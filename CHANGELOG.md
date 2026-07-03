@@ -1,5 +1,11 @@
 # hide-email-ext
 
+## 0.3.1
+
+### Patch Changes
+
+- 7acdaa2: bump pkgs
+
 ## 0.3.0
 
 ### Minor Changes
