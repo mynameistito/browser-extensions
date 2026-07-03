@@ -32,12 +32,12 @@ The repo already uses **Bun**, **TypeScript (strict)**, **ultracite**, **oxlint*
 
 ### New runtime/dev dependencies (kept to an absolute minimum)
 
-| Package           | Why                                                                                                             | Type         |
-| ----------------- | --------------------------------------------------------------------------------------------------------------- | ------------ |
-| `wxt`             | Extension framework: manifest generation, dev server, cross-browser builds, typed `browser` API, typed storage. | dev          |
-| `@changesets/cli` | Versioning: changeset files, `changeset version` bumps, changelog generation.                                   | dev          |
-| `@types/chrome`   | Pulled transitively by WXT; not added directly.                                                                 | (transitive) |
-| `typescript`      | Already a peer dep.                                                                                             | peer         |
+| Package | Why | Type |
+| --- | --- | --- |
+| `wxt` | Extension framework: manifest generation, dev server, cross-browser builds, typed `browser` API, typed storage. | dev |
+| `@changesets/cli` | Versioning: changeset files, `changeset version` bumps, changelog generation. | dev |
+| `@types/chrome` | Pulled transitively by WXT; not added directly. | (transitive) |
+| `typescript` | Already a peer dep. | peer |
 
 That's it. **No React, no Tailwind, no UI lib, no zod, no state lib.** WXT ships with everything else (vite, esbuild, types). Validation will be hand-rolled type guards (one tiny file) since the data shape is trivial (an array of strings).
 
@@ -275,15 +275,15 @@ All DOM lookups go through small typed helpers (`getById<T>`) — no `as` casts 
 
 ~60 lines targeting:
 
-| Element          | Style                                                                                                                                                           |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `body`           | `width: 300px`, `font-family: system-ui`, `margin: 0`, `padding: 8px`, `background: #1a1a1a`, `color: #e0e0e0`                                                  |
-| `#email-input`   | `width: 100%`, `padding: 6px 8px`, `background: #2a2a2a`, `color: #fff`, `border: 1px solid #444`, `border-radius: 4px`, `box-sizing: border-box`               |
-| `#email-list`    | `list-style: none`, `padding: 0`, `margin: 8px 0 0`                                                                                                             |
+| Element | Style |
+| --- | --- |
+| `body` | `width: 300px`, `font-family: system-ui`, `margin: 0`, `padding: 8px`, `background: #1a1a1a`, `color: #e0e0e0` |
+| `#email-input` | `width: 100%`, `padding: 6px 8px`, `background: #2a2a2a`, `color: #fff`, `border: 1px solid #444`, `border-radius: 4px`, `box-sizing: border-box` |
+| `#email-list` | `list-style: none`, `padding: 0`, `margin: 8px 0 0` |
 | `#email-list li` | `display: flex`, `align-items: center`, `justify-content: space-between`, `padding: 4px 6px`, `background: #252525`, `border-radius: 3px`, `margin-bottom: 4px` |
-| `.remove-btn`    | `background: none`, `border: none`, `color: #888`, `cursor: pointer`, `font-size: 14px`                                                                         |
-| `.add-btn`       | `margin-top: 4px`, `padding: 6px 12px`, `background: #3a3a3a`, `color: #e0e0e0`, `border: 1px solid #444`, `border-radius: 4px`, `cursor: pointer`              |
-| `.error`         | `color: #f44`, `font-size: 12px`, `margin-top: 2px`                                                                                                             |
+| `.remove-btn` | `background: none`, `border: none`, `color: #888`, `cursor: pointer`, `font-size: 14px` |
+| `.add-btn` | `margin-top: 4px`, `padding: 6px 12px`, `background: #3a3a3a`, `color: #e0e0e0`, `border: 1px solid #444`, `border-radius: 4px`, `cursor: pointer` |
+| `.error` | `color: #f44`, `font-size: 12px`, `margin-top: 2px` |
 
 Nothing else. No animations, no shadows, no gradients — intentionally plain.
 
@@ -488,15 +488,15 @@ bun run fix
 
 ## 17. Type-Safety Guarantees Summary
 
-| Boundary               | How it's typed                                                                      |
-| ---------------------- | ----------------------------------------------------------------------------------- |
-| Storage read/write     | `storage.defineItem<NormalizedEmail[]>` — value type inferred everywhere.           |
-| User input → email     | `isEmail` type guard + `normalize` returns branded `NormalizedEmail`.               |
-| Runtime messages       | Discriminated union `Message`, validated by a guard before dispatch.                |
-| DOM lookups in popup   | `getById<T extends HTMLElement>(id, ctor)` — narrows or throws, no casts.           |
-| WXT manifest           | `defineConfig` from `wxt` — checked against MV3 schema.                             |
-| Content-script options | `defineContentScript` — typed `matches`, `runAt`, etc.                              |
-| `tsconfig`             | `strict`, `noUncheckedIndexedAccess`, `verbatimModuleSyntax`, `noImplicitOverride`. |
+| Boundary | How it's typed |
+| --- | --- |
+| Storage read/write | `storage.defineItem<NormalizedEmail[]>` — value type inferred everywhere. |
+| User input → email | `isEmail` type guard + `normalize` returns branded `NormalizedEmail`. |
+| Runtime messages | Discriminated union `Message`, validated by a guard before dispatch. |
+| DOM lookups in popup | `getById<T extends HTMLElement>(id, ctor)` — narrows or throws, no casts. |
+| WXT manifest | `defineConfig` from `wxt` — checked against MV3 schema. |
+| Content-script options | `defineContentScript` — typed `matches`, `runAt`, etc. |
+| `tsconfig` | `strict`, `noUncheckedIndexedAccess`, `verbatimModuleSyntax`, `noImplicitOverride`. |
 
 No `any`, no non-null assertions outside generated WXT code, no unchecked casts.
 
@@ -763,20 +763,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
-          gh release create "v${{ needs.release.outputs.version }}"
-          --title "v${{ needs.release.outputs.version }}"
-          --generate-notes
-          .output/hide-email-chrome.zip
-          .output/hide-email-firefox.zip
+          gh release create "v${{ needs.release.outputs.version }}" --title "v${{ needs.release.outputs.version }}" --generate-notes .output/hide-email-chrome.zip .output/hide-email-firefox.zip
 ```
 
 ### What happens on each merge to `main`
 
-| Scenario                 | Result                                                                                                                                                        |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| No pending changesets    | Workflow runs, no-op.                                                                                                                                         |
-| Pending changesets exist | Changesets action creates/updates a "Version extension" PR. When that PR is merged, the next run publishes the version and triggers `build-and-release`.      |
-| Version just published   | `build-and-release` job runs: builds Chrome + Firefox, zips both, creates a GitHub Release (`vX.Y.Z`) with both zips attached + auto-generated release notes. |
+| Scenario | Result |
+| --- | --- |
+| No pending changesets | Workflow runs, no-op. |
+| Pending changesets exist | Changesets action creates/updates a "Version extension" PR. When that PR is merged, the next run publishes the version and triggers `build-and-release`. |
+| Version just published | `build-and-release` job runs: builds Chrome + Firefox, zips both, creates a GitHub Release (`vX.Y.Z`) with both zips attached + auto-generated release notes. |
 
 ### Workflow: CI Checks
 
@@ -809,10 +805,10 @@ jobs:
 
 ### Required GitHub secrets
 
-| Secret              | Purpose                                                        |
-| ------------------- | -------------------------------------------------------------- |
-| `EXTENSION_KEY_PEM` | RSA private key content for stable Chrome extension ID.        |
-| `GITHUB_TOKEN`      | Auto-provided by Actions — used by Changesets for PR creation. |
+| Secret | Purpose |
+| --- | --- |
+| `EXTENSION_KEY_PEM` | RSA private key content for stable Chrome extension ID. |
+| `GITHUB_TOKEN` | Auto-provided by Actions — used by Changesets for PR creation. |
 
 ---
 
