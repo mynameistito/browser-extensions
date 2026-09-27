@@ -1,5 +1,11 @@
 # quote-viewer
 
+## 0.2.10
+
+### Patch Changes
+
+- [`c8c0089`](https://github.com/mynameistito/quote-viewer/commit/c8c0089): Update `@changesets/cli`, `@types/bun`, `lefthook`, `oxfmt`, `oxlint`, `ultracite`, and `wxt`.
+
 ## 0.2.9
 
 ### Patch Changes
