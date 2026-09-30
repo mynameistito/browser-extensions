@@ -2,8 +2,14 @@ import { useEffect, useRef, useState } from "react";
 
 import { usePreferences } from "../preferences/preferences-provider";
 import { WeatherSettings } from "./weather-settings";
+import { WidgetsSettings } from "./widgets-settings";
 
-type SettingsSection = "appearance" | "search" | "weather" | "privacy";
+type SettingsSection =
+  | "appearance"
+  | "search"
+  | "widgets"
+  | "weather"
+  | "privacy";
 
 const sections: readonly {
   readonly id: SettingsSection;
@@ -11,6 +17,7 @@ const sections: readonly {
 }[] = [
   { id: "appearance", label: "Appearance" },
   { id: "search", label: "Search" },
+  { id: "widgets", label: "Widgets" },
   { id: "weather", label: "Weather" },
   { id: "privacy", label: "Privacy" },
 ];
@@ -189,6 +196,8 @@ export const SettingsPanel = ({
             )}
 
             {section === "weather" && <WeatherSettings isLoaded={isLoaded} />}
+
+            {section === "widgets" && <WidgetsSettings isLoaded={isLoaded} />}
 
             {section === "privacy" && (
               <section

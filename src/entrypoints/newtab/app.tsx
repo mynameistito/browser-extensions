@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 
 import { BackgroundLayer } from "../../components/background/background-layer";
-import { ClockWidget } from "../../components/clock/clock-widget";
 import { usePreferences } from "../../components/preferences/preferences-provider";
-import { SearchWidget } from "../../components/search/search-widget";
 import { SettingsPanel } from "../../components/settings/settings-panel";
-import { WeatherWidget } from "../../components/weather/weather-widget";
+import { WidgetGrid } from "../../components/widgets/widget-grid";
 
 /** The initial new-tab dashboard with a clock and search actions. */
 export const App = () => {
   const { preferences, isLoaded, updatePreferences } = usePreferences();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isArrangeMode, setIsArrangeMode] = useState(false);
 
   useEffect(() => {
     document.documentElement.dataset.theme = preferences.theme;
@@ -35,26 +34,33 @@ export const App = () => {
           <span>new tab</span>
         </p>
         <span className="local-note">Your space, on this device</span>
-        <button
-          aria-expanded={isSettingsOpen}
-          aria-haspopup="dialog"
-          className="customize-button"
-          disabled={!isLoaded}
-          onClick={() => setIsSettingsOpen(true)}
-          type="button"
-        >
-          Customize
-        </button>
+        <div className="topbar-actions">
+          <button
+            aria-pressed={isArrangeMode}
+            className={
+              isArrangeMode ? "customize-button is-active" : "customize-button"
+            }
+            disabled={!isLoaded}
+            onClick={() => setIsArrangeMode((current) => !current)}
+            type="button"
+          >
+            {isArrangeMode ? "Done arranging" : "Arrange"}
+          </button>
+          <button
+            aria-expanded={isSettingsOpen}
+            aria-haspopup="dialog"
+            className="customize-button"
+            disabled={!isLoaded}
+            onClick={() => setIsSettingsOpen(true)}
+            type="button"
+          >
+            Customize
+          </button>
+        </div>
       </header>
 
       <section aria-label="Dashboard" className="home-content">
-        <div className="hero-widgets">
-          <ClockWidget />
-          <SearchWidget />
-        </div>
-        <div className="secondary-widgets">
-          <WeatherWidget />
-        </div>
+        <WidgetGrid isArrangeMode={isArrangeMode} />
       </section>
 
       <footer className="bottom-note">

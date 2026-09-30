@@ -87,7 +87,7 @@ export const WeatherWidget = () => {
 
   if (!location) {
     return (
-      <section aria-label="Weather" className="widget">
+      <section aria-label="Weather" className="weather-widget">
         <p className="widget-eyebrow">Weather</p>
         <p className="weather-empty">
           Set a city in Customize to see local weather.
@@ -97,7 +97,7 @@ export const WeatherWidget = () => {
   }
 
   return (
-    <section aria-label="Weather" className="widget">
+    <section aria-label="Weather" className="weather-widget">
       <div className="weather-heading">
         <div>
           <p className="widget-eyebrow">Weather</p>

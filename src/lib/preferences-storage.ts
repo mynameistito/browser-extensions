@@ -2,7 +2,11 @@ import { Data, Effect, Either, Schema } from "effect";
 
 import { storage } from "#imports";
 
-import { DEFAULT_PREFERENCES, PreferencesSchema } from "./preferences";
+import {
+  DEFAULT_PREFERENCES,
+  normalizeWidgetLayout,
+  PreferencesSchema,
+} from "./preferences";
 import type { Preferences } from "./preferences";
 
 const preferencesItem = storage.defineItem<unknown>("local:preferences", {
@@ -25,7 +29,16 @@ export const loadPreferences = Effect.tryPromise({
 }).pipe(
   Effect.map((stored) => {
     const parsed = Schema.decodeUnknownEither(PreferencesSchema)(stored);
-    return Either.isRight(parsed) ? parsed.right : DEFAULT_PREFERENCES;
+    if (Either.isLeft(parsed)) {
+      return DEFAULT_PREFERENCES;
+    }
+
+    return {
+      ...parsed.right,
+      widgetLayout: normalizeWidgetLayout(
+        parsed.right.widgetLayout ?? DEFAULT_PREFERENCES.widgetLayout
+      ),
+    };
   })
 );
 

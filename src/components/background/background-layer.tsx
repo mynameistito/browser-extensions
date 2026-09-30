@@ -20,18 +20,18 @@ export const BackgroundLayer = () => {
 
     let isMounted = true;
 
-    const load = async () => {
-      const result = await Effect.runPromise(
-        Effect.either(loadBackgroundPhotos())
-      );
-
-      if (isMounted && result._tag === "Right") {
-        setPhotos(result.right);
-        setLoadedDay(Date.now());
-      }
-    };
-
-    void load();
+    Effect.runFork(
+      Effect.either(loadBackgroundPhotos()).pipe(
+        Effect.tap((result) =>
+          Effect.sync(() => {
+            if (isMounted && result._tag === "Right") {
+              setPhotos(result.right);
+              setLoadedDay(Date.now());
+            }
+          })
+        )
+      )
+    );
 
     return () => {
       isMounted = false;
