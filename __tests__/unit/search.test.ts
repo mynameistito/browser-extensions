@@ -20,6 +20,18 @@ describe("createSearchUrl", () => {
     expect(url.searchParams.get("q")).toBe("Explain Effect");
   });
 
+  test("supports the selected web search provider", () => {
+    const bing = Effect.runSync(createSearchUrl("web", "weather", "bing"));
+    const duckDuckGo = Effect.runSync(
+      createSearchUrl("web", "weather", "duckduckgo")
+    );
+
+    expect(bing.hostname).toBe("www.bing.com");
+    expect(bing.searchParams.get("q")).toBe("weather");
+    expect(duckDuckGo.hostname).toBe("duckduckgo.com");
+    expect(duckDuckGo.searchParams.get("q")).toBe("weather");
+  });
+
   test("fails with a typed error for a blank query", () => {
     const result = Effect.runSync(Effect.either(createSearchUrl("web", "   ")));
 

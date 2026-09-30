@@ -1,5 +1,7 @@
 import { Data, Effect } from "effect";
 
+import type { SearchProvider } from "./preferences";
+
 /** A supported destination for a search query. */
 export type SearchTarget = "web" | "chatgpt";
 
@@ -11,7 +13,8 @@ export class EmptySearchQuery extends Data.TaggedError("EmptySearchQuery")<
 /** Build a destination URL from a non-empty user query. */
 export const createSearchUrl = (
   target: SearchTarget,
-  query: string
+  query: string,
+  provider: SearchProvider = "google"
 ): Effect.Effect<URL, EmptySearchQuery> =>
   Effect.gen(function* createSearchUrlProgram() {
     const normalizedQuery = query.trim();
@@ -20,10 +23,13 @@ export const createSearchUrl = (
       return yield* Effect.fail(new EmptySearchQuery());
     }
 
+    const webSearchUrls = {
+      google: "https://www.google.com/search",
+      bing: "https://www.bing.com/search",
+      duckduckgo: "https://duckduckgo.com/",
+    } satisfies Record<SearchProvider, string>;
     const url = new URL(
-      target === "web"
-        ? "https://www.google.com/search"
-        : "https://chatgpt.com/"
+      target === "web" ? webSearchUrls[provider] : "https://chatgpt.com/"
     );
     url.searchParams.set("q", normalizedQuery);
 

@@ -4,14 +4,20 @@ import type { FormEvent } from "react";
 
 import { createSearchUrl } from "../../lib/search";
 import type { SearchTarget } from "../../lib/search";
+import { usePreferences } from "../preferences/preferences-provider";
 
 /** Search the web or open a query as a ChatGPT prompt. */
 export const SearchWidget = () => {
   const [query, setQuery] = useState("");
   const [searchError, setSearchError] = useState("");
+  const { preferences, isLoaded } = usePreferences();
 
   const submitSearch = (target: SearchTarget) => {
-    const program = createSearchUrl(target, query).pipe(
+    const program = createSearchUrl(
+      target,
+      query,
+      preferences.searchProvider
+    ).pipe(
       Effect.flatMap((url) =>
         Effect.sync(() => {
           window.open(url.toString(), "_blank", "noopener,noreferrer");
@@ -52,11 +58,16 @@ export const SearchWidget = () => {
         value={query}
       />
       <div className="search-actions">
-        <button className="search-button search-button-primary" type="submit">
+        <button
+          className="search-button search-button-primary"
+          disabled={!isLoaded}
+          type="submit"
+        >
           Search web
         </button>
         <button
           className="search-button search-button-secondary"
+          disabled={!isLoaded}
           onClick={() => submitSearch("chatgpt")}
           type="button"
         >
@@ -64,7 +75,8 @@ export const SearchWidget = () => {
         </button>
       </div>
       <p aria-live="polite" className="search-message">
-        {searchError || "Google search · ChatGPT prompt"}
+        {searchError ||
+          `${preferences.searchProvider === "duckduckgo" ? "DuckDuckGo" : preferences.searchProvider} · ChatGPT prompt`}
       </p>
     </form>
   );
