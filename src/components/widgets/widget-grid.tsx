@@ -1,19 +1,15 @@
 import { useState } from "react";
 
+import { ClockWidget } from "@/components/clock/clock-widget";
+import { usePreferences } from "@/components/preferences/preferences-provider";
+import { SearchWidget } from "@/components/search/search-widget";
+import { WeatherWidget } from "@/components/weather/weather-widget";
 import {
   moveWidget,
   resizeWidget,
   swapWidgetPositions,
-} from "../../lib/preferences";
-import type {
-  WidgetId,
-  WidgetPlacement,
-  WidgetSpan,
-} from "../../lib/preferences";
-import { ClockWidget } from "../clock/clock-widget";
-import { usePreferences } from "../preferences/preferences-provider";
-import { SearchWidget } from "../search/search-widget";
-import { WeatherWidget } from "../weather/weather-widget";
+} from "@/lib/preferences";
+import type { WidgetId, WidgetPlacement, WidgetSpan } from "@/lib/preferences";
 
 const widgetLabels: Record<WidgetId, string> = {
   clock: "Clock",

@@ -2,14 +2,11 @@ import { Effect } from "effect";
 import type { Either } from "effect";
 import { useEffect, useState } from "react";
 
-import { describeWeatherCode } from "../../lib/weather";
-import type { InvalidWeatherResponse } from "../../lib/weather";
-import type {
-  WeatherReading,
-  WeatherRequestError,
-} from "../../lib/weather-client";
-import { loadCurrentWeather } from "../../lib/weather-client";
-import { usePreferences } from "../preferences/preferences-provider";
+import { usePreferences } from "@/components/preferences/preferences-provider";
+import { describeWeatherCode } from "@/lib/weather";
+import type { InvalidWeatherResponse } from "@/lib/weather";
+import type { WeatherReading, WeatherRequestError } from "@/lib/weather-client";
+import { loadCurrentWeather } from "@/lib/weather-client";
 
 const WEATHER_REFRESH_INTERVAL = 30 * 60 * 1000;
 

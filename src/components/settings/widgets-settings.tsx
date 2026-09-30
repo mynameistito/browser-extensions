@@ -1,6 +1,6 @@
-import { DEFAULT_PREFERENCES } from "../../lib/preferences";
-import type { WidgetId } from "../../lib/preferences";
-import { usePreferences } from "../preferences/preferences-provider";
+import { usePreferences } from "@/components/preferences/preferences-provider";
+import { DEFAULT_PREFERENCES } from "@/lib/preferences";
+import type { WidgetId } from "@/lib/preferences";
 
 const widgetNames: Record<WidgetId, string> = {
   clock: "Clock",

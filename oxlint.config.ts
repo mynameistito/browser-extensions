@@ -19,6 +19,14 @@ export default defineConfig({
     antiSlop,
     jsPlugins,
   ],
+  overrides: [
+    {
+      files: ["src/**"],
+      rules: {
+        "import/no-relative-parent-imports": "error",
+      },
+    },
+  ],
   ignorePatterns: core.ignorePatterns,
   jsPlugins: [...jsPlugins.jsPlugins, ...shadcn.jsPlugins],
   settings: jsPluginSettings,

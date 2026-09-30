@@ -5,6 +5,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   resolve: {
     alias: {
+      "@": fileURLToPath(new URL("src", import.meta.url)),
       "#imports": fileURLToPath(
         new URL("__tests__/helpers/wxt-imports.ts", import.meta.url)
       ),

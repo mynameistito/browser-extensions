@@ -10,12 +10,9 @@ import {
 } from "react";
 import type { ReactNode } from "react";
 
-import { DEFAULT_PREFERENCES } from "../../lib/preferences";
-import type { Preferences } from "../../lib/preferences";
-import {
-  loadPreferences,
-  savePreferences,
-} from "../../lib/preferences-storage";
+import { DEFAULT_PREFERENCES } from "@/lib/preferences";
+import type { Preferences } from "@/lib/preferences";
+import { loadPreferences, savePreferences } from "@/lib/preferences-storage";
 
 interface PreferencesContextValue {
   readonly preferences: Preferences;

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
-import { syncSettingsDialog } from "../../lib/settings-dialog";
-import { usePreferences } from "../preferences/preferences-provider";
+import { usePreferences } from "@/components/preferences/preferences-provider";
+import { syncSettingsDialog } from "@/lib/settings-dialog";
+
 import { WeatherSettings } from "./weather-settings";
 import { WidgetsSettings } from "./widgets-settings";
 

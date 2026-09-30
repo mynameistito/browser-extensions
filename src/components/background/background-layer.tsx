@@ -1,10 +1,10 @@
 import { Effect } from "effect";
 import { useEffect, useMemo, useState } from "react";
 
-import { loadBackgroundPhotos } from "../../lib/background-client";
-import { chooseDailyBackground } from "../../lib/backgrounds";
-import type { BackgroundPhoto } from "../../lib/backgrounds";
-import { usePreferences } from "../preferences/preferences-provider";
+import { usePreferences } from "@/components/preferences/preferences-provider";
+import { loadBackgroundPhotos } from "@/lib/background-client";
+import { chooseDailyBackground } from "@/lib/backgrounds";
+import type { BackgroundPhoto } from "@/lib/backgrounds";
 
 /** Display one cached, attributed Wikimedia landscape behind the dashboard. */
 export const BackgroundLayer = () => {

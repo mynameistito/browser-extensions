@@ -2,9 +2,9 @@ import { Effect } from "effect";
 import { useState } from "react";
 import type { FormEvent } from "react";
 
-import { createSearchUrl } from "../../lib/search";
-import type { SearchTarget } from "../../lib/search";
-import { usePreferences } from "../preferences/preferences-provider";
+import { usePreferences } from "@/components/preferences/preferences-provider";
+import { createSearchUrl } from "@/lib/search";
+import type { SearchTarget } from "@/lib/search";
 
 /** Search the web or open a query as a ChatGPT prompt. */
 export const SearchWidget = () => {
