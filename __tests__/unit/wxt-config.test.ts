@@ -1,5 +1,5 @@
 import { generateKeyPairSync } from "node:crypto";
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
@@ -83,10 +83,23 @@ describe("WXT browser configuration", () => {
   });
 
   test("uses the local key when the environment key is blank", async () => {
+    const directory = mkdtempSync(path.join(tmpdir(), "wxt-local-key-test-"));
+    const { privateKey } = generateKeyPairSync("rsa", {
+      modulusLength: 2048,
+      privateKeyEncoding: { format: "pem", type: "pkcs8" },
+      publicKeyEncoding: { format: "pem", type: "spki" },
+    });
+    process.chdir(directory);
     process.env.WXT_CHROME_KEY = "   ";
-    const manifest = await getManifest("chrome");
+    writeFileSync("key.pem", privateKey);
 
-    expect(manifest).toHaveProperty("key");
+    try {
+      const manifest = await getManifest("chrome");
+      expect(manifest).toHaveProperty("key");
+    } finally {
+      process.chdir(originalDirectory);
+      rmSync(directory, { recursive: true, force: true });
+    }
   });
 
   test("omits the manifest key when neither environment nor local key exists", async () => {
