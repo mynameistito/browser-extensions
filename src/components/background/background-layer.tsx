@@ -8,13 +8,13 @@ import { usePreferences } from "../preferences/preferences-provider";
 
 /** Display one cached, attributed Wikimedia landscape behind the dashboard. */
 export const BackgroundLayer = () => {
-  const { preferences } = usePreferences();
+  const { preferences, isLoaded } = usePreferences();
   const [photos, setPhotos] = useState<readonly BackgroundPhoto[]>([]);
   const [loadedDay, setLoadedDay] = useState<number | null>(null);
   const [failedImageUrl, setFailedImageUrl] = useState("");
 
   useEffect(() => {
-    if (!preferences.backgroundEnabled) {
+    if (!isLoaded || !preferences.backgroundEnabled) {
       return;
     }
 
@@ -36,7 +36,7 @@ export const BackgroundLayer = () => {
     return () => {
       isMounted = false;
     };
-  }, [preferences.backgroundEnabled]);
+  }, [isLoaded, preferences.backgroundEnabled]);
 
   const photo = useMemo(
     () =>

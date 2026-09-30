@@ -116,13 +116,12 @@ export const moveWidget = (
   }
 
   const next = [...layout];
-  const current = next[currentPosition];
-  const destination = next[destinationPosition];
-
-  if (current && destination) {
-    next[currentPosition] = destination;
-    next[destinationPosition] = current;
-  }
+  // SAFETY: Both positions came from indices computed from this same dense input layout.
+  const current = next[currentPosition] as WidgetPlacement;
+  // SAFETY: destinationPosition was checked against visibleIndexes before indexing this dense layout.
+  const destination = next[destinationPosition] as WidgetPlacement;
+  next[currentPosition] = destination;
+  next[destinationPosition] = current;
 
   return next;
 };
@@ -145,13 +144,12 @@ export const swapWidgetPositions = (
   }
 
   const next = [...layout];
-  const first = next[firstIndex];
-  const second = next[secondIndex];
-
-  if (first && second) {
-    next[firstIndex] = second;
-    next[secondIndex] = first;
-  }
+  // SAFETY: Both indices were found in this same dense input layout.
+  const first = next[firstIndex] as WidgetPlacement;
+  // SAFETY: secondIndex was found by searching this same dense input layout.
+  const second = next[secondIndex] as WidgetPlacement;
+  next[firstIndex] = second;
+  next[secondIndex] = first;
 
   return next;
 };

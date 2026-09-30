@@ -1,6 +1,5 @@
-import { describe, expect, test } from "bun:test";
-
 import { Either, Schema } from "effect";
+import { describe, expect, test } from "vitest";
 
 import {
   DEFAULT_PREFERENCES,
@@ -81,5 +80,13 @@ describe("PreferencesSchema", () => {
     expect(
       resizeWidget(layout, "clock", 3).find(({ id }) => id === "clock")?.span
     ).toBe(3);
+  });
+
+  test("leaves layouts unchanged when a widget cannot be moved or swapped", () => {
+    const layout = DEFAULT_PREFERENCES.widgetLayout;
+    expect(moveWidget(layout, "clock", -1)).toBe(layout);
+    expect(moveWidget(layout, "weather", 1)).toBe(layout);
+    expect(swapWidgetPositions(layout, "clock", "clock")).toBe(layout);
+    expect(swapWidgetPositions(layout, "clock", "weather")).toBe(layout);
   });
 });

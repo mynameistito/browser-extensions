@@ -1,5 +1,6 @@
-import { describe, expect, test } from "bun:test";
 import { generateKeyPairSync } from "node:crypto";
+
+import { describe, expect, test } from "vitest";
 
 import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
 
