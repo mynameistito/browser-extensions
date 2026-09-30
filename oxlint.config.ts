@@ -6,14 +6,12 @@ import react from "ultracite/oxlint/react";
 import shadcn from "ultracite/oxlint/shadcn";
 import tanstack from "ultracite/oxlint/tanstack";
 import tanstackJsPlugins from "ultracite/oxlint/tanstack/js-plugins";
-import vitest from "ultracite/oxlint/vitest";
 
 const jsPlugins = selectJsPlugins(["github", "sonarjs", "react-doctor"]);
 
 export default defineConfig({
   extends: [
     core,
-    vitest,
     tanstack,
     react,
     tanstackJsPlugins,

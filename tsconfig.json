@@ -1,8 +1,9 @@
 {
   "$schema": "https://www.schemastore.org/tsconfig.json",
+  "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
     // Environment setup & latest features
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ESNext",
     "module": "Preserve",
     "moduleDetection": "force",
@@ -24,5 +25,12 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
-  }
+  },
+  "include": [
+    ".wxt/wxt.d.ts",
+    "src/**/*",
+    "wxt.config.ts",
+    "scripts/**/*",
+    "__tests__/**/*"
+  ]
 }
