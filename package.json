@@ -1,0 +1,44 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "name": "new-tab-ext",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "mynameistito",
+    "email": "github@mynameistito.com",
+    "url": "https://github.com/mynameistito"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mynameistito/new-tab-ext.git"
+  },
+  "type": "module",
+  "module": "index.ts",
+  "scripts": {
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "prepare": "lefthook install",
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "postinstall": "wxt prepare"
+  },
+  "devDependencies": {
+    "@shadcn/lint": "^0.2.0",
+    "@types/bun": "1.4.2",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "eslint-plugin-github": "6.1.2",
+    "eslint-plugin-sonarjs": "^4.2.1",
+    "lefthook": "^2.1.15",
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.86.0",
+    "oxlint-plugin-react-doctor": "^0.9.14",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "ultracite": "7.12.2",
+    "wxt": "^0.21.4"
+  }
+}
