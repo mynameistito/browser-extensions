@@ -8,6 +8,9 @@ dist
 .wxt
 *.tgz
 
+# Private key used to pin the Chromium extension ID
+key.pem
+
 # code coverage
 coverage
 *.lcov

@@ -22,6 +22,7 @@
     "knip": "bunx knip@latest",
     "changeset": "changeset",
     "changeset-add": "bun ./scripts/changeset-add.ts",
+    "generate-key": "bun scripts/generate-key.ts",
     "version": "changeset version && wxt prepare",
     "prepare": "lefthook install",
     "dev": "wxt",
