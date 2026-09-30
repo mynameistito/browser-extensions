@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
+import { syncSettingsDialog } from "../../lib/settings-dialog";
 import { usePreferences } from "../preferences/preferences-provider";
 import { WeatherSettings } from "./weather-settings";
 import { WidgetsSettings } from "./widgets-settings";
@@ -38,17 +39,7 @@ export const SettingsPanel = ({
     usePreferences();
 
   useEffect(() => {
-    const dialog = dialogRef.current;
-
-    if (!dialog) {
-      return;
-    }
-
-    if (open && !dialog.open) {
-      dialog.showModal();
-    } else if (!open && dialog.open) {
-      dialog.close();
-    }
+    syncSettingsDialog(dialogRef.current, open);
   }, [open]);
 
   return (

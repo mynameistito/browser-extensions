@@ -88,23 +88,17 @@ export const PreferencesProvider = ({
         }
 
         isSaving.current = true;
-        const queuedPreferences = saveQueue.current.shift();
+        // SAFETY: The guard above verified the queue is non-empty; no code mutates it before this synchronous shift.
+        const queuedPreferences = saveQueue.current.shift() as Preferences;
+        const exit = await Effect.runPromiseExit(
+          Effect.either(savePreferences(queuedPreferences))
+        );
 
-        try {
-          if (queuedPreferences) {
-            const exit = await Effect.runPromiseExit(
-              Effect.either(savePreferences(queuedPreferences))
-            );
-
-            setStorageMessage(
-              Exit.isFailure(exit) || exit.value._tag === "Left"
-                ? SAVE_ERROR_MESSAGE
-                : ""
-            );
-          }
-        } catch {
-          setStorageMessage(SAVE_ERROR_MESSAGE);
-        }
+        setStorageMessage(
+          Exit.isFailure(exit) || exit.value._tag === "Left"
+            ? SAVE_ERROR_MESSAGE
+            : ""
+        );
         isSaving.current = false;
 
         if (saveQueue.current.length > 0) {

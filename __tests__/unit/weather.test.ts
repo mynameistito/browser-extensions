@@ -1,6 +1,5 @@
-import { describe, expect, test } from "bun:test";
-
 import { Either, Schema } from "effect";
+import { describe, expect, test } from "vitest";
 
 import {
   CityResponseSchema,
@@ -42,6 +41,24 @@ describe("Open-Meteo response decoding", () => {
     }
   });
 
+  test("handles missing, empty, and regionless geocoding results", () => {
+    expect(parseCityResults({})).toEqual([]);
+    expect(
+      parseCityResults({
+        results: [
+          {
+            id: 4,
+            name: "Oslo",
+            country: "Norway",
+            latitude: 59.9,
+            longitude: 10.7,
+            timezone: "Europe/Oslo",
+          },
+        ],
+      })[0]?.region
+    ).toBe("");
+  });
+
   test("rejects malformed forecast conditions and maps valid conditions", () => {
     const invalid = Schema.decodeUnknownEither(CurrentWeatherSchema)({
       current: { temperature_2m: "cold" },
@@ -74,8 +91,31 @@ describe("Open-Meteo response decoding", () => {
   });
 
   test("describes common weather codes", () => {
-    expect(describeWeatherCode(0)).toBe("Clear sky");
-    expect(describeWeatherCode(95)).toBe("Thunderstorms");
-    expect(describeWeatherCode(255)).toBe("Current conditions");
+    const cases: readonly (readonly [number, string])[] = [
+      [0, "Clear sky"],
+      [1, "Mostly clear"],
+      [2, "Partly cloudy"],
+      [3, "Overcast"],
+      [45, "Fog"],
+      [48, "Fog"],
+      [51, "Drizzle"],
+      [57, "Drizzle"],
+      [61, "Rain"],
+      [67, "Rain"],
+      [71, "Snow"],
+      [77, "Snow"],
+      [80, "Rain showers"],
+      [82, "Rain showers"],
+      [85, "Snow showers"],
+      [86, "Snow showers"],
+      [95, "Thunderstorms"],
+      [96, "Thunderstorms"],
+      [99, "Thunderstorms"],
+      [255, "Current conditions"],
+    ];
+
+    for (const [code, description] of cases) {
+      expect(describeWeatherCode(code)).toBe(description);
+    }
   });
 });
