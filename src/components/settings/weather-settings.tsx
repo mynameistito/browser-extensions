@@ -1,9 +1,9 @@
 import { Effect } from "effect";
 import { useState } from "react";
 
-import type { CityResult } from "../../lib/weather";
-import { searchCities } from "../../lib/weather-client";
-import { usePreferences } from "../preferences/preferences-provider";
+import { usePreferences } from "@/components/preferences/preferences-provider";
+import type { CityResult } from "@/lib/weather";
+import { searchCities } from "@/lib/weather-client";
 
 const CITY_SEARCH_ERROR = "Could not find cities right now. Try again shortly.";
 

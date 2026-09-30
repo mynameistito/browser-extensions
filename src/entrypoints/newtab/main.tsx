@@ -1,7 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-import { PreferencesProvider } from "../../components/preferences/preferences-provider";
+import { PreferencesProvider } from "@/components/preferences/preferences-provider";
+
 import { App } from "./app";
 import { requireNewTabRoot } from "./root";
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { BackgroundLayer } from "../../components/background/background-layer";
-import { usePreferences } from "../../components/preferences/preferences-provider";
-import { SettingsPanel } from "../../components/settings/settings-panel";
-import { WidgetGrid } from "../../components/widgets/widget-grid";
+import { BackgroundLayer } from "@/components/background/background-layer";
+import { usePreferences } from "@/components/preferences/preferences-provider";
+import { SettingsPanel } from "@/components/settings/settings-panel";
+import { WidgetGrid } from "@/components/widgets/widget-grid";
 
 /** The initial new-tab dashboard with a clock and search actions. */
 export const App = () => {
