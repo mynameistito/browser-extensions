@@ -6,6 +6,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("src", import.meta.url)),
+      "react-grab": fileURLToPath(
+        new URL("__tests__/helpers/react-grab.ts", import.meta.url)
+      ),
       "#imports": fileURLToPath(
         new URL("__tests__/helpers/wxt-imports.ts", import.meta.url)
       ),

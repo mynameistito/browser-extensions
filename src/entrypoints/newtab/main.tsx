@@ -8,6 +8,10 @@ import { requireNewTabRoot } from "./root";
 
 import "./style.css";
 
+if (import.meta.env.DEV && import.meta.env.MODE !== "test") {
+  void import("react-grab");
+}
+
 const root = requireNewTabRoot(document.querySelector<HTMLDivElement>("#root"));
 
 createRoot(root).render(
