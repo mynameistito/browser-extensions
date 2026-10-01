@@ -7,6 +7,7 @@ afterEach(() => {
   cleanup();
   clearWxtStorage();
   vi.unstubAllGlobals();
+  vi.unstubAllEnvs();
   vi.useRealTimers();
 });
 

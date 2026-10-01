@@ -17,6 +17,7 @@ describe("new-tab entrypoint", () => {
     const root = document.createElement("div");
     root.id = "root";
     document.body.replaceChildren(root);
+    vi.stubEnv("MODE", "development");
 
     await act(async () => {
       await import("../../src/entrypoints/newtab/main");
@@ -25,5 +26,8 @@ describe("new-tab entrypoint", () => {
     expect(
       await vi.waitFor(() => root.querySelector(".new-tab"))
     ).not.toBeNull();
+    expect(
+      await vi.waitFor(() => document.documentElement.dataset.reactGrabLoaded)
+    ).toBe("true");
   });
 });

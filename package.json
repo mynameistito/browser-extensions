@@ -60,6 +60,7 @@
     "oxfmt": "^0.71.0",
     "oxlint": "^1.86.0",
     "oxlint-plugin-react-doctor": "^0.9.14",
+    "react-grab": "^0.2.0",
     "tailwindcss": "^4.3.3",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "ultracite": "7.12.2",
