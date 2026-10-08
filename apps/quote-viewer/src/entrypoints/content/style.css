@@ -1,0 +1,28 @@
+[data-quote-viewer-hidden-native-quotes="true"] {
+  display: none !important;
+}
+
+.quoted-tweets-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quoted-tweets-container > button {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  color: rgb(113, 118, 123);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 6px;
+  min-height: 36px;
+  min-width: 36px;
+  transition: background-color 0.2s;
+}
+
+.quoted-tweets-container > button:hover {
+  color: #1d9bf0;
+  background-color: rgba(29, 155, 240, 0.1);
+}

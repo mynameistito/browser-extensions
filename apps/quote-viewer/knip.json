@@ -1,0 +1,5 @@
+{
+  "entry": ["src/entrypoints/**/*.{ts,tsx}", "scripts/*.ts"],
+  "ignoreUnresolved": ["#imports"],
+  "project": ["src/**/*.ts", "scripts/**/*.ts", "*.config.ts"]
+}

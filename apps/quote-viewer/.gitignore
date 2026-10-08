@@ -1,0 +1,54 @@
+# dependencies (bun install)
+node_modules
+
+# output
+out
+dist
+*.tgz
+
+# wxt
+.wxt
+.output
+web-ext.config.ts
+stats.html
+stats-*.json
+
+# extension signing key (persistent ID) — never commit
+key.pem
+key.public.txt
+
+# extracted reference crx used during rewrite analysis
+temp
+
+# code coverage
+coverage
+*.lcov
+
+# logs
+logs
+*.log
+report.*.json
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# caches
+.eslintcache
+.cache
+*.tsbuildinfo
+
+# IntelliJ based IDEs
+.idea
+
+# Finder (MacOS) folder config
+.DS_Store
+
+# Temp files
+temp/
+
+# Antigravitycli
+.antigravitycli/

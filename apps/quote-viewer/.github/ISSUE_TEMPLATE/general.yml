@@ -1,0 +1,32 @@
+name: General Issue
+description: Ask a question, suggest maintenance work, or open a topic that is not a bug or feature request
+title: "General: "
+labels:
+  - triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for general questions, maintenance ideas, documentation notes, or anything that does not fit the bug or feature templates.
+        AI-assisted issues are fine, but please keep them concise and review the content before submitting.
+  - type: textarea
+    id: topic
+    attributes:
+      label: Topic
+      description: What would you like to discuss or change?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Add any relevant background, links, screenshots, or examples.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I searched existing issues and pull requests.
+          required: true
+        - label: I did not include secrets, cookies, tokens, private keys, or private account data.
+          required: true

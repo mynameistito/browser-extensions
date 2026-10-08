@@ -1,0 +1,49 @@
+{
+  "name": "quote-viewer",
+  "version": "0.2.10",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build && wxt build -b firefox",
+    "build:chrome": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip && wxt zip -b firefox",
+    "zip:chrome": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "zip:all": "bun run zip",
+    "generate-key": "bun scripts/generate-key.ts",
+    "postinstall": "wxt prepare",
+    "test": "bun test",
+    "test:coverage": "bun test --coverage",
+    "typecheck": "tsgo --noEmit",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "knip": "bunx knip@latest",
+    "changeset": "changeset",
+    "changeset-add": "bun ./scripts/changeset-add.ts",
+    "version": "changeset version && bun scripts/linkify-changelog.ts && wxt prepare",
+    "release": "bun run scripts/release.ts",
+    "ci:release": "bun run release",
+    "prepare": "lefthook install"
+  },
+  "devDependencies": {
+    "@changesets/cli": "3.0.3",
+    "@types/bun": "^1.4.2",
+    "@typescript/native-preview": "^7.0.0-dev.20260707.2",
+    "lefthook": "^2.1.14",
+    "oxfmt": "^0.70.0",
+    "oxlint": "^1.85.0",
+    "ultracite": "7.12.0",
+    "wxt": "^0.21.4"
+  },
+  "overrides": {
+    "esbuild": "0.28.1",
+    "js-yaml": "4.2.0",
+    "shell-quote": "1.8.4",
+    "tmp": "0.2.7",
+    "uuid": "11.1.1",
+    "vite": "8.0.16"
+  }
+}
