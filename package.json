@@ -1,0 +1,34 @@
+{
+  "name": "browser-extensions",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.3.14",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "turbo": "turbo"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.0",
+    "@shadcn/lint": "^0.2.0",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "@types/bun": "^1.4.2",
+    "eslint-plugin-github": "^6.1.2",
+    "eslint-plugin-sonarjs": "^4.2.1",
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.86.0",
+    "oxlint-plugin-react-doctor": "^0.9.14",
+    "turbo": "^2.5.0",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "ultracite": "7.12.2"
+  }
+}

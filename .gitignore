@@ -1,0 +1,9 @@
+node_modules/
+.turbo/
+.output/
+dist/
+coverage/
+key.pem
+*.pem
+.DS_Store
+Thumbs.db
