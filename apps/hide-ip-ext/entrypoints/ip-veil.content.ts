@@ -1,119 +1,125 @@
-const VEIL_CLASS = 'ip-veil-hidden';
-const STYLE_ID = 'ip-veil-styles';
+const VEIL_CLASS = "ip-veil-hidden";
+const STYLE_ID = "ip-veil-styles";
+const EXCLUDED_TAGS = new Set([
+  "SCRIPT",
+  "STYLE",
+  "TEXTAREA",
+  "INPUT",
+  "NOSCRIPT",
+  "TITLE",
+]);
 
-export default defineContentScript({
-  matches: ['<all_urls>'],
-  runAt: 'document_idle',
-  main() {
-    void start();
-  },
-});
+const escapeRegExp = (value: string): string =>
+  value.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 
-async function start() {
-  let ip: string | null;
-  try {
-    ip = await browser.runtime.sendMessage({ type: 'IP_VEIL_GET_IP' }) as string | null;
-  } catch {
-    // A lookup failure should never affect the website being visited.
-    return;
-  }
-  if (!ip) return;
-
-  injectStyles();
-  const matcher = new RegExp(`(?<![\\w.:])${escapeRegExp(ip)}(?![\\w.:])`, 'g');
-  veilMatches(document.body, matcher);
-  redactTitles(ip);
-
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      for (const node of mutation.addedNodes) veilNode(node, matcher);
-    }
-    redactTitles(ip);
-  });
-
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ['title'],
-    childList: true,
-    subtree: true,
-  });
-}
-
-function veilNode(node: Node, matcher: RegExp) {
-  if (node.nodeType === Node.TEXT_NODE) {
-    veilTextNode(node as Text, matcher);
-    return;
-  }
-
-  if (node.nodeType === Node.ELEMENT_NODE) veilMatches(node as Element, matcher);
-}
-
-function veilMatches(root: ParentNode, matcher: RegExp) {
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-    acceptNode: (node) => shouldProcess(node) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT,
-  });
-
-  const textNodes: Text[] = [];
-  while (walker.nextNode()) textNodes.push(walker.currentNode as Text);
-  textNodes.forEach((node) => veilTextNode(node, matcher));
-}
-
-function shouldProcess(node: Node) {
+const shouldProcess = (node: Node): boolean => {
   const parent = node.parentElement;
-  if (!parent || parent.closest(`.${VEIL_CLASS}`)) return false;
-  return !['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'NOSCRIPT', 'TITLE'].includes(parent.tagName);
-}
+  return Boolean(
+    parent &&
+    !parent.closest(`.${VEIL_CLASS}`) &&
+    !EXCLUDED_TAGS.has(parent.tagName)
+  );
+};
 
-function redactTitles(ip: string) {
-  const replacement = 'your-ip';
-  if (document.title.includes(ip)) document.title = document.title.replaceAll(ip, replacement);
+const createVeil = (ip: string): HTMLSpanElement => {
+  const veil = document.createElement("span");
+  veil.className = VEIL_CLASS;
+  veil.dataset.ip = ip;
+  veil.setAttribute(
+    "aria-label",
+    "Your IP address is blurred. Hover to reveal."
+  );
 
-  document.querySelectorAll<HTMLElement>('[title]').forEach((element) => {
-    const title = element.getAttribute('title');
-    if (title?.includes(ip)) element.setAttribute('title', title.replaceAll(ip, replacement));
+  const value = document.createElement("span");
+  value.className = "ip-veil-value";
+  value.textContent = ip;
+  const label = document.createElement("span");
+  label.className = "ip-veil-label";
+  label.setAttribute("aria-hidden", "true");
+  label.textContent = "your-ip";
+  veil.append(value, label);
+
+  veil.addEventListener("pointerenter", () => {
+    veil.classList.add("ip-veil-visible");
+    veil.setAttribute("aria-label", "Your IP address is visible.");
   });
-}
+  veil.addEventListener("pointerleave", () => {
+    veil.classList.remove("ip-veil-visible");
+    veil.setAttribute(
+      "aria-label",
+      "Your IP address is blurred. Hover to reveal."
+    );
+  });
 
-function veilTextNode(textNode: Text, matcher: RegExp) {
+  return veil;
+};
+
+const veilTextNode = (textNode: Text, matcher: RegExp): void => {
   const value = textNode.nodeValue;
-  if (!value || !matcher.test(value)) return;
+  if (!value || !matcher.test(value)) {
+    return;
+  }
   matcher.lastIndex = 0;
 
   const fragment = document.createDocumentFragment();
   let cursor = 0;
   for (const match of value.matchAll(matcher)) {
-    const start = match.index ?? 0;
-    fragment.append(value.slice(cursor, start));
+    const matchStart = match.index ?? 0;
+    fragment.append(value.slice(cursor, matchStart));
     fragment.append(createVeil(match[0]));
-    cursor = start + match[0].length;
+    cursor = matchStart + match[0].length;
   }
   fragment.append(value.slice(cursor));
   textNode.replaceWith(fragment);
-}
+};
 
-function createVeil(ip: string) {
-  const veil = document.createElement('span');
-  veil.className = VEIL_CLASS;
-  veil.dataset.ip = ip;
-  veil.setAttribute('aria-label', 'Your IP address is blurred. Hover to reveal.');
-  veil.innerHTML = '<span class="ip-veil-value"></span><span class="ip-veil-label" aria-hidden="true">your-ip</span>';
-  veil.querySelector('.ip-veil-value')!.textContent = ip;
-
-  veil.addEventListener('pointerenter', () => {
-    veil.classList.add('ip-veil-visible');
-    veil.setAttribute('aria-label', 'Your IP address is visible.');
-  });
-  veil.addEventListener('pointerleave', () => {
-    veil.classList.remove('ip-veil-visible');
-    veil.setAttribute('aria-label', 'Your IP address is blurred. Hover to reveal.');
+const veilMatches = (root: ParentNode, matcher: RegExp): void => {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: (node) =>
+      shouldProcess(node) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT,
   });
 
-  return veil;
-}
+  const textNodes: Text[] = [];
+  while (walker.nextNode()) {
+    if (walker.currentNode instanceof Text) {
+      textNodes.push(walker.currentNode);
+    }
+  }
+  for (const node of textNodes) {
+    veilTextNode(node, matcher);
+  }
+};
 
-function injectStyles() {
-  if (document.getElementById(STYLE_ID)) return;
-  const style = document.createElement('style');
+const veilNode = (node: Node, matcher: RegExp): void => {
+  if (node instanceof Text) {
+    veilTextNode(node, matcher);
+    return;
+  }
+
+  if (node instanceof Element) {
+    veilMatches(node, matcher);
+  }
+};
+
+const redactTitles = (ip: string): void => {
+  const replacement = "your-ip";
+  if (document.title.includes(ip)) {
+    document.title = document.title.replaceAll(ip, replacement);
+  }
+
+  for (const element of document.querySelectorAll<HTMLElement>("[title]")) {
+    const title = element.getAttribute("title");
+    if (title?.includes(ip)) {
+      element.setAttribute("title", title.replaceAll(ip, replacement));
+    }
+  }
+};
+
+const injectStyles = (): void => {
+  if (document.querySelector(`#${STYLE_ID}`)) {
+    return;
+  }
+  const style = document.createElement("style");
   style.id = STYLE_ID;
   style.textContent = `
     .${VEIL_CLASS} {
@@ -149,8 +155,50 @@ function injectStyles() {
     @media (prefers-reduced-motion: reduce) { .${VEIL_CLASS} { animation: none; transition: none; } }
   `;
   document.documentElement.append(style);
-}
+};
 
-function escapeRegExp(value: string) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
+const start = async (): Promise<void> => {
+  let response: unknown;
+  try {
+    response = await browser.runtime.sendMessage({ type: "IP_VEIL_GET_IP" });
+  } catch {
+    // A lookup failure should never affect the website being visited.
+    return;
+  }
+
+  if (typeof response !== "string" || !response) {
+    return;
+  }
+
+  injectStyles();
+  const matcher = new RegExp(
+    `(?<![\\w.:])${escapeRegExp(response)}(?![\\w.:])`,
+    "gu"
+  );
+  veilMatches(document.body, matcher);
+  redactTitles(response);
+
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes) {
+        veilNode(node, matcher);
+      }
+    }
+    redactTitles(response);
+  });
+
+  observer.observe(document.documentElement, {
+    attributeFilter: ["title"],
+    attributes: true,
+    childList: true,
+    subtree: true,
+  });
+};
+
+export default defineContentScript({
+  main: () => {
+    void start();
+  },
+  matches: ["<all_urls>"],
+  runAt: "document_idle",
+});

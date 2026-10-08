@@ -1,27 +1,36 @@
 {
   "name": "hide-ip-ext",
   "version": "0.1.0",
-  "description": "A WXT browser extension that blurs your public IP address on web pages.",
   "private": true,
-  "type": "module",
-  "author": "My Name is Tito <github@mynameistito.com>",
+  "description": "A WXT browser extension that blurs your public IP address on web pages.",
+  "homepage": "https://github.com/mynameistito/hide-ip-ext#readme",
+  "bugs": {
+    "url": "https://github.com/mynameistito/hide-ip-ext/issues"
+  },
   "license": "MIT",
+  "author": "My Name is Tito <github@mynameistito.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mynameistito/hide-ip-ext.git"
   },
-  "bugs": {
-    "url": "https://github.com/mynameistito/hide-ip-ext/issues"
-  },
-  "homepage": "https://github.com/mynameistito/hide-ip-ext#readme",
+  "type": "module",
   "scripts": {
-    "dev": "wxt",
-    "build": "wxt build",
-    "zip": "wxt zip",
-    "postinstall": "wxt prepare"
+    "dev": "bun ../../scripts/run-wxt.ts",
+    "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
+    "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",
+    "build:firefox": "bun ../../scripts/run-wxt.ts build -b firefox",
+    "zip": "bun ../../scripts/run-wxt.ts zip",
+    "zip:chrome": "bun ../../scripts/run-wxt.ts zip -b chrome",
+    "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
+    "zip:all": "bun run zip:chrome && bun run zip:firefox",
+    "typecheck": "tsc --noEmit",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "ci:release": "bun ../../scripts/release-app.ts",
+    "postinstall": "bun ../../scripts/run-wxt.ts prepare"
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
+    "@types/bun": "^1.4.2",
     "wxt": "^0.20.27"
   }
 }
