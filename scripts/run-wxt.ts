@@ -3,9 +3,10 @@ import path from "node:path";
 
 const workspaceRoot = path.resolve(import.meta.dirname, "..");
 const appDir = process.cwd();
+const appNodeModules = path.join(appDir, "node_modules");
 const rootNodeModules = path.join(workspaceRoot, "node_modules");
 
-process.env.NODE_PATH = [process.env.NODE_PATH, rootNodeModules]
+process.env.NODE_PATH = [process.env.NODE_PATH, appNodeModules, rootNodeModules]
   .filter(Boolean)
   .join(path.delimiter);
 
