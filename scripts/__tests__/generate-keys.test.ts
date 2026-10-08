@@ -5,12 +5,24 @@ import path from "node:path";
 
 import {
   chromeKeySecrets,
+  generateKeyHelp,
   generateChromeKeyFile,
   parseGenerateKeyOptions,
   uploadChromeKey,
 } from "../generate-keys-core";
 
 describe("parseGenerateKeyOptions", () => {
+  test("prints help for both long and short flags", () => {
+    expect(parseGenerateKeyOptions(["--help"])).toEqual({
+      kind: "help",
+      message: generateKeyHelp,
+    });
+    expect(parseGenerateKeyOptions(["-h"])).toEqual({
+      kind: "help",
+      message: generateKeyHelp,
+    });
+  });
+
   test("uses the release workflow secret name for each app", () => {
     expect(chromeKeySecrets).toEqual({
       "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",

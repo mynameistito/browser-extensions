@@ -61,7 +61,9 @@ const generateKey = (
 };
 
 const parsed = parseGenerateKeyOptions(process.argv.slice(2));
-if (parsed.kind === "error") {
+if (parsed.kind === "help") {
+  console.log(parsed.message);
+} else if (parsed.kind === "error") {
   console.error(parsed.message);
   process.exitCode = 1;
 } else {

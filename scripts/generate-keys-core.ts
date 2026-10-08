@@ -36,10 +36,36 @@ export interface GenerateKeyOptions {
 /** Result of parsing generator command-line options. */
 export type ParseGenerateKeyOptionsResult =
   | { readonly kind: "error"; readonly message: string }
+  | { readonly kind: "help"; readonly message: string }
   | { readonly kind: "ok"; readonly options: GenerateKeyOptions };
 
 const usage =
   "Usage: bun run generate-keys [--app <hide-email-ext|quote-viewer|new-tab-ext>] [--repo <owner/name>] [--upload] [--force]";
+
+/** Complete help text for the root key-generation command. */
+export const generateKeyHelp = `${usage}
+
+Generate RSA signing keys for the Chromium extensions. Without --app, keys are
+generated for all supported apps. Each app's private key is written to its own
+gitignored apps/<app>/key.pem file.
+
+Options:
+  --app <name>         Generate a key for one app.
+  --repo <owner/name>  Override the GitHub repository for the secret command.
+  --upload             Upload the key to GitHub with gh instead of printing a command.
+  --force, -f          Replace an existing key and change that extension's ID.
+  --help, -h           Show this help message.
+
+The repository defaults to mynameistito/browser-extensions. --repo and --upload
+require exactly one --app. Keys are stored in the per-app Actions secrets used
+by the workflows; uploads require gh to be installed and authenticated.
+
+Examples:
+  bun run generate-keys
+  bun run generate-keys -- --app quote-viewer
+  bun run generate-keys -- --app quote-viewer --repo owner/name
+  bun run generate-keys -- --app quote-viewer --upload
+`;
 
 interface GhCommandResult {
   readonly error: Error | undefined;
@@ -68,6 +94,10 @@ const runGhSecretCommand: GhSecretCommand = (args, input) => {
 export const parseGenerateKeyOptions = (
   args: readonly string[]
 ): ParseGenerateKeyOptionsResult => {
+  if (args.some((argument) => argument === "--help" || argument === "-h")) {
+    return { kind: "help", message: generateKeyHelp };
+  }
+
   const selectedExtensions: Extension[] = [];
   let force = false;
   let upload = false;
