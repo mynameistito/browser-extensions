@@ -61,7 +61,9 @@ describe("settings UI", () => {
     );
     await waitFor(() => expect(dialog).toHaveProperty("open", true));
 
-    await user.selectOptions(screen.getByLabelText("Theme"), "light");
+    fireEvent.change(screen.getByLabelText("Theme"), {
+      target: { value: "light" },
+    });
     expect(screen.getByLabelText("Theme")).toHaveProperty("value", "light");
     fireEvent.change(screen.getByLabelText("Theme"), {
       target: { value: "invalid" },
@@ -79,10 +81,9 @@ describe("settings UI", () => {
     expect(onNextBackground).toHaveBeenCalledOnce();
 
     await user.click(screen.getByRole("button", { name: "Search" }));
-    await user.selectOptions(
-      screen.getByLabelText("Web search provider"),
-      "bing"
-    );
+    fireEvent.change(screen.getByLabelText("Web search provider"), {
+      target: { value: "bing" },
+    });
     expect(screen.getByLabelText("Web search provider")).toHaveProperty(
       "value",
       "bing"

@@ -19,8 +19,7 @@
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
     "generate-key": "bun run ./scripts/generate-key.ts",
-    "knip": "bunx knip@latest",
-    "prepare": "lefthook install"
+    "knip": "bunx knip@latest"
   },
   "devDependencies": {
     "@types/chrome": "^0.2.2",

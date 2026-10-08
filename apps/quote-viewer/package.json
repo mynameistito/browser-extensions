@@ -22,8 +22,7 @@
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
     "linkify-changelog": "bun scripts/linkify-changelog.ts",
-    "knip": "bunx knip@latest",
-    "prepare": "lefthook install"
+    "knip": "bunx knip@latest"
   },
   "devDependencies": {
     "wxt": "^0.21.4"
