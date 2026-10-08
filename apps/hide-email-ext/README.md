@@ -50,10 +50,10 @@ Chrome assigns a random extension ID on each build unless an RSA key is embedded
 bun run generate-keys -- --app hide-email-ext
 ```
 
-The root-level script creates this app's gitignored `key.pem`, prints the stable Chromium extension ID, and prints the command to configure the `WXT_CHROME_KEY` GitHub Actions secret. Do not commit or share `key.pem`; use `--force` only when intentionally changing the extension ID.
+The root-level script creates this app's gitignored `key.pem`, prints the stable Chromium extension ID, and prints the command to configure `HIDE_EMAIL_WXT_CHROME_KEY` in the workspace repository. Do not commit or share `key.pem`; use `--force` only when intentionally changing the extension ID.
 
 ```
-Get-Content apps/hide-email-ext/key.pem -Raw | gh secret set WXT_CHROME_KEY --repo mynameistito/hide-email-ext
+Get-Content apps/hide-email-ext/key.pem -Raw | gh secret set HIDE_EMAIL_WXT_CHROME_KEY --repo mynameistito/browser-extensions
 ```
 
 ## Project Structure

@@ -66,10 +66,10 @@ Generate a key with:
 bun run generate-keys -- --app quote-viewer
 ```
 
-The root-level script writes this app's gitignored `key.pem` and prints the resulting extension ID plus the GitHub CLI command to register the private key as the `WXT_CHROME_KEY` GitHub Actions secret. Do not commit or share the key; use `--force` only when intentionally changing the extension ID.
+The root-level script writes this app's gitignored `key.pem` and prints the resulting extension ID plus the GitHub CLI command to register the private key as the `QUOTE_VIEWER_WXT_CHROME_KEY` GitHub Actions secret. Do not commit or share the key; use `--force` only when intentionally changing the extension ID.
 
 ```bash
-Get-Content apps/quote-viewer/key.pem -Raw | gh secret set WXT_CHROME_KEY --repo mynameistito/quote-viewer
+Get-Content apps/quote-viewer/key.pem -Raw | gh secret set QUOTE_VIEWER_WXT_CHROME_KEY --repo mynameistito/browser-extensions
 ```
 
 Firefox uses `browser_specific_settings.gecko.id` from `wxt.config.ts`, so it does not need this key.

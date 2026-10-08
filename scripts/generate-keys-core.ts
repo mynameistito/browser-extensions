@@ -14,6 +14,13 @@ export const supportedExtensions = [
 /** An app configured to use a persistent Chromium signing key. */
 export type Extension = (typeof supportedExtensions)[number];
 
+/** Per-app GitHub Actions secrets referenced by the workflows. */
+export const chromeKeySecrets = {
+  "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
+  "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
+  "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
+} as const satisfies Record<Extension, string>;
+
 /** Parsed options for the key-generation command. */
 export interface GenerateKeyOptions {
   /** App keys to create. */
@@ -34,8 +41,28 @@ export type ParseGenerateKeyOptionsResult =
 const usage =
   "Usage: bun run generate-keys [--app <hide-email-ext|quote-viewer|new-tab-ext>] [--repo <owner/name>] [--upload] [--force]";
 
+interface GhCommandResult {
+  readonly error: Error | undefined;
+  readonly status: number | null;
+}
+
+type GhSecretCommand = (
+  args: readonly string[],
+  input: string
+) => GhCommandResult;
+
 const isExtension = (value: string): value is Extension =>
   supportedExtensions.some((extension) => extension === value);
+
+const runGhSecretCommand: GhSecretCommand = (args, input) => {
+  const result = spawnSync("gh", args, {
+    encoding: "utf-8",
+    input,
+    stdio: ["pipe", "inherit", "inherit"],
+  });
+
+  return { error: result.error, status: result.status };
+};
 
 /** Parse CLI arguments and reject ambiguous repo/upload targets. */
 export const parseGenerateKeyOptions = (
@@ -153,23 +180,20 @@ export const generateChromeKeyFile = (
   };
 };
 
-/** Send a PEM key to the release workflow's WXT_CHROME_KEY Actions secret. */
+/** Upload a PEM key to the release workflow's per-app GitHub Actions secret. */
 export const uploadChromeKey = (
   keyPath: string,
-  repository: string
+  repository: string,
+  secretName: string,
+  runCommand: GhSecretCommand = runGhSecretCommand
 ):
   | { readonly kind: "error"; readonly message: string }
   | { readonly kind: "uploaded" } => {
   try {
     const keyPem = readFileSync(keyPath, "utf-8");
-    const result = spawnSync(
-      "gh",
-      ["secret", "set", "WXT_CHROME_KEY", "--repo", repository],
-      {
-        encoding: "utf-8",
-        input: keyPem,
-        stdio: ["pipe", "inherit", "inherit"],
-      }
+    const result = runCommand(
+      ["secret", "set", secretName, "--repo", repository],
+      keyPem
     );
 
     if (result.error) {

@@ -4,11 +4,21 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 
 import {
+  chromeKeySecrets,
   generateChromeKeyFile,
   parseGenerateKeyOptions,
+  uploadChromeKey,
 } from "../generate-keys-core";
 
 describe("parseGenerateKeyOptions", () => {
+  test("uses the release workflow secret name for each app", () => {
+    expect(chromeKeySecrets).toEqual({
+      "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
+      "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
+      "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
+    });
+  });
+
   test("accepts a repository override for one app", () => {
     expect(
       parseGenerateKeyOptions([
@@ -85,6 +95,41 @@ describe("generateChromeKeyFile", () => {
         message: expect.stringContaining("already exists"),
       });
       expect(readFileSync(keyPath, "utf-8")).toBe("preserve this key");
+    } finally {
+      rmSync(directory, { force: true, recursive: true });
+    }
+  });
+});
+
+describe("uploadChromeKey", () => {
+  test("sends the key to the configured app secret and repository", () => {
+    const directory = mkdtempSync(path.join(tmpdir(), "extension-key-test-"));
+    const keyPath = path.join(directory, "key.pem");
+    writeFileSync(keyPath, "private test key");
+    let command: readonly string[] = [];
+    let input = "";
+
+    try {
+      const result = uploadChromeKey(
+        keyPath,
+        "owner/repository",
+        chromeKeySecrets["quote-viewer"],
+        (args, keyPem) => {
+          command = args;
+          input = keyPem;
+          return { error: undefined, status: 0 };
+        }
+      );
+
+      expect(result).toEqual({ kind: "uploaded" });
+      expect(command).toEqual([
+        "secret",
+        "set",
+        "QUOTE_VIEWER_WXT_CHROME_KEY",
+        "--repo",
+        "owner/repository",
+      ]);
+      expect(input).toBe("private test key");
     } finally {
       rmSync(directory, { force: true, recursive: true });
     }

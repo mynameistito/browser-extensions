@@ -3,10 +3,13 @@ import path from "node:path";
 
 import type { Extension } from "./generate-keys-core";
 import {
+  chromeKeySecrets,
   parseGenerateKeyOptions,
   generateChromeKeyFile,
   uploadChromeKey,
 } from "./generate-keys-core";
+
+const defaultRepository = "mynameistito/browser-extensions";
 
 const generateKey = (
   extension: Extension,
@@ -29,9 +32,10 @@ const generateKey = (
   if (result.kind === "error") {
     return { kind: "error", message: `${extension}: ${result.message}` };
   }
-  const repository = options.repository ?? `mynameistito/${extension}`;
+  const repository = options.repository ?? defaultRepository;
+  const secretName = chromeKeySecrets[extension];
   if (options.upload) {
-    const uploadResult = uploadChromeKey(keyPath, repository);
+    const uploadResult = uploadChromeKey(keyPath, repository, secretName);
     if (uploadResult.kind === "error") {
       return {
         kind: "error",
@@ -41,14 +45,14 @@ const generateKey = (
 
     return {
       kind: "generated",
-      output: `Generated apps/${extension}/key.pem\nChrome extension ID: ${result.extensionId}\nUploaded as WXT_CHROME_KEY to ${repository}.`,
+      output: `Generated apps/${extension}/key.pem\nChrome extension ID: ${result.extensionId}\nUploaded as ${secretName} to ${repository}.`,
     };
   }
 
   const secretCommand =
     process.platform === "win32"
-      ? `Get-Content apps/${extension}/key.pem -Raw | gh secret set WXT_CHROME_KEY --repo ${repository}`
-      : `gh secret set WXT_CHROME_KEY --repo ${repository} < apps/${extension}/key.pem`;
+      ? `Get-Content apps/${extension}/key.pem -Raw | gh secret set ${secretName} --repo ${repository}`
+      : `gh secret set ${secretName} --repo ${repository} < apps/${extension}/key.pem`;
 
   return {
     kind: "generated",
