@@ -1,6 +1,11 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": ["src/entrypoints/**/*.{ts,tsx}", "scripts/*.ts"],
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/entrypoints/**/*.{ts,tsx}",
+    "scripts/*.ts",
+    "oxlint.config.ts"
+  ],
   "project": ["src/**/*.{ts,tsx,css}", "scripts/**/*.ts", "*.config.ts"],
-  "ignoreUnresolved": ["#imports"]
+  "ignoreBinaries": ["tsc", "ultracite"],
+  "ignoreDependencies": ["oxlint", "ultracite"]
 }

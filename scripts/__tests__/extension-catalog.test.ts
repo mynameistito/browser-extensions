@@ -115,7 +115,7 @@ describe("extension catalog", () => {
             app: "hide-email-ext",
             chromeSigningSecret: "HIDE_EMAIL_WXT_CHROME_KEY",
           },
-          { app: "hide-ip-ext", chromeSigningSecret: undefined },
+          { app: "hide-ip-ext" },
           { app: "new-tab-ext", chromeSigningSecret: "NEW_TAB_WXT_CHROME_KEY" },
           {
             app: "quote-viewer",

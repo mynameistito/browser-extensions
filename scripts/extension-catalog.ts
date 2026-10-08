@@ -139,10 +139,14 @@ if (import.meta.main) {
   if (argument === "--matrix") {
     console.log(
       JSON.stringify({
-        include: extensionCatalog.map(({ name, chromeSigningSecret }) => ({
-          app: name,
-          chromeSigningSecret,
-        })),
+        include: extensionCatalog
+          .filter((app) => app.scripts["ci:release"] !== undefined)
+          .map(({ name, chromeSigningSecret }) => ({
+            app: name,
+            ...(chromeSigningSecret === undefined
+              ? {}
+              : { chromeSigningSecret }),
+          })),
       })
     );
   } else if (argument === "--json") {

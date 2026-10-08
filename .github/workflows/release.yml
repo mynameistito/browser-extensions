@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
     outputs:
       has-changesets: ${{ steps.changesets.outputs['has-changesets'] }}
+      matrix: ${{ steps.matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
@@ -24,6 +25,9 @@ jobs:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
       - run: bun run prepare:wxt
+      - name: Build release matrix from extension catalog
+        id: matrix
+        run: echo "matrix=$(bun scripts/extension-catalog.ts --matrix)" >> "$GITHUB_OUTPUT"
       - name: Create or update version pull request
         id: changesets
         uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
@@ -34,10 +38,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  release-hide-email:
+  release:
     needs: version
     if: needs.version.outputs['has-changesets'] == 'false'
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.version.outputs.matrix) }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
@@ -45,57 +52,16 @@ jobs:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
       - run: bun run prepare:wxt
-      - run: bun run --filter hide-email-ext ci:release
+      - name: Release keyed extension
+        if: ${{ matrix.chromeSigningSecret }}
+        run: bun run --filter ${{ matrix.app }} ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REQUIRE_CHROME_KEY: "1"
-          WXT_CHROME_KEY: ${{ secrets.HIDE_EMAIL_WXT_CHROME_KEY }}
+          WXT_CHROME_KEY: ${{ secrets[matrix.chromeSigningSecret] }}
 
-  release-quote-viewer:
-    needs: version
-    if: needs.version.outputs['has-changesets'] == 'false'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
-        with:
-          bun-version: 1.4.2
-      - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
-      - run: bun run --filter quote-viewer ci:release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REQUIRE_CHROME_KEY: "1"
-          WXT_CHROME_KEY: ${{ secrets.QUOTE_VIEWER_WXT_CHROME_KEY }}
-
-  release-new-tab:
-    needs: version
-    if: needs.version.outputs['has-changesets'] == 'false'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
-        with:
-          bun-version: 1.4.2
-      - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
-      - run: bun run --filter new-tab-ext ci:release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REQUIRE_CHROME_KEY: "1"
-          WXT_CHROME_KEY: ${{ secrets.NEW_TAB_WXT_CHROME_KEY }}
-
-  release-hide-ip:
-    needs: version
-    if: needs.version.outputs['has-changesets'] == 'false'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
-        with:
-          bun-version: 1.4.2
-      - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
-      - run: bun run --filter hide-ip-ext ci:release
+      - name: Release extension without signing key
+        if: ${{ !matrix.chromeSigningSecret }}
+        run: bun run --filter ${{ matrix.app }} ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
