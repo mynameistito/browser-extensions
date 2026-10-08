@@ -1,8 +1,9 @@
-import { createPublicKey } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import { defineConfig } from "wxt";
+
+import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
 
 /**
  * Derive the Chromium-compatible `manifest.key` (base64 SPKI public key) from
@@ -30,15 +31,7 @@ const loadManifestKey = (): string | undefined => {
     return;
   }
 
-  const spkiPem = createPublicKey(pem).export({
-    format: "pem",
-    type: "spki",
-  }) as string;
-
-  return spkiPem
-    .replaceAll("-----BEGIN PUBLIC KEY-----", "")
-    .replaceAll("-----END PUBLIC KEY-----", "")
-    .replaceAll(/\s+/gu, "");
+  return deriveChromeExtensionKey(pem).manifestKey;
 };
 
 export default defineConfig({

@@ -18,7 +18,6 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
-    "generate-key": "bun run ./scripts/generate-key.ts",
     "knip": "bunx knip@latest"
   },
   "devDependencies": {

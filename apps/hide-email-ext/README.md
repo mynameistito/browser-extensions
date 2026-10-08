@@ -46,15 +46,14 @@ bun run fix              # auto-fix lint/format issues
 Chrome assigns a random extension ID on each build unless an RSA key is embedded in the manifest. Generate one locally:
 
 ```bash
-bun run generate-key     # creates key.pem (gitignored)
+# Run from the workspace root.
+bun run generate-keys -- --app hide-email-ext
 ```
 
-CI reads the key from the `EXTENSION_KEY_PEM` GitHub secret.
+The root-level script creates this app's gitignored `key.pem`, prints the stable Chromium extension ID, and prints the command to configure the `WXT_CHROME_KEY` GitHub Actions secret. Do not commit or share `key.pem`; use `--force` only when intentionally changing the extension ID.
 
 ```
-bun run generate-key # generates key.pem for stable extension ID
-Get-Content key.pem -Raw | gh secret set EXTENSION_KEY_PEM # sets secret for CI (win)
-gh secret set EXTENSION_KEY_PEM < key.pem # sets secret for CI (unix)
+Get-Content apps/hide-email-ext/key.pem -Raw | gh secret set WXT_CHROME_KEY --repo mynameistito/hide-email-ext
 ```
 
 ## Project Structure
@@ -73,8 +72,6 @@ gh secret set EXTENSION_KEY_PEM < key.pem # sets secret for CI (unix)
 │   ├── redact.ts               # DOM walker + MutationObserver redaction engine
 │   ├── storage.ts              # typed wrapper around WXT storage
 │   └── messaging.ts            # typed runtime messages (popup ↔ content)
-├── scripts/
-│   └── generate-key.ts         # generates key.pem for stable extension ID
 ├── public/                     # static icons (16/32/48/96/128 PNG)
 ├── wxt.config.ts               # WXT config (manifest, permissions)
 └── package.json
