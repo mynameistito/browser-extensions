@@ -3,23 +3,21 @@ import { generateKeyPairSync } from "node:crypto";
 import { chmodSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 
 import { deriveChromeExtensionKey } from "./chrome-extension-key";
+import { persistentChromeKeyApps } from "./extension-catalog";
 
 /** Apps whose release workflows require stable Chromium signing keys. */
-export const supportedExtensions = [
-  "hide-email-ext",
-  "quote-viewer",
-  "new-tab-ext",
-] as const;
+export const supportedExtensions = persistentChromeKeyApps.map(
+  (app) => app.name
+);
 
 /** An app configured to use a persistent Chromium signing key. */
 export type Extension = (typeof supportedExtensions)[number];
 
 /** Per-app GitHub Actions secrets referenced by the workflows. */
-export const chromeKeySecrets = {
-  "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
-  "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
-  "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
-} as const satisfies Record<Extension, string>;
+export const chromeKeySecrets: Readonly<Record<Extension, string>> =
+  Object.fromEntries(
+    persistentChromeKeyApps.map((app) => [app.name, app.chromeSigningSecret])
+  ) as Record<Extension, string>;
 
 /** Parsed options for the key-generation command. */
 export interface GenerateKeyOptions {
@@ -39,8 +37,7 @@ export type ParseGenerateKeyOptionsResult =
   | { readonly kind: "help"; readonly message: string }
   | { readonly kind: "ok"; readonly options: GenerateKeyOptions };
 
-const usage =
-  "Usage: bun run generate-keys [--app <hide-email-ext|quote-viewer|new-tab-ext>] [--repo <owner/name>] [--upload] [--force]";
+const usage = `Usage: bun run generate-keys [--app <${supportedExtensions.join("|")}>] [--repo <owner/name>] [--upload] [--force]`;
 
 /** Complete help text for the root key-generation command. */
 export const generateKeyHelp = `${usage}
@@ -57,8 +54,8 @@ Options:
   --help, -h           Show this help message.
 
 The repository defaults to mynameistito/browser-extensions. --repo and --upload
-require exactly one --app. Keys are stored in the per-app Actions secrets used
-by the workflows; uploads require gh to be installed and authenticated.
+require exactly one --app. Keys are stored in the per-app Actions secrets declared
+in each app manifest; uploads require gh to be installed and authenticated.
 
 Examples:
   bun run generate-keys

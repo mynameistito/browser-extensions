@@ -10,11 +10,13 @@ import {
 import { tmpdir } from "node:os";
 import path from "node:path";
 
+import { persistentChromeKeyApps } from "../extension-catalog";
 import {
   chromeKeySecrets,
   generateKeyHelp,
   generateChromeKeyFile,
   parseGenerateKeyOptions,
+  supportedExtensions,
   uploadChromeKey,
 } from "../generate-keys-core";
 
@@ -31,10 +33,23 @@ describe("parseGenerateKeyOptions", () => {
   });
 
   test("uses the release workflow secret name for each app", () => {
+    expect(supportedExtensions).toEqual(
+      persistentChromeKeyApps.map((app) => app.name)
+    );
     expect(chromeKeySecrets).toEqual({
       "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
       "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
       "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
+    });
+  });
+
+  test("derives help choices from keyed apps and rejects keyless apps", () => {
+    for (const app of persistentChromeKeyApps) {
+      expect(generateKeyHelp).toContain(app.name);
+    }
+    expect(parseGenerateKeyOptions(["--app", "hide-ip-ext"])).toMatchObject({
+      kind: "error",
+      message: expect.stringContaining("--app"),
     });
   });
 

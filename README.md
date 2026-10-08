@@ -32,4 +32,4 @@ packages/   Shared tooling and configuration packages
 
 Lint/format configuration is centralized in the root `oxlint.config.ts` and `oxfmt.config.ts`. The new-tab app adds its React/TanStack-specific Oxlint presets in its local config while inheriting the same Ultracite core. The shared TypeScript base lives in `packages/typescript-config`.
 
-Before enabling automated Chrome releases, add these repository Actions secrets, each containing that extension's own PEM key: `HIDE_EMAIL_WXT_CHROME_KEY`, `QUOTE_VIEWER_WXT_CHROME_KEY`, and `NEW_TAB_WXT_CHROME_KEY`. `hide-ip-ext` does not currently use a persistent Chrome key.
+Before enabling automated Chrome releases, configure the signing secret for each app that uses a persistent Chrome key. Run `bun run generate-keys --help` for supported apps, or generate a key for one app to print its exact secret name. `hide-ip-ext` does not currently use a persistent Chrome key.

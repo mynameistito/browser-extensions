@@ -2,12 +2,9 @@ import { randomBytes } from "node:crypto";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
-const appNames = [
-  "hide-email-ext",
-  "quote-viewer",
-  "new-tab-ext",
-  "hide-ip-ext",
-] as const;
+import { extensionCatalog } from "./extension-catalog";
+
+const appNames = extensionCatalog.map((app) => app.name);
 const changeTypes = ["patch", "minor", "major"] as const;
 
 const [appName, changeType, ...summaryParts] = process.argv.slice(2);

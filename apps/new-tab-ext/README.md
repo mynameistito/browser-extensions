@@ -31,7 +31,7 @@ Chromium derives an extension ID from its manifest key. Generate this project's 
 bun run generate-keys -- --app new-tab-ext
 ```
 
-The root-level script writes this app's gitignored `key.pem`, prints the derived extension ID, and prints the command to register the key as the `NEW_TAB_WXT_CHROME_KEY` GitHub Actions secret. Do not commit or share `key.pem`. Push builds on `init` require that secret and use it only for Chrome builds; pull-request builds do not receive it. Firefox continues to use the fixed Gecko ID in `wxt.config.ts` and does not use the Chrome key. Do not use `--force` unless you intend to change the Chrome extension ID.
+The root-level script writes this app's gitignored `key.pem`, prints the derived extension ID, and prints the command to register the key as this app's GitHub Actions secret. Do not commit or share `key.pem`. Push builds on `init` require that secret and use it only for Chrome builds; pull-request builds do not receive it. Firefox continues to use the fixed Gecko ID in `wxt.config.ts` and does not use the Chrome key. Do not use `--force` unless you intend to change the Chrome extension ID.
 
 ## Checks and builds
 
