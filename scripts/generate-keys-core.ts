@@ -1,6 +1,6 @@
 import { spawnSync } from "node:child_process";
 import { generateKeyPairSync } from "node:crypto";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { chmodSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 
 import { deriveChromeExtensionKey } from "./chrome-extension-key";
 
@@ -194,6 +194,7 @@ export const generateChromeKeyFile = (
       flag: force ? "w" : "wx",
       mode: 0o600,
     });
+    chmodSync(keyPath, 0o600);
   } catch (error) {
     return {
       kind: "error",

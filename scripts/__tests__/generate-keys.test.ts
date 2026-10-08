@@ -1,5 +1,12 @@
 import { describe, expect, test } from "bun:test";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import {
+  chmodSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
@@ -107,6 +114,27 @@ describe("generateChromeKeyFile", () => {
         message: expect.stringContaining("already exists"),
       });
       expect(readFileSync(keyPath, "utf-8")).toBe("preserve this key");
+    } finally {
+      rmSync(directory, { force: true, recursive: true });
+    }
+  });
+
+  test("restores owner-only permissions when force replaces a key", () => {
+    if (process.platform === "win32") {
+      return;
+    }
+
+    const directory = mkdtempSync(path.join(tmpdir(), "extension-key-test-"));
+    const keyPath = path.join(directory, "key.pem");
+
+    try {
+      writeFileSync(keyPath, "old key", { mode: 0o644 });
+      chmodSync(keyPath, 0o644);
+
+      const result = generateChromeKeyFile(keyPath, true);
+
+      expect(result.kind).toBe("generated");
+      expect(statSync(keyPath).mode.toString(8).slice(-3)).toBe("600");
     } finally {
       rmSync(directory, { force: true, recursive: true });
     }
