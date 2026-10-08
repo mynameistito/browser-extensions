@@ -3,7 +3,59 @@ import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
-import { generateChromeKeyFile } from "../generate-keys-core";
+import {
+  generateChromeKeyFile,
+  parseGenerateKeyOptions,
+} from "../generate-keys-core";
+
+describe("parseGenerateKeyOptions", () => {
+  test("accepts a repository override for one app", () => {
+    expect(
+      parseGenerateKeyOptions([
+        "--app",
+        "quote-viewer",
+        "--repo",
+        "mynameistito/quote-viewer",
+      ])
+    ).toMatchObject({
+      kind: "ok",
+      options: {
+        extensions: ["quote-viewer"],
+        repository: "mynameistito/quote-viewer",
+        upload: false,
+      },
+    });
+  });
+
+  test("allows direct upload when one app is selected", () => {
+    expect(
+      parseGenerateKeyOptions(["--app", "quote-viewer", "--upload"])
+    ).toMatchObject({
+      kind: "ok",
+      options: {
+        extensions: ["quote-viewer"],
+        upload: true,
+      },
+    });
+  });
+
+  test("requires one app when overriding the repo or uploading", () => {
+    expect(parseGenerateKeyOptions(["--repo", "owner/repo"])).toMatchObject({
+      kind: "error",
+      message: expect.stringContaining("exactly one --app"),
+    });
+    expect(
+      parseGenerateKeyOptions(["--app", "quote-viewer", "--repo", "bad"])
+    ).toMatchObject({
+      kind: "error",
+      message: expect.stringContaining("owner/name"),
+    });
+    expect(parseGenerateKeyOptions(["--upload"])).toMatchObject({
+      kind: "error",
+      message: expect.stringContaining("exactly one --app"),
+    });
+  });
+});
 
 describe("generateChromeKeyFile", () => {
   test("writes a PKCS#8 key and returns its stable Chromium ID", () => {
