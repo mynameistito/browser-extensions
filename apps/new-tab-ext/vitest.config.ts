@@ -15,7 +15,7 @@ export default defineConfig({
     },
   },
   test: {
-    environment: "jsdom",
+    environment: "happy-dom",
     include: ["__tests__/**/*.test.{ts,tsx}"],
     setupFiles: ["./__tests__/setup.ts"],
     restoreMocks: true,
