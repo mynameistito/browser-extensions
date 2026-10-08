@@ -1,15 +1,16 @@
 import { generateKeyPairSync } from "node:crypto";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
 import type { PluginOption } from "vite";
-import { afterEach, describe, expect, test } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 
 import config from "../../wxt.config";
 
 const originalDirectory = process.cwd();
 const originalChromeKey = process.env.WXT_CHROME_KEY;
+const originalRequireKey = process.env.REQUIRE_CHROME_KEY;
 interface BrowserConfigEnv {
   readonly browser: "chrome" | "firefox";
   readonly command: "build" | "serve";
@@ -40,6 +41,11 @@ afterEach(() => {
     Reflect.deleteProperty(process.env, "WXT_CHROME_KEY");
   } else {
     process.env.WXT_CHROME_KEY = originalChromeKey;
+  }
+  if (originalRequireKey === undefined) {
+    Reflect.deleteProperty(process.env, "REQUIRE_CHROME_KEY");
+  } else {
+    process.env.REQUIRE_CHROME_KEY = originalRequireKey;
   }
 });
 
@@ -82,35 +88,34 @@ describe("WXT browser configuration", () => {
     ).toHaveProperty("plugins");
   });
 
-  test("uses the local key when the environment key is blank", async () => {
-    const directory = mkdtempSync(path.join(tmpdir(), "wxt-local-key-test-"));
-    const { privateKey } = generateKeyPairSync("rsa", {
-      modulusLength: 2048,
-      privateKeyEncoding: { format: "pem", type: "pkcs8" },
-      publicKeyEncoding: { format: "pem", type: "spki" },
-    });
-    process.chdir(directory);
-    process.env.WXT_CHROME_KEY = "   ";
-    writeFileSync("key.pem", privateKey);
+  test("enforces the shared required-key behavior only for Chromium", async () => {
+    process.env.WXT_CHROME_KEY = " ";
+    process.env.REQUIRE_CHROME_KEY = "1";
 
-    try {
-      const manifest = await getManifest("chrome");
-      expect(manifest).toHaveProperty("key");
-    } finally {
-      process.chdir(originalDirectory);
-      rmSync(directory, { recursive: true, force: true });
-    }
+    await expect(getManifest("chrome")).rejects.toThrow(
+      "WXT_CHROME_KEY or key.pem is required when REQUIRE_CHROME_KEY=1."
+    );
+    expect(await getManifest("firefox")).toHaveProperty(
+      "browser_specific_settings.gecko.id",
+      "new-tab-ext@mynameistito.com"
+    );
   });
 
   test("omits the manifest key when neither environment nor local key exists", async () => {
     const directory = mkdtempSync(path.join(tmpdir(), "wxt-config-test-"));
     process.chdir(directory);
     process.env.WXT_CHROME_KEY = "";
+    process.env.REQUIRE_CHROME_KEY = "0";
+    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
 
     try {
       const manifest = await getManifest("chrome");
       expect(manifest).not.toHaveProperty("key");
+      expect(warning).toHaveBeenCalledWith(
+        expect.stringContaining("extension ID will be unstable")
+      );
     } finally {
+      warning.mockRestore();
       process.chdir(originalDirectory);
       rmSync(directory, { recursive: true, force: true });
     }

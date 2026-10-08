@@ -1,38 +1,6 @@
-import { existsSync, readFileSync } from "node:fs";
-import path from "node:path";
-
 import { defineConfig } from "wxt";
 
-import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
-
-/**
- * Derive the Chromium-compatible `manifest.key` (base64 SPKI public key) from
- * the local `key.pem` (PKCS8 private key) so the extension always resolves to
- * the same persistent ID locally.
- *
- * - In dev / local builds we read `key.pem` from the repo root.
- * - In CI we accept `WXT_CHROME_KEY` as the raw private-key PEM (from a secret).
- * - Only injected for Chromium targets — Firefox uses `browser_specific_settings`.
- */
-const loadPemSource = (): string | undefined => {
-  const fromEnv = process.env.WXT_CHROME_KEY;
-  if (fromEnv && fromEnv.length > 0) {
-    return fromEnv;
-  }
-  const keyPath = path.resolve("key.pem");
-  if (existsSync(keyPath)) {
-    return readFileSync(keyPath, "utf-8");
-  }
-};
-
-const loadManifestKey = (): string | undefined => {
-  const pem = loadPemSource();
-  if (!pem) {
-    return;
-  }
-
-  return deriveChromeExtensionKey(pem).manifestKey;
-};
+import { loadChromeExtensionConfig } from "../../scripts/chrome-extension-config";
 
 export default defineConfig({
   manifest: ({ browser }) => {
@@ -55,7 +23,7 @@ export default defineConfig({
       };
     }
 
-    const key = loadManifestKey();
+    const key = loadChromeExtensionConfig(import.meta.dirname)?.manifestKey;
     return {
       ...base,
       ...(key ? { key } : {}),
