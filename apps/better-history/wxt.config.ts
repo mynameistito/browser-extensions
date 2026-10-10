@@ -7,8 +7,8 @@ export default defineConfig({
   manifest: ({ browser }) => {
     const base = {
       default_locale: "en",
-      description: "Powerful browser history search, filtering, and cleanup.",
-      name: "Better History",
+      description: "__MSG_manifest_description__",
+      name: "__MSG_appName__",
       permissions: [
         "history",
         "sessions",

@@ -16,9 +16,7 @@ A modern rewrite of the classic Better History extension — local-only, no tele
 
 ## Roadmap
 
-Custom date ranges, per-domain views, synced device sessions, on-device time
-tracking, history export, settings import, and display settings (theme, RTL)
-are planned. See [`TODO.md`](./TODO.md) for the v8 rewrite roadmap.
+Custom date ranges, per-domain views, synced device sessions, on-device time tracking, history export, settings import, and display settings (theme, RTL) are planned. See [`TODO.md`](./TODO.md) for the v8 rewrite roadmap.
 
 ## Privacy
 
@@ -31,7 +29,7 @@ Runs entirely in your browser. No analytics, no telemetry, no remote API. See [`
 - Tailwind v4 + shadcn-style components + lucide-react
 - [virtua](https://github.com/inokawa/virtua) for virtualized lists
 - [better-result](https://github.com/zatsu/better-result) for typed errors
-- [ultracite](https://www.ultracite.ai) + Biome for lint/format
+- [ultracite](https://www.ultracite.ai) + Oxlint/Oxfmt for lint/format
 - Bun runtime
 
 ## Develop

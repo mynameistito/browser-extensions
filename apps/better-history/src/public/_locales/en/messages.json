@@ -96,7 +96,7 @@
     "message": "Please allow access to submit feedback."
   },
   "appName": {
-    "message": "Better History | Manage, Export, and Delete History"
+    "message": "Better History"
   },
   "apply": {
     "message": "Apply"
@@ -705,7 +705,7 @@
     "message": "Browse History"
   },
   "manifest_description": {
-    "message": "leek History Manager: Powerful search, bulk export, delete custom selections, filter by day/hour, and block domains from history."
+    "message": "Search, filter, and clean up your browsing history."
   },
   "maxSize": {
     "message": "Max Size"

@@ -1,6 +1,11 @@
 import { Result } from "better-result";
 
 import { history } from "@/lib/browser-api";
+import type {
+  BrowserApiError,
+  StorageReadError,
+  StorageValidationError,
+} from "@/lib/errors";
 import { extensionMessaging } from "@/lib/messages";
 import { shouldDelete } from "@/lib/patterns";
 import type { Cleanup } from "@/lib/schemas";
@@ -17,27 +22,41 @@ const RETENTION_MS: Record<string, number> = {
   "3m": 90 * 24 * 60 * 60 * 1000,
 };
 
+type CleanupError = BrowserApiError | StorageReadError | StorageValidationError;
+
 const runCleanup = async (
   retention: keyof typeof RETENTION_MS,
   whitelistExempt: boolean
-): Promise<void> => {
+): Promise<Result<null, CleanupError>> => {
   const ms = RETENTION_MS[retention];
   if (ms === undefined) {
-    return;
+    return Result.ok(null);
   }
   const cutoff = Date.now() - ms;
   if (!whitelistExempt) {
-    await history.deleteRange({ endTime: cutoff, startTime: 0 });
-    return;
+    const removed = await history.deleteRange({
+      endTime: cutoff,
+      startTime: 0,
+    });
+    if (Result.isError(removed)) {
+      return Result.err<null, CleanupError>(removed.error);
+    }
+    return Result.ok(null);
   }
 
   const wl = await readKeyOr("whitelist", []);
   if (Result.isError(wl)) {
-    return;
+    return Result.err<null, CleanupError>(wl.error);
   }
   if (wl.value.length === 0) {
-    await history.deleteRange({ endTime: cutoff, startTime: 0 });
-    return;
+    const removed = await history.deleteRange({
+      endTime: cutoff,
+      startTime: 0,
+    });
+    if (Result.isError(removed)) {
+      return Result.err<null, CleanupError>(removed.error);
+    }
+    return Result.ok(null);
   }
 
   const r = await history.search({
@@ -47,23 +66,33 @@ const runCleanup = async (
     text: "",
   });
   if (Result.isError(r)) {
-    return;
+    return Result.err<null, CleanupError>(r.error);
   }
   const { anyRuleMatches } = await import("@/lib/patterns");
-  await Promise.all(
+  const deletions = await Promise.all(
     r.value.flatMap((item) =>
       item.url && !anyRuleMatches(wl.value, item.url)
         ? [history.deleteUrl({ url: item.url })]
         : []
     )
   );
+  for (const deletion of deletions) {
+    if (Result.isError(deletion)) {
+      return Result.err<null, CleanupError>(deletion.error);
+    }
+  }
+  return Result.ok(null);
 };
 
 const runCleanupWithConfig = async (
   cfg: Cleanup,
   now = Date.now()
 ): Promise<number> => {
-  await runCleanup(cfg.retention, cfg.whitelistExempt);
+  const cleaned = await runCleanup(cfg.retention, cfg.whitelistExempt);
+  if (Result.isError(cleaned)) {
+    console.error("[enforcement] cleanup failed", cleaned.error);
+    throw cleaned.error;
+  }
   const written = await writeKey("cleanup", { ...cfg, lastRunAt: now });
   if (Result.isError(written)) {
     console.error(

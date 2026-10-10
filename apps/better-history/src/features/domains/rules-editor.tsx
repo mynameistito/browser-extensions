@@ -25,33 +25,32 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
   const [pattern, setPattern] = useState("");
   const [kind, setKind] = useState<DomainRule["kind"]>("subdomain");
   const [bulk, setBulk] = useState("");
+  const [saveError, setSaveError] = useState<string | null>(null);
 
-  const add = () => {
+  const add = async () => {
     const p = pattern.trim();
     if (!p) {
       return;
     }
-    void (async () => {
-      try {
-        await onChange([...rules, { kind, pattern: p }]);
-      } catch {
-        // ignore
-      }
-    })();
-    setPattern("");
+    try {
+      await onChange([...rules, { kind, pattern: p }]);
+      setPattern("");
+      setSaveError(null);
+    } catch {
+      setSaveError("Could not save the rule. Please try again.");
+    }
   };
 
-  const remove = (idx: number) => {
-    void (async () => {
-      try {
-        await onChange(rules.filter((_, i) => i !== idx));
-      } catch {
-        // ignore
-      }
-    })();
+  const remove = async (idx: number) => {
+    try {
+      await onChange(rules.filter((_, i) => i !== idx));
+      setSaveError(null);
+    } catch {
+      setSaveError("Could not delete the rule. Please try again.");
+    }
   };
 
-  const addBulk = () => {
+  const addBulk = async () => {
     const lines = bulk
       .split(NEWLINE)
       .map((l) => l.trim())
@@ -60,14 +59,13 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
       return;
     }
     const additions: DomainRule[] = lines.map((p) => ({ kind, pattern: p }));
-    void (async () => {
-      try {
-        await onChange([...rules, ...additions]);
-      } catch {
-        // ignore
-      }
-    })();
-    setBulk("");
+    try {
+      await onChange([...rules, ...additions]);
+      setBulk("");
+      setSaveError(null);
+    } catch {
+      setSaveError("Could not save the rules. Please try again.");
+    }
   };
 
   return (
@@ -157,6 +155,12 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
           ))
         )}
       </ul>
+
+      {saveError ? (
+        <p className="text-sm text-red-600" role="alert">
+          {saveError}
+        </p>
+      ) : null}
     </div>
   );
 };
