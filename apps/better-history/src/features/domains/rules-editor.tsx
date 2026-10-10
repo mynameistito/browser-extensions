@@ -1,5 +1,5 @@
 import { Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { cn } from "@/lib/cn";
 import { PatternKindSchema } from "@/lib/schemas";
@@ -26,28 +26,48 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
   const [kind, setKind] = useState<DomainRule["kind"]>("subdomain");
   const [bulk, setBulk] = useState("");
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const savingRef = useRef(false);
+
+  const saveRules = async (
+    next: DomainRule[],
+    errorMessage: string,
+    onSuccess?: () => void
+  ) => {
+    if (savingRef.current) {
+      return;
+    }
+    savingRef.current = true;
+    setIsSaving(true);
+    setSaveError(null);
+    try {
+      await onChange(next);
+      onSuccess?.();
+    } catch {
+      setSaveError(errorMessage);
+    } finally {
+      savingRef.current = false;
+      setIsSaving(false);
+    }
+  };
 
   const add = async () => {
     const p = pattern.trim();
     if (!p) {
       return;
     }
-    try {
-      await onChange([...rules, { kind, pattern: p }]);
-      setPattern("");
-      setSaveError(null);
-    } catch {
-      setSaveError("Could not save the rule. Please try again.");
-    }
+    await saveRules(
+      [...rules, { kind, pattern: p }],
+      "Could not save the rule. Please try again.",
+      () => setPattern("")
+    );
   };
 
   const remove = async (idx: number) => {
-    try {
-      await onChange(rules.filter((_, i) => i !== idx));
-      setSaveError(null);
-    } catch {
-      setSaveError("Could not delete the rule. Please try again.");
-    }
+    await saveRules(
+      rules.filter((_, i) => i !== idx),
+      "Could not delete the rule. Please try again."
+    );
   };
 
   const addBulk = async () => {
@@ -59,23 +79,22 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
       return;
     }
     const additions: DomainRule[] = lines.map((p) => ({ kind, pattern: p }));
-    try {
-      await onChange([...rules, ...additions]);
-      setBulk("");
-      setSaveError(null);
-    } catch {
-      setSaveError("Could not save the rules. Please try again.");
-    }
+    await saveRules(
+      [...rules, ...additions],
+      "Could not save the rules. Please try again.",
+      () => setBulk("")
+    );
   };
 
   return (
-    <div className="space-y-6">
+    <div aria-busy={isSaving} className="space-y-6">
       <h2 className="text-xl font-semibold">{title}</h2>
 
       <div className="space-y-2">
         <div className="flex gap-2">
           <input
             className="flex-1 rounded-md border border-zinc-200 bg-transparent px-3 py-1.5 text-sm dark:border-zinc-800"
+            disabled={isSaving}
             onChange={(e) => setPattern(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && add()}
             placeholder="example.com or https://example.com/docs"
@@ -83,6 +102,7 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
           />
           <select
             className="rounded-md border border-zinc-200 bg-transparent px-2 py-1.5 text-sm dark:border-zinc-800"
+            disabled={isSaving}
             onChange={(e) => setKind(e.target.value as DomainRule["kind"])}
             value={kind}
           >
@@ -94,6 +114,7 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
           </select>
           <button
             className="rounded-md bg-zinc-900 px-3 py-1.5 text-sm text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900"
+            disabled={isSaving}
             onClick={add}
             type="button"
           >
@@ -108,12 +129,14 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
           <div className="mt-2 space-y-2">
             <textarea
               className="h-24 w-full rounded-md border border-zinc-200 bg-transparent px-3 py-2 font-mono text-xs dark:border-zinc-800"
+              disabled={isSaving}
               onChange={(e) => setBulk(e.target.value)}
               placeholder={"facebook.com\ntwitter.com\nx.com"}
               value={bulk}
             />
             <button
               className="rounded-md bg-zinc-900 px-3 py-1 text-sm text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900"
+              disabled={isSaving}
               onClick={addBulk}
               type="button"
             >
@@ -146,6 +169,7 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
               <button
                 aria-label="Remove rule"
                 className="ml-auto text-zinc-400 hover:text-red-600"
+                disabled={isSaving}
                 onClick={() => remove(idx)}
                 type="button"
               >
@@ -159,6 +183,11 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
       {saveError ? (
         <p className="text-sm text-red-600" role="alert">
           {saveError}
+        </p>
+      ) : null}
+      {isSaving ? (
+        <p className="text-sm text-zinc-500" role="status">
+          Saving rules…
         </p>
       ) : null}
     </div>
