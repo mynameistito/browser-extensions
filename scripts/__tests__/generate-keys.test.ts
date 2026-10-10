@@ -65,6 +65,25 @@ describe("parseGenerateKeyOptions", () => {
     });
   });
 
+  test("accepts all apps with force and upload", () => {
+    expect(
+      parseGenerateKeyOptions(["--app", "all", "--force", "--upload"])
+    ).toMatchObject({
+      kind: "ok",
+      options: {
+        extensions: [
+          "better-history",
+          "hide-email-ext",
+          "quote-viewer",
+          "new-tab-ext",
+          "ig-video-controls",
+        ],
+        force: true,
+        upload: true,
+      },
+    });
+  });
+
   test("allows direct upload when one app is selected", () => {
     expect(
       parseGenerateKeyOptions(["--app", "quote-viewer", "--upload"])
@@ -90,7 +109,13 @@ describe("parseGenerateKeyOptions", () => {
     });
     expect(parseGenerateKeyOptions(["--upload"])).toMatchObject({
       kind: "error",
-      message: expect.stringContaining("exactly one --app"),
+      message: expect.stringContaining("explicit --app target"),
+    });
+    expect(
+      parseGenerateKeyOptions(["--app", "all", "--repo", "owner/repo"])
+    ).toMatchObject({
+      kind: "error",
+      message: expect.stringContaining("exactly one --app target"),
     });
   });
 });
