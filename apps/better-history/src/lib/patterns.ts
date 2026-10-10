@@ -57,8 +57,9 @@ export const ruleMatches = (rule: DomainRule, url: string): boolean => {
           target.startsWith("http") ? target : `https://${target}`
         );
         const targetHost = t.host.toLowerCase().replace(WWW_PREFIX, "");
+        const targetPath = t.pathname.replace(/\/$/u, "");
         const atBoundary =
-          p.pathname === t.pathname || p.pathname.startsWith(`${t.pathname}/`);
+          p.pathname === targetPath || p.pathname.startsWith(`${targetPath}/`);
         return p.host === targetHost && atBoundary;
       } catch {
         return false;

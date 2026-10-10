@@ -64,6 +64,22 @@ describe("ruleMatches: path", () => {
   test("matches deeper path", () => {
     expect(ruleMatches(rule, "https://example.com/docs/intro")).toBe(true);
   });
+  test("matches the root path prefix", () => {
+    expect(
+      ruleMatches(
+        { kind: "path", pattern: "https://example.com/" },
+        "https://example.com/docs/intro"
+      )
+    ).toBe(true);
+  });
+  test("matches a trailing-slash prefix without the slash", () => {
+    expect(
+      ruleMatches(
+        { kind: "path", pattern: "https://example.com/docs/" },
+        "https://example.com/docs"
+      )
+    ).toBe(true);
+  });
   test("rejects sibling path with shared prefix", () => {
     expect(ruleMatches(rule, "https://example.com/docs-private")).toBe(false);
   });
