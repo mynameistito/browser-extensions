@@ -7,6 +7,8 @@ const appNames = [
   "quote-viewer",
   "new-tab-ext",
   "hide-ip-ext",
+  "ig-video-controls",
+  "better-history",
 ] as const;
 const changeTypes = ["patch", "minor", "major"] as const;
 

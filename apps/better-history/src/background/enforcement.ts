@@ -1,49 +1,85 @@
 import { Result } from "better-result";
+
 import { history } from "@/lib/browser-api";
 import { extensionMessaging } from "@/lib/messages";
 import { shouldDelete } from "@/lib/patterns";
-import { Cleanup, Settings } from "@/lib/schemas";
+import type { Cleanup } from "@/lib/schemas";
+import { CleanupSchema, SettingsSchema } from "@/lib/schemas";
 import { readKeyOr, writeKey } from "@/lib/storage";
 
 const ALARM_NAME = "bh.enforce";
 const PERIOD_MIN = 5;
 
 const RETENTION_MS: Record<string, number> = {
+  "1m": 30 * 24 * 60 * 60 * 1000,
   "1w": 7 * 24 * 60 * 60 * 1000,
   "2w": 14 * 24 * 60 * 60 * 1000,
-  "1m": 30 * 24 * 60 * 60 * 1000,
   "3m": 90 * 24 * 60 * 60 * 1000,
 };
 
-export async function ensureAlarm() {
-  const existing = await browser.alarms.get(ALARM_NAME);
-  if (existing) {
+const runCleanup = async (
+  retention: keyof typeof RETENTION_MS,
+  whitelistExempt: boolean
+): Promise<void> => {
+  const ms = RETENTION_MS[retention];
+  if (ms === undefined) {
     return;
   }
-  browser.alarms.create(ALARM_NAME, {
-    delayInMinutes: 1,
-    periodInMinutes: PERIOD_MIN,
+  const cutoff = Date.now() - ms;
+  if (!whitelistExempt) {
+    await history.deleteRange({ endTime: cutoff, startTime: 0 });
+    return;
+  }
+
+  const wl = await readKeyOr("whitelist", []);
+  if (Result.isError(wl)) {
+    return;
+  }
+  if (wl.value.length === 0) {
+    await history.deleteRange({ endTime: cutoff, startTime: 0 });
+    return;
+  }
+
+  const r = await history.search({
+    endTime: cutoff,
+    maxResults: 100_000,
+    startTime: 0,
+    text: "",
   });
-}
+  if (Result.isError(r)) {
+    return;
+  }
+  const { anyRuleMatches } = await import("@/lib/patterns");
+  await Promise.all(
+    r.value.flatMap((item) =>
+      item.url && !anyRuleMatches(wl.value, item.url)
+        ? [history.deleteUrl({ url: item.url })]
+        : []
+    )
+  );
+};
 
-export function registerAlarmHandler() {
-  browser.alarms.onAlarm.addListener(async (alarm) => {
-    if (alarm.name !== ALARM_NAME) {
-      return;
-    }
-    await tick();
-  });
-}
+const runCleanupWithConfig = async (
+  cfg: Cleanup,
+  now = Date.now()
+): Promise<number> => {
+  await runCleanup(cfg.retention, cfg.whitelistExempt);
+  const written = await writeKey("cleanup", { ...cfg, lastRunAt: now });
+  if (Result.isError(written)) {
+    console.error(
+      "[enforcement] failed to persist cleanup.lastRunAt",
+      written.error
+    );
+    throw written.error;
+  }
+  return now;
+};
 
-async function tick() {
-  await Promise.all([enforceBlacklist(), maybeRunScheduledCleanup()]);
-}
-
-async function enforceBlacklist() {
+const enforceBlacklist = async (): Promise<void> => {
   const [bl, wl, settings] = await Promise.all([
     readKeyOr("blacklist", []),
     readKeyOr("whitelist", []),
-    readKeyOr("settings", Settings.parse({})),
+    readKeyOr("settings", SettingsSchema.parse({})),
   ]);
   if (Result.isError(bl) || Result.isError(wl) || Result.isError(settings)) {
     return;
@@ -54,33 +90,31 @@ async function enforceBlacklist() {
 
   const since = Date.now() - 24 * 60 * 60 * 1000;
   const r = await history.search({
-    text: "",
     maxResults: 10_000,
     startTime: since,
+    text: "",
   });
   if (Result.isError(r)) {
     return;
   }
 
-  for (const item of r.value) {
-    if (!item.url) {
-      continue;
-    }
-    if (
+  await Promise.all(
+    r.value.flatMap((item) =>
+      item.url &&
       shouldDelete(
         item.url,
         bl.value,
         wl.value,
         settings.value.whitelistPrecedence
       )
-    ) {
-      await history.deleteUrl({ url: item.url });
-    }
-  }
-}
+        ? [history.deleteUrl({ url: item.url })]
+        : []
+    )
+  );
+};
 
-async function maybeRunScheduledCleanup() {
-  const c = await readKeyOr("cleanup", Cleanup.parse({}));
+const maybeRunScheduledCleanup = async (): Promise<void> => {
+  const c = await readKeyOr("cleanup", CleanupSchema.parse({}));
   if (Result.isError(c)) {
     return;
   }
@@ -106,39 +140,52 @@ async function maybeRunScheduledCleanup() {
 
   try {
     await runCleanupWithConfig(cfg, now);
-  } catch (err) {
+  } catch (error) {
     console.error(
       "[enforcement] runCleanupWithConfig failed during alarm tick",
-      { now, schedule: cfg.schedule, retention: cfg.retention },
-      err
+      { now, retention: cfg.retention, schedule: cfg.schedule },
+      error
     );
   }
-}
+};
 
-async function runCleanupWithConfig(cfg: Cleanup, now = Date.now()) {
-  await runCleanup(cfg.retention, cfg.whitelistExempt);
-  const written = await writeKey("cleanup", { ...cfg, lastRunAt: now });
-  if (Result.isError(written)) {
-    console.error(
-      "[enforcement] failed to persist cleanup.lastRunAt",
-      written.error
-    );
-    throw written.error;
+const tick = async (): Promise<void> => {
+  await Promise.all([enforceBlacklist(), maybeRunScheduledCleanup()]);
+};
+
+export const ensureAlarm = async (): Promise<void> => {
+  const existing = await browser.alarms.get(ALARM_NAME);
+  if (existing) {
+    return;
   }
-  return now;
-}
+  browser.alarms.create(ALARM_NAME, {
+    delayInMinutes: 1,
+    periodInMinutes: PERIOD_MIN,
+  });
+};
 
-export async function runConfiguredCleanup() {
-  const c = await readKeyOr("cleanup", Cleanup.parse({}));
+export const registerAlarmHandler = (): void => {
+  browser.alarms.onAlarm.addListener(async (alarm) => {
+    if (alarm.name !== ALARM_NAME) {
+      return;
+    }
+    await tick();
+  });
+};
+
+export const runConfiguredCleanup = async (): Promise<{
+  lastRunAt: number;
+}> => {
+  const c = await readKeyOr("cleanup", CleanupSchema.parse({}));
   if (Result.isError(c)) {
     throw c.error;
   }
   const lastRunAt = await runCleanupWithConfig(c.value);
   return { lastRunAt };
-}
+};
 
-export async function runOnCloseCleanup() {
-  const c = await readKeyOr("cleanup", Cleanup.parse({}));
+export const runOnCloseCleanup = async (): Promise<void> => {
+  const c = await readKeyOr("cleanup", CleanupSchema.parse({}));
   if (Result.isError(c)) {
     return;
   }
@@ -147,55 +194,11 @@ export async function runOnCloseCleanup() {
   }
   try {
     await runCleanupWithConfig(c.value);
-  } catch (err) {
-    console.error("[enforcement] runOnCloseCleanup failed", err);
+  } catch (error) {
+    console.error("[enforcement] runOnCloseCleanup failed", error);
   }
-}
+};
 
-export function registerCleanupMessages() {
+export const registerCleanupMessages = (): void => {
   extensionMessaging.onMessage("cleanup.runNow", () => runConfiguredCleanup());
-}
-
-export async function runCleanup(
-  retention: keyof typeof RETENTION_MS,
-  whitelistExempt: boolean
-) {
-  const ms = RETENTION_MS[retention];
-  if (ms === undefined) {
-    return;
-  }
-  const cutoff = Date.now() - ms;
-  if (!whitelistExempt) {
-    await history.deleteRange({ startTime: 0, endTime: cutoff });
-    return;
-  }
-
-  const wl = await readKeyOr("whitelist", []);
-  if (Result.isError(wl)) {
-    return;
-  }
-  if (wl.value.length === 0) {
-    await history.deleteRange({ startTime: 0, endTime: cutoff });
-    return;
-  }
-
-  const r = await history.search({
-    text: "",
-    maxResults: 100_000,
-    startTime: 0,
-    endTime: cutoff,
-  });
-  if (Result.isError(r)) {
-    return;
-  }
-  const { anyRuleMatches } = await import("@/lib/patterns");
-  for (const item of r.value) {
-    if (!item.url) {
-      continue;
-    }
-    if (anyRuleMatches(wl.value, item.url)) {
-      continue;
-    }
-    await history.deleteUrl({ url: item.url });
-  }
-}
+};

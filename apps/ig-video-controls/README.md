@@ -6,10 +6,10 @@ Originally based on [Controls for Instagram Videos](https://chromewebstore.googl
 
 ## Hotkeys
 
-| Gesture                                             | Action                    |
-| --------------------------------------------------- | ------------------------- |
-| `Ctrl + Mousewheel` over a video                    | Speed up / down (± 0.25×) |
-| Hold Right Mouse Button + `Mousewheel` over a video | Volume up / down (± 0.1)  |
+| Gesture | Action |
+| --- | --- |
+| `Ctrl + Mousewheel` over a video | Speed up / down (± 0.25×) |
+| Hold Right Mouse Button + `Mousewheel` over a video | Volume up / down (± 0.1) |
 
 Right-click without scrolling still works normally — the context menu is only suppressed when you actually scroll while holding RMB.
 

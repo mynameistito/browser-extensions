@@ -25,16 +25,24 @@ export default defineBackground(() => {
   });
 
   browser.runtime.onSuspend.addListener(() => {
-    runOnCloseCleanup().catch(() => {
-      // MV3 suspend work is best-effort; startup catchup will retry.
-    });
+    void (async () => {
+      try {
+        await runOnCloseCleanup();
+      } catch {
+        // MV3 suspend work is best-effort; startup catchup will retry.
+      }
+    })();
   });
 
   browser.storage.onChanged.addListener((changes, area) => {
     if (area === "local" && changes.settings) {
-      rebuildContextMenus().catch(() => {
-        // ignore
-      });
+      void (async () => {
+        try {
+          await rebuildContextMenus();
+        } catch {
+          // ignore
+        }
+      })();
     }
   });
 

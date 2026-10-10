@@ -1,24 +1,25 @@
 import { Result } from "better-result";
+
 import { contextMenus, history, tabs } from "@/lib/browser-api";
-import { Settings } from "@/lib/schemas";
+import { SettingsSchema } from "@/lib/schemas";
 import { readKeyOr } from "@/lib/storage";
 
 const MENU = {
-  searchHistory: "bh.search_history",
-  visitsDomain: "bh.visits_domain",
   eraseSite: "bh.erase_site",
   removeUrl: "bh.remove_url",
+  searchHistory: "bh.search_history",
+  visitsDomain: "bh.visits_domain",
 } as const;
 
-const WWW_PREFIX = /^www\./;
+const WWW_PREFIX = /^www\./u;
 
 const t = (k: string) =>
   (browser.i18n.getMessage as (key: string) => string)(k) || k;
 
-export async function rebuildContextMenus() {
+export const rebuildContextMenus = async (): Promise<void> => {
   await contextMenus.removeAll();
 
-  const r = await readKeyOr("settings", Settings.parse({}));
+  const r = await readKeyOr("settings", SettingsSchema.parse({}));
   if (Result.isError(r)) {
     return;
   }
@@ -26,31 +27,31 @@ export async function rebuildContextMenus() {
 
   if (s.searchText) {
     await contextMenus.create({
+      contexts: ["selection"],
       id: MENU.searchHistory,
       title: t("search_history"),
-      contexts: ["selection"],
     });
   }
   if (s.searchDomain) {
     await contextMenus.create({
+      contexts: ["page"],
       id: MENU.visitsDomain,
       title: t("visits_domain"),
-      contexts: ["page"],
     });
     await contextMenus.create({
+      contexts: ["page"],
       id: MENU.eraseSite,
       title: t("eraseAllHistoryFromThisSite"),
-      contexts: ["page"],
     });
   }
   await contextMenus.create({
+    contexts: ["page"],
     id: MENU.removeUrl,
     title: t("remove_url"),
-    contexts: ["page"],
   });
-}
+};
 
-function hostOf(url: string | undefined): string | null {
+const hostOf = (url: string | undefined): string | null => {
   if (!url) {
     return null;
   }
@@ -59,16 +60,18 @@ function hostOf(url: string | undefined): string | null {
   } catch {
     return null;
   }
-}
+};
 
-async function handleSearchHistory(selectionText: string) {
+const handleSearchHistory = async (selectionText: string): Promise<void> => {
   const url = browser.runtime.getURL(
     `/history.html#/?q=${encodeURIComponent(selectionText)}`
   );
   await tabs.create({ url });
-}
+};
 
-async function handleVisitsDomain(pageUrl: string | undefined) {
+const handleVisitsDomain = async (
+  pageUrl: string | undefined
+): Promise<void> => {
   const host = hostOf(pageUrl);
   if (!host) {
     return;
@@ -76,29 +79,31 @@ async function handleVisitsDomain(pageUrl: string | undefined) {
   await tabs.create({
     url: browser.runtime.getURL(`/history.html#/domain/${host}`),
   });
-}
+};
 
-async function handleEraseSite(pageUrl: string | undefined) {
+const handleEraseSite = async (pageUrl: string | undefined): Promise<void> => {
   const host = hostOf(pageUrl);
   if (!host) {
     return;
   }
   const r = await history.search({
-    text: host,
     maxResults: 10_000,
     startTime: 0,
+    text: host,
   });
   if (Result.isError(r)) {
     return;
   }
-  for (const item of r.value) {
-    if (item.url && hostOf(item.url) === host) {
-      await history.deleteUrl({ url: item.url });
-    }
-  }
-}
+  await Promise.all(
+    r.value.flatMap((item) =>
+      item.url && hostOf(item.url) === host
+        ? [history.deleteUrl({ url: item.url })]
+        : []
+    )
+  );
+};
 
-export function registerContextMenuClicks() {
+export const registerContextMenuClicks = (): void => {
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     const id = String(info.menuItemId);
     const pageUrl = info.pageUrl ?? tab?.url;
@@ -113,4 +118,4 @@ export function registerContextMenuClicks() {
       await history.deleteUrl({ url: pageUrl });
     }
   });
-}
+};

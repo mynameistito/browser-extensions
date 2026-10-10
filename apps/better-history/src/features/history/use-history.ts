@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { Result } from "better-result";
+
 import { history } from "@/lib/browser-api";
-import { type Preset, presetRange } from "@/lib/ranges";
+import { presetRange } from "@/lib/ranges";
+import type { Preset } from "@/lib/ranges";
 
 export interface HistoryItem {
   id: string;
@@ -11,16 +13,15 @@ export interface HistoryItem {
   visitCount: number;
 }
 
-export function useHistory(params: { q: string; preset: Preset }) {
-  return useQuery({
-    queryKey: ["history", params.q, params.preset],
+export const useHistory = (params: { q: string; preset: Preset }) =>
+  useQuery({
     queryFn: async (): Promise<HistoryItem[]> => {
       const range = presetRange(params.preset);
       const r = await history.search({
-        text: params.q,
+        endTime: range.endTime,
         maxResults: 10_000,
         startTime: range.startTime,
-        endTime: range.endTime,
+        text: params.q,
       });
       if (Result.isError(r)) {
         throw r.error;
@@ -31,11 +32,11 @@ export function useHistory(params: { q: string; preset: Preset }) {
         )
         .map((i) => ({
           id: i.id,
-          url: i.url,
-          title: i.title || i.url,
           lastVisitTime: i.lastVisitTime ?? 0,
+          title: i.title || i.url,
+          url: i.url,
           visitCount: i.visitCount ?? 0,
         }));
     },
+    queryKey: ["history", params.q, params.preset],
   });
-}

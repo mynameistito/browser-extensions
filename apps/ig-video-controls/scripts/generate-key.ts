@@ -64,4 +64,9 @@ console.log(spkiB64);
 console.log(
   "\nTo register the key with GitHub Actions (requires gh CLI logged in):\n"
 );
-console.log(`  gh secret set WXT_CHROME_KEY < ${KEY_PATH}\n`);
+console.log(
+  `  Get-Content ${KEY_PATH} -Raw | gh secret set IG_VIDEO_CONTROLS_WXT_CHROME_KEY --repo mynameistito/browser-extensions # Windows\n`
+);
+console.log(
+  `  gh secret set IG_VIDEO_CONTROLS_WXT_CHROME_KEY --repo mynameistito/browser-extensions < ${KEY_PATH} # Unix\n`
+);

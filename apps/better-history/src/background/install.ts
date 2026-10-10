@@ -1,9 +1,10 @@
 import { Result } from "better-result";
-import { Cleanup, Meta, Settings } from "@/lib/schemas";
+
+import { CleanupSchema, MetaSchema, SettingsSchema } from "@/lib/schemas";
 import { readKeyOr, writeKey } from "@/lib/storage";
 
-export async function seedDefaults() {
-  const meta = await readKeyOr("meta", Meta.parse({}));
+export const seedDefaults = async (): Promise<void> => {
+  const meta = await readKeyOr("meta", MetaSchema.parse({}));
   if (Result.isError(meta)) {
     console.error("seedDefaults: meta read failed", meta.error);
     return;
@@ -18,8 +19,8 @@ export async function seedDefaults() {
     return;
   }
 
-  await writeKey("settings", Settings.parse({}));
-  await writeKey("cleanup", Cleanup.parse({}));
+  await writeKey("settings", SettingsSchema.parse({}));
+  await writeKey("cleanup", CleanupSchema.parse({}));
   await writeKey("blacklist", []);
   await writeKey("whitelist", []);
   await writeKey("tracking", {});
@@ -29,4 +30,4 @@ export async function seedDefaults() {
     lastReloadTime: Date.now(),
     wasRunning: false,
   });
-}
+};

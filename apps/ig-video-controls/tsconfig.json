@@ -1,11 +1,15 @@
 {
-  "extends": "./.wxt/tsconfig.json",
+  "$schema": "https://www.schemastore.org/tsconfig.json",
+  "extends": [
+    "./.wxt/tsconfig.json",
+    "../../packages/typescript-config/base.json"
+  ],
   "compilerOptions": {
-    "types": ["bun"],
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ESNext",
     "module": "Preserve",
     "moduleDetection": "force",
+    "types": ["bun"],
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,

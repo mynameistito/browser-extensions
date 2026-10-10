@@ -21,7 +21,7 @@ None. There is no analytics, no telemetry, no remote API, no account system.
 ## Permissions
 
 | Permission | Why |
-|---|---|
+| --- | --- |
 | `history` | Core feature: read and delete history entries. |
 | `sessions` | Show tabs from other signed-in devices. |
 | `tabs`, `activeTab` | Open results, act on the current tab from the popup or context menu. |

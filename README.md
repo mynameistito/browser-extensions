@@ -10,6 +10,8 @@ Independent WXT browser extensions maintained in one Bun/Turborepo workspace.
 | [`quote-viewer`](apps/quote-viewer) | Restores a View Quotes action on X. |
 | [`new-tab-ext`](apps/new-tab-ext) | A local-first browser new-tab dashboard. |
 | [`hide-ip-ext`](apps/hide-ip-ext) | Blurs your public IP address on web pages. |
+| [`ig-video-controls`](apps/ig-video-controls) | Adds native HTML5 video controls to Instagram videos. |
+| [`better-history`](apps/better-history) | Powerful browser history search, filtering, and cleanup. |
 
 ## Setup
 
@@ -28,4 +30,4 @@ packages/   Shared tooling and configuration packages
 
 Lint/format configuration is centralized in the root `oxlint.config.ts` and `oxfmt.config.ts`. The new-tab app adds its React/TanStack-specific Oxlint presets in its local config while inheriting the same Ultracite core. The shared TypeScript base lives in `packages/typescript-config`.
 
-Before enabling automated Chrome releases, add these repository Actions secrets, each containing that extension's own PEM key: `HIDE_EMAIL_WXT_CHROME_KEY`, `QUOTE_VIEWER_WXT_CHROME_KEY`, and `NEW_TAB_WXT_CHROME_KEY`. `hide-ip-ext` does not currently use a persistent Chrome key.
+Before enabling automated Chrome releases, add these repository Actions secrets, each containing that extension's own PEM key: `HIDE_EMAIL_WXT_CHROME_KEY`, `QUOTE_VIEWER_WXT_CHROME_KEY`, `NEW_TAB_WXT_CHROME_KEY`, and `IG_VIDEO_CONTROLS_WXT_CHROME_KEY`. `hide-ip-ext` and `better-history` do not currently use persistent Chrome keys.

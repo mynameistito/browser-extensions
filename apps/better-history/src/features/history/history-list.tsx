@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { Trash2 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { VList } from "virtua";
+
 import type { HistoryItem } from "@/features/history/use-history";
 import { cn } from "@/lib/cn";
 
@@ -10,7 +11,51 @@ interface Props {
   onDelete: (urls: string[]) => void;
 }
 
-export function HistoryList({ items, onDelete }: Props) {
+const Row = ({
+  item,
+  checked,
+  onToggle,
+}: {
+  item: HistoryItem;
+  checked: boolean;
+  onToggle: () => void;
+}) => {
+  const host = useMemo(() => {
+    try {
+      return new URL(item.url).host;
+    } catch {
+      return item.url;
+    }
+  }, [item.url]);
+
+  return (
+    <div className="flex items-center gap-3 border-b border-zinc-100 px-4 py-2 hover:bg-zinc-50 dark:border-zinc-900 dark:hover:bg-zinc-900/50">
+      <input
+        aria-label="Select item"
+        checked={checked}
+        className="size-4 shrink-0"
+        onChange={onToggle}
+        type="checkbox"
+      />
+      <div className="min-w-0 flex-1">
+        <a
+          className="block truncate text-sm font-medium hover:underline"
+          href={item.url}
+          rel="noreferrer"
+          target="_blank"
+        >
+          {item.title}
+        </a>
+        <div className="truncate text-xs text-zinc-500">{host}</div>
+      </div>
+      <div className="shrink-0 text-xs text-zinc-400 tabular-nums">
+        {format(new Date(item.lastVisitTime), "HH:mm")}
+      </div>
+    </div>
+  );
+};
+
+export const HistoryList = ({ items, onDelete }: Props) => {
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const toggle = (url: string) => {
@@ -44,7 +89,7 @@ export function HistoryList({ items, onDelete }: Props) {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center gap-3 border-zinc-200 border-b px-4 py-2 dark:border-zinc-800">
+      <div className="flex items-center gap-3 border-b border-zinc-200 px-4 py-2 dark:border-zinc-800">
         <input
           aria-label="Select all"
           checked={allChecked}
@@ -85,48 +130,4 @@ export function HistoryList({ items, onDelete }: Props) {
       </div>
     </div>
   );
-}
-
-function Row({
-  item,
-  checked,
-  onToggle,
-}: {
-  item: HistoryItem;
-  checked: boolean;
-  onToggle: () => void;
-}) {
-  const host = useMemo(() => {
-    try {
-      return new URL(item.url).host;
-    } catch {
-      return item.url;
-    }
-  }, [item.url]);
-
-  return (
-    <div className="flex items-center gap-3 border-zinc-100 border-b px-4 py-2 hover:bg-zinc-50 dark:border-zinc-900 dark:hover:bg-zinc-900/50">
-      <input
-        aria-label="Select item"
-        checked={checked}
-        className="size-4 shrink-0"
-        onChange={onToggle}
-        type="checkbox"
-      />
-      <div className="min-w-0 flex-1">
-        <a
-          className="block truncate font-medium text-sm hover:underline"
-          href={item.url}
-          rel="noreferrer"
-          target="_blank"
-        >
-          {item.title}
-        </a>
-        <div className="truncate text-xs text-zinc-500">{host}</div>
-      </div>
-      <div className="shrink-0 text-xs text-zinc-400 tabular-nums">
-        {format(new Date(item.lastVisitTime), "HH:mm")}
-      </div>
-    </div>
-  );
-}
+};

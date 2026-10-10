@@ -9,14 +9,14 @@ interface ConfirmDeleteModalProps {
   title: string;
 }
 
-export function ConfirmDeleteModal({
+export const ConfirmDeleteModal = ({
   body,
   confirmLabel,
   isBusy = false,
   onClose,
   onConfirm,
   title,
-}: ConfirmDeleteModalProps) {
+}: ConfirmDeleteModalProps) => {
   const [value, setValue] = useState("");
   const canConfirm = value.trim().toLowerCase() === "delete" && !isBusy;
   const titleId = useId();
@@ -53,14 +53,14 @@ export function ConfirmDeleteModal({
         onSubmit={handleSubmit}
       >
         <div className="space-y-2">
-          <p className="font-semibold text-red-600 text-xs uppercase tracking-[0.24em]">
+          <p className="text-xs font-semibold tracking-[0.24em] text-red-600 uppercase">
             Destructive cleanup
           </p>
-          <h2 className="font-semibold text-xl" id={titleId}>
+          <h2 className="text-xl font-semibold" id={titleId}>
             {title}
           </h2>
           <p
-            className="text-sm text-zinc-600 leading-6 dark:text-zinc-400"
+            className="text-sm leading-6 text-zinc-600 dark:text-zinc-400"
             id={bodyId}
           >
             {body}
@@ -71,7 +71,7 @@ export function ConfirmDeleteModal({
           <span className="font-medium">Type “delete” to confirm</span>
           <input
             autoFocus
-            className="w-full rounded-lg border border-zinc-200 bg-transparent px-3 py-2 font-mono text-sm outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-500/20 dark:border-zinc-800"
+            className="w-full rounded-lg border border-zinc-200 bg-transparent px-3 py-2 font-mono text-sm transition outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 dark:border-zinc-800"
             onChange={(event) => setValue(event.target.value)}
             value={value}
           />
@@ -97,4 +97,4 @@ export function ConfirmDeleteModal({
       </form>
     </div>
   );
-}
+};

@@ -1,8 +1,8 @@
 import type { Settings } from "@/lib/defaults";
 import { DEFAULTS } from "@/lib/defaults";
 
-export type { Settings };
-export { DEFAULTS };
+export { DEFAULTS } from "@/lib/defaults";
+export type { Settings } from "@/lib/defaults";
 
 const DEFAULTS_AS_RECORD = DEFAULTS as unknown as Record<string, unknown>;
 

@@ -99,3 +99,35 @@ jobs:
       - run: bun run --filter hide-ip-ext ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release-ig-video-controls:
+    needs: version
+    if: needs.version.outputs['has-changesets'] == 'false'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - run: bun run prepare:wxt
+      - run: bun run --filter ig-video-controls ci:release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQUIRE_CHROME_KEY: "1"
+          WXT_CHROME_KEY: ${{ secrets.IG_VIDEO_CONTROLS_WXT_CHROME_KEY }}
+
+  release-better-history:
+    needs: version
+    if: needs.version.outputs['has-changesets'] == 'false'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - run: bun run prepare:wxt
+      - run: bun run --filter better-history ci:release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

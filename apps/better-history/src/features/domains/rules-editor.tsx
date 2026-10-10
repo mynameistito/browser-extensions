@@ -1,14 +1,16 @@
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
+
 import { cn } from "@/lib/cn";
-import { type DomainRule, PatternKind } from "@/lib/schemas";
+import { PatternKindSchema } from "@/lib/schemas";
+import type { DomainRule } from "@/lib/schemas";
 
 const KIND_LABELS: Record<DomainRule["kind"], string> = {
   exact: "Exact domain",
-  subdomain: "Domain + subdomains",
-  "specific-sub": "Specific subdomain",
-  path: "Path prefix",
   page: "Exact page",
+  path: "Path prefix",
+  "specific-sub": "Specific subdomain",
+  subdomain: "Domain + subdomains",
 };
 
 interface Props {
@@ -17,9 +19,9 @@ interface Props {
   title: string;
 }
 
-const NEWLINE = /\r?\n/;
+const NEWLINE = /\r?\n/u;
 
-export function RulesEditor({ title, rules, onChange }: Props) {
+export const RulesEditor = ({ title, rules, onChange }: Props) => {
   const [pattern, setPattern] = useState("");
   const [kind, setKind] = useState<DomainRule["kind"]>("subdomain");
   const [bulk, setBulk] = useState("");
@@ -29,16 +31,24 @@ export function RulesEditor({ title, rules, onChange }: Props) {
     if (!p) {
       return;
     }
-    Promise.resolve(onChange([...rules, { pattern: p, kind }])).catch(() => {
-      // ignore
-    });
+    void (async () => {
+      try {
+        await onChange([...rules, { kind, pattern: p }]);
+      } catch {
+        // ignore
+      }
+    })();
     setPattern("");
   };
 
   const remove = (idx: number) => {
-    Promise.resolve(onChange(rules.filter((_, i) => i !== idx))).catch(() => {
-      // ignore
-    });
+    void (async () => {
+      try {
+        await onChange(rules.filter((_, i) => i !== idx));
+      } catch {
+        // ignore
+      }
+    })();
   };
 
   const addBulk = () => {
@@ -49,16 +59,20 @@ export function RulesEditor({ title, rules, onChange }: Props) {
     if (lines.length === 0) {
       return;
     }
-    const additions: DomainRule[] = lines.map((p) => ({ pattern: p, kind }));
-    Promise.resolve(onChange([...rules, ...additions])).catch(() => {
-      // ignore
-    });
+    const additions: DomainRule[] = lines.map((p) => ({ kind, pattern: p }));
+    void (async () => {
+      try {
+        await onChange([...rules, ...additions]);
+      } catch {
+        // ignore
+      }
+    })();
     setBulk("");
   };
 
   return (
     <div className="space-y-6">
-      <h2 className="font-semibold text-xl">{title}</h2>
+      <h2 className="text-xl font-semibold">{title}</h2>
 
       <div className="space-y-2">
         <div className="flex gap-2">
@@ -74,7 +88,7 @@ export function RulesEditor({ title, rules, onChange }: Props) {
             onChange={(e) => setKind(e.target.value as DomainRule["kind"])}
             value={kind}
           >
-            {PatternKind.options.map((k) => (
+            {PatternKindSchema.options.map((k) => (
               <option key={k} value={k}>
                 {KIND_LABELS[k]}
               </option>
@@ -145,4 +159,4 @@ export function RulesEditor({ title, rules, onChange }: Props) {
       </ul>
     </div>
   );
-}
+};

@@ -6,33 +6,32 @@ interface Parsed {
   pathname: string;
 }
 
-const WWW_PREFIX = /^www\./;
-const PROTOCOL_PREFIX = /^https?:\/\//;
-const PATH_TAIL = /\/.*$/;
+const WWW_PREFIX = /^www\./u;
+const PROTOCOL_PREFIX = /^https?:\/\//u;
+const PATH_TAIL = /\/.*$/u;
 
-function parse(url: string): Parsed | null {
+const parse = (url: string): Parsed | null => {
   try {
     const u = new URL(url);
     return {
       host: u.host.toLowerCase().replace(WWW_PREFIX, ""),
-      pathname: u.pathname,
       href: `${u.origin}${u.pathname}${u.search}`,
+      pathname: u.pathname,
     };
   } catch {
     return null;
   }
-}
+};
 
-function normHost(input: string): string {
-  return input
+const normHost = (input: string): string =>
+  input
     .trim()
     .toLowerCase()
     .replace(PROTOCOL_PREFIX, "")
     .replace(WWW_PREFIX, "")
     .replace(PATH_TAIL, "");
-}
 
-export function ruleMatches(rule: DomainRule, url: string): boolean {
+export const ruleMatches = (rule: DomainRule, url: string): boolean => {
   const p = parse(url);
   if (!p) {
     return false;
@@ -79,27 +78,27 @@ export function ruleMatches(rule: DomainRule, url: string): boolean {
       return false;
     }
   }
-}
+};
 
-export function anyRuleMatches(rules: DomainRule[], url: string): boolean {
+export const anyRuleMatches = (rules: DomainRule[], url: string): boolean => {
   for (const r of rules) {
     if (ruleMatches(r, url)) {
       return true;
     }
   }
   return false;
-}
+};
 
-export function shouldDelete(
+export const shouldDelete = (
   url: string,
   blacklist: DomainRule[],
   whitelist: DomainRule[],
   whitelistPrecedence: boolean
-): boolean {
+): boolean => {
   const onWhite = anyRuleMatches(whitelist, url);
   const onBlack = anyRuleMatches(blacklist, url);
   if (whitelistPrecedence && onWhite) {
     return false;
   }
   return onBlack;
-}
+};

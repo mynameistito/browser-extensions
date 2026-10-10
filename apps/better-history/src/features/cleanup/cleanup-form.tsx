@@ -1,18 +1,20 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Result } from "better-result";
 import { useEffect, useState } from "react";
+
 import { ConfirmDeleteModal } from "@/features/cleanup/confirm-delete-modal";
 import { extensionMessaging } from "@/lib/messages";
-import { Cleanup, type Cleanup as CleanupConfig } from "@/lib/schemas";
+import { CleanupSchema } from "@/lib/schemas";
+import type { Cleanup as CleanupConfig } from "@/lib/schemas";
 import { readKeyOr, writeKey } from "@/lib/storage";
 
-const DEFAULT_CLEANUP = Cleanup.parse({});
+const DEFAULT_CLEANUP = CleanupSchema.parse({});
 
-const SCHEDULES: Array<{
+const SCHEDULES: {
   description: string;
   label: string;
   value: CleanupConfig["schedule"];
-}> = [
+}[] = [
   {
     description: "Only remove history when you press Run now.",
     label: "Never",
@@ -41,11 +43,11 @@ const SCHEDULES: Array<{
   },
 ];
 
-const RETENTIONS: Array<{
+const RETENTIONS: {
   description: string;
   label: string;
   value: CleanupConfig["retention"];
-}> = [
+}[] = [
   {
     description: "Aggressive cleanup for short-lived browsing trails.",
     label: "1 week",
@@ -70,7 +72,7 @@ const RETENTIONS: Array<{
 
 type PendingAction = "run-now" | "save";
 
-function formatLastRun(lastRunAt: number | undefined) {
+const formatLastRun = (lastRunAt: number | undefined) => {
   if (lastRunAt === undefined) {
     return "Never run";
   }
@@ -78,18 +80,17 @@ function formatLastRun(lastRunAt: number | undefined) {
     dateStyle: "medium",
     timeStyle: "short",
   }).format(lastRunAt);
-}
+};
 
-function optionClasses(isSelected: boolean) {
-  return [
+const optionClasses = (isSelected: boolean) =>
+  [
     "rounded-xl border p-4 text-left transition",
     isSelected
       ? "border-zinc-900 bg-zinc-950 text-white shadow-lg shadow-zinc-950/10 dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
       : "border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-700 dark:hover:bg-zinc-900",
   ].join(" ");
-}
 
-export function CleanupForm() {
+export const CleanupForm = () => {
   const queryClient = useQueryClient();
   const [draft, setDraft] = useState<CleanupConfig>(DEFAULT_CLEANUP);
   const [isDirty, setIsDirty] = useState(false);
@@ -98,10 +99,9 @@ export function CleanupForm() {
   );
   const [isWorking, setIsWorking] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const query = useQuery({
-    queryKey: ["cleanup"],
     queryFn: async (): Promise<CleanupConfig> => {
       const result = await readKeyOr("cleanup", DEFAULT_CLEANUP);
       if (Result.isError(result)) {
@@ -109,6 +109,7 @@ export function CleanupForm() {
       }
       return result.value;
     },
+    queryKey: ["cleanup"],
   });
 
   useEffect(() => {
@@ -134,7 +135,7 @@ export function CleanupForm() {
     }
 
     setIsWorking(true);
-    setError(null);
+    setErrorMessage(null);
     setStatus(null);
 
     try {
@@ -155,8 +156,8 @@ export function CleanupForm() {
         setStatus(`Cleanup finished at ${formatLastRun(response.lastRunAt)}.`);
       }
       setPendingAction(null);
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : String(caught));
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : String(error));
     } finally {
       setIsWorking(false);
     }
@@ -168,7 +169,7 @@ export function CleanupForm() {
 
   if (query.isError) {
     return (
-      <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-700 text-sm dark:border-red-950 dark:bg-red-950/30 dark:text-red-300">
+      <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-950 dark:bg-red-950/30 dark:text-red-300">
         Failed to load cleanup settings: {String(query.error)}
       </div>
     );
@@ -179,14 +180,14 @@ export function CleanupForm() {
       <section className="overflow-hidden rounded-3xl border border-zinc-200 bg-[radial-gradient(circle_at_top_right,rgba(244,63,94,0.16),transparent_34%),linear-gradient(135deg,#ffffff,#fafafa)] p-6 dark:border-zinc-800 dark:bg-[radial-gradient(circle_at_top_right,rgba(244,63,94,0.22),transparent_34%),linear-gradient(135deg,#09090b,#18181b)]">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
-            <p className="font-semibold text-rose-600 text-xs uppercase tracking-[0.24em] dark:text-rose-400">
+            <p className="text-xs font-semibold tracking-[0.24em] text-rose-600 uppercase dark:text-rose-400">
               Smart cleanup
             </p>
             <div className="space-y-2">
-              <h2 className="font-semibold text-3xl tracking-tight">
+              <h2 className="text-3xl font-semibold tracking-tight">
                 Prune old history without touching the places you trust.
               </h2>
-              <p className="max-w-2xl text-sm text-zinc-600 leading-6 dark:text-zinc-400">
+              <p className="max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
                 Choose how often Better History should remove older visits, how
                 much recent history to keep, and whether whitelisted domains are
                 preserved during cleanup.
@@ -202,7 +203,7 @@ export function CleanupForm() {
 
       <section className="space-y-3">
         <div>
-          <h3 className="font-semibold text-lg">Schedule</h3>
+          <h3 className="text-lg font-semibold">Schedule</h3>
           <p className="text-sm text-zinc-500">
             Automatic cleanup runs in the background alarm loop.
           </p>
@@ -225,7 +226,7 @@ export function CleanupForm() {
                 }
                 type="radio"
               />
-              <span className="font-medium text-sm">{option.label}</span>
+              <span className="text-sm font-medium">{option.label}</span>
               <span className="mt-2 block text-xs leading-5 opacity-75">
                 {option.description}
               </span>
@@ -236,7 +237,7 @@ export function CleanupForm() {
 
       <section className="space-y-3">
         <div>
-          <h3 className="font-semibold text-lg">Retention</h3>
+          <h3 className="text-lg font-semibold">Retention</h3>
           <p className="text-sm text-zinc-500">
             Visits older than this window are eligible for deletion.
           </p>
@@ -259,7 +260,7 @@ export function CleanupForm() {
                 }
                 type="radio"
               />
-              <span className="font-medium text-sm">{option.label}</span>
+              <span className="text-sm font-medium">{option.label}</span>
               <span className="mt-2 block text-xs leading-5 opacity-75">
                 {option.description}
               </span>
@@ -271,10 +272,10 @@ export function CleanupForm() {
       <section className="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
         <label className="flex items-start justify-between gap-4">
           <span>
-            <span className="block font-medium text-sm">
+            <span className="block text-sm font-medium">
               Exempt whitelisted domains
             </span>
-            <span className="mt-1 block text-sm text-zinc-500 leading-6">
+            <span className="mt-1 block text-sm leading-6 text-zinc-500">
               When enabled, cleanup preserves visits matching your whitelist
               rules even if they are older than the retention window.
             </span>
@@ -293,19 +294,19 @@ export function CleanupForm() {
         </label>
       </section>
 
-      {(status || error) && (
+      {(status || errorMessage) && (
         <div
           className={
-            error
-              ? "rounded-xl border border-red-200 bg-red-50 p-3 text-red-700 text-sm dark:border-red-950 dark:bg-red-950/30 dark:text-red-300"
-              : "rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-emerald-700 text-sm dark:border-emerald-950 dark:bg-emerald-950/30 dark:text-emerald-300"
+            errorMessage
+              ? "rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-950 dark:bg-red-950/30 dark:text-red-300"
+              : "rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-700 dark:border-emerald-950 dark:bg-emerald-950/30 dark:text-emerald-300"
           }
         >
-          {error ?? status}
+          {errorMessage ?? status}
         </div>
       )}
 
-      <div className="flex flex-col gap-2 border-zinc-200 border-t pt-5 sm:flex-row sm:justify-end dark:border-zinc-800">
+      <div className="flex flex-col gap-2 border-t border-zinc-200 pt-5 sm:flex-row sm:justify-end dark:border-zinc-800">
         <button
           className="rounded-lg border border-zinc-200 px-4 py-2 text-sm hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:hover:bg-zinc-900"
           disabled={isWorking || isDirty}
@@ -349,4 +350,4 @@ export function CleanupForm() {
       )}
     </div>
   );
-}
+};

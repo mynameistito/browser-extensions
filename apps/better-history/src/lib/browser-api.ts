@@ -1,37 +1,38 @@
 import { Result } from "better-result";
+
 import { BrowserApiError, PermissionDeniedError } from "@/lib/errors";
 
 type Async<T> = Promise<Result<T, BrowserApiError>>;
 
 const wrap = <T>(api: string, fn: () => Promise<T>): Async<T> =>
   Result.tryPromise({
-    try: fn,
     catch: (cause) => new BrowserApiError({ api, cause }),
+    try: fn,
   });
 
 export const history = {
-  search: (q: Browser.history.HistoryQuery) =>
-    wrap("history.search", () => browser.history.search(q)),
-  getVisits: (details: Browser.history.UrlDetails) =>
-    wrap("history.getVisits", () => browser.history.getVisits(details)),
-  deleteUrl: (details: Browser.history.UrlDetails) =>
-    wrap("history.deleteUrl", () => browser.history.deleteUrl(details)),
+  deleteAll: () => wrap("history.deleteAll", () => browser.history.deleteAll()),
   deleteRange: (range: Browser.history.Range) =>
     wrap("history.deleteRange", () => browser.history.deleteRange(range)),
-  deleteAll: () => wrap("history.deleteAll", () => browser.history.deleteAll()),
+  deleteUrl: (details: Browser.history.UrlDetails) =>
+    wrap("history.deleteUrl", () => browser.history.deleteUrl(details)),
+  getVisits: (details: Browser.history.UrlDetails) =>
+    wrap("history.getVisits", () => browser.history.getVisits(details)),
+  search: (q: Browser.history.HistoryQuery) =>
+    wrap("history.search", () => browser.history.search(q)),
 };
 
 export const tabs = {
-  query: (q: Browser.tabs.QueryInfo) =>
-    wrap("tabs.query", () => browser.tabs.query(q)),
   create: (props: Browser.tabs.CreateProperties) =>
     wrap("tabs.create", () => browser.tabs.create(props)),
-  update: (id: number | undefined, props: Browser.tabs.UpdateProperties) =>
-    wrap("tabs.update", () => browser.tabs.update(id, props)),
+  query: (q: Browser.tabs.QueryInfo) =>
+    wrap("tabs.query", () => browser.tabs.query(q)),
   remove: (ids: number | number[]) =>
     wrap("tabs.remove", () =>
       Array.isArray(ids) ? browser.tabs.remove(ids) : browser.tabs.remove(ids)
     ),
+  update: (id: number | undefined, props: Browser.tabs.UpdateProperties) =>
+    wrap("tabs.update", () => browser.tabs.update(id, props)),
 };
 
 export const sessions = {
@@ -44,25 +45,25 @@ export const sessions = {
 };
 
 export const storageLocal = {
+  clear: () => wrap("storage.local.clear", () => browser.storage.local.clear()),
   get: <T = unknown>(keys?: string | string[] | null) =>
     wrap("storage.local.get", () =>
       browser.storage.local.get(keys ?? null)
     ) as Async<Record<string, T>>,
-  set: (items: Record<string, unknown>) =>
-    wrap("storage.local.set", () => browser.storage.local.set(items)),
   remove: (keys: string | string[]) =>
     wrap("storage.local.remove", () => browser.storage.local.remove(keys)),
-  clear: () => wrap("storage.local.clear", () => browser.storage.local.clear()),
+  set: (items: Record<string, unknown>) =>
+    wrap("storage.local.set", () => browser.storage.local.set(items)),
 };
 
 export const alarms = {
+  clear: (name: string) =>
+    wrap("alarms.clear", () => browser.alarms.clear(name)),
   create: (name: string, info: Browser.alarms.AlarmCreateInfo) =>
     wrap("alarms.create", () => {
       browser.alarms.create(name, info);
       return Promise.resolve();
     }),
-  clear: (name: string) =>
-    wrap("alarms.clear", () => browser.alarms.clear(name)),
 };
 
 export const contextMenus = {
@@ -78,6 +79,8 @@ export const contextMenus = {
 export const permissions = {
   contains: (perms: Browser.permissions.Permissions) =>
     wrap("permissions.contains", () => browser.permissions.contains(perms)),
+  remove: (perms: Browser.permissions.Permissions) =>
+    wrap("permissions.remove", () => browser.permissions.remove(perms)),
   request: async (
     perms: Browser.permissions.Permissions
   ): Promise<Result<true, PermissionDeniedError | BrowserApiError>> => {
@@ -85,7 +88,7 @@ export const permissions = {
       browser.permissions.request(perms)
     );
     if (Result.isError(r)) {
-      return r;
+      return Result.err<true, PermissionDeniedError | BrowserApiError>(r.error);
     }
     if (!r.value) {
       return Result.err(
@@ -96,6 +99,4 @@ export const permissions = {
     }
     return Result.ok(true as const);
   },
-  remove: (perms: Browser.permissions.Permissions) =>
-    wrap("permissions.remove", () => browser.permissions.remove(perms)),
 };

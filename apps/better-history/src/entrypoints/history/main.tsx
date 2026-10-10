@@ -6,12 +6,13 @@ import {
 } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+
 import { routeTree } from "@/routeTree.gen";
 
 const router = createRouter({
-  routeTree,
-  history: createMemoryHistory({ initialEntries: ["/"] }),
   defaultPreload: "intent",
+  history: createMemoryHistory({ initialEntries: ["/"] }),
+  routeTree,
 });
 
 declare module "@tanstack/react-router" {
@@ -22,7 +23,7 @@ declare module "@tanstack/react-router" {
 
 const queryClient = new QueryClient();
 
-const root = document.getElementById("app");
+const root = document.querySelector("#app");
 if (!root) {
   throw new Error("Root element #app not found");
 }

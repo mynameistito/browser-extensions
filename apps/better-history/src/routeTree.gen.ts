@@ -9,25 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SettingsWhitelistRouteImport } from './routes/settings.whitelist'
-import { Route as SettingsCleanupRouteImport } from './routes/settings.cleanup'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SettingsBlacklistRouteImport } from './routes/settings.blacklist'
+import { Route as SettingsCleanupRouteImport } from './routes/settings.cleanup'
+import { Route as SettingsWhitelistRouteImport } from './routes/settings.whitelist'
 
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SettingsWhitelistRoute = SettingsWhitelistRouteImport.update({
-  id: '/whitelist',
-  path: '/whitelist',
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsBlacklistRoute = SettingsBlacklistRouteImport.update({
+  id: '/blacklist',
+  path: '/blacklist',
   getParentRoute: () => SettingsRoute,
 } as any)
 const SettingsCleanupRoute = SettingsCleanupRouteImport.update({
@@ -35,9 +35,9 @@ const SettingsCleanupRoute = SettingsCleanupRouteImport.update({
   path: '/cleanup',
   getParentRoute: () => SettingsRoute,
 } as any)
-const SettingsBlacklistRoute = SettingsBlacklistRouteImport.update({
-  id: '/blacklist',
-  path: '/blacklist',
+const SettingsWhitelistRoute = SettingsWhitelistRouteImport.update({
+  id: '/whitelist',
+  path: '/whitelist',
   getParentRoute: () => SettingsRoute,
 } as any)
 
@@ -94,13 +94,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -108,11 +101,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/settings/whitelist': {
-      id: '/settings/whitelist'
-      path: '/whitelist'
-      fullPath: '/settings/whitelist'
-      preLoaderRoute: typeof SettingsWhitelistRouteImport
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/blacklist': {
+      id: '/settings/blacklist'
+      path: '/blacklist'
+      fullPath: '/settings/blacklist'
+      preLoaderRoute: typeof SettingsBlacklistRouteImport
       parentRoute: typeof SettingsRoute
     }
     '/settings/cleanup': {
@@ -122,11 +122,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsCleanupRouteImport
       parentRoute: typeof SettingsRoute
     }
-    '/settings/blacklist': {
-      id: '/settings/blacklist'
-      path: '/blacklist'
-      fullPath: '/settings/blacklist'
-      preLoaderRoute: typeof SettingsBlacklistRouteImport
+    '/settings/whitelist': {
+      id: '/settings/whitelist'
+      path: '/whitelist'
+      fullPath: '/settings/whitelist'
+      preLoaderRoute: typeof SettingsWhitelistRouteImport
       parentRoute: typeof SettingsRoute
     }
   }

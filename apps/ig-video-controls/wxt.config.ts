@@ -1,6 +1,6 @@
 import { createPublicKey } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import path from "node:path";
 
 import { defineConfig } from "wxt";
 
@@ -9,7 +9,7 @@ const loadPemSource = (): string | undefined => {
   if (fromEnv && fromEnv.length > 0) {
     return fromEnv;
   }
-  const keyPath = resolve("key.pem");
+  const keyPath = path.resolve("key.pem");
   if (existsSync(keyPath)) {
     try {
       return readFileSync(keyPath, "utf-8");
