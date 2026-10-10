@@ -1,0 +1,16 @@
+pre-commit:
+  parallel: false
+  jobs:
+    - name: Cleanup
+      run: bun run scripts/cleanup.ts
+      # Always runs (no glob) – fine if it's quick/global
+
+    - name: Format check
+      run: bun ultracite check
+      glob: "**/*.{js,jsx,ts,tsx,json,jsonc,css}"
+      # Validates formatting of matching staged files (no fixes applied)
+      # If none match → quick noop
+
+    - name: TypeScript
+      run: bun tsgo --noEmit
+      glob: "**/*.{ts,tsx}"

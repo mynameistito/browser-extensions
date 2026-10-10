@@ -1,0 +1,80 @@
+div.igvc-raise-button {
+  bottom: 50px;
+}
+div.igvc-fade-button {
+  opacity: 0.4;
+  transition: opacity 4s ease-out;
+}
+div.igvc-fade-button:hover {
+  opacity: 1;
+  transition: opacity 0.05s ease-out;
+}
+
+video[data-igvc-init][controls]::-webkit-media-controls {
+  display: flex !important;
+}
+
+video[data-igvc-init][controls]::-webkit-media-controls-panel {
+  opacity: 1 !important;
+}
+
+[data-instancekey] > [data-visualcompletion] {
+  pointer-events: none !important;
+}
+
+[data-instancekey] div[role="presentation"] {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+[data-instancekey] button,
+[data-instancekey] [role="button"],
+[data-instancekey] [role="slider"] {
+  pointer-events: auto !important;
+}
+
+[data-instancekey] div[role="presentation"] button,
+[data-instancekey] div[role="presentation"] [role="button"],
+[data-instancekey] div[role="presentation"] [role="slider"] {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+video.igvc-disable-native-play-button[controls]::-webkit-media-controls-play-button {
+  visibility: hidden;
+}
+
+.igvc-osd {
+  position: fixed;
+  z-index: 2147483647;
+  transform: translate(-50%, -50%) scale(0.9);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+  opacity: 0;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+  user-select: none;
+}
+
+.igvc-osd.igvc-osd-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.igvc-osd-value {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  line-height: 1;
+  white-space: nowrap;
+}
