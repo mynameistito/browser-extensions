@@ -19,9 +19,6 @@
     "ci:release": "bun ../../scripts/release-app.ts",
     "linkify-changelog": "bun scripts/linkify-changelog.ts"
   },
-  "dependencies": {
-    "playwriter": "^0.2.0"
-  },
   "devDependencies": {
     "@types/bun": "^1.4.2",
     "wxt": "^0.20.27"
