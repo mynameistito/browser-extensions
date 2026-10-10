@@ -1,39 +1,15 @@
-import { dimensionWithinXPercentOrAbsoluteValue } from "@/lib/math";
-
 import {
   isInstagramReelsPage,
   findVolumeOrTagsButtons,
   getVideoCoveringButtons,
   getComponentRootForStoryVideo,
+  looksLikeCoversVideo,
   nParents,
 } from "./button-finder";
 import { queryAll, hide } from "./dom";
 
 const HTML5_CONTROL_HEIGHT = "70px";
 const TEXTAREA_ADJUST_PADDING = 16;
-
-const looksLikeCoversVideoEl = (
-  el: Element,
-  vid: HTMLVideoElement
-): boolean => {
-  const videoRect = vid.getBoundingClientRect();
-  const rect = el.getBoundingClientRect();
-
-  const widthOk = dimensionWithinXPercentOrAbsoluteValue(
-    videoRect.width,
-    rect.width,
-    1.1,
-    100
-  );
-  const heightOk = dimensionWithinXPercentOrAbsoluteValue(
-    videoRect.height,
-    rect.height,
-    1.2,
-    100
-  );
-
-  return widthOk && heightOk;
-};
 
 const findPlayButton = (
   root: Element,
@@ -57,7 +33,7 @@ const findPlayButton = (
       rect.width < parentRect.width * 0.8 &&
       rect.height < parentRect.height * 0.8
     ) {
-      return looksLikeCoversVideoEl(parentEl, vid);
+      return looksLikeCoversVideo(parentEl, vid);
     }
     return false;
   });
@@ -194,7 +170,7 @@ const handleInstanceKeyOverlay = (
         '[data-visualcompletion] [style*="gradient"], [role="presentation"] [style*="gradient"], [data-testid*="gradient"]'
       );
       gradientEls = [...candidates].filter((el) =>
-        looksLikeCoversVideoEl(el, video)
+        looksLikeCoversVideo(el, video)
       );
     }
     if ([...gradientEls].length === 0) {
