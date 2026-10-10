@@ -1,5 +1,13 @@
 # new-tab-ext
 
+## 0.2.2
+
+### Patch Changes
+
+- Add React Grab for local development only
+- Use source aliases to satisfy the import-boundary lint rule
+- Wait for local preferences before loading rotating backgrounds
+
 ## 0.2.1
 
 ### Patch Changes
