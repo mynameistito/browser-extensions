@@ -13,7 +13,6 @@
     "zip:chrome": "bun ../../scripts/run-wxt.ts zip -b chrome",
     "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
     "zip:all": "bun run zip",
-    "generate-key": "bun scripts/generate-key.ts",
     "postinstall": "bun ../../scripts/run-wxt.ts prepare",
     "test": "bun test",
     "test:coverage": "bun test --coverage",

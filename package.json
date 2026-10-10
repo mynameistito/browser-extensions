@@ -18,11 +18,12 @@
     "init:ultracite": "ultracite init --pm bun --linter oxlint --quiet",
     "changeset": "changeset",
     "changeset-add": "bun scripts/changeset-add.ts",
+    "generate-keys": "bun scripts/generate-keys.ts",
     "version": "changeset version && bun run --filter quote-viewer linkify-changelog && bun run --filter ig-video-controls linkify-changelog",
     "turbo": "turbo"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.31.0",
+    "@changesets/cli": "^3.0.3",
     "@shadcn/lint": "^0.2.0",
     "@types/bun": "^1.4.2",
     "@typescript/native": "npm:typescript@^7.0.2",

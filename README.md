@@ -21,6 +21,10 @@ Run a command across all apps with `bun run build`, `bun run test`, or `bun run 
 
 Each app remains independently versioned and released. Create a Changeset for the app package that changed with `bun run changeset`, or use `bun run changeset-add <app> <patch|minor|major> "summary"`. For example: `bun run changeset-add quote-viewer patch "Fix quote button on profile pages"`. Each release gets an app-prefixed GitHub tag and app-specific Chrome/Firefox artifacts.
 
+Generate persistent Chromium signing keys from the repository root with `bun run generate-keys`. This creates a separate gitignored `key.pem` in each app that uses a persistent Chrome key. To generate only one app's key, use `bun run generate-keys -- --app quote-viewer`. Existing keys are never overwritten unless `--force` is passed. By default, the command prints the `gh secret set` command using that app's secret in the release workflow. It targets `mynameistito/browser-extensions` unless `--repo owner/name` is supplied. Add `--upload` to send the key to GitHub directly (requires `gh` authentication). Repo overrides and uploads require a single `--app` target.
+
+Run `bun run generate-keys --help` for all options and examples.
+
 ## Repository layout
 
 ```text

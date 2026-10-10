@@ -22,7 +22,6 @@
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "knip": "bunx knip@latest",
-    "generate-key": "bun scripts/generate-key.ts",
     "dev": "bun ../../scripts/run-wxt.ts",
     "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
     "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",

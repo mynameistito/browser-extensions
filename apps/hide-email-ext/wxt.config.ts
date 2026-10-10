@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { defineConfig } from "wxt";
 
-import { pemToSpkiBase64 } from "./scripts/lib/crypto";
+import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
 
 const pkg = JSON.parse(
   readFileSync(path.resolve(import.meta.dirname, "package.json"), "utf-8")
@@ -32,7 +32,7 @@ const loadManifestKey = (): string | undefined => {
     return;
   }
 
-  return pemToSpkiBase64(pem);
+  return deriveChromeExtensionKey(pem).manifestKey;
 };
 
 export default defineConfig({
@@ -74,7 +74,7 @@ export default defineConfig({
       }
 
       console.warn(
-        "[wxt] key.pem not found and WXT_CHROME_KEY is unset - extension ID will be random. Run `bun run generate-key`."
+        "[wxt] key.pem not found and WXT_CHROME_KEY is unset - extension ID will be random. Run `bun run generate-keys -- --app hide-email-ext` from the workspace root."
       );
     }
 
