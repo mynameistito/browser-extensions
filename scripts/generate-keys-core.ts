@@ -70,7 +70,7 @@ Examples:
   bun generate-keys --app quote-viewer
   bun generate-keys --app quote-viewer --repo owner/name
   bun generate-keys --app quote-viewer --upload
-  bun generate-keys --app all --force --upload
+  bun generate-keys --app all --upload
 `;
 
 interface GhCommandResult {
