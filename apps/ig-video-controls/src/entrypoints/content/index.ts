@@ -83,7 +83,7 @@ export default defineContentScript({
       modifyAllPresentVideos();
       redefineWebkitMediaControlHidingCssRule();
       hideAllIgVolumeControls();
-    }, 200);
+    }, 1000);
 
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) {
