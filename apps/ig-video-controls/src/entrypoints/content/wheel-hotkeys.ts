@@ -1,6 +1,7 @@
 import { clamp, snapToStep } from "@/lib/math";
 
 import type { Settings } from "./settings";
+import { persistSettings } from "./settings";
 import { showVolumeOsd, showSpeedOsd } from "./video-osd";
 
 let rmbHeld = false;
@@ -64,8 +65,8 @@ const onWheel = (e: WheelEvent): void => {
       0.0625,
       128
     );
-    browser.storage.local.set({ playbackRate: newRate });
     currentSettings.playbackRate = newRate;
+    persistSettings({ playbackRate: newRate });
     video.playbackRate = newRate;
     showSpeedOsd(video, newRate);
   } else if (rmbHeld) {
@@ -81,8 +82,8 @@ const onWheel = (e: WheelEvent): void => {
     if (video.muted) {
       video.muted = false;
     }
-    browser.storage.local.set({ volumeLevel: newVolume });
     currentSettings.volumeLevel = newVolume;
+    persistSettings({ volumeLevel: newVolume });
     video.volume = newVolume;
     showVolumeOsd(video, newVolume);
   }
