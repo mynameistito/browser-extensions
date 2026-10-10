@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "โปรดอธิบายสิ่งที่เราสามารถเพิ่มหรือปรับปรุงได้"
+  },
+  "FeedbackSuccessAlert": {
+    "message": "ขอบคุณ! ข้อเสนอแนะของคุณถูกส่งเรียบร้อยแล้ว"
+  },
+  "Friday": {
+    "message": "วันศุกร์"
+  },
+  "Monday": {
+    "message": "วันจันทร์"
+  },
+  "Popup": {
+    "message": "ป๊อปอัป"
+  },
+  "Saturday": {
+    "message": "วันเสาร์"
+  },
+  "Sidebar": {
+    "message": "แถบด้านข้าง"
+  },
+  "Sunday": {
+    "message": "วันอาทิตย์"
+  },
+  "ThanksForFeedBack": {
+    "message": "ขอบคุณสำหรับคำติชมของคุณ!"
+  },
+  "Thursday": {
+    "message": "วันพฤหัสบดี"
+  },
+  "Today": {
+    "message": "วันนี้"
+  },
+  "Tuesday": {
+    "message": "วันอังคาร"
+  },
+  "URL": {
+    "message": "URL"
+  },
+  "Wednesday": {
+    "message": "วันพุธ"
+  },
+  "WhatCanWeImprove": {
+    "message": "เราจะปรับปรุงอะไรได้บ้าง?"
+  },
+  "Yesterday": {
+    "message": "เมื่อวาน"
+  },
+  "about": {
+    "message": "เกี่ยวกับ"
+  },
+  "activity": {
+    "message": "กิจกรรม"
+  },
+  "add": {
+    "message": "เพิ่ม"
+  },
+  "addDomains": {
+    "message": "เพิ่มโดเมน"
+  },
+  "addToBlackList": {
+    "message": "เพิ่มในบัญชีดำ"
+  },
+  "advanceExport": {
+    "message": "ส่งออกขั้นสูง"
+  },
+  "advancedFeaturesActive": {
+    "message": "คุณสมบัติขั้นสูงกำลังทำงานอยู่"
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "คุณสมบัติขั้นสูงต้องได้รับอนุญาตเพิ่มเติมสำหรับ:"
+  },
+  "all": {
+    "message": "ทั้งหมด"
+  },
+  "allCapitalLetters": {
+    "message": "ตัวอักษรพิมพ์ใหญ่ทั้งหมด"
+  },
+  "allHistoryDeleted": {
+    "message": "ประวัติทั้งหมดถูกลบออก"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "ประวัติทั้งหมดถูกลบออก ยกเว้นโดเมนในบัญชีขาว"
+  },
+  "allPermissionsGranted": {
+    "message": "ได้รับอนุญาตทั้งหมดแล้ว!"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "URL ที่เลือกทั้งหมดถูกลบแล้ว"
+  },
+  "allTime": {
+    "message": "ตลอดเวลา"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "โปรดอนุญาตการเข้าถึงเพื่อส่งคำติชม"
+  },
+  "appName": {
+    "message": "Better History | จัดการ, ส่งออก และล้างประวัติ"
+  },
+  "apply": {
+    "message": "ใช้"
+  },
+  "autoCleanupDisabled": {
+    "message": "การล้างข้อมูลอัตโนมัติถูกปิดใช้งาน คุณยังสามารถล้างประวัติด้วยตนเองได้เมื่อจำเป็น"
+  },
+  "autoCleanupEnabled": {
+    "message": "ประวัติการท่องเว็บของคุณจะถูกล้างโดยอัตโนมัติตามกำหนดการที่เลือก"
+  },
+  "autoCleanupHelp": {
+    "message": "การล้างข้อมูลอัตโนมัติช่วยรักษาความเป็นส่วนตัวของคุณโดยการลบประวัติการท่องเว็บเป็นประจำตามความต้องการของคุณ"
+  },
+  "autoCleanupSchedule": {
+    "message": "กำหนดการล้างข้อมูลอัตโนมัติ:"
+  },
+  "avgPerDay": {
+    "message": "เฉลี่ย {{time}} ต่อวัน"
+  },
+  "basicDomain": {
+    "message": "โดเมนพื้นฐาน"
+  },
+  "basicSearch": {
+    "message": "การค้นหาพื้นฐาน"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}:\u003C/strong> พิมพ์คำหลักใด ๆ เพื่อค้นหารายการที่ตรงกัน (เช่น \"Inbox\")"
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> เป็นส่วนเสริมของเบราว์เซอร์ที่เป็นนวัตกรรมใหม่ พัฒนาโดย \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span> ช่วยให้ผู้ใช้สามารถจัดการประวัติการท่องเว็บได้อย่างง่ายดาย โดยนำเสนอคุณสมบัติขั้นสูง เช่น การลบแบบกำหนดเอง, ฟิลเตอร์ที่แม่นยำ และอินเทอร์เฟซที่ใช้งานง่าย ที่ BetterLogic Ltd เราให้ความสำคัญกับความเป็นส่วนตัวของผู้ใช้และการทำงานที่ราบรื่นเพื่อปรับปรุงประสบการณ์การท่องเว็บของคุณ"
+  },
+  "blacklist": {
+    "message": "บัญชีดำ"
+  },
+  "blacklistDomain": {
+    "message": "บัญชีดำโดเมน"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "เพิ่มโดเมนลงในบัญชีดำจากประวัติ"
+  },
+  "blacklistDomains": {
+    "message": "โดเมนบัญชีดำ"
+  },
+  "blacklistFeatureDescription": {
+    "message": "คุณสมบัติบัญชีดำโดเมนใน BetterHistory ช่วยให้คุณสามารถบล็อกเว็บไซต์บางแห่งไม่ให้ถูกบันทึกในประวัติการท่องเว็บของคุณ เมื่อโดเมนถูกเพิ่มในบัญชีดำแล้ว การเข้าชมเว็บไซต์นั้นในอดีตและอนาคตทั้งหมดจะถูกลบออกโดยอัตโนมัติ"
+  },
+  "blacklistInstructionText": {
+    "message": "คุณสมบัติบัญชีดำโดเมนใน BetterHistory ช่วยให้คุณสามารถบล็อกเว็บไซต์บางแห่งไม่ให้ถูกบันทึกในประวัติการท่องเว็บของคุณ เมื่อโดเมนถูกเพิ่มในบัญชีดำแล้ว การเข้าชมเว็บไซต์นั้นในอดีตและอนาคตทั้งหมดจะถูกลบออกโดยอัตโนมัติ"
+  },
+  "blacklistTips": {
+    "message": "เคล็ดลับ"
+  },
+  "blacklist_confirmation": {
+    "message": "คุณแน่ใจหรือไม่ว่าต้องการเพิ่ม **{{DOMAIN}}** ลงในบัญชีดำจากประวัติการท่องเว็บของคุณ?\u003Cbr/>การเข้าชมโดเมนนี้ในอนาคตจะไม่ถูกบันทึกอีกต่อไป และรายการประวัติที่มีอยู่ทั้งหมดสำหรับ **{{DOMAIN}}** จะถูกลบออก"
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> มีอยู่ในบัญชีดำแล้ว"
+  },
+  "blacklistedDomains": {
+    "message": "โดเมนบัญชีดำ"
+  },
+  "blockExactDomain": {
+    "message": "บล็อกเฉพาะโดเมนที่ตรงกันเท่านั้น ไม่รวมโดเมนย่อยหรือเส้นทางเฉพาะ"
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "บล็อกโดเมนหลักและโดเมนย่อยทั้งหมด (mail.example.com, blog.example.com, ฯลฯ)"
+  },
+  "blockSpecificPage": {
+    "message": "บล็อกเฉพาะหน้าเฉพาะบนโดเมน"
+  },
+  "blockSpecificPath": {
+    "message": "บล็อกทุกหน้าภายใต้เส้นทางเฉพาะในโดเมน"
+  },
+  "blockSpecificSubdomain": {
+    "message": "บล็อกเฉพาะโดเมนย่อยเฉพาะเท่านั้น ไม่รวมโดเมนหลักหรือโดเมนย่อยอื่น ๆ"
+  },
+  "bugReport": {
+    "message": "รายงานข้อบกพร่อง"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "เพิ่มหลายโดเมนในบัญชีดำของคุณพร้อมกัน ป้อนหนึ่งโดเมนต่อบรรทัด"
+  },
+  "bulkAddDomains": {
+    "message": "เพิ่มโดเมนเป็นชุด"
+  },
+  "cancel": {
+    "message": "ยกเลิก"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>การคำนึงถึงตัวพิมพ์ใหญ่-เล็ก:\u003C/strong> การค้นหาจะไม่คำนึงถึงตัวพิมพ์ใหญ่-เล็กโดยค่าเริ่มต้น"
+  },
+  "chooseStartAndEndDates": {
+    "message": "เลือกวันเริ่มต้นและสิ้นสุด"
+  },
+  "clear": {
+    "message": "ล้าง"
+  },
+  "clearBrowsingHistory": {
+    "message": "ล้างประวัติการท่องเว็บ"
+  },
+  "clearHistory": {
+    "message": "ล้างประวัติ"
+  },
+  "clearHistoryConfirm": {
+    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบประวัติการท่องเว็บทั้งหมดของคุณ? การดำเนินการนี้เป็นแบบถาวรและไม่สามารถย้อนกลับได้"
+  },
+  "clearStats": {
+    "message": "ล้างสถิติ"
+  },
+  "clearing": {
+    "message": "กำลังล้าง..."
+  },
+  "clearingHistory": {
+    "message": "การจัดการประวัติ"
+  },
+  "clickToRequestPermissions": {
+    "message": "คลิกปุ่มด้านล่างเพื่อขอสิทธิ์"
+  },
+  "close": {
+    "message": "ปิด"
+  },
+  "clr": {
+    "message": "ล้าง"
+  },
+  "confirmAndSave": {
+    "message": "ยืนยันและบันทึก"
+  },
+  "confirmDelete": {
+    "message": "ยืนยันการลบ"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "ยืนยันการตั้งค่าการล้างข้อมูลอัตโนมัติอัจฉริยะ"
+  },
+  "contact": {
+    "message": "ติดต่อ"
+  },
+  "contactAndFeedback": {
+    "message": "ติดต่อและคำติชม"
+  },
+  "contactLimitReached": {
+    "message": "คุณถึงขีดจำกัดการติดต่อสำหรับวันนี้แล้ว"
+  },
+  "containsDotCom": {
+    "message": "มี \".com\""
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>มีหลายคำ:\u003C/strong> ใช้ \u003Ccode>{{pipe}}\u003C/code> เพื่อค้นหารายการที่มีคำใดคำหนึ่งจากหลายคำ (เช่น \u003Ccode>{{example}}\u003C/code>)"
+  },
+  "containsNewsOrInfo": {
+    "message": "มี \"News\" หรือ \"Info\""
+  },
+  "containsNumbers": {
+    "message": "มีตัวเลข"
+  },
+  "containsSpaces": {
+    "message": "มีช่องว่าง"
+  },
+  "containsTODO": {
+    "message": "มี \"TODO\""
+  },
+  "current": {
+    "message": "จากเว็บไซต์นี้"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "ขณะนี้คุณสามารถดูข้อมูลสำหรับ {{days}} {{dayLabel}} ที่ผ่านมาได้ จะมีการเพิ่มวันเพิ่มเติมโดยอัตโนมัติ"
+  },
+  "custom": {
+    "message": "กำหนดเอง"
+  },
+  "customExport": {
+    "message": "ส่งออกแบบกำหนดเอง"
+  },
+  "customRange": {
+    "message": "ช่วงกำหนดเอง"
+  },
+  "dailyAtMidnight": {
+    "message": "รายวัน (เวลาเที่ยงคืน)"
+  },
+  "darkMode": {
+    "message": "โหมดมืด"
+  },
+  "dateAndTimeOrder": {
+    "message": "ลำดับวันที่และเวลา"
+  },
+  "day": {
+    "message": "วัน"
+  },
+  "days": {
+    "message": "วัน"
+  },
+  "debugToolsTitle": {
+    "message": "เครื่องมือดีบัก (สำหรับการทดสอบ):"
+  },
+  "default": {
+    "message": "ค่าเริ่มต้น"
+  },
+  "delete": {
+    "message": "ลบ"
+  },
+  "deleteAllForHour": {
+    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบประวัติการท่องเว็บทั้งหมดสำหรับ **{{startHour}}** อย่างถาวร?\u003Cbr>การดำเนินการนี้จะลบประวัติการท่องเว็บของชั่วโมงนั้นทั้งหมด ({{startAndendHour}}) เมื่อลบแล้ว การดำเนินการนี้จะไม่สามารถย้อนกลับได้"
+  },
+  "deleteAllFromDate": {
+    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบประวัติการท่องเว็บทั้งหมดสำหรับ **{{date}}** อย่างถาวร?\u003Cbr>การดำเนินการนี้จะลบระเบียนทั้งหมดของวันนั้น เมื่อลบแล้ว การดำเนินการนี้จะไม่สามารถย้อนกลับได้"
+  },
+  "deleteAllSearchHistory": {
+    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบรายการประวัติการท่องเว็บที่ค้นหาทั้งหมดที่แสดงบนหน้านี้อย่างถาวร?\u003Cbr/>การดำเนินการนี้จะลบรายการทั้งหมดที่แสดงในผลการค้นหาปัจจุบัน เมื่อลบแล้ว การดำเนินการนี้จะไม่สามารถย้อนกลับได้"
+  },
+  "deleteBulk": {
+    "message": "ลบ"
+  },
+  "deleteDomainConfirm": {
+    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบประวัติทั้งหมดจากโดเมน \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span>? การดำเนินการนี้จะลบรายการที่เกี่ยวข้องทั้งหมดและไม่สามารถย้อนกลับได้"
+  },
+  "deleteDomainStats": {
+    "message": "ลบสถิติโดเมนหรือไม่?"
+  },
+  "deleteEntire": {
+    "message": "ลบทั้งวัน"
+  },
+  "deleteEntireHistory": {
+    "message": "ลบประวัติทั้งหมด"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "ลบประวัติทั้งหมดหรือไม่?"
+  },
+  "deleteHistory": {
+    "message": "ลบประวัติ"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบประวัติการท่องเว็บทั้งหมดของคุณ? การดำเนินการนี้เป็นแบบถาวรและไม่สามารถย้อนกลับได้"
+  },
+  "deleteMsg": {
+    "message": "ลบผลการค้นหาทั้งหมดหรือไม่?"
+  },
+  "deleteSelectedHistory": {
+    "message": "ลบประวัติที่เลือก"
+  },
+  "deleteSpecificDate": {
+    "message": "ลบวันที่เฉพาะ"
+  },
+  "deleteStatsConfirmation": {
+    "message": "คุณกำลังจะลบข้อมูลการติดตามทั้งหมดสำหรับ \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> ออกจาก BetterHistory อย่างถาวร\u003Cbr>\u003Cbr>การดำเนินการนี้ไม่สามารถย้อนกลับได้"
+  },
+  "deleteUrlConfirm": {
+    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบ URL \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> ออกจากประวัติของคุณ? การดำเนินการนี้ไม่สามารถย้อนกลับได้"
+  },
+  "deletedSelectedHistory": {
+    "message": "คุณแน่ใจหรือไม่ว่าต้องการลบรายการประวัติที่เลือก {{selectedNumber}} รายการอย่างถาวร?\u003Cbr/>การดำเนินการนี้จะลบรายการที่เลือก {{selectedNumber}} รายการทั้งหมดอย่างถาวร เมื่อลบแล้ว การดำเนินการนี้จะไม่สามารถย้อนกลับได้"
+  },
+  "devices": {
+    "message": "อุปกรณ์"
+  },
+  "disableTimeTracking": {
+    "message": "การปิดใช้งานสิ่งนี้จะหยุดการติดตามและซ่อนสถิติทั้งหมด"
+  },
+  "domainAlreadyExists": {
+    "message": "โดเมนนี้มีอยู่ในรายการของคุณแล้ว"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "บรรทัด ${index + 1}: โดเมนมีอยู่แล้ว (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "บัญชีดำโดเมน"
+  },
+  "domainCannotBeEmpty": {
+    "message": "โดเมนต้องไม่ว่างเปล่า"
+  },
+  "domainStats": {
+    "message": "สถิติโดเมน"
+  },
+  "domainWithSubdomains": {
+    "message": "โดเมนที่มีโดเมนย่อยทั้งหมด"
+  },
+  "domains": {
+    "message": "โดเมน"
+  },
+  "email": {
+    "message": "อีเมล"
+  },
+  "emailArticle": {
+    "message": "บทความสนับสนุน"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}: \u003C/span>เรียกดูคู่มือสนับสนุนและคำถามที่พบบ่อยของเราได้ที่ \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">การสนับสนุน BetterHistory\u003C/span>\u003C/a>"
+  },
+  "emailSupport": {
+    "message": "การสนับสนุนทางอีเมล"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}:\u003C/span> สำหรับคำถามหรือปัญหาใด ๆ ติดต่อเราได้ที่ 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a>"
+  },
+  "enableStats": {
+    "message": "เปิดใช้งานสถิติ"
+  },
+  "enableStatsDescription": {
+    "message": "เปิดหรือปิดการทำงานของสถิติทั้งหมด เมื่อปิดใช้งาน จะไม่มีการรวบรวมหรือแสดงสถิติใด ๆ"
+  },
+  "enable_popup": {
+    "message": "เปิดใช้งานป๊อปอัป"
+  },
+  "endsWithQuestionMark": {
+    "message": "ลงท้ายด้วย \"?\""
+  },
+  "enterAValidDomain": {
+    "message": "ป้อนโดเมนที่ถูกต้อง"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "โปรดป้อนอย่างน้อยหนึ่งโดเมน"
+  },
+  "enterDomain": {
+    "message": "ป้อนโดเมนที่คุณต้องการยกเว้นจากประวัติ"
+  },
+  "enterDomainName": {
+    "message": "ป้อนชื่อโดเมน"
+  },
+  "enterDomainPerLine": {
+    "message": "เพิ่มหลายโดเมนในบัญชีขาวของคุณพร้อมกัน ป้อนหนึ่งโดเมนต่อบรรทัด"
+  },
+  "enterDomainToBlock": {
+    "message": "ป้อนโดเมนที่จะบล็อก (เช่น example.com)"
+  },
+  "enterDomainToWhitelist": {
+    "message": "ป้อนโดเมนที่จะเพิ่มในบัญชีขาว (เช่น example.com)"
+  },
+  "enterValidDomain": {
+    "message": "โปรดป้อนอย่างน้อยหนึ่งโดเมนที่ถูกต้อง"
+  },
+  "entireExport": {
+    "message": "ส่งออกทั้งหมด (90 วัน)"
+  },
+  "entries": {
+    "message": "รายการ"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "ลบประวัติทั้งหมดสำหรับเว็บไซต์นี้"
+  },
+  "error": {
+    "message": "ข้อผิดพลาด"
+  },
+  "errorClearingHistory": {
+    "message": "ไม่สามารถล้างประวัติได้ โปรดลองอีกครั้ง"
+  },
+  "errorClearingStats": {
+    "message": "ไม่สามารถล้างสถิติได้"
+  },
+  "errorLoadingData": {
+    "message": "ข้อผิดพลาดในการโหลดข้อมูล"
+  },
+  "errorLoadingSettings": {
+    "message": "ข้อผิดพลาดในการโหลดการตั้งค่า กำลังใช้ค่าเริ่มต้น"
+  },
+  "errorSavingSettings": {
+    "message": "บันทึกการตั้งค่าล้มเหลว โปรดลองอีกครั้ง"
+  },
+  "exactWordProject": {
+    "message": "คำว่า \"Project\" ที่ตรงกัน"
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "สำรวจผลิตภัณฑ์ของเรา"
+  },
+  "export": {
+    "message": "ส่งออก"
+  },
+  "exportAsJSON": {
+    "message": "ส่งออกเป็น JSON"
+  },
+  "exportAsPDF": {
+    "message": "ส่งออกเป็น PDF"
+  },
+  "exportCsv": {
+    "message": "ส่งออก CSV"
+  },
+  "exportEntireLocalData": {
+    "message": "ส่งออกข้อมูลภายในทั้งหมด"
+  },
+  "exportHistory": {
+    "message": "ส่งออกประวัติการท่องเว็บทั้งหมดของคุณ"
+  },
+  "exportHistoryDescription": {
+    "message": "คุณสมบัตินี้ช่วยให้คุณสามารถส่งออกประวัติการท่องเว็บทั้งหมดของคุณ (สูงสุด 90 วัน) หรือเลือกช่วงวันที่กำหนดเองเพื่อส่งออก โปรดทราบว่า History API ของ Chrome รองรับการส่งออกประวัติเท่านั้น - ไม่อนุญาตให้นำเข้าประวัติกลับเข้าไป"
+  },
+  "exportHistoryLimitation": {
+    "message": "นอกจากนี้ Chrome จะลบประวัติที่เก่ากว่า 90 วันโดยอัตโนมัติ ดังนั้น BetterHistory จึงสามารถส่งออกได้เฉพาะระเบียนที่ Chrome เก็บไว้เท่านั้น"
+  },
+  "exportHtml": {
+    "message": "ส่งออก HTML"
+  },
+  "exportLocalData": {
+    "message": "ส่งออกข้อมูลภายใน"
+  },
+  "exportSelectedCsv": {
+    "message": "ส่งออก CSV ที่เลือก"
+  },
+  "exportSelectedHtml": {
+    "message": "ส่งออก HTML ที่เลือก"
+  },
+  "exportTimeTrackingData": {
+    "message": "ส่งออกข้อมูลการติดตามเวลา"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "นี่คือข้อมูลการติดตามเวลาที่จัดเก็บไว้ในเครื่อง ซึ่งคุณสามารถส่งออกเพื่อใช้ส่วนตัวได้ ข้อมูลนี้สะท้อนถึงเวลาที่คุณใช้ในหน้าที่เข้าชม ซึ่งช่วยคุณวิเคราะห์พฤติกรรมการท่องเว็บของคุณ"
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "ข้อมูลนี้ถูกบันทึกไว้ในเบราว์เซอร์ของคุณเท่านั้น และไม่ได้ซิงค์หรือจัดเก็บออนไลน์ การลบส่วนขยาย BetterHistory จะลบข้อมูลการติดตามเวลาทั้งหมดอย่างถาวร หากต้องการเก็บข้อมูลสำรอง โปรดส่งออกข้อมูลของคุณเป็นประจำ"
+  },
+  "exportToCSV": {
+    "message": "ส่งออกเป็น CSV"
+  },
+  "exportToTXT": {
+    "message": "ส่งออกเป็น TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "ประวัติการท่องเว็บที่ส่งออก - วันที่:"
+  },
+  "exportedHistoryKeyword": {
+    "message": "ประวัติการท่องเว็บที่ส่งออก - คำหลัก:"
+  },
+  "featureRequest": {
+    "message": "คำขอคุณสมบัติ"
+  },
+  "feedback": {
+    "message": "คำติชม"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "ฉันยอมรับ \u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">นโยบายความเป็นส่วนตัว\u003C/span>\u003C/a> และการประมวลผลข้อมูล"
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "โปรดระบุอีเมลของคุณเพื่อติดตามผลการส่งของคุณ"
+  },
+  "feedbackForm": {
+    "message": "แบบฟอร์มคำติชม"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}:\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">คลิกที่นี่เพื่อส่งคำติชมของคุณ\u003C/span>"
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "ขนาดไฟล์เกิน 5MB โปรดอัปโหลดไฟล์ที่เล็กกว่า"
+  },
+  "find_all_visits_domain": {
+    "message": "ค้นหาการเข้าชมทั้งหมดไปยัง {{d}}"
+  },
+  "generalContact": {
+    "message": "ติดต่อทั่วไป"
+  },
+  "generatedUsing": {
+    "message": "เอกสารนี้สร้างขึ้นโดยใช้"
+  },
+  "grantPermissions": {
+    "message": "อนุญาต"
+  },
+  "groupSession": {
+    "message": "จัดกลุ่มเซสชัน"
+  },
+  "history": {
+    "message": "ประวัติ"
+  },
+  "historyCleared": {
+    "message": "ล้างประวัติแล้ว"
+  },
+  "historyControlsFor": {
+    "message": "ตัวควบคุมประวัติสำหรับ"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "ประวัติจากโดเมนในบัญชีขาวจะถูกสงวนไว้ระหว่างการล้างข้อมูล"
+  },
+  "historyRetentionHelp": {
+    "message": "ประวัติในช่วงเวลาที่เลือกนี้จะถูกสงวนไว้และยกเว้นจากการล้างข้อมูลอัตโนมัติ"
+  },
+  "hourFormat": {
+    "message": "รูปแบบเวลา"
+  },
+  "hours": {
+    "message": "ชั่วโมง"
+  },
+  "howDidWeDo": {
+    "message": "เราทำได้ดีแค่ไหน?"
+  },
+  "howLongKeepHistory": {
+    "message": "ควรเก็บประวัติการท่องเว็บของคุณไว้นานแค่ไหนก่อนที่จะมีสิทธิ์ได้รับการลบโดยอัตโนมัติ?"
+  },
+  "howToUseTheSearchTool": {
+    "message": "วิธีใช้เครื่องมือค้นหา"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "idleDetectionDescription": {
+    "message": "• การตรวจจับการไม่ใช้งาน (หยุดการติดตามเมื่อคุณไม่อยู่)"
+  },
+  "import": {
+    "message": "นำเข้า"
+  },
+  "importEntireLocalData": {
+    "message": "นำเข้าข้อมูลภายใน"
+  },
+  "importFailed": {
+    "message": "นำเข้าข้อมูลล้มเหลว"
+  },
+  "importJSON": {
+    "message": "นำเข้า JSON"
+  },
+  "importSuccessful": {
+    "message": "นำเข้าข้อมูลสำเร็จ"
+  },
+  "infinityScroll": {
+    "message": "เปิดใช้งานการเลื่อนแบบไม่สิ้นสุด"
+  },
+  "interfaceStyle": {
+    "message": "การตั้งค่าการแสดงผล"
+  },
+  "invalidDomainFormat": {
+    "message": "โปรดป้อนรูปแบบโดเมนที่ถูกต้อง (เช่น example.com)"
+  },
+  "invalidDomainFormatLine": {
+    "message": "บรรทัด ${index + 1}: รูปแบบโดเมนไม่ถูกต้อง (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "ประเภทไฟล์ไม่ถูกต้อง โปรดอัปโหลดรูปภาพ JPG หรือ PNG"
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> ไม่ใช่โดเมนที่ถูกต้อง โปรดใช้โดเมนที่ถูกต้องเพื่อเพิ่มลงในบัญชีดำ"
+  },
+  "keepHistoryCheckText": {
+    "message": "เก็บประวัติจากเว็บไซต์ที่คุณเพิ่มในบัญชีขาว"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "เก็บประวัติจากเว็บไซต์ที่คุณเพิ่มในบัญชีขาว"
+  },
+  "large": {
+    "message": "ใหญ่"
+  },
+  "last15Days": {
+    "message": "15 วัน"
+  },
+  "last2Months": {
+    "message": "2 เดือนที่ผ่านมา"
+  },
+  "last30Days": {
+    "message": "30 วัน"
+  },
+  "last3Months": {
+    "message": "3 เดือนที่ผ่านมา"
+  },
+  "last60Days": {
+    "message": "60 วัน"
+  },
+  "last7Days": {
+    "message": "7 วัน"
+  },
+  "last90Days": {
+    "message": "90 วัน"
+  },
+  "lastMonth": {
+    "message": "เดือนที่แล้ว"
+  },
+  "lastVisitTime": {
+    "message": "เวลาเข้าชมล่าสุด"
+  },
+  "lastWeek": {
+    "message": "สัปดาห์ที่แล้ว"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "เรียนรู้เพิ่มเติมเกี่ยวกับการล้างข้อมูลอัตโนมัติ"
+  },
+  "learnMoreAboutRetention": {
+    "message": "เรียนรู้เพิ่มเติมเกี่ยวกับระยะเวลาการเก็บรักษา"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "แจ้งให้เราทราบหากคุณต้องการการปรับเปลี่ยนเพิ่มเติม"
+  },
+  "lightMode": {
+    "message": "โหมดสว่าง"
+  },
+  "loadingSettings": {
+    "message": "กำลังโหลดการตั้งค่า..."
+  },
+  "ltr": {
+    "message": "LTR (ซ้ายไปขวา)"
+  },
+  "mainDomainNote": {
+    "message": "การบล็อกโดเมนหลักไม่ได้บล็อกโดเมนย่อยโดยอัตโนมัติ"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "จัดการการติดตามเวลาและสถิติการใช้งาน"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "เมื่อเปิดใช้งาน BetterHistory จะติดตามว่าคุณใช้เวลากับแต่ละเว็บไซต์นานเท่าใด รวมถึงระยะเวลาเซสชันและเวลาที่ใช้งานเทียบกับเวลาที่ไม่ได้ใช้งาน ข้อมูลทั้งหมดจะถูกจัดเก็บไว้ในเบราว์เซอร์ของคุณ และใช้เพื่อมอบข้อมูลเชิงลึกเกี่ยวกับการท่องเว็บและการวิเคราะห์เวลาโดยละเอียดเท่านั้น"
+  },
+  "manifest_browser_action_title": {
+    "message": "เรียกดูประวัติ"
+  },
+  "manifest_description": {
+    "message": "ตัวจัดการประวัติที่ทันสมัย: ค้นหาได้ทรงพลัง, ส่งออกเป็นชุด, ลบรายการที่เลือกเอง, กรองตามวันและชั่วโมง, และบล็อกโดเมนเฉพาะจากประวัติ."
+  },
+  "maxSize": {
+    "message": "ขนาดสูงสุด"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• การตรวจจับการเล่นสื่อ (ติดตามต่อระหว่างวิดีโอ/เพลง)"
+  },
+  "medium": {
+    "message": "กลาง"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "รายเดือน (วันที่ 1 ของทุกเดือน)"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "จะมีการเพิ่มวันเพิ่มเติมโดยอัตโนมัติ"
+  },
+  "moreFromSite": {
+    "message": "เพิ่มเติมจากเว็บไซต์นี้"
+  },
+  "mostActiveDay": {
+    "message": "วันที่ใช้งานมากที่สุด"
+  },
+  "neverDisabled": {
+    "message": "ไม่เคย (ปิดใช้งาน)"
+  },
+  "noActivityData": {
+    "message": "ไม่มีข้อมูลกิจกรรมสำหรับช่วงเวลานี้"
+  },
+  "noBlacklistType": {
+    "message": "ไม่มี {{type}} ในบัญชีดำของคุณ"
+  },
+  "noChangesToSave": {
+    "message": "ไม่มีการเปลี่ยนแปลงให้บันทึก"
+  },
+  "noDevices": {
+    "message": "ไม่พบเซสชันอุปกรณ์ที่ใช้งานอยู่"
+  },
+  "noDomainBlacklisted": {
+    "message": "ยังไม่มีโดเมนในบัญชีดำ"
+  },
+  "noDomains": {
+    "message": "ยังไม่มีโดเมนในบัญชีขาว"
+  },
+  "noDomainsType": {
+    "message": "ไม่มี {{type}} ในบัญชีขาวของคุณ"
+  },
+  "noFileSelectedMessage": {
+    "message": "ไม่มีไฟล์ที่เลือก โปรดอัปโหลดไฟล์ที่ถูกต้อง"
+  },
+  "noMoreResults": {
+    "message": "ไม่มีผลลัพธ์เพิ่มเติม"
+  },
+  "noResultsFound": {
+    "message": "ไม่พบผลลัพธ์ ลองปรับคำค้นหาหรือตัวกรองของคุณ"
+  },
+  "noThanks": {
+    "message": "ไม่เป็นไร ขอบคุณ"
+  },
+  "noTitle": {
+    "message": "ไม่มีชื่อเรื่อง"
+  },
+  "noVisits": {
+    "message": "ขออภัย ไม่พบการเข้าชม"
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>เฉพาะตัวเลข:\u003C/strong> ใช้ \u003Ccode>{{pattern}}\u003C/code> เพื่อค้นหารายการที่มีตัวเลข"
+  },
+  "of": {
+    "message": "ของ"
+  },
+  "ok": {
+    "message": "ตกลง"
+  },
+  "oneMonth": {
+    "message": "หนึ่งเดือน"
+  },
+  "oneWeek": {
+    "message": "หนึ่งสัปดาห์"
+  },
+  "openAllTabs": {
+    "message": "เปิดทุกแท็บ"
+  },
+  "openMenu": {
+    "message": "เปิดเมนู"
+  },
+  "openTab": {
+    "message": "เปิดในแท็บใหม่"
+  },
+  "order": {
+    "message": "ลำดับ"
+  },
+  "otherOptions": {
+    "message": "การตั้งค่าทั่วไป"
+  },
+  "page": {
+    "message": "หน้า"
+  },
+  "paths": {
+    "message": "เส้นทาง"
+  },
+  "permissionGranted": {
+    "message": "✓ ได้รับอนุญาต"
+  },
+  "permissionMissing": {
+    "message": "✗ ขาดหายไป"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "ได้รับอนุญาตแล้ว"
+  },
+  "pleaseNote": {
+    "message": "โปรดทราบ:"
+  },
+  "pleaseRateUs": {
+    "message": "โปรดให้คะแนนเรา!"
+  },
+  "prefixesAutoRemoved": {
+    "message": "คำนำหน้า เช่น 'http://', 'https://' และ 'www.' จะถูกลบออกโดยอัตโนมัติ"
+  },
+  "prefixesRemoved": {
+    "message": "คำนำหน้า เช่น 'http://', 'https://' และ 'www.' จะถูกลบออกโดยอัตโนมัติ"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "เพิ่มเว็บไซต์นี้ลงในบัญชีดำเพื่อไม่ให้บันทึกประวัติ"
+  },
+  "privacyPolicy": {
+    "message": "นโยบายความเป็นส่วนตัว"
+  },
+  "privacyTerms": {
+    "message": "ความเป็นส่วนตัวและข้อกำหนด"
+  },
+  "processing": {
+    "message": "กำลังประมวลผล..."
+  },
+  "rateText": {
+    "message": "ความคิดเห็นของคุณช่วยให้เราปรับปรุง BetterHistory บอกให้เราทราบว่าเราทำได้ดีแค่ไหน!"
+  },
+  "recent": {
+    "message": "การเข้าชมล่าสุด"
+  },
+  "recordedVisits": {
+    "message": "บันทึกการเข้าชมโดเมนนี้"
+  },
+  "remove_url": {
+    "message": "ลบ URL นี้ออกจากประวัติ"
+  },
+  "result": {
+    "message": "ผลลัพธ์"
+  },
+  "results": {
+    "message": "ผลลัพธ์"
+  },
+  "retentionPeriod": {
+    "message": "ระยะเวลาการเก็บรักษา:"
+  },
+  "retentionPeriodHelp": {
+    "message": "ระยะเวลาการเก็บรักษาจะกำหนดว่าประวัติการท่องเว็บของคุณจะถูกเก็บรักษาไว้นานแค่ไหน ประวัติที่เก่ากว่าจะมีสิทธิ์ได้รับการล้างข้อมูล"
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "โปรดตรวจสอบการตั้งค่าของคุณก่อนยืนยัน"
+  },
+  "revokePermissions": {
+    "message": "เพิกถอนสิทธิ์"
+  },
+  "rightTitle": {
+    "message": "ตัวเลือกเมนูบริบท"
+  },
+  "rtl": {
+    "message": "RTL (ขวาไปซ้าย)"
+  },
+  "saveSettings": {
+    "message": "บันทึกการตั้งค่า"
+  },
+  "search": {
+    "message": "ค้นหา"
+  },
+  "searchDeeper": {
+    "message": "ค้นหาให้ลึกกว่าเดิม"
+  },
+  "searchDomainTitle": {
+    "message": "ค้นหาโดยโดเมน"
+  },
+  "searchEngine": {
+    "message": "เครื่องมือค้นหา"
+  },
+  "searchMsg": {
+    "message": "กระซิบ... ลองค้นหาอะไรบางอย่างสิ"
+  },
+  "searchPlaceholder": {
+    "message": "ค้นหาชื่อเรื่องหรือ URL"
+  },
+  "searchTextTitle": {
+    "message": "ค้นหาโดยการเลือกข้อความ"
+  },
+  "searchTips": {
+    "message": "เคล็ดลับการค้นหา"
+  },
+  "searchTipsMsg1": {
+    "message": "รองรับการค้นหาด้วยนิพจน์ทั่วไปแล้ว!"
+  },
+  "searchTipsMsg2": {
+    "message": "เช่น ลองค้นหา"
+  },
+  "searchTipsMsg3": {
+    "message": "ค้นหาการเข้าชมและการดาวน์โหลด"
+  },
+  "searchTipsMsg4": {
+    "message": "การค้นหาจะหาการเข้าชมตามชื่อหน้าและ URL โดยอัตโนมัติ และการดาวน์โหลดตามชื่อไฟล์และ URL"
+  },
+  "searchTipsMsg5": {
+    "message": "การเข้าชม 10,000 รายการล่าสุดของคุณจะถูกใช้สำหรับการค้นหาเริ่มต้นที่รวดเร็ว หากต้องการค้นหาให้ลึกกว่าเดิม ให้ไปที่ส่วนท้ายของหน้าผลลัพธ์สุดท้ายแล้วคลิกปุ่ม 'ค้นหาให้ลึกกว่าเดิม'"
+  },
+  "searchToolDescription": {
+    "message": "เครื่องมือนี้ช่วยให้คุณสามารถค้นหาในประวัติการท่องเว็บของคุณได้อย่างมีประสิทธิภาพโดยใช้คำหลักง่าย ๆ หรือ **นิพจน์ทั่วไป (RegEx)** ขั้นสูง ด้านล่างนี้คือตัวอย่างบางส่วนเพื่อช่วยให้คุณเริ่มต้น:"
+  },
+  "search_history": {
+    "message": "ค้นหาในประวัติ"
+  },
+  "searchedUrlDeleted": {
+    "message": "URL ที่ค้นหาถูกลบแล้ว"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "URL ที่ค้นหาถูกลบแล้ว ยกเว้นโดเมนในบัญชีขาว"
+  },
+  "searching": {
+    "message": "กำลังค้นหา"
+  },
+  "selectDateFormat": {
+    "message": "รูปแบบวันที่"
+  },
+  "selectDateRange": {
+    "message": "เลือกช่วงวันที่"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "เลือกวันที่เพื่อลบประวัติ"
+  },
+  "selectEndDate": {
+    "message": "เลือกวันสิ้นสุด"
+  },
+  "selectStartDate": {
+    "message": "เลือกวันเริ่มต้น"
+  },
+  "selected": {
+    "message": "เลือกแล้ว"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "ประวัติวันที่เลือกถูกลบแล้ว"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "ประวัติวันที่เลือกถูกลบแล้ว ยกเว้นโดเมนในบัญชีขาว"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "ประวัติชั่วโมงที่เลือกถูกลบแล้ว"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "ประวัติชั่วโมงที่เลือกถูกลบแล้ว ยกเว้นโดเมนในบัญชีขาว"
+  },
+  "sessions": {
+    "message": "เซสชัน"
+  },
+  "settings": {
+    "message": "การตั้งค่า"
+  },
+  "settingsSaved": {
+    "message": "บันทึกการตั้งค่าแล้ว"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "การตั้งค่าการล้างข้อมูลอัตโนมัติอัจฉริยะของคุณได้รับการอัปเดตเรียบร้อยแล้ว"
+  },
+  "shortRetentionWarning": {
+    "message": "การตั้งค่าระยะเวลาการเก็บรักษาที่สั้นหนึ่งสัปดาห์หมายความว่าประวัติการท่องเว็บที่เก่ากว่าของคุณจะถูกล้างบ่อยขึ้น ตรวจสอบให้แน่ใจว่าสิ่งนี้สอดคล้องกับความต้องการของคุณ"
+  },
+  "show": {
+    "message": "แสดง"
+  },
+  "showAllHistory": {
+    "message": "แสดงประวัติทั้งหมด"
+  },
+  "showStats": {
+    "message": "แสดงสถิติ"
+  },
+  "small": {
+    "message": "เล็ก"
+  },
+  "smartAutoCleanup": {
+    "message": "การล้างข้อมูลอัตโนมัติอัจฉริยะ"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "จัดการประวัติการท่องเว็บของคุณโดยอัตโนมัติด้วยการล้างข้อมูลอัตโนมัติอัจฉริยะ เลือกความถี่ที่ควรดำเนินการล้างข้อมูลและระยะเวลาที่ควรเก็บประวัติล่าสุดของคุณไว้"
+  },
+  "smartAutoCleanupSettings": {
+    "message": "การตั้งค่าการล้างข้อมูลอัตโนมัติอัจฉริยะ"
+  },
+  "smartHistoryCleanup": {
+    "message": "การล้างประวัติอัจฉริยะ"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "ล้างประวัติการท่องเว็บของคุณ ยกเว้นเว็บไซต์ที่คุณเพิ่มในบัญชีขาว คุณสมบัตินี้ช่วยให้คุณเก็บกิจกรรมส่วนตัวไว้ในขณะที่ยังคงรักษาประวัติสำคัญจากเว็บไซต์ที่เชื่อถือได้หรือใช้งานบ่อย"
+  },
+  "socialMediaTip": {
+    "message": "สำหรับเว็บไซต์โซเชียลมีเดีย ให้พิจารณาบล็อกส่วนเฉพาะ (facebook.com/marketplace/*)"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "ไม่สามารถเพิ่มบางโดเมนได้:\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "บางสิทธิ์หายไป"
+  },
+  "specificPage": {
+    "message": "หน้าเฉพาะ"
+  },
+  "specificPath": {
+    "message": "เส้นทางเฉพาะ"
+  },
+  "specificSubdomain": {
+    "message": "โดเมนย่อยเฉพาะ"
+  },
+  "start": {
+    "message": "เริ่มต้น"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>เริ่มต้นด้วย:\u003C/strong> ใช้ ^ เพื่อค้นหารายการที่ขึ้นต้นด้วยคำเฉพาะ (เช่น ^Inbox)"
+  },
+  "startsWithInbox": {
+    "message": "เริ่มต้นด้วย \"Inbox\""
+  },
+  "statsCleared": {
+    "message": "ล้างสถิติแล้ว"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "ยกเลิก"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "เพื่อช่วยคุณติดตามเวลาที่คุณใช้บนเว็บไซต์ ดูรายละเอียดเซสชัน และส่งออกรายงานเวลาในรูปแบบ PDF เราต้องการสิทธิ์ในการเข้าถึงกิจกรรมการท่องเว็บของคุณ"
+  },
+  "statsPermissionDialogGrant": {
+    "message": "อนุญาต"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "เราได้เปิดตัวคุณสมบัติการติดตามเวลาใหม่ใน BetterHistory!"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "จำเป็นต้องมีการอนุญาตใหม่สำหรับการติดตามเวลา"
+  },
+  "subdomainNote": {
+    "message": "การเพิ่มโดเมนหลักในบัญชีขาวไม่ได้เพิ่มโดเมนย่อยในบัญชีขาวโดยอัตโนมัติ"
+  },
+  "subdomains": {
+    "message": "โดเมนย่อย"
+  },
+  "submit": {
+    "message": "ส่ง"
+  },
+  "submitFeedback": {
+    "message": "ส่งคำติชม"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "คำแนะนำและคำติชมของคุณช่วยให้เราปรับปรุง BetterHistory และมอบประสบการณ์ผู้ใช้ที่ดีที่สุด"
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 ตัวอักษรขึ้นไป"
+  },
+  "termsOfService": {
+    "message": "ข้อกำหนดในการให้บริการ"
+  },
+  "thankYou": {
+    "message": "ขอบคุณ!"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "การดำเนินการนี้ไม่สามารถย้อนกลับได้"
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "URL หรือโดเมนนี้มีอยู่ในโดเมนบัญชีดำแล้ว"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "URL หรือโดเมนนี้มีอยู่ในโดเมนบัญชีขาวแล้ว"
+  },
+  "threeMonths": {
+    "message": "สามเดือน"
+  },
+  "timeTrackingStartedOn": {
+    "message": "การติดตามเวลาเริ่มต้นเมื่อ {{date}}"
+  },
+  "tips": {
+    "message": "เคล็ดลับ"
+  },
+  "title": {
+    "message": "ชื่อเรื่อง"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "หากต้องการเพิ่มทุกหน้าในโดเมนและโดเมนย่อยลงในบัญชีดำ ให้เขียน:"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "หากต้องการเพิ่มทุกหน้าในโดเมนลงในบัญชีดำ ให้เขียน:"
+  },
+  "todalWords": {
+    "message": "คำทั้งหมด"
+  },
+  "today": {
+    "message": "วันนี้"
+  },
+  "toolbarIcon": {
+    "message": "ธีมไอคอนแถบเครื่องมือ"
+  },
+  "totalEntries": {
+    "message": "รายการทั้งหมด"
+  },
+  "totalVisits": {
+    "message": "จำนวนการเข้าชมทั้งหมด"
+  },
+  "twoWeeks": {
+    "message": "สองสัปดาห์"
+  },
+  "typdCount": {
+    "message": "จำนวนที่พิมพ์"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "พิมพ์คำหลักใด ๆ เพื่อค้นหารายการที่ตรงกัน"
+  },
+  "typeDeleteToConfirm": {
+    "message": "พิมพ์ \"delete\" เพื่อยืนยัน:"
+  },
+  "typedCount": {
+    "message": "พิมพ์ในแถบที่อยู่ {{times}} ครั้ง"
+  },
+  "unableToLoadDomainStats": {
+    "message": "ไม่สามารถโหลดสถิติโดเมนได้ โปรดลองอีกครั้งในภายหลัง"
+  },
+  "understandSettings": {
+    "message": "ฉันเข้าใจการตั้งค่าเหล่านี้และจะส่งผลต่อประวัติการท่องเว็บของฉันอย่างไร"
+  },
+  "understandYourRights": {
+    "message": "ทำความเข้าใจสิทธิ์ของคุณ"
+  },
+  "uniqueUrls": {
+    "message": "URL ที่ไม่ซ้ำกัน"
+  },
+  "updatingData": {
+    "message": "กำลังอัปเดตข้อมูล..."
+  },
+  "uploadScreenShot": {
+    "message": "อัปโหลดภาพหน้าจอ"
+  },
+  "urlDeleted": {
+    "message": "URL ถูกลบแล้ว"
+  },
+  "urlPatternGuide": {
+    "message": "คู่มือรูปแบบ URL"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "คุณสามารถใช้รูปแบบต่อไปนี้เพื่อบล็อกเว็บไซต์:"
+  },
+  "useSpecificPaths": {
+    "message": "ใช้เส้นทางเฉพาะเพื่อเพิ่มเฉพาะส่วนของเว็บไซต์ในบัญชีขาว"
+  },
+  "viewHere": {
+    "message": "ดูที่นี่"
+  },
+  "viewStats": {
+    "message": "ดูสถิติ"
+  },
+  "viewStatsButton": {
+    "message": "คุณจะเห็นปุ่ม \"ดูสถิติ\" ในแต่ละรายการบนหน้ากิจกรรมเพื่อให้เข้าถึงข้อมูลเวลาโดยละเอียดได้อย่างรวดเร็ว"
+  },
+  "visitCount": {
+    "message": "ลิงก์เข้าชมแล้ว {{times}} ครั้ง"
+  },
+  "visitSite": {
+    "message": "เยี่ยมชมเว็บไซต์"
+  },
+  "visits_domain": {
+    "message": "ดูการเข้าชมทั้งหมดไปยังโดเมนนี้"
+  },
+  "vstCount": {
+    "message": "จำนวนการเข้าชม"
+  },
+  "weValueYourInputMessage": {
+    "message": "เราให้ความสำคัญกับความคิดเห็นของคุณและพร้อมที่จะช่วยเหลือคุณ!"
+  },
+  "websiteAccessDescription": {
+    "message": "• การเข้าถึงเว็บไซต์ (เพื่อตรวจสอบกิจกรรม)"
+  },
+  "websites": {
+    "message": "เว็บไซต์"
+  },
+  "weeklyEverySunday": {
+    "message": "รายสัปดาห์ (ทุกวันอาทิตย์)"
+  },
+  "whatThisMeans": {
+    "message": "นี่หมายความว่า:"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "อนุญาตให้ใช้รูปแบบ URL ใดบ้าง?"
+  },
+  "whenBrowserCloses": {
+    "message": "เมื่อเบราว์เซอร์ปิด"
+  },
+  "whenShouldCleanupRun": {
+    "message": "ควรดำเนินการล้างข้อมูลอัตโนมัติอัจฉริยะเมื่อใด?"
+  },
+  "whitelist": {
+    "message": "บัญชีขาว"
+  },
+  "whitelistDomain": {
+    "message": "โดเมนบัญชีขาว"
+  },
+  "whitelistDomains": {
+    "message": "โดเมนบัญชีขาว"
+  },
+  "whitelistExactDomain": {
+    "message": "เพิ่มเฉพาะโดเมนที่ตรงกันเท่านั้น ไม่รวมโดเมนย่อยหรือเส้นทางเฉพาะ"
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "เพิ่มโดเมนหลักและโดเมนย่อยทั้งหมดลงในบัญชีขาว (mail.example.com, blog.example.com, ฯลฯ)"
+  },
+  "whitelistPatterns": {
+    "message": "คุณสามารถใช้รูปแบบต่อไปนี้เพื่อเพิ่มในบัญชีขาว:"
+  },
+  "whitelistPrecedence": {
+    "message": "โดเมนในบัญชีขาวมีความสำคัญเหนือโดเมนในบัญชีดำ"
+  },
+  "whitelistSpecificPage": {
+    "message": "เพิ่มเฉพาะหน้าเฉพาะบนโดเมนลงในบัญชีขาว"
+  },
+  "whitelistSpecificPath": {
+    "message": "เพิ่มทุกหน้าภายใต้เส้นทางเฉพาะในโดเมนลงในบัญชีขาว"
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "เพิ่มเฉพาะโดเมนย่อยเฉพาะเท่านั้น ไม่รวมโดเมนหลักหรือโดเมนย่อยอื่น ๆ"
+  },
+  "whitelistedDomains": {
+    "message": "โดเมนในบัญชีขาว"
+  },
+  "wildcardWarning": {
+    "message": "ใช้สัญลักษณ์ตัวแทน (*) อย่างระมัดระวังเนื่องจากอาจบล็อกเกินกว่าที่ตั้งใจไว้"
+  },
+  "yesterday": {
+    "message": "เมื่อวาน"
+  }
+}

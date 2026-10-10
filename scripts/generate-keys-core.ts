@@ -6,9 +6,11 @@ import { deriveChromeExtensionKey } from "./chrome-extension-key";
 
 /** Apps whose release workflows require stable Chromium signing keys. */
 export const supportedExtensions = [
+  "better-history",
   "hide-email-ext",
   "quote-viewer",
   "new-tab-ext",
+  "ig-video-controls",
 ] as const;
 
 /** An app configured to use a persistent Chromium signing key. */
@@ -16,7 +18,9 @@ export type Extension = (typeof supportedExtensions)[number];
 
 /** Per-app GitHub Actions secrets referenced by the workflows. */
 export const chromeKeySecrets = {
+  "better-history": "BETTER_HISTORY_WXT_CHROME_KEY",
   "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
+  "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
   "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
   "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
 } as const satisfies Record<Extension, string>;
@@ -40,7 +44,7 @@ export type ParseGenerateKeyOptionsResult =
   | { readonly kind: "ok"; readonly options: GenerateKeyOptions };
 
 const usage =
-  "Usage: bun run generate-keys [--app <hide-email-ext|quote-viewer|new-tab-ext>] [--repo <owner/name>] [--upload] [--force]";
+  "Usage: bun generate-keys [--app <all|better-history|hide-email-ext|quote-viewer|new-tab-ext|ig-video-controls>] [--repo <owner/name>] [--upload] [--force]";
 
 /** Complete help text for the root key-generation command. */
 export const generateKeyHelp = `${usage}
@@ -50,21 +54,23 @@ generated for all supported apps. Each app's private key is written to its own
 gitignored apps/<app>/key.pem file.
 
 Options:
-  --app <name>         Generate a key for one app.
-  --repo <owner/name>  Override the GitHub repository for the secret command.
-  --upload             Upload the key to GitHub with gh instead of printing a command.
+  --app <name|all>     Generate keys for one app or all supported apps.
+  --repo <owner/name>  Override the GitHub repository for secret uploads (one app only).
+  --upload             Upload generated keys to GitHub with gh instead of printing commands.
   --force, -f          Replace an existing key and change that extension's ID.
   --help, -h           Show this help message.
 
-The repository defaults to mynameistito/browser-extensions. --repo and --upload
-require exactly one --app. Keys are stored in the per-app Actions secrets used
-by the workflows; uploads require gh to be installed and authenticated.
+The repository defaults to mynameistito/browser-extensions. --upload requires
+an explicit --app target; use --app all to upload every key. --repo requires
+exactly one app. Keys are stored in the per-app Actions secrets used by the
+workflows; uploads require gh to be installed and authenticated.
 
 Examples:
-  bun run generate-keys
-  bun run generate-keys -- --app quote-viewer
-  bun run generate-keys -- --app quote-viewer --repo owner/name
-  bun run generate-keys -- --app quote-viewer --upload
+  bun generate-keys
+  bun generate-keys --app quote-viewer
+  bun generate-keys --app quote-viewer --repo owner/name
+  bun generate-keys --app quote-viewer --upload
+  bun generate-keys --app all --upload
 `;
 
 interface GhCommandResult {
@@ -100,6 +106,7 @@ export const parseGenerateKeyOptions = (
 
   const selectedExtensions: Extension[] = [];
   let force = false;
+  let hasAppSelection = false;
   let upload = false;
   let repository: string | undefined;
 
@@ -118,13 +125,17 @@ export const parseGenerateKeyOptions = (
 
     if (argument === "--app") {
       const extension = args[index + 1];
-      if (!extension || !isExtension(extension)) {
+      if (extension === "all") {
+        selectedExtensions.push(...supportedExtensions);
+      } else if (extension && isExtension(extension)) {
+        selectedExtensions.push(extension);
+      } else {
         return {
           kind: "error",
-          message: `Missing or unknown app for --app.\n${usage}`,
+          message: `Missing or unknown app for --app. Choose a supported app or all.\n${usage}`,
         };
       }
-      selectedExtensions.push(extension);
+      hasAppSelection = true;
       index += 1;
       continue;
     }
@@ -146,10 +157,16 @@ export const parseGenerateKeyOptions = (
   }
 
   const uniqueExtensions = [...new Set(selectedExtensions)];
-  if ((repository || upload) && uniqueExtensions.length !== 1) {
+  if (repository && uniqueExtensions.length !== 1) {
     return {
       kind: "error",
-      message: `--repo and --upload require exactly one --app target.\n${usage}`,
+      message: `--repo requires exactly one --app target.\n${usage}`,
+    };
+  }
+  if (upload && !hasAppSelection) {
+    return {
+      kind: "error",
+      message: `--upload requires an explicit --app target; use --app all to upload every key.\n${usage}`,
     };
   }
 

@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "Будь ласка, опишіть, що ми можемо додати чи покращити."
+  },
+  "FeedbackSuccessAlert": {
+    "message": "Дякуємо! Ваш відгук успішно надіслано."
+  },
+  "Friday": {
+    "message": "П'ятниця"
+  },
+  "Monday": {
+    "message": "Понеділок"
+  },
+  "Popup": {
+    "message": "Спливаюче Вікно"
+  },
+  "Saturday": {
+    "message": "Субота"
+  },
+  "Sidebar": {
+    "message": "Бічна Панель"
+  },
+  "Sunday": {
+    "message": "Неділя"
+  },
+  "ThanksForFeedBack": {
+    "message": "Дякуємо за ваш відгук!"
+  },
+  "Thursday": {
+    "message": "Четвер"
+  },
+  "Today": {
+    "message": "Сьогодні"
+  },
+  "Tuesday": {
+    "message": "Вівторок"
+  },
+  "URL": {
+    "message": "URL"
+  },
+  "Wednesday": {
+    "message": "Середа"
+  },
+  "WhatCanWeImprove": {
+    "message": "Що ми можемо покращити?"
+  },
+  "Yesterday": {
+    "message": "Вчора"
+  },
+  "about": {
+    "message": "Про програму"
+  },
+  "activity": {
+    "message": "Активність"
+  },
+  "add": {
+    "message": "Додати"
+  },
+  "addDomains": {
+    "message": "Додати Домени"
+  },
+  "addToBlackList": {
+    "message": "Додати до Чорного Списку"
+  },
+  "advanceExport": {
+    "message": "Розширений Експорт"
+  },
+  "advancedFeaturesActive": {
+    "message": "Розширені функції тепер активні."
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "Розширені функції вимагають додаткових дозволів для:"
+  },
+  "all": {
+    "message": "Всі"
+  },
+  "allCapitalLetters": {
+    "message": "Усі Великі Літери"
+  },
+  "allHistoryDeleted": {
+    "message": "Вся історія була видалена"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "Вся історія була видалена, за винятком доменів у білому списку"
+  },
+  "allPermissionsGranted": {
+    "message": "Усі дозволи надано!"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "Усі Вибрані URL-адреси було видалено"
+  },
+  "allTime": {
+    "message": "За Весь Час"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "Будь ласка, дозвольте доступ, щоб надіслати відгук"
+  },
+  "appName": {
+    "message": "Better History | Керування, Експорт та Видалення Історії"
+  },
+  "apply": {
+    "message": "Застосувати"
+  },
+  "autoCleanupDisabled": {
+    "message": "Автоматичне очищення вимкнено. Ви все ще можете очистити історію вручну за потреби."
+  },
+  "autoCleanupEnabled": {
+    "message": "Ваша історія переглядів буде автоматично очищена відповідно до вибраного графіку."
+  },
+  "autoCleanupHelp": {
+    "message": "Автоматичне очищення допомагає підтримувати вашу конфіденційність шляхом регулярного видалення історії переглядів відповідно до ваших уподобань."
+  },
+  "autoCleanupSchedule": {
+    "message": "Графік Автоматичного Очищення:"
+  },
+  "avgPerDay": {
+    "message": "В середньому {{time}} на день"
+  },
+  "basicDomain": {
+    "message": "Базовий домен"
+  },
+  "basicSearch": {
+    "message": "Базовий Пошук"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}:\u003C/strong> Введіть будь-яке ключове слово, щоб знайти відповідні записи (наприклад, \"Вхідні\")."
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> — це інноваційне розширення для браузера, розроблене компанією \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span>. Воно дає змогу користувачам легко керувати своєю історією переглядів, пропонуючи розширені функції, як-от індивідуальне видалення, точні фільтри та інтуїтивно зрозумілий інтерфейс. У BetterLogic Ltd ми надаємо пріоритет конфіденційності користувачів та безперебійній роботі, щоб покращити ваш досвід перегляду."
+  },
+  "blacklist": {
+    "message": "Чорний Список"
+  },
+  "blacklistDomain": {
+    "message": "Домен у Чорному Списку"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "Додати Домен до Чорного Списку Історії"
+  },
+  "blacklistDomains": {
+    "message": "Домени у Чорному Списку"
+  },
+  "blacklistFeatureDescription": {
+    "message": "Функція Чорний Список Доменів у BetterHistory дозволяє блокувати конкретні веб-сайти від запису в історію переглядів. Як тільки домен потрапляє до чорного списку, всі минулі та майбутні відвідування цього сайту будуть автоматично видалені."
+  },
+  "blacklistInstructionText": {
+    "message": "Функція Чорний Список Доменів у BetterHistory дозволяє блокувати конкретні веб-сайти від запису в історію переглядів. Як тільки домен потрапляє до чорного списку, всі минулі та майбутні відвідування цього сайту будуть автоматично видалені."
+  },
+  "blacklistTips": {
+    "message": "Поради"
+  },
+  "blacklist_confirmation": {
+    "message": "Ви впевнені, що хочете додати **{{DOMAIN}}** до чорного списку вашої історії переглядів?\u003Cbr/>Майбутні відвідування цього домену більше не будуть реєструватися, а всі існуючі записи історії для **{{DOMAIN}}** будуть видалені."
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> вже є у чорному списку."
+  },
+  "blacklistedDomains": {
+    "message": "Домени у Чорному Списку"
+  },
+  "blockExactDomain": {
+    "message": "Блокує лише точний домен, а не субдомени чи конкретні шляхи."
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "Блокує головний домен та всі його субдомени (mail.example.com, blog.example.com тощо)."
+  },
+  "blockSpecificPage": {
+    "message": "Блокує лише конкретну сторінку на домені."
+  },
+  "blockSpecificPath": {
+    "message": "Блокує всі сторінки за конкретним шляхом на домені."
+  },
+  "blockSpecificSubdomain": {
+    "message": "Блокує лише конкретний субдомен, а не головний домен чи інші субдомени."
+  },
+  "bugReport": {
+    "message": "Повідомлення про Помилку"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "Додайте кілька доменів до свого чорного списку одночасно. Введіть один домен на рядок."
+  },
+  "bulkAddDomains": {
+    "message": "Масове Додавання Доменів"
+  },
+  "cancel": {
+    "message": "Скасувати"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>Чутливість до Регістру:\u003C/strong> Пошук за замовчуванням не чутливий до регістру."
+  },
+  "chooseStartAndEndDates": {
+    "message": "Вибрати початкову та кінцеву дати"
+  },
+  "clear": {
+    "message": "Очистити"
+  },
+  "clearBrowsingHistory": {
+    "message": "Очистити Історію Переглядів"
+  },
+  "clearHistory": {
+    "message": "Очистити Історію"
+  },
+  "clearHistoryConfirm": {
+    "message": "Ви впевнені, що хочете видалити всю свою історію переглядів? Ця дія є постійною і не може бути скасована."
+  },
+  "clearStats": {
+    "message": "Очистити Статистику"
+  },
+  "clearing": {
+    "message": "Очищення..."
+  },
+  "clearingHistory": {
+    "message": "Керування Історією"
+  },
+  "clickToRequestPermissions": {
+    "message": "Натисніть кнопку нижче, щоб їх запросити."
+  },
+  "close": {
+    "message": "Закрити"
+  },
+  "clr": {
+    "message": "Очистити"
+  },
+  "confirmAndSave": {
+    "message": "Підтвердити та Зберегти"
+  },
+  "confirmDelete": {
+    "message": "Підтвердити Видалення"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "Підтвердити Налаштування Розумного Автоматичного Очищення"
+  },
+  "contact": {
+    "message": "Контакти"
+  },
+  "contactAndFeedback": {
+    "message": "Контакти та Відгуки"
+  },
+  "contactLimitReached": {
+    "message": "Ви вже досягли ліміту контактів на сьогодні."
+  },
+  "containsDotCom": {
+    "message": "Містить \".com\""
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>Містить Кілька Слів:\u003C/strong> Використовуйте \u003Ccode>{{pipe}}\u003C/code> для пошуку записів, що містять одне з кількох слів (наприклад, \u003Ccode>{{example}}\u003C/code>)."
+  },
+  "containsNewsOrInfo": {
+    "message": "Містить \"Новини\" або \"Інфо\""
+  },
+  "containsNumbers": {
+    "message": "Містить Числа"
+  },
+  "containsSpaces": {
+    "message": "Містить Пробіли"
+  },
+  "containsTODO": {
+    "message": "Містить \"СПРАВА\""
+  },
+  "current": {
+    "message": "З Цього Сайту"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "Наразі ви можете переглядати дані за останні {{days}} {{dayLabel}}. Більше днів буде додано автоматично."
+  },
+  "custom": {
+    "message": "Власний"
+  },
+  "customExport": {
+    "message": "Власний Експорт"
+  },
+  "customRange": {
+    "message": "Власний Діапазон"
+  },
+  "dailyAtMidnight": {
+    "message": "Щоденно (опівночі)"
+  },
+  "darkMode": {
+    "message": "Темний Режим"
+  },
+  "dateAndTimeOrder": {
+    "message": "Порядок Дати та Часу"
+  },
+  "day": {
+    "message": "день"
+  },
+  "days": {
+    "message": "днів"
+  },
+  "debugToolsTitle": {
+    "message": "Інструменти Налагодження (для тестування):"
+  },
+  "default": {
+    "message": "За замовчуванням"
+  },
+  "delete": {
+    "message": "Видалити"
+  },
+  "deleteAllForHour": {
+    "message": "Ви впевнені, що хочете назавжди видалити всю історію переглядів за **{{startHour}}**?\u003Cbr>Це призведе до видалення історії переглядів за всю годину ({{startAndendHour}}). Після видалення цю дію не можна скасувати."
+  },
+  "deleteAllFromDate": {
+    "message": "Ви впевнені, що хочете назавжди видалити всю історію переглядів за **{{date}}**?\u003Cbr>Це призведе до видалення всіх записів за цей день. Після видалення цю дію не можна скасувати."
+  },
+  "deleteAllSearchHistory": {
+    "message": "Ви впевнені, що хочете назавжди видалити всі знайдені записи історії переглядів, перелічені на цій сторінці?\u003Cbr/>Ця дія призведе до видалення всіх записів, відображених у поточних результатах пошуку. Після видалення цю дію не можна скасувати."
+  },
+  "deleteBulk": {
+    "message": "Видалити"
+  },
+  "deleteDomainConfirm": {
+    "message": "Ви впевнені, що хочете видалити всю історію з домену \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span>? Ця дія видалить усі пов'язані записи та не може бути скасована."
+  },
+  "deleteDomainStats": {
+    "message": "Видалити Статистику Домену?"
+  },
+  "deleteEntire": {
+    "message": "Видалити Весь День"
+  },
+  "deleteEntireHistory": {
+    "message": "Видалити Всю Історію"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "Видалити Всю Історію?"
+  },
+  "deleteHistory": {
+    "message": "Видалити Історію"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "Ви впевнені, що хочете видалити всю свою історію переглядів? Ця дія є постійною і не може бути скасована."
+  },
+  "deleteMsg": {
+    "message": "Видалити всі результати пошуку?"
+  },
+  "deleteSelectedHistory": {
+    "message": "Видалити Вибрану Історію"
+  },
+  "deleteSpecificDate": {
+    "message": "Видалити Конкретну Дату"
+  },
+  "deleteStatsConfirmation": {
+    "message": "Ви збираєтеся назавжди видалити всі дані відстеження для \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> з BetterHistory.\u003Cbr>\u003Cbr>Цю дію не можна скасувати."
+  },
+  "deleteUrlConfirm": {
+    "message": "Ви впевнені, що хочете видалити URL-адресу \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> зі своєї історії? Цю дію не можна скасувати."
+  },
+  "deletedSelectedHistory": {
+    "message": "Ви впевнені, що хочете назавжди видалити {{selectedNumber}} вибраних записів історії?\u003Cbr/>Ця дія назавжди видалить усі {{selectedNumber}} вибраних записів. Після видалення цю дію не можна скасувати."
+  },
+  "devices": {
+    "message": "Пристрої"
+  },
+  "disableTimeTracking": {
+    "message": "Вимкнення цього припинить відстеження та приховає всю статистику."
+  },
+  "domainAlreadyExists": {
+    "message": "Цей домен вже є у вашому списку"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "Рядок ${index + 1}: Домен уже існує (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "Чорний Список Доменів"
+  },
+  "domainCannotBeEmpty": {
+    "message": "Домен не може бути порожнім"
+  },
+  "domainStats": {
+    "message": "Статистика Домену"
+  },
+  "domainWithSubdomains": {
+    "message": "Домен з усіма субдоменами"
+  },
+  "domains": {
+    "message": "Домени"
+  },
+  "email": {
+    "message": "Електронна пошта"
+  },
+  "emailArticle": {
+    "message": "Статті Підтримки"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}: \u003C/span>Перегляньте наші посібники з підтримки та поширені запитання на \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">Підтримка BetterHistory\u003C/span>\u003C/a>."
+  },
+  "emailSupport": {
+    "message": "Підтримка електронною поштою"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}:\u003C/span> З будь-яких питань або проблем звертайтеся до нас на 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a>."
+  },
+  "enableStats": {
+    "message": "Увімкнути Статистику"
+  },
+  "enableStatsDescription": {
+    "message": "Увімкнути або вимкнути всю функціональність статистики. Коли вимкнено, жодна статистика не збиратиметься або не відображатиметься."
+  },
+  "enable_popup": {
+    "message": "Увімкнути Спливаюче Вікно"
+  },
+  "endsWithQuestionMark": {
+    "message": "Закінчується на \"?\""
+  },
+  "enterAValidDomain": {
+    "message": "Введіть дійсний домен"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "Будь ласка, введіть принаймні один домен"
+  },
+  "enterDomain": {
+    "message": "Введіть Домен, Який Хочете Виключити з Історії"
+  },
+  "enterDomainName": {
+    "message": "Введіть Назву Домену"
+  },
+  "enterDomainPerLine": {
+    "message": "Додайте кілька доменів до свого білого списку одночасно. Введіть один домен на рядок."
+  },
+  "enterDomainToBlock": {
+    "message": "Введіть домен для блокування (наприклад, example.com)"
+  },
+  "enterDomainToWhitelist": {
+    "message": "Введіть домен для додавання до білого списку (наприклад, example.com)"
+  },
+  "enterValidDomain": {
+    "message": "Будь ласка, введіть принаймні один дійсний домен"
+  },
+  "entireExport": {
+    "message": "Повний Експорт (90 Днів)"
+  },
+  "entries": {
+    "message": "Записи"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "Видалити Всю Історію для Цього Сайту"
+  },
+  "error": {
+    "message": "Помилка"
+  },
+  "errorClearingHistory": {
+    "message": "Не вдалося очистити історію. Будь ласка, спробуйте ще раз."
+  },
+  "errorClearingStats": {
+    "message": "Не вдалося очистити статистику"
+  },
+  "errorLoadingData": {
+    "message": "Помилка Завантаження Даних"
+  },
+  "errorLoadingSettings": {
+    "message": "Помилка завантаження налаштувань. Використовуються значення за замовчуванням."
+  },
+  "errorSavingSettings": {
+    "message": "Не вдалося зберегти налаштування. Будь ласка, спробуйте ще раз."
+  },
+  "exactWordProject": {
+    "message": "Точне Слово \"Проєкт\""
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "Ознайомтеся з Нашими Продуктами"
+  },
+  "export": {
+    "message": "Експорт"
+  },
+  "exportAsJSON": {
+    "message": "Експорт як JSON"
+  },
+  "exportAsPDF": {
+    "message": "Експорт як PDF"
+  },
+  "exportCsv": {
+    "message": "Експорт у CSV"
+  },
+  "exportEntireLocalData": {
+    "message": "Експорт Усіх Локальних Даних"
+  },
+  "exportHistory": {
+    "message": "Експортувати Всю Вашу Історію Переглядів"
+  },
+  "exportHistoryDescription": {
+    "message": "Ця функція дозволяє експортувати всю вашу історію переглядів (до 90 днів) або вибрати власний діапазон дат для експорту. Зверніть увагу, що API Історії Chrome підтримує лише експорт історії – він не дозволяє імпортувати історію назад."
+  },
+  "exportHistoryLimitation": {
+    "message": "Крім того, Chrome автоматично видаляє історію, старішу за 90 днів, тому BetterHistory може експортувати лише ті записи, які Chrome зберігає."
+  },
+  "exportHtml": {
+    "message": "Експорт у HTML"
+  },
+  "exportLocalData": {
+    "message": "Експорт Локальних Даних"
+  },
+  "exportSelectedCsv": {
+    "message": "Експорт Вибраного у CSV"
+  },
+  "exportSelectedHtml": {
+    "message": "Експорт Вибраного у HTML"
+  },
+  "exportTimeTrackingData": {
+    "message": "Експорт Даних Відстеження Часу"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "Це ваші локально збережені дані відстеження часу, які ви можете експортувати для особистого користування. Вони відображають час, який ви витратили на відвідані сторінки, допомагаючи вам аналізувати ваші звички перегляду."
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "Ці дані зберігаються лише у вашому браузері і не синхронізуються або зберігаються онлайн. Видалення розширення BetterHistory назавжди видалить усі дані відстеження часу. Регулярно експортуйте свої дані, якщо бажаєте зберегти резервну копію."
+  },
+  "exportToCSV": {
+    "message": "Експорт у CSV"
+  },
+  "exportToTXT": {
+    "message": "Експорт у TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "Експортована Історія Переглядів - Дата:"
+  },
+  "exportedHistoryKeyword": {
+    "message": "Експортована Історія Переглядів - Ключове Слово:"
+  },
+  "featureRequest": {
+    "message": "Запит Функції"
+  },
+  "feedback": {
+    "message": "Відгуки"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "Я приймаю \u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">Політику Конфіденційності\u003C/span>\u003C/a> та обробку даних."
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "Будь ласка, надайте свій e-mail для зворотного зв'язку щодо вашого звернення."
+  },
+  "feedbackForm": {
+    "message": "Форма Відгуку"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}:\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">Натисніть тут, щоб надіслати свій відгук\u003C/span>."
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "Розмір файлу перевищує 5 МБ. Будь ласка, завантажте менший файл."
+  },
+  "find_all_visits_domain": {
+    "message": "Знайти всі відвідування {{d}}"
+  },
+  "generalContact": {
+    "message": "Загальний Контакт"
+  },
+  "generatedUsing": {
+    "message": "Цей документ був створений за допомогою"
+  },
+  "grantPermissions": {
+    "message": "Надати Дозволи"
+  },
+  "groupSession": {
+    "message": "Груповий Сеанс"
+  },
+  "history": {
+    "message": "Історія"
+  },
+  "historyCleared": {
+    "message": "Історію очищено"
+  },
+  "historyControlsFor": {
+    "message": "Керування Історією для"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "Історія з доменів у білому списку буде збережена під час очищення"
+  },
+  "historyRetentionHelp": {
+    "message": "Історія в межах вибраного часового діапазону буде збережена та виключена з автоматичного очищення."
+  },
+  "hourFormat": {
+    "message": "Формат Часу"
+  },
+  "hours": {
+    "message": "Години"
+  },
+  "howDidWeDo": {
+    "message": "Як ми впоралися?"
+  },
+  "howLongKeepHistory": {
+    "message": "Як довго має зберігатися ваша історія переглядів, перш ніж вона стане доступною для автоматичного видалення?"
+  },
+  "howToUseTheSearchTool": {
+    "message": "Як користуватися інструментом пошуку"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "idleDetectionDescription": {
+    "message": "• Виявлення бездіяльності (зупиняє відстеження, коли ви відсутні)"
+  },
+  "import": {
+    "message": "Імпорт"
+  },
+  "importEntireLocalData": {
+    "message": "Імпорт Локальних Даних"
+  },
+  "importFailed": {
+    "message": "Не вдалося імпортувати дані"
+  },
+  "importJSON": {
+    "message": "Імпорт JSON"
+  },
+  "importSuccessful": {
+    "message": "Дані успішно імпортовано"
+  },
+  "infinityScroll": {
+    "message": "Увімкнути Нескінченне Прокручування"
+  },
+  "interfaceStyle": {
+    "message": "Налаштування Відображення"
+  },
+  "invalidDomainFormat": {
+    "message": "Будь ласка, введіть дійсний формат домену (наприклад, example.com)"
+  },
+  "invalidDomainFormatLine": {
+    "message": "Рядок ${index + 1}: Недійсний формат домену (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "Недійсний тип файлу. Будь ласка, завантажте зображення JPG або PNG."
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> не є дійсним доменом. Будь ласка, використовуйте дійсний домен для додавання до чорного списку."
+  },
+  "keepHistoryCheckText": {
+    "message": "Зберігати історію з веб-сайтів, які ви додали до свого білого списку"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "Зберігати історію з веб-сайтів, які ви додали до свого білого списку"
+  },
+  "large": {
+    "message": "Великий"
+  },
+  "last15Days": {
+    "message": "15 днів"
+  },
+  "last2Months": {
+    "message": "Останні 2 Місяці"
+  },
+  "last30Days": {
+    "message": "30 днів"
+  },
+  "last3Months": {
+    "message": "Останні 3 Місяці"
+  },
+  "last60Days": {
+    "message": "60 днів"
+  },
+  "last7Days": {
+    "message": "7 днів"
+  },
+  "last90Days": {
+    "message": "90 днів"
+  },
+  "lastMonth": {
+    "message": "Минулий Місяць"
+  },
+  "lastVisitTime": {
+    "message": "Час Останнього Відвідування"
+  },
+  "lastWeek": {
+    "message": "Минулий Тиждень"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "Дізнатися більше про автоматичне очищення"
+  },
+  "learnMoreAboutRetention": {
+    "message": "Дізнатися більше про термін зберігання"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "Повідомте мені, якщо вам потрібні додаткові коригування."
+  },
+  "lightMode": {
+    "message": "Світлий Режим"
+  },
+  "loadingSettings": {
+    "message": "Завантаження налаштувань..."
+  },
+  "ltr": {
+    "message": "Зліва Направо (LTR)"
+  },
+  "mainDomainNote": {
+    "message": "Блокування головного домену не блокує автоматично його субдомени"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "Керувати Відстеженням Часу та Статистикою Використання"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "Коли увімкнено, BetterHistory відстежує, скільки часу ви проводите на кожному веб-сайті, включаючи тривалість сеансів та час активності проти часу бездіяльності. Усі дані зберігаються локально у вашому браузері та використовуються виключно для надання вам детальної інформації про перегляди та аналізу часу."
+  },
+  "manifest_browser_action_title": {
+    "message": "Перегляд Історії"
+  },
+  "manifest_description": {
+    "message": "Елегантний Менеджер Історії: Потужний Пошук, Масовий Експорт, Видалення Обраних Елементів, Фільтр за Днем і Годиною та Блокування Конкретних Доменів з Історії."
+  },
+  "maxSize": {
+    "message": "Макс. Розмір"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• Виявлення відтворення медіа (продовжує відстеження під час відео/музики)"
+  },
+  "medium": {
+    "message": "Середній"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "Щомісяця (1-го числа кожного місяця)"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "Більше днів буде додано автоматично."
+  },
+  "moreFromSite": {
+    "message": "Більше з цього сайту"
+  },
+  "mostActiveDay": {
+    "message": "Найактивніший день"
+  },
+  "neverDisabled": {
+    "message": "Ніколи (вимкнено)"
+  },
+  "noActivityData": {
+    "message": "Немає даних про активність за цей період"
+  },
+  "noBlacklistType": {
+    "message": "Немає {{type}} у вашому чорному списку"
+  },
+  "noChangesToSave": {
+    "message": "Немає змін для збереження"
+  },
+  "noDevices": {
+    "message": "Активних сеансів пристроїв не знайдено."
+  },
+  "noDomainBlacklisted": {
+    "message": "Наразі до чорного списку не додано жодного домену"
+  },
+  "noDomains": {
+    "message": "Наразі до білого списку не додано жодного домену"
+  },
+  "noDomainsType": {
+    "message": "Немає {{type}} у вашому білому списку"
+  },
+  "noFileSelectedMessage": {
+    "message": "Файл не вибрано. Будь ласка, завантажте дійсний файл."
+  },
+  "noMoreResults": {
+    "message": "Більше Немає Результатів"
+  },
+  "noResultsFound": {
+    "message": "Результатів не знайдено. Спробуйте змінити пошукові терміни або фільтри."
+  },
+  "noThanks": {
+    "message": "Ні, Дякую"
+  },
+  "noTitle": {
+    "message": "Без Заголовка"
+  },
+  "noVisits": {
+    "message": "На жаль, відвідувань не знайдено."
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>Тільки Числа:\u003C/strong> Використовуйте \u003Ccode>{{pattern}}\u003C/code>, щоб знайти записи з числами."
+  },
+  "of": {
+    "message": "з"
+  },
+  "ok": {
+    "message": "ОК"
+  },
+  "oneMonth": {
+    "message": "Один місяць"
+  },
+  "oneWeek": {
+    "message": "Один тиждень"
+  },
+  "openAllTabs": {
+    "message": "Відкрити Всі Вкладки"
+  },
+  "openMenu": {
+    "message": "Відкрити меню"
+  },
+  "openTab": {
+    "message": "Відкрити в Новій Вкладці"
+  },
+  "order": {
+    "message": "Порядок"
+  },
+  "otherOptions": {
+    "message": "Загальні Налаштування"
+  },
+  "page": {
+    "message": "Сторінка"
+  },
+  "paths": {
+    "message": "Шляхи"
+  },
+  "permissionGranted": {
+    "message": "✓ Надано"
+  },
+  "permissionMissing": {
+    "message": "✗ Відсутній"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "Дозволи Вже Надано"
+  },
+  "pleaseNote": {
+    "message": "Зверніть увагу:"
+  },
+  "pleaseRateUs": {
+    "message": "Будь ласка, Оцініть Нас!"
+  },
+  "prefixesAutoRemoved": {
+    "message": "Префікси, такі як 'http://', 'https://' та 'www.', будуть видалені автоматично."
+  },
+  "prefixesRemoved": {
+    "message": "Префікси, такі як 'http://', 'https://' та 'www.', видаляються автоматично"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "Додати Цей Сайт до Чорного Списку для Запису Історії"
+  },
+  "privacyPolicy": {
+    "message": "Політика Конфіденційності"
+  },
+  "privacyTerms": {
+    "message": "Конфіденційність та Умови"
+  },
+  "processing": {
+    "message": "Обробка..."
+  },
+  "rateText": {
+    "message": "Ваш внесок допомагає нам покращити BetterHistory. Розкажіть, як ми впоралися!"
+  },
+  "recent": {
+    "message": "Нещодавні Відвідування"
+  },
+  "recordedVisits": {
+    "message": "Зареєстровані відвідування цього домену"
+  },
+  "remove_url": {
+    "message": "Видалити Цю URL-адресу з Історії"
+  },
+  "result": {
+    "message": "Результат"
+  },
+  "results": {
+    "message": "Результати"
+  },
+  "retentionPeriod": {
+    "message": "Термін Зберігання:"
+  },
+  "retentionPeriodHelp": {
+    "message": "Термін зберігання визначає, як далеко в минуле зберігається ваша історія переглядів. Старіша історія буде доступна для очищення."
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "Будь ласка, перегляньте свої налаштування перед підтвердженням."
+  },
+  "revokePermissions": {
+    "message": "Скасувати Дозволи"
+  },
+  "rightTitle": {
+    "message": "Параметри Контекстного Меню"
+  },
+  "rtl": {
+    "message": "Справа Наліво (RTL)"
+  },
+  "saveSettings": {
+    "message": "Зберегти Налаштування"
+  },
+  "search": {
+    "message": "Пошук"
+  },
+  "searchDeeper": {
+    "message": "Шукати глибше"
+  },
+  "searchDomainTitle": {
+    "message": "Пошук за Доменом"
+  },
+  "searchEngine": {
+    "message": "Пошукова Система"
+  },
+  "searchMsg": {
+    "message": "Тс-с... Спробуйте щось знайти"
+  },
+  "searchPlaceholder": {
+    "message": "Пошук за заголовком або URL"
+  },
+  "searchTextTitle": {
+    "message": "Пошук за Виділенням Тексту"
+  },
+  "searchTips": {
+    "message": "Поради щодо Пошуку"
+  },
+  "searchTipsMsg1": {
+    "message": "Тепер підтримується пошук за регулярними виразами!"
+  },
+  "searchTipsMsg2": {
+    "message": "Наприклад, спробуйте знайти"
+  },
+  "searchTipsMsg3": {
+    "message": "Пошук відвідувань та завантажень"
+  },
+  "searchTipsMsg4": {
+    "message": "Пошук автоматично знаходитиме відвідування за заголовком сторінки та URL-адресою, а завантаження – за іменем файлу та URL-адресою."
+  },
+  "searchTipsMsg5": {
+    "message": "Ваші останні 10 000 відвідувань використовуються для швидкого, початкового пошуку. Щоб шукати глибше, перейдіть до нижньої частини останньої сторінки результатів і натисніть кнопку «Шукати глибше»."
+  },
+  "searchToolDescription": {
+    "message": "Цей інструмент дозволяє ефективно шукати у вашій історії переглядів за допомогою простих ключових слів або розширених **регулярних виразів (RegEx)**. Нижче наведено кілька прикладів, які допоможуть вам почати:"
+  },
+  "search_history": {
+    "message": "Шукати в Історії"
+  },
+  "searchedUrlDeleted": {
+    "message": "Знайдені URL-адреси було видалено"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "Знайдені URL-адреси було видалено, за винятком доменів у білому списку"
+  },
+  "searching": {
+    "message": "Йде пошук"
+  },
+  "selectDateFormat": {
+    "message": "Формат Дати"
+  },
+  "selectDateRange": {
+    "message": "Вибрати діапазон дат"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "Вибрати Дату для Видалення Історії"
+  },
+  "selectEndDate": {
+    "message": "Вибрати кінцеву дату"
+  },
+  "selectStartDate": {
+    "message": "Вибрати початкову дату"
+  },
+  "selected": {
+    "message": "Вибрано"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "Історію вибраної дати було видалено"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "Історію вибраної дати було видалено, за винятком доменів у білому списку"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "Історію вибраної години було видалено"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "Історію Вибраної Години було видалено, за винятком доменів у білому списку"
+  },
+  "sessions": {
+    "message": "Сеанси"
+  },
+  "settings": {
+    "message": "Налаштування"
+  },
+  "settingsSaved": {
+    "message": "Налаштування збережено"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "Ваші налаштування Розумного Автоматичного Очищення успішно оновлено."
+  },
+  "shortRetentionWarning": {
+    "message": "Встановлення короткого терміну зберігання в один тиждень означає, що ваша старіша історія переглядів буде очищатися частіше. Переконайтеся, що це відповідає вашим потребам."
+  },
+  "show": {
+    "message": "Показати"
+  },
+  "showAllHistory": {
+    "message": "Показати Всю Історію"
+  },
+  "showStats": {
+    "message": "Показати Статистику"
+  },
+  "small": {
+    "message": "Малий"
+  },
+  "smartAutoCleanup": {
+    "message": "Розумне Автоматичне Очищення"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "Автоматично керуйте своєю історією переглядів за допомогою Розумного Автоматичного Очищення. Виберіть, як часто має відбуватися очищення та як довго має зберігатися ваша недавня історія."
+  },
+  "smartAutoCleanupSettings": {
+    "message": "Налаштування Розумного Автоматичного Очищення"
+  },
+  "smartHistoryCleanup": {
+    "message": "Розумне Очищення Історії"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "Очищає вашу історію переглядів, за винятком веб-сайтів, які ви додали до свого білого списку. Ця функція допомагає вам зберігати конфіденційність вашої активності, водночас зберігаючи важливу історію з довірених або часто використовуваних сайтів."
+  },
+  "socialMediaTip": {
+    "message": "Для сайтів соціальних мереж розгляньте можливість блокування конкретних розділів (facebook.com/marketplace/*)"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "Деякі домени не вдалося додати:\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "Деякі дозволи відсутні"
+  },
+  "specificPage": {
+    "message": "Конкретна сторінка"
+  },
+  "specificPath": {
+    "message": "Конкретний шлях"
+  },
+  "specificSubdomain": {
+    "message": "Конкретний субдомен"
+  },
+  "start": {
+    "message": "Початок"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>Починається з:\u003C/strong> Використовуйте ^, щоб знайти записи, які починаються з певного слова (наприклад, ^Вхідні)."
+  },
+  "startsWithInbox": {
+    "message": "Починається з \"Вхідні\""
+  },
+  "statsCleared": {
+    "message": "Статистику очищено"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "Скасувати"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "Щоб допомогти вам відстежувати час, який ви проводите на веб-сайтах, переглядати деталі сеансу та експортувати звіти про час у PDF, нам потрібен дозвіл на доступ до вашої активності переглядів."
+  },
+  "statsPermissionDialogGrant": {
+    "message": "Надати Дозволи"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "Ми запровадили нову функцію Відстеження Часу в BetterHistory!"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "Потрібен Новий Дозвіл для Відстеження Часу"
+  },
+  "subdomainNote": {
+    "message": "Додавання головного домену до білого списку не додає автоматично до білого списку його субдомени"
+  },
+  "subdomains": {
+    "message": "Субдомени"
+  },
+  "submit": {
+    "message": "Надіслати"
+  },
+  "submitFeedback": {
+    "message": "Надіслати Відгук"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "Ваші пропозиції та відгуки допомагають нам покращувати BetterHistory та надавати найкращий користувацький досвід."
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 або Більше Символів"
+  },
+  "termsOfService": {
+    "message": "Умови Надання Послуг"
+  },
+  "thankYou": {
+    "message": "Дякуємо!"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "Цю дію не можна скасувати."
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "Ця URL-адреса або домен вже є у Списку Доменів у Чорному Списку"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "Ця URL-адреса або домен вже є у Списку Доменів у Білому Списку"
+  },
+  "threeMonths": {
+    "message": "Три місяці"
+  },
+  "timeTrackingStartedOn": {
+    "message": "Відстеження часу розпочато {{date}}"
+  },
+  "tips": {
+    "message": "Поради"
+  },
+  "title": {
+    "message": "Заголовок"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "Щоб додати кожну сторінку домену та його субдоменів до чорного списку, напишіть:"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "Щоб додати кожну сторінку домену до чорного списку, напишіть:"
+  },
+  "todalWords": {
+    "message": "Всього Слів"
+  },
+  "today": {
+    "message": "Сьогодні"
+  },
+  "toolbarIcon": {
+    "message": "Тема Іконки Панелі Інструментів"
+  },
+  "totalEntries": {
+    "message": "всього Записів"
+  },
+  "totalVisits": {
+    "message": "Усього Відвідувань"
+  },
+  "twoWeeks": {
+    "message": "Два тижні"
+  },
+  "typdCount": {
+    "message": "Кількість Набраних"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "Введіть будь-яке ключове слово, щоб знайти відповідні записи."
+  },
+  "typeDeleteToConfirm": {
+    "message": "Введіть «delete» для підтвердження:"
+  },
+  "typedCount": {
+    "message": "Набрано {{times}} разів в адресному рядку"
+  },
+  "unableToLoadDomainStats": {
+    "message": "Не вдалося завантажити статистику домену. Будь ласка, спробуйте пізніше."
+  },
+  "understandSettings": {
+    "message": "Я розумію ці налаштування та те, як вони вплинуть на мою історію переглядів"
+  },
+  "understandYourRights": {
+    "message": "Ознайомтеся зі Своїми Правами"
+  },
+  "uniqueUrls": {
+    "message": "унікальних URL-адрес"
+  },
+  "updatingData": {
+    "message": "Оновлення даних..."
+  },
+  "uploadScreenShot": {
+    "message": "Завантажити Знімок Екрана"
+  },
+  "urlDeleted": {
+    "message": "URL-адресу було Видалено"
+  },
+  "urlPatternGuide": {
+    "message": "Посібник із Шаблонів URL-адрес"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "Ви можете використовувати наступні шаблони для блокування веб-сайтів:"
+  },
+  "useSpecificPaths": {
+    "message": "Використовуйте конкретні шляхи, щоб додати до білого списку лише певні розділи веб-сайту"
+  },
+  "viewHere": {
+    "message": "Переглянути Тут"
+  },
+  "viewStats": {
+    "message": "Переглянути Статистику"
+  },
+  "viewStatsButton": {
+    "message": "Ви також побачите кнопку «Переглянути Статистику» біля кожного запису на сторінці Активності для швидкого доступу до детальних даних часу"
+  },
+  "visitCount": {
+    "message": "Посилання відвідано {{times}} разів"
+  },
+  "visitSite": {
+    "message": "Відвідати сайт"
+  },
+  "visits_domain": {
+    "message": "Переглянути Всі Відвідування Цього Домену"
+  },
+  "vstCount": {
+    "message": "Кількість Відвідувань"
+  },
+  "weValueYourInputMessage": {
+    "message": "Ми цінуємо ваш внесок і готові вам допомогти!"
+  },
+  "websiteAccessDescription": {
+    "message": "• Доступ до веб-сайту (для моніторингу активності)"
+  },
+  "websites": {
+    "message": "Веб-сайти"
+  },
+  "weeklyEverySunday": {
+    "message": "Щотижня (кожної неділі)"
+  },
+  "whatThisMeans": {
+    "message": "Що це означає:"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "Які шаблони URL-адрес дозволені?"
+  },
+  "whenBrowserCloses": {
+    "message": "Коли браузер закривається"
+  },
+  "whenShouldCleanupRun": {
+    "message": "Коли має відбуватися Розумне Автоматичне Очищення?"
+  },
+  "whitelist": {
+    "message": "Білий Список"
+  },
+  "whitelistDomain": {
+    "message": "Домен у Білому Списку"
+  },
+  "whitelistDomains": {
+    "message": "Домени у Білому Списку"
+  },
+  "whitelistExactDomain": {
+    "message": "Додає до білого списку лише точний домен, а не субдомени чи конкретні шляхи."
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "Додає до білого списку головний домен та всі його субдомени (mail.example.com, blog.example.com тощо)."
+  },
+  "whitelistPatterns": {
+    "message": "Ви можете використовувати наступні шаблони для білого списку:"
+  },
+  "whitelistPrecedence": {
+    "message": "Домени у білому списку мають пріоритет над доменами у чорному списку"
+  },
+  "whitelistSpecificPage": {
+    "message": "Додає до білого списку лише конкретну сторінку на домені."
+  },
+  "whitelistSpecificPath": {
+    "message": "Додає до білого списку всі сторінки за конкретним шляхом на домені."
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "Додає до білого списку лише конкретний субдомен, а не головний домен чи інші субдомени."
+  },
+  "whitelistedDomains": {
+    "message": "Домени у Білому Списку"
+  },
+  "wildcardWarning": {
+    "message": "Використовуйте універсальний символ (*) обережно, оскільки він може заблокувати більше, ніж передбачалося"
+  },
+  "yesterday": {
+    "message": "Вчора"
+  }
+}

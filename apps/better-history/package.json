@@ -1,0 +1,49 @@
+{
+  "name": "better-history",
+  "version": "8.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "ci:release": "bun ../../scripts/release-app.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "dev": "bun ../../scripts/run-wxt.ts",
+    "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
+    "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",
+    "build:chrome": "bun ../../scripts/run-wxt.ts build",
+    "build:firefox": "bun ../../scripts/run-wxt.ts build -b firefox",
+    "zip": "bun ../../scripts/run-wxt.ts zip && bun ../../scripts/run-wxt.ts zip -b firefox",
+    "zip:all": "bun run zip",
+    "zip:chrome": "bun ../../scripts/run-wxt.ts zip -b chrome",
+    "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
+    "postinstall": "bun ../../scripts/run-wxt.ts prepare"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "@tanstack/react-query": "^5.100.9",
+    "@tanstack/react-router": "^1.169.2",
+    "better-result": "^2.9.2",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^1.14.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.3.0",
+    "virtua": "^0.49.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tanstack/router-plugin": "^1.167.35",
+    "@types/bun": "^1.4.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "wxt": "^0.20.27"
+  },
+  "peerDependencies": {
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "Lütfen ne ekleyebileceğimizi veya geliştirebileceğimizi açıklayın."
+  },
+  "FeedbackSuccessAlert": {
+    "message": "Teşekkürler! Geri bildiriminiz başarıyla gönderildi."
+  },
+  "Friday": {
+    "message": "Cuma"
+  },
+  "Monday": {
+    "message": "Pazartesi"
+  },
+  "Popup": {
+    "message": "Açılır Pencere"
+  },
+  "Saturday": {
+    "message": "Cumartesi"
+  },
+  "Sidebar": {
+    "message": "Yan Çubuk"
+  },
+  "Sunday": {
+    "message": "Pazar"
+  },
+  "ThanksForFeedBack": {
+    "message": "Geri bildiriminiz için teşekkürler!"
+  },
+  "Thursday": {
+    "message": "Perşembe"
+  },
+  "Today": {
+    "message": "Bugün"
+  },
+  "Tuesday": {
+    "message": "Salı"
+  },
+  "URL": {
+    "message": "URL"
+  },
+  "Wednesday": {
+    "message": "Çarşamba"
+  },
+  "WhatCanWeImprove": {
+    "message": "Neleri geliştirebiliriz?"
+  },
+  "Yesterday": {
+    "message": "Dün"
+  },
+  "about": {
+    "message": "Hakkında"
+  },
+  "activity": {
+    "message": "Etkinlik"
+  },
+  "add": {
+    "message": "Ekle"
+  },
+  "addDomains": {
+    "message": "Alan Adlarını Ekle"
+  },
+  "addToBlackList": {
+    "message": "Kara Listeye Ekle"
+  },
+  "advanceExport": {
+    "message": "Gelişmiş Dışa Aktarma"
+  },
+  "advancedFeaturesActive": {
+    "message": "Gelişmiş özellikler artık etkin."
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "Gelişmiş özellikler için ek izinler gereklidir:"
+  },
+  "all": {
+    "message": "Tümü"
+  },
+  "allCapitalLetters": {
+    "message": "Tümü Büyük Harf"
+  },
+  "allHistoryDeleted": {
+    "message": "Tüm geçmiş silindi"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "Beyaz listedeki alan adları hariç tüm geçmiş silindi"
+  },
+  "allPermissionsGranted": {
+    "message": "Tüm izinler verildi!"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "Seçilen tüm URL'ler silindi"
+  },
+  "allTime": {
+    "message": "Tüm zamanlar"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "Geri bildirim göndermek için lütfen erişime izin verin"
+  },
+  "appName": {
+    "message": "Better History | Geçmişi Yönet, Dışa Aktar ve Sil"
+  },
+  "apply": {
+    "message": "Uygula"
+  },
+  "autoCleanupDisabled": {
+    "message": "Otomatik temizleme devre dışı bırakıldı. İhtiyaç duyduğunuzda geçmişi manuel olarak temizleyebilirsiniz."
+  },
+  "autoCleanupEnabled": {
+    "message": "Göz atma geçmişiniz seçilen programa göre otomatik olarak temizlenecektir."
+  },
+  "autoCleanupHelp": {
+    "message": "Otomatik temizleme, tercihlerinize göre göz atma geçmişini düzenli olarak kaldırarak gizliliğinizi korumaya yardımcı olur."
+  },
+  "autoCleanupSchedule": {
+    "message": "Otomatik Temizleme Programı:"
+  },
+  "avgPerDay": {
+    "message": "Ort. günlük {{time}}"
+  },
+  "basicDomain": {
+    "message": "Temel alan adı"
+  },
+  "basicSearch": {
+    "message": "Temel Arama"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}:\u003C/strong> Eşleşen girişleri bulmak için herhangi bir anahtar kelime yazın (ör. \"GelenKutusu\")."
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span>, \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span> tarafından geliştirilmiş yenilikçi bir tarayıcı uzantısıdır. Özel silme, hassas filtreler ve sezgisel bir arayüz gibi gelişmiş özellikler sunarak kullanıcıların göz atma geçmişlerini kolaylıkla yönetmelerini sağlar. BetterLogic Ltd olarak, göz atma deneyiminizi geliştirmek için kullanıcı gizliliğine ve kusursuz işlevselliğe öncelik veriyoruz."
+  },
+  "blacklist": {
+    "message": "Kara Liste"
+  },
+  "blacklistDomain": {
+    "message": "Alan Adını Kara Listeye Al"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "Alan Adını Geçmişten Kara Listeye Al"
+  },
+  "blacklistDomains": {
+    "message": "Kara Liste Alan Adları"
+  },
+  "blacklistFeatureDescription": {
+    "message": "BetterHistory'deki Alan Adı Kara Listesi özelliği, belirli web sitelerinin göz atma geçmişinize kaydedilmesini engellemenize olanak tanır. Bir alan adı kara listeye alındıktan sonra, o siteye yapılan tüm geçmiş ve gelecekteki ziyaretler otomatik olarak kaldırılacaktır."
+  },
+  "blacklistInstructionText": {
+    "message": "BetterHistory'deki Alan Adı Kara Listesi özelliği, belirli web sitelerinin göz atma geçmişinize kaydedilmesini engellemenize olanak tanır. Bir alan adı kara listeye alındıktan sonra, o siteye yapılan tüm geçmiş ve gelecekteki ziyaretler otomatik olarak kaldırılacaktır."
+  },
+  "blacklistTips": {
+    "message": "İpuçları"
+  },
+  "blacklist_confirmation": {
+    "message": "**{{DOMAIN}}** adresini göz atma geçmişinizden kara listeye almak istediğinizden emin misiniz?\u003Cbr/>Bu alana gelecekteki ziyaretler artık kaydedilmeyecek ve **{{DOMAIN}}** adresine ait mevcut tüm geçmiş girişleri silinecektir."
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> zaten kara listede bulunuyor."
+  },
+  "blacklistedDomains": {
+    "message": "Kara Listeye Alınan Alan Adları"
+  },
+  "blockExactDomain": {
+    "message": "Alt alan adlarını veya belirli yolları değil, yalnızca tam alan adını engeller."
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "Ana alan adını ve tüm alt alan adlarını (mail.example.com, blog.example.com, vb.) engeller."
+  },
+  "blockSpecificPage": {
+    "message": "Alan adındaki yalnızca belirli bir sayfayı engeller."
+  },
+  "blockSpecificPath": {
+    "message": "Alan adındaki belirli bir yolun altındaki tüm sayfaları engeller."
+  },
+  "blockSpecificSubdomain": {
+    "message": "Ana alan adını veya diğer alt alan adlarını değil, yalnızca belirli bir alt alan adını engeller."
+  },
+  "bugReport": {
+    "message": "Hata Bildirimi"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "Kara listenize aynı anda birden fazla alan adı ekleyin. Her satıra bir alan adı girin."
+  },
+  "bulkAddDomains": {
+    "message": "Toplu Alan Adı Ekle"
+  },
+  "cancel": {
+    "message": "İptal"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>Büyük/Küçük Harf Duyarlılığı:\u003C/strong> Aramalar varsayılan olarak büyük/küçük harf duyarlı değildir."
+  },
+  "chooseStartAndEndDates": {
+    "message": "Başlangıç ve bitiş tarihlerini seçin"
+  },
+  "clear": {
+    "message": "Temizle"
+  },
+  "clearBrowsingHistory": {
+    "message": "Göz Atma Geçmişini Temizle"
+  },
+  "clearHistory": {
+    "message": "Geçmişi Temizle"
+  },
+  "clearHistoryConfirm": {
+    "message": "Tüm göz atma geçmişinizi silmek istediğinizden emin misiniz? Bu işlem kalıcıdır ve geri alınamaz."
+  },
+  "clearStats": {
+    "message": "İstatistikleri Temizle"
+  },
+  "clearing": {
+    "message": "Temizleniyor..."
+  },
+  "clearingHistory": {
+    "message": "Geçmiş Yönetimi"
+  },
+  "clickToRequestPermissions": {
+    "message": "İstemek için aşağıdaki düğmeye tıklayın."
+  },
+  "close": {
+    "message": "Kapat"
+  },
+  "clr": {
+    "message": "Temizle"
+  },
+  "confirmAndSave": {
+    "message": "Onayla ve Kaydet"
+  },
+  "confirmDelete": {
+    "message": "Silmeyi Onayla"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "Akıllı Otomatik Temizleme Ayarlarını Onayla"
+  },
+  "contact": {
+    "message": "İletişim"
+  },
+  "contactAndFeedback": {
+    "message": "İletişim ve Geri Bildirim"
+  },
+  "contactLimitReached": {
+    "message": "Bugün için iletişim limitinize ulaştınız."
+  },
+  "containsDotCom": {
+    "message": "\".com\" İçerir"
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>Birden Çok Kelime İçerir:\u003C/strong> Birden çok kelimeden birini içeren girişleri aramak için \u003Ccode>{{pipe}}\u003C/code> kullanın (ör. \u003Ccode>{{example}}\u003C/code>)."
+  },
+  "containsNewsOrInfo": {
+    "message": "\"Haberler\" veya \"Bilgi\" içerir"
+  },
+  "containsNumbers": {
+    "message": "Sayı İçerir"
+  },
+  "containsSpaces": {
+    "message": "Boşluk İçerir"
+  },
+  "containsTODO": {
+    "message": "\"YAPILACAK\" İçerir"
+  },
+  "current": {
+    "message": "Bu Siteden"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "Şu anda, son {{days}} {{dayLabel}} için verileri görüntüleyebilirsiniz. Daha fazla gün otomatik olarak eklenecektir."
+  },
+  "custom": {
+    "message": "Özel"
+  },
+  "customExport": {
+    "message": "Özel Dışa Aktarma"
+  },
+  "customRange": {
+    "message": "Özel Aralık"
+  },
+  "dailyAtMidnight": {
+    "message": "Günlük (gece yarısı)"
+  },
+  "darkMode": {
+    "message": "Koyu Mod"
+  },
+  "dateAndTimeOrder": {
+    "message": "Tarih ve Saat Sırası"
+  },
+  "day": {
+    "message": "gün"
+  },
+  "days": {
+    "message": "gün"
+  },
+  "debugToolsTitle": {
+    "message": "Hata Ayıklama Araçları (test için):"
+  },
+  "default": {
+    "message": "Varsayılan"
+  },
+  "delete": {
+    "message": "Sil"
+  },
+  "deleteAllForHour": {
+    "message": "**{{startHour}}** saatindeki tüm göz atma geçmişini kalıcı olarak silmek istediğinizden emin misiniz?\u003Cbr>Bu, saat diliminin tamamındaki ({{startAndendHour}}) göz atma geçmişini silecektir. Bir kere silindikten sonra bu işlem geri alınamaz."
+  },
+  "deleteAllFromDate": {
+    "message": "**{{date}}** tarihli tüm göz atma geçmişini kalıcı olarak silmek istediğinizden emin misiniz?\u003Cbr>Bu, o güne ait tüm kayıtları kaldıracaktır. Bir kere silindikten sonra bu işlem geri alınamaz."
+  },
+  "deleteAllSearchHistory": {
+    "message": "Bu sayfada listelenen aranan tüm göz atma geçmişi girişlerini kalıcı olarak silmek istediğinizden emin misiniz?\u003Cbr/>Bu işlem, mevcut arama sonuçlarında görüntülenen tüm girişleri kaldıracaktır. Bir kere silindikten sonra bu işlem geri alınamaz."
+  },
+  "deleteBulk": {
+    "message": "Sil"
+  },
+  "deleteDomainConfirm": {
+    "message": "\u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span> alan adındaki tüm geçmişi silmek istediğinizden emin misiniz? Bu işlem, ilgili tüm girişleri kaldıracaktır ve geri alınamaz."
+  },
+  "deleteDomainStats": {
+    "message": "Alan Adı İstatistiklerini Silmek İster Misiniz?"
+  },
+  "deleteEntire": {
+    "message": "Tüm Günü Sil"
+  },
+  "deleteEntireHistory": {
+    "message": "Tüm Geçmişi Sil"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "Tüm Geçmişi Silmek İster Misiniz?"
+  },
+  "deleteHistory": {
+    "message": "Geçmişi Sil"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "Tüm göz atma geçmişinizi silmek istediğinizden emin misiniz? Bu işlem kalıcıdır ve geri alınamaz."
+  },
+  "deleteMsg": {
+    "message": "Tüm arama sonuçlarını silmek ister misiniz?"
+  },
+  "deleteSelectedHistory": {
+    "message": "Seçilen Geçmişi Sil"
+  },
+  "deleteSpecificDate": {
+    "message": "Belirli Tarihi Sil"
+  },
+  "deleteStatsConfirmation": {
+    "message": "BetterHistory'den \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> adresine ait tüm takip verilerini kalıcı olarak silmek üzeresiniz.\u003Cbr>\u003Cbr>Bu işlem geri alınamaz."
+  },
+  "deleteUrlConfirm": {
+    "message": "\u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> URL'sini geçmişinizden silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+  },
+  "deletedSelectedHistory": {
+    "message": "Seçilen {{selectedNumber}} adet geçmiş girişini kalıcı olarak silmek istediğinizden emin misiniz?\u003Cbr/>Bu işlem, seçilen tüm {{selectedNumber}} adet girişi kalıcı olarak silecektir. Bir kere silindikten sonra bu işlem geri alınamaz."
+  },
+  "devices": {
+    "message": "Cihazlar"
+  },
+  "disableTimeTracking": {
+    "message": "Bunu devre dışı bırakmak takibi durduracak ve tüm istatistikleri gizleyecektir."
+  },
+  "domainAlreadyExists": {
+    "message": "Bu alan adı zaten listenizde var"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "Satır ${index + 1}: Alan adı zaten var (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "Alan Adı Kara Listesi"
+  },
+  "domainCannotBeEmpty": {
+    "message": "Alan adı boş olamaz"
+  },
+  "domainStats": {
+    "message": "Alan Adı İstatistikleri"
+  },
+  "domainWithSubdomains": {
+    "message": "Tüm alt alan adlarıyla birlikte alan adı"
+  },
+  "domains": {
+    "message": "Alan Adları"
+  },
+  "email": {
+    "message": "E-posta"
+  },
+  "emailArticle": {
+    "message": "Destek Makaleleri"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}: \u003C/span>\u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">BetterHistory Desteği\u003C/span>\u003C/a> bölümümüzdeki destek kılavuzlarımıza ve SSS'lerimize göz atın."
+  },
+  "emailSupport": {
+    "message": "E-posta Desteği"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}:\u003C/span> Herhangi bir sorunuz veya sorununuz için 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a> adresinden bize ulaşın."
+  },
+  "enableStats": {
+    "message": "İstatistikleri Etkinleştir"
+  },
+  "enableStatsDescription": {
+    "message": "Tüm istatistik işlevlerini etkinleştirin veya devre dışı bırakın. Devre dışı bırakıldığında, hiçbir istatistik toplanmayacak veya görüntülenmeyecektir."
+  },
+  "enable_popup": {
+    "message": "Açılır Pencereyi Etkinleştir"
+  },
+  "endsWithQuestionMark": {
+    "message": "\"?\" ile biter"
+  },
+  "enterAValidDomain": {
+    "message": "Geçerli bir alan adı girin"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "Lütfen en az bir alan adı girin"
+  },
+  "enterDomain": {
+    "message": "Geçmişten Hariç Tutmak İstediğiniz Alan Adını Girin"
+  },
+  "enterDomainName": {
+    "message": "Alan Adı Girin"
+  },
+  "enterDomainPerLine": {
+    "message": "Beyaz listenize aynı anda birden fazla alan adı ekleyin. Her satıra bir alan adı girin."
+  },
+  "enterDomainToBlock": {
+    "message": "Engellenecek alan adını girin (ör. example.com)"
+  },
+  "enterDomainToWhitelist": {
+    "message": "Beyaz listeye eklenecek alan adını girin (ör. example.com)"
+  },
+  "enterValidDomain": {
+    "message": "Lütfen en az bir geçerli alan adı girin"
+  },
+  "entireExport": {
+    "message": "Tümünü Dışa Aktar (90 Gün)"
+  },
+  "entries": {
+    "message": "Girişler"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "Bu Siteye Ait Tüm Geçmişi Sil"
+  },
+  "error": {
+    "message": "Hata"
+  },
+  "errorClearingHistory": {
+    "message": "Geçmiş temizlenemedi. Lütfen tekrar deneyin."
+  },
+  "errorClearingStats": {
+    "message": "İstatistikler temizlenemedi"
+  },
+  "errorLoadingData": {
+    "message": "Veri Yükleme Hatası"
+  },
+  "errorLoadingSettings": {
+    "message": "Ayarlar yüklenirken hata oluştu. Varsayılan değerler kullanılıyor."
+  },
+  "errorSavingSettings": {
+    "message": "Ayarlar kaydedilemedi. Lütfen tekrar deneyin."
+  },
+  "exactWordProject": {
+    "message": "Tam Kelime \"Proje\""
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "Ürünlerimizi Keşfet"
+  },
+  "export": {
+    "message": "Dışa Aktar"
+  },
+  "exportAsJSON": {
+    "message": "JSON Olarak Dışa Aktar"
+  },
+  "exportAsPDF": {
+    "message": "PDF Olarak Dışa Aktar"
+  },
+  "exportCsv": {
+    "message": "CSV Olarak Dışa Aktar"
+  },
+  "exportEntireLocalData": {
+    "message": "Tüm Yerel Verileri Dışa Aktar"
+  },
+  "exportHistory": {
+    "message": "Tüm Göz Atma Geçmişinizi Dışa Aktarın"
+  },
+  "exportHistoryDescription": {
+    "message": "Bu özellik, tüm göz atma geçmişinizi (90 güne kadar) dışa aktarmanıza veya dışa aktarma için özel bir tarih aralığı seçmenize olanak tanır. Chrome'un Geçmiş API'sinin yalnızca geçmişi dışa aktarmayı desteklediğini, geçmişi geri içe aktarmaya izin vermediğini lütfen unutmayın."
+  },
+  "exportHistoryLimitation": {
+    "message": "Ek olarak, Chrome 90 günden eski geçmişi otomatik olarak siler, bu nedenle BetterHistory yalnızca Chrome'un sakladığı kayıtları dışa aktarabilir."
+  },
+  "exportHtml": {
+    "message": "HTML Olarak Dışa Aktar"
+  },
+  "exportLocalData": {
+    "message": "Yerel Verileri Dışa Aktar"
+  },
+  "exportSelectedCsv": {
+    "message": "Seçilenleri CSV Olarak Dışa Aktar"
+  },
+  "exportSelectedHtml": {
+    "message": "Seçilenleri HTML Olarak Dışa Aktar"
+  },
+  "exportTimeTrackingData": {
+    "message": "Zaman Takip Verilerini Dışa Aktar"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "Bunlar, kişisel kullanım için dışa aktarabileceğiniz yerel olarak depolanan zaman takip verilerinizdir. Ziyaret edilen sayfalarda geçirdiğiniz süreyi yansıtarak göz atma alışkanlıklarınızı analiz etmenize yardımcı olur."
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "Bu veriler yalnızca tarayıcınızda kaydedilir ve çevrimiçi olarak senkronize edilmez veya saklanmaz. BetterHistory uzantısını kaldırmak, tüm zaman takip verilerini kalıcı olarak silecektir. Yedek tutmak istiyorsanız verilerinizi düzenli olarak dışa aktarın."
+  },
+  "exportToCSV": {
+    "message": "CSV Olarak Dışa Aktar"
+  },
+  "exportToTXT": {
+    "message": "TXT Olarak Dışa Aktar"
+  },
+  "exportedHistoryDate": {
+    "message": "Dışa Aktarılan Göz Atma Geçmişi - Tarih:"
+  },
+  "exportedHistoryKeyword": {
+    "message": "Dışa Aktarılan Göz Atma Geçmişi - Anahtar Kelime:"
+  },
+  "featureRequest": {
+    "message": "Özellik İsteği"
+  },
+  "feedback": {
+    "message": "Geri Bildirim"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "\u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">Gizlilik Politikasını\u003C/span>\u003C/a> ve veri işlemeyi kabul ediyorum."
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "Gönderiminizle ilgili takip için lütfen e-posta adresinizi belirtin."
+  },
+  "feedbackForm": {
+    "message": "Geri Bildirim Formu"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}:\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">Geri bildiriminizi göndermek için buraya tıklayın\u003C/span>"
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "Dosya boyutu 5 MB'ı aşıyor. Lütfen daha küçük bir dosya yükleyin."
+  },
+  "find_all_visits_domain": {
+    "message": "{{d}} adresine yapılan tüm ziyaretleri bul"
+  },
+  "generalContact": {
+    "message": "Genel İletişim"
+  },
+  "generatedUsing": {
+    "message": "Bu belge şunun kullanılarak oluşturulmuştur"
+  },
+  "grantPermissions": {
+    "message": "İzin Ver"
+  },
+  "groupSession": {
+    "message": "Oturumu Gruplandır"
+  },
+  "history": {
+    "message": "Geçmiş"
+  },
+  "historyCleared": {
+    "message": "Geçmiş temizlendi"
+  },
+  "historyControlsFor": {
+    "message": "Geçmiş Kontrolleri (Şunun İçin):"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "Beyaz listedeki alan adlarından gelen geçmiş, temizleme sırasında korunacaktır"
+  },
+  "historyRetentionHelp": {
+    "message": "Seçilen bu zaman aralığındaki geçmiş korunacak ve otomatik temizlemeden hariç tutulacaktır."
+  },
+  "hourFormat": {
+    "message": "Saat Biçimi"
+  },
+  "hours": {
+    "message": "Saatler"
+  },
+  "howDidWeDo": {
+    "message": "Nasıl başardık?"
+  },
+  "howLongKeepHistory": {
+    "message": "Otomatik silme için uygun olmadan önce göz atma geçmişiniz ne kadar süreyle saklanmalıdır?"
+  },
+  "howToUseTheSearchTool": {
+    "message": "Arama aracı nasıl kullanılır"
+  },
+  "id": {
+    "message": "Kimlik"
+  },
+  "idleDetectionDescription": {
+    "message": "• Boşta kalma algılama (uzakta olduğunuzda takibi durdurur)"
+  },
+  "import": {
+    "message": "İçe Aktar"
+  },
+  "importEntireLocalData": {
+    "message": "Yerel Verileri İçe Aktar"
+  },
+  "importFailed": {
+    "message": "Veri içe aktarma başarısız oldu"
+  },
+  "importJSON": {
+    "message": "JSON İçe Aktar"
+  },
+  "importSuccessful": {
+    "message": "Veriler başarıyla içe aktarıldı"
+  },
+  "infinityScroll": {
+    "message": "Sonsuz Kaydırmayı Etkinleştir"
+  },
+  "interfaceStyle": {
+    "message": "Görüntü Ayarları"
+  },
+  "invalidDomainFormat": {
+    "message": "Lütfen geçerli bir alan adı biçimi girin (ör. example.com)"
+  },
+  "invalidDomainFormatLine": {
+    "message": "Satır ${index + 1}: Geçersiz alan adı biçimi (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "Geçersiz dosya türü. Lütfen bir JPG veya PNG görseli yükleyin."
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> geçerli bir alan adı değil. Lütfen kara listeye eklemek için geçerli bir alan adı kullanın."
+  },
+  "keepHistoryCheckText": {
+    "message": "Beyaz listenize eklediğiniz web sitelerinin geçmişini saklayın"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "Beyaz listenize eklediğiniz web sitelerinin geçmişini saklayın"
+  },
+  "large": {
+    "message": "Büyük"
+  },
+  "last15Days": {
+    "message": "15 gün"
+  },
+  "last2Months": {
+    "message": "Son 2 Ay"
+  },
+  "last30Days": {
+    "message": "30 gün"
+  },
+  "last3Months": {
+    "message": "Son 3 Ay"
+  },
+  "last60Days": {
+    "message": "60 gün"
+  },
+  "last7Days": {
+    "message": "7 gün"
+  },
+  "last90Days": {
+    "message": "90 gün"
+  },
+  "lastMonth": {
+    "message": "Geçen Ay"
+  },
+  "lastVisitTime": {
+    "message": "Son Ziyaret Zamanı"
+  },
+  "lastWeek": {
+    "message": "Geçen Hafta"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "Otomatik temizleme hakkında daha fazla bilgi edinin"
+  },
+  "learnMoreAboutRetention": {
+    "message": "Saklama süresi hakkında daha fazla bilgi edinin"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "Ek ayarlamalara ihtiyacınız olursa bana bildirin."
+  },
+  "lightMode": {
+    "message": "Açık Mod"
+  },
+  "loadingSettings": {
+    "message": "Ayarlar yükleniyor..."
+  },
+  "ltr": {
+    "message": "LTR (Soldan Sağa)"
+  },
+  "mainDomainNote": {
+    "message": "Bir ana alan adını engellemek, alt alan adlarını otomatik olarak engellemez"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "Zaman Takibi ve Kullanım İstatistiklerini Yönet"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "Etkinleştirildiğinde, BetterHistory oturum süreleri ve aktif/boşta süre dahil olmak üzere her web sitesinde ne kadar zaman harcadığınızı izler. Tüm veriler tarayıcınızda yerel olarak depolanır ve yalnızca size ayrıntılı göz atma bilgileri ve zaman analizleri sağlamak için kullanılır."
+  },
+  "manifest_browser_action_title": {
+    "message": "Geçmişi Göz At"
+  },
+  "manifest_description": {
+    "message": "Şık Geçmiş Yöneticisi: Güçlü Arama, Toplu Dışa Aktarma, Özel Seçilenleri Silme, Gün ve Saate Göre Filtreleme ve Geçmişteki Belirli Alan Adlarını Engelleme."
+  },
+  "maxSize": {
+    "message": "Maksimum Boyut"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• Medya oynatma algılama (video/müzik sırasında takibi sürdürür)"
+  },
+  "medium": {
+    "message": "Orta"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "Aylık (her ayın 1'i)"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "Daha fazla gün otomatik olarak eklenecektir."
+  },
+  "moreFromSite": {
+    "message": "Bu siteden daha fazlası"
+  },
+  "mostActiveDay": {
+    "message": "En aktif gün"
+  },
+  "neverDisabled": {
+    "message": "Asla (devre dışı)"
+  },
+  "noActivityData": {
+    "message": "Bu döneme ait etkinlik verisi yok"
+  },
+  "noBlacklistType": {
+    "message": "Kara listenizde {{type}} yok"
+  },
+  "noChangesToSave": {
+    "message": "Kaydedilecek değişiklik yok"
+  },
+  "noDevices": {
+    "message": "Aktif cihaz oturumu bulunamadı."
+  },
+  "noDomainBlacklisted": {
+    "message": "Henüz kara listeye alınmış alan adı yok"
+  },
+  "noDomains": {
+    "message": "Henüz beyaz listeye alınmış alan adı yok"
+  },
+  "noDomainsType": {
+    "message": "Beyaz listenizde {{type}} yok"
+  },
+  "noFileSelectedMessage": {
+    "message": "Hiçbir dosya seçilmedi. Lütfen geçerli bir dosya yükleyin."
+  },
+  "noMoreResults": {
+    "message": "Daha Fazla Sonuç Yok"
+  },
+  "noResultsFound": {
+    "message": "Sonuç bulunamadı. Arama terimlerinizi veya filtrelerinizi ayarlamayı deneyin."
+  },
+  "noThanks": {
+    "message": "Hayır, Teşekkürler"
+  },
+  "noTitle": {
+    "message": "Başlık Yok"
+  },
+  "noVisits": {
+    "message": "Üzgünüm, ziyaret bulunamadı."
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>Yalnızca Sayılar:\u003C/strong> Sayı içeren girişleri bulmak için \u003Ccode>{{pattern}}\u003C/code> kullanın."
+  },
+  "of": {
+    "message": " / "
+  },
+  "ok": {
+    "message": "Tamam"
+  },
+  "oneMonth": {
+    "message": "Bir ay"
+  },
+  "oneWeek": {
+    "message": "Bir hafta"
+  },
+  "openAllTabs": {
+    "message": "Tüm Sekmeleri Aç"
+  },
+  "openMenu": {
+    "message": "Menüyü aç"
+  },
+  "openTab": {
+    "message": "Yeni Sekmede Aç"
+  },
+  "order": {
+    "message": "Sıra"
+  },
+  "otherOptions": {
+    "message": "Genel Tercihler"
+  },
+  "page": {
+    "message": "Sayfa"
+  },
+  "paths": {
+    "message": "Yollar"
+  },
+  "permissionGranted": {
+    "message": "✓ İzin Verildi"
+  },
+  "permissionMissing": {
+    "message": "✗ Eksik"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "İzinler Zaten Verildi"
+  },
+  "pleaseNote": {
+    "message": "Lütfen dikkat:"
+  },
+  "pleaseRateUs": {
+    "message": "Lütfen Bizi Puanlayın!"
+  },
+  "prefixesAutoRemoved": {
+    "message": "'http://', 'https://' ve 'www.' gibi önekler otomatik olarak kaldırılacaktır."
+  },
+  "prefixesRemoved": {
+    "message": "'http://', 'https://' ve 'www.' gibi önekler otomatik olarak kaldırılır"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "Geçmiş Kaydı İçin Bu Siteyi Kara Listeye Al"
+  },
+  "privacyPolicy": {
+    "message": "Gizlilik Politikası"
+  },
+  "privacyTerms": {
+    "message": "Gizlilik ve Şartlar"
+  },
+  "processing": {
+    "message": "İşleniyor..."
+  },
+  "rateText": {
+    "message": "Görüşleriniz BetterHistory'yi geliştirmemize yardımcı oluyor. Nasıl başardığımızı bize bildirin!"
+  },
+  "recent": {
+    "message": "Son Ziyaretler"
+  },
+  "recordedVisits": {
+    "message": "Bu alana kaydedilen ziyaretler"
+  },
+  "remove_url": {
+    "message": "Bu URL'yi Geçmişten Sil"
+  },
+  "result": {
+    "message": "Sonuç"
+  },
+  "results": {
+    "message": "Sonuçlar"
+  },
+  "retentionPeriod": {
+    "message": "Saklama Süresi:"
+  },
+  "retentionPeriodHelp": {
+    "message": "Saklama süresi, göz atma geçmişinizin ne kadar geriye dönük olarak korunduğunu belirler. Daha eski geçmiş temizlemeye uygun olacaktır."
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "Lütfen onaylamadan önce ayarlarınızı gözden geçirin."
+  },
+  "revokePermissions": {
+    "message": "İzinleri İptal Et"
+  },
+  "rightTitle": {
+    "message": "İçerik Menüsü Seçenekleri"
+  },
+  "rtl": {
+    "message": "RTL (Sağdan Sola)"
+  },
+  "saveSettings": {
+    "message": "Ayarları Kaydet"
+  },
+  "search": {
+    "message": "Ara"
+  },
+  "searchDeeper": {
+    "message": "Daha Derin Ara"
+  },
+  "searchDomainTitle": {
+    "message": "Alan Adına Göre Ara"
+  },
+  "searchEngine": {
+    "message": "Arama Motoru"
+  },
+  "searchMsg": {
+    "message": "Psst... Bir şeyler aramayı dene"
+  },
+  "searchPlaceholder": {
+    "message": "Başlık veya URL ara"
+  },
+  "searchTextTitle": {
+    "message": "Metin Seçimine Göre Ara"
+  },
+  "searchTips": {
+    "message": "Arama İpuçları"
+  },
+  "searchTipsMsg1": {
+    "message": "Artık düzenli ifade (Regular expression) araması desteklenmektedir!"
+  },
+  "searchTipsMsg2": {
+    "message": "Örneğin, aramayı deneyin"
+  },
+  "searchTipsMsg3": {
+    "message": "Ziyaretleri ve indirmeleri ara"
+  },
+  "searchTipsMsg4": {
+    "message": "Arama, sayfa başlığı ve URL'ye göre ziyaretleri ve dosya adı ve URL'ye göre indirmeleri otomatik olarak arayacaktır."
+  },
+  "searchTipsMsg5": {
+    "message": "Hızlı, ilk arama için son 10.000 ziyaretiniz kullanılır. Daha derin arama yapmak için son sonuç sayfasının altına gidin ve 'Daha Derin Ara' düğmesine tıklayın."
+  },
+  "searchToolDescription": {
+    "message": "Bu araç, basit anahtar kelimeler veya gelişmiş **Düzenli İfadeler (RegEx)** kullanarak göz atma geçmişinizde etkili bir şekilde arama yapmanızı sağlar. Başlamanıza yardımcı olacak bazı örnekler aşağıdadır:"
+  },
+  "search_history": {
+    "message": "Geçmişte Ara"
+  },
+  "searchedUrlDeleted": {
+    "message": "Aranan URL'ler silindi"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "Beyaz listedeki alan adları hariç aranan URL'ler silindi"
+  },
+  "searching": {
+    "message": "Aranıyor"
+  },
+  "selectDateFormat": {
+    "message": "Tarih Biçimi"
+  },
+  "selectDateRange": {
+    "message": "Tarih aralığı seçin"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "Geçmişi Silmek İçin Tarih Seçin"
+  },
+  "selectEndDate": {
+    "message": "Bitiş tarihini seçin"
+  },
+  "selectStartDate": {
+    "message": "Başlangıç tarihini seçin"
+  },
+  "selected": {
+    "message": "Seçilen"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "Seçilen tarih geçmişi silindi"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "Beyaz listedeki alan adları hariç seçilen tarih geçmişi silindi"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "Seçilen saat geçmişi silindi"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "Beyaz listedeki alan adları hariç seçilen saat geçmişi silindi"
+  },
+  "sessions": {
+    "message": "Oturumlar"
+  },
+  "settings": {
+    "message": "Ayarlar"
+  },
+  "settingsSaved": {
+    "message": "Ayarlar kaydedildi"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "Akıllı Otomatik Temizleme ayarlarınız başarıyla güncellendi."
+  },
+  "shortRetentionWarning": {
+    "message": "Bir haftalık kısa bir saklama süresi belirlemek, eski göz atma geçmişinizin daha sık temizleneceği anlamına gelir. Bunun ihtiyaçlarınızla uyumlu olduğundan emin olun."
+  },
+  "show": {
+    "message": "Göster"
+  },
+  "showAllHistory": {
+    "message": "Tüm Geçmişi Göster"
+  },
+  "showStats": {
+    "message": "İstatistikleri Göster"
+  },
+  "small": {
+    "message": "Küçük"
+  },
+  "smartAutoCleanup": {
+    "message": "Akıllı Otomatik Temizleme"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "Akıllı Otomatik Temizleme ile göz atma geçmişinizi otomatik olarak yönetin. Temizliğin ne sıklıkta çalışacağını ve son geçmişinizin ne kadar süreyle saklanacağını seçin."
+  },
+  "smartAutoCleanupSettings": {
+    "message": "Akıllı Otomatik Temizleme Ayarları"
+  },
+  "smartHistoryCleanup": {
+    "message": "Akıllı Geçmiş Temizleme"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "Beyaz listenize eklediğiniz web siteleri hariç göz atma geçmişinizi temizler. Bu özellik, güvenilir veya sık kullanılan sitelerden gelen önemli geçmişi korurken etkinliğinizi gizli tutmanıza yardımcı olur."
+  },
+  "socialMediaTip": {
+    "message": "Sosyal medya siteleri için belirli bölümleri engellemeyi düşünün (facebook.com/marketplace/*)"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "Bazı alan adları eklenemedi:\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "Bazı izinler eksik"
+  },
+  "specificPage": {
+    "message": "Belirli sayfa"
+  },
+  "specificPath": {
+    "message": "Belirli yol"
+  },
+  "specificSubdomain": {
+    "message": "Belirli alt alan adı"
+  },
+  "start": {
+    "message": "Başlangıç"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>Bununla başlar:\u003C/strong> Belirli bir kelimeyle başlayan girişleri bulmak için ^ kullanın (ör. ^GelenKutusu)."
+  },
+  "startsWithInbox": {
+    "message": "\"GelenKutusu\" ile başlar"
+  },
+  "statsCleared": {
+    "message": "İstatistikler temizlendi"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "İptal"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "Web sitelerinde geçirdiğiniz süreyi takip etmenize, oturum ayrıntılarını görüntülemenize ve zaman raporlarını PDF olarak dışa aktarmanıza yardımcı olmak için göz atma etkinliğinize erişim iznine ihtiyacımız var."
+  },
+  "statsPermissionDialogGrant": {
+    "message": "İzin Ver"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "BetterHistory'ye yeni bir Zaman Takibi özelliği ekledik!"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "Zaman Takibi İçin Yeni İzin Gereklidir"
+  },
+  "subdomainNote": {
+    "message": "Bir ana alan adını beyaz listeye almak, alt alan adlarını otomatik olarak beyaz listeye almaz"
+  },
+  "subdomains": {
+    "message": "Alt Alan Adları"
+  },
+  "submit": {
+    "message": "Gönder"
+  },
+  "submitFeedback": {
+    "message": "Geri Bildirim Gönder"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "Önerileriniz ve geri bildirimleriniz, BetterHistory'yi geliştirmemize ve en iyi kullanıcı deneyimini sunmamıza yardımcı olur."
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 veya Daha Fazla Karakter"
+  },
+  "termsOfService": {
+    "message": "Hizmet Şartları"
+  },
+  "thankYou": {
+    "message": "Teşekkürler!"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "Bu işlem geri alınamaz."
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "Bu URL veya alan adı zaten Kara Liste Alan Adları'nda listelenmiştir"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "Bu URL veya alan adı zaten Beyaz Liste Alan Adları'nda listelenmiştir"
+  },
+  "threeMonths": {
+    "message": "Üç ay"
+  },
+  "timeTrackingStartedOn": {
+    "message": "Zaman takibi {{date}} tarihinde başladı"
+  },
+  "tips": {
+    "message": "İpuçları"
+  },
+  "title": {
+    "message": "Başlık"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "Bir alan adındaki her sayfayı ve alt alan adlarını kara listeye almak için şunu yazın:"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "Bir alan adındaki her sayfayı kara listeye almak için şunu yazın:"
+  },
+  "todalWords": {
+    "message": "Toplam Kelime Sayısı"
+  },
+  "today": {
+    "message": "Bugün"
+  },
+  "toolbarIcon": {
+    "message": "Araç Çubuğu Simge Teması"
+  },
+  "totalEntries": {
+    "message": "toplam Giriş"
+  },
+  "totalVisits": {
+    "message": "Toplam Ziyaret"
+  },
+  "twoWeeks": {
+    "message": "İki hafta"
+  },
+  "typdCount": {
+    "message": "Yazma Sayısı"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "Eşleşen girişleri bulmak için herhangi bir anahtar kelime yazın."
+  },
+  "typeDeleteToConfirm": {
+    "message": "Onaylamak için \"delete\" yazın:"
+  },
+  "typedCount": {
+    "message": "Adres çubuğuna {{times}} kez yazıldı"
+  },
+  "unableToLoadDomainStats": {
+    "message": "Alan adı istatistikleri yüklenemedi. Lütfen daha sonra tekrar deneyin."
+  },
+  "understandSettings": {
+    "message": "Bu ayarları ve göz atma geçmişimi nasıl etkileyeceklerini anlıyorum"
+  },
+  "understandYourRights": {
+    "message": "Haklarınızı Anlayın"
+  },
+  "uniqueUrls": {
+    "message": "benzersiz URL'ler"
+  },
+  "updatingData": {
+    "message": "Veriler güncelleniyor..."
+  },
+  "uploadScreenShot": {
+    "message": "Ekran Görüntüsü Yükle"
+  },
+  "urlDeleted": {
+    "message": "URL silindi"
+  },
+  "urlPatternGuide": {
+    "message": "URL Desen Kılavuzu"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "Web sitelerini engellemek için aşağıdaki desenleri kullanabilirsiniz:"
+  },
+  "useSpecificPaths": {
+    "message": "Bir web sitesinin yalnızca belirli bölümlerini beyaz listeye almak için belirli yolları kullanın"
+  },
+  "viewHere": {
+    "message": "Buradan Görüntüle"
+  },
+  "viewStats": {
+    "message": "İstatistikleri Görüntüle"
+  },
+  "viewStatsButton": {
+    "message": "Ayrıca Ayrıntılı zaman verilerine hızlı erişim için Etkinlik sayfasındaki her girişin yanında bir \"İstatistikleri Görüntüle\" düğmesi göreceksiniz"
+  },
+  "visitCount": {
+    "message": "Bağlantı {{times}} kez ziyaret edildi"
+  },
+  "visitSite": {
+    "message": "Siteyi ziyaret et"
+  },
+  "visits_domain": {
+    "message": "Bu Alan Adına Yapılan Tüm Ziyaretleri Görüntüle"
+  },
+  "vstCount": {
+    "message": "Ziyaret Sayısı"
+  },
+  "weValueYourInputMessage": {
+    "message": "Görüşlerinize değer veriyoruz ve size yardımcı olmak için buradayız!"
+  },
+  "websiteAccessDescription": {
+    "message": "• Web sitesi erişimi (etkinliği izlemek için)"
+  },
+  "websites": {
+    "message": "Web Siteleri"
+  },
+  "weeklyEverySunday": {
+    "message": "Haftalık (her Pazar)"
+  },
+  "whatThisMeans": {
+    "message": "Bunun anlamı:"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "Hangi URL desenlerine izin verilir?"
+  },
+  "whenBrowserCloses": {
+    "message": "Tarayıcı kapandığında"
+  },
+  "whenShouldCleanupRun": {
+    "message": "Akıllı Otomatik Temizleme ne zaman çalışmalıdır?"
+  },
+  "whitelist": {
+    "message": "Beyaz Liste"
+  },
+  "whitelistDomain": {
+    "message": "Alan Adını Beyaz Listeye Al"
+  },
+  "whitelistDomains": {
+    "message": "Beyaz Liste Alan Adları"
+  },
+  "whitelistExactDomain": {
+    "message": "Alt alan adlarını veya belirli yolları değil, yalnızca tam alan adını beyaz listeye alır."
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "Ana alan adını ve tüm alt alan adlarını (mail.example.com, blog.example.com, vb.) beyaz listeye alır."
+  },
+  "whitelistPatterns": {
+    "message": "Beyaz listeye almak için aşağıdaki desenleri kullanabilirsiniz:"
+  },
+  "whitelistPrecedence": {
+    "message": "Beyaz listedeki alan adları, kara listedeki alan adlarına göre önceliklidir"
+  },
+  "whitelistSpecificPage": {
+    "message": "Alan adındaki yalnızca belirli bir sayfayı beyaz listeye alır."
+  },
+  "whitelistSpecificPath": {
+    "message": "Alan adındaki belirli bir yolun altındaki tüm sayfaları beyaz listeye alır."
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "Ana alan adını veya diğer alt alan adlarını değil, yalnızca belirli bir alt alan adını beyaz listeye alır."
+  },
+  "whitelistedDomains": {
+    "message": "Beyaz Listeye Alınan Alan Adları"
+  },
+  "wildcardWarning": {
+    "message": "Joker karakteri (*) amaçlanandan fazlasını engelleyebileceği için dikkatli kullanın"
+  },
+  "yesterday": {
+    "message": "Dün"
+  }
+}

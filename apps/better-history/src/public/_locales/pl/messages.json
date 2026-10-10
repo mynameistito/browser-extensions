@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "Opisz, co moglibyśmy dodać lub ulepszyć."
+  },
+  "FeedbackSuccessAlert": {
+    "message": "Dziękujemy! Twoja opinia została pomyślnie przesłana."
+  },
+  "Friday": {
+    "message": "Piątek"
+  },
+  "Monday": {
+    "message": "Poniedziałek"
+  },
+  "Popup": {
+    "message": "Wyskakujące Okienko"
+  },
+  "Saturday": {
+    "message": "Sobota"
+  },
+  "Sidebar": {
+    "message": "Pasek Boczny"
+  },
+  "Sunday": {
+    "message": "Niedziela"
+  },
+  "ThanksForFeedBack": {
+    "message": "Dziękujemy za opinię!"
+  },
+  "Thursday": {
+    "message": "Czwartek"
+  },
+  "Today": {
+    "message": "Dziś"
+  },
+  "Tuesday": {
+    "message": "Wtorek"
+  },
+  "URL": {
+    "message": "Adres URL"
+  },
+  "Wednesday": {
+    "message": "Środa"
+  },
+  "WhatCanWeImprove": {
+    "message": "Co możemy ulepszyć?"
+  },
+  "Yesterday": {
+    "message": "Wczoraj"
+  },
+  "about": {
+    "message": "O nas"
+  },
+  "activity": {
+    "message": "Aktywność"
+  },
+  "add": {
+    "message": "Dodaj"
+  },
+  "addDomains": {
+    "message": "Dodaj Domeny"
+  },
+  "addToBlackList": {
+    "message": "Dodaj do Czarnej Listy"
+  },
+  "advanceExport": {
+    "message": "Zaawansowany Eksport"
+  },
+  "advancedFeaturesActive": {
+    "message": "Zaawansowane funkcje są teraz aktywne."
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "Zaawansowane funkcje wymagają dodatkowych uprawnień dla:"
+  },
+  "all": {
+    "message": "Wszystkie"
+  },
+  "allCapitalLetters": {
+    "message": "Wszystkie Wielkie Litery"
+  },
+  "allHistoryDeleted": {
+    "message": "Cała historia została usunięta"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "Cała historia została usunięta z wyjątkiem domen na białej liście"
+  },
+  "allPermissionsGranted": {
+    "message": "Wszystkie uprawnienia przyznane!"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "Wszystkie Wybrane Adresy URL zostały usunięte"
+  },
+  "allTime": {
+    "message": "Cały czas"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "Proszę zezwolić na dostęp, aby przesłać opinię"
+  },
+  "appName": {
+    "message": "Better History | Zarządzaj, Eksportuj i Usuwaj Historię"
+  },
+  "apply": {
+    "message": "Zastosuj"
+  },
+  "autoCleanupDisabled": {
+    "message": "Automatyczne czyszczenie jest wyłączone. Nadal możesz ręcznie wyczyścić historię, gdy zajdzie taka potrzeba."
+  },
+  "autoCleanupEnabled": {
+    "message": "Twoja historia przeglądania zostanie automatycznie wyczyszczona zgodnie z wybranym harmonogramem."
+  },
+  "autoCleanupHelp": {
+    "message": "Automatyczne czyszczenie pomaga zachować Twoją prywatność poprzez regularne usuwanie historii przeglądania zgodnie z Twoimi preferencjami."
+  },
+  "autoCleanupSchedule": {
+    "message": "Harmonogram Automatycznego Czyszczenia:"
+  },
+  "avgPerDay": {
+    "message": "Średnio {{time}} dziennie"
+  },
+  "basicDomain": {
+    "message": "Domena podstawowa"
+  },
+  "basicSearch": {
+    "message": "Podstawowe Wyszukiwanie"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}:\u003C/strong> Wpisz dowolne słowo kluczowe, aby znaleźć pasujące wpisy (np. \"SkrzynkaOdbiorcza\")."
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> to innowacyjne rozszerzenie przeglądarki opracowane przez \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span>. Umożliwia użytkownikom łatwe zarządzanie historią przeglądania, oferując zaawansowane funkcje, takie jak niestandardowe usuwanie, precyzyjne filtry i intuicyjny interfejs. W BetterLogic Ltd priorytetem jest prywatność użytkownika i płynna funkcjonalność, aby poprawić Twoje wrażenia z przeglądania."
+  },
+  "blacklist": {
+    "message": "Czarna Lista"
+  },
+  "blacklistDomain": {
+    "message": "Domena na Czarnej Liście"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "Umieść Domenę na Czarnej Liście Historii"
+  },
+  "blacklistDomains": {
+    "message": "Domeny na Czarnej Liście"
+  },
+  "blacklistFeatureDescription": {
+    "message": "Funkcja Czarnej Listy Domen w BetterHistory pozwala blokować określone witryny przed rejestrowaniem w historii przeglądania. Gdy domena znajdzie się na czarnej liście, wszystkie przeszłe i przyszłe wizyty na tej stronie zostaną automatycznie usunięte."
+  },
+  "blacklistInstructionText": {
+    "message": "Funkcja Czarnej Listy Domen w BetterHistory pozwala blokować określone witryny przed rejestrowaniem w historii przeglądania. Gdy domena znajdzie się na czarnej liście, wszystkie przeszłe i przyszłe wizyty na tej stronie zostaną automatycznie usunięte."
+  },
+  "blacklistTips": {
+    "message": "Wskazówki"
+  },
+  "blacklist_confirmation": {
+    "message": "Czy na pewno chcesz umieścić **{{DOMAIN}}** na czarnej liście swojego historii przeglądania?\u003Cbr/>Przyszłe wizyty na tej domenie nie będą już rejestrowane, a wszystkie istniejące wpisy historii dla **{{DOMAIN}}** zostaną usunięte."
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> jest już na czarnej liście."
+  },
+  "blacklistedDomains": {
+    "message": "Domeny na Czarnej Liście"
+  },
+  "blockExactDomain": {
+    "message": "Blokuje tylko dokładną domenę, a nie subdomeny ani określone ścieżki."
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "Blokuje domenę główną i wszystkie jej subdomeny (mail.example.com, blog.example.com itd.)."
+  },
+  "blockSpecificPage": {
+    "message": "Blokuje tylko określoną stronę w domenie."
+  },
+  "blockSpecificPath": {
+    "message": "Blokuje wszystkie strony pod określoną ścieżką w domenie."
+  },
+  "blockSpecificSubdomain": {
+    "message": "Blokuje tylko określoną subdomenę, a nie domenę główną ani inne subdomeny."
+  },
+  "bugReport": {
+    "message": "Zgłoszenie Błędu"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "Dodaj wiele domen do swojej czarnej listy jednocześnie. Wprowadź jedną domenę na wiersz."
+  },
+  "bulkAddDomains": {
+    "message": "Masowe Dodawanie Domen"
+  },
+  "cancel": {
+    "message": "Anuluj"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>Wielkość Liter:\u003C/strong> Wyszukiwanie domyślnie nie rozróżnia wielkości liter."
+  },
+  "chooseStartAndEndDates": {
+    "message": "Wybierz datę rozpoczęcia i zakończenia"
+  },
+  "clear": {
+    "message": "Wyczyść"
+  },
+  "clearBrowsingHistory": {
+    "message": "Wyczyść Historię Przeglądania"
+  },
+  "clearHistory": {
+    "message": "Wyczyść Historię"
+  },
+  "clearHistoryConfirm": {
+    "message": "Czy na pewno chcesz usunąć całą historię przeglądania? Ta operacja jest trwała i nie można jej cofnąć."
+  },
+  "clearStats": {
+    "message": "Wyczyść Statystyki"
+  },
+  "clearing": {
+    "message": "Czyszczenie..."
+  },
+  "clearingHistory": {
+    "message": "Zarządzanie Historią"
+  },
+  "clickToRequestPermissions": {
+    "message": "Kliknij przycisk poniżej, aby je zażądać."
+  },
+  "close": {
+    "message": "Zamknij"
+  },
+  "clr": {
+    "message": "Wyczyść"
+  },
+  "confirmAndSave": {
+    "message": "Potwierdź i Zapisz"
+  },
+  "confirmDelete": {
+    "message": "Potwierdź Usunięcie"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "Potwierdź Ustawienia Inteligentnego Automatycznego Czyszczenia"
+  },
+  "contact": {
+    "message": "Kontakt"
+  },
+  "contactAndFeedback": {
+    "message": "Kontakt i Opinie"
+  },
+  "contactLimitReached": {
+    "message": "Osiągnięto limit kontaktów na dziś."
+  },
+  "containsDotCom": {
+    "message": "Zawiera \".com\""
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>Zawiera Wiele Słów:\u003C/strong> Użyj \u003Ccode>{{pipe}}\u003C/code>, aby wyszukać wpisy zawierające jedno z kilku słów (np. \u003Ccode>{{example}}\u003C/code>)."
+  },
+  "containsNewsOrInfo": {
+    "message": "Zawiera \"Wiadomości\" lub \"Info\""
+  },
+  "containsNumbers": {
+    "message": "Zawiera Liczby"
+  },
+  "containsSpaces": {
+    "message": "Zawiera Spacje"
+  },
+  "containsTODO": {
+    "message": "Zawiera \"DO ZROBIENIA\""
+  },
+  "current": {
+    "message": "Z Tej Witryny"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "Obecnie możesz przeglądać dane z ostatnich {{days}} {{dayLabel}}. Więcej dni zostanie dodanych automatycznie."
+  },
+  "custom": {
+    "message": "Niestandardowy"
+  },
+  "customExport": {
+    "message": "Niestandardowy Eksport"
+  },
+  "customRange": {
+    "message": "Niestandardowy Zakres"
+  },
+  "dailyAtMidnight": {
+    "message": "Codziennie (o północy)"
+  },
+  "darkMode": {
+    "message": "Tryb Ciemny"
+  },
+  "dateAndTimeOrder": {
+    "message": "Kolejność Daty i Godziny"
+  },
+  "day": {
+    "message": "dzień"
+  },
+  "days": {
+    "message": "dni"
+  },
+  "debugToolsTitle": {
+    "message": "Narzędzia Debugowania (do testowania):"
+  },
+  "default": {
+    "message": "Domyślny"
+  },
+  "delete": {
+    "message": "Usuń"
+  },
+  "deleteAllForHour": {
+    "message": "Czy na pewno chcesz trwale usunąć całą historię przeglądania dla godziny **{{startHour}}**?\u003Cbr>Spowoduje to usunięcie historii przeglądania dla całej godziny ({{startAndendHour}}). Raz usuniętej, tej operacji nie można cofnąć."
+  },
+  "deleteAllFromDate": {
+    "message": "Czy na pewno chcesz trwale usunąć całą historię przeglądania dla **{{date}}**?\u003Cbr>Spowoduje to usunięcie wszystkich rekordów z tego dnia. Raz usuniętej, tej operacji nie można cofnąć."
+  },
+  "deleteAllSearchHistory": {
+    "message": "Czy na pewno chcesz trwale usunąć wszystkie wyszukane wpisy historii przeglądania wymienione na tej stronie?\u003Cbr/>Ta operacja usunie wszystkie wpisy wyświetlone w bieżących wynikach wyszukiwania. Raz usuniętej, tej operacji nie można cofnąć."
+  },
+  "deleteBulk": {
+    "message": "Usuń"
+  },
+  "deleteDomainConfirm": {
+    "message": "Czy na pewno chcesz usunąć całą historię z domeny \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span>? Ta operacja usunie wszystkie powiązane wpisy i nie można jej cofnąć."
+  },
+  "deleteDomainStats": {
+    "message": "Usunąć Statystyki Domeny?"
+  },
+  "deleteEntire": {
+    "message": "Usuń Cały Dzień"
+  },
+  "deleteEntireHistory": {
+    "message": "Usuń Całą Historię"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "Usunąć Całą Historię?"
+  },
+  "deleteHistory": {
+    "message": "Usuń Historię"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "Czy na pewno chcesz usunąć całą historię przeglądania? Ta operacja jest trwała i nie można jej cofnąć."
+  },
+  "deleteMsg": {
+    "message": "Usunąć wszystkie wyniki wyszukiwania?"
+  },
+  "deleteSelectedHistory": {
+    "message": "Usuń Zaznaczoną Historię"
+  },
+  "deleteSpecificDate": {
+    "message": "Usuń Konkretną Datę"
+  },
+  "deleteStatsConfirmation": {
+    "message": "Zamierzasz trwale usunąć wszystkie dane śledzenia dla \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> z BetterHistory.\u003Cbr>\u003Cbr>Tej operacji nie można cofnąć."
+  },
+  "deleteUrlConfirm": {
+    "message": "Czy na pewno chcesz usunąć adres URL \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> ze swojej historii? Tej operacji nie można cofnąć."
+  },
+  "deletedSelectedHistory": {
+    "message": "Czy na pewno chcesz trwale usunąć {{selectedNumber}} zaznaczonych wpisów historii?\u003Cbr/>Ta operacja trwale usunie wszystkie {{selectedNumber}} zaznaczone wpisy. Raz usuniętej, tej operacji nie można cofnąć."
+  },
+  "devices": {
+    "message": "Urządzenia"
+  },
+  "disableTimeTracking": {
+    "message": "Wyłączenie tej opcji zatrzyma śledzenie i ukryje wszystkie statystyki."
+  },
+  "domainAlreadyExists": {
+    "message": "Ta domena jest już na Twojej liście"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "Wiersz ${index + 1}: Domena już istnieje (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "Czarna Lista Domen"
+  },
+  "domainCannotBeEmpty": {
+    "message": "Domena nie może być pusta"
+  },
+  "domainStats": {
+    "message": "Statystyki Domeny"
+  },
+  "domainWithSubdomains": {
+    "message": "Domena ze wszystkimi subdomenami"
+  },
+  "domains": {
+    "message": "Domeny"
+  },
+  "email": {
+    "message": "E-mail"
+  },
+  "emailArticle": {
+    "message": "Artykuły Wsparcia"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}: \u003C/span>Przeglądaj nasze przewodniki wsparcia i często zadawane pytania na stronie \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">Wsparcie BetterHistory\u003C/span>\u003C/a>."
+  },
+  "emailSupport": {
+    "message": "Wsparcie E-mail"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}:\u003C/span> W przypadku jakichkolwiek pytań lub problemów, skontaktuj się z nami pod adresem 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a>."
+  },
+  "enableStats": {
+    "message": "Włącz Statystyki"
+  },
+  "enableStatsDescription": {
+    "message": "Włącz lub wyłącz całą funkcjonalność statystyk. Gdy wyłączone, żadne statystyki nie będą zbierane ani wyświetlane."
+  },
+  "enable_popup": {
+    "message": "Włącz Wyskakujące Okienko"
+  },
+  "endsWithQuestionMark": {
+    "message": "Kończy się na \"?\""
+  },
+  "enterAValidDomain": {
+    "message": "Wprowadź poprawną domenę"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "Wprowadź co najmniej jedną domenę"
+  },
+  "enterDomain": {
+    "message": "Wprowadź Domenę, Którą Chcesz Wykluczyć z Historii"
+  },
+  "enterDomainName": {
+    "message": "Wprowadź Nazwę Domeny"
+  },
+  "enterDomainPerLine": {
+    "message": "Dodaj wiele domen do swojej białej listy jednocześnie. Wprowadź jedną domenę na wiersz."
+  },
+  "enterDomainToBlock": {
+    "message": "Wprowadź domenę do zablokowania (np. example.com)"
+  },
+  "enterDomainToWhitelist": {
+    "message": "Wprowadź domenę do umieszczenia na białej liście (np. example.com)"
+  },
+  "enterValidDomain": {
+    "message": "Wprowadź co najmniej jedną poprawną domenę"
+  },
+  "entireExport": {
+    "message": "Eksport Całości (90 Dni)"
+  },
+  "entries": {
+    "message": "Wpisy"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "Usuń Całą Historię dla Tej Witryny"
+  },
+  "error": {
+    "message": "Błąd"
+  },
+  "errorClearingHistory": {
+    "message": "Nie udało się wyczyścić historii. Spróbuj ponownie."
+  },
+  "errorClearingStats": {
+    "message": "Nie udało się wyczyścić statystyk"
+  },
+  "errorLoadingData": {
+    "message": "Błąd Ładowania Danych"
+  },
+  "errorLoadingSettings": {
+    "message": "Błąd ładowania ustawień. Używane są wartości domyślne."
+  },
+  "errorSavingSettings": {
+    "message": "Nie udało się zapisać ustawień. Spróbuj ponownie."
+  },
+  "exactWordProject": {
+    "message": "Dokładne Słowo \"Projekt\""
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "Poznaj Nasze Produkty"
+  },
+  "export": {
+    "message": "Eksportuj"
+  },
+  "exportAsJSON": {
+    "message": "Eksportuj jako JSON"
+  },
+  "exportAsPDF": {
+    "message": "Eksportuj jako PDF"
+  },
+  "exportCsv": {
+    "message": "Eksportuj CSV"
+  },
+  "exportEntireLocalData": {
+    "message": "Eksportuj Całe Dane Lokalne"
+  },
+  "exportHistory": {
+    "message": "Eksportuj Całą Swoją Historię Przeglądania"
+  },
+  "exportHistoryDescription": {
+    "message": "Ta funkcja umożliwia eksport całej historii przeglądania (do 90 dni) lub wybranie niestandardowego zakresu dat do eksportu. Pamiętaj, że interfejs API historii Chrome obsługuje tylko eksport historii — nie zezwala na importowanie historii z powrotem."
+  },
+  "exportHistoryLimitation": {
+    "message": "Ponadto Chrome automatycznie usuwa historię starszą niż 90 dni, więc BetterHistory może eksportować tylko te rekordy, które Chrome zachowuje."
+  },
+  "exportHtml": {
+    "message": "Eksportuj HTML"
+  },
+  "exportLocalData": {
+    "message": "Eksportuj Dane Lokalne"
+  },
+  "exportSelectedCsv": {
+    "message": "Eksportuj Zaznaczone do CSV"
+  },
+  "exportSelectedHtml": {
+    "message": "Eksportuj Zaznaczone do HTML"
+  },
+  "exportTimeTrackingData": {
+    "message": "Eksportuj Dane Śledzenia Czasu"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "To są Twoje lokalnie przechowywane dane śledzenia czasu, które możesz wyeksportować do użytku osobistego. Odzwierciedlają czas spędzony na odwiedzonych stronach, pomagając Ci analizować swoje nawyki przeglądania."
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "Te dane są zapisywane tylko w Twojej przeglądarce i nie są synchronizowane ani przechowywane online. Usunięcie rozszerzenia BetterHistory trwale usunie wszystkie dane śledzenia czasu. Regularnie eksportuj swoje dane, jeśli chcesz zachować kopię zapasową."
+  },
+  "exportToCSV": {
+    "message": "Eksportuj do CSV"
+  },
+  "exportToTXT": {
+    "message": "Eksportuj do TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "Wyeksportowana Historia Przeglądania - Data:"
+  },
+  "exportedHistoryKeyword": {
+    "message": "Wyeksportowana Historia Przeglądania - Słowo Kluczowe:"
+  },
+  "featureRequest": {
+    "message": "Prośba o Funkcję"
+  },
+  "feedback": {
+    "message": "Opinie"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "Akceptuję \u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">Politykę Prywatności\u003C/span>\u003C/a> i przetwarzanie danych."
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "Podaj swój adres e-mail w celu kontaktu w sprawie Twojego zgłoszenia."
+  },
+  "feedbackForm": {
+    "message": "Formularz Opinii"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}:\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">Kliknij tutaj, aby przesłać swoją opinię\u003C/span>."
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "Rozmiar pliku przekracza 5 MB. Prześlij mniejszy plik."
+  },
+  "find_all_visits_domain": {
+    "message": "Znajdź wszystkie wizyty na {{d}}"
+  },
+  "generalContact": {
+    "message": "Ogólny Kontakt"
+  },
+  "generatedUsing": {
+    "message": "Ten dokument został wygenerowany za pomocą"
+  },
+  "grantPermissions": {
+    "message": "Przyznaj Uprawnienia"
+  },
+  "groupSession": {
+    "message": "Grupuj Sesję"
+  },
+  "history": {
+    "message": "Historia"
+  },
+  "historyCleared": {
+    "message": "Historia wyczyszczona"
+  },
+  "historyControlsFor": {
+    "message": "Kontrola Historii dla"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "Historia z domen na białej liście zostanie zachowana podczas czyszczenia"
+  },
+  "historyRetentionHelp": {
+    "message": "Historia w wybranym przedziale czasowym zostanie zachowana i wyłączona z automatycznego czyszczenia."
+  },
+  "hourFormat": {
+    "message": "Format Godziny"
+  },
+  "hours": {
+    "message": "Godziny"
+  },
+  "howDidWeDo": {
+    "message": "Jak nam poszło?"
+  },
+  "howLongKeepHistory": {
+    "message": "Jak długo Twoja historia przeglądania powinna być przechowywana, zanim będzie kwalifikować się do automatycznego usunięcia?"
+  },
+  "howToUseTheSearchTool": {
+    "message": "Jak korzystać z narzędzia wyszukiwania"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "idleDetectionDescription": {
+    "message": "• Wykrywanie bezczynności (zatrzymuje śledzenie, gdy jesteś nieobecny)"
+  },
+  "import": {
+    "message": "Importuj"
+  },
+  "importEntireLocalData": {
+    "message": "Importuj Dane Lokalne"
+  },
+  "importFailed": {
+    "message": "Nie udało się zaimportować danych"
+  },
+  "importJSON": {
+    "message": "Importuj JSON"
+  },
+  "importSuccessful": {
+    "message": "Dane zaimportowano pomyślnie"
+  },
+  "infinityScroll": {
+    "message": "Włącz Nieskończone Przewijanie"
+  },
+  "interfaceStyle": {
+    "message": "Ustawienia Wyświetlania"
+  },
+  "invalidDomainFormat": {
+    "message": "Wprowadź poprawny format domeny (np. example.com)"
+  },
+  "invalidDomainFormatLine": {
+    "message": "Wiersz ${index + 1}: Nieprawidłowy format domeny (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "Nieprawidłowy typ pliku. Prześlij obraz JPG lub PNG."
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> nie jest poprawną domeną. Użyj poprawnej domeny, aby dodać ją do czarnej listy."
+  },
+  "keepHistoryCheckText": {
+    "message": "Zachowaj historię z witryn, które dodałeś do białej listy"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "Zachowaj historię z witryn, które dodałeś do białej listy"
+  },
+  "large": {
+    "message": "Duży"
+  },
+  "last15Days": {
+    "message": "15 dni"
+  },
+  "last2Months": {
+    "message": "Ostatnie 2 Miesiące"
+  },
+  "last30Days": {
+    "message": "30 dni"
+  },
+  "last3Months": {
+    "message": "Ostatnie 3 Miesiące"
+  },
+  "last60Days": {
+    "message": "60 dni"
+  },
+  "last7Days": {
+    "message": "7 dni"
+  },
+  "last90Days": {
+    "message": "90 dni"
+  },
+  "lastMonth": {
+    "message": "Ostatni Miesiąc"
+  },
+  "lastVisitTime": {
+    "message": "Ostatnia Godzina Wizyty"
+  },
+  "lastWeek": {
+    "message": "Ostatni Tydzień"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "Dowiedz się więcej o automatycznym czyszczeniu"
+  },
+  "learnMoreAboutRetention": {
+    "message": "Dowiedz się więcej o okresie retencji"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "Daj mi znać, jeśli potrzebujesz dodatkowych dostosowań."
+  },
+  "lightMode": {
+    "message": "Tryb Jasny"
+  },
+  "loadingSettings": {
+    "message": "Ładowanie ustawień..."
+  },
+  "ltr": {
+    "message": "LTR (od lewej do prawej)"
+  },
+  "mainDomainNote": {
+    "message": "Zablokowanie domeny głównej nie blokuje automatycznie jej subdomen"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "Zarządzaj Śledzeniem Czasu i Statystykami Użycia"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "Gdy włączone, BetterHistory śledzi, ile czasu spędzasz na każdej stronie internetowej, w tym czas trwania sesji oraz czas aktywny vs. czas bezczynności. Wszystkie dane są przechowywane lokalnie w Twojej przeglądarce i używane wyłącznie w celu dostarczenia szczegółowych informacji o przeglądaniu i analizy czasu."
+  },
+  "manifest_browser_action_title": {
+    "message": "Przeglądaj Historię"
+  },
+  "manifest_description": {
+    "message": "Elegancki Menedżer Historii: Potężne Wyszukiwanie, Eksport Masowy, Usuwanie Niestandardowych Zaznaczeń, Filtrowanie Według Dnia i Godziny oraz Blokowanie Określonych Domen z Historii."
+  },
+  "maxSize": {
+    "message": "Maks. Rozmiar"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• Wykrywanie odtwarzania multimediów (kontynuuje śledzenie podczas filmów/muzyki)"
+  },
+  "medium": {
+    "message": "Średni"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "Co miesiąc (1. dzień każdego miesiąca)"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "Więcej dni zostanie dodanych automatycznie."
+  },
+  "moreFromSite": {
+    "message": "Więcej z tej witryny"
+  },
+  "mostActiveDay": {
+    "message": "Najbardziej aktywny dzień"
+  },
+  "neverDisabled": {
+    "message": "Nigdy (wyłączone)"
+  },
+  "noActivityData": {
+    "message": "Brak danych aktywności dla tego okresu"
+  },
+  "noBlacklistType": {
+    "message": "Brak {{type}} na Twojej czarnej liście"
+  },
+  "noChangesToSave": {
+    "message": "Brak zmian do zapisania"
+  },
+  "noDevices": {
+    "message": "Nie znaleziono aktywnych sesji urządzeń."
+  },
+  "noDomainBlacklisted": {
+    "message": "Jeszcze nie zablokowano domen"
+  },
+  "noDomains": {
+    "message": "Jeszcze nie dodano domen do białej listy"
+  },
+  "noDomainsType": {
+    "message": "Brak {{type}} na Twojej białej liście"
+  },
+  "noFileSelectedMessage": {
+    "message": "Nie wybrano pliku. Prześlij poprawny plik."
+  },
+  "noMoreResults": {
+    "message": "Brak Dalszych Wyników"
+  },
+  "noResultsFound": {
+    "message": "Nie znaleziono wyników. Spróbuj dostosować warunki wyszukiwania lub filtry."
+  },
+  "noThanks": {
+    "message": "Nie, Dziękuję"
+  },
+  "noTitle": {
+    "message": "Brak Tytułu"
+  },
+  "noVisits": {
+    "message": "Przepraszamy, nie znaleziono wizyt."
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>Tylko Liczby:\u003C/strong> Użyj \u003Ccode>{{pattern}}\u003C/code>, aby znaleźć wpisy z cyframi."
+  },
+  "of": {
+    "message": "z"
+  },
+  "ok": {
+    "message": "OK"
+  },
+  "oneMonth": {
+    "message": "Jeden miesiąc"
+  },
+  "oneWeek": {
+    "message": "Jeden tydzień"
+  },
+  "openAllTabs": {
+    "message": "Otwórz Wszystkie Karty"
+  },
+  "openMenu": {
+    "message": "Otwórz menu"
+  },
+  "openTab": {
+    "message": "Otwórz w Nowej Karcie"
+  },
+  "order": {
+    "message": "Kolejność"
+  },
+  "otherOptions": {
+    "message": "Ogólne Preferencje"
+  },
+  "page": {
+    "message": "Strona"
+  },
+  "paths": {
+    "message": "Ścieżki"
+  },
+  "permissionGranted": {
+    "message": "✓ Przyznano"
+  },
+  "permissionMissing": {
+    "message": "✗ Brak"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "Uprawnienia Już Przyznane"
+  },
+  "pleaseNote": {
+    "message": "Proszę Zauważyć:"
+  },
+  "pleaseRateUs": {
+    "message": "Prosimy o Ocenę!"
+  },
+  "prefixesAutoRemoved": {
+    "message": "Prefiksy takie jak 'http://', 'https://' i 'www.' zostaną automatycznie usunięte."
+  },
+  "prefixesRemoved": {
+    "message": "Prefiksy takie jak 'http://', 'https://' i 'www.' są automatycznie usuwane"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "Umieść Tę Witrynę na Czarnej Liście dla Rejestrowania Historii"
+  },
+  "privacyPolicy": {
+    "message": "Polityka Prywatności"
+  },
+  "privacyTerms": {
+    "message": "Prywatność i Warunki"
+  },
+  "processing": {
+    "message": "Przetwarzanie..."
+  },
+  "rateText": {
+    "message": "Twój wkład pomaga nam ulepszać BetterHistory. Daj nam znać, jak nam poszło!"
+  },
+  "recent": {
+    "message": "Ostatnie Wizyty"
+  },
+  "recordedVisits": {
+    "message": "Zarejestrowane wizyty na tej domenie"
+  },
+  "remove_url": {
+    "message": "Usuń Ten Adres URL z Historii"
+  },
+  "result": {
+    "message": "Wynik"
+  },
+  "results": {
+    "message": "Wyniki"
+  },
+  "retentionPeriod": {
+    "message": "Okres Retencji:"
+  },
+  "retentionPeriodHelp": {
+    "message": "Okres retencji określa, jak daleko wstecz Twoja historia przeglądania jest zachowywana. Starsza historia będzie kwalifikować się do czyszczenia."
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "Proszę przejrzeć ustawienia przed potwierdzeniem."
+  },
+  "revokePermissions": {
+    "message": "Odwołaj Uprawnienia"
+  },
+  "rightTitle": {
+    "message": "Opcje Menu Kontekstowego"
+  },
+  "rtl": {
+    "message": "RTL (od prawej do lewej)"
+  },
+  "saveSettings": {
+    "message": "Zapisz Ustawienia"
+  },
+  "search": {
+    "message": "Szukaj"
+  },
+  "searchDeeper": {
+    "message": "Szukaj głębiej"
+  },
+  "searchDomainTitle": {
+    "message": "Szukaj wg Domeny"
+  },
+  "searchEngine": {
+    "message": "Wyszukiwarka"
+  },
+  "searchMsg": {
+    "message": "Pst... Spróbuj czegoś poszukać"
+  },
+  "searchPlaceholder": {
+    "message": "Szukaj tytułu lub adresu URL"
+  },
+  "searchTextTitle": {
+    "message": "Szukaj wg Zaznaczenia Tekstu"
+  },
+  "searchTips": {
+    "message": "Wskazówki Dotyczące Wyszukiwania"
+  },
+  "searchTipsMsg1": {
+    "message": "Wyszukiwanie za pomocą wyrażeń regularnych jest już obsługiwane!"
+  },
+  "searchTipsMsg2": {
+    "message": "Na przykład, spróbuj wyszukać"
+  },
+  "searchTipsMsg3": {
+    "message": "Szukaj wizyt i pobrań"
+  },
+  "searchTipsMsg4": {
+    "message": "Wyszukiwanie automatycznie znajdzie wizyty po tytule strony i adresie URL, a także pobrania po nazwie pliku i adresie URL."
+  },
+  "searchTipsMsg5": {
+    "message": "Twoje ostatnie 10 000 wizyt jest używane do szybkiego, początkowego wyszukiwania. Aby szukać głębiej, przejdź na dół ostatniej strony wyników i kliknij przycisk 'Szukaj głębiej'."
+  },
+  "searchToolDescription": {
+    "message": "To narzędzie umożliwia skuteczne przeszukiwanie historii przeglądania za pomocą prostych słów kluczowych lub zaawansowanych **Wyrażeń Regularnych (RegEx)**. Poniżej znajduje się kilka przykładów, które pomogą Ci zacząć:"
+  },
+  "search_history": {
+    "message": "Szukaj w Historii"
+  },
+  "searchedUrlDeleted": {
+    "message": "Wyszukane adresy URL zostały usunięte"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "Wyszukane adresy URL zostały usunięte z wyjątkiem domen na białej liście"
+  },
+  "searching": {
+    "message": "Wyszukiwanie"
+  },
+  "selectDateFormat": {
+    "message": "Format Daty"
+  },
+  "selectDateRange": {
+    "message": "Wybierz zakres dat"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "Wybierz Datę do Usunięcia Historii"
+  },
+  "selectEndDate": {
+    "message": "Wybierz datę zakończenia"
+  },
+  "selectStartDate": {
+    "message": "Wybierz datę rozpoczęcia"
+  },
+  "selected": {
+    "message": "Wybrano"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "Historia wybranej daty została usunięta"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "Historia wybranej daty została usunięta z wyjątkiem domen na białej liście"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "Historia wybranej godziny została usunięta"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "Historia Wybranej Godziny została usunięta z wyjątkiem domen na białej liście"
+  },
+  "sessions": {
+    "message": "Sesje"
+  },
+  "settings": {
+    "message": "Ustawienia"
+  },
+  "settingsSaved": {
+    "message": "Ustawienia zapisane"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "Twoje ustawienia Inteligentnego Automatycznego Czyszczenia zostały pomyślnie zaktualizowane."
+  },
+  "shortRetentionWarning": {
+    "message": "Ustawienie krótkiego okresu retencji wynoszącego jeden tydzień oznacza, że Twoja starsza historia przeglądania będzie czyszczona częściej. Upewnij się, że jest to zgodne z Twoimi potrzebami."
+  },
+  "show": {
+    "message": "Pokaż"
+  },
+  "showAllHistory": {
+    "message": "Pokaż Całą Historię"
+  },
+  "showStats": {
+    "message": "Pokaż Statystyki"
+  },
+  "small": {
+    "message": "Mały"
+  },
+  "smartAutoCleanup": {
+    "message": "Inteligentne Automatyczne Czyszczenie"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "Automatycznie zarządzaj historią przeglądania dzięki Inteligentnemu Automatycznemu Czyszczeniu. Wybierz, jak często ma być uruchamiane czyszczenie i jak długo ma być przechowywana Twoja ostatnia historia."
+  },
+  "smartAutoCleanupSettings": {
+    "message": "Ustawienia Inteligentnego Automatycznego Czyszczenia"
+  },
+  "smartHistoryCleanup": {
+    "message": "Inteligentne Czyszczenie Historii"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "Czyści historię przeglądania z wyjątkiem witryn, które dodałeś do białej listy. Ta funkcja pomaga zachować prywatność aktywności, jednocześnie zachowując ważną historię z zaufanych lub często używanych witryn."
+  },
+  "socialMediaTip": {
+    "message": "W przypadku witryn mediów społecznościowych rozważ blokowanie określonych sekcji (facebook.com/marketplace/*)"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "Niektóre domeny nie mogły zostać dodane:\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "Brakuje niektórych uprawnień"
+  },
+  "specificPage": {
+    "message": "Określona strona"
+  },
+  "specificPath": {
+    "message": "Określona ścieżka"
+  },
+  "specificSubdomain": {
+    "message": "Określona subdomena"
+  },
+  "start": {
+    "message": "Początek"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>Zaczyna się od:\u003C/strong> Użyj ^, aby znaleźć wpisy, które zaczynają się od określonego słowa (np. ^SkrzynkaOdbiorcza)."
+  },
+  "startsWithInbox": {
+    "message": "Zaczyna się od \"SkrzynkaOdbiorcza\""
+  },
+  "statsCleared": {
+    "message": "Statystyki wyczyszczone"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "Anuluj"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "Aby pomóc Ci śledzić czas spędzony na stronach internetowych, wyświetlać szczegóły sesji i eksportować raporty czasowe w formacie PDF, potrzebujemy zezwolenia na dostęp do Twojej aktywności przeglądania."
+  },
+  "statsPermissionDialogGrant": {
+    "message": "Przyznaj Uprawnienia"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "Wprowadziliśmy nową funkcję Śledzenia Czasu w BetterHistory!"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "Nowe Wymagane Uprawnienie do Śledzenia Czasu"
+  },
+  "subdomainNote": {
+    "message": "Umieszczenie domeny głównej na białej liście nie powoduje automatycznego umieszczenia na niej jej subdomen"
+  },
+  "subdomains": {
+    "message": "Subdomeny"
+  },
+  "submit": {
+    "message": "Wyślij"
+  },
+  "submitFeedback": {
+    "message": "Wyślij Opinię"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "Twoje sugestie i opinie pomagają nam ulepszać BetterHistory i zapewniać najlepsze doświadczenia użytkownika."
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 lub Więcej Znaków"
+  },
+  "termsOfService": {
+    "message": "Warunki Usługi"
+  },
+  "thankYou": {
+    "message": "Dziękujemy!"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "Tej operacji nie można cofnąć."
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "Ten adres URL lub domena jest już wymieniony w Domenach na Czarnej Liście"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "Ten adres URL lub domena jest już wymieniony w Domenach na Białej Liście"
+  },
+  "threeMonths": {
+    "message": "Trzy miesiące"
+  },
+  "timeTrackingStartedOn": {
+    "message": "Śledzenie czasu rozpoczęte {{date}}"
+  },
+  "tips": {
+    "message": "Wskazówki"
+  },
+  "title": {
+    "message": "Tytuł"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "Aby umieścić każdą stronę domeny i jej subdomen na czarnej liście, napisz:"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "Aby umieścić każdą stronę domeny na czarnej liście, napisz:"
+  },
+  "todalWords": {
+    "message": "Suma Słów"
+  },
+  "today": {
+    "message": "Dziś"
+  },
+  "toolbarIcon": {
+    "message": "Motyw Ikony Paska Narzędzi"
+  },
+  "totalEntries": {
+    "message": "łączna liczba Wpisów"
+  },
+  "totalVisits": {
+    "message": "Łączna Liczba Wizyt"
+  },
+  "twoWeeks": {
+    "message": "Dwa tygodnie"
+  },
+  "typdCount": {
+    "message": "Liczba Wpisanych"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "Wpisz dowolne słowo kluczowe, aby znaleźć pasujące wpisy."
+  },
+  "typeDeleteToConfirm": {
+    "message": "Wpisz \"delete\", aby potwierdzić:"
+  },
+  "typedCount": {
+    "message": "Wpisano {{times}} razy w pasku adresu"
+  },
+  "unableToLoadDomainStats": {
+    "message": "Nie można załadować statystyk domeny. Spróbuj ponownie później."
+  },
+  "understandSettings": {
+    "message": "Rozumiem te ustawienia i to, jak wpłyną na moją historię przeglądania"
+  },
+  "understandYourRights": {
+    "message": "Poznaj Swoje Prawa"
+  },
+  "uniqueUrls": {
+    "message": "unikalne adresy URL"
+  },
+  "updatingData": {
+    "message": "Aktualizowanie danych..."
+  },
+  "uploadScreenShot": {
+    "message": "Prześlij Zrzut Ekranu"
+  },
+  "urlDeleted": {
+    "message": "Adres URL został Usunięty"
+  },
+  "urlPatternGuide": {
+    "message": "Przewodnik po Wzorcach URL"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "Możesz użyć następujących wzorców do blokowania witryn internetowych:"
+  },
+  "useSpecificPaths": {
+    "message": "Użyj określonych ścieżek, aby umieścić na białej liście tylko niektóre sekcje witryny"
+  },
+  "viewHere": {
+    "message": "Zobacz Tutaj"
+  },
+  "viewStats": {
+    "message": "Zobacz Statystyki"
+  },
+  "viewStatsButton": {
+    "message": "Zobaczysz również przycisk \"Zobacz Statystyki\" przy każdym wpisie na stronie Aktywności, aby mieć szybki dostęp do szczegółowych danych czasowych"
+  },
+  "visitCount": {
+    "message": "Link odwiedzony {{times}} razy"
+  },
+  "visitSite": {
+    "message": "Odwiedź witrynę"
+  },
+  "visits_domain": {
+    "message": "Zobacz Wszystkie Wizyty na Tej Domenie"
+  },
+  "vstCount": {
+    "message": "Liczba Wizyt"
+  },
+  "weValueYourInputMessage": {
+    "message": "Cenimy Twój wkład i jesteśmy tutaj, aby Ci pomóc!"
+  },
+  "websiteAccessDescription": {
+    "message": "• Dostęp do witryny (do monitorowania aktywności)"
+  },
+  "websites": {
+    "message": "Witryny"
+  },
+  "weeklyEverySunday": {
+    "message": "Co tydzień (w każdą niedzielę)"
+  },
+  "whatThisMeans": {
+    "message": "Co to oznacza:"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "Jakie wzorce URL są dozwolone?"
+  },
+  "whenBrowserCloses": {
+    "message": "Po zamknięciu przeglądarki"
+  },
+  "whenShouldCleanupRun": {
+    "message": "Kiedy powinno być uruchamiane Inteligentne Automatyczne Czyszczenie?"
+  },
+  "whitelist": {
+    "message": "Biała Lista"
+  },
+  "whitelistDomain": {
+    "message": "Domena na Białej Liście"
+  },
+  "whitelistDomains": {
+    "message": "Biała Lista Domen"
+  },
+  "whitelistExactDomain": {
+    "message": "Umieszcza na białej liście tylko dokładną domenę, a nie subdomeny ani określone ścieżki."
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "Umieszcza na białej liście domenę główną i wszystkie jej subdomeny (mail.example.com, blog.example.com itd.)."
+  },
+  "whitelistPatterns": {
+    "message": "Możesz użyć następujących wzorców dla białej listy:"
+  },
+  "whitelistPrecedence": {
+    "message": "Domeny na białej liście mają pierwszeństwo przed domenami na czarnej liście"
+  },
+  "whitelistSpecificPage": {
+    "message": "Umieszcza na białej liście tylko określoną stronę w domenie."
+  },
+  "whitelistSpecificPath": {
+    "message": "Umieszcza na białej liście wszystkie strony pod określoną ścieżką w domenie."
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "Umieszcza na białej liście tylko określoną subdomenę, a nie domenę główną ani inne subdomeny."
+  },
+  "whitelistedDomains": {
+    "message": "Domeny na Białej Liście"
+  },
+  "wildcardWarning": {
+    "message": "Używaj symbolu wieloznacznego (*) ostrożnie, ponieważ może zablokować więcej, niż zamierzasz"
+  },
+  "yesterday": {
+    "message": "Wczoraj"
+  }
+}

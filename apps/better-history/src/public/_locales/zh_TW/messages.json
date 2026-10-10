@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "請描述我們可以新增或改進的內容。"
+  },
+  "FeedbackSuccessAlert": {
+    "message": "感謝！您的意見回饋已成功送出。"
+  },
+  "Friday": {
+    "message": "星期五"
+  },
+  "Monday": {
+    "message": "星期一"
+  },
+  "Popup": {
+    "message": "彈出視窗"
+  },
+  "Saturday": {
+    "message": "星期六"
+  },
+  "Sidebar": {
+    "message": "側邊欄"
+  },
+  "Sunday": {
+    "message": "星期日"
+  },
+  "ThanksForFeedBack": {
+    "message": "感謝您的意見回饋！"
+  },
+  "Thursday": {
+    "message": "星期四"
+  },
+  "Today": {
+    "message": "今天"
+  },
+  "Tuesday": {
+    "message": "星期二"
+  },
+  "URL": {
+    "message": "網址 (URL)"
+  },
+  "Wednesday": {
+    "message": "星期三"
+  },
+  "WhatCanWeImprove": {
+    "message": "我們可以改進什麼？"
+  },
+  "Yesterday": {
+    "message": "昨天"
+  },
+  "about": {
+    "message": "關於"
+  },
+  "activity": {
+    "message": "活動"
+  },
+  "add": {
+    "message": "新增"
+  },
+  "addDomains": {
+    "message": "新增網域"
+  },
+  "addToBlackList": {
+    "message": "新增到黑名單"
+  },
+  "advanceExport": {
+    "message": "進階匯出"
+  },
+  "advancedFeaturesActive": {
+    "message": "進階功能現已啟用。"
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "進階功能需要額外的權限："
+  },
+  "all": {
+    "message": "全部"
+  },
+  "allCapitalLetters": {
+    "message": "所有大寫字母"
+  },
+  "allHistoryDeleted": {
+    "message": "所有歷史紀錄均已刪除"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "除白名單網域外的所有歷史紀錄均已刪除"
+  },
+  "allPermissionsGranted": {
+    "message": "所有權限均已授予！"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "所有選定的網址均已刪除"
+  },
+  "allTime": {
+    "message": "所有時間"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "請允許存取權限以送出意見回饋"
+  },
+  "appName": {
+    "message": "Better History | 管理、匯出與刪除歷史紀錄"
+  },
+  "apply": {
+    "message": "套用"
+  },
+  "autoCleanupDisabled": {
+    "message": "自動清理已停用。您仍然可以在需要時手動清除歷史紀錄。"
+  },
+  "autoCleanupEnabled": {
+    "message": "您的瀏覽歷史紀錄將根據所選排程自動清理。"
+  },
+  "autoCleanupHelp": {
+    "message": "自動清理有助於維護您的私隱，方法是根據您的偏好設定定期刪除瀏覽歷史紀錄。"
+  },
+  "autoCleanupSchedule": {
+    "message": "自動清理排程："
+  },
+  "avgPerDay": {
+    "message": "平均每天 {{time}}"
+  },
+  "basicDomain": {
+    "message": "基本網域"
+  },
+  "basicSearch": {
+    "message": "基本搜尋"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}：\u003C/strong>輸入任何關鍵字以尋找匹配的條目（例如，「收件匣」）。"
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> 是由 \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span> 開發的創新瀏覽器擴充功能。它透過提供自訂刪除、精確篩選和直覺式介面等進階功能，讓使用者可以輕鬆管理其瀏覽歷史紀錄。在 BetterLogic Ltd，我們優先考慮使用者私隱和流暢功能，以增強您的瀏覽體驗。"
+  },
+  "blacklist": {
+    "message": "黑名單"
+  },
+  "blacklistDomain": {
+    "message": "黑名單網域"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "將網域從歷史紀錄中加入黑名單"
+  },
+  "blacklistDomains": {
+    "message": "黑名單網域"
+  },
+  "blacklistFeatureDescription": {
+    "message": "BetterHistory 中的「網域黑名單」功能可讓您封鎖特定網站不被記錄到您的瀏覽歷史紀錄中。一旦網域被列入黑名單，所有過去和將來對該網站的造訪都將自動刪除。"
+  },
+  "blacklistInstructionText": {
+    "message": "BetterHistory 中的「網域黑名單」功能可讓您封鎖特定網站不被記錄到您的瀏覽歷史紀錄中。一旦網域被列入黑名單，所有過去和將來對該網站的造訪都將自動刪除。"
+  },
+  "blacklistTips": {
+    "message": "提示"
+  },
+  "blacklist_confirmation": {
+    "message": "您確定要將 **{{DOMAIN}}** 從您的瀏覽歷史紀錄中加入黑名單嗎？\u003Cbr/>將來對該網域的造訪將不再被記錄，**{{DOMAIN}}** 的所有現有歷史紀錄條目都將被刪除。"
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> 已在黑名單中。"
+  },
+  "blacklistedDomains": {
+    "message": "黑名單網域"
+  },
+  "blockExactDomain": {
+    "message": "僅封鎖精確網域，不包括子網域或特定路徑。"
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "封鎖主網域及其所有子網域（mail.example.com、blog.example.com 等）。"
+  },
+  "blockSpecificPage": {
+    "message": "僅封鎖網域上的特定頁面。"
+  },
+  "blockSpecificPath": {
+    "message": "封鎖網域上特定路徑下的所有頁面。"
+  },
+  "blockSpecificSubdomain": {
+    "message": "僅封鎖特定的子網域，不包括主網域或其他子網域。"
+  },
+  "bugReport": {
+    "message": "錯誤報告"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "一次性將多個網域新增到您的黑名單。每行輸入一個網域。"
+  },
+  "bulkAddDomains": {
+    "message": "批次新增網域"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>區分大小寫：\u003C/strong>搜尋預設不區分大小寫。"
+  },
+  "chooseStartAndEndDates": {
+    "message": "選擇開始和結束日期"
+  },
+  "clear": {
+    "message": "清除"
+  },
+  "clearBrowsingHistory": {
+    "message": "清除瀏覽歷史紀錄"
+  },
+  "clearHistory": {
+    "message": "清除歷史紀錄"
+  },
+  "clearHistoryConfirm": {
+    "message": "您確定要刪除您的全部瀏覽歷史紀錄嗎？此操作是永久性的，無法復原。"
+  },
+  "clearStats": {
+    "message": "清除統計資料"
+  },
+  "clearing": {
+    "message": "正在清除..."
+  },
+  "clearingHistory": {
+    "message": "歷史紀錄管理"
+  },
+  "clickToRequestPermissions": {
+    "message": "點擊下面的按鈕請求這些權限。"
+  },
+  "close": {
+    "message": "關閉"
+  },
+  "clr": {
+    "message": "清除"
+  },
+  "confirmAndSave": {
+    "message": "確認並儲存"
+  },
+  "confirmDelete": {
+    "message": "確認刪除"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "確認智慧型自動清理設定"
+  },
+  "contact": {
+    "message": "聯絡"
+  },
+  "contactAndFeedback": {
+    "message": "聯絡與意見回饋"
+  },
+  "contactLimitReached": {
+    "message": "您已達到今天的聯絡限制。"
+  },
+  "containsDotCom": {
+    "message": "包含「.com」"
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>包含多個單字：\u003C/strong>使用 \u003Ccode>{{pipe}}\u003C/code> 搜尋包含多個單字中任一個的條目（例如，\u003Ccode>{{example}}\u003C/code>）。"
+  },
+  "containsNewsOrInfo": {
+    "message": "包含「新聞」或「資訊」"
+  },
+  "containsNumbers": {
+    "message": "包含數字"
+  },
+  "containsSpaces": {
+    "message": "包含空格"
+  },
+  "containsTODO": {
+    "message": "包含「待辦事項」"
+  },
+  "current": {
+    "message": "來自此網站"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "目前，您可以查看過去 {{days}} {{dayLabel}} 的資料。系統將會自動新增更多天數。"
+  },
+  "custom": {
+    "message": "自訂"
+  },
+  "customExport": {
+    "message": "自訂匯出"
+  },
+  "customRange": {
+    "message": "自訂範圍"
+  },
+  "dailyAtMidnight": {
+    "message": "每日（午夜）"
+  },
+  "darkMode": {
+    "message": "深色模式"
+  },
+  "dateAndTimeOrder": {
+    "message": "日期和時間順序"
+  },
+  "day": {
+    "message": "天"
+  },
+  "days": {
+    "message": "天"
+  },
+  "debugToolsTitle": {
+    "message": "偵錯工具（用於測試）："
+  },
+  "default": {
+    "message": "預設"
+  },
+  "delete": {
+    "message": "刪除"
+  },
+  "deleteAllForHour": {
+    "message": "您確定要永久刪除 **{{startHour}}** 的所有瀏覽歷史紀錄嗎？\u003Cbr>這將會刪除整個小時（{{startAndendHour}}）的瀏覽歷史紀錄。一旦刪除，此操作無法復原。"
+  },
+  "deleteAllFromDate": {
+    "message": "您確定要永久刪除 **{{date}}** 的所有瀏覽歷史紀錄嗎？\u003Cbr>這將會刪除該日期的所有記錄。一旦刪除，此操作無法復原。"
+  },
+  "deleteAllSearchHistory": {
+    "message": "您確定要永久刪除此頁面上列出的所有已搜尋瀏覽歷史紀錄條目嗎？\u003Cbr/>此操作將刪除目前搜尋結果中顯示的所有條目。一旦刪除，此操作無法復原。"
+  },
+  "deleteBulk": {
+    "message": "刪除"
+  },
+  "deleteDomainConfirm": {
+    "message": "您確定要刪除網域 \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span> 的所有歷史紀錄嗎？此操作將刪除所有相關條目，且無法復原。"
+  },
+  "deleteDomainStats": {
+    "message": "刪除網域統計資料？"
+  },
+  "deleteEntire": {
+    "message": "刪除整個日期"
+  },
+  "deleteEntireHistory": {
+    "message": "刪除所有歷史紀錄"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "刪除所有歷史紀錄？"
+  },
+  "deleteHistory": {
+    "message": "刪除歷史紀錄"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "您確定要刪除您的全部瀏覽歷史紀錄嗎？此操作是永久性的，無法復原。"
+  },
+  "deleteMsg": {
+    "message": "刪除所有搜尋結果？"
+  },
+  "deleteSelectedHistory": {
+    "message": "刪除選定的歷史紀錄"
+  },
+  "deleteSpecificDate": {
+    "message": "刪除特定日期"
+  },
+  "deleteStatsConfirmation": {
+    "message": "您即將永久刪除 BetterHistory 中 \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> 的所有追蹤資料。\u003Cbr>\u003Cbr>此操作無法復原。"
+  },
+  "deleteUrlConfirm": {
+    "message": "您確定要從歷史紀錄中刪除網址 \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> 嗎？此操作無法復原。"
+  },
+  "deletedSelectedHistory": {
+    "message": "您確定要永久刪除 {{selectedNumber}} 個選定的歷史紀錄條目嗎？\u003Cbr/>此操作將永久刪除所有 {{selectedNumber}} 個選定的條目。一旦刪除，此操作無法復原。"
+  },
+  "devices": {
+    "message": "裝置"
+  },
+  "disableTimeTracking": {
+    "message": "停用此功能將停止追蹤並隱藏所有統計資料。"
+  },
+  "domainAlreadyExists": {
+    "message": "此網域已在您的清單中"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "第 ${index + 1} 行：網域已存在 (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "網域黑名單"
+  },
+  "domainCannotBeEmpty": {
+    "message": "網域不能為空"
+  },
+  "domainStats": {
+    "message": "網域統計"
+  },
+  "domainWithSubdomains": {
+    "message": "包含所有子網域的網域"
+  },
+  "domains": {
+    "message": "網域"
+  },
+  "email": {
+    "message": "電子郵件"
+  },
+  "emailArticle": {
+    "message": "支援文章"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}：\u003C/span>請在 \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">BetterHistory 支援\u003C/span>\u003C/a>瀏覽我們的支援指南和常見問題。"
+  },
+  "emailSupport": {
+    "message": "電子郵件支援"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}：\u003C/span>如有任何疑問或問題，請透過 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a> 聯絡我們。"
+  },
+  "enableStats": {
+    "message": "啟用統計資料"
+  },
+  "enableStatsDescription": {
+    "message": "啟用或停用所有統計功能。停用後，將不會收集或顯示任何統計資料。"
+  },
+  "enable_popup": {
+    "message": "啟用彈出視窗"
+  },
+  "endsWithQuestionMark": {
+    "message": "以「？」結尾"
+  },
+  "enterAValidDomain": {
+    "message": "輸入一個有效的網域"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "請輸入至少一個網域"
+  },
+  "enterDomain": {
+    "message": "輸入您想從歷史紀錄中排除的網域"
+  },
+  "enterDomainName": {
+    "message": "輸入網域名稱"
+  },
+  "enterDomainPerLine": {
+    "message": "一次性將多個網域新增到您的白名單。每行輸入一個網域。"
+  },
+  "enterDomainToBlock": {
+    "message": "輸入要封鎖的網域（例如 example.com）"
+  },
+  "enterDomainToWhitelist": {
+    "message": "輸入要新增到白名單的網域（例如 example.com）"
+  },
+  "enterValidDomain": {
+    "message": "請輸入至少一個有效的網域"
+  },
+  "entireExport": {
+    "message": "全部匯出（90 天）"
+  },
+  "entries": {
+    "message": "條目"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "刪除此網站的所有歷史紀錄"
+  },
+  "error": {
+    "message": "錯誤"
+  },
+  "errorClearingHistory": {
+    "message": "清除歷史紀錄失敗。請再試一次。"
+  },
+  "errorClearingStats": {
+    "message": "清除統計資料失敗"
+  },
+  "errorLoadingData": {
+    "message": "載入資料時出錯"
+  },
+  "errorLoadingSettings": {
+    "message": "載入設定時出錯。正在使用預設值。"
+  },
+  "errorSavingSettings": {
+    "message": "儲存設定失敗。請再試一次。"
+  },
+  "exactWordProject": {
+    "message": "精確單字「Project」"
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "探索我們的產品"
+  },
+  "export": {
+    "message": "匯出"
+  },
+  "exportAsJSON": {
+    "message": "匯出為 JSON"
+  },
+  "exportAsPDF": {
+    "message": "匯出為 PDF"
+  },
+  "exportCsv": {
+    "message": "匯出 CSV"
+  },
+  "exportEntireLocalData": {
+    "message": "匯出所有本機資料"
+  },
+  "exportHistory": {
+    "message": "匯出您的全部瀏覽歷史紀錄"
+  },
+  "exportHistoryDescription": {
+    "message": "此功能允許您匯出您的全部瀏覽歷史紀錄（最多 90 天）或選擇自訂日期範圍進行匯出。請注意，Chrome 的歷史紀錄 API 僅支援歷史紀錄匯出，不允許歷史紀錄回導。"
+  },
+  "exportHistoryLimitation": {
+    "message": "此外，Chrome 會自動刪除超過 90 天的歷史紀錄，因此 BetterHistory 只能匯出 Chrome 保留的記錄。"
+  },
+  "exportHtml": {
+    "message": "匯出 HTML"
+  },
+  "exportLocalData": {
+    "message": "匯出本機資料"
+  },
+  "exportSelectedCsv": {
+    "message": "匯出選定的 CSV"
+  },
+  "exportSelectedHtml": {
+    "message": "匯出選定的 HTML"
+  },
+  "exportTimeTrackingData": {
+    "message": "匯出時間追蹤資料"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "這是您的本機儲存的時間追蹤資料，您可以將其匯出供個人使用。它反映了您在造訪頁面上花費的時間，有助於您分析您的瀏覽習慣。"
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "這些資料僅保存在您的瀏覽器中，不會同步或在線儲存。刪除 BetterHistory 擴充功能將永久刪除所有時間追蹤資料。如果您希望保留備份，請定期匯出您的資料。"
+  },
+  "exportToCSV": {
+    "message": "匯出為 CSV"
+  },
+  "exportToTXT": {
+    "message": "匯出為 TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "匯出的瀏覽歷史紀錄 - 日期："
+  },
+  "exportedHistoryKeyword": {
+    "message": "匯出的瀏覽歷史紀錄 - 關鍵字："
+  },
+  "featureRequest": {
+    "message": "功能請求"
+  },
+  "feedback": {
+    "message": "意見回饋"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "我接受\u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">私隱政策\u003C/span>\u003C/a>和資料處理。"
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "請提供您的電子郵件地址，以便跟進您的提交。"
+  },
+  "feedbackForm": {
+    "message": "意見回饋表"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}：\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">點擊此處送出您的意見回饋\u003C/span>"
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "檔案大小超過 5MB。請上傳較小的檔案。"
+  },
+  "find_all_visits_domain": {
+    "message": "尋找 {{d}} 的所有造訪紀錄"
+  },
+  "generalContact": {
+    "message": "一般聯絡"
+  },
+  "generatedUsing": {
+    "message": "此文件是使用以下工具產生的"
+  },
+  "grantPermissions": {
+    "message": "授予權限"
+  },
+  "groupSession": {
+    "message": "分組工作階段"
+  },
+  "history": {
+    "message": "歷史紀錄"
+  },
+  "historyCleared": {
+    "message": "歷史紀錄已清除"
+  },
+  "historyControlsFor": {
+    "message": "歷史紀錄控制（適用於）"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "白名單網域的歷史紀錄將在清理期間保留"
+  },
+  "historyRetentionHelp": {
+    "message": "在此選定時間範圍內的歷史紀錄將會保留並排除在自動清理之外。"
+  },
+  "hourFormat": {
+    "message": "時間格式"
+  },
+  "hours": {
+    "message": "小時"
+  },
+  "howDidWeDo": {
+    "message": "我們做得怎麼樣？"
+  },
+  "howLongKeepHistory": {
+    "message": "在您的瀏覽歷史紀錄符合自動刪除條件之前，應保留多長時間？"
+  },
+  "howToUseTheSearchTool": {
+    "message": "如何使用搜尋工具"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "idleDetectionDescription": {
+    "message": "• 閒置偵測（當您離開時停止追蹤）"
+  },
+  "import": {
+    "message": "匯入"
+  },
+  "importEntireLocalData": {
+    "message": "匯入本機資料"
+  },
+  "importFailed": {
+    "message": "匯入資料失敗"
+  },
+  "importJSON": {
+    "message": "匯入 JSON"
+  },
+  "importSuccessful": {
+    "message": "資料匯入成功"
+  },
+  "infinityScroll": {
+    "message": "啟用無限捲動"
+  },
+  "interfaceStyle": {
+    "message": "顯示設定"
+  },
+  "invalidDomainFormat": {
+    "message": "請輸入有效的網域格式（例如 example.com）"
+  },
+  "invalidDomainFormatLine": {
+    "message": "第 ${index + 1} 行：網域格式無效 (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "檔案類型無效。請上傳 JPG 或 PNG 圖像。"
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> 不是有效網域。請使用有效網域新增到黑名單。"
+  },
+  "keepHistoryCheckText": {
+    "message": "保留您已新增到白名單的網站的歷史紀錄"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "保留您已新增到白名單的網站的歷史紀錄"
+  },
+  "large": {
+    "message": "大"
+  },
+  "last15Days": {
+    "message": "15 天"
+  },
+  "last2Months": {
+    "message": "最近 2 個月"
+  },
+  "last30Days": {
+    "message": "30 天"
+  },
+  "last3Months": {
+    "message": "最近 3 個月"
+  },
+  "last60Days": {
+    "message": "60 天"
+  },
+  "last7Days": {
+    "message": "7 天"
+  },
+  "last90Days": {
+    "message": "90 天"
+  },
+  "lastMonth": {
+    "message": "上個月"
+  },
+  "lastVisitTime": {
+    "message": "上次造訪時間"
+  },
+  "lastWeek": {
+    "message": "上週"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "了解有關自動清理的更多資訊"
+  },
+  "learnMoreAboutRetention": {
+    "message": "了解有關保留期的更多資訊"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "如果您需要其他調整，請告訴我。"
+  },
+  "lightMode": {
+    "message": "淺色模式"
+  },
+  "loadingSettings": {
+    "message": "正在載入設定..."
+  },
+  "ltr": {
+    "message": "從左到右 (LTR)"
+  },
+  "mainDomainNote": {
+    "message": "封鎖主網域不會自動封鎖其子網域"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "管理時間追蹤和使用統計"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "啟用後，BetterHistory 會追蹤您在每個網站上花費的時間，包括工作階段持續時間和活動時間與閒置時間。所有資料都儲存在您的瀏覽器中，僅用於為您提供詳細的瀏覽洞察和時間分析。"
+  },
+  "manifest_browser_action_title": {
+    "message": "瀏覽歷史紀錄"
+  },
+  "manifest_description": {
+    "message": "精巧的歷史紀錄管理器：強大的搜尋、批次匯出、刪除自訂選擇、按日和小時篩選，以及從歷史紀錄中封鎖特定網域。"
+  },
+  "maxSize": {
+    "message": "最大尺寸"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• 媒體播放偵測（在視訊/音樂播放期間繼續追蹤）"
+  },
+  "medium": {
+    "message": "中"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "每月（每月 1 日）"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "系統將會自動新增更多天數。"
+  },
+  "moreFromSite": {
+    "message": "來自此網站的更多內容"
+  },
+  "mostActiveDay": {
+    "message": "最活躍的一天"
+  },
+  "neverDisabled": {
+    "message": "從不（已停用）"
+  },
+  "noActivityData": {
+    "message": "此期間沒有活動資料"
+  },
+  "noBlacklistType": {
+    "message": "您的黑名單中沒有 {{type}}"
+  },
+  "noChangesToSave": {
+    "message": "沒有要儲存的變更"
+  },
+  "noDevices": {
+    "message": "未找到作用中的裝置工作階段。"
+  },
+  "noDomainBlacklisted": {
+    "message": "尚未有網域新增到黑名單"
+  },
+  "noDomains": {
+    "message": "尚未有網域新增到白名單"
+  },
+  "noDomainsType": {
+    "message": "您的白名單中沒有 {{type}}"
+  },
+  "noFileSelectedMessage": {
+    "message": "未選擇檔案。請上傳有效檔案。"
+  },
+  "noMoreResults": {
+    "message": "沒有更多結果"
+  },
+  "noResultsFound": {
+    "message": "未找到結果。請嘗試調整您的搜尋字詞或篩選條件。"
+  },
+  "noThanks": {
+    "message": "不用了，謝謝"
+  },
+  "noTitle": {
+    "message": "無標題"
+  },
+  "noVisits": {
+    "message": "抱歉，未找到造訪紀錄。"
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>僅限數字：\u003C/strong>使用 \u003Ccode>{{pattern}}\u003C/code> 尋找包含數字的條目。"
+  },
+  "of": {
+    "message": "之"
+  },
+  "ok": {
+    "message": "確定"
+  },
+  "oneMonth": {
+    "message": "一個月"
+  },
+  "oneWeek": {
+    "message": "一週"
+  },
+  "openAllTabs": {
+    "message": "開啟所有分頁"
+  },
+  "openMenu": {
+    "message": "開啟選單"
+  },
+  "openTab": {
+    "message": "在新分頁中開啟"
+  },
+  "order": {
+    "message": "順序"
+  },
+  "otherOptions": {
+    "message": "一般偏好設定"
+  },
+  "page": {
+    "message": "頁"
+  },
+  "paths": {
+    "message": "路徑"
+  },
+  "permissionGranted": {
+    "message": "✓ 已授予"
+  },
+  "permissionMissing": {
+    "message": "✗ 缺失"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "權限已授予"
+  },
+  "pleaseNote": {
+    "message": "請注意："
+  },
+  "pleaseRateUs": {
+    "message": "請給我們評分！"
+  },
+  "prefixesAutoRemoved": {
+    "message": "「http://」、「https://」和「www.」等前綴將會自動刪除。"
+  },
+  "prefixesRemoved": {
+    "message": "「http://」、「https://」和「www.」等前綴會自動刪除"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "將此網站加入黑名單以阻止記錄歷史紀錄"
+  },
+  "privacyPolicy": {
+    "message": "私隱政策"
+  },
+  "privacyTerms": {
+    "message": "私隱與條款"
+  },
+  "processing": {
+    "message": "正在處理..."
+  },
+  "rateText": {
+    "message": "您的意見有助於我們改進 BetterHistory。請告訴我們您的看法！"
+  },
+  "recent": {
+    "message": "最近的造訪"
+  },
+  "recordedVisits": {
+    "message": "記錄的此網域造訪次數"
+  },
+  "remove_url": {
+    "message": "從歷史紀錄中刪除此網址"
+  },
+  "result": {
+    "message": "結果"
+  },
+  "results": {
+    "message": "結果"
+  },
+  "retentionPeriod": {
+    "message": "保留期："
+  },
+  "retentionPeriodHelp": {
+    "message": "保留期決定了您的瀏覽歷史紀錄可以追溯到多久以前。較舊的歷史紀錄將符合清理條件。"
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "請在確認前檢查您的設定。"
+  },
+  "revokePermissions": {
+    "message": "撤銷權限"
+  },
+  "rightTitle": {
+    "message": "快捷選單選項"
+  },
+  "rtl": {
+    "message": "從右到左 (RTL)"
+  },
+  "saveSettings": {
+    "message": "儲存設定"
+  },
+  "search": {
+    "message": "搜尋"
+  },
+  "searchDeeper": {
+    "message": "更深入搜尋"
+  },
+  "searchDomainTitle": {
+    "message": "按網域搜尋"
+  },
+  "searchEngine": {
+    "message": "搜尋引擎"
+  },
+  "searchMsg": {
+    "message": "噓... 試著搜尋一些內容"
+  },
+  "searchPlaceholder": {
+    "message": "搜尋標題或網址"
+  },
+  "searchTextTitle": {
+    "message": "按文字選擇搜尋"
+  },
+  "searchTips": {
+    "message": "搜尋提示"
+  },
+  "searchTipsMsg1": {
+    "message": "現已支援正規表達式搜尋！"
+  },
+  "searchTipsMsg2": {
+    "message": "例如，試著搜尋"
+  },
+  "searchTipsMsg3": {
+    "message": "搜尋造訪紀錄和下載紀錄"
+  },
+  "searchTipsMsg4": {
+    "message": "搜尋將自動查找按頁面標題和網址的造訪紀錄，以及按檔案名稱和網址的下載紀錄。"
+  },
+  "searchTipsMsg5": {
+    "message": "您的最近 10,000 次造訪用於快速初始搜尋。要進行更深入的搜尋，請前往結果最後一頁的底部，然後點擊「更深入搜尋」按鈕。"
+  },
+  "searchToolDescription": {
+    "message": "此工具允許您使用簡單的關鍵字或進階 **正規表達式 (RegEx)** 有效地搜尋您的瀏覽歷史紀錄。以下是一些幫助您入門的範例："
+  },
+  "search_history": {
+    "message": "在歷史紀錄中搜尋"
+  },
+  "searchedUrlDeleted": {
+    "message": "搜尋到的網址已刪除"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "搜尋到的網址已刪除，白名單網域除外"
+  },
+  "searching": {
+    "message": "正在搜尋"
+  },
+  "selectDateFormat": {
+    "message": "日期格式"
+  },
+  "selectDateRange": {
+    "message": "選擇日期範圍"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "選擇要刪除歷史紀錄的日期"
+  },
+  "selectEndDate": {
+    "message": "選擇結束日期"
+  },
+  "selectStartDate": {
+    "message": "選擇開始日期"
+  },
+  "selected": {
+    "message": "已選擇"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "選定日期的歷史紀錄已刪除"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "選定日期的歷史紀錄已刪除，白名單網域除外"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "選定小時的歷史紀錄已刪除"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "選定小時的歷史紀錄已刪除，白名單網域除外"
+  },
+  "sessions": {
+    "message": "工作階段"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "settingsSaved": {
+    "message": "設定已儲存"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "您的智慧型自動清理設定已成功更新。"
+  },
+  "shortRetentionWarning": {
+    "message": "設定一週的短保留期意味著您較舊的瀏覽歷史紀錄將更頻繁地被清理。請確保這符合您的需求。"
+  },
+  "show": {
+    "message": "顯示"
+  },
+  "showAllHistory": {
+    "message": "顯示所有歷史紀錄"
+  },
+  "showStats": {
+    "message": "顯示統計資料"
+  },
+  "small": {
+    "message": "小"
+  },
+  "smartAutoCleanup": {
+    "message": "智慧型自動清理"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "使用智慧型自動清理自動管理您的瀏覽歷史紀錄。選擇清理的執行頻率以及保留最近歷史紀錄的時長。"
+  },
+  "smartAutoCleanupSettings": {
+    "message": "智慧型自動清理設定"
+  },
+  "smartHistoryCleanup": {
+    "message": "智能歷史紀錄清理"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "清除您的瀏覽歷史紀錄，但您新增到白名單的網站除外。此功能可幫助您保持活動私密性，同時保留來自受信任或常用網站的重要歷史紀錄。"
+  },
+  "socialMediaTip": {
+    "message": "對於社交媒體網站，請考慮封鎖特定區塊（facebook.com/marketplace/*）"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "某些網域無法新增：\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "缺少一些權限"
+  },
+  "specificPage": {
+    "message": "特定的頁面"
+  },
+  "specificPath": {
+    "message": "特定的路徑"
+  },
+  "specificSubdomain": {
+    "message": "特定的子網域"
+  },
+  "start": {
+    "message": "開始"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>以此開頭：\u003C/strong>使用 ^ 尋找以特定單字開頭的條目（例如，^收件匣）。"
+  },
+  "startsWithInbox": {
+    "message": "以「收件匣」開頭"
+  },
+  "statsCleared": {
+    "message": "統計資料已清除"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "取消"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "為了幫助您追蹤在網站上花費的時間、查看工作階段詳細資訊以及以 PDF 格式匯出時間報告，我們需要獲得存取您的瀏覽活動的權限。"
+  },
+  "statsPermissionDialogGrant": {
+    "message": "授予權限"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "我們在 BetterHistory 中引入了一項新的時間追蹤功能！"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "時間追蹤需要新的權限"
+  },
+  "subdomainNote": {
+    "message": "將主網域新增到白名單不會自動將其子網域新增到白名單"
+  },
+  "subdomains": {
+    "message": "子網域"
+  },
+  "submit": {
+    "message": "送出"
+  },
+  "submitFeedback": {
+    "message": "送出意見回饋"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "您的建議和意見回饋有助於我們改進 BetterHistory 並提供最佳使用者體驗。"
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 個或更多字元"
+  },
+  "termsOfService": {
+    "message": "服務條款"
+  },
+  "thankYou": {
+    "message": "謝謝您！"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "此操作無法復原。"
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "此網址或網域已在黑名單網域中列出"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "此網址或網域已在白名單網域中列出"
+  },
+  "threeMonths": {
+    "message": "三個月"
+  },
+  "timeTrackingStartedOn": {
+    "message": "時間追蹤於 {{date}} 開始"
+  },
+  "tips": {
+    "message": "提示"
+  },
+  "title": {
+    "message": "標題"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "要將網域及其子網域上的每個頁面都列入黑名單，請寫："
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "要將網域上的每個頁面都列入黑名單，請寫："
+  },
+  "todalWords": {
+    "message": "總字數"
+  },
+  "today": {
+    "message": "今天"
+  },
+  "toolbarIcon": {
+    "message": "工具列圖示主題"
+  },
+  "totalEntries": {
+    "message": "總條目"
+  },
+  "totalVisits": {
+    "message": "總造訪次數"
+  },
+  "twoWeeks": {
+    "message": "兩週"
+  },
+  "typdCount": {
+    "message": "輸入次數"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "輸入任何關鍵字以尋找匹配的條目。"
+  },
+  "typeDeleteToConfirm": {
+    "message": "輸入「delete」確認："
+  },
+  "typedCount": {
+    "message": "在網址列中輸入 {{times}} 次"
+  },
+  "unableToLoadDomainStats": {
+    "message": "無法載入網域統計資料。請稍後再試。"
+  },
+  "understandSettings": {
+    "message": "我了解這些設定以及它們將如何影響我的瀏覽歷史紀錄"
+  },
+  "understandYourRights": {
+    "message": "了解您的權利"
+  },
+  "uniqueUrls": {
+    "message": "獨特的網址"
+  },
+  "updatingData": {
+    "message": "正在更新資料..."
+  },
+  "uploadScreenShot": {
+    "message": "上傳螢幕截圖"
+  },
+  "urlDeleted": {
+    "message": "網址已刪除"
+  },
+  "urlPatternGuide": {
+    "message": "網址模式指南"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "您可以使用以下模式封鎖網站："
+  },
+  "useSpecificPaths": {
+    "message": "使用特定的路徑僅將網站的某些部分新增到白名單"
+  },
+  "viewHere": {
+    "message": "在此查看"
+  },
+  "viewStats": {
+    "message": "查看統計資料"
+  },
+  "viewStatsButton": {
+    "message": "您還會在「活動」頁面上的每個條目旁邊看到一個「查看統計資料」按鈕，以便快速存取詳細的時間資料"
+  },
+  "visitCount": {
+    "message": "連結已造訪 {{times}} 次"
+  },
+  "visitSite": {
+    "message": "造訪網站"
+  },
+  "visits_domain": {
+    "message": "查看此網域的所有造訪紀錄"
+  },
+  "vstCount": {
+    "message": "造訪次數"
+  },
+  "weValueYourInputMessage": {
+    "message": "我們重視您的意見，並隨時為您提供協助！"
+  },
+  "websiteAccessDescription": {
+    "message": "• 網站存取權限（用於監控活動）"
+  },
+  "websites": {
+    "message": "網站"
+  },
+  "weeklyEverySunday": {
+    "message": "每週（每個星期日）"
+  },
+  "whatThisMeans": {
+    "message": "這意味著："
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "允許使用哪些網址模式？"
+  },
+  "whenBrowserCloses": {
+    "message": "當瀏覽器關閉時"
+  },
+  "whenShouldCleanupRun": {
+    "message": "智慧型自動清理應在何時執行？"
+  },
+  "whitelist": {
+    "message": "白名單"
+  },
+  "whitelistDomain": {
+    "message": "網域白名單"
+  },
+  "whitelistDomains": {
+    "message": "白名單網域"
+  },
+  "whitelistExactDomain": {
+    "message": "僅將精確網域新增到白名單，不包括子網域或特定路徑。"
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "將主網域及其所有子網域（mail.example.com、blog.example.com 等）新增到白名單。"
+  },
+  "whitelistPatterns": {
+    "message": "您可以使用以下模式新增到白名單："
+  },
+  "whitelistPrecedence": {
+    "message": "白名單網域優先於黑名單網域"
+  },
+  "whitelistSpecificPage": {
+    "message": "僅將網域上的特定頁面新增到白名單。"
+  },
+  "whitelistSpecificPath": {
+    "message": "將網域上特定路徑下的所有頁面新增到白名單。"
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "僅將特定的子網域新增到白名單，不包括主網域或其他子網域。"
+  },
+  "whitelistedDomains": {
+    "message": "白名單網域"
+  },
+  "wildcardWarning": {
+    "message": "請謹慎使用萬用字元（*），因為它可能會封鎖超出預期的內容"
+  },
+  "yesterday": {
+    "message": "昨天"
+  }
+}

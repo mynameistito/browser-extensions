@@ -12,14 +12,14 @@
     "fix": "ultracite fix",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
-    "prepare:wxt": "bun run --filter hide-email-ext postinstall && bun run --filter quote-viewer postinstall && bun run --filter new-tab-ext postinstall && bun run --filter hide-ip-ext postinstall",
+    "prepare:wxt": "bun run --filter hide-email-ext postinstall && bun run --filter quote-viewer postinstall && bun run --filter new-tab-ext postinstall && bun run --filter hide-ip-ext postinstall && bun run --filter ig-video-controls postinstall && bun run --filter better-history postinstall",
     "prepare": "bun run lefthook install",
-    "release:all": "bun run --filter hide-email-ext ci:release && bun run --filter quote-viewer ci:release && bun run --filter new-tab-ext ci:release && bun run --filter hide-ip-ext ci:release",
+    "release:all": "bun run --filter hide-email-ext ci:release && bun run --filter quote-viewer ci:release && bun run --filter new-tab-ext ci:release && bun run --filter hide-ip-ext ci:release && bun run --filter ig-video-controls ci:release && bun run --filter better-history ci:release",
     "init:ultracite": "ultracite init --pm bun --linter oxlint --quiet",
     "changeset": "changeset",
     "changeset-add": "bun scripts/changeset-add.ts",
     "generate-keys": "bun scripts/generate-keys.ts",
-    "version": "changeset version && bun run --filter quote-viewer linkify-changelog",
+    "version": "changeset version && bun run --filter quote-viewer linkify-changelog && bun run --filter ig-video-controls linkify-changelog",
     "turbo": "turbo"
   },
   "devDependencies": {

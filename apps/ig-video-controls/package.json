@@ -1,0 +1,26 @@
+{
+  "name": "ig-video-controls",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun ../../scripts/run-wxt.ts",
+    "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
+    "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",
+    "build:firefox": "bun ../../scripts/run-wxt.ts build -b firefox",
+    "zip": "bun ../../scripts/run-wxt.ts zip && bun ../../scripts/run-wxt.ts zip -b firefox",
+    "zip:all": "bun run zip",
+    "zip:chrome": "bun ../../scripts/run-wxt.ts zip -b chrome",
+    "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
+    "postinstall": "bun ../../scripts/run-wxt.ts prepare",
+    "typecheck": "tsc --noEmit",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "ci:release": "bun ../../scripts/release-app.ts",
+    "linkify-changelog": "bun scripts/linkify-changelog.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "wxt": "^0.20.27"
+  }
+}

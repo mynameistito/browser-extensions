@@ -1,0 +1,1247 @@
+{
+  "appName": {
+    "message": "Better History | Gerenciar, Exportar e Excluir Histórico"
+  },
+  "manifest_description": {
+    "message": "Gerenciador de Histórico Elegante: Pesquisa Poderosa, Exportação em Massa, Exclusão de Seleções Personalizadas, Filtro por Dia e Hora, e Bloqueio de Domínios Específicos do Histórico."
+  },
+  "history": {
+    "message": "Histórico"
+  },
+  "activity": {
+    "message": "Atividade"
+  },
+  "devices": {
+    "message": "Dispositivos"
+  },
+  "searchEngine": {
+    "message": "Mecanismo de Busca"
+  },
+  "about": {
+    "message": "Sobre"
+  },
+  "feedback": {
+    "message": "Feedback"
+  },
+  "search": {
+    "message": "Buscar"
+  },
+  "contact": {
+    "message": "Contato"
+  },
+  "darkMode": {
+    "message": "Modo Escuro"
+  },
+  "settings": {
+    "message": "Configurações"
+  },
+  "today": {
+    "message": "Hoje"
+  },
+  "yesterday": {
+    "message": "Ontem"
+  },
+  "Today": {
+    "message": "Hoje"
+  },
+  "Yesterday": {
+    "message": "Ontem"
+  },
+  "Saturday": {
+    "message": "Sábado"
+  },
+  "Sunday": {
+    "message": "Domingo"
+  },
+  "Monday": {
+    "message": "Segunda-feira"
+  },
+  "Tuesday": {
+    "message": "Terça-feira"
+  },
+  "Wednesday": {
+    "message": "Quarta-feira"
+  },
+  "Thursday": {
+    "message": "Quinta-feira"
+  },
+  "Friday": {
+    "message": "Sexta-feira"
+  },
+  "searchPlaceholder": {
+    "message": "Buscar título ou URL"
+  },
+  "moreFromSite": {
+    "message": "Mais deste site"
+  },
+  "clearingHistory": {
+    "message": "Gerenciamento de Histórico"
+  },
+  "clearHistory": {
+    "message": "Limpar Histórico"
+  },
+  "rightTitle": {
+    "message": "Opções do Menu de Contexto"
+  },
+  "searchTextTitle": {
+    "message": "Buscar por Seleção de Texto"
+  },
+  "searchDomainTitle": {
+    "message": "Buscar por Domínio"
+  },
+  "otherOptions": {
+    "message": "Preferências Gerais"
+  },
+  "openTab": {
+    "message": "Abrir em Nova Aba"
+  },
+  "openAllTabs": {
+    "message": "Abrir Todas as Abas"
+  },
+  "results": {
+    "message": "Resultados"
+  },
+  "delete": {
+    "message": "Excluir"
+  },
+  "searchTips": {
+    "message": "Dicas de Busca"
+  },
+  "searching": {
+    "message": "Buscando"
+  },
+  "searchMsg": {
+    "message": "Psst... Tente buscar algo"
+  },
+  "deleteMsg": {
+    "message": "Excluir todos os resultados da busca?"
+  },
+  "cancel": {
+    "message": "Cancelar"
+  },
+  "ok": {
+    "message": "OK"
+  },
+  "export": {
+    "message": "Exportar"
+  },
+  "searchTipsMsg1": {
+    "message": "A pesquisa por expressão regular agora é suportada!"
+  },
+  "searchTipsMsg2": {
+    "message": "Por exemplo, tente buscar por"
+  },
+  "searchTipsMsg3": {
+    "message": "Buscar visitas e downloads"
+  },
+  "searchTipsMsg4": {
+    "message": "A busca procurará automaticamente visitas por título da página e URL, e downloads por nome de arquivo e URL."
+  },
+  "searchTipsMsg5": {
+    "message": "Suas últimas 10.000 visitas são usadas para uma busca inicial e rápida. Para buscar mais profundamente, vá para a parte inferior da última página de resultados e clique no botão 'Buscar Mais Profundamente'."
+  },
+  "searchDeeper": {
+    "message": "Buscar Mais Profundamente"
+  },
+  "deleteAllFromDate": {
+    "message": "Tem certeza de que deseja excluir permanentemente todo o histórico de navegação de **{{date}}**?<br>Isso removerá todos os registros desse dia. Uma vez excluída, esta ação não pode ser desfeita."
+  },
+  "deleteAllForHour": {
+    "message": "Tem certeza de que deseja excluir permanentemente todo o histórico de navegação de **{{startHour}}**?<br>Isso excluirá o histórico de navegação da hora inteira ({{startAndendHour}}). Uma vez excluída, esta ação não pode ser desfeita."
+  },
+  "deleteAllSearchHistory": {
+    "message": "Tem certeza de que deseja excluir permanentemente todas as entradas de histórico de navegação buscadas listadas nesta página?<br/>Esta ação removerá todas as entradas exibidas nos resultados de busca atuais. Uma vez excluída, esta ação não pode ser desfeita."
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "Excluir Todo o Histórico Deste Site"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "Adicionar Este Site à Lista Negra para Gravação de Histórico"
+  },
+  "noVisits": {
+    "message": "Desculpe, nenhuma visita encontrada."
+  },
+  "noDevices": {
+    "message": "Nenhuma sessão de dispositivo ativa encontrada."
+  },
+  "visits_domain": {
+    "message": "Ver Todas as Visitas a Este Domínio"
+  },
+  "find_all_visits_domain": {
+    "message": "Encontrar todas as visitas a {{d}}"
+  },
+  "search_history": {
+    "message": "Buscar no Histórico"
+  },
+  "manifest_browser_action_title": {
+    "message": "Navegar Histórico"
+  },
+  "infinityScroll": {
+    "message": "Habilitar Rolagem Infinita"
+  },
+  "hourFormat": {
+    "message": "Formato de Hora"
+  },
+  "hours": {
+    "message": "Horas"
+  },
+  "toolbarIcon": {
+    "message": "Tema do Ícone da Barra de Ferramentas"
+  },
+  "default": {
+    "message": "Padrão"
+  },
+  "lightMode": {
+    "message": "Modo Claro"
+  },
+  "visitCount": {
+    "message": "Link visitado {{times}} vezes"
+  },
+  "typedCount": {
+    "message": "Digitado {{times}} vezes na barra de endereços"
+  },
+  "remove_url": {
+    "message": "Excluir Esta URL do Histórico"
+  },
+  "current": {
+    "message": "Deste Site"
+  },
+  "recent": {
+    "message": "Visitas Recentes"
+  },
+  "showAllHistory": {
+    "message": "Mostrar Todo o Histórico"
+  },
+  "interfaceStyle": {
+    "message": "Configurações de Exibição"
+  },
+  "small": {
+    "message": "Pequeno"
+  },
+  "medium": {
+    "message": "Médio"
+  },
+  "large": {
+    "message": "Grande"
+  },
+  "selectDateFormat": {
+    "message": "Formato de Data"
+  },
+  "enable_popup": {
+    "message": "Habilitar Pop-up"
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "exportCsv": {
+    "message": "Exportar CSV"
+  },
+  "exportSelectedCsv": {
+    "message": "Exportar Seleção para CSV"
+  },
+  "exportHtml": {
+    "message": "Exportar HTML"
+  },
+  "exportSelectedHtml": {
+    "message": "Exportar Seleção para HTML"
+  },
+  "deleteSelectedHistory": {
+    "message": "Excluir Histórico Selecionado"
+  },
+  "deleteBulk": {
+    "message": "Excluir"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "Selecionar Data para Excluir Histórico"
+  },
+  "deleteSpecificDate": {
+    "message": "Excluir Data Específica"
+  },
+  "deleteEntireHistory": {
+    "message": "Excluir Histórico Inteiro"
+  },
+  "addToBlackList": {
+    "message": "Adicionar à Lista Negra"
+  },
+  "blacklistDomain": {
+    "message": "Domínio na Lista Negra"
+  },
+  "blacklist": {
+    "message": "Lista Negra"
+  },
+  "blacklistDomains": {
+    "message": "Domínios na Lista Negra"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "Adicionar Domínio à Lista Negra do Histórico"
+  },
+  "blacklist_confirmation": {
+    "message": "Tem certeza de que deseja adicionar **{{DOMAIN}}** à lista negra do seu histórico de navegação?<br/>Visitas futuras a este domínio não serão mais registradas, e todas as entradas de histórico existentes para **{{DOMAIN}}** serão excluídas."
+  },
+  "blacklist_domain_already_present": {
+    "message": "<strong>{{DOMAIN}}</strong> já está na lista negra."
+  },
+  "enterDomainName": {
+    "message": "Inserir Nome do Domínio"
+  },
+  "add": {
+    "message": "Adicionar"
+  },
+  "deleteEntire": {
+    "message": "Excluir Dia Inteiro"
+  },
+  "enterAValidDomain": {
+    "message": "Insira um domínio válido"
+  },
+  "clear": {
+    "message": "Limpar"
+  },
+  "confirmDelete": {
+    "message": "Confirmar Exclusão"
+  },
+  "deletedSelectedHistory": {
+    "message": "Tem certeza de que deseja excluir permanentemente as {{selectedNumber}} entradas de histórico selecionadas?<br/>Esta ação excluirá permanentemente todas as {{selectedNumber}} entradas selecionadas. Uma vez excluída, esta ação não pode ser desfeita."
+  },
+  "thisActionCannotBeUndone": {
+    "message": "Esta ação não pode ser desfeita."
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "Quais padrões de URL são permitidos?"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "Para adicionar todas as páginas de um domínio à lista negra, escreva:"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "Para adicionar todas as páginas de um domínio e seus subdomínios à lista negra, escreva:"
+  },
+  "FeedbackSuccessAlert": {
+    "message": "Obrigado! Seu feedback foi enviado com sucesso."
+  },
+  "WhatCanWeImprove": {
+    "message": "O que podemos melhorar?"
+  },
+  "todalWords": {
+    "message": "Total de Palavras"
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "Por favor, forneça seu e-mail para acompanhamento do seu envio."
+  },
+  "generalContact": {
+    "message": "Contato Geral"
+  },
+  "featureRequest": {
+    "message": "Solicitação de Recurso"
+  },
+  "bugReport": {
+    "message": "Relatório de Erro"
+  },
+  "FeedBackTextarePlaceholder": {
+    "message": "Descreva o que poderíamos adicionar ou melhorar."
+  },
+  "uploadScreenShot": {
+    "message": "Carregar Captura de Tela"
+  },
+  "maxSize": {
+    "message": "Tamanho Máx."
+  },
+  "email": {
+    "message": "E-mail"
+  },
+  "submitFeedback": {
+    "message": "Enviar Feedback"
+  },
+  "noFileSelectedMessage": {
+    "message": "Nenhum arquivo selecionado. Por favor, carregue um arquivo válido."
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "O tamanho do arquivo excede 5MB. Por favor, carregue um arquivo menor."
+  },
+  "invalidFileTypeMessage": {
+    "message": "Tipo de arquivo inválido. Por favor, carregue uma imagem JPG ou PNG."
+  },
+  "betterHistoryDescription": {
+    "message": "<span class=\"font-bold\">{{betterHistory}}</span> é uma extensão de navegador inovadora desenvolvida pela <span class=\"font-bold\">BetterLogic Ltd</span>. Ela permite que os usuários gerenciem seu histórico de navegação com facilidade, oferecendo recursos avançados como exclusão personalizada, filtros precisos e uma interface intuitiva. Na BetterLogic Ltd, priorizamos a privacidade do usuário e a funcionalidade perfeita para aprimorar sua experiência de navegação."
+  },
+  "exploreOurProducts": {
+    "message": "Explore Nossos Produtos"
+  },
+  "contactAndFeedback": {
+    "message": "Contato e Feedback"
+  },
+  "weValueYourInputMessage": {
+    "message": "Valorizamos sua opinião e estamos aqui para ajudá-lo!"
+  },
+  "emailSupport": {
+    "message": "Suporte por E-mail"
+  },
+  "feedbackForm": {
+    "message": "Formulário de Feedback"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "Suas sugestões e feedback nos ajudam a melhorar o BetterHistory e a oferecer a melhor experiência do usuário."
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "Avise-me se precisar de ajustes adicionais."
+  },
+  "privacyTerms": {
+    "message": "Privacidade e Termos"
+  },
+  "understandYourRights": {
+    "message": "Entenda Seus Direitos"
+  },
+  "privacyPolicy": {
+    "message": "Política de Privacidade"
+  },
+  "viewHere": {
+    "message": "Ver Aqui"
+  },
+  "termsOfService": {
+    "message": "Termos de Serviço"
+  },
+  "howToUseTheSearchTool": {
+    "message": "Como usar a ferramenta de busca"
+  },
+  "searchToolDescription": {
+    "message": "Esta ferramenta permite que você pesquise seu histórico de navegação de forma eficaz usando palavras-chave simples ou **Expressões Regulares (RegEx)** avançadas. Abaixo estão alguns exemplos para ajudá-lo a começar:"
+  },
+  "basicSearch": {
+    "message": "Busca Básica"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "Digite qualquer palavra-chave para encontrar entradas correspondentes."
+  },
+  "startsWithDescription": {
+    "message": "<strong>Começa com:</strong> Use ^ para encontrar entradas que começam com uma palavra específica (por exemplo, ^CaixaDeEntrada)."
+  },
+  "containsMultipleWordsDescription": {
+    "message": "<strong>Contém Várias Palavras:</strong> Use <code>{{pipe}}</code> para buscar entradas que contenham uma de várias palavras (por exemplo, <code>{{example}}</code>)."
+  },
+  "numbersOnlyDescription": {
+    "message": "<strong>Somente Números:</strong> Use <code>{{pattern}}</code> para encontrar entradas com números."
+  },
+  "caseSensitivityDescription": {
+    "message": "<strong>Sensibilidade a Maiúsculas:</strong> As buscas são insensíveis a maiúsculas e minúsculas por padrão."
+  },
+  "basicSearchDescription": {
+    "message": "<strong>{{basicSearch}}:</strong> Digite qualquer palavra-chave para encontrar entradas correspondentes (por exemplo, \"CaixaDeEntrada\")."
+  },
+  "startsWithInbox": {
+    "message": "Começa com \"CaixaDeEntrada\""
+  },
+  "containsNewsOrInfo": {
+    "message": "Contém \"Notícias\" ou \"Info\""
+  },
+  "containsNumbers": {
+    "message": "Contém Números"
+  },
+  "allCapitalLetters": {
+    "message": "Todas as Letras Maiúsculas"
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 ou Mais Caracteres"
+  },
+  "exactWordProject": {
+    "message": "Palavra Exata \"Projeto\""
+  },
+  "containsSpaces": {
+    "message": "Contém Espaços"
+  },
+  "containsDotCom": {
+    "message": "Contém \".com\""
+  },
+  "endsWithQuestionMark": {
+    "message": "Termina com \"?\""
+  },
+  "containsTODO": {
+    "message": "Contém \"A FAZER\""
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "Aceito a <a href=\"https://betterhistory.io/privacy/\" target=\"_blank\"><span class=\"font-bold\">Política de Privacidade</span></a> e o processamento de dados."
+  },
+  "contactLimitReached": {
+    "message": "Você já atingiu seu limite de contato para hoje."
+  },
+  "noMoreResults": {
+    "message": "Sem Mais Resultados"
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "<strong>{{DOMAIN}}</strong> não é um domínio válido. Por favor, use um domínio válido para adicionar à lista negra."
+  },
+  "noResultsFound": {
+    "message": "Nenhum resultado encontrado. Tente ajustar seus termos de busca ou filtros."
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "Por favor, permita o acesso para enviar feedback"
+  },
+  "howDidWeDo": {
+    "message": "Como nos saímos?"
+  },
+  "rateText": {
+    "message": "Sua opinião nos ajuda a melhorar o BetterHistory. Diga-nos como nos saímos!"
+  },
+  "submit": {
+    "message": "Enviar"
+  },
+  "noThanks": {
+    "message": "Não, Obrigado"
+  },
+  "thankYou": {
+    "message": "Obrigado!"
+  },
+  "ThanksForFeedBack": {
+    "message": "Obrigado pelo seu feedback!"
+  },
+  "emailArticle": {
+    "message": "Artigos de Suporte"
+  },
+  "emailArticleDesc": {
+    "message": "<span class=\"font-bold\">{{emailArticle}}: </span>Navegue por nossos guias de suporte e FAQs em <a href=\"https://betterhistory.io/support/\" target=\"_blank\"><span class=\"font-bold text-[#6886AB] hover:underline\">Suporte BetterHistory</span></a>."
+  },
+  "blacklistInstructionText": {
+    "message": "O recurso Lista Negra de Domínios no BetterHistory permite que você bloqueie sites específicos para que não sejam registrados em seu histórico de navegação. Uma vez que um domínio está na lista negra, todas as visitas passadas e futuras a esse site serão automaticamente removidas."
+  },
+  "pleaseRateUs": {
+    "message": "Por Favor, Avalie-nos!"
+  },
+  "enterDomain": {
+    "message": "Insira o Domínio que Você Deseja Excluir do Histórico"
+  },
+  "emailSupportDescription": {
+    "message": "<span class=\"font-bold\">{{emailSupport}}:</span> Para qualquer dúvida ou problema, entre em contato conosco em 📧 <a href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io</a>."
+  },
+  "feedbackFormDescription": {
+    "message": "<span class=\"font-bold\">{{feedbackForm}}:</span> <span class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">Clique aqui para enviar seu feedback</span>."
+  },
+  "historyControlsFor": {
+    "message": "Controles de Histórico para"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exportHistory": {
+    "message": "Exportar Seu Histórico de Navegação Inteiro"
+  },
+  "exportHistoryDescription": {
+    "message": "Este recurso permite que você exporte seu histórico de navegação inteiro (até 90 dias) ou selecione um intervalo de datas personalizado para exportação. Observe que a API de Histórico do Chrome suporta apenas a exportação de histórico - não permite a importação de histórico de volta."
+  },
+  "exportHistoryLimitation": {
+    "message": "Além disso, o Chrome exclui automaticamente o histórico com mais de 90 dias, portanto, o BetterHistory só pode exportar os registros que o Chrome mantém."
+  },
+  "entireExport": {
+    "message": "Exportação Completa (90 Dias)"
+  },
+  "customExport": {
+    "message": "Exportação Personalizada"
+  },
+  "lastWeek": {
+    "message": "Última Semana"
+  },
+  "lastMonth": {
+    "message": "Último Mês"
+  },
+  "last3Months": {
+    "message": "Últimos 3 Meses"
+  },
+  "last2Months": {
+    "message": "Últimos 2 Meses"
+  },
+  "customRange": {
+    "message": "Intervalo Personalizado"
+  },
+  "days": {
+    "message": "dias"
+  },
+  "deleteUrlConfirm": {
+    "message": "Tem certeza de que deseja excluir o URL <span class=\"font-bold break-words\">{{url}}</span> do seu histórico? Esta ação não pode ser desfeita."
+  },
+  "deleteDomainConfirm": {
+    "message": "Tem certeza de que deseja excluir todo o histórico do domínio <span class=\"font-bold break-words\">{{domain}}</span>? Esta ação removerá todas as entradas relacionadas e não pode ser desfeita."
+  },
+  "exportedHistoryKeyword": {
+    "message": "Histórico de Navegação Exportado - Palavra-chave:"
+  },
+  "exportedHistoryDate": {
+    "message": "Histórico de Navegação Exportado - Data:"
+  },
+  "advanceExport": {
+    "message": "Exportação Avançada"
+  },
+  "generatedUsing": {
+    "message": "Este documento foi gerado usando"
+  },
+  "show": {
+    "message": "Mostrar"
+  },
+  "entries": {
+    "message": "Entradas"
+  },
+  "all": {
+    "message": "Tudo"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "title": {
+    "message": "Título"
+  },
+  "URL": {
+    "message": "URL"
+  },
+  "vstCount": {
+    "message": "Contagem de Visitas"
+  },
+  "typdCount": {
+    "message": "Contagem Digitada"
+  },
+  "lastVisitTime": {
+    "message": "Hora da Última Visita"
+  },
+  "page": {
+    "message": "Página"
+  },
+  "of": {
+    "message": "de"
+  },
+  "totalEntries": {
+    "message": "total de Entradas"
+  },
+  "whitelistDomain": {
+    "message": "Domínio na Lista Branca"
+  },
+  "whitelist": {
+    "message": "Lista Branca"
+  },
+  "keepHistoryCheckText": {
+    "message": "Manter histórico de sites que você adicionou à sua lista branca"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "Excluir Histórico Inteiro?"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "Tem certeza de que deseja excluir todo o seu histórico de navegação? Esta ação é permanente e não pode ser desfeita."
+  },
+  "deleteHistory": {
+    "message": "Excluir Histórico"
+  },
+  "smartHistoryCleanup": {
+    "message": "Limpeza Inteligente de Histórico"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "Limpa seu histórico de navegação, exceto os sites que você adicionou à sua lista branca. Este recurso ajuda você a manter sua atividade privada enquanto preserva o histórico importante de sites confiáveis ou frequentemente usados."
+  },
+  "enterDomainToWhitelist": {
+    "message": "Insira o domínio para adicionar à lista branca (ex. example.com)"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "Todo o histórico foi excluído, exceto os domínios da lista branca"
+  },
+  "allHistoryDeleted": {
+    "message": "Todo o histórico foi excluído"
+  },
+  "urlDeleted": {
+    "message": "URL foi Excluída"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "Todas as URLs Selecionadas foram excluídas"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "O histórico da data selecionada foi excluído"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "O histórico da data selecionada foi excluído, exceto os domínios da lista branca"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "O Histórico da Hora Selecionada foi excluído, exceto os domínios da lista branca"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "O histórico da hora selecionada foi excluído"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "As URLs buscadas foram excluídas, exceto os domínios da lista branca"
+  },
+  "searchedUrlDeleted": {
+    "message": "As URLs buscadas foram excluídas"
+  },
+  "dateAndTimeOrder": {
+    "message": "Ordem de Data e Hora"
+  },
+  "ltr": {
+    "message": "LTR (Esquerda para Direita)"
+  },
+  "rtl": {
+    "message": "RTL (Direita para Esquerda)"
+  },
+  "whitelistedDomains": {
+    "message": "Domínios na Lista Branca"
+  },
+  "bulkAddDomains": {
+    "message": "Adicionar Domínios em Massa"
+  },
+  "exportToCSV": {
+    "message": "Exportar para CSV"
+  },
+  "exportToTXT": {
+    "message": "Exportar para TXT"
+  },
+  "domainCannotBeEmpty": {
+    "message": "O domínio não pode estar vazio"
+  },
+  "invalidDomainFormat": {
+    "message": "Por favor, insira um formato de domínio válido (ex. example.com)"
+  },
+  "domainAlreadyExists": {
+    "message": "Este domínio já está na sua lista"
+  },
+  "urlPatternGuide": {
+    "message": "Guia de Padrões de URL"
+  },
+  "basicDomain": {
+    "message": "Domínio básico"
+  },
+  "websites": {
+    "message": "Sites"
+  },
+  "domainWithSubdomains": {
+    "message": "Domínio com todos os subdomínios"
+  },
+  "specificSubdomain": {
+    "message": "Subdomínio específico"
+  },
+  "specificPath": {
+    "message": "Caminho específico"
+  },
+  "specificPage": {
+    "message": "Página específica"
+  },
+  "tips": {
+    "message": "Dicas"
+  },
+  "whitelistPrecedence": {
+    "message": "Domínios na lista branca têm precedência sobre domínios na lista negra"
+  },
+  "useSpecificPaths": {
+    "message": "Use caminhos específicos para adicionar à lista branca apenas certas seções de um site"
+  },
+  "subdomainNote": {
+    "message": "Adicionar um domínio principal à lista branca não adiciona automaticamente seus subdomínios à lista branca"
+  },
+  "prefixesRemoved": {
+    "message": "Prefixos como 'http://', 'https://' e 'www.' são removidos automaticamente"
+  },
+  "enterDomainPerLine": {
+    "message": "Adicione vários domínios à sua lista branca de uma só vez. Insira um domínio por linha."
+  },
+  "prefixesAutoRemoved": {
+    "message": "Prefixos como 'http://', 'https://' e 'www.' serão removidos automaticamente."
+  },
+  "processing": {
+    "message": "Processando..."
+  },
+  "addDomains": {
+    "message": "Adicionar Domínios"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "Por favor, insira pelo menos um domínio"
+  },
+  "domains": {
+    "message": "Domínios"
+  },
+  "subdomains": {
+    "message": "Subdomínios"
+  },
+  "paths": {
+    "message": "Caminhos"
+  },
+  "noDomains": {
+    "message": "Nenhum domínio na lista branca ainda"
+  },
+  "noDomainsType": {
+    "message": "Nenhum(a) {{type}} na sua lista branca"
+  },
+  "clearBrowsingHistory": {
+    "message": "Limpar Histórico de Navegação"
+  },
+  "clearHistoryConfirm": {
+    "message": "Tem certeza de que deseja excluir todo o seu histórico de navegação? Esta ação é permanente e não pode ser desfeita."
+  },
+  "typeDeleteToConfirm": {
+    "message": "Digite \"delete\" para confirmar:"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "Manter histórico de sites que você adicionou à sua lista branca"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "O histórico de domínios na lista branca será preservado durante a limpeza"
+  },
+  "clearing": {
+    "message": "Limpando..."
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "openMenu": {
+    "message": "Abrir menu"
+  },
+  "whitelistPatterns": {
+    "message": "Você pode usar os seguintes padrões para adicionar à lista branca:"
+  },
+  "whitelistExactDomain": {
+    "message": "Adiciona à lista branca apenas o domínio exato, não subdomínios ou caminhos específicos."
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "Adiciona à lista branca o domínio principal e todos os seus subdomínios (mail.example.com, blog.example.com, etc.)."
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "Adiciona à lista branca apenas um subdomínio específico, não o domínio principal ou outros subdomínios."
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "whitelistSpecificPath": {
+    "message": "Adiciona à lista branca todas as páginas em um caminho específico no domínio."
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "whitelistSpecificPage": {
+    "message": "Adiciona à lista branca apenas uma página específica no domínio."
+  },
+  "domainBlacklist": {
+    "message": "Lista Negra de Domínios"
+  },
+  "blacklistFeatureDescription": {
+    "message": "O recurso Lista Negra de Domínios no BetterHistory permite que você bloqueie sites específicos para que não sejam registrados em seu histórico de navegação. Uma vez que um domínio está na lista negra, todas as visitas passadas e futuras a esse site serão automaticamente removidas."
+  },
+  "enterDomainToBlock": {
+    "message": "Insira o domínio para bloquear (ex. example.com)"
+  },
+  "blacklistedDomains": {
+    "message": "Domínios na Lista Negra"
+  },
+  "noDomainBlacklisted": {
+    "message": "Nenhum domínio na lista negra ainda"
+  },
+  "noBlacklistType": {
+    "message": "Nenhum(a) {{type}} na sua lista negra"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "Você pode usar os seguintes padrões para bloquear sites:"
+  },
+  "blockExactDomain": {
+    "message": "Bloqueia apenas o domínio exato, não subdomínios ou caminhos específicos."
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "Bloqueia o domínio principal e todos os seus subdomínios (mail.example.com, blog.example.com, etc.)."
+  },
+  "blockSpecificSubdomain": {
+    "message": "Bloqueia apenas um subdomínio específico, não o domínio principal ou outros subdomínios."
+  },
+  "blockSpecificPath": {
+    "message": "Bloqueia todas as páginas em um caminho específico no domínio."
+  },
+  "blockSpecificPage": {
+    "message": "Bloqueia apenas uma página específica no domínio."
+  },
+  "blacklistTips": {
+    "message": "Dicas"
+  },
+  "wildcardWarning": {
+    "message": "Use o caractere curinga (*) com cuidado, pois ele pode bloquear mais do que o pretendido"
+  },
+  "socialMediaTip": {
+    "message": "Para sites de mídia social, considere bloquear seções específicas (facebook.com/marketplace/*)"
+  },
+  "mainDomainNote": {
+    "message": "Bloquear um domínio principal não bloqueia automaticamente seus subdomínios"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "Adicione vários domínios à sua lista negra de uma só vez. Insira um domínio por linha."
+  },
+  "enterValidDomain": {
+    "message": "Por favor, insira pelo menos um domínio válido"
+  },
+  "invalidDomainFormatLine": {
+    "message": "Linha ${index + 1}: Formato de domínio inválido (${line})"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "Linha ${index + 1}: O domínio já existe (${cleanedDomain})"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "Alguns domínios não puderam ser adicionados:\n${errors}"
+  },
+  "domainStats": {
+    "message": "Estatísticas do Domínio"
+  },
+  "visitSite": {
+    "message": "Visitar site"
+  },
+  "last7Days": {
+    "message": "7 dias"
+  },
+  "last15Days": {
+    "message": "15 dias"
+  },
+  "last30Days": {
+    "message": "30 dias"
+  },
+  "last60Days": {
+    "message": "60 dias"
+  },
+  "last90Days": {
+    "message": "90 dias"
+  },
+  "custom": {
+    "message": "Personalizado"
+  },
+  "selectDateRange": {
+    "message": "Selecionar intervalo de datas"
+  },
+  "chooseStartAndEndDates": {
+    "message": "Escolher datas de início e fim"
+  },
+  "selected": {
+    "message": "Selecionado"
+  },
+  "start": {
+    "message": "Início"
+  },
+  "selectEndDate": {
+    "message": "Selecionar data de fim"
+  },
+  "selectStartDate": {
+    "message": "Selecionar data de início"
+  },
+  "clr": {
+    "message": "Limpar"
+  },
+  "apply": {
+    "message": "Aplicar"
+  },
+  "sessions": {
+    "message": "Sessões"
+  },
+  "noActivityData": {
+    "message": "Nenhum dado de atividade para este período"
+  },
+  "updatingData": {
+    "message": "Atualizando dados..."
+  },
+  "importJSON": {
+    "message": "Importar JSON"
+  },
+  "exportAsPDF": {
+    "message": "Exportar como PDF"
+  },
+  "exportAsJSON": {
+    "message": "Exportar como JSON"
+  },
+  "smartAutoCleanupSettings": {
+    "message": "Configurações de Limpeza Automática Inteligente"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "Gerencie seu histórico de navegação automaticamente com a Limpeza Automática Inteligente. Escolha a frequência com que a limpeza deve ser executada e por quanto tempo seu histórico recente deve ser retido."
+  },
+  "whenShouldCleanupRun": {
+    "message": "Quando a Limpeza Automática Inteligente deve ser executada?"
+  },
+  "autoCleanupDisabled": {
+    "message": "A limpeza automática está desativada. Você ainda pode limpar o histórico manualmente quando necessário."
+  },
+  "autoCleanupEnabled": {
+    "message": "Seu histórico de navegação será limpo automaticamente com base no cronograma selecionado."
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "Saiba mais sobre a limpeza automática"
+  },
+  "autoCleanupHelp": {
+    "message": "A limpeza automática ajuda a manter sua privacidade, removendo regularmente o histórico de navegação de acordo com suas preferências."
+  },
+  "neverDisabled": {
+    "message": "Nunca (desativado)"
+  },
+  "dailyAtMidnight": {
+    "message": "Diariamente (à meia-noite)"
+  },
+  "weeklyEverySunday": {
+    "message": "Semanalmente (todos os domingos)"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "Mensalmente (1º dia de cada mês)"
+  },
+  "whenBrowserCloses": {
+    "message": "Quando o navegador fechar"
+  },
+  "howLongKeepHistory": {
+    "message": "Por quanto tempo seu histórico de navegação deve ser mantido antes de se qualificar para exclusão automática?"
+  },
+  "historyRetentionHelp": {
+    "message": "O histórico dentro deste intervalo de tempo selecionado será preservado e excluído da limpeza automática."
+  },
+  "learnMoreAboutRetention": {
+    "message": "Saiba mais sobre o período de retenção"
+  },
+  "retentionPeriodHelp": {
+    "message": "O período de retenção determina até que ponto seu histórico de navegação é preservado. O histórico mais antigo será elegível para limpeza."
+  },
+  "oneWeek": {
+    "message": "Uma semana"
+  },
+  "twoWeeks": {
+    "message": "Duas semanas"
+  },
+  "oneMonth": {
+    "message": "Um mês"
+  },
+  "threeMonths": {
+    "message": "Três meses"
+  },
+  "shortRetentionWarning": {
+    "message": "Definir um período de retenção curto de uma semana significa que seu histórico de navegação mais antigo será limpo com mais frequência. Certifique-se de que isso se alinhe com suas necessidades."
+  },
+  "saveSettings": {
+    "message": "Salvar Configurações"
+  },
+  "noChangesToSave": {
+    "message": "Nenhuma alteração para salvar"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "Confirmar Configurações de Limpeza Automática Inteligente"
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "Por favor, revise suas configurações antes de confirmar."
+  },
+  "autoCleanupSchedule": {
+    "message": "Cronograma de Limpeza Automática:"
+  },
+  "retentionPeriod": {
+    "message": "Período de Retenção:"
+  },
+  "whatThisMeans": {
+    "message": "O que isso significa:"
+  },
+  "understandSettings": {
+    "message": "Eu entendo essas configurações e como elas afetarão meu histórico de navegação"
+  },
+  "confirmAndSave": {
+    "message": "Confirmar e Salvar"
+  },
+  "settingsSaved": {
+    "message": "Configurações salvas"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "Suas configurações de Limpeza Automática Inteligente foram atualizadas com sucesso."
+  },
+  "errorLoadingSettings": {
+    "message": "Erro ao carregar as configurações. Usando valores padrão."
+  },
+  "errorSavingSettings": {
+    "message": "Falha ao salvar as configurações. Por favor, tente novamente."
+  },
+  "loadingSettings": {
+    "message": "Carregando configurações..."
+  },
+  "errorLoadingData": {
+    "message": "Erro ao Carregar Dados"
+  },
+  "unableToLoadDomainStats": {
+    "message": "Não foi possível carregar as estatísticas do domínio. Por favor, tente novamente mais tarde."
+  },
+  "groupSession": {
+    "message": "Agrupar Sessão"
+  },
+  "uniqueUrls": {
+    "message": "URLs únicas"
+  },
+  "recordedVisits": {
+    "message": "Visitas registradas a este domínio"
+  },
+  "mostActiveDay": {
+    "message": "Dia mais ativo"
+  },
+  "totalVisits": {
+    "message": "Total de Visitas"
+  },
+  "allTime": {
+    "message": "Todo o tempo"
+  },
+  "avgPerDay": {
+    "message": "Média {{time}} por dia"
+  },
+  "smartAutoCleanup": {
+    "message": "Limpeza Automática Inteligente"
+  },
+  "exportLocalData": {
+    "message": "Exportar Dados Locais"
+  },
+  "whitelistDomains": {
+    "message": "Domínios na Lista Branca"
+  },
+  "clearStats": {
+    "message": "Limpar Estatísticas"
+  },
+  "viewStats": {
+    "message": "Ver Estatísticas"
+  },
+  "showStats": {
+    "message": "Mostrar Estatísticas"
+  },
+  "Popup": {
+    "message": "Pop-up"
+  },
+  "Sidebar": {
+    "message": "Barra Lateral"
+  },
+  "exportEntireLocalData": {
+    "message": "Exportar Todos os Dados Locais"
+  },
+  "importEntireLocalData": {
+    "message": "Importar Dados Locais"
+  },
+  "import": {
+    "message": "Importar"
+  },
+  "importSuccessful": {
+    "message": "Dados importados com sucesso"
+  },
+  "importFailed": {
+    "message": "Falha ao importar dados"
+  },
+  "exportTimeTrackingData": {
+    "message": "Exportar Dados de Rastreamento de Tempo"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "Estes são seus dados de rastreamento de tempo armazenados localmente que você pode exportar para uso pessoal. Eles refletem o tempo que você gastou nas páginas visitadas, ajudando você a analisar seus hábitos de navegação."
+  },
+  "pleaseNote": {
+    "message": "Observe:"
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "Estes dados são salvos apenas no seu navegador e não são sincronizados ou armazenados online. A remoção da extensão BetterHistory excluirá permanentemente todos os dados de rastreamento de tempo. Exporte seus dados regularmente se desejar manter um backup."
+  },
+  "deleteDomainStats": {
+    "message": "Excluir Estatísticas do Domínio?"
+  },
+  "deleteStatsConfirmation": {
+    "message": "Você está prestes a excluir permanentemente todos os dados de rastreamento para <span class='font-medium'>{{DOMAIN}}</span> do BetterHistory.<br><br>Esta ação não pode ser desfeita."
+  },
+  "enableStats": {
+    "message": "Habilitar Estatísticas"
+  },
+  "enableStatsDescription": {
+    "message": "Habilite ou desabilite toda a funcionalidade de estatísticas. Quando desabilitado, nenhuma estatística será coletada ou exibida."
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "Recursos avançados exigem permissões adicionais para:"
+  },
+  "idleDetectionDescription": {
+    "message": "• Detecção de inatividade (interrompe o rastreamento quando você está ausente)"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• Detecção de reprodução de mídia (continua o rastreamento durante vídeos/músicas)"
+  },
+  "websiteAccessDescription": {
+    "message": "• Acesso ao site (para monitorar a atividade)"
+  },
+  "permissionGranted": {
+    "message": "✓ Concedido"
+  },
+  "permissionMissing": {
+    "message": "✗ Ausente"
+  },
+  "allPermissionsGranted": {
+    "message": "Todas as permissões concedidas!"
+  },
+  "advancedFeaturesActive": {
+    "message": "Recursos avançados agora estão ativos."
+  },
+  "somePermissionsMissing": {
+    "message": "Algumas permissões estão ausentes"
+  },
+  "clickToRequestPermissions": {
+    "message": "Clique no botão abaixo para solicitá-las."
+  },
+  "permissionsAlreadyGranted": {
+    "message": "Permissões Já Concedidas"
+  },
+  "grantPermissions": {
+    "message": "Conceder Permissões"
+  },
+  "debugToolsTitle": {
+    "message": "Ferramentas de Depuração (para testes):"
+  },
+  "revokePermissions": {
+    "message": "Revogar Permissões"
+  },
+  "timeTrackingStartedOn": {
+    "message": "Rastreamento de tempo iniciado em {{date}}"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "Atualmente, você pode visualizar dados dos últimos {{days}} {{dayLabel}}. Mais dias serão adicionados automaticamente."
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "Mais dias serão adicionados automaticamente."
+  },
+  "statsPermissionDialogTitle": {
+    "message": "Nova Permissão Necessária para Rastreamento de Tempo"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "Introduzimos um novo recurso de Rastreamento de Tempo no BetterHistory!"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "Para ajudar você a rastrear o tempo gasto em sites, visualizar detalhes da sessão e exportar relatórios de tempo em PDF, precisamos de permissão para acessar sua atividade de navegação."
+  },
+  "statsPermissionDialogGrant": {
+    "message": "Conceder Permissões"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "Cancelar"
+  },
+  "day": {
+    "message": "dia"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "Esta URL ou domínio já está listado nos Domínios na Lista Branca"
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "Esta URL ou domínio já está listado nos Domínios na Lista Negra"
+  },
+  "noTitle": {
+    "message": "Sem Título"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "Gerenciar Rastreamento de Tempo e Estatísticas de Uso"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "Quando habilitado, o BetterHistory rastreia quanto tempo você passa em cada site, incluindo durações de sessão e tempo ativo vs. inativo. Todos os dados são armazenados localmente em seu navegador e usados exclusivamente para fornecer insights detalhados de navegação e análises de tempo."
+  },
+  "viewStatsButton": {
+    "message": "Você também verá um botão \"Ver Estatísticas\" em cada entrada na página Atividade para acesso rápido a dados detalhados de tempo"
+  },
+  "disableTimeTracking": {
+    "message": "Desabilitar isso interromperá o rastreamento e ocultará todas as estatísticas."
+  },
+  "result": {
+    "message": "Resultado"
+  },
+  "close": {
+    "message": "Fechar"
+  },
+  "error": {
+    "message": "Erro"
+  },
+  "historyCleared": {
+    "message": "Histórico limpo"
+  },
+  "errorClearingHistory": {
+    "message": "Falha ao limpar o histórico. Por favor, tente novamente."
+  },
+  "statsCleared": {
+    "message": "Estatísticas limpas"
+  },
+  "errorClearingStats": {
+    "message": "Falha ao limpar as estatísticas"
+  },
+  "order": {
+    "message": "Ordem"
+  }
+}

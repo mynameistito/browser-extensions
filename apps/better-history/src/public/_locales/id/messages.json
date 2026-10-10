@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "Harap jelaskan apa yang dapat kami tambahkan atau tingkatkan."
+  },
+  "FeedbackSuccessAlert": {
+    "message": "Terima kasih! Umpan balik Anda telah berhasil dikirimkan."
+  },
+  "Friday": {
+    "message": "Jumat"
+  },
+  "Monday": {
+    "message": "Senin"
+  },
+  "Popup": {
+    "message": "Popup"
+  },
+  "Saturday": {
+    "message": "Sabtu"
+  },
+  "Sidebar": {
+    "message": "Bilah Samping"
+  },
+  "Sunday": {
+    "message": "Minggu"
+  },
+  "ThanksForFeedBack": {
+    "message": "Terima kasih atas umpan balik Anda!"
+  },
+  "Thursday": {
+    "message": "Kamis"
+  },
+  "Today": {
+    "message": "Hari Ini"
+  },
+  "Tuesday": {
+    "message": "Selasa"
+  },
+  "URL": {
+    "message": "URL"
+  },
+  "Wednesday": {
+    "message": "Rabu"
+  },
+  "WhatCanWeImprove": {
+    "message": "Apa yang bisa kami tingkatkan?"
+  },
+  "Yesterday": {
+    "message": "Kemarin"
+  },
+  "about": {
+    "message": "Tentang Kami"
+  },
+  "activity": {
+    "message": "Aktivitas"
+  },
+  "add": {
+    "message": "Tambah"
+  },
+  "addDomains": {
+    "message": "Tambahkan Domain"
+  },
+  "addToBlackList": {
+    "message": "Tambahkan ke Blacklist"
+  },
+  "advanceExport": {
+    "message": "Ekspor Lanjutan"
+  },
+  "advancedFeaturesActive": {
+    "message": "Fitur lanjutan kini aktif."
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "Fitur lanjutan memerlukan izin tambahan untuk:"
+  },
+  "all": {
+    "message": "Semua"
+  },
+  "allCapitalLetters": {
+    "message": "Semua Huruf Kapital"
+  },
+  "allHistoryDeleted": {
+    "message": "Semua riwayat telah dihapus"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "Semua riwayat telah dihapus kecuali domain yang di-whitelist"
+  },
+  "allPermissionsGranted": {
+    "message": "Semua izin diberikan!"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "Semua URL Terpilih telah dihapus"
+  },
+  "allTime": {
+    "message": "Sepanjang waktu"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "Harap izinkan akses untuk mengirim umpan balik"
+  },
+  "appName": {
+    "message": "Better History | Kelola, Ekspor & Hapus Riwayat"
+  },
+  "apply": {
+    "message": "Terapkan"
+  },
+  "autoCleanupDisabled": {
+    "message": "Pembersihan otomatis dinonaktifkan. Anda masih dapat membersihkan riwayat secara manual saat diperlukan."
+  },
+  "autoCleanupEnabled": {
+    "message": "Riwayat penjelajahan Anda akan dibersihkan secara otomatis berdasarkan jadwal yang dipilih."
+  },
+  "autoCleanupHelp": {
+    "message": "Pembersihan otomatis membantu menjaga privasi Anda dengan menghapus riwayat penjelajahan secara teratur sesuai dengan preferensi Anda."
+  },
+  "autoCleanupSchedule": {
+    "message": "Jadwal Pembersihan Otomatis:"
+  },
+  "avgPerDay": {
+    "message": "Rata-rata {{time}} per hari"
+  },
+  "basicDomain": {
+    "message": "Domain dasar"
+  },
+  "basicSearch": {
+    "message": "Pencarian Dasar"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}:\u003C/strong> Ketik kata kunci apa pun untuk menemukan entri yang cocok (misalnya, \"KotakMasuk\")."
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> adalah ekstensi browser inovatif yang dikembangkan oleh \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span>. Ini memberdayakan pengguna untuk mengelola riwayat penjelajahan mereka dengan mudah, menawarkan fitur canggih seperti penghapusan kustom, filter yang tepat, dan antarmuka yang intuitif. Di BetterLogic Ltd, kami memprioritaskan privasi pengguna dan fungsionalitas yang mulus untuk meningkatkan pengalaman penjelajahan Anda."
+  },
+  "blacklist": {
+    "message": "Blacklist"
+  },
+  "blacklistDomain": {
+    "message": "Domain Blacklist"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "Blacklist Domain dari Riwayat"
+  },
+  "blacklistDomains": {
+    "message": "Domain Blacklist"
+  },
+  "blacklistFeatureDescription": {
+    "message": "Fitur Blacklist Domain di BetterHistory memungkinkan Anda memblokir situs web tertentu agar tidak direkam dalam riwayat penjelajahan Anda. Setelah domain diblacklist, semua kunjungan masa lalu dan masa depan ke situs tersebut akan dihapus secara otomatis."
+  },
+  "blacklistInstructionText": {
+    "message": "Fitur Blacklist Domain di BetterHistory memungkinkan Anda memblokir situs web tertentu agar tidak direkam dalam riwayat penjelajahan Anda. Setelah domain diblacklist, semua kunjungan masa lalu dan masa depan ke situs tersebut akan dihapus secara otomatis."
+  },
+  "blacklistTips": {
+    "message": "Tips"
+  },
+  "blacklist_confirmation": {
+    "message": "Anda yakin ingin mem-blacklist **{{DOMAIN}}** dari riwayat penjelajahan Anda?\u003Cbr/>Kunjungan di masa mendatang ke domain ini tidak akan lagi direkam, dan semua entri riwayat yang ada untuk **{{DOMAIN}}** akan dihapus."
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> sudah ada di blacklist."
+  },
+  "blacklistedDomains": {
+    "message": "Domain yang Di-blacklist"
+  },
+  "blockExactDomain": {
+    "message": "Memblokir hanya domain persis, bukan subdomain atau jalur spesifik."
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "Memblokir domain utama dan semua subdomainnya (mail.example.com, blog.example.com, dll.)."
+  },
+  "blockSpecificPage": {
+    "message": "Memblokir hanya halaman spesifik pada domain."
+  },
+  "blockSpecificPath": {
+    "message": "Memblokir semua halaman di bawah jalur spesifik pada domain."
+  },
+  "blockSpecificSubdomain": {
+    "message": "Memblokir hanya subdomain spesifik, bukan domain utama atau subdomain lain."
+  },
+  "bugReport": {
+    "message": "Laporan Bug"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "Tambahkan beberapa domain ke blacklist Anda sekaligus. Masukkan satu domain per baris."
+  },
+  "bulkAddDomains": {
+    "message": "Tambahkan Domain Secara Massal"
+  },
+  "cancel": {
+    "message": "Batal"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>Sensitivitas Huruf Besar/Kecil:\u003C/strong> Pencarian tidak sensitif huruf besar/kecil secara default."
+  },
+  "chooseStartAndEndDates": {
+    "message": "Pilih tanggal mulai dan berakhir"
+  },
+  "clear": {
+    "message": "Bersihkan"
+  },
+  "clearBrowsingHistory": {
+    "message": "Bersihkan Riwayat Penjelajahan"
+  },
+  "clearHistory": {
+    "message": "Hapus Riwayat"
+  },
+  "clearHistoryConfirm": {
+    "message": "Anda yakin ingin menghapus seluruh riwayat penjelajahan Anda? Tindakan ini permanen dan tidak dapat dibatalkan."
+  },
+  "clearStats": {
+    "message": "Bersihkan Statistik"
+  },
+  "clearing": {
+    "message": "Membersihkan..."
+  },
+  "clearingHistory": {
+    "message": "Manajemen Riwayat"
+  },
+  "clickToRequestPermissions": {
+    "message": "Klik tombol di bawah untuk memintanya."
+  },
+  "close": {
+    "message": "Tutup"
+  },
+  "clr": {
+    "message": "Bersihkan"
+  },
+  "confirmAndSave": {
+    "message": "Konfirmasi & Simpan"
+  },
+  "confirmDelete": {
+    "message": "Konfirmasi Penghapusan"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "Konfirmasi Pengaturan Pembersihan Otomatis Cerdas"
+  },
+  "contact": {
+    "message": "Kontak"
+  },
+  "contactAndFeedback": {
+    "message": "Kontak dan Umpan Balik"
+  },
+  "contactLimitReached": {
+    "message": "Anda sudah mencapai batas kontak Anda untuk hari ini."
+  },
+  "containsDotCom": {
+    "message": "Mengandung \".com\""
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>Mengandung Beberapa Kata:\u003C/strong> Gunakan \u003Ccode>{{pipe}}\u003C/code> untuk mencari entri yang mengandung salah satu dari beberapa kata (misalnya, \u003Ccode>{{example}}\u003C/code>)."
+  },
+  "containsNewsOrInfo": {
+    "message": "Mengandung \"Berita\" atau \"Info\""
+  },
+  "containsNumbers": {
+    "message": "Mengandung Angka"
+  },
+  "containsSpaces": {
+    "message": "Mengandung Spasi"
+  },
+  "containsTODO": {
+    "message": "Mengandung \"TODO\""
+  },
+  "current": {
+    "message": "Dari Situs Ini"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "Saat ini, Anda dapat melihat data untuk {{days}} {{dayLabel}} terakhir. Lebih banyak hari akan ditambahkan secara otomatis."
+  },
+  "custom": {
+    "message": "Kustom"
+  },
+  "customExport": {
+    "message": "Ekspor Kustom"
+  },
+  "customRange": {
+    "message": "Rentang Kustom"
+  },
+  "dailyAtMidnight": {
+    "message": "Harian (pada tengah malam)"
+  },
+  "darkMode": {
+    "message": "Mode Gelap"
+  },
+  "dateAndTimeOrder": {
+    "message": "Urutan Tanggal dan Waktu"
+  },
+  "day": {
+    "message": "hari"
+  },
+  "days": {
+    "message": "hari"
+  },
+  "debugToolsTitle": {
+    "message": "Alat Debug (untuk pengujian):"
+  },
+  "default": {
+    "message": "Default"
+  },
+  "delete": {
+    "message": "Hapus"
+  },
+  "deleteAllForHour": {
+    "message": "Anda yakin ingin menghapus semua riwayat penjelajahan untuk **{{startHour}}** secara permanen?\u003Cbr>Ini akan menghapus riwayat penjelajahan untuk seluruh jam ({{startAndendHour}}). Setelah dihapus, tindakan ini tidak dapat dibatalkan."
+  },
+  "deleteAllFromDate": {
+    "message": "Anda yakin ingin menghapus semua riwayat penjelajahan untuk **{{date}}** secara permanen?\u003Cbr>Ini akan menghapus semua catatan dari hari itu. Setelah dihapus, tindakan ini tidak dapat dibatalkan."
+  },
+  "deleteAllSearchHistory": {
+    "message": "Anda yakin ingin menghapus semua entri riwayat penjelajahan yang dicari yang tercantum di halaman ini secara permanen?\u003Cbr/>Tindakan ini akan menghapus semua entri yang ditampilkan dalam hasil pencarian saat ini. Setelah dihapus, tindakan ini tidak dapat dibatalkan."
+  },
+  "deleteBulk": {
+    "message": "Hapus"
+  },
+  "deleteDomainConfirm": {
+    "message": "Anda yakin ingin menghapus semua riwayat dari domain \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span>? Tindakan ini akan menghapus semua entri terkait dan tidak dapat dibatalkan."
+  },
+  "deleteDomainStats": {
+    "message": "Hapus Statistik Domain?"
+  },
+  "deleteEntire": {
+    "message": "Hapus Seluruh Tanggal"
+  },
+  "deleteEntireHistory": {
+    "message": "Hapus Seluruh Riwayat"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "Hapus Seluruh Riwayat?"
+  },
+  "deleteHistory": {
+    "message": "Hapus Riwayat"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "Anda yakin ingin menghapus seluruh riwayat penjelajahan Anda? Tindakan ini permanen dan tidak dapat dibatalkan."
+  },
+  "deleteMsg": {
+    "message": "Hapus semua hasil pencarian?"
+  },
+  "deleteSelectedHistory": {
+    "message": "Hapus Riwayat Terpilih"
+  },
+  "deleteSpecificDate": {
+    "message": "Hapus Tanggal Tertentu"
+  },
+  "deleteStatsConfirmation": {
+    "message": "Anda akan menghapus semua data pelacakan untuk \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> dari BetterHistory secara permanen.\u003Cbr>\u003Cbr>Tindakan ini tidak dapat dibatalkan."
+  },
+  "deleteUrlConfirm": {
+    "message": "Anda yakin ingin menghapus URL \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> dari riwayat Anda? Tindakan ini tidak dapat dibatalkan."
+  },
+  "deletedSelectedHistory": {
+    "message": "Anda yakin ingin menghapus {{selectedNumber}} entri riwayat terpilih secara permanen?\u003Cbr/>Tindakan ini akan menghapus semua {{selectedNumber}} entri terpilih secara permanen. Setelah dihapus, tindakan ini tidak dapat dibatalkan."
+  },
+  "devices": {
+    "message": "Perangkat"
+  },
+  "disableTimeTracking": {
+    "message": "Menonaktifkan ini akan menghentikan pelacakan dan menyembunyikan semua statistik."
+  },
+  "domainAlreadyExists": {
+    "message": "Domain ini sudah ada di daftar Anda"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "Baris ${index + 1}: Domain sudah ada (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "Blacklist Domain"
+  },
+  "domainCannotBeEmpty": {
+    "message": "Domain tidak boleh kosong"
+  },
+  "domainStats": {
+    "message": "Statistik Domain"
+  },
+  "domainWithSubdomains": {
+    "message": "Domain dengan semua subdomain"
+  },
+  "domains": {
+    "message": "Domain"
+  },
+  "email": {
+    "message": "Email"
+  },
+  "emailArticle": {
+    "message": "Artikel Dukungan"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}: \u003C/span>Jelajahi panduan dukungan dan FAQ kami di \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">Dukungan BetterHistory\u003C/span>\u003C/a>."
+  },
+  "emailSupport": {
+    "message": "Dukungan Email"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}:\u003C/span> Untuk pertanyaan atau masalah apa pun, hubungi kami di 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a>."
+  },
+  "enableStats": {
+    "message": "Aktifkan Statistik"
+  },
+  "enableStatsDescription": {
+    "message": "Aktifkan atau nonaktifkan semua fungsionalitas statistik. Ketika dinonaktifkan, tidak ada statistik yang akan dikumpulkan atau ditampilkan."
+  },
+  "enable_popup": {
+    "message": "Aktifkan Popup"
+  },
+  "endsWithQuestionMark": {
+    "message": "Berakhir dengan \"?\""
+  },
+  "enterAValidDomain": {
+    "message": "Masukkan domain yang valid"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "Harap masukkan setidaknya satu domain"
+  },
+  "enterDomain": {
+    "message": "Masukkan Domain yang Ingin Anda Kecualikan dari Riwayat"
+  },
+  "enterDomainName": {
+    "message": "Masukkan Nama Domain"
+  },
+  "enterDomainPerLine": {
+    "message": "Tambahkan beberapa domain ke whitelist Anda sekaligus. Masukkan satu domain per baris."
+  },
+  "enterDomainToBlock": {
+    "message": "Masukkan domain untuk diblokir (misalnya, example.com)"
+  },
+  "enterDomainToWhitelist": {
+    "message": "Masukkan domain untuk di-whitelist (misalnya, example.com)"
+  },
+  "enterValidDomain": {
+    "message": "Harap masukkan setidaknya satu domain yang valid"
+  },
+  "entireExport": {
+    "message": "Ekspor Seluruhnya (90 Hari)"
+  },
+  "entries": {
+    "message": "Entri"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "Hapus Semua Riwayat untuk Situs Ini"
+  },
+  "error": {
+    "message": "Kesalahan"
+  },
+  "errorClearingHistory": {
+    "message": "Gagal membersihkan riwayat. Silakan coba lagi."
+  },
+  "errorClearingStats": {
+    "message": "Gagal membersihkan statistik"
+  },
+  "errorLoadingData": {
+    "message": "Kesalahan Memuat Data"
+  },
+  "errorLoadingSettings": {
+    "message": "Kesalahan memuat pengaturan. Menggunakan nilai default."
+  },
+  "errorSavingSettings": {
+    "message": "Gagal menyimpan pengaturan. Silakan coba lagi."
+  },
+  "exactWordProject": {
+    "message": "Kata Persis \"Proyek\""
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "Jelajahi Produk Kami"
+  },
+  "export": {
+    "message": "Ekspor"
+  },
+  "exportAsJSON": {
+    "message": "Ekspor sebagai JSON"
+  },
+  "exportAsPDF": {
+    "message": "Ekspor sebagai PDF"
+  },
+  "exportCsv": {
+    "message": "Ekspor CSV"
+  },
+  "exportEntireLocalData": {
+    "message": "Ekspor Seluruh Data Lokal"
+  },
+  "exportHistory": {
+    "message": "Ekspor Seluruh Riwayat Penjelajahan Anda"
+  },
+  "exportHistoryDescription": {
+    "message": "Fitur ini memungkinkan Anda mengekspor seluruh riwayat penjelajahan Anda (hingga 90 hari) atau memilih rentang tanggal kustom untuk ekspor. Harap dicatat bahwa API Riwayat Chrome hanya mendukung ekspor riwayat—tidak mengizinkan impor riwayat kembali."
+  },
+  "exportHistoryLimitation": {
+    "message": "Selain itu, Chrome secara otomatis menghapus riwayat yang lebih lama dari 90 hari, jadi BetterHistory hanya dapat mengekspor catatan yang dipertahankan oleh Chrome."
+  },
+  "exportHtml": {
+    "message": "Ekspor HTML"
+  },
+  "exportLocalData": {
+    "message": "Ekspor Data Lokal"
+  },
+  "exportSelectedCsv": {
+    "message": "Ekspor CSV Terpilih"
+  },
+  "exportSelectedHtml": {
+    "message": "Ekspor HTML Terpilih"
+  },
+  "exportTimeTrackingData": {
+    "message": "Ekspor Data Pelacakan Waktu"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "Ini adalah data pelacakan waktu Anda yang disimpan secara lokal yang dapat Anda ekspor untuk penggunaan pribadi. Ini mencerminkan waktu yang telah Anda habiskan di halaman yang dikunjungi, membantu Anda menganalisis kebiasaan menjelajah Anda."
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "Data ini hanya disimpan di browser Anda dan tidak disinkronkan atau disimpan secara online. Menghapus ekstensi BetterHistory akan menghapus semua data pelacakan waktu secara permanen. Ekspor data Anda secara teratur jika Anda ingin menyimpan cadangan."
+  },
+  "exportToCSV": {
+    "message": "Ekspor ke CSV"
+  },
+  "exportToTXT": {
+    "message": "Ekspor ke TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "Riwayat Penjelajahan yang Diekspor - Tanggal:"
+  },
+  "exportedHistoryKeyword": {
+    "message": "Riwayat Penjelajahan yang Diekspor - Kata Kunci:"
+  },
+  "featureRequest": {
+    "message": "Permintaan Fitur"
+  },
+  "feedback": {
+    "message": "Umpan Balik"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "Saya menerima \u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">Kebijakan Privasi\u003C/span>\u003C/a> dan pemrosesan data."
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "Harap berikan email Anda untuk tindak lanjut atas kiriman Anda."
+  },
+  "feedbackForm": {
+    "message": "Formulir Umpan Balik"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}:\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">Klik di sini untuk mengirimkan umpan balik Anda\u003C/span>."
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "Ukuran file melebihi 5MB. Harap unggah file yang lebih kecil."
+  },
+  "find_all_visits_domain": {
+    "message": "Temukan semua kunjungan ke {{d}}"
+  },
+  "generalContact": {
+    "message": "Kontak Umum"
+  },
+  "generatedUsing": {
+    "message": "Dokumen ini dibuat menggunakan"
+  },
+  "grantPermissions": {
+    "message": "Berikan Izin"
+  },
+  "groupSession": {
+    "message": "Grup Sesi"
+  },
+  "history": {
+    "message": "Riwayat"
+  },
+  "historyCleared": {
+    "message": "Riwayat dibersihkan"
+  },
+  "historyControlsFor": {
+    "message": "Kontrol Riwayat untuk"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "Riwayat dari domain yang di-whitelist akan dipertahankan selama pembersihan"
+  },
+  "historyRetentionHelp": {
+    "message": "Riwayat dalam rentang waktu yang dipilih ini akan dipertahankan dan dikecualikan dari pembersihan otomatis."
+  },
+  "hourFormat": {
+    "message": "Format Waktu"
+  },
+  "hours": {
+    "message": "Jam"
+  },
+  "howDidWeDo": {
+    "message": "Bagaimana kinerja kami?"
+  },
+  "howLongKeepHistory": {
+    "message": "Berapa lama riwayat penjelajahan Anda harus disimpan sebelum memenuhi syarat untuk penghapusan otomatis?"
+  },
+  "howToUseTheSearchTool": {
+    "message": "Cara menggunakan alat pencarian"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "idleDetectionDescription": {
+    "message": "• Deteksi idle (menghentikan pelacakan saat Anda tidak ada)"
+  },
+  "import": {
+    "message": "Impor"
+  },
+  "importEntireLocalData": {
+    "message": "Impor Data Lokal"
+  },
+  "importFailed": {
+    "message": "Gagal mengimpor data"
+  },
+  "importJSON": {
+    "message": "Impor JSON"
+  },
+  "importSuccessful": {
+    "message": "Data berhasil diimpor"
+  },
+  "infinityScroll": {
+    "message": "Aktifkan Gulir Tak Terbatas"
+  },
+  "interfaceStyle": {
+    "message": "Pengaturan Tampilan"
+  },
+  "invalidDomainFormat": {
+    "message": "Harap masukkan format domain yang valid (misalnya, example.com)"
+  },
+  "invalidDomainFormatLine": {
+    "message": "Baris ${index + 1}: Format domain tidak valid (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "Jenis file tidak valid. Harap unggah gambar JPG atau PNG."
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> bukan domain yang valid. Harap gunakan domain yang valid untuk ditambahkan ke blacklist."
+  },
+  "keepHistoryCheckText": {
+    "message": "Simpan riwayat dari situs web yang telah Anda tambahkan ke whitelist Anda"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "Simpan riwayat dari situs web yang telah Anda tambahkan ke whitelist Anda"
+  },
+  "large": {
+    "message": "Besar"
+  },
+  "last15Days": {
+    "message": "15 hari"
+  },
+  "last2Months": {
+    "message": "2 Bulan Terakhir"
+  },
+  "last30Days": {
+    "message": "30 hari"
+  },
+  "last3Months": {
+    "message": "3 Bulan Terakhir"
+  },
+  "last60Days": {
+    "message": "60 hari"
+  },
+  "last7Days": {
+    "message": "7 hari"
+  },
+  "last90Days": {
+    "message": "90 hari"
+  },
+  "lastMonth": {
+    "message": "Bulan Lalu"
+  },
+  "lastVisitTime": {
+    "message": "Waktu Kunjungan Terakhir"
+  },
+  "lastWeek": {
+    "message": "Minggu Lalu"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "Pelajari lebih lanjut tentang pembersihan otomatis"
+  },
+  "learnMoreAboutRetention": {
+    "message": "Pelajari lebih lanjut tentang periode retensi"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "Beri tahu saya jika Anda memerlukan penyesuaian tambahan."
+  },
+  "lightMode": {
+    "message": "Mode Terang"
+  },
+  "loadingSettings": {
+    "message": "Memuat pengaturan..."
+  },
+  "ltr": {
+    "message": "LTR (Kiri ke Kanan)"
+  },
+  "mainDomainNote": {
+    "message": "Memblokir domain utama tidak secara otomatis memblokir subdomainnya"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "Kelola Pelacakan Waktu dan Statistik Penggunaan"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "Saat diaktifkan, BetterHistory melacak berapa banyak waktu yang Anda habiskan di setiap situs web, termasuk durasi sesi dan waktu aktif vs. idle. Semua data disimpan secara lokal di browser Anda dan digunakan semata-mata untuk memberi Anda wawasan penjelajahan yang mendetail dan analitik waktu."
+  },
+  "manifest_browser_action_title": {
+    "message": "Jelajahi Riwayat"
+  },
+  "manifest_description": {
+    "message": "Manajer Riwayat yang Ramping: Pencarian Canggih, Ekspor Massal, Hapus Pilihan Kustom, Filter Berdasarkan Hari dan Jam, dan Blokir Domain Tertentu dari Riwayat."
+  },
+  "maxSize": {
+    "message": "Ukuran Maks"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• Deteksi pemutaran media (melanjutkan pelacakan selama video/musik)"
+  },
+  "medium": {
+    "message": "Sedang"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "Bulanan (tanggal 1 setiap bulan)"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "Lebih banyak hari akan ditambahkan secara otomatis."
+  },
+  "moreFromSite": {
+    "message": "Lebih banyak dari situs ini"
+  },
+  "mostActiveDay": {
+    "message": "Hari paling aktif"
+  },
+  "neverDisabled": {
+    "message": "Tidak Pernah (dinonaktifkan)"
+  },
+  "noActivityData": {
+    "message": "Tidak ada data aktivitas untuk periode ini"
+  },
+  "noBlacklistType": {
+    "message": "Tidak ada {{type}} di blacklist Anda"
+  },
+  "noChangesToSave": {
+    "message": "Tidak ada perubahan untuk disimpan"
+  },
+  "noDevices": {
+    "message": "Tidak ditemukan sesi perangkat aktif."
+  },
+  "noDomainBlacklisted": {
+    "message": "Belum ada domain yang diblacklist"
+  },
+  "noDomains": {
+    "message": "Belum ada domain yang di-whitelist"
+  },
+  "noDomainsType": {
+    "message": "Tidak ada {{type}} di whitelist Anda"
+  },
+  "noFileSelectedMessage": {
+    "message": "Tidak ada file yang dipilih. Harap unggah file yang valid."
+  },
+  "noMoreResults": {
+    "message": "Tidak Ada Lagi Hasil"
+  },
+  "noResultsFound": {
+    "message": "Tidak ada hasil ditemukan. Coba sesuaikan istilah pencarian atau filter Anda."
+  },
+  "noThanks": {
+    "message": "Tidak, Terima Kasih"
+  },
+  "noTitle": {
+    "message": "Tidak Ada Judul"
+  },
+  "noVisits": {
+    "message": "Maaf, tidak ditemukan kunjungan."
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>Hanya Angka:\u003C/strong> Gunakan \u003Ccode>{{pattern}}\u003C/code> untuk menemukan entri dengan angka."
+  },
+  "of": {
+    "message": "dari"
+  },
+  "ok": {
+    "message": "OK"
+  },
+  "oneMonth": {
+    "message": "Satu bulan"
+  },
+  "oneWeek": {
+    "message": "Satu minggu"
+  },
+  "openAllTabs": {
+    "message": "Buka Semua Tab"
+  },
+  "openMenu": {
+    "message": "Buka menu"
+  },
+  "openTab": {
+    "message": "Buka di Tab Baru"
+  },
+  "order": {
+    "message": "Urutan"
+  },
+  "otherOptions": {
+    "message": "Preferensi Umum"
+  },
+  "page": {
+    "message": "Halaman"
+  },
+  "paths": {
+    "message": "Jalur"
+  },
+  "permissionGranted": {
+    "message": "✓ Diberikan"
+  },
+  "permissionMissing": {
+    "message": "✗ Hilang"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "Izin Sudah Diberikan"
+  },
+  "pleaseNote": {
+    "message": "Harap diperhatikan:"
+  },
+  "pleaseRateUs": {
+    "message": "Silakan Nilai Kami!"
+  },
+  "prefixesAutoRemoved": {
+    "message": "Awalan seperti 'http://', 'https://', dan 'www.' akan dihapus secara otomatis."
+  },
+  "prefixesRemoved": {
+    "message": "Awalan seperti 'http://', 'https://', dan 'www.' dihapus secara otomatis"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "Blacklist Situs Ini dari Perekaman Riwayat"
+  },
+  "privacyPolicy": {
+    "message": "Kebijakan Privasi"
+  },
+  "privacyTerms": {
+    "message": "Privasi & Ketentuan"
+  },
+  "processing": {
+    "message": "Memproses..."
+  },
+  "rateText": {
+    "message": "Masukan Anda membantu kami meningkatkan BetterHistory. Beri tahu kami bagaimana kinerja kami!"
+  },
+  "recent": {
+    "message": "Kunjungan Terbaru"
+  },
+  "recordedVisits": {
+    "message": "Kunjungan yang direkam ke domain ini"
+  },
+  "remove_url": {
+    "message": "Hapus URL Ini dari Riwayat"
+  },
+  "result": {
+    "message": "Hasil"
+  },
+  "results": {
+    "message": "Hasil"
+  },
+  "retentionPeriod": {
+    "message": "Periode Retensi:"
+  },
+  "retentionPeriodHelp": {
+    "message": "Periode retensi menentukan seberapa jauh riwayat penjelajahan Anda dipertahankan. Riwayat yang lebih lama akan memenuhi syarat untuk pembersihan."
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "Harap tinjau pengaturan Anda sebelum mengonfirmasi."
+  },
+  "revokePermissions": {
+    "message": "Cabut Izin"
+  },
+  "rightTitle": {
+    "message": "Opsi Menu Konteks"
+  },
+  "rtl": {
+    "message": "RTL (Kanan ke Kiri)"
+  },
+  "saveSettings": {
+    "message": "Simpan Pengaturan"
+  },
+  "search": {
+    "message": "Cari"
+  },
+  "searchDeeper": {
+    "message": "Cari Lebih Dalam"
+  },
+  "searchDomainTitle": {
+    "message": "Cari berdasarkan Domain"
+  },
+  "searchEngine": {
+    "message": "Mesin Pencari"
+  },
+  "searchMsg": {
+    "message": "Sst... Coba cari sesuatu"
+  },
+  "searchPlaceholder": {
+    "message": "Cari judul atau URL"
+  },
+  "searchTextTitle": {
+    "message": "Cari berdasarkan Pemilihan Teks"
+  },
+  "searchTips": {
+    "message": "Tips Pencarian"
+  },
+  "searchTipsMsg1": {
+    "message": "Pencarian ekspresi reguler kini didukung!"
+  },
+  "searchTipsMsg2": {
+    "message": "Misalnya, coba cari"
+  },
+  "searchTipsMsg3": {
+    "message": "Cari kunjungan dan unduhan"
+  },
+  "searchTipsMsg4": {
+    "message": "Pencarian akan secara otomatis mencari kunjungan berdasarkan judul halaman dan URL, serta unduhan berdasarkan nama file dan URL."
+  },
+  "searchTipsMsg5": {
+    "message": "10.000 kunjungan terakhir Anda digunakan untuk pencarian awal yang cepat. Untuk mencari lebih dalam, kunjungi bagian bawah halaman hasil terakhir dan klik tombol 'Cari Lebih Dalam'."
+  },
+  "searchToolDescription": {
+    "message": "Alat ini memungkinkan Anda mencari riwayat penjelajahan secara efektif menggunakan kata kunci sederhana atau **Ekspresi Reguler (RegEx)** tingkat lanjut. Berikut adalah beberapa contoh untuk membantu Anda memulai:"
+  },
+  "search_history": {
+    "message": "Cari di Riwayat"
+  },
+  "searchedUrlDeleted": {
+    "message": "URL yang dicari telah dihapus"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "URL yang dicari telah dihapus kecuali domain yang di-whitelist"
+  },
+  "searching": {
+    "message": "Mencari"
+  },
+  "selectDateFormat": {
+    "message": "Format Tanggal"
+  },
+  "selectDateRange": {
+    "message": "Pilih rentang tanggal"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "Pilih Tanggal untuk Menghapus Riwayat"
+  },
+  "selectEndDate": {
+    "message": "Pilih tanggal berakhir"
+  },
+  "selectStartDate": {
+    "message": "Pilih tanggal mulai"
+  },
+  "selected": {
+    "message": "Terpilih"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "Riwayat tanggal terpilih telah dihapus"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "Riwayat tanggal terpilih telah dihapus kecuali domain yang di-whitelist"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "Riwayat jam terpilih telah dihapus"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "Riwayat Jam Terpilih telah dihapus kecuali domain yang di-whitelist"
+  },
+  "sessions": {
+    "message": "Sesi"
+  },
+  "settings": {
+    "message": "Pengaturan"
+  },
+  "settingsSaved": {
+    "message": "Pengaturan disimpan"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "Pengaturan Pembersihan Otomatis Cerdas Anda telah berhasil diperbarui."
+  },
+  "shortRetentionWarning": {
+    "message": "Menetapkan periode retensi singkat satu minggu berarti riwayat penjelajahan Anda yang lebih lama akan dibersihkan lebih sering. Pastikan ini sesuai dengan kebutuhan Anda."
+  },
+  "show": {
+    "message": "Tampilkan"
+  },
+  "showAllHistory": {
+    "message": "Tampilkan Semua Riwayat"
+  },
+  "showStats": {
+    "message": "Tampilkan Statistik"
+  },
+  "small": {
+    "message": "Kecil"
+  },
+  "smartAutoCleanup": {
+    "message": "Pembersihan Otomatis Cerdas"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "Kelola riwayat penjelajahan Anda secara otomatis dengan Pembersihan Otomatis Cerdas. Pilih seberapa sering pembersihan harus berjalan dan berapa lama riwayat terbaru Anda harus dipertahankan."
+  },
+  "smartAutoCleanupSettings": {
+    "message": "Pengaturan Pembersihan Otomatis Cerdas"
+  },
+  "smartHistoryCleanup": {
+    "message": "Pembersihan Riwayat Cerdas"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "Membersihkan riwayat penjelajahan Anda kecuali untuk situs web yang telah Anda tambahkan ke whitelist Anda. Fitur ini membantu Anda menjaga aktivitas Anda tetap pribadi sambil mempertahankan riwayat penting dari situs tepercaya atau yang sering digunakan."
+  },
+  "socialMediaTip": {
+    "message": "Untuk situs media sosial, pertimbangkan untuk memblokir bagian tertentu (facebook.com/marketplace/*)"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "Beberapa domain tidak dapat ditambahkan:\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "Beberapa izin hilang"
+  },
+  "specificPage": {
+    "message": "Halaman spesifik"
+  },
+  "specificPath": {
+    "message": "Jalur spesifik"
+  },
+  "specificSubdomain": {
+    "message": "Subdomain spesifik"
+  },
+  "start": {
+    "message": "Mulai"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>Dimulai dengan:\u003C/strong> Gunakan ^ untuk menemukan entri yang dimulai dengan kata tertentu (misalnya, ^KotakMasuk)."
+  },
+  "startsWithInbox": {
+    "message": "Dimulai dengan \"KotakMasuk\""
+  },
+  "statsCleared": {
+    "message": "Statistik dibersihkan"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "Batal"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "Untuk membantu Anda melacak waktu yang Anda habiskan di situs web, melihat detail sesi, dan mengekspor laporan waktu dalam PDF, kami memerlukan izin untuk mengakses aktivitas penjelajahan Anda."
+  },
+  "statsPermissionDialogGrant": {
+    "message": "Berikan Izin"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "Kami telah memperkenalkan fitur Pelacakan Waktu baru di BetterHistory!"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "Izin Baru Diperlukan untuk Pelacakan Waktu"
+  },
+  "subdomainNote": {
+    "message": "Mem-whitelist domain utama tidak secara otomatis mem-whitelist subdomainnya"
+  },
+  "subdomains": {
+    "message": "Subdomain"
+  },
+  "submit": {
+    "message": "Kirim"
+  },
+  "submitFeedback": {
+    "message": "Kirim Umpan Balik"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "Saran dan umpan balik Anda membantu kami meningkatkan BetterHistory dan memberikan pengalaman pengguna terbaik."
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 Karakter atau Lebih"
+  },
+  "termsOfService": {
+    "message": "Ketentuan Layanan"
+  },
+  "thankYou": {
+    "message": "Terima kasih!"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "Tindakan ini tidak dapat dibatalkan."
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "URL atau domain ini sudah terdaftar di Domain Blacklist"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "URL atau domain ini sudah terdaftar di Domain Whitelist"
+  },
+  "threeMonths": {
+    "message": "Tiga bulan"
+  },
+  "timeTrackingStartedOn": {
+    "message": "Pelacakan waktu dimulai pada {{date}}"
+  },
+  "tips": {
+    "message": "Tips"
+  },
+  "title": {
+    "message": "Judul"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "Untuk mem-blacklist setiap halaman pada domain dan subdomainnya, tulis:"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "Untuk mem-blacklist setiap halaman pada domain, tulis:"
+  },
+  "todalWords": {
+    "message": "Total Kata"
+  },
+  "today": {
+    "message": "Hari Ini"
+  },
+  "toolbarIcon": {
+    "message": "Tema Ikon Toolbar"
+  },
+  "totalEntries": {
+    "message": "total Entri"
+  },
+  "totalVisits": {
+    "message": "Total Kunjungan"
+  },
+  "twoWeeks": {
+    "message": "Dua minggu"
+  },
+  "typdCount": {
+    "message": "Jumlah Ketikan"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "Ketik kata kunci apa pun untuk menemukan entri yang cocok."
+  },
+  "typeDeleteToConfirm": {
+    "message": "Ketik \"delete\" untuk mengonfirmasi:"
+  },
+  "typedCount": {
+    "message": "Diketik {{times}} kali di bilah alamat"
+  },
+  "unableToLoadDomainStats": {
+    "message": "Tidak dapat memuat statistik domain. Silakan coba lagi nanti."
+  },
+  "understandSettings": {
+    "message": "Saya memahami pengaturan ini dan bagaimana dampaknya terhadap riwayat penjelajahan saya"
+  },
+  "understandYourRights": {
+    "message": "Pahami Hak Anda"
+  },
+  "uniqueUrls": {
+    "message": "URL unik"
+  },
+  "updatingData": {
+    "message": "Memperbarui data..."
+  },
+  "uploadScreenShot": {
+    "message": "Unggah Tangkapan Layar"
+  },
+  "urlDeleted": {
+    "message": "URL telah Dihapus"
+  },
+  "urlPatternGuide": {
+    "message": "Panduan Pola URL"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "Anda dapat menggunakan pola berikut untuk memblokir situs web:"
+  },
+  "useSpecificPaths": {
+    "message": "Gunakan jalur spesifik untuk mem-whitelist hanya bagian tertentu dari sebuah situs web"
+  },
+  "viewHere": {
+    "message": "Lihat Di Sini"
+  },
+  "viewStats": {
+    "message": "Lihat Statistik"
+  },
+  "viewStatsButton": {
+    "message": "Anda juga akan melihat tombol \"Lihat Statistik\" pada setiap entri di halaman Aktivitas untuk akses cepat ke data waktu yang mendetail"
+  },
+  "visitCount": {
+    "message": "Tautan dikunjungi {{times}} kali"
+  },
+  "visitSite": {
+    "message": "Kunjungi situs"
+  },
+  "visits_domain": {
+    "message": "Lihat Semua Kunjungan ke Domain Ini"
+  },
+  "vstCount": {
+    "message": "Jumlah Kunjungan"
+  },
+  "weValueYourInputMessage": {
+    "message": "Kami menghargai masukan Anda dan siap membantu Anda!"
+  },
+  "websiteAccessDescription": {
+    "message": "• Akses situs web (untuk memantau aktivitas)"
+  },
+  "websites": {
+    "message": "Situs Web"
+  },
+  "weeklyEverySunday": {
+    "message": "Mingguan (setiap hari Minggu)"
+  },
+  "whatThisMeans": {
+    "message": "Apa artinya ini:"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "Pola URL apa yang diizinkan?"
+  },
+  "whenBrowserCloses": {
+    "message": "Saat browser ditutup"
+  },
+  "whenShouldCleanupRun": {
+    "message": "Kapan Pembersihan Otomatis Cerdas harus berjalan?"
+  },
+  "whitelist": {
+    "message": "Whitelist"
+  },
+  "whitelistDomain": {
+    "message": "Domain Whitelist"
+  },
+  "whitelistDomains": {
+    "message": "Domain Whitelist"
+  },
+  "whitelistExactDomain": {
+    "message": "Mem-whitelist hanya domain persis, bukan subdomain atau jalur spesifik."
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "Mem-whitelist domain utama dan semua subdomainnya (mail.example.com, blog.example.com, dll.)."
+  },
+  "whitelistPatterns": {
+    "message": "Anda dapat menggunakan pola berikut untuk mem-whitelist:"
+  },
+  "whitelistPrecedence": {
+    "message": "Domain yang di-whitelist lebih diutamakan daripada domain yang di-blacklist"
+  },
+  "whitelistSpecificPage": {
+    "message": "Mem-whitelist hanya halaman spesifik pada domain."
+  },
+  "whitelistSpecificPath": {
+    "message": "Mem-whitelist semua halaman di bawah jalur spesifik pada domain."
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "Mem-whitelist hanya subdomain spesifik, bukan domain utama atau subdomain lain."
+  },
+  "whitelistedDomains": {
+    "message": "Domain yang Di-whitelist"
+  },
+  "wildcardWarning": {
+    "message": "Gunakan wildcard (*) dengan hati-hati karena dapat memblokir lebih dari yang dimaksudkan"
+  },
+  "yesterday": {
+    "message": "Kemarin"
+  }
+}

@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "אנא תאר מה נוכל להוסיף או לשפר."
+  },
+  "FeedbackSuccessAlert": {
+    "message": "תודה! המשוב שלך נשלח בהצלחה."
+  },
+  "Friday": {
+    "message": "שישי"
+  },
+  "Monday": {
+    "message": "שני"
+  },
+  "Popup": {
+    "message": "חלון קופץ"
+  },
+  "Saturday": {
+    "message": "שבת"
+  },
+  "Sidebar": {
+    "message": "סרגל צד"
+  },
+  "Sunday": {
+    "message": "ראשון"
+  },
+  "ThanksForFeedBack": {
+    "message": "תודה על המשוב שלך!"
+  },
+  "Thursday": {
+    "message": "חמישי"
+  },
+  "Today": {
+    "message": "היום"
+  },
+  "Tuesday": {
+    "message": "שלישי"
+  },
+  "URL": {
+    "message": "כתובת URL"
+  },
+  "Wednesday": {
+    "message": "רביעי"
+  },
+  "WhatCanWeImprove": {
+    "message": "מה נוכל לשפר?"
+  },
+  "Yesterday": {
+    "message": "אתמול"
+  },
+  "about": {
+    "message": "אודות"
+  },
+  "activity": {
+    "message": "פעילות"
+  },
+  "add": {
+    "message": "הוסף"
+  },
+  "addDomains": {
+    "message": "הוסף דומיינים"
+  },
+  "addToBlackList": {
+    "message": "הוסף לרשימה השחורה"
+  },
+  "advanceExport": {
+    "message": "ייצוא מתקדם"
+  },
+  "advancedFeaturesActive": {
+    "message": "תכונות מתקדמות פעילות כעת."
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "תכונות מתקדמות דורשות הרשאות נוספות עבור:"
+  },
+  "all": {
+    "message": "הכל"
+  },
+  "allCapitalLetters": {
+    "message": "כל אותיות גדולות"
+  },
+  "allHistoryDeleted": {
+    "message": "כל ההיסטוריה נמחקה"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "כל ההיסטוריה נמחקה למעט דומיינים ברשימה הלבנה"
+  },
+  "allPermissionsGranted": {
+    "message": "כל ההרשאות ניתנו!"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "כל כתובות ה-URL שנבחרו נמחקו"
+  },
+  "allTime": {
+    "message": "כל הזמנים"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "אנא אפשר גישה כדי לשלוח משוב."
+  },
+  "appName": {
+    "message": "Better History | נהל, ייצא ומחק היסטוריה"
+  },
+  "apply": {
+    "message": "החל"
+  },
+  "autoCleanupDisabled": {
+    "message": "ניקוי אוטומטי מושבת. עדיין ניתן לנקות היסטוריה ידנית בעת הצורך."
+  },
+  "autoCleanupEnabled": {
+    "message": "היסטוריית הגלישה שלך תנוקה אוטומטית בהתאם ללוח הזמנים שנבחר."
+  },
+  "autoCleanupHelp": {
+    "message": "ניקוי אוטומטי עוזר לשמור על הפרטיות שלך על ידי הסרת היסטוריית הגלישה באופן קבוע בהתאם להעדפותיך."
+  },
+  "autoCleanupSchedule": {
+    "message": "לוח זמנים לניקוי אוטומטי:"
+  },
+  "avgPerDay": {
+    "message": "ממוצע {{time}} ליום"
+  },
+  "basicDomain": {
+    "message": "דומיין בסיסי"
+  },
+  "basicSearch": {
+    "message": "חיפוש בסיסי"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}:\u003C/strong> הקלד כל מילת מפתח כדי למצוא רשומות תואמות (לדוגמה, \"Inbox\")."
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> הוא הרחבת דפדפן חדשנית שפותחה על ידי \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span>. הוא מאפשר למשתמשים לנהל את היסטוריית הגלישה שלהם בקלות, ומציע תכונות מתקדמות כמו מחיקה מותאמת אישית, מסננים מדויקים וממשק אינטואיטיבי. ב-BetterLogic Ltd, אנו נותנים עדיפות לפרטיות המשתמש ולפונקציונליות חלקה כדי לשפר את חווית הגלישה שלך."
+  },
+  "blacklist": {
+    "message": "רשימה שחורה"
+  },
+  "blacklistDomain": {
+    "message": "דומיין ברשימה השחורה"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "הכנס דומיין לרשימה השחורה מההיסטוריה"
+  },
+  "blacklistDomains": {
+    "message": "דומיינים ברשימה השחורה"
+  },
+  "blacklistFeatureDescription": {
+    "message": "תכונת הרשימה השחורה של דומיינים ב-BetterHistory מאפשרת לך לחסום אתרים ספציפיים מלהיות מתועדים בהיסטוריית הגלישה שלך. לאחר שדומיין נכנס לרשימה השחורה, כל הביקורים הקודמים והעתידיים לאתר זה יוסרו אוטומטית."
+  },
+  "blacklistInstructionText": {
+    "message": "תכונת הרשימה השחורה של דומיינים ב-BetterHistory מאפשרת לך לחסום אתרים ספציפיים מלהיות מתועדים בהיסטוריית הגלישה שלך. לאחר שדומיין נכנס לרשימה השחורה, כל הביקורים הקודמים והעתידיים לאתר זה יוסרו אוטומטית."
+  },
+  "blacklistTips": {
+    "message": "טיפים"
+  },
+  "blacklist_confirmation": {
+    "message": "האם אתה בטוח שברצונך להכניס את \u003Cstrong>{{DOMAIN}}\u003C/strong> לרשימה השחורה מהיסטוריית הגלישה שלך?\u003Cbr/>ביקורים עתידיים בדומיין זה לא יתועדו עוד, וכל רשומות ההיסטוריה הקיימות עבור \u003Cstrong>{{DOMAIN}}\u003C/strong> יימחקו."
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> כבר נמצא ברשימה השחורה."
+  },
+  "blacklistedDomains": {
+    "message": "דומיינים ברשימה השחורה"
+  },
+  "blockExactDomain": {
+    "message": "חוסם רק את הדומיין המדויק, לא תתי דומיינים או נתיבים ספציפיים."
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "חוסם את הדומיין הראשי ואת כל תתי הדומיינים שלו (mail.example.com, blog.example.com, וכו')."
+  },
+  "blockSpecificPage": {
+    "message": "חוסם רק עמוד ספציפי בדומיין."
+  },
+  "blockSpecificPath": {
+    "message": "חוסם את כל העמודים תחת נתיב ספציפי בדומיין."
+  },
+  "blockSpecificSubdomain": {
+    "message": "חוסם רק תת-דומיין ספציפי, לא את הדומיין הראשי או תתי דומיינים אחרים."
+  },
+  "bugReport": {
+    "message": "דיווח על באג"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "הוסף מספר דומיינים לרשימה השחורה שלך בבת אחת. הזן דומיין אחד בכל שורה."
+  },
+  "bulkAddDomains": {
+    "message": "הוספת דומיינים בכמויות גדולות"
+  },
+  "cancel": {
+    "message": "בטל"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>רגישות לאותיות:\u003C/strong> החיפושים אינם רגישים לאותיות כברירת מחדל."
+  },
+  "chooseStartAndEndDates": {
+    "message": "בחר תאריכי התחלה וסיום"
+  },
+  "clear": {
+    "message": "נקה"
+  },
+  "clearBrowsingHistory": {
+    "message": "נקה היסטוריית גלישה"
+  },
+  "clearHistory": {
+    "message": "מחק היסטוריה"
+  },
+  "clearHistoryConfirm": {
+    "message": "האם אתה בטוח שברצונך למחוק את כל היסטוריית הגלישה שלך? פעולה זו היא קבועה ולא ניתנת לביטול."
+  },
+  "clearStats": {
+    "message": "נקה סטטיסטיקות"
+  },
+  "clearing": {
+    "message": "מנקה..."
+  },
+  "clearingHistory": {
+    "message": "ניהול היסטוריה"
+  },
+  "clickToRequestPermissions": {
+    "message": "לחץ על הכפתור למטה כדי לבקש אותן."
+  },
+  "close": {
+    "message": "סגור"
+  },
+  "clr": {
+    "message": "נקה"
+  },
+  "confirmAndSave": {
+    "message": "אשר ושמור"
+  },
+  "confirmDelete": {
+    "message": "אשר מחיקה"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "אשר הגדרות ניקוי אוטומטי חכם"
+  },
+  "contact": {
+    "message": "יצירת קשר"
+  },
+  "contactAndFeedback": {
+    "message": "יצירת קשר ומשוב"
+  },
+  "contactLimitReached": {
+    "message": "כבר הגעת למגבלת יצירת הקשר שלך להיום."
+  },
+  "containsDotCom": {
+    "message": "מכיל \".com\""
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>מכיל מספר מילים:\u003C/strong> השתמש ב-\u003Ccode>{{pipe}}\u003C/code> כדי לחפש רשומות המכילות אחת ממספר מילים (לדוגמה, \u003Ccode>{{example}}\u003C/code>)."
+  },
+  "containsNewsOrInfo": {
+    "message": "מכיל \"News\" או \"Info\""
+  },
+  "containsNumbers": {
+    "message": "מכיל מספרים"
+  },
+  "containsSpaces": {
+    "message": "מכיל רווחים"
+  },
+  "containsTODO": {
+    "message": "מכיל \"TODO\""
+  },
+  "current": {
+    "message": "מאתר זה"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "נכון לעכשיו, אתה יכול לצפות בנתונים עבור {{days}} {{dayLabel}} האחרונים. ימים נוספים יתווספו אוטומטית."
+  },
+  "custom": {
+    "message": "מותאם אישית"
+  },
+  "customExport": {
+    "message": "ייצוא מותאם אישית"
+  },
+  "customRange": {
+    "message": "טווח מותאם אישית"
+  },
+  "dailyAtMidnight": {
+    "message": "יומי (בחצות)"
+  },
+  "darkMode": {
+    "message": "מצב כהה"
+  },
+  "dateAndTimeOrder": {
+    "message": "סדר תאריך ושעה"
+  },
+  "day": {
+    "message": "יום"
+  },
+  "days": {
+    "message": "ימים"
+  },
+  "debugToolsTitle": {
+    "message": "כלי איתור באגים (לבדיקה):"
+  },
+  "default": {
+    "message": "ברירת מחדל"
+  },
+  "delete": {
+    "message": "מחק"
+  },
+  "deleteAllForHour": {
+    "message": "האם אתה בטוח שברצונך למחוק לצמיתות את כל היסטוריית הגלישה עבור \u003Cstrong>{{startHour}}\u003C/strong>?\u003Cbr>פעולה זו תמחק את היסטוריית הגלישה למשך השעה כולה ({{startAndendHour}}). לאחר המחיקה, לא ניתן לבטל פעולה זו."
+  },
+  "deleteAllFromDate": {
+    "message": "האם אתה בטוח שברצונך למחוק לצמיתות את כל היסטוריית הגלישה עבור \u003Cstrong>{{date}}\u003C/strong>?\u003Cbr>פעולה זו תסיר את כל הרשומות מאותו יום. לאחר המחיקה, לא ניתן לבטל פעולה זו."
+  },
+  "deleteAllSearchHistory": {
+    "message": "האם אתה בטוח שברצונך למחוק לצמיתות את כל רשומות היסטוריית הגלישה שנמצאו בחיפוש ומופיעות בדף זה?\u003Cbr/>פעולה זו תסיר את כל הרשומות המוצגות בתוצאות החיפוש הנוכחיות. לאחר המחיקה, לא ניתן לבטל פעולה זו."
+  },
+  "deleteBulk": {
+    "message": "מחק"
+  },
+  "deleteDomainConfirm": {
+    "message": "האם אתה בטוח שברצונך למחוק את כל ההיסטוריה מהדומיין \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span>? פעולה זו תסיר את כל הרשומות הקשורות ולא ניתן לבטלה."
+  },
+  "deleteDomainStats": {
+    "message": "למחוק סטטיסטיקות דומיין?"
+  },
+  "deleteEntire": {
+    "message": "מחק תאריך שלם"
+  },
+  "deleteEntireHistory": {
+    "message": "מחק היסטוריה שלמה"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "למחוק את כל ההיסטוריה?"
+  },
+  "deleteHistory": {
+    "message": "מחק היסטוריה"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "האם אתה בטוח שברצונך למחוק את כל היסטוריית הגלישה שלך? פעולה זו היא קבועה ולא ניתנת לביטול."
+  },
+  "deleteMsg": {
+    "message": "למחוק את כל תוצאות החיפוש?"
+  },
+  "deleteSelectedHistory": {
+    "message": "מחק היסטוריה נבחרת"
+  },
+  "deleteSpecificDate": {
+    "message": "מחק תאריך ספציפי"
+  },
+  "deleteStatsConfirmation": {
+    "message": "אתה עומד למחוק לצמיתות את כל נתוני המעקב עבור \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> מ-BetterHistory.\u003Cbr>\u003Cbr>לא ניתן לבטל פעולה זו."
+  },
+  "deleteUrlConfirm": {
+    "message": "האם אתה בטוח שברצונך למחוק את כתובת ה-URL \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> מההיסטוריה שלך? לא ניתן לבטל פעולה זו."
+  },
+  "deletedSelectedHistory": {
+    "message": "האם אתה בטוח שברצונך למחוק לצמיתות את {{selectedNumber}} רשומות ההיסטוריה שנבחרו? \u003Cbr/>פעולה זו תמחק לצמיתות את כל {{selectedNumber}} הרשומות שנבחרו. לאחר המחיקה, לא ניתן לבטל פעולה זו."
+  },
+  "devices": {
+    "message": "מכשירים"
+  },
+  "disableTimeTracking": {
+    "message": "השבתת זה תפסיק את המעקב ותסתיר את כל הסטטיסטיקות."
+  },
+  "domainAlreadyExists": {
+    "message": "דומיין זה כבר נמצא ברשימה שלך"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "שורה ${index + 1}: הדומיין כבר קיים (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "רשימה שחורה של דומיינים"
+  },
+  "domainCannotBeEmpty": {
+    "message": "דומיין לא יכול להיות ריק"
+  },
+  "domainStats": {
+    "message": "סטטיסטיקות דומיין"
+  },
+  "domainWithSubdomains": {
+    "message": "דומיין עם כל תתי הדומיינים"
+  },
+  "domains": {
+    "message": "דומיינים"
+  },
+  "email": {
+    "message": "אימייל"
+  },
+  "emailArticle": {
+    "message": "מאמרי תמיכה"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}: \u003C/span>עיין במדריכי התמיכה ובשאלות הנפוצות שלנו ב- \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">תמיכת BetterHistory\u003C/span>\u003C/a>."
+  },
+  "emailSupport": {
+    "message": "תמיכה באימייל"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}:\u003C/span> לכל שאלה או בעיה, פנה אלינו ב- 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a>."
+  },
+  "enableStats": {
+    "message": "אפשר סטטיסטיקות"
+  },
+  "enableStatsDescription": {
+    "message": "אפשר או השבת את כל פונקציונליות הסטטיסטיקות. כאשר מושבת, לא ייאספו או יוצגו סטטיסטיקות."
+  },
+  "enable_popup": {
+    "message": "אפשר חלון קופץ"
+  },
+  "endsWithQuestionMark": {
+    "message": "מסתיימת ב-\" ?\""
+  },
+  "enterAValidDomain": {
+    "message": "הזן דומיין תקף"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "אנא הזן לפחות דומיין אחד"
+  },
+  "enterDomain": {
+    "message": "הזן את הדומיין שברצונך לא לכלול מההיסטוריה"
+  },
+  "enterDomainName": {
+    "message": "הזן שם דומיין"
+  },
+  "enterDomainPerLine": {
+    "message": "הוסף מספר דומיינים לרשימה הלבנה שלך בבת אחת. הזן דומיין אחד בכל שורה."
+  },
+  "enterDomainToBlock": {
+    "message": "הזן דומיין לחסימה (לדוגמה, example.com)"
+  },
+  "enterDomainToWhitelist": {
+    "message": "הזן דומיין לרשימה הלבנה (לדוגמה, example.com)"
+  },
+  "enterValidDomain": {
+    "message": "אנא הזן לפחות דומיין תקף אחד"
+  },
+  "entireExport": {
+    "message": "ייצוא שלם (90 יום)"
+  },
+  "entries": {
+    "message": "רשומות"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "מחק את כל ההיסטוריה עבור אתר זה"
+  },
+  "error": {
+    "message": "שגיאה"
+  },
+  "errorClearingHistory": {
+    "message": "נכשל ניקוי ההיסטוריה. אנא נסה שוב."
+  },
+  "errorClearingStats": {
+    "message": "נכשל ניקוי הסטטיסטיקות"
+  },
+  "errorLoadingData": {
+    "message": "שגיאה בטעינת נתונים"
+  },
+  "errorLoadingSettings": {
+    "message": "שגיאה בטעינת ההגדרות. משתמש בערכי ברירת מחדל."
+  },
+  "errorSavingSettings": {
+    "message": "שמירת ההגדרות נכשלה. אנא נסה שוב."
+  },
+  "exactWordProject": {
+    "message": "המילה המדויקת \"Project\""
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "גלה את המוצרים שלנו"
+  },
+  "export": {
+    "message": "ייצוא"
+  },
+  "exportAsJSON": {
+    "message": "ייצוא כ-JSON"
+  },
+  "exportAsPDF": {
+    "message": "ייצוא כקובץ PDF"
+  },
+  "exportCsv": {
+    "message": "ייצוא CSV"
+  },
+  "exportEntireLocalData": {
+    "message": "ייצוא כל הנתונים המקומיים"
+  },
+  "exportHistory": {
+    "message": "ייצא את כל היסטוריית הגלישה שלך"
+  },
+  "exportHistoryDescription": {
+    "message": "תכונה זו מאפשרת לך לייצא את כל היסטוריית הגלישה שלך (עד 90 יום) או לבחור טווח תאריכים מותאם אישית לייצוא. לידיעתך, ה-API של כרום להיסטוריה תומך רק בייצוא היסטוריה—הוא אינו מאפשר ייבוא היסטוריה בחזרה."
+  },
+  "exportHistoryLimitation": {
+    "message": "בנוסף, כרום מוחק אוטומטית היסטוריה ישנה מ-90 יום, כך ש-BetterHistory יכולה לייצא רק את הרשומות שכרום שומר."
+  },
+  "exportHtml": {
+    "message": "ייצוא HTML"
+  },
+  "exportLocalData": {
+    "message": "ייצוא נתונים מקומיים"
+  },
+  "exportSelectedCsv": {
+    "message": "ייצוא נבחר CSV"
+  },
+  "exportSelectedHtml": {
+    "message": "ייצוא נבחר HTML"
+  },
+  "exportTimeTrackingData": {
+    "message": "ייצוא נתוני מעקב זמן"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "אלו נתוני מעקב הזמן המאוחסנים מקומית שתוכל לייצא לשימושך האישי. הם משקפים את הזמן שבילית בעמודים שביקרת, ועוזרים לך לנתח את הרגלי הגלישה שלך."
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "נתונים אלה נשמרים רק בדפדפן שלך ואינם מסונכרנים או מאוחסנים באופן מקוון. הסרת הרחבת BetterHistory תמחק לצמיתות את כל נתוני מעקב הזמן. ייצא את הנתונים שלך באופן קבוע אם ברצונך לשמור גיבוי."
+  },
+  "exportToCSV": {
+    "message": "ייצוא ל-CSV"
+  },
+  "exportToTXT": {
+    "message": "ייצוא ל-TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "היסטוריית גלישה מיוצאת - תאריך:"
+  },
+  "exportedHistoryKeyword": {
+    "message": "היסטוריית גלישה מיוצאת - מילת מפתח:"
+  },
+  "featureRequest": {
+    "message": "בקשת תכונה"
+  },
+  "feedback": {
+    "message": "משוב"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "אני מקבל את \u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">מדיניות הפרטיות\u003C/span>\u003C/a> ועיבוד הנתונים."
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "אנא ספק את האימייל שלך למעקב אחר הגשתך."
+  },
+  "feedbackForm": {
+    "message": "טופס משוב"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}:\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">לחץ כאן כדי לשלוח את המשוב שלך\u003C/span>."
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "גודל הקובץ חורג מ-5MB. אנא העלה קובץ קטן יותר."
+  },
+  "find_all_visits_domain": {
+    "message": "מצא את כל הביקורים ב-{{d}}"
+  },
+  "generalContact": {
+    "message": "יצירת קשר כללית"
+  },
+  "generatedUsing": {
+    "message": "מסמך זה נוצר באמצעות"
+  },
+  "grantPermissions": {
+    "message": "הענק הרשאות"
+  },
+  "groupSession": {
+    "message": "קבוצת הפעלה"
+  },
+  "history": {
+    "message": "היסטוריה"
+  },
+  "historyCleared": {
+    "message": "ההיסטוריה נוקתה"
+  },
+  "historyControlsFor": {
+    "message": "בקרות היסטוריה עבור"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "היסטוריה מדומיינים ברשימה הלבנה תישמר במהלך הניקוי"
+  },
+  "historyRetentionHelp": {
+    "message": "היסטוריה בטווח הזמן שנבחר זה תישמר ותוחרג מניקוי אוטומטי."
+  },
+  "hourFormat": {
+    "message": "פורמט זמן"
+  },
+  "hours": {
+    "message": "שעות"
+  },
+  "howDidWeDo": {
+    "message": "איך עשינו?"
+  },
+  "howLongKeepHistory": {
+    "message": "כמה זמן יש לשמור את היסטוריית הגלישה שלך לפני שהיא כשירה למחיקה אוטומטית?"
+  },
+  "howToUseTheSearchTool": {
+    "message": "כיצד להשתמש בכלי החיפוש"
+  },
+  "id": {
+    "message": "מזהה"
+  },
+  "idleDetectionDescription": {
+    "message": "• זיהוי חוסר פעילות (מפסיק מעקב כשאתה לא נמצא)"
+  },
+  "import": {
+    "message": "ייבוא"
+  },
+  "importEntireLocalData": {
+    "message": "ייבוא נתונים מקומיים"
+  },
+  "importFailed": {
+    "message": "הייבוא נכשל"
+  },
+  "importJSON": {
+    "message": "ייבוא JSON"
+  },
+  "importSuccessful": {
+    "message": "הנתונים יובאו בהצלחה"
+  },
+  "infinityScroll": {
+    "message": "אפשר גלילה אינסופית"
+  },
+  "interfaceStyle": {
+    "message": "הגדרות תצוגה"
+  },
+  "invalidDomainFormat": {
+    "message": "אנא הזן פורמט דומיין תקף (לדוגמה, example.com)"
+  },
+  "invalidDomainFormatLine": {
+    "message": "שורה ${index + 1}: פורמט דומיין לא חוקי (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "סוג קובץ לא חוקי. אנא העלה תמונת JPG או PNG."
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> אינו דומיין תקף. אנא השתמש בדומיין תקף כדי להוסיף לרשימה השחורה."
+  },
+  "keepHistoryCheckText": {
+    "message": "שמור היסטוריה מאתרים שהוספת לרשימה הלבנה שלך"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "שמור היסטוריה מאתרים שהוספת לרשימה הלבנה שלך"
+  },
+  "large": {
+    "message": "גדול"
+  },
+  "last15Days": {
+    "message": "15 ימים"
+  },
+  "last2Months": {
+    "message": "חודשיים אחרונים"
+  },
+  "last30Days": {
+    "message": "30 ימים"
+  },
+  "last3Months": {
+    "message": "שלושה חודשים אחרונים"
+  },
+  "last60Days": {
+    "message": "60 ימים"
+  },
+  "last7Days": {
+    "message": "7 ימים"
+  },
+  "last90Days": {
+    "message": "90 ימים"
+  },
+  "lastMonth": {
+    "message": "חודש שעבר"
+  },
+  "lastVisitTime": {
+    "message": "זמן ביקור אחרון"
+  },
+  "lastWeek": {
+    "message": "שבוע שעבר"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "למד עוד על ניקוי אוטומטי"
+  },
+  "learnMoreAboutRetention": {
+    "message": "למד עוד על תקופת השמירה"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "ספר לי אם אתה זקוק להתאמות נוספות."
+  },
+  "lightMode": {
+    "message": "מצב בהיר"
+  },
+  "loadingSettings": {
+    "message": "טוען הגדרות..."
+  },
+  "ltr": {
+    "message": "משמאל לימין (LTR)"
+  },
+  "mainDomainNote": {
+    "message": "חסימת דומיין ראשי אינה חוסמת אוטומטית את תתי הדומיינים שלו"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "נהל מעקב זמן וסטטיסטיקות שימוש"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "כאשר מאופשר, BetterHistory עוקב אחר כמה זמן אתה מבלה בכל אתר, כולל משך הפעלות וזמן פעיל מול זמן חוסר פעילות. כל הנתונים נשמרים מקומית בדפדפן שלך ומשמשים אך ורק כדי לספק לך תובנות גלישה מפורטות וניתוח זמן."
+  },
+  "manifest_browser_action_title": {
+    "message": "דפדוף בהיסטוריה"
+  },
+  "manifest_description": {
+    "message": "מנהל היסטוריה אלגנטי: חיפוש עוצמתי, ייצוא בכמויות גדולות, מחיקת בחירות מותאמות אישית, סינון לפי יום ושעה, וחסימת דומיינים ספציפיים מההיסטוריה."
+  },
+  "maxSize": {
+    "message": "גודל מקסימלי"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• זיהוי הפעלת מדיה (ממשיך מעקב במהלך סרטונים/מוזיקה)"
+  },
+  "medium": {
+    "message": "בינוני"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "חודשי (ראשון לכל חודש)"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "ימים נוספים יתווספו אוטומטית."
+  },
+  "moreFromSite": {
+    "message": "עוד מהאתר הזה"
+  },
+  "mostActiveDay": {
+    "message": "היום הפעיל ביותר"
+  },
+  "neverDisabled": {
+    "message": "אף פעם (מושבת)"
+  },
+  "noActivityData": {
+    "message": "אין נתוני פעילות לתקופה זו"
+  },
+  "noBlacklistType": {
+    "message": "אין {{type}} ברשימה השחורה שלך"
+  },
+  "noChangesToSave": {
+    "message": "אין שינויים לשמירה"
+  },
+  "noDevices": {
+    "message": "לא נמצאו הפעלות מכשיר פעילות."
+  },
+  "noDomainBlacklisted": {
+    "message": "אין דומיינים ברשימה השחורה עדיין"
+  },
+  "noDomains": {
+    "message": "אין דומיינים ברשימה הלבנה עדיין"
+  },
+  "noDomainsType": {
+    "message": "אין {{type}} ברשימה הלבנה שלך"
+  },
+  "noFileSelectedMessage": {
+    "message": "לא נבחר קובץ. אנא העלה קובץ תקף."
+  },
+  "noMoreResults": {
+    "message": "אין תוצאות נוספות"
+  },
+  "noResultsFound": {
+    "message": "לא נמצאו תוצאות. נסה להתאים את מונחי החיפוש או המסננים שלך."
+  },
+  "noThanks": {
+    "message": "לא, תודה"
+  },
+  "noTitle": {
+    "message": "ללא כותרת"
+  },
+  "noVisits": {
+    "message": "מצטערים, לא נמצאו ביקורים."
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>מספרים בלבד:\u003C/strong> השתמש ב-\u003Ccode>{{pattern}}\u003C/code> כדי למצוא רשומות עם מספרים."
+  },
+  "of": {
+    "message": "מתוך"
+  },
+  "ok": {
+    "message": "אישור"
+  },
+  "oneMonth": {
+    "message": "חודש אחד"
+  },
+  "oneWeek": {
+    "message": "שבוע אחד"
+  },
+  "openAllTabs": {
+    "message": "פתח את כל הכרטיסיות"
+  },
+  "openMenu": {
+    "message": "פתח תפריט"
+  },
+  "openTab": {
+    "message": "פתח בכרטיסייה חדשה"
+  },
+  "order": {
+    "message": "סדר"
+  },
+  "otherOptions": {
+    "message": "העדפות כלליות"
+  },
+  "page": {
+    "message": "עמוד"
+  },
+  "paths": {
+    "message": "נתיבים"
+  },
+  "permissionGranted": {
+    "message": "✓ ניתנה"
+  },
+  "permissionMissing": {
+    "message": "✗ חסרה"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "ההרשאות כבר ניתנו"
+  },
+  "pleaseNote": {
+    "message": "שים לב:"
+  },
+  "pleaseRateUs": {
+    "message": "אנא דרג אותנו!"
+  },
+  "prefixesAutoRemoved": {
+    "message": "קידומות כמו 'http://', 'https://' ו-'www.' יוסרו אוטומטית."
+  },
+  "prefixesRemoved": {
+    "message": "קידומות כמו 'http://', 'https://' ו-'www.' מוסרות אוטומטית"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "הכנס לאתר לרשימה השחורה כדי למנוע תיעוד היסטוריה עתידי"
+  },
+  "privacyPolicy": {
+    "message": "מדיניות פרטיות"
+  },
+  "privacyTerms": {
+    "message": "פרטיות ותנאים"
+  },
+  "processing": {
+    "message": "מעבד..."
+  },
+  "rateText": {
+    "message": "התרומה שלך עוזרת לנו לשפר את BetterHistory. ספר לנו איך עשינו!"
+  },
+  "recent": {
+    "message": "ביקורים אחרונים"
+  },
+  "recordedVisits": {
+    "message": "ביקורים מתועדים בדומיין זה"
+  },
+  "remove_url": {
+    "message": "מחק כתובת URL זו מההיסטוריה"
+  },
+  "result": {
+    "message": "תוצאה"
+  },
+  "results": {
+    "message": "תוצאות"
+  },
+  "retentionPeriod": {
+    "message": "תקופת שמירה:"
+  },
+  "retentionPeriodHelp": {
+    "message": "תקופת השמירה קובעת עד כמה רחוק אחורה נשמרת היסטוריית הגלישה שלך. היסטוריה ישנה יותר תהיה כשירה לניקוי."
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "אנא בדוק את ההגדרות שלך לפני האישור."
+  },
+  "revokePermissions": {
+    "message": "בטל הרשאות"
+  },
+  "rightTitle": {
+    "message": "אפשרויות תפריט הקשר"
+  },
+  "rtl": {
+    "message": "מימין לשמאל (RTL)"
+  },
+  "saveSettings": {
+    "message": "שמור הגדרות"
+  },
+  "search": {
+    "message": "חיפוש"
+  },
+  "searchDeeper": {
+    "message": "חפש לעומק"
+  },
+  "searchDomainTitle": {
+    "message": "חפש לפי דומיין"
+  },
+  "searchEngine": {
+    "message": "מנוע חיפוש"
+  },
+  "searchMsg": {
+    "message": "ששש... נסה לחפש משהו"
+  },
+  "searchPlaceholder": {
+    "message": "חפש כותרת או כתובת URL"
+  },
+  "searchTextTitle": {
+    "message": "חפש לפי בחירת טקסט"
+  },
+  "searchTips": {
+    "message": "טיפים לחיפוש"
+  },
+  "searchTipsMsg1": {
+    "message": "חיפוש ביטויים רגולריים נתמך כעת!"
+  },
+  "searchTipsMsg2": {
+    "message": "לדוגמה, נסה לחפש את"
+  },
+  "searchTipsMsg3": {
+    "message": "חפש ביקורים והורדות"
+  },
+  "searchTipsMsg4": {
+    "message": "החיפוש יחפש אוטומטית ביקורים לפי כותרת עמוד וכתובת URL, והורדות לפי שם קובץ וכתובת URL."
+  },
+  "searchTipsMsg5": {
+    "message": "עשרת אלפים הביקורים האחרונים שלך משמשים לחיפוש ראשוני מהיר. כדי לחפש לעומק, עבור לתחתית העמוד האחרון של התוצאות ולחץ על כפתור 'חפש לעומק'."
+  },
+  "searchToolDescription": {
+    "message": "כלי זה מאפשר לך לחפש בהיסטוריית הגלישה שלך בצורה יעילה באמצעות מילות מפתח פשוטות או \u003Cstrong>ביטויים רגולריים (RegEx)\u003C/strong> מתקדמים. להלן מספר דוגמאות שיעזרו לך להתחיל:"
+  },
+  "search_history": {
+    "message": "חפש בהיסטוריה"
+  },
+  "searchedUrlDeleted": {
+    "message": "כתובות URL שחופשו נמחקו"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "כתובות URL שחופשו נמחקו למעט דומיינים ברשימה הלבנה"
+  },
+  "searching": {
+    "message": "מחפש"
+  },
+  "selectDateFormat": {
+    "message": "פורמט תאריך"
+  },
+  "selectDateRange": {
+    "message": "בחר טווח תאריכים"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "בחר תאריך למחיקת היסטוריה"
+  },
+  "selectEndDate": {
+    "message": "בחר תאריך סיום"
+  },
+  "selectStartDate": {
+    "message": "בחר תאריך התחלה"
+  },
+  "selected": {
+    "message": "נבחר"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "היסטוריית התאריך הנבחר נמחקה"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "היסטוריית התאריך הנבחר נמחקה למעט דומיינים ברשימה הלבנה"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "היסטוריית השעה הנבחרת נמחקה"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "היסטוריית השעה הנבחרת נמחקה למעט דומיינים ברשימה הלבנה"
+  },
+  "sessions": {
+    "message": "הפעלות"
+  },
+  "settings": {
+    "message": "הגדרות"
+  },
+  "settingsSaved": {
+    "message": "ההגדרות נשמרו"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "הגדרות הניקוי האוטומטי החכם שלך עודכנו בהצלחה."
+  },
+  "shortRetentionWarning": {
+    "message": "הגדרת תקופת שמירה קצרה של שבוע אחד פירושה שהיסטוריית הגלישה הישנה שלך תנוקה בתדירות גבוהה יותר. ודא שזה מתאים לצרכיך."
+  },
+  "show": {
+    "message": "הצג"
+  },
+  "showAllHistory": {
+    "message": "הצג את כל ההיסטוריה"
+  },
+  "showStats": {
+    "message": "הצג סטטיסטיקות"
+  },
+  "small": {
+    "message": "קטן"
+  },
+  "smartAutoCleanup": {
+    "message": "ניקוי אוטומטי חכם"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "נהל את היסטוריית הגלישה שלך באופן אוטומטי עם ניקוי אוטומטי חכם. בחר באיזו תדירות הניקוי צריך לפעול וכמה זמן ההיסטוריה האחרונה שלך צריכה להישמר."
+  },
+  "smartAutoCleanupSettings": {
+    "message": "הגדרות ניקוי אוטומטי חכם"
+  },
+  "smartHistoryCleanup": {
+    "message": "ניקוי היסטוריה חכם"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "מנקה את היסטוריית הגלישה שלך למעט אתרים שהוספת לרשימה הלבנה שלך. תכונה זו עוזרת לך לשמור על פרטיות הפעילות שלך תוך שמירת היסטוריה חשובה מאתרים מהימנים או בשימוש תדיר."
+  },
+  "socialMediaTip": {
+    "message": "עבור אתרי מדיה חברתית, שקול לחסום חלקים ספציפיים (facebook.com/marketplace/*)"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "לא ניתן היה להוסיף חלק מהדומיינים:\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "חלק מההרשאות חסרות"
+  },
+  "specificPage": {
+    "message": "עמוד ספציפי"
+  },
+  "specificPath": {
+    "message": "נתיב ספציפי"
+  },
+  "specificSubdomain": {
+    "message": "תת-דומיין ספציפי"
+  },
+  "start": {
+    "message": "התחלה"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>מתחיל ב:\u003C/strong> השתמש ב-^ כדי למצוא רשומות שמתחילות במילה ספציפית (לדוגמה, ^Inbox)."
+  },
+  "startsWithInbox": {
+    "message": "מתחיל ב-\"Inbox\""
+  },
+  "statsCleared": {
+    "message": "הסטטיסטיקות נוקו"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "בטל"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "כדי לעזור לך לעקוב אחר הזמן שאתה מבלה באתרים, לצפות בפרטי הפעלות ולייצא דוחות זמן ב-PDF, אנו זקוקים להרשאה לגישה לפעילות הגלישה שלך."
+  },
+  "statsPermissionDialogGrant": {
+    "message": "הענק הרשאות"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "הצגנו תכונת מעקב זמן חדשה ב-BetterHistory!"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "נדרשת הרשאה חדשה למעקב זמן"
+  },
+  "subdomainNote": {
+    "message": "הכנסת דומיין ראשי לרשימה הלבנה אינה מכניסה אוטומטית את תתי הדומיינים שלו לרשימה הלבנה"
+  },
+  "subdomains": {
+    "message": "תתי דומיינים"
+  },
+  "submit": {
+    "message": "שלח"
+  },
+  "submitFeedback": {
+    "message": "שלח משוב"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "ההצעות והמשוב שלך עוזרים לנו לשפר את BetterHistory ולספק את חווית המשתמש הטובה ביותר."
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 תווים או יותר"
+  },
+  "termsOfService": {
+    "message": "תנאי שימוש"
+  },
+  "thankYou": {
+    "message": "תודה!"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "לא ניתן לבטל פעולה זו."
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "כתובת URL או דומיין זה כבר מופיעים ברשימת הדומיינים השחורה"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "כתובת URL או דומיין זה כבר מופיעים ברשימת הדומיינים הלבנה"
+  },
+  "threeMonths": {
+    "message": "שלושה חודשים"
+  },
+  "timeTrackingStartedOn": {
+    "message": "מעקב זמן התחיל ב-{{date}}"
+  },
+  "tips": {
+    "message": "טיפים"
+  },
+  "title": {
+    "message": "כותרת"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "כדי להכניס לרשימה השחורה כל עמוד בדומיין ותתי הדומיין שלו, כתוב:"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "כדי להכניס לרשימה השחורה כל עמוד בדומיין, כתוב:"
+  },
+  "todalWords": {
+    "message": "סך מילים"
+  },
+  "today": {
+    "message": "היום"
+  },
+  "toolbarIcon": {
+    "message": "ערכת נושא של סמל סרגל הכלים"
+  },
+  "totalEntries": {
+    "message": "סה\"כ רשומות"
+  },
+  "totalVisits": {
+    "message": "סה\"כ ביקורים"
+  },
+  "twoWeeks": {
+    "message": "שבועיים"
+  },
+  "typdCount": {
+    "message": "ספירת הקלדות"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "הקלד כל מילת מפתח כדי למצוא רשומות תואמות."
+  },
+  "typeDeleteToConfirm": {
+    "message": "הקלד \"מחק\" כדי לאשר:"
+  },
+  "typedCount": {
+    "message": "הוקלד {{times}} פעמים בשורת הכתובת"
+  },
+  "unableToLoadDomainStats": {
+    "message": "לא ניתן לטעון סטטיסטיקות דומיין. אנא נסה שוב מאוחר יותר."
+  },
+  "understandSettings": {
+    "message": "אני מבין הגדרות אלה וכיצד הן ישפיעו על היסטוריית הגלישה שלי"
+  },
+  "understandYourRights": {
+    "message": "הבנת הזכויות שלך"
+  },
+  "uniqueUrls": {
+    "message": "כתובות URL ייחודיות"
+  },
+  "updatingData": {
+    "message": "מעדכן נתונים..."
+  },
+  "uploadScreenShot": {
+    "message": "העלה צילום מסך"
+  },
+  "urlDeleted": {
+    "message": "כתובת ה-URL נמחקה"
+  },
+  "urlPatternGuide": {
+    "message": "מדריך תבניות URL"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "אתה יכול להשתמש בתבניות הבאות כדי לחסום אתרים:"
+  },
+  "useSpecificPaths": {
+    "message": "השתמש בנתיבים ספציפיים כדי להכניס לרשימה הלבנה רק חלקים מסוימים של אתר אינטרנט"
+  },
+  "viewHere": {
+    "message": "צפה כאן"
+  },
+  "viewStats": {
+    "message": "צפה בסטטיסטיקות"
+  },
+  "viewStatsButton": {
+    "message": "תראה גם כפתור \"צפה בסטטיסטיקות\" על כל רשומה בדף הפעילות לגישה מהירה לנתוני זמן מפורטים"
+  },
+  "visitCount": {
+    "message": "קישור זה בוקר {{times}} פעמים"
+  },
+  "visitSite": {
+    "message": "בקר באתר"
+  },
+  "visits_domain": {
+    "message": "צפה בכל הביקורים בדומיין זה"
+  },
+  "vstCount": {
+    "message": "ספירת ביקורים"
+  },
+  "weValueYourInputMessage": {
+    "message": "אנו מעריכים את תרומתך ואנחנו כאן כדי לסייע לך!"
+  },
+  "websiteAccessDescription": {
+    "message": "• גישה לאתר (כדי לעקוב אחר פעילות)"
+  },
+  "websites": {
+    "message": "אתרי אינטרנט"
+  },
+  "weeklyEverySunday": {
+    "message": "שבועי (בכל יום ראשון)"
+  },
+  "whatThisMeans": {
+    "message": "מה זה אומר:"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "אילו תבניות URL מותרות?"
+  },
+  "whenBrowserCloses": {
+    "message": "כאשר הדפדפן נסגר"
+  },
+  "whenShouldCleanupRun": {
+    "message": "מתי הניקוי האוטומטי החכם צריך לפעול?"
+  },
+  "whitelist": {
+    "message": "רשימה לבנה"
+  },
+  "whitelistDomain": {
+    "message": "דומיין ברשימה הלבנה"
+  },
+  "whitelistDomains": {
+    "message": "דומיינים ברשימה הלבנה"
+  },
+  "whitelistExactDomain": {
+    "message": "מכניס לרשימה הלבנה רק את הדומיין המדויק, לא תתי דומיינים או נתיבים ספציפיים."
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "מכניס לרשימה הלבנה את הדומיין הראשי ואת כל תתי הדומיינים שלו (mail.example.com, blog.example.com, וכו')."
+  },
+  "whitelistPatterns": {
+    "message": "אתה יכול להשתמש בתבניות הבאות כדי להכניס לרשימה הלבנה:"
+  },
+  "whitelistPrecedence": {
+    "message": "לדומיינים ברשימה הלבנה יש עדיפות על פני דומיינים ברשימה השחורה"
+  },
+  "whitelistSpecificPage": {
+    "message": "מכניס לרשימה הלבנה רק עמוד ספציפי בדומיין."
+  },
+  "whitelistSpecificPath": {
+    "message": "מכניס לרשימה הלבנה את כל העמודים תחת נתיב ספציפי בדומיין."
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "מכניס לרשימה הלבנה רק תת-דומיין ספציפי, לא את הדומיין הראשי או תתי דומיינים אחרים."
+  },
+  "whitelistedDomains": {
+    "message": "דומיינים ברשימה הלבנה"
+  },
+  "wildcardWarning": {
+    "message": "השתמש בתו הכללי (*) בזהירות מכיוון שהוא יכול לחסום יותר מהמתוכנן"
+  },
+  "yesterday": {
+    "message": "אתמול"
+  }
+}

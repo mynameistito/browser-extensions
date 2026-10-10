@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "Beschrijf alstublieft wat we kunnen toevoegen of verbeteren."
+  },
+  "FeedbackSuccessAlert": {
+    "message": "Dank u wel! Uw feedback is succesvol verzonden."
+  },
+  "Friday": {
+    "message": "Vrijdag"
+  },
+  "Monday": {
+    "message": "Maandag"
+  },
+  "Popup": {
+    "message": "Pop-up"
+  },
+  "Saturday": {
+    "message": "Zaterdag"
+  },
+  "Sidebar": {
+    "message": "Zijbalk"
+  },
+  "Sunday": {
+    "message": "Zondag"
+  },
+  "ThanksForFeedBack": {
+    "message": "Bedankt voor uw feedback!"
+  },
+  "Thursday": {
+    "message": "Donderdag"
+  },
+  "Today": {
+    "message": "Vandaag"
+  },
+  "Tuesday": {
+    "message": "Dinsdag"
+  },
+  "URL": {
+    "message": "URL"
+  },
+  "Wednesday": {
+    "message": "Woensdag"
+  },
+  "WhatCanWeImprove": {
+    "message": "Wat kunnen we verbeteren?"
+  },
+  "Yesterday": {
+    "message": "Gisteren"
+  },
+  "about": {
+    "message": "Over"
+  },
+  "activity": {
+    "message": "Activiteit"
+  },
+  "add": {
+    "message": "Toevoegen"
+  },
+  "addDomains": {
+    "message": "Domeinen Toevoegen"
+  },
+  "addToBlackList": {
+    "message": "Toevoegen aan Blacklist"
+  },
+  "advanceExport": {
+    "message": "Geavanceerde Export"
+  },
+  "advancedFeaturesActive": {
+    "message": "Geavanceerde functies zijn nu actief."
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "Geavanceerde functies vereisen aanvullende machtigingen voor:"
+  },
+  "all": {
+    "message": "Alle"
+  },
+  "allCapitalLetters": {
+    "message": "Alle Hoofdletters"
+  },
+  "allHistoryDeleted": {
+    "message": "Alle geschiedenis is verwijderd"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "Alle geschiedenis is verwijderd, behalve de whitelisted domeinen"
+  },
+  "allPermissionsGranted": {
+    "message": "Alle machtigingen verleend!"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "Alle Geselecteerde URL's zijn verwijderd"
+  },
+  "allTime": {
+    "message": "Altijd"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "Gelieve toegang te verlenen om feedback te verzenden"
+  },
+  "appName": {
+    "message": "Better History | Geschiedenis Beheren, Exporteren & Verwijderen"
+  },
+  "apply": {
+    "message": "Toepassen"
+  },
+  "autoCleanupDisabled": {
+    "message": "Auto-opschoning is uitgeschakeld. U kunt de geschiedenis nog steeds handmatig wissen wanneer dat nodig is."
+  },
+  "autoCleanupEnabled": {
+    "message": "Uw browsegeschiedenis wordt automatisch opgeschoond op basis van het geselecteerde schema."
+  },
+  "autoCleanupHelp": {
+    "message": "Automatische opschoning helpt uw privacy te behouden door de browsegeschiedenis regelmatig te verwijderen volgens uw voorkeuren."
+  },
+  "autoCleanupSchedule": {
+    "message": "Schema Auto-Opschoning:"
+  },
+  "avgPerDay": {
+    "message": "Gem. {{time}} per dag"
+  },
+  "basicDomain": {
+    "message": "Basisdomein"
+  },
+  "basicSearch": {
+    "message": "Basis Zoeken"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}:\u003C/strong> Typ een trefwoord om overeenkomende items te vinden (bijv. \"Inbox\")."
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> is een innovatieve browserextensie ontwikkeld door \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span>. Het stelt gebruikers in staat om hun browsegeschiedenis gemakkelijk te beheren, met geavanceerde functies zoals aangepaste verwijdering, nauwkeurige filters en een intuïtieve interface. Bij BetterLogic Ltd geven we prioriteit aan gebruikersprivacy en naadloze functionaliteit om uw browse-ervaring te verbeteren."
+  },
+  "blacklist": {
+    "message": "Blacklist"
+  },
+  "blacklistDomain": {
+    "message": "Domein Blacklisten"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "Domein Blacklisten uit Geschiedenis"
+  },
+  "blacklistDomains": {
+    "message": "Blacklist Domeinen"
+  },
+  "blacklistFeatureDescription": {
+    "message": "De functie Domein Blacklist in BetterHistory stelt u in staat om specifieke websites te blokkeren voor opname in uw browsegeschiedenis. Zodra een domein op de blacklist staat, worden alle vroegere en toekomstige bezoeken aan die site automatisch verwijderd."
+  },
+  "blacklistInstructionText": {
+    "message": "De functie Domein Blacklist in BetterHistory stelt u in staat om specifieke websites te blokkeren voor opname in uw browsegeschiedenis. Zodra een domein op de blacklist staat, worden alle vroegere en toekomstige bezoeken aan die site automatisch verwijderd."
+  },
+  "blacklistTips": {
+    "message": "Tips"
+  },
+  "blacklist_confirmation": {
+    "message": "Weet u zeker dat u **{{DOMAIN}}** uit uw browsegeschiedenis wilt blacklisten?\u003Cbr/>Toekomstige bezoeken aan dit domein worden niet meer geregistreerd en alle bestaande geschiedenisitems voor **{{DOMAIN}}** worden verwijderd."
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> staat al in de blacklist."
+  },
+  "blacklistedDomains": {
+    "message": "Blacklisted Domeinen"
+  },
+  "blockExactDomain": {
+    "message": "Blokkeert alleen het exacte domein, niet subdomeinen of specifieke paden."
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "Blokkeert het hoofddomein en al zijn subdomeinen (mail.example.com, blog.example.com, etc.)."
+  },
+  "blockSpecificPage": {
+    "message": "Blokkeert alleen een specifieke pagina op het domein."
+  },
+  "blockSpecificPath": {
+    "message": "Blokkeert alle pagina's onder een specifiek pad op het domein."
+  },
+  "blockSpecificSubdomain": {
+    "message": "Blokkeert alleen een specifiek subdomein, niet het hoofddomein of andere subdomeinen."
+  },
+  "bugReport": {
+    "message": "Bug Rapport"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "Voeg meerdere domeinen tegelijk toe aan uw blacklist. Voer één domein per regel in."
+  },
+  "bulkAddDomains": {
+    "message": "Bulk Domeinen Toevoegen"
+  },
+  "cancel": {
+    "message": "Annuleren"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>Hoofdlettergevoeligheid:\u003C/strong> Zoekopdrachten zijn standaard niet hoofdlettergevoelig."
+  },
+  "chooseStartAndEndDates": {
+    "message": "Kies begin- en einddatums"
+  },
+  "clear": {
+    "message": "Wissen"
+  },
+  "clearBrowsingHistory": {
+    "message": "Browsegeschiedenis Wissen"
+  },
+  "clearHistory": {
+    "message": "Geschiedenis Wissen"
+  },
+  "clearHistoryConfirm": {
+    "message": "Weet u zeker dat u uw volledige browsegeschiedenis wilt verwijderen? Deze actie is permanent en kan niet ongedaan worden gemaakt."
+  },
+  "clearStats": {
+    "message": "Statistieken Wissen"
+  },
+  "clearing": {
+    "message": "Wissen..."
+  },
+  "clearingHistory": {
+    "message": "Geschiedenisbeheer"
+  },
+  "clickToRequestPermissions": {
+    "message": "Klik op de knop hieronder om ze aan te vragen."
+  },
+  "close": {
+    "message": "Sluiten"
+  },
+  "clr": {
+    "message": "Wissen"
+  },
+  "confirmAndSave": {
+    "message": "Bevestigen & Opslaan"
+  },
+  "confirmDelete": {
+    "message": "Verwijdering Bevestigen"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "Bevestig Instellingen Slimme Auto-Opschoning"
+  },
+  "contact": {
+    "message": "Contact"
+  },
+  "contactAndFeedback": {
+    "message": "Contact en Feedback"
+  },
+  "contactLimitReached": {
+    "message": "U heeft uw contactlimiet voor vandaag al bereikt."
+  },
+  "containsDotCom": {
+    "message": "Bevat \".com\""
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>Bevat Meerdere Woorden:\u003C/strong> Gebruik \u003Ccode>{{pipe}}\u003C/code> om te zoeken naar items die een van de verschillende woorden bevatten (bijv. \u003Ccode>{{example}}\u003C/code>)."
+  },
+  "containsNewsOrInfo": {
+    "message": "Bevat \"Nieuws\" of \"Info\""
+  },
+  "containsNumbers": {
+    "message": "Bevat Cijfers"
+  },
+  "containsSpaces": {
+    "message": "Bevat Spaties"
+  },
+  "containsTODO": {
+    "message": "Bevat \"TE DOEN\""
+  },
+  "current": {
+    "message": "Van Deze Site"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "Momenteel kunt u gegevens bekijken voor de afgelopen {{days}} {{dayLabel}}. Meer dagen zullen automatisch worden toegevoegd."
+  },
+  "custom": {
+    "message": "Aangepast"
+  },
+  "customExport": {
+    "message": "Aangepaste Export"
+  },
+  "customRange": {
+    "message": "Aangepast Bereik"
+  },
+  "dailyAtMidnight": {
+    "message": "Dagelijks (om middernacht)"
+  },
+  "darkMode": {
+    "message": "Donkere Modus"
+  },
+  "dateAndTimeOrder": {
+    "message": "Volgorde Datum en Tijd"
+  },
+  "day": {
+    "message": "dag"
+  },
+  "days": {
+    "message": "dagen"
+  },
+  "debugToolsTitle": {
+    "message": "Debug Tools (voor testen):"
+  },
+  "default": {
+    "message": "Standaard"
+  },
+  "delete": {
+    "message": "Verwijderen"
+  },
+  "deleteAllForHour": {
+    "message": "Weet u zeker dat u alle browsegeschiedenis voor **{{startHour}}** permanent wilt verwijderen?\u003Cbr>Dit verwijdert de browsegeschiedenis voor het hele uur ({{startAndendHour}}). Eenmaal verwijderd, kan deze actie niet ongedaan worden gemaakt."
+  },
+  "deleteAllFromDate": {
+    "message": "Weet u zeker dat u alle browsegeschiedenis voor **{{date}}** permanent wilt verwijderen?\u003Cbr>Dit verwijdert alle records van die dag. Eenmaal verwijderd, kan deze actie niet ongedaan worden gemaakt."
+  },
+  "deleteAllSearchHistory": {
+    "message": "Weet u zeker dat u alle gezochte browsegeschiedenis-items op deze pagina permanent wilt verwijderen?\u003Cbr/>Deze actie verwijdert alle items die in de huidige zoekresultaten worden weergegeven. Eenmaal verwijderd, kan deze actie niet ongedaan worden gemaakt."
+  },
+  "deleteBulk": {
+    "message": "Verwijderen"
+  },
+  "deleteDomainConfirm": {
+    "message": "Weet u zeker dat u alle geschiedenis van het domein \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span> wilt verwijderen? Deze actie verwijdert alle gerelateerde items en kan niet ongedaan worden gemaakt."
+  },
+  "deleteDomainStats": {
+    "message": "Domeinstatistieken Verwijderen?"
+  },
+  "deleteEntire": {
+    "message": "Volledige Dag Verwijderen"
+  },
+  "deleteEntireHistory": {
+    "message": "Volledige Geschiedenis Verwijderen"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "Volledige Geschiedenis Verwijderen?"
+  },
+  "deleteHistory": {
+    "message": "Geschiedenis Verwijderen"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "Weet u zeker dat u uw volledige browsegeschiedenis wilt verwijderen? Deze actie is permanent en kan niet ongedaan worden gemaakt."
+  },
+  "deleteMsg": {
+    "message": "Alle zoekresultaten verwijderen?"
+  },
+  "deleteSelectedHistory": {
+    "message": "Geselecteerde Geschiedenis Verwijderen"
+  },
+  "deleteSpecificDate": {
+    "message": "Specifieke Datum Verwijderen"
+  },
+  "deleteStatsConfirmation": {
+    "message": "U staat op het punt om alle trackinggegevens voor \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> uit BetterHistory permanent te verwijderen.\u003Cbr>\u003Cbr>Deze actie kan niet ongedaan worden gemaakt."
+  },
+  "deleteUrlConfirm": {
+    "message": "Weet u zeker dat u de URL \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> uit uw geschiedenis wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
+  },
+  "deletedSelectedHistory": {
+    "message": "Weet u zeker dat u de {{selectedNumber}} geselecteerde geschiedenisitems permanent wilt verwijderen?\u003Cbr/>Deze actie verwijdert alle {{selectedNumber}} geselecteerde items permanent. Eenmaal verwijderd, kan deze actie niet ongedaan worden gemaakt."
+  },
+  "devices": {
+    "message": "Apparaten"
+  },
+  "disableTimeTracking": {
+    "message": "Dit uitschakelen stopt de registratie en verbergt alle statistieken."
+  },
+  "domainAlreadyExists": {
+    "message": "Dit domein staat al in uw lijst"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "Regel ${index + 1}: Domein bestaat al (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "Domein Blacklist"
+  },
+  "domainCannotBeEmpty": {
+    "message": "Domein mag niet leeg zijn"
+  },
+  "domainStats": {
+    "message": "Domein Statistieken"
+  },
+  "domainWithSubdomains": {
+    "message": "Domein met alle subdomeinen"
+  },
+  "domains": {
+    "message": "Domeinen"
+  },
+  "email": {
+    "message": "E-mail"
+  },
+  "emailArticle": {
+    "message": "Ondersteuningsartikelen"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}: \u003C/span>Blader door onze ondersteuningsgidsen en FAQ's op \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">BetterHistory Support\u003C/span>\u003C/a>."
+  },
+  "emailSupport": {
+    "message": "E-mail Support"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}:\u003C/span> Voor vragen of problemen kunt u contact met ons opnemen via 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a>."
+  },
+  "enableStats": {
+    "message": "Statistieken Inschakelen"
+  },
+  "enableStatsDescription": {
+    "message": "Schakel alle statistiekfunctionaliteit in of uit. Wanneer uitgeschakeld, worden er geen statistieken verzameld of weergegeven."
+  },
+  "enable_popup": {
+    "message": "Pop-up Inschakelen"
+  },
+  "endsWithQuestionMark": {
+    "message": "Eindigt met \"?\""
+  },
+  "enterAValidDomain": {
+    "message": "Voer een geldig domein in"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "Voer alstublieft ten minste één domein in"
+  },
+  "enterDomain": {
+    "message": "Voer het Domein in dat U van de Geschiedenis Wilt Uitsluiten"
+  },
+  "enterDomainName": {
+    "message": "Voer Domeinnaam in"
+  },
+  "enterDomainPerLine": {
+    "message": "Voeg meerdere domeinen tegelijk toe aan uw whitelist. Voer één domein per regel in."
+  },
+  "enterDomainToBlock": {
+    "message": "Voer domein in om te blokkeren (bijv. example.com)"
+  },
+  "enterDomainToWhitelist": {
+    "message": "Voer domein in om te whitelisten (bijv. example.com)"
+  },
+  "enterValidDomain": {
+    "message": "Voer alstublieft ten minste één geldig domein in"
+  },
+  "entireExport": {
+    "message": "Volledige Export (90 Dagen)"
+  },
+  "entries": {
+    "message": "Items"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "Alle Geschiedenis voor Deze Site Verwijderen"
+  },
+  "error": {
+    "message": "Fout"
+  },
+  "errorClearingHistory": {
+    "message": "Kon geschiedenis niet wissen. Probeer het opnieuw."
+  },
+  "errorClearingStats": {
+    "message": "Kon statistieken niet wissen"
+  },
+  "errorLoadingData": {
+    "message": "Fout bij het Laden van Gegevens"
+  },
+  "errorLoadingSettings": {
+    "message": "Fout bij het laden van instellingen. Standaardwaarden worden gebruikt."
+  },
+  "errorSavingSettings": {
+    "message": "Opslaan van instellingen mislukt. Probeer het opnieuw."
+  },
+  "exactWordProject": {
+    "message": "Exact Woord \"Project\""
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "Ontdek Onze Producten"
+  },
+  "export": {
+    "message": "Exporteren"
+  },
+  "exportAsJSON": {
+    "message": "Exporteer als JSON"
+  },
+  "exportAsPDF": {
+    "message": "Exporteer als PDF"
+  },
+  "exportCsv": {
+    "message": "CSV Exporteren"
+  },
+  "exportEntireLocalData": {
+    "message": "Exporteer Alle Lokale Gegevens"
+  },
+  "exportHistory": {
+    "message": "Exporteer Uw Volledige Browsegeschiedenis"
+  },
+  "exportHistoryDescription": {
+    "message": "Deze functie stelt u in staat om uw volledige browsegeschiedenis (tot 90 dagen) te exporteren of een aangepast datumbereik voor export te selecteren. Houd er rekening mee dat de Chrome History API alleen het exporteren van geschiedenis ondersteunt; het staat het importeren van geschiedenis niet toe."
+  },
+  "exportHistoryLimitation": {
+    "message": "Bovendien verwijdert Chrome automatisch geschiedenis ouder dan 90 dagen, dus BetterHistory kan alleen de records exporteren die Chrome behoudt."
+  },
+  "exportHtml": {
+    "message": "HTML Exporteren"
+  },
+  "exportLocalData": {
+    "message": "Lokale Gegevens Exporteren"
+  },
+  "exportSelectedCsv": {
+    "message": "Geselecteerde Exporteren als CSV"
+  },
+  "exportSelectedHtml": {
+    "message": "Geselecteerde Exporteren als HTML"
+  },
+  "exportTimeTrackingData": {
+    "message": "Tijdregistratiegegevens Exporteren"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "Dit zijn uw lokaal opgeslagen tijdregistratiegegevens die u kunt exporteren voor persoonlijk gebruik. Ze geven de tijd weer die u op bezochte pagina's heeft doorgebracht, wat u helpt bij het analyseren van uw browsegedrag."
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "Deze gegevens worden alleen in uw browser opgeslagen en worden niet gesynchroniseerd of online opgeslagen. Het verwijderen van de BetterHistory-extensie zal alle tijdregistratiegegevens permanent verwijderen. Exporteer uw gegevens regelmatig als u een back-up wilt bewaren."
+  },
+  "exportToCSV": {
+    "message": "Exporteren naar CSV"
+  },
+  "exportToTXT": {
+    "message": "Exporteren naar TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "Geëxporteerde Browsegeschiedenis - Datum:"
+  },
+  "exportedHistoryKeyword": {
+    "message": "Geëxporteerde Browsegeschiedenis - Trefwoord:"
+  },
+  "featureRequest": {
+    "message": "Functieverzoek"
+  },
+  "feedback": {
+    "message": "Feedback"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "Ik accepteer het \u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">Privacybeleid\u003C/span>\u003C/a> en de gegevensverwerking."
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "Gelieve uw e-mailadres op te geven voor follow-up over uw inzending."
+  },
+  "feedbackForm": {
+    "message": "Feedback Formulier"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}:\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">Klik hier om uw feedback te verzenden\u003C/span>."
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "Bestandsgrootte overschrijdt 5MB. Gelieve een kleiner bestand te uploaden."
+  },
+  "find_all_visits_domain": {
+    "message": "Vind alle bezoeken aan {{d}}"
+  },
+  "generalContact": {
+    "message": "Algemeen Contact"
+  },
+  "generatedUsing": {
+    "message": "Dit document is gegenereerd met behulp van de"
+  },
+  "grantPermissions": {
+    "message": "Machtigingen Verlenen"
+  },
+  "groupSession": {
+    "message": "Groepeer Sessie"
+  },
+  "history": {
+    "message": "Geschiedenis"
+  },
+  "historyCleared": {
+    "message": "Geschiedenis gewist"
+  },
+  "historyControlsFor": {
+    "message": "Geschiedeniscontroles voor"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "Geschiedenis van whitelisted domeinen blijft behouden tijdens het opschonen"
+  },
+  "historyRetentionHelp": {
+    "message": "Geschiedenis binnen dit geselecteerde tijdsbestek blijft behouden en wordt uitgesloten van automatische opschoning."
+  },
+  "hourFormat": {
+    "message": "Tijdformaat"
+  },
+  "hours": {
+    "message": "Uren"
+  },
+  "howDidWeDo": {
+    "message": "Hoe hebben we het gedaan?"
+  },
+  "howLongKeepHistory": {
+    "message": "Hoe lang moet uw browsegeschiedenis worden bewaard voordat deze in aanmerking komt voor automatische verwijdering?"
+  },
+  "howToUseTheSearchTool": {
+    "message": "Hoe de zoektool te gebruiken"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "idleDetectionDescription": {
+    "message": "• Inactiviteitsdetectie (stopt het volgen wanneer u afwezig bent)"
+  },
+  "import": {
+    "message": "Importeren"
+  },
+  "importEntireLocalData": {
+    "message": "Lokale Gegevens Importeren"
+  },
+  "importFailed": {
+    "message": "Importeren van gegevens mislukt"
+  },
+  "importJSON": {
+    "message": "Importeer JSON"
+  },
+  "importSuccessful": {
+    "message": "Gegevens succesvol geïmporteerd"
+  },
+  "infinityScroll": {
+    "message": "Oneindig Scrollen Inschakelen"
+  },
+  "interfaceStyle": {
+    "message": "Weergave-instellingen"
+  },
+  "invalidDomainFormat": {
+    "message": "Voer alstublieft een geldig domeinformaat in (bijv. example.com)"
+  },
+  "invalidDomainFormatLine": {
+    "message": "Regel ${index + 1}: Ongeldig domeinformaat (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "Ongeldig bestandstype. Gelieve een JPG- of PNG-afbeelding te uploaden."
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> is geen geldig domein. Gebruik alstublieft een geldig domein om toe te voegen aan de blacklist."
+  },
+  "keepHistoryCheckText": {
+    "message": "Bewaar geschiedenis van websites die u aan uw whitelist heeft toegevoegd"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "Bewaar geschiedenis van websites die u aan uw whitelist heeft toegevoegd"
+  },
+  "large": {
+    "message": "Groot"
+  },
+  "last15Days": {
+    "message": "15 dagen"
+  },
+  "last2Months": {
+    "message": "Laatste 2 Maanden"
+  },
+  "last30Days": {
+    "message": "30 dagen"
+  },
+  "last3Months": {
+    "message": "Laatste 3 Maanden"
+  },
+  "last60Days": {
+    "message": "60 dagen"
+  },
+  "last7Days": {
+    "message": "7 dagen"
+  },
+  "last90Days": {
+    "message": "90 dagen"
+  },
+  "lastMonth": {
+    "message": "Vorige Maand"
+  },
+  "lastVisitTime": {
+    "message": "Laatste Bezoek Tijd"
+  },
+  "lastWeek": {
+    "message": "Vorige Week"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "Meer weten over auto-opschoning"
+  },
+  "learnMoreAboutRetention": {
+    "message": "Meer weten over de retentieperiode"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "Laat me weten als u aanvullende aanpassingen nodig heeft."
+  },
+  "lightMode": {
+    "message": "Lichte Modus"
+  },
+  "loadingSettings": {
+    "message": "Instellingen laden..."
+  },
+  "ltr": {
+    "message": "LTR (Links naar Rechts)"
+  },
+  "mainDomainNote": {
+    "message": "Het blokkeren van een hoofddomein blokkeert niet automatisch zijn subdomeinen"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "Tijdregistratie en Gebruiksstatistieken Beheren"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "Wanneer ingeschakeld, registreert BetterHistory hoeveel tijd u op elke website doorbrengt, inclusief sessieduren en actieve versus inactieve tijd. Alle gegevens worden lokaal in uw browser opgeslagen en uitsluitend gebruikt om u gedetailleerde browse-inzichten en tijdsanalyses te bieden."
+  },
+  "manifest_browser_action_title": {
+    "message": "Geschiedenis Doorbladeren"
+  },
+  "manifest_description": {
+    "message": "Slanke Geschiedenismanager: Krachtig Zoeken, Bulkexporteren, Aangepaste Selecties Verwijderen, Filteren op Dag en Uur, en Specifieke Domeinen uit de Geschiedenis Blokkeren."
+  },
+  "maxSize": {
+    "message": "Max. Grootte"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• Detectie van het afspelen van media (gaat door met volgen tijdens video's/muziek)"
+  },
+  "medium": {
+    "message": "Medium"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "Maandelijks (de 1e van elke maand)"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "Meer dagen zullen automatisch worden toegevoegd."
+  },
+  "moreFromSite": {
+    "message": "Meer van deze site"
+  },
+  "mostActiveDay": {
+    "message": "Meest actieve dag"
+  },
+  "neverDisabled": {
+    "message": "Nooit (uitgeschakeld)"
+  },
+  "noActivityData": {
+    "message": "Geen activiteitsgegevens voor deze periode"
+  },
+  "noBlacklistType": {
+    "message": "Geen {{type}} in uw blacklist"
+  },
+  "noChangesToSave": {
+    "message": "Geen wijzigingen om op te slaan"
+  },
+  "noDevices": {
+    "message": "Geen actieve apparaten sessies gevonden."
+  },
+  "noDomainBlacklisted": {
+    "message": "Nog geen domeinen geblacklist"
+  },
+  "noDomains": {
+    "message": "Nog geen domeinen gewhitelist"
+  },
+  "noDomainsType": {
+    "message": "Geen {{type}} in uw whitelist"
+  },
+  "noFileSelectedMessage": {
+    "message": "Geen bestand geselecteerd. Gelieve een geldig bestand te uploaden."
+  },
+  "noMoreResults": {
+    "message": "Geen Verdere Resultaten"
+  },
+  "noResultsFound": {
+    "message": "Geen resultaten gevonden. Probeer uw zoektermen of filters aan te passen."
+  },
+  "noThanks": {
+    "message": "Nee, bedankt"
+  },
+  "noTitle": {
+    "message": "Geen Titel"
+  },
+  "noVisits": {
+    "message": "Sorry, geen bezoeken gevonden."
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>Alleen Cijfers:\u003C/strong> Gebruik \u003Ccode>{{pattern}}\u003C/code> om items met cijfers te vinden."
+  },
+  "of": {
+    "message": "van"
+  },
+  "ok": {
+    "message": "OK"
+  },
+  "oneMonth": {
+    "message": "Eén maand"
+  },
+  "oneWeek": {
+    "message": "Eén week"
+  },
+  "openAllTabs": {
+    "message": "Alle Tabbladen Openen"
+  },
+  "openMenu": {
+    "message": "Menu openen"
+  },
+  "openTab": {
+    "message": "Openen in Nieuw Tabblad"
+  },
+  "order": {
+    "message": "Volgorde"
+  },
+  "otherOptions": {
+    "message": "Algemene Voorkeuren"
+  },
+  "page": {
+    "message": "Pagina"
+  },
+  "paths": {
+    "message": "Paden"
+  },
+  "permissionGranted": {
+    "message": "✓ Verleend"
+  },
+  "permissionMissing": {
+    "message": "✗ Ontbreekt"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "Machtigingen Reeds Verleend"
+  },
+  "pleaseNote": {
+    "message": "Let op:"
+  },
+  "pleaseRateUs": {
+    "message": "Beoordeel Ons Alstublieft!"
+  },
+  "prefixesAutoRemoved": {
+    "message": "Prefixen zoals 'http://', 'https://' en 'www.' worden automatisch verwijderd."
+  },
+  "prefixesRemoved": {
+    "message": "Prefixen zoals 'http://', 'https://' en 'www.' worden automatisch verwijderd"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "Deze Site Blacklisten voor Geschiedenisopname"
+  },
+  "privacyPolicy": {
+    "message": "Privacybeleid"
+  },
+  "privacyTerms": {
+    "message": "Privacy & Voorwaarden"
+  },
+  "processing": {
+    "message": "Verwerken..."
+  },
+  "rateText": {
+    "message": "Uw inbreng helpt ons BetterHistory te verbeteren. Laat ons weten hoe we het gedaan hebben!"
+  },
+  "recent": {
+    "message": "Recente Bezoeken"
+  },
+  "recordedVisits": {
+    "message": "Geregistreerde bezoeken aan dit domein"
+  },
+  "remove_url": {
+    "message": "Deze URL uit de Geschiedenis Verwijderen"
+  },
+  "result": {
+    "message": "Resultaat"
+  },
+  "results": {
+    "message": "Resultaten"
+  },
+  "retentionPeriod": {
+    "message": "Retentieperiode:"
+  },
+  "retentionPeriodHelp": {
+    "message": "De retentieperiode bepaalt hoe ver uw browsegeschiedenis wordt bewaard. Oudere geschiedenis komt in aanmerking voor opschoning."
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "Gelieve uw instellingen te controleren alvorens te bevestigen."
+  },
+  "revokePermissions": {
+    "message": "Machtigingen Intrekken"
+  },
+  "rightTitle": {
+    "message": "Opties Contextmenu"
+  },
+  "rtl": {
+    "message": "RTL (Rechts naar Links)"
+  },
+  "saveSettings": {
+    "message": "Instellingen Opslaan"
+  },
+  "search": {
+    "message": "Zoeken"
+  },
+  "searchDeeper": {
+    "message": "Dieper zoeken"
+  },
+  "searchDomainTitle": {
+    "message": "Zoeken op Domein"
+  },
+  "searchEngine": {
+    "message": "Zoekmachine"
+  },
+  "searchMsg": {
+    "message": "Psst... Probeer eens iets te zoeken"
+  },
+  "searchPlaceholder": {
+    "message": "Zoek titel of URL"
+  },
+  "searchTextTitle": {
+    "message": "Zoeken op Geselecteerde Tekst"
+  },
+  "searchTips": {
+    "message": "Zoektips"
+  },
+  "searchTipsMsg1": {
+    "message": "Zoeken met reguliere expressies wordt nu ondersteund!"
+  },
+  "searchTipsMsg2": {
+    "message": "Probeer bijvoorbeeld te zoeken naar"
+  },
+  "searchTipsMsg3": {
+    "message": "Zoeken naar bezoeken en downloads"
+  },
+  "searchTipsMsg4": {
+    "message": "Zoeken zoekt automatisch naar bezoeken op paginatitel en URL, en downloads op bestandsnaam en URL."
+  },
+  "searchTipsMsg5": {
+    "message": "Uw laatste 10.000 bezoeken worden gebruikt voor een snelle, eerste zoekopdracht. Om dieper te zoeken, gaat u naar de onderkant van de laatste resultatenpagina en klikt u op de knop 'Dieper zoeken'."
+  },
+  "searchToolDescription": {
+    "message": "Met deze tool kunt u effectief zoeken in uw browsegeschiedenis met behulp van eenvoudige trefwoorden of geavanceerde **Reguliere Expressies (RegEx)**. Hieronder staan enkele voorbeelden om u op weg te helpen:"
+  },
+  "search_history": {
+    "message": "Zoeken in Geschiedenis"
+  },
+  "searchedUrlDeleted": {
+    "message": "Gezochte URL's zijn verwijderd"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "Gezochte URL's zijn verwijderd, behalve de whitelisted domeinen"
+  },
+  "searching": {
+    "message": "Bezig met zoeken"
+  },
+  "selectDateFormat": {
+    "message": "Datumformaat"
+  },
+  "selectDateRange": {
+    "message": "Selecteer datumbereik"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "Selecteer Datum om Geschiedenis te Verwijderen"
+  },
+  "selectEndDate": {
+    "message": "Selecteer einddatum"
+  },
+  "selectStartDate": {
+    "message": "Selecteer startdatum"
+  },
+  "selected": {
+    "message": "Geselecteerd"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "Geschiedenis van geselecteerde datum is verwijderd"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "Geschiedenis van geselecteerde datum is verwijderd, behalve de whitelisted domeinen"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "Geschiedenis van geselecteerd uur is verwijderd"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "Geschiedenis van geselecteerd Uur is verwijderd, behalve de whitelisted domeinen"
+  },
+  "sessions": {
+    "message": "Sessies"
+  },
+  "settings": {
+    "message": "Instellingen"
+  },
+  "settingsSaved": {
+    "message": "Instellingen opgeslagen"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "Uw instellingen voor Slimme Auto-Opschoning zijn succesvol bijgewerkt."
+  },
+  "shortRetentionWarning": {
+    "message": "Het instellen van een korte retentieperiode van één week betekent dat uw oudere browsegeschiedenis vaker wordt opgeschoond. Zorg ervoor dat dit overeenkomt met uw behoeften."
+  },
+  "show": {
+    "message": "Toon"
+  },
+  "showAllHistory": {
+    "message": "Toon Alle Geschiedenis"
+  },
+  "showStats": {
+    "message": "Statistieken Tonen"
+  },
+  "small": {
+    "message": "Klein"
+  },
+  "smartAutoCleanup": {
+    "message": "Slimme Auto-Opschoning"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "Beheer uw browsegeschiedenis automatisch met Slimme Auto-Opschoning. Kies hoe vaak de opschoning moet worden uitgevoerd en hoe lang uw recente geschiedenis moet worden bewaard."
+  },
+  "smartAutoCleanupSettings": {
+    "message": "Instellingen Slimme Auto-Opschoning"
+  },
+  "smartHistoryCleanup": {
+    "message": "Slimme Geschiedenisopschoning"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "Wist uw browsegeschiedenis behalve voor websites die u aan uw whitelist heeft toegevoegd. Deze functie helpt u om uw activiteit privé te houden terwijl belangrijke geschiedenis van vertrouwde of veelgebruikte sites behouden blijft."
+  },
+  "socialMediaTip": {
+    "message": "Overweeg voor sociale media sites specifieke secties te blokkeren (facebook.com/marketplace/*)"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "Sommige domeinen konden niet worden toegevoegd:\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "Sommige machtigingen ontbreken"
+  },
+  "specificPage": {
+    "message": "Specifieke pagina"
+  },
+  "specificPath": {
+    "message": "Specifiek pad"
+  },
+  "specificSubdomain": {
+    "message": "Specifiek subdomein"
+  },
+  "start": {
+    "message": "Start"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>Begint met:\u003C/strong> Gebruik ^ om items te vinden die beginnen met een specifiek woord (bijv. ^Inbox)."
+  },
+  "startsWithInbox": {
+    "message": "Begint met \"Inbox\""
+  },
+  "statsCleared": {
+    "message": "Statistieken gewist"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "Annuleren"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "Om u te helpen de tijd die u op websites doorbrengt bij te houden, sessiedetails te bekijken en tijdrapporten in PDF te exporteren, hebben we toestemming nodig om toegang te krijgen tot uw browse-activiteit."
+  },
+  "statsPermissionDialogGrant": {
+    "message": "Machtigingen Verlenen"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "We hebben een nieuwe Tijdregistratie-functie geïntroduceerd in BetterHistory!"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "Nieuwe Machtiging Vereist voor Tijdregistratie"
+  },
+  "subdomainNote": {
+    "message": "Het whitelisten van een hoofddomein whitelist niet automatisch zijn subdomeinen"
+  },
+  "subdomains": {
+    "message": "Subdomeinen"
+  },
+  "submit": {
+    "message": "Verzenden"
+  },
+  "submitFeedback": {
+    "message": "Feedback Verzenden"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "Uw suggesties en feedback helpen ons om BetterHistory te verbeteren en de beste gebruikerservaring te leveren."
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 of Meer Karakters"
+  },
+  "termsOfService": {
+    "message": "Gebruiksvoorwaarden"
+  },
+  "thankYou": {
+    "message": "Dank u wel!"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "Deze actie kan niet ongedaan worden gemaakt."
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "Deze URL of dit domein staat al vermeld in Blacklist Domeinen"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "Deze URL of dit domein staat al vermeld in Whitelist Domeinen"
+  },
+  "threeMonths": {
+    "message": "Drie maanden"
+  },
+  "timeTrackingStartedOn": {
+    "message": "Tijdregistratie gestart op {{date}}"
+  },
+  "tips": {
+    "message": "Tips"
+  },
+  "title": {
+    "message": "Titel"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "Om elke pagina op een domein en zijn subdomeinen te blacklisten, schrijft u:"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "Om elke pagina op een domein te blacklisten, schrijft u:"
+  },
+  "todalWords": {
+    "message": "Totaal Aantal Woorden"
+  },
+  "today": {
+    "message": "Vandaag"
+  },
+  "toolbarIcon": {
+    "message": "Toolbar Icoonthema"
+  },
+  "totalEntries": {
+    "message": "totaal Items"
+  },
+  "totalVisits": {
+    "message": "Totaal Bezoeken"
+  },
+  "twoWeeks": {
+    "message": "Twee weken"
+  },
+  "typdCount": {
+    "message": "Aantal Getypte"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "Typ een trefwoord om overeenkomende items te vinden."
+  },
+  "typeDeleteToConfirm": {
+    "message": "Typ \"delete\" om te bevestigen:"
+  },
+  "typedCount": {
+    "message": "{{times}} keer getypt in de adresbalk"
+  },
+  "unableToLoadDomainStats": {
+    "message": "Kan domeinstatistieken niet laden. Probeer het later opnieuw."
+  },
+  "understandSettings": {
+    "message": "Ik begrijp deze instellingen en hoe ze mijn browsegeschiedenis zullen beïnvloeden"
+  },
+  "understandYourRights": {
+    "message": "Begrijp Uw Rechten"
+  },
+  "uniqueUrls": {
+    "message": "unieke URL's"
+  },
+  "updatingData": {
+    "message": "Gegevens bijwerken..."
+  },
+  "uploadScreenShot": {
+    "message": "Screenshot Uploaden"
+  },
+  "urlDeleted": {
+    "message": "URL is verwijderd"
+  },
+  "urlPatternGuide": {
+    "message": "URL Patroon Gids"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "U kunt de volgende patronen gebruiken om websites te blokkeren:"
+  },
+  "useSpecificPaths": {
+    "message": "Gebruik specifieke paden om slechts bepaalde delen van een website te whitelisten"
+  },
+  "viewHere": {
+    "message": "Bekijk Hier"
+  },
+  "viewStats": {
+    "message": "Statistieken Bekijken"
+  },
+  "viewStatsButton": {
+    "message": "U ziet ook een knop \"Statistieken Bekijken\" bij elk item op de Activiteitspagina voor snelle toegang tot gedetailleerde tijdsgegevens"
+  },
+  "visitCount": {
+    "message": "Link {{times}} keer bezocht"
+  },
+  "visitSite": {
+    "message": "Bezoek site"
+  },
+  "visits_domain": {
+    "message": "Bekijk Alle Bezoeken aan Dit Domein"
+  },
+  "vstCount": {
+    "message": "Aantal Bezoeken"
+  },
+  "weValueYourInputMessage": {
+    "message": "We waarderen uw inbreng en staan klaar om u te helpen!"
+  },
+  "websiteAccessDescription": {
+    "message": "• Toegang tot de website (om activiteit te controleren)"
+  },
+  "websites": {
+    "message": "Websites"
+  },
+  "weeklyEverySunday": {
+    "message": "Wekelijks (elke zondag)"
+  },
+  "whatThisMeans": {
+    "message": "Wat dit betekent:"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "Welke URL-patronen zijn toegestaan?"
+  },
+  "whenBrowserCloses": {
+    "message": "Wanneer browser sluit"
+  },
+  "whenShouldCleanupRun": {
+    "message": "Wanneer moet Slimme Auto-Opschoning worden uitgevoerd?"
+  },
+  "whitelist": {
+    "message": "Whitelist"
+  },
+  "whitelistDomain": {
+    "message": "Domein Whitelisten"
+  },
+  "whitelistDomains": {
+    "message": "Whitelist Domeinen"
+  },
+  "whitelistExactDomain": {
+    "message": "Whitelist alleen het exacte domein, niet subdomeinen of specifieke paden."
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "Whitelist het hoofddomein en al zijn subdomeinen (mail.example.com, blog.example.com, etc.)."
+  },
+  "whitelistPatterns": {
+    "message": "U kunt de volgende patronen gebruiken om te whitelisten:"
+  },
+  "whitelistPrecedence": {
+    "message": "Whitelisted domeinen hebben voorrang op blacklisted domeinen"
+  },
+  "whitelistSpecificPage": {
+    "message": "Whitelist alleen een specifieke pagina op het domein."
+  },
+  "whitelistSpecificPath": {
+    "message": "Whitelist alle pagina's onder een specifiek pad op het domein."
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "Whitelist alleen een specifiek subdomein, niet het hoofddomein of andere subdomeinen."
+  },
+  "whitelistedDomains": {
+    "message": "Whitelisted Domeinen"
+  },
+  "wildcardWarning": {
+    "message": "Gebruik de wildcard (*) voorzichtig, aangezien deze meer kan blokkeren dan bedoeld"
+  },
+  "yesterday": {
+    "message": "Gisteren"
+  }
+}

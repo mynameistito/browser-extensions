@@ -32,7 +32,9 @@ describe("parseGenerateKeyOptions", () => {
 
   test("uses the release workflow secret name for each app", () => {
     expect(chromeKeySecrets).toEqual({
+      "better-history": "BETTER_HISTORY_WXT_CHROME_KEY",
       "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
+      "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
       "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
       "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
     });
@@ -52,6 +54,32 @@ describe("parseGenerateKeyOptions", () => {
         extensions: ["quote-viewer"],
         repository: "mynameistito/quote-viewer",
         upload: false,
+      },
+    });
+  });
+
+  test("accepts Better History as a persistent-key target", () => {
+    expect(parseGenerateKeyOptions(["--app", "better-history"])).toMatchObject({
+      kind: "ok",
+      options: { extensions: ["better-history"] },
+    });
+  });
+
+  test("accepts all apps with force and upload", () => {
+    expect(
+      parseGenerateKeyOptions(["--app", "all", "--force", "--upload"])
+    ).toMatchObject({
+      kind: "ok",
+      options: {
+        extensions: [
+          "better-history",
+          "hide-email-ext",
+          "quote-viewer",
+          "new-tab-ext",
+          "ig-video-controls",
+        ],
+        force: true,
+        upload: true,
       },
     });
   });
@@ -81,7 +109,13 @@ describe("parseGenerateKeyOptions", () => {
     });
     expect(parseGenerateKeyOptions(["--upload"])).toMatchObject({
       kind: "error",
-      message: expect.stringContaining("exactly one --app"),
+      message: expect.stringContaining("explicit --app target"),
+    });
+    expect(
+      parseGenerateKeyOptions(["--app", "all", "--repo", "owner/repo"])
+    ).toMatchObject({
+      kind: "error",
+      message: expect.stringContaining("exactly one --app target"),
     });
   });
 });
