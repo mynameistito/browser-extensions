@@ -7,17 +7,18 @@ A modern rewrite of the classic Better History extension — local-only, no tele
 ## Features
 
 - Fast full-text search over your browser history
-- Date range presets + custom ranges, per-domain views
+- Date range presets
 - Bulk delete with multi-select and keyboard shortcuts
 - Blacklist (auto-delete) and whitelist (protect) by URL pattern
 - Scheduled cleanup (on-close / daily / weekly / monthly) with configurable retention
-- Synced device sessions (recent tabs from your other signed-in browsers)
-- Optional opt-in on-device time tracking per domain
-- Export to CSV / JSON / HTML / TXT / PDF, import settings from JSON
-- Light / dark / system theme, RTL, i18n
 - Cross-browser (Chrome MV3 + Firefox)
+- i18n locale catalogs
 
-See [`TODO.md`](./TODO.md) for the v8 rewrite roadmap.
+## Roadmap
+
+Custom date ranges, per-domain views, synced device sessions, on-device time
+tracking, history export, settings import, and display settings (theme, RTL)
+are planned. See [`TODO.md`](./TODO.md) for the v8 rewrite roadmap.
 
 ## Privacy
 
@@ -57,9 +58,9 @@ Zipped artifacts land in `.output/`.
 ## Lint / typecheck
 
 ```bash
-bun run check     # ultracite (Biome)
+bun run check     # ultracite (oxlint + oxfmt)
 bun run fix       # auto-fix
-bun run compile   # tsc --noEmit
+bun run typecheck # tsc --noEmit
 ```
 
 ## Layout

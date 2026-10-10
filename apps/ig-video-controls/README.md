@@ -2,7 +2,7 @@
 
 Adds the native HTML5 video player (seek bar, volume slider, fullscreen, PiP) to Instagram videos, remembers your volume and playback speed across tabs and sessions, and provides mouse-wheel hotkeys for quick adjustments.
 
-Originally based on [Controls for Instagram Videos](https://chromewebstore.google.com/detail/controls-for-instagram-vi/eigfbedabacomcacemdnkelnlhgbiacn) by [rehfeld.us](rehfeld.us). This is an complete rewrite; all telemetry / uninstall analytics removed, and browser agnostic.
+Originally based on [Controls for Instagram Videos](https://chromewebstore.google.com/detail/controls-for-instagram-vi/eigfbedabacomcacemdnkelnlhgbiacn) by [rehfeld.us](https://rehfeld.us). This is a complete rewrite; all telemetry / uninstall analytics removed, and browser agnostic.
 
 ## Hotkeys
 
