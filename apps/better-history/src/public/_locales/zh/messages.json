@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "请描述我们可以添加或改进的内容。"
+  },
+  "FeedbackSuccessAlert": {
+    "message": "感谢！您的反馈已成功提交。"
+  },
+  "Friday": {
+    "message": "星期五"
+  },
+  "Monday": {
+    "message": "星期一"
+  },
+  "Popup": {
+    "message": "弹出窗口"
+  },
+  "Saturday": {
+    "message": "星期六"
+  },
+  "Sidebar": {
+    "message": "侧边栏"
+  },
+  "Sunday": {
+    "message": "星期日"
+  },
+  "ThanksForFeedBack": {
+    "message": "感谢您的反馈！"
+  },
+  "Thursday": {
+    "message": "星期四"
+  },
+  "Today": {
+    "message": "今天"
+  },
+  "Tuesday": {
+    "message": "星期二"
+  },
+  "URL": {
+    "message": "网址 (URL)"
+  },
+  "Wednesday": {
+    "message": "星期三"
+  },
+  "WhatCanWeImprove": {
+    "message": "我们可以改进什么？"
+  },
+  "Yesterday": {
+    "message": "昨天"
+  },
+  "about": {
+    "message": "关于"
+  },
+  "activity": {
+    "message": "活动"
+  },
+  "add": {
+    "message": "添加"
+  },
+  "addDomains": {
+    "message": "添加域名"
+  },
+  "addToBlackList": {
+    "message": "添加到黑名单"
+  },
+  "advanceExport": {
+    "message": "高级导出"
+  },
+  "advancedFeaturesActive": {
+    "message": "高级功能现已启用。"
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "高级功能需要额外的权限："
+  },
+  "all": {
+    "message": "全部"
+  },
+  "allCapitalLetters": {
+    "message": "所有大写字母"
+  },
+  "allHistoryDeleted": {
+    "message": "所有历史记录均已删除"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "除白名单域名外的所有历史记录均已删除"
+  },
+  "allPermissionsGranted": {
+    "message": "所有权限均已授予！"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "所有选定的网址均已删除"
+  },
+  "allTime": {
+    "message": "所有时间"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "请允许访问权限以提交反馈"
+  },
+  "appName": {
+    "message": "Better History | 管理、导出与删除历史记录"
+  },
+  "apply": {
+    "message": "应用"
+  },
+  "autoCleanupDisabled": {
+    "message": "自动清理已禁用。您仍然可以在需要时手动清除历史记录。"
+  },
+  "autoCleanupEnabled": {
+    "message": "您的浏览历史记录将根据所选时间表自动清理。"
+  },
+  "autoCleanupHelp": {
+    "message": "自动清理有助于维护您的隐私，方法是根据您的偏好定期删除浏览历史记录。"
+  },
+  "autoCleanupSchedule": {
+    "message": "自动清理计划："
+  },
+  "avgPerDay": {
+    "message": "平均每天 {{time}}"
+  },
+  "basicDomain": {
+    "message": "基本域名"
+  },
+  "basicSearch": {
+    "message": "基本搜索"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}：\u003C/strong>输入任何关键词以查找匹配的条目（例如，“收件箱”）。"
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> 是由 \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span> 开发的创新型浏览器扩展程序。它通过提供自定义删除、精确筛选和直观界面等高级功能，使用户能够轻松管理其浏览历史记录。在 BetterLogic Ltd，我们优先考虑用户隐私和无缝功能，以增强您的浏览体验。"
+  },
+  "blacklist": {
+    "message": "黑名单"
+  },
+  "blacklistDomain": {
+    "message": "黑名单域名"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "将域名从历史记录中加入黑名单"
+  },
+  "blacklistDomains": {
+    "message": "黑名单域名"
+  },
+  "blacklistFeatureDescription": {
+    "message": "BetterHistory 中的“域名黑名单”功能允许您阻止将特定网站记录到您的浏览历史记录中。一旦域名被列入黑名单，对该网站的所有过去和将来的访问都将自动删除。"
+  },
+  "blacklistInstructionText": {
+    "message": "BetterHistory 中的“域名黑名单”功能允许您阻止将特定网站记录到您的浏览历史记录中。一旦域名被列入黑名单，对该网站的所有过去和将来的访问都将自动删除。"
+  },
+  "blacklistTips": {
+    "message": "提示"
+  },
+  "blacklist_confirmation": {
+    "message": "您确定要将 **{{DOMAIN}}** 从您的浏览历史记录中加入黑名单吗？\u003Cbr/>将来对该域名的访问将不再被记录，**{{DOMAIN}}** 的所有现有历史记录条目都将被删除。"
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> 已在黑名单中。"
+  },
+  "blacklistedDomains": {
+    "message": "黑名单域名"
+  },
+  "blockExactDomain": {
+    "message": "仅阻止准确域名，不包括子域名或特定路径。"
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "阻止主域名及其所有子域名（mail.example.com、blog.example.com 等）。"
+  },
+  "blockSpecificPage": {
+    "message": "仅阻止域名上的特定页面。"
+  },
+  "blockSpecificPath": {
+    "message": "阻止域名上特定路径下的所有页面。"
+  },
+  "blockSpecificSubdomain": {
+    "message": "仅阻止特定的子域名，不包括主域名或其他子域名。"
+  },
+  "bugReport": {
+    "message": "错误报告"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "一次性将多个域名添加到您的黑名单。每行输入一个域名。"
+  },
+  "bulkAddDomains": {
+    "message": "批量添加域名"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>区分大小写：\u003C/strong>搜索默认不区分大小写。"
+  },
+  "chooseStartAndEndDates": {
+    "message": "选择开始和结束日期"
+  },
+  "clear": {
+    "message": "清除"
+  },
+  "clearBrowsingHistory": {
+    "message": "清除浏览历史记录"
+  },
+  "clearHistory": {
+    "message": "清除历史记录"
+  },
+  "clearHistoryConfirm": {
+    "message": "您确定要删除您的全部浏览历史记录吗？此操作是永久性的，无法撤消。"
+  },
+  "clearStats": {
+    "message": "清除统计数据"
+  },
+  "clearing": {
+    "message": "正在清除..."
+  },
+  "clearingHistory": {
+    "message": "历史记录管理"
+  },
+  "clickToRequestPermissions": {
+    "message": "点击下面的按钮请求这些权限。"
+  },
+  "close": {
+    "message": "关闭"
+  },
+  "clr": {
+    "message": "清除"
+  },
+  "confirmAndSave": {
+    "message": "确认并保存"
+  },
+  "confirmDelete": {
+    "message": "确认删除"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "确认智能自动清理设置"
+  },
+  "contact": {
+    "message": "联系"
+  },
+  "contactAndFeedback": {
+    "message": "联系与反馈"
+  },
+  "contactLimitReached": {
+    "message": "您已达到今天的联系限制。"
+  },
+  "containsDotCom": {
+    "message": "包含“.com”"
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>包含多个单词：\u003C/strong>使用 \u003Ccode>{{pipe}}\u003C/code> 搜索包含多个单词中任一个的条目（例如，\u003Ccode>{{example}}\u003C/code>）。"
+  },
+  "containsNewsOrInfo": {
+    "message": "包含“新闻”或“信息”"
+  },
+  "containsNumbers": {
+    "message": "包含数字"
+  },
+  "containsSpaces": {
+    "message": "包含空格"
+  },
+  "containsTODO": {
+    "message": "包含“待办事项”"
+  },
+  "current": {
+    "message": "来自此网站"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "目前，您可以查看过去 {{days}} {{dayLabel}} 的数据。系统将自动添加更多天数。"
+  },
+  "custom": {
+    "message": "自定义"
+  },
+  "customExport": {
+    "message": "自定义导出"
+  },
+  "customRange": {
+    "message": "自定义范围"
+  },
+  "dailyAtMidnight": {
+    "message": "每日（午夜）"
+  },
+  "darkMode": {
+    "message": "深色模式"
+  },
+  "dateAndTimeOrder": {
+    "message": "日期和时间顺序"
+  },
+  "day": {
+    "message": "天"
+  },
+  "days": {
+    "message": "天"
+  },
+  "debugToolsTitle": {
+    "message": "调试工具（用于测试）："
+  },
+  "default": {
+    "message": "默认"
+  },
+  "delete": {
+    "message": "删除"
+  },
+  "deleteAllForHour": {
+    "message": "您确定要永久删除 **{{startHour}}** 的所有浏览历史记录吗？\u003Cbr>这将删除整个小时（{{startAndendHour}}）的浏览历史记录。一旦删除，此操作无法撤消。"
+  },
+  "deleteAllFromDate": {
+    "message": "您确定要永久删除 **{{date}}** 的所有浏览历史记录吗？\u003Cbr>这将删除该日期的所有记录。一旦删除，此操作无法撤消。"
+  },
+  "deleteAllSearchHistory": {
+    "message": "您确定要永久删除此页面上列出的所有搜索到的浏览历史记录条目吗？\u003Cbr/>此操作将删除当前搜索结果中显示的所有条目。一旦删除，此操作无法撤消。"
+  },
+  "deleteBulk": {
+    "message": "删除"
+  },
+  "deleteDomainConfirm": {
+    "message": "您确定要删除域名 \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span> 的所有历史记录吗？此操作将删除所有相关条目，并且无法撤消。"
+  },
+  "deleteDomainStats": {
+    "message": "删除域名统计数据？"
+  },
+  "deleteEntire": {
+    "message": "删除整个日期"
+  },
+  "deleteEntireHistory": {
+    "message": "删除全部历史记录"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "删除全部历史记录？"
+  },
+  "deleteHistory": {
+    "message": "删除历史记录"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "您确定要删除您的全部浏览历史记录吗？此操作是永久性的，无法撤消。"
+  },
+  "deleteMsg": {
+    "message": "删除所有搜索结果？"
+  },
+  "deleteSelectedHistory": {
+    "message": "删除选定的历史记录"
+  },
+  "deleteSpecificDate": {
+    "message": "删除特定日期"
+  },
+  "deleteStatsConfirmation": {
+    "message": "您即将永久删除 BetterHistory 中 \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> 的所有跟踪数据。\u003Cbr>\u003Cbr>此操作无法撤消。"
+  },
+  "deleteUrlConfirm": {
+    "message": "您确定要从历史记录中删除 URL \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> 吗？此操作无法撤消。"
+  },
+  "deletedSelectedHistory": {
+    "message": "您确定要永久删除 {{selectedNumber}} 个选定的历史记录条目吗？\u003Cbr/>此操作将永久删除所有 {{selectedNumber}} 个选定的条目。一旦删除，此操作无法撤消。"
+  },
+  "devices": {
+    "message": "设备"
+  },
+  "disableTimeTracking": {
+    "message": "禁用此功能将停止跟踪并隐藏所有统计数据。"
+  },
+  "domainAlreadyExists": {
+    "message": "此域名已在您的列表中"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "第 ${index + 1} 行：域名已存在 (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "域名黑名单"
+  },
+  "domainCannotBeEmpty": {
+    "message": "域名不能为空"
+  },
+  "domainStats": {
+    "message": "域名统计"
+  },
+  "domainWithSubdomains": {
+    "message": "包含所有子域名的域名"
+  },
+  "domains": {
+    "message": "域名"
+  },
+  "email": {
+    "message": "电子邮件"
+  },
+  "emailArticle": {
+    "message": "支持文章"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}：\u003C/span>在 \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">BetterHistory 支持\u003C/span>\u003C/a>浏览我们的支持指南和常见问题解答。"
+  },
+  "emailSupport": {
+    "message": "电子邮件支持"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}：\u003C/span>如有任何问题或疑问，请通过 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a> 联系我们。"
+  },
+  "enableStats": {
+    "message": "启用统计数据"
+  },
+  "enableStatsDescription": {
+    "message": "启用或禁用所有统计功能。禁用后，将不会收集或显示任何统计数据。"
+  },
+  "enable_popup": {
+    "message": "启用弹出窗口"
+  },
+  "endsWithQuestionMark": {
+    "message": "以“?”结尾"
+  },
+  "enterAValidDomain": {
+    "message": "输入一个有效的域名"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "请输入至少一个域名"
+  },
+  "enterDomain": {
+    "message": "输入您想从历史记录中排除的域名"
+  },
+  "enterDomainName": {
+    "message": "输入域名"
+  },
+  "enterDomainPerLine": {
+    "message": "一次性将多个域名添加到您的白名单。每行输入一个域名。"
+  },
+  "enterDomainToBlock": {
+    "message": "输入要阻止的域名（例如 example.com）"
+  },
+  "enterDomainToWhitelist": {
+    "message": "输入要添加到白名单的域名（例如 example.com）"
+  },
+  "enterValidDomain": {
+    "message": "请输入至少一个有效的域名"
+  },
+  "entireExport": {
+    "message": "全部导出（90 天）"
+  },
+  "entries": {
+    "message": "条目"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "删除此网站的所有历史记录"
+  },
+  "error": {
+    "message": "错误"
+  },
+  "errorClearingHistory": {
+    "message": "清除历史记录失败。请再试一次。"
+  },
+  "errorClearingStats": {
+    "message": "清除统计数据失败"
+  },
+  "errorLoadingData": {
+    "message": "加载数据时出错"
+  },
+  "errorLoadingSettings": {
+    "message": "加载设置时出错。正在使用默认值。"
+  },
+  "errorSavingSettings": {
+    "message": "保存设置失败。请再试一次。"
+  },
+  "exactWordProject": {
+    "message": "确切单词“Project”"
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "探索我们的产品"
+  },
+  "export": {
+    "message": "导出"
+  },
+  "exportAsJSON": {
+    "message": "导出为 JSON"
+  },
+  "exportAsPDF": {
+    "message": "导出为 PDF"
+  },
+  "exportCsv": {
+    "message": "导出 CSV"
+  },
+  "exportEntireLocalData": {
+    "message": "导出所有本地数据"
+  },
+  "exportHistory": {
+    "message": "导出您的全部浏览历史记录"
+  },
+  "exportHistoryDescription": {
+    "message": "此功能允许您导出您的全部浏览历史记录（最多 90 天）或选择自定义日期范围进行导出。请注意，Chrome 的历史记录 API 仅支持历史记录导出，不支持历史记录回导。"
+  },
+  "exportHistoryLimitation": {
+    "message": "此外，Chrome 会自动删除超过 90 天的历史记录，因此 BetterHistory 只能导出 Chrome 保留的记录。"
+  },
+  "exportHtml": {
+    "message": "导出 HTML"
+  },
+  "exportLocalData": {
+    "message": "导出本地数据"
+  },
+  "exportSelectedCsv": {
+    "message": "导出选定的 CSV"
+  },
+  "exportSelectedHtml": {
+    "message": "导出选定的 HTML"
+  },
+  "exportTimeTrackingData": {
+    "message": "导出时间跟踪数据"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "这是您的本地存储的时间跟踪数据，您可以将其导出供个人使用。它反映了您在访问页面上花费的时间，帮助您分析您的浏览习惯。"
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "这些数据仅保存在您的浏览器中，不会同步或在线存储。删除 BetterHistory 扩展程序将永久删除所有时间跟踪数据。如果您希望保留备份，请定期导出您的数据。"
+  },
+  "exportToCSV": {
+    "message": "导出为 CSV"
+  },
+  "exportToTXT": {
+    "message": "导出为 TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "导出的浏览历史记录 - 日期："
+  },
+  "exportedHistoryKeyword": {
+    "message": "导出的浏览历史记录 - 关键词："
+  },
+  "featureRequest": {
+    "message": "功能请求"
+  },
+  "feedback": {
+    "message": "反馈"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "我接受\u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">隐私政策\u003C/span>\u003C/a>和数据处理。"
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "请提供您的电子邮件地址，以便跟进您的提交。"
+  },
+  "feedbackForm": {
+    "message": "反馈表"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}：\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">点击此处提交您的反馈\u003C/span>"
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "文件大小超过 5MB。请上传较小的文件。"
+  },
+  "find_all_visits_domain": {
+    "message": "查找 {{d}} 的所有访问记录"
+  },
+  "generalContact": {
+    "message": "一般联系"
+  },
+  "generatedUsing": {
+    "message": "本文档是使用"
+  },
+  "grantPermissions": {
+    "message": "授予权限"
+  },
+  "groupSession": {
+    "message": "分组会话"
+  },
+  "history": {
+    "message": "历史记录"
+  },
+  "historyCleared": {
+    "message": "历史记录已清除"
+  },
+  "historyControlsFor": {
+    "message": "历史记录控制（适用于）"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "白名单域名的历史记录将在清理期间保留"
+  },
+  "historyRetentionHelp": {
+    "message": "在此选定时间范围内的历史记录将保留并排除在自动清理之外。"
+  },
+  "hourFormat": {
+    "message": "时间格式"
+  },
+  "hours": {
+    "message": "小时"
+  },
+  "howDidWeDo": {
+    "message": "我们做得怎么样？"
+  },
+  "howLongKeepHistory": {
+    "message": "在您的浏览历史记录符合自动删除条件之前，应保留多长时间？"
+  },
+  "howToUseTheSearchTool": {
+    "message": "如何使用搜索工具"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "idleDetectionDescription": {
+    "message": "• 空闲检测（当您离开时停止跟踪）"
+  },
+  "import": {
+    "message": "导入"
+  },
+  "importEntireLocalData": {
+    "message": "导入本地数据"
+  },
+  "importFailed": {
+    "message": "导入数据失败"
+  },
+  "importJSON": {
+    "message": "导入 JSON"
+  },
+  "importSuccessful": {
+    "message": "数据导入成功"
+  },
+  "infinityScroll": {
+    "message": "启用无限滚动"
+  },
+  "interfaceStyle": {
+    "message": "显示设置"
+  },
+  "invalidDomainFormat": {
+    "message": "请输入有效的域名格式（例如 example.com）"
+  },
+  "invalidDomainFormatLine": {
+    "message": "第 ${index + 1} 行：域名格式无效 (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "文件类型无效。请上传 JPG 或 PNG 图像。"
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> 不是有效域名。请使用有效域名添加到黑名单。"
+  },
+  "keepHistoryCheckText": {
+    "message": "保留您已添加到白名单的网站的历史记录"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "保留您已添加到白名单的网站的历史记录"
+  },
+  "large": {
+    "message": "大"
+  },
+  "last15Days": {
+    "message": "15 天"
+  },
+  "last2Months": {
+    "message": "最近 2 个月"
+  },
+  "last30Days": {
+    "message": "30 天"
+  },
+  "last3Months": {
+    "message": "最近 3 个月"
+  },
+  "last60Days": {
+    "message": "60 天"
+  },
+  "last7Days": {
+    "message": "7 天"
+  },
+  "last90Days": {
+    "message": "90 天"
+  },
+  "lastMonth": {
+    "message": "上个月"
+  },
+  "lastVisitTime": {
+    "message": "上次访问时间"
+  },
+  "lastWeek": {
+    "message": "上周"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "了解有关自动清理的更多信息"
+  },
+  "learnMoreAboutRetention": {
+    "message": "了解有关保留期的更多信息"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "如果您需要其他调整，请告诉我。"
+  },
+  "lightMode": {
+    "message": "浅色模式"
+  },
+  "loadingSettings": {
+    "message": "正在加载设置..."
+  },
+  "ltr": {
+    "message": "从左到右 (LTR)"
+  },
+  "mainDomainNote": {
+    "message": "阻止主域名不会自动阻止其子域名"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "管理时间跟踪和使用统计"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "启用后，BetterHistory 会跟踪您在每个网站上花费的时间，包括会话持续时间和活动时间与空闲时间。所有数据都存储在您的浏览器中，仅用于为您提供详细的浏览洞察和时间分析。"
+  },
+  "manifest_browser_action_title": {
+    "message": "浏览历史记录"
+  },
+  "manifest_description": {
+    "message": "简洁的历史记录管理器：强大的搜索、批量导出、删除自定义选择、按日和小时筛选，以及从历史记录中阻止特定域名。"
+  },
+  "maxSize": {
+    "message": "最大尺寸"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• 媒体播放检测（在视频/音乐播放期间继续跟踪）"
+  },
+  "medium": {
+    "message": "中"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "每月（每月 1 日）"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "系统将自动添加更多天数。"
+  },
+  "moreFromSite": {
+    "message": "来自该网站的更多内容"
+  },
+  "mostActiveDay": {
+    "message": "最活跃的一天"
+  },
+  "neverDisabled": {
+    "message": "从不（已禁用）"
+  },
+  "noActivityData": {
+    "message": "此期间没有活动数据"
+  },
+  "noBlacklistType": {
+    "message": "您的黑名单中没有 {{type}}"
+  },
+  "noChangesToSave": {
+    "message": "没有要保存的更改"
+  },
+  "noDevices": {
+    "message": "未找到活动的设备会话。"
+  },
+  "noDomainBlacklisted": {
+    "message": "尚未有域名添加到黑名单"
+  },
+  "noDomains": {
+    "message": "尚未有域名添加到白名单"
+  },
+  "noDomainsType": {
+    "message": "您的白名单中没有 {{type}}"
+  },
+  "noFileSelectedMessage": {
+    "message": "未选择文件。请上传有效文件。"
+  },
+  "noMoreResults": {
+    "message": "没有更多结果"
+  },
+  "noResultsFound": {
+    "message": "未找到结果。请尝试调整搜索词或筛选条件。"
+  },
+  "noThanks": {
+    "message": "不用了，谢谢"
+  },
+  "noTitle": {
+    "message": "无标题"
+  },
+  "noVisits": {
+    "message": "抱歉，未找到访问记录。"
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>仅限数字：\u003C/strong>使用 \u003Ccode>{{pattern}}\u003C/code> 查找包含数字的条目。"
+  },
+  "of": {
+    "message": "之"
+  },
+  "ok": {
+    "message": "确定"
+  },
+  "oneMonth": {
+    "message": "一个月"
+  },
+  "oneWeek": {
+    "message": "一周"
+  },
+  "openAllTabs": {
+    "message": "打开所有标签页"
+  },
+  "openMenu": {
+    "message": "打开菜单"
+  },
+  "openTab": {
+    "message": "在新标签页中打开"
+  },
+  "order": {
+    "message": "顺序"
+  },
+  "otherOptions": {
+    "message": "通用偏好设置"
+  },
+  "page": {
+    "message": "页"
+  },
+  "paths": {
+    "message": "路径"
+  },
+  "permissionGranted": {
+    "message": "✓ 已授予"
+  },
+  "permissionMissing": {
+    "message": "✗ 缺失"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "权限已授予"
+  },
+  "pleaseNote": {
+    "message": "请注意："
+  },
+  "pleaseRateUs": {
+    "message": "请给我们评分！"
+  },
+  "prefixesAutoRemoved": {
+    "message": "“http://”、“https://”和“www.”等前缀将自动删除。"
+  },
+  "prefixesRemoved": {
+    "message": "“http://”、“https://”和“www.”等前缀将自动删除"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "将此网站加入黑名单以阻止记录历史记录"
+  },
+  "privacyPolicy": {
+    "message": "隐私政策"
+  },
+  "privacyTerms": {
+    "message": "隐私与条款"
+  },
+  "processing": {
+    "message": "正在处理..."
+  },
+  "rateText": {
+    "message": "您的意见有助于我们改进 BetterHistory。告诉我们您的看法吧！"
+  },
+  "recent": {
+    "message": "最近的访问"
+  },
+  "recordedVisits": {
+    "message": "记录的该域名访问次数"
+  },
+  "remove_url": {
+    "message": "从历史记录中删除此网址"
+  },
+  "result": {
+    "message": "结果"
+  },
+  "results": {
+    "message": "结果"
+  },
+  "retentionPeriod": {
+    "message": "保留期："
+  },
+  "retentionPeriodHelp": {
+    "message": "保留期决定了您的浏览历史记录可以追溯到多久以前。更早的历史记录将符合清理条件。"
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "请在确认前检查您的设置。"
+  },
+  "revokePermissions": {
+    "message": "撤销权限"
+  },
+  "rightTitle": {
+    "message": "上下文菜单选项"
+  },
+  "rtl": {
+    "message": "从右到左 (RTL)"
+  },
+  "saveSettings": {
+    "message": "保存设置"
+  },
+  "search": {
+    "message": "搜索"
+  },
+  "searchDeeper": {
+    "message": "更深入搜索"
+  },
+  "searchDomainTitle": {
+    "message": "按域名搜索"
+  },
+  "searchEngine": {
+    "message": "搜索引擎"
+  },
+  "searchMsg": {
+    "message": "嘘... 试试搜索点什么"
+  },
+  "searchPlaceholder": {
+    "message": "搜索标题或网址"
+  },
+  "searchTextTitle": {
+    "message": "按文本选择搜索"
+  },
+  "searchTips": {
+    "message": "搜索提示"
+  },
+  "searchTipsMsg1": {
+    "message": "现已支持正则表达式搜索！"
+  },
+  "searchTipsMsg2": {
+    "message": "例如，尝试搜索"
+  },
+  "searchTipsMsg3": {
+    "message": "搜索访问记录和下载记录"
+  },
+  "searchTipsMsg4": {
+    "message": "搜索将自动查找按页面标题和网址的访问记录，以及按文件名和网址的下载记录。"
+  },
+  "searchTipsMsg5": {
+    "message": "您的最近 10,000 次访问用于快速初始搜索。要进行更深入的搜索，请访问结果最后一页的底部，然后点击“更深入搜索”按钮。"
+  },
+  "searchToolDescription": {
+    "message": "此工具允许您使用简单关键词或高级**正则表达式 (RegEx)** 有效地搜索您的浏览历史记录。以下是一些帮助您入门的示例："
+  },
+  "search_history": {
+    "message": "在历史记录中搜索"
+  },
+  "searchedUrlDeleted": {
+    "message": "搜索到的网址已删除"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "搜索到的网址已删除，白名单域名除外"
+  },
+  "searching": {
+    "message": "正在搜索"
+  },
+  "selectDateFormat": {
+    "message": "日期格式"
+  },
+  "selectDateRange": {
+    "message": "选择日期范围"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "选择要删除历史记录的日期"
+  },
+  "selectEndDate": {
+    "message": "选择结束日期"
+  },
+  "selectStartDate": {
+    "message": "选择开始日期"
+  },
+  "selected": {
+    "message": "已选择"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "选定日期的历史记录已删除"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "选定日期的历史记录已删除，白名单域名除外"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "选定小时的历史记录已删除"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "选定小时的历史记录已删除，白名单域名除外"
+  },
+  "sessions": {
+    "message": "会话"
+  },
+  "settings": {
+    "message": "设置"
+  },
+  "settingsSaved": {
+    "message": "设置已保存"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "您的智能自动清理设置已成功更新。"
+  },
+  "shortRetentionWarning": {
+    "message": "设置一周的短保留期意味着您较旧的浏览历史记录将更频繁地被清理。请确保这符合您的需求。"
+  },
+  "show": {
+    "message": "显示"
+  },
+  "showAllHistory": {
+    "message": "显示所有历史记录"
+  },
+  "showStats": {
+    "message": "显示统计数据"
+  },
+  "small": {
+    "message": "小"
+  },
+  "smartAutoCleanup": {
+    "message": "智能自动清理"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "使用智能自动清理自动管理您的浏览历史记录。选择清理的运行频率以及保留最近历史记录的时长。"
+  },
+  "smartAutoCleanupSettings": {
+    "message": "智能自动清理设置"
+  },
+  "smartHistoryCleanup": {
+    "message": "智能历史记录清理"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "清除您的浏览历史记录，但您添加到白名单的网站除外。此功能可帮助您保持活动私密性，同时保留来自受信任或常用网站的重要历史记录。"
+  },
+  "socialMediaTip": {
+    "message": "对于社交媒体网站，请考虑阻止特定部分（facebook.com/marketplace/*）"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "某些域名无法添加：\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "缺少一些权限"
+  },
+  "specificPage": {
+    "message": "特定的页面"
+  },
+  "specificPath": {
+    "message": "特定的路径"
+  },
+  "specificSubdomain": {
+    "message": "特定的子域名"
+  },
+  "start": {
+    "message": "开始"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>以此开头：\u003C/strong>使用 ^ 查找以特定单词开头的条目（例如，^收件箱）。"
+  },
+  "startsWithInbox": {
+    "message": "以“收件箱”开头"
+  },
+  "statsCleared": {
+    "message": "统计数据已清除"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "取消"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "为了帮助您跟踪在网站上花费的时间、查看会话详情以及以 PDF 格式导出时间报告，我们需要获得访问您的浏览活动的权限。"
+  },
+  "statsPermissionDialogGrant": {
+    "message": "授予权限"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "我们在 BetterHistory 中引入了一项新的时间跟踪功能！"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "时间跟踪需要新的权限"
+  },
+  "subdomainNote": {
+    "message": "将主域名添加到白名单不会自动将其子域名添加到白名单"
+  },
+  "subdomains": {
+    "message": "子域名"
+  },
+  "submit": {
+    "message": "提交"
+  },
+  "submitFeedback": {
+    "message": "提交反馈"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "您的建议和反馈有助于我们改进 BetterHistory 并提供最佳用户体验。"
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 个或更多字符"
+  },
+  "termsOfService": {
+    "message": "服务条款"
+  },
+  "thankYou": {
+    "message": "谢谢您！"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "此操作无法撤消。"
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "此网址或域名已在黑名单域名中列出"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "此网址或域名已在白名单域名中列出"
+  },
+  "threeMonths": {
+    "message": "三个月"
+  },
+  "timeTrackingStartedOn": {
+    "message": "时间跟踪于 {{date}} 开始"
+  },
+  "tips": {
+    "message": "提示"
+  },
+  "title": {
+    "message": "标题"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "要将域名及其子域名上的每个页面都列入黑名单，请写："
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "要将域名上的每个页面都列入黑名单，请写："
+  },
+  "todalWords": {
+    "message": "总字数"
+  },
+  "today": {
+    "message": "今天"
+  },
+  "toolbarIcon": {
+    "message": "工具栏图标主题"
+  },
+  "totalEntries": {
+    "message": "总条目"
+  },
+  "totalVisits": {
+    "message": "总访问次数"
+  },
+  "twoWeeks": {
+    "message": "两周"
+  },
+  "typdCount": {
+    "message": "输入次数"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "输入任何关键词以查找匹配的条目。"
+  },
+  "typeDeleteToConfirm": {
+    "message": "输入“delete”确认："
+  },
+  "typedCount": {
+    "message": "在地址栏中输入 {{times}} 次"
+  },
+  "unableToLoadDomainStats": {
+    "message": "无法加载域名统计信息。请稍后重试。"
+  },
+  "understandSettings": {
+    "message": "我了解这些设置以及它们将如何影响我的浏览历史记录"
+  },
+  "understandYourRights": {
+    "message": "了解您的权利"
+  },
+  "uniqueUrls": {
+    "message": "独特的网址"
+  },
+  "updatingData": {
+    "message": "正在更新数据..."
+  },
+  "uploadScreenShot": {
+    "message": "上传屏幕截图"
+  },
+  "urlDeleted": {
+    "message": "网址已删除"
+  },
+  "urlPatternGuide": {
+    "message": "网址模式指南"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "您可以使用以下模式阻止网站："
+  },
+  "useSpecificPaths": {
+    "message": "使用特定的路径仅将网站的某些部分添加到白名单"
+  },
+  "viewHere": {
+    "message": "在此查看"
+  },
+  "viewStats": {
+    "message": "查看统计数据"
+  },
+  "viewStatsButton": {
+    "message": "您还将在“活动”页面上的每个条目旁边看到一个“查看统计数据”按钮，以便快速访问详细的时间数据"
+  },
+  "visitCount": {
+    "message": "链接已访问 {{times}} 次"
+  },
+  "visitSite": {
+    "message": "访问网站"
+  },
+  "visits_domain": {
+    "message": "查看此域名的所有访问记录"
+  },
+  "vstCount": {
+    "message": "访问次数"
+  },
+  "weValueYourInputMessage": {
+    "message": "我们重视您的意见，并随时为您提供帮助！"
+  },
+  "websiteAccessDescription": {
+    "message": "• 网站访问权限（用于监控活动）"
+  },
+  "websites": {
+    "message": "网站"
+  },
+  "weeklyEverySunday": {
+    "message": "每周（每个星期日）"
+  },
+  "whatThisMeans": {
+    "message": "这意味着："
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "允许使用哪些网址模式？"
+  },
+  "whenBrowserCloses": {
+    "message": "当浏览器关闭时"
+  },
+  "whenShouldCleanupRun": {
+    "message": "智能自动清理应何时运行？"
+  },
+  "whitelist": {
+    "message": "白名单"
+  },
+  "whitelistDomain": {
+    "message": "域名白名单"
+  },
+  "whitelistDomains": {
+    "message": "白名单域名"
+  },
+  "whitelistExactDomain": {
+    "message": "仅将准确域名添加到白名单，不包括子域名或特定路径。"
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "将主域名及其所有子域名（mail.example.com、blog.example.com 等）添加到白名单。"
+  },
+  "whitelistPatterns": {
+    "message": "您可以使用以下模式添加到白名单："
+  },
+  "whitelistPrecedence": {
+    "message": "白名单域名优先于黑名单域名"
+  },
+  "whitelistSpecificPage": {
+    "message": "仅将域名上的特定页面添加到白名单。"
+  },
+  "whitelistSpecificPath": {
+    "message": "将域名上特定路径下的所有页面添加到白名单。"
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "仅将特定的子域名添加到白名单，不包括主域名或其他子域名。"
+  },
+  "whitelistedDomains": {
+    "message": "白名单域名"
+  },
+  "wildcardWarning": {
+    "message": "请谨慎使用通配符 (*)，因为它可能会阻止超出预期的内容"
+  },
+  "yesterday": {
+    "message": "昨天"
+  }
+}

@@ -1,0 +1,39 @@
+# dependencies
+node_modules
+
+# wxt
+.output
+.wxt
+
+# build output
+out
+dist
+*.tgz
+
+# code coverage
+coverage
+*.lcov
+
+# logs
+logs
+*.log
+
+# dotenv
+.env
+.env.local
+.env.*.local
+
+# caches
+.eslintcache
+.cache
+*.tsbuildinfo
+
+# editors / tooling
+.idea
+.vscode
+.zed
+.claude
+
+# OS
+.DS_Store
+Thumbs.db

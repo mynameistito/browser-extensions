@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "Пожалуйста, опишите, что мы можем добавить или улучшить."
+  },
+  "FeedbackSuccessAlert": {
+    "message": "Спасибо! Ваш отзыв был успешно отправлен."
+  },
+  "Friday": {
+    "message": "Пятница"
+  },
+  "Monday": {
+    "message": "Понедельник"
+  },
+  "Popup": {
+    "message": "Всплывающее окно"
+  },
+  "Saturday": {
+    "message": "Суббота"
+  },
+  "Sidebar": {
+    "message": "Боковая панель"
+  },
+  "Sunday": {
+    "message": "Воскресенье"
+  },
+  "ThanksForFeedBack": {
+    "message": "Спасибо за ваш отзыв!"
+  },
+  "Thursday": {
+    "message": "Четверг"
+  },
+  "Today": {
+    "message": "Сегодня"
+  },
+  "Tuesday": {
+    "message": "Вторник"
+  },
+  "URL": {
+    "message": "URL"
+  },
+  "Wednesday": {
+    "message": "Среда"
+  },
+  "WhatCanWeImprove": {
+    "message": "Что мы можем улучшить?"
+  },
+  "Yesterday": {
+    "message": "Вчера"
+  },
+  "about": {
+    "message": "О программе"
+  },
+  "activity": {
+    "message": "Активность"
+  },
+  "add": {
+    "message": "Добавить"
+  },
+  "addDomains": {
+    "message": "Добавить домены"
+  },
+  "addToBlackList": {
+    "message": "Добавить в черный список"
+  },
+  "advanceExport": {
+    "message": "Расширенный экспорт"
+  },
+  "advancedFeaturesActive": {
+    "message": "Расширенные функции теперь активны."
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "Расширенные функции требуют дополнительных разрешений для:"
+  },
+  "all": {
+    "message": "Все"
+  },
+  "allCapitalLetters": {
+    "message": "Все Заглавные Буквы"
+  },
+  "allHistoryDeleted": {
+    "message": "Вся история удалена"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "Вся история удалена, кроме доменов из белого списка"
+  },
+  "allPermissionsGranted": {
+    "message": "Все разрешения предоставлены!"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "Все выбранные URL-адреса удалены"
+  },
+  "allTime": {
+    "message": "За все время"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "Пожалуйста, разрешите доступ, чтобы отправить отзыв"
+  },
+  "appName": {
+    "message": "Better History | Управление, экспорт и удаление истории"
+  },
+  "apply": {
+    "message": "Применить"
+  },
+  "autoCleanupDisabled": {
+    "message": "Автоочистка отключена. При необходимости вы все равно можете очистить историю вручную."
+  },
+  "autoCleanupEnabled": {
+    "message": "Ваша история просмотров будет автоматически очищена в соответствии с выбранным расписанием."
+  },
+  "autoCleanupHelp": {
+    "message": "Автоматическая очистка помогает поддерживать вашу конфиденциальность, регулярно удаляя историю просмотров в соответствии с вашими предпочтениями."
+  },
+  "autoCleanupSchedule": {
+    "message": "Расписание автоочистки:"
+  },
+  "avgPerDay": {
+    "message": "В среднем {{time}} в день"
+  },
+  "basicDomain": {
+    "message": "Базовый домен"
+  },
+  "basicSearch": {
+    "message": "Базовый поиск"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}:\u003C/strong> Введите любое ключевое слово, чтобы найти совпадающие записи (например, \"Входящие\")."
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> — это инновационное расширение для браузеров, разработанное \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span>. Оно позволяет пользователям с легкостью управлять своей историей просмотров, предлагая расширенные функции, такие как настраиваемое удаление, точные фильтры и интуитивно понятный интерфейс. В BetterLogic Ltd мы уделяем приоритетное внимание конфиденциальности пользователей и бесперебойной работе, чтобы улучшить ваш опыт просмотра."
+  },
+  "blacklist": {
+    "message": "Черный список"
+  },
+  "blacklistDomain": {
+    "message": "Черный список доменов"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "Добавить домен в черный список истории"
+  },
+  "blacklistDomains": {
+    "message": "Домены в черном списке"
+  },
+  "blacklistFeatureDescription": {
+    "message": "Функция Черный список доменов в BetterHistory позволяет блокировать запись определенных веб-сайтов в историю просмотров. После того как домен попадает в черный список, все прошлые и будущие посещения этого сайта будут автоматически удалены."
+  },
+  "blacklistInstructionText": {
+    "message": "Функция Черный список доменов в BetterHistory позволяет блокировать запись определенных веб-сайтов в историю просмотров. После того как домен попадает в черный список, все прошлые и будущие посещения этого сайта будут автоматически удалены."
+  },
+  "blacklistTips": {
+    "message": "Советы"
+  },
+  "blacklist_confirmation": {
+    "message": "Вы уверены, что хотите добавить **{{DOMAIN}}** в черный список вашей истории просмотров?\u003Cbr/>Будущие посещения этого домена больше не будут записываться, а все существующие записи истории для **{{DOMAIN}}** будут удалены."
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> уже находится в черном списке."
+  },
+  "blacklistedDomains": {
+    "message": "Домены в черном списке"
+  },
+  "blockExactDomain": {
+    "message": "Блокирует только точный домен, а не поддомены или определенные пути."
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "Блокирует основной домен и все его поддомены (mail.example.com, blog.example.com и т. д.)."
+  },
+  "blockSpecificPage": {
+    "message": "Блокирует только определенную страницу на домене."
+  },
+  "blockSpecificPath": {
+    "message": "Блокирует все страницы по определенному пути на домене."
+  },
+  "blockSpecificSubdomain": {
+    "message": "Блокирует только определенный поддомен, а не основной домен или другие поддомены."
+  },
+  "bugReport": {
+    "message": "Сообщение об ошибке"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "Добавьте несколько доменов в черный список одновременно. Введите один домен на строку."
+  },
+  "bulkAddDomains": {
+    "message": "Массовое добавление доменов"
+  },
+  "cancel": {
+    "message": "Отмена"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>Чувствительность к регистру:\u003C/strong> Поиск по умолчанию не чувствителен к регистру."
+  },
+  "chooseStartAndEndDates": {
+    "message": "Выберите начальную и конечную даты"
+  },
+  "clear": {
+    "message": "Очистить"
+  },
+  "clearBrowsingHistory": {
+    "message": "Очистить историю просмотров"
+  },
+  "clearHistory": {
+    "message": "Очистить историю"
+  },
+  "clearHistoryConfirm": {
+    "message": "Вы уверены, что хотите удалить всю историю просмотров? Это действие необратимо и не может быть отменено."
+  },
+  "clearStats": {
+    "message": "Очистить статистику"
+  },
+  "clearing": {
+    "message": "Очистка..."
+  },
+  "clearingHistory": {
+    "message": "Управление историей"
+  },
+  "clickToRequestPermissions": {
+    "message": "Нажмите кнопку ниже, чтобы запросить их."
+  },
+  "close": {
+    "message": "Закрыть"
+  },
+  "clr": {
+    "message": "Очистить"
+  },
+  "confirmAndSave": {
+    "message": "Подтвердить и сохранить"
+  },
+  "confirmDelete": {
+    "message": "Подтвердить удаление"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "Подтвердить настройки умной автоочистки"
+  },
+  "contact": {
+    "message": "Контакты"
+  },
+  "contactAndFeedback": {
+    "message": "Контакты и обратная связь"
+  },
+  "contactLimitReached": {
+    "message": "Вы уже достигли лимита контактов на сегодня."
+  },
+  "containsDotCom": {
+    "message": "Содержит \".com\""
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>Содержит несколько слов:\u003C/strong> Используйте \u003Ccode>{{pipe}}\u003C/code> для поиска записей, содержащих одно из нескольких слов (например, \u003Ccode>{{example}}\u003C/code>)."
+  },
+  "containsNewsOrInfo": {
+    "message": "Содержит \"Новости\" или \"Инфо\""
+  },
+  "containsNumbers": {
+    "message": "Содержит Числа"
+  },
+  "containsSpaces": {
+    "message": "Содержит пробелы"
+  },
+  "containsTODO": {
+    "message": "Содержит \"TODO\""
+  },
+  "current": {
+    "message": "С этого сайта"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "В настоящее время вы можете просматривать данные за последние {{days}} {{dayLabel}}. Большее количество дней будет добавлено автоматически."
+  },
+  "custom": {
+    "message": "Пользовательский"
+  },
+  "customExport": {
+    "message": "Пользовательский экспорт"
+  },
+  "customRange": {
+    "message": "Пользовательский диапазон"
+  },
+  "dailyAtMidnight": {
+    "message": "Ежедневно (в полночь)"
+  },
+  "darkMode": {
+    "message": "Темный режим"
+  },
+  "dateAndTimeOrder": {
+    "message": "Порядок даты и времени"
+  },
+  "day": {
+    "message": "день"
+  },
+  "days": {
+    "message": "дней"
+  },
+  "debugToolsTitle": {
+    "message": "Инструменты отладки (для тестирования):"
+  },
+  "default": {
+    "message": "По умолчанию"
+  },
+  "delete": {
+    "message": "Удалить"
+  },
+  "deleteAllForHour": {
+    "message": "Вы уверены, что хотите навсегда удалить всю историю просмотров за **{{startHour}}**?\u003Cbr>Это удалит историю просмотров за весь час ({{startAndendHour}}). После удаления это действие нельзя отменить."
+  },
+  "deleteAllFromDate": {
+    "message": "Вы уверены, что хотите навсегда удалить всю историю просмотров за **{{date}}**?\u003Cbr>Это удалит все записи за этот день. После удаления это действие нельзя отменить."
+  },
+  "deleteAllSearchHistory": {
+    "message": "Вы уверены, что хотите навсегда удалить все найденные записи истории просмотров, перечисленные на этой странице?\u003Cbr/>Это действие удалит все записи, отображаемые в текущих результатах поиска. После удаления это действие нельзя отменить."
+  },
+  "deleteBulk": {
+    "message": "Удалить"
+  },
+  "deleteDomainConfirm": {
+    "message": "Вы уверены, что хотите удалить всю историю с домена \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span>? Это действие удалит все связанные записи и не может быть отменено."
+  },
+  "deleteDomainStats": {
+    "message": "Удалить статистику домена?"
+  },
+  "deleteEntire": {
+    "message": "Удалить весь день"
+  },
+  "deleteEntireHistory": {
+    "message": "Удалить всю историю"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "Удалить всю историю?"
+  },
+  "deleteHistory": {
+    "message": "Удалить историю"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "Вы уверены, что хотите удалить всю историю просмотров? Это действие необратимо и не может быть отменено."
+  },
+  "deleteMsg": {
+    "message": "Удалить все результаты поиска?"
+  },
+  "deleteSelectedHistory": {
+    "message": "Удалить выбранную историю"
+  },
+  "deleteSpecificDate": {
+    "message": "Удалить определенную дату"
+  },
+  "deleteStatsConfirmation": {
+    "message": "Вы собираетесь навсегда удалить все данные отслеживания для \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> из BetterHistory.\u003Cbr>\u003Cbr>Это действие нельзя отменить."
+  },
+  "deleteUrlConfirm": {
+    "message": "Вы уверены, что хотите удалить URL \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> из вашей истории? Это действие нельзя отменить."
+  },
+  "deletedSelectedHistory": {
+    "message": "Вы уверены, что хотите навсегда удалить {{selectedNumber}} выбранных записей истории?\u003Cbr/>Это действие навсегда удалит все {{selectedNumber}} выбранных записей. После удаления это действие нельзя отменить."
+  },
+  "devices": {
+    "message": "Устройства"
+  },
+  "disableTimeTracking": {
+    "message": "Отключение этого остановит отслеживание и скроет всю статистику."
+  },
+  "domainAlreadyExists": {
+    "message": "Этот домен уже есть в вашем списке"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "Строка ${index + 1}: Домен уже существует (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "Черный список доменов"
+  },
+  "domainCannotBeEmpty": {
+    "message": "Домен не может быть пустым"
+  },
+  "domainStats": {
+    "message": "Статистика домена"
+  },
+  "domainWithSubdomains": {
+    "message": "Домен со всеми поддоменами"
+  },
+  "domains": {
+    "message": "Домены"
+  },
+  "email": {
+    "message": "Электронная почта"
+  },
+  "emailArticle": {
+    "message": "Статьи поддержки"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}: \u003C/span>Просмотрите наши руководства по поддержке и часто задаваемые вопросы на \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">Поддержка BetterHistory\u003C/span>\u003C/a>."
+  },
+  "emailSupport": {
+    "message": "Поддержка по электронной почте"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}:\u003C/span> По любым вопросам или проблемам обращайтесь к нам по адресу 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a>."
+  },
+  "enableStats": {
+    "message": "Включить статистику"
+  },
+  "enableStatsDescription": {
+    "message": "Включить или отключить всю функциональность статистики. Если отключено, статистика не будет собираться или отображаться."
+  },
+  "enable_popup": {
+    "message": "Включить всплывающее окно"
+  },
+  "endsWithQuestionMark": {
+    "message": "Заканчивается на \"?\""
+  },
+  "enterAValidDomain": {
+    "message": "Введите действительный домен"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "Пожалуйста, введите хотя бы один домен"
+  },
+  "enterDomain": {
+    "message": "Введите домен, который хотите исключить из истории"
+  },
+  "enterDomainName": {
+    "message": "Введите имя домена"
+  },
+  "enterDomainPerLine": {
+    "message": "Добавьте несколько доменов в белый список одновременно. Введите один домен на строку."
+  },
+  "enterDomainToBlock": {
+    "message": "Введите домен для блокировки (например, example.com)"
+  },
+  "enterDomainToWhitelist": {
+    "message": "Введите домен для добавления в белый список (например, example.com)"
+  },
+  "enterValidDomain": {
+    "message": "Пожалуйста, введите хотя бы один действительный домен"
+  },
+  "entireExport": {
+    "message": "Полный экспорт (90 дней)"
+  },
+  "entries": {
+    "message": "Записи"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "Удалить всю историю для этого сайта"
+  },
+  "error": {
+    "message": "Ошибка"
+  },
+  "errorClearingHistory": {
+    "message": "Не удалось очистить историю. Пожалуйста, попробуйте еще раз."
+  },
+  "errorClearingStats": {
+    "message": "Не удалось очистить статистику"
+  },
+  "errorLoadingData": {
+    "message": "Ошибка загрузки данных"
+  },
+  "errorLoadingSettings": {
+    "message": "Ошибка загрузки настроек. Используются значения по умолчанию."
+  },
+  "errorSavingSettings": {
+    "message": "Не удалось сохранить настройки. Пожалуйста, попробуйте еще раз."
+  },
+  "exactWordProject": {
+    "message": "Точное слово \"Проект\""
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "Изучите наши продукты"
+  },
+  "export": {
+    "message": "Экспорт"
+  },
+  "exportAsJSON": {
+    "message": "Экспорт в JSON"
+  },
+  "exportAsPDF": {
+    "message": "Экспорт в PDF"
+  },
+  "exportCsv": {
+    "message": "Экспорт в CSV"
+  },
+  "exportEntireLocalData": {
+    "message": "Экспорт всех локальных данных"
+  },
+  "exportHistory": {
+    "message": "Экспорт всей вашей истории просмотров"
+  },
+  "exportHistoryDescription": {
+    "message": "Эта функция позволяет экспортировать всю вашу историю просмотров (до 90 дней) или выбрать пользовательский диапазон дат для экспорта. Обратите внимание, что API истории Chrome поддерживает только экспорт истории — он не позволяет импортировать историю обратно."
+  },
+  "exportHistoryLimitation": {
+    "message": "Кроме того, Chrome автоматически удаляет историю старше 90 дней, поэтому BetterHistory может экспортировать только те записи, которые Chrome сохраняет."
+  },
+  "exportHtml": {
+    "message": "Экспорт в HTML"
+  },
+  "exportLocalData": {
+    "message": "Экспорт локальных данных"
+  },
+  "exportSelectedCsv": {
+    "message": "Экспорт выбранного в CSV"
+  },
+  "exportSelectedHtml": {
+    "message": "Экспорт выбранного в HTML"
+  },
+  "exportTimeTrackingData": {
+    "message": "Экспорт данных отслеживания времени"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "Это ваши локально сохраненные данные отслеживания времени, которые вы можете экспортировать для личного использования. Они отражают время, которое вы провели на посещенных страницах, помогая вам анализировать ваши привычки просмотра."
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "Эти данные сохраняются только в вашем браузере и не синхронизируются и не хранятся в сети. Удаление расширения BetterHistory навсегда удалит все данные отслеживания времени. Регулярно экспортируйте свои данные, если хотите сохранить резервную копию."
+  },
+  "exportToCSV": {
+    "message": "Экспорт в CSV"
+  },
+  "exportToTXT": {
+    "message": "Экспорт в TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "Экспортированная история просмотров - Дата:"
+  },
+  "exportedHistoryKeyword": {
+    "message": "Экспортированная история просмотров - Ключевое слово:"
+  },
+  "featureRequest": {
+    "message": "Запрос функции"
+  },
+  "feedback": {
+    "message": "Обратная связь"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "Я принимаю \u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">Политику конфиденциальности\u003C/span>\u003C/a> и обработку данных."
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "Пожалуйста, укажите свой адрес электронной почты для обратной связи по вашему обращению."
+  },
+  "feedbackForm": {
+    "message": "Форма обратной связи"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}:\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">Нажмите здесь, чтобы отправить свой отзыв\u003C/span>."
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "Размер файла превышает 5 МБ. Пожалуйста, загрузите файл меньшего размера."
+  },
+  "find_all_visits_domain": {
+    "message": "Найти все посещения {{d}}"
+  },
+  "generalContact": {
+    "message": "Общий контакт"
+  },
+  "generatedUsing": {
+    "message": "Этот документ был сгенерирован с помощью"
+  },
+  "grantPermissions": {
+    "message": "Предоставить разрешения"
+  },
+  "groupSession": {
+    "message": "Группировать сеанс"
+  },
+  "history": {
+    "message": "История"
+  },
+  "historyCleared": {
+    "message": "История очищена"
+  },
+  "historyControlsFor": {
+    "message": "Управление историей для"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "История с доменов из белого списка будет сохранена во время очистки"
+  },
+  "historyRetentionHelp": {
+    "message": "История в пределах выбранного временного диапазона будет сохранена и исключена из автоматической очистки."
+  },
+  "hourFormat": {
+    "message": "Формат времени"
+  },
+  "hours": {
+    "message": "Часы"
+  },
+  "howDidWeDo": {
+    "message": "Как мы справились?"
+  },
+  "howLongKeepHistory": {
+    "message": "Как долго должна сохраняться ваша история просмотров, прежде чем она станет доступной для автоматического удаления?"
+  },
+  "howToUseTheSearchTool": {
+    "message": "Как пользоваться инструментом поиска"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "idleDetectionDescription": {
+    "message": "• Обнаружение бездействия (останавливает отслеживание, когда вы отсутствуете)"
+  },
+  "import": {
+    "message": "Импорт"
+  },
+  "importEntireLocalData": {
+    "message": "Импорт локальных данных"
+  },
+  "importFailed": {
+    "message": "Не удалось импортировать данные"
+  },
+  "importJSON": {
+    "message": "Импорт JSON"
+  },
+  "importSuccessful": {
+    "message": "Данные успешно импортированы"
+  },
+  "infinityScroll": {
+    "message": "Включить бесконечную прокрутку"
+  },
+  "interfaceStyle": {
+    "message": "Настройки отображения"
+  },
+  "invalidDomainFormat": {
+    "message": "Пожалуйста, введите действительный формат домена (например, example.com)"
+  },
+  "invalidDomainFormatLine": {
+    "message": "Строка ${index + 1}: Недопустимый формат домена (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "Недопустимый тип файла. Пожалуйста, загрузите изображение JPG или PNG."
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> не является действительным доменом. Пожалуйста, используйте действительный домен, чтобы добавить его в черный список."
+  },
+  "keepHistoryCheckText": {
+    "message": "Сохранять историю с сайтов, которые вы добавили в белый список"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "Сохранять историю с сайтов, которые вы добавили в белый список"
+  },
+  "large": {
+    "message": "Большой"
+  },
+  "last15Days": {
+    "message": "15 дней"
+  },
+  "last2Months": {
+    "message": "Последние 2 месяца"
+  },
+  "last30Days": {
+    "message": "30 дней"
+  },
+  "last3Months": {
+    "message": "Последние 3 месяца"
+  },
+  "last60Days": {
+    "message": "60 дней"
+  },
+  "last7Days": {
+    "message": "7 дней"
+  },
+  "last90Days": {
+    "message": "90 дней"
+  },
+  "lastMonth": {
+    "message": "Прошлый месяц"
+  },
+  "lastVisitTime": {
+    "message": "Время последнего посещения"
+  },
+  "lastWeek": {
+    "message": "Прошлая неделя"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "Узнать больше об автоочистке"
+  },
+  "learnMoreAboutRetention": {
+    "message": "Узнать больше о сроке хранения"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "Дайте мне знать, если вам нужны дополнительные настройки."
+  },
+  "lightMode": {
+    "message": "Светлый режим"
+  },
+  "loadingSettings": {
+    "message": "Загрузка настроек..."
+  },
+  "ltr": {
+    "message": "LTR (Слева направо)"
+  },
+  "mainDomainNote": {
+    "message": "Блокировка основного домена не приводит к автоматической блокировке его поддоменов"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "Управление отслеживанием времени и статистикой использования"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "Когда включено, BetterHistory отслеживает, сколько времени вы проводите на каждом веб-сайте, включая продолжительность сеансов и активное время по сравнению со временем бездействия. Все данные хранятся локально в вашем браузере и используются исключительно для предоставления вам подробной информации о просмотре и анализа времени."
+  },
+  "manifest_browser_action_title": {
+    "message": "Просмотр истории"
+  },
+  "manifest_description": {
+    "message": "Элегантный менеджер истории: мощный поиск, массовый экспорт, удаление выбранных элементов, фильтрация по дням и часам, а также блокировка определенных доменов в истории."
+  },
+  "maxSize": {
+    "message": "Макс. размер"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• Обнаружение воспроизведения медиа (продолжает отслеживание во время видео/музыки)"
+  },
+  "medium": {
+    "message": "Средний"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "Ежемесячно (1-го числа каждого месяца)"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "Больше дней будет добавлено автоматически."
+  },
+  "moreFromSite": {
+    "message": "Больше с этого сайта"
+  },
+  "mostActiveDay": {
+    "message": "Самый активный день"
+  },
+  "neverDisabled": {
+    "message": "Никогда (отключено)"
+  },
+  "noActivityData": {
+    "message": "Нет данных об активности за этот период"
+  },
+  "noBlacklistType": {
+    "message": "Нет {{type}} в вашем черном списке"
+  },
+  "noChangesToSave": {
+    "message": "Нет изменений для сохранения"
+  },
+  "noDevices": {
+    "message": "Активные сеансы устройств не найдены."
+  },
+  "noDomainBlacklisted": {
+    "message": "Домены еще не добавлены в черный список"
+  },
+  "noDomains": {
+    "message": "Домены еще не добавлены в белый список"
+  },
+  "noDomainsType": {
+    "message": "Нет {{type}} в вашем белом списке"
+  },
+  "noFileSelectedMessage": {
+    "message": "Файл не выбран. Пожалуйста, загрузите действительный файл."
+  },
+  "noMoreResults": {
+    "message": "Больше нет результатов"
+  },
+  "noResultsFound": {
+    "message": "Результаты не найдены. Попробуйте изменить условия поиска или фильтры."
+  },
+  "noThanks": {
+    "message": "Нет, спасибо"
+  },
+  "noTitle": {
+    "message": "Без заголовка"
+  },
+  "noVisits": {
+    "message": "К сожалению, посещения не найдены."
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>Только числа:\u003C/strong> Используйте \u003Ccode>{{pattern}}\u003C/code> для поиска записей с числами."
+  },
+  "of": {
+    "message": "из"
+  },
+  "ok": {
+    "message": "ОК"
+  },
+  "oneMonth": {
+    "message": "Один месяц"
+  },
+  "oneWeek": {
+    "message": "Одна неделя"
+  },
+  "openAllTabs": {
+    "message": "Открыть все вкладки"
+  },
+  "openMenu": {
+    "message": "Открыть меню"
+  },
+  "openTab": {
+    "message": "Открыть в новой вкладке"
+  },
+  "order": {
+    "message": "Порядок"
+  },
+  "otherOptions": {
+    "message": "Общие настройки"
+  },
+  "page": {
+    "message": "Страница"
+  },
+  "paths": {
+    "message": "Пути"
+  },
+  "permissionGranted": {
+    "message": "✓ Предоставлено"
+  },
+  "permissionMissing": {
+    "message": "✗ Отсутствует"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "Разрешения уже предоставлены"
+  },
+  "pleaseNote": {
+    "message": "Обратите внимание:"
+  },
+  "pleaseRateUs": {
+    "message": "Пожалуйста, оцените нас!"
+  },
+  "prefixesAutoRemoved": {
+    "message": "Префиксы, такие как 'http://', 'https://' и 'www.', будут удалены автоматически."
+  },
+  "prefixesRemoved": {
+    "message": "Префиксы, такие как 'http://', 'https://' и 'www.', удаляются автоматически"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "Добавить этот сайт в черный список для записи истории"
+  },
+  "privacyPolicy": {
+    "message": "Политика конфиденциальности"
+  },
+  "privacyTerms": {
+    "message": "Конфиденциальность и условия"
+  },
+  "processing": {
+    "message": "Обработка..."
+  },
+  "rateText": {
+    "message": "Ваш вклад помогает нам улучшать BetterHistory. Расскажите, как мы справились!"
+  },
+  "recent": {
+    "message": "Недавние посещения"
+  },
+  "recordedVisits": {
+    "message": "Зарегистрированные посещения этого домена"
+  },
+  "remove_url": {
+    "message": "Удалить этот URL из истории"
+  },
+  "result": {
+    "message": "Результат"
+  },
+  "results": {
+    "message": "Результаты"
+  },
+  "retentionPeriod": {
+    "message": "Срок хранения:"
+  },
+  "retentionPeriodHelp": {
+    "message": "Срок хранения определяет, как далеко в прошлое сохраняется ваша история просмотров. Более старая история будет доступна для очистки."
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "Пожалуйста, просмотрите свои настройки перед подтверждением."
+  },
+  "revokePermissions": {
+    "message": "Отозвать разрешения"
+  },
+  "rightTitle": {
+    "message": "Параметры контекстного меню"
+  },
+  "rtl": {
+    "message": "RTL (Справа налево)"
+  },
+  "saveSettings": {
+    "message": "Сохранить настройки"
+  },
+  "search": {
+    "message": "Поиск"
+  },
+  "searchDeeper": {
+    "message": "Искать глубже"
+  },
+  "searchDomainTitle": {
+    "message": "Поиск по домену"
+  },
+  "searchEngine": {
+    "message": "Поисковая система"
+  },
+  "searchMsg": {
+    "message": "Тсс... Попробуйте что-нибудь найти"
+  },
+  "searchPlaceholder": {
+    "message": "Поиск по заголовку или URL"
+  },
+  "searchTextTitle": {
+    "message": "Поиск по выделенному тексту"
+  },
+  "searchTips": {
+    "message": "Советы по поиску"
+  },
+  "searchTipsMsg1": {
+    "message": "Теперь поддерживается поиск по регулярным выражениям!"
+  },
+  "searchTipsMsg2": {
+    "message": "Например, попробуйте найти"
+  },
+  "searchTipsMsg3": {
+    "message": "Поиск посещений и загрузок"
+  },
+  "searchTipsMsg4": {
+    "message": "Поиск автоматически находит посещения по заголовку страницы и URL, а загрузки — по имени файла и URL."
+  },
+  "searchTipsMsg5": {
+    "message": "Ваши последние 10 000 посещений используются для быстрого, начального поиска. Чтобы искать глубже, перейдите в нижнюю часть последней страницы результатов и нажмите кнопку «Искать глубже»."
+  },
+  "searchToolDescription": {
+    "message": "Этот инструмент позволяет эффективно искать в истории просмотров с помощью простых ключевых слов или расширенных **регулярных выражений (RegEx)**. Ниже приведены несколько примеров, которые помогут вам начать:"
+  },
+  "search_history": {
+    "message": "Поиск в истории"
+  },
+  "searchedUrlDeleted": {
+    "message": "Найденные URL-адреса удалены"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "Найденные URL-адреса удалены, кроме доменов из белого списка"
+  },
+  "searching": {
+    "message": "Идет поиск"
+  },
+  "selectDateFormat": {
+    "message": "Формат даты"
+  },
+  "selectDateRange": {
+    "message": "Выберите диапазон дат"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "Выберите дату для удаления истории"
+  },
+  "selectEndDate": {
+    "message": "Выберите конечную дату"
+  },
+  "selectStartDate": {
+    "message": "Выберите начальную дату"
+  },
+  "selected": {
+    "message": "Выбрано"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "История за выбранную дату удалена"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "История за выбранную дату удалена, кроме доменов из белого списка"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "История за выбранный час удалена"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "История за выбранный час удалена, кроме доменов из белого списка"
+  },
+  "sessions": {
+    "message": "Сеансы"
+  },
+  "settings": {
+    "message": "Настройки"
+  },
+  "settingsSaved": {
+    "message": "Настройки сохранены"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "Ваши настройки умной автоочистки успешно обновлены."
+  },
+  "shortRetentionWarning": {
+    "message": "Установка короткого срока хранения в одну неделю означает, что ваша более старая история просмотров будет очищаться чаще. Убедитесь, что это соответствует вашим потребностям."
+  },
+  "show": {
+    "message": "Показать"
+  },
+  "showAllHistory": {
+    "message": "Показать всю историю"
+  },
+  "showStats": {
+    "message": "Показать статистику"
+  },
+  "small": {
+    "message": "Маленький"
+  },
+  "smartAutoCleanup": {
+    "message": "Умная автоочистка"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "Автоматически управляйте своей историей просмотров с помощью умной автоочистки. Выберите, как часто должна выполняться очистка и как долго должна сохраняться ваша недавняя история."
+  },
+  "smartAutoCleanupSettings": {
+    "message": "Настройки умной автоочистки"
+  },
+  "smartHistoryCleanup": {
+    "message": "Умная очистка истории"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "Очищает вашу историю просмотров, за исключением веб-сайтов, которые вы добавили в белый список. Эта функция помогает сохранить вашу активность конфиденциальной, сохраняя при этом важную историю с доверенных или часто используемых сайтов."
+  },
+  "socialMediaTip": {
+    "message": "Для сайтов социальных сетей рассмотрите возможность блокировки определенных разделов (facebook.com/marketplace/*)"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "Некоторые домены не удалось добавить:\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "Некоторые разрешения отсутствуют"
+  },
+  "specificPage": {
+    "message": "Определенная страница"
+  },
+  "specificPath": {
+    "message": "Определенный путь"
+  },
+  "specificSubdomain": {
+    "message": "Определенный поддомен"
+  },
+  "start": {
+    "message": "Начало"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>Начинается с:\u003C/strong> Используйте ^, чтобы найти записи, начинающиеся с определенного слова (например, ^Входящие)."
+  },
+  "startsWithInbox": {
+    "message": "Начинается с \"Входящие\""
+  },
+  "statsCleared": {
+    "message": "Статистика очищена"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "Отмена"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "Чтобы помочь вам отслеживать время, проведенное на веб-сайтах, просматривать детали сеанса и экспортировать отчеты о времени в формате PDF, нам требуется разрешение на доступ к вашей активности просмотра."
+  },
+  "statsPermissionDialogGrant": {
+    "message": "Предоставить разрешения"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "Мы внедрили новую функцию отслеживания времени в BetterHistory!"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "Требуется новое разрешение для отслеживания времени"
+  },
+  "subdomainNote": {
+    "message": "Добавление основного домена в белый список не приводит к автоматическому добавлению его поддоменов"
+  },
+  "subdomains": {
+    "message": "Поддомены"
+  },
+  "submit": {
+    "message": "Отправить"
+  },
+  "submitFeedback": {
+    "message": "Отправить отзыв"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "Ваши предложения и отзывы помогают нам улучшать BetterHistory и обеспечивать лучший пользовательский опыт."
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 или более символов"
+  },
+  "termsOfService": {
+    "message": "Условия предоставления услуг"
+  },
+  "thankYou": {
+    "message": "Спасибо!"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "Это действие нельзя отменить."
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "Этот URL-адрес или домен уже указан в черном списке доменов"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "Этот URL-адрес или домен уже указан в белом списке доменов"
+  },
+  "threeMonths": {
+    "message": "Три месяца"
+  },
+  "timeTrackingStartedOn": {
+    "message": "Отслеживание времени началось {{date}}"
+  },
+  "tips": {
+    "message": "Советы"
+  },
+  "title": {
+    "message": "Заголовок"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "Чтобы добавить каждую страницу домена и его поддоменов в черный список, напишите:"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "Чтобы добавить каждую страницу домена в черный список, напишите:"
+  },
+  "todalWords": {
+    "message": "Всего слов"
+  },
+  "today": {
+    "message": "Сегодня"
+  },
+  "toolbarIcon": {
+    "message": "Тема значка на панели инструментов"
+  },
+  "totalEntries": {
+    "message": "всего записей"
+  },
+  "totalVisits": {
+    "message": "Всего посещений"
+  },
+  "twoWeeks": {
+    "message": "Две недели"
+  },
+  "typdCount": {
+    "message": "Количество наборов"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "Введите любое ключевое слово, чтобы найти совпадающие записи."
+  },
+  "typeDeleteToConfirm": {
+    "message": "Введите \"delete\" для подтверждения:"
+  },
+  "typedCount": {
+    "message": "Набрано {{times}} раз в адресной строке"
+  },
+  "unableToLoadDomainStats": {
+    "message": "Не удалось загрузить статистику домена. Пожалуйста, попробуйте еще раз позже."
+  },
+  "understandSettings": {
+    "message": "Я понимаю эти настройки и то, как они повлияют на мою историю просмотров"
+  },
+  "understandYourRights": {
+    "message": "Ознакомьтесь со своими правами"
+  },
+  "uniqueUrls": {
+    "message": "уникальных URL"
+  },
+  "updatingData": {
+    "message": "Обновление данных..."
+  },
+  "uploadScreenShot": {
+    "message": "Загрузить снимок экрана"
+  },
+  "urlDeleted": {
+    "message": "URL-адрес удален"
+  },
+  "urlPatternGuide": {
+    "message": "Руководство по шаблонам URL"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "Вы можете использовать следующие шаблоны для блокировки веб-сайтов:"
+  },
+  "useSpecificPaths": {
+    "message": "Используйте определенные пути, чтобы добавить в белый список только некоторые разделы веб-сайта"
+  },
+  "viewHere": {
+    "message": "Посмотреть здесь"
+  },
+  "viewStats": {
+    "message": "Посмотреть статистику"
+  },
+  "viewStatsButton": {
+    "message": "Вы также увидите кнопку \"Посмотреть статистику\" рядом с каждой записью на странице \"Активность\" для быстрого доступа к подробным данным о времени"
+  },
+  "visitCount": {
+    "message": "Ссылка посещена {{times}} раз"
+  },
+  "visitSite": {
+    "message": "Посетить сайт"
+  },
+  "visits_domain": {
+    "message": "Посмотреть все посещения этого домена"
+  },
+  "vstCount": {
+    "message": "Количество посещений"
+  },
+  "weValueYourInputMessage": {
+    "message": "Мы ценим ваш вклад и готовы помочь вам!"
+  },
+  "websiteAccessDescription": {
+    "message": "• Доступ к веб-сайту (для мониторинга активности)"
+  },
+  "websites": {
+    "message": "Веб-сайты"
+  },
+  "weeklyEverySunday": {
+    "message": "Еженедельно (каждое воскресенье)"
+  },
+  "whatThisMeans": {
+    "message": "Что это означает:"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "Какие шаблоны URL-адресов разрешены?"
+  },
+  "whenBrowserCloses": {
+    "message": "При закрытии браузера"
+  },
+  "whenShouldCleanupRun": {
+    "message": "Когда должна выполняться умная автоочистка?"
+  },
+  "whitelist": {
+    "message": "Белый список"
+  },
+  "whitelistDomain": {
+    "message": "Домен в белом списке"
+  },
+  "whitelistDomains": {
+    "message": "Домены в белом списке"
+  },
+  "whitelistExactDomain": {
+    "message": "Добавляет в белый список только точный домен, а не поддомены или определенные пути."
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "Добавляет в белый список основной домен и все его поддомены (mail.example.com, blog.example.com и т. д.)."
+  },
+  "whitelistPatterns": {
+    "message": "Вы можете использовать следующие шаблоны для белого списка:"
+  },
+  "whitelistPrecedence": {
+    "message": "Домены из белого списка имеют приоритет над доменами из черного списка"
+  },
+  "whitelistSpecificPage": {
+    "message": "Добавляет в белый список только определенную страницу на домене."
+  },
+  "whitelistSpecificPath": {
+    "message": "Добавляет в белый список все страницы по определенному пути на домене."
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "Добавляет в белый список только определенный поддомен, а не основной домен или другие поддомены."
+  },
+  "whitelistedDomains": {
+    "message": "Домены в белом списке"
+  },
+  "wildcardWarning": {
+    "message": "Используйте подстановочный знак (*) осторожно, так как он может заблокировать больше, чем предполагалось"
+  },
+  "yesterday": {
+    "message": "Вчера"
+  }
+}

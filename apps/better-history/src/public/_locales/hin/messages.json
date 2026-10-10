@@ -1,0 +1,1247 @@
+{
+  "appName": {
+    "message": "Better History | इतिहास प्रबंधित करें, निर्यात करें और हटाएँ"
+  },
+  "manifest_description": {
+    "message": "स्मार्ट इतिहास प्रबंधक: शक्तिशाली खोज, थोक निर्यात, कस्टम चयनित हटाना, दिन और घंटे के अनुसार फ़िल्टर करना, और इतिहास से विशिष्ट डोमेन को ब्लॉक करना।"
+  },
+  "history": {
+    "message": "इतिहास"
+  },
+  "activity": {
+    "message": "गतिविधि"
+  },
+  "devices": {
+    "message": "डिवाइस"
+  },
+  "searchEngine": {
+    "message": "खोज इंजन"
+  },
+  "about": {
+    "message": "हमारे बारे में"
+  },
+  "feedback": {
+    "message": "प्रतिक्रिया"
+  },
+  "search": {
+    "message": "खोजें"
+  },
+  "contact": {
+    "message": "संपर्क"
+  },
+  "darkMode": {
+    "message": "डार्क मोड"
+  },
+  "settings": {
+    "message": "सेटिंग्स"
+  },
+  "today": {
+    "message": "आज"
+  },
+  "yesterday": {
+    "message": "कल"
+  },
+  "Today": {
+    "message": "आज"
+  },
+  "Yesterday": {
+    "message": "कल"
+  },
+  "Saturday": {
+    "message": "शनिवार"
+  },
+  "Sunday": {
+    "message": "रविवार"
+  },
+  "Monday": {
+    "message": "सोमवार"
+  },
+  "Tuesday": {
+    "message": "मंगलवार"
+  },
+  "Wednesday": {
+    "message": "बुधवार"
+  },
+  "Thursday": {
+    "message": "गुरुवार"
+  },
+  "Friday": {
+    "message": "शुक्रवार"
+  },
+  "searchPlaceholder": {
+    "message": "शीर्षक या URL खोजें"
+  },
+  "moreFromSite": {
+    "message": "इस साइट से अधिक"
+  },
+  "clearingHistory": {
+    "message": "इतिहास प्रबंधन"
+  },
+  "clearHistory": {
+    "message": "इतिहास साफ़ करें"
+  },
+  "rightTitle": {
+    "message": "संदर्भ मेनू विकल्प"
+  },
+  "searchTextTitle": {
+    "message": "पाठ चयन द्वारा खोजें"
+  },
+  "searchDomainTitle": {
+    "message": "डोमेन द्वारा खोजें"
+  },
+  "otherOptions": {
+    "message": "सामान्य प्राथमिकताएँ"
+  },
+  "openTab": {
+    "message": "नए टैब में खोलें"
+  },
+  "openAllTabs": {
+    "message": "सभी टैब खोलें"
+  },
+  "results": {
+    "message": "परिणाम"
+  },
+  "delete": {
+    "message": "हटाएँ"
+  },
+  "searchTips": {
+    "message": "खोज सुझाव"
+  },
+  "searching": {
+    "message": "खोज रहे हैं"
+  },
+  "searchMsg": {
+    "message": "फुसफुसाहट... कुछ खोजने की कोशिश करें"
+  },
+  "deleteMsg": {
+    "message": "सभी खोज परिणाम हटाएँ?"
+  },
+  "cancel": {
+    "message": "रद्द करें"
+  },
+  "ok": {
+    "message": "ठीक है"
+  },
+  "export": {
+    "message": "निर्यात करें"
+  },
+  "searchTipsMsg1": {
+    "message": "नियमित अभिव्यक्ति (Regular expression) खोज अब समर्थित है!"
+  },
+  "searchTipsMsg2": {
+    "message": "उदाहरण के लिए, खोजने का प्रयास करें"
+  },
+  "searchTipsMsg3": {
+    "message": "विज़िट और डाउनलोड खोजें"
+  },
+  "searchTipsMsg4": {
+    "message": "खोज स्वचालित रूप से पृष्ठ शीर्षक और URL द्वारा विज़िट, और फ़ाइल नाम और URL द्वारा डाउनलोड खोजेगी।"
+  },
+  "searchTipsMsg5": {
+    "message": "आपके अंतिम 10,000 विज़िट का उपयोग त्वरित, प्रारंभिक खोज के लिए किया जाता है। गहराई से खोजने के लिए, परिणामों के अंतिम पृष्ठ के निचले भाग पर जाएँ और 'गहराई से खोजें' बटन पर क्लिक करें।"
+  },
+  "searchDeeper": {
+    "message": "गहराई से खोजें"
+  },
+  "deleteAllFromDate": {
+    "message": "क्या आप **{{date}}** के लिए सभी ब्राउज़िंग इतिहास को स्थायी रूप से हटाना चाहते हैं?<br>यह उस दिन के सभी रिकॉर्ड हटा देगा। एक बार हटाए जाने के बाद, इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।"
+  },
+  "deleteAllForHour": {
+    "message": "क्या आप **{{startHour}}** के लिए सभी ब्राउज़िंग इतिहास को स्थायी रूप से हटाना चाहते हैं?<br>यह पूरे घंटे ({{startAndendHour}}) के ब्राउज़िंग इतिहास को हटा देगा। एक बार हटाए जाने के बाद, इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।"
+  },
+  "deleteAllSearchHistory": {
+    "message": "क्या आप इस पृष्ठ पर सूचीबद्ध सभी खोजे गए ब्राउज़िंग इतिहास प्रविष्टियों को स्थायी रूप से हटाना चाहते हैं?<br/>यह कार्रवाई वर्तमान खोज परिणामों में प्रदर्शित सभी प्रविष्टियों को हटा देगी। एक बार हटाए जाने के बाद, इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "इस साइट के लिए सभी इतिहास हटाएँ"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "इतिहास रिकॉर्ड करने से इस साइट को ब्लैकलिस्ट करें"
+  },
+  "noVisits": {
+    "message": "क्षमा करें, कोई विज़िट नहीं मिली।"
+  },
+  "noDevices": {
+    "message": "कोई सक्रिय डिवाइस सत्र नहीं मिला।"
+  },
+  "visits_domain": {
+    "message": "इस डोमेन के सभी विज़िट देखें"
+  },
+  "find_all_visits_domain": {
+    "message": "{{d}} के सभी विज़िट खोजें"
+  },
+  "search_history": {
+    "message": "इतिहास में खोजें"
+  },
+  "manifest_browser_action_title": {
+    "message": "इतिहास ब्राउज़ करें"
+  },
+  "infinityScroll": {
+    "message": "अनंत स्क्रॉल सक्षम करें"
+  },
+  "hourFormat": {
+    "message": "समय प्रारूप"
+  },
+  "hours": {
+    "message": "घंटे"
+  },
+  "toolbarIcon": {
+    "message": "टूलबार आइकन थीम"
+  },
+  "default": {
+    "message": "डिफ़ॉल्ट"
+  },
+  "lightMode": {
+    "message": "लाइट मोड"
+  },
+  "visitCount": {
+    "message": "लिंक पर {{times}} बार विज़िट किया गया"
+  },
+  "typedCount": {
+    "message": "एड्रेस बार में {{times}} बार टाइप किया गया"
+  },
+  "remove_url": {
+    "message": "इतिहास से यह URL हटाएँ"
+  },
+  "current": {
+    "message": "इस साइट से"
+  },
+  "recent": {
+    "message": "हाल की विज़िट"
+  },
+  "showAllHistory": {
+    "message": "सभी इतिहास दिखाएँ"
+  },
+  "interfaceStyle": {
+    "message": "प्रदर्शन सेटिंग्स"
+  },
+  "small": {
+    "message": "छोटा"
+  },
+  "medium": {
+    "message": "मध्यम"
+  },
+  "large": {
+    "message": "बड़ा"
+  },
+  "selectDateFormat": {
+    "message": "दिनांक प्रारूप"
+  },
+  "enable_popup": {
+    "message": "पॉपअप सक्षम करें"
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "exportCsv": {
+    "message": "CSV निर्यात करें"
+  },
+  "exportSelectedCsv": {
+    "message": "चयनित CSV निर्यात करें"
+  },
+  "exportHtml": {
+    "message": "HTML निर्यात करें"
+  },
+  "exportSelectedHtml": {
+    "message": "चयनित HTML निर्यात करें"
+  },
+  "deleteSelectedHistory": {
+    "message": "चयनित इतिहास हटाएँ"
+  },
+  "deleteBulk": {
+    "message": "हटाएँ"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "इतिहास हटाने के लिए दिनांक चुनें"
+  },
+  "deleteSpecificDate": {
+    "message": "विशिष्ट दिनांक हटाएँ"
+  },
+  "deleteEntireHistory": {
+    "message": "पूरा इतिहास हटाएँ"
+  },
+  "addToBlackList": {
+    "message": "ब्लैकलिस्ट में जोड़ें"
+  },
+  "blacklistDomain": {
+    "message": "डोमेन ब्लैकलिस्ट करें"
+  },
+  "blacklist": {
+    "message": "ब्लैकलिस्ट"
+  },
+  "blacklistDomains": {
+    "message": "ब्लैकलिस्ट डोमेन"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "इतिहास से डोमेन ब्लैकलिस्ट करें"
+  },
+  "blacklist_confirmation": {
+    "message": "क्या आप अपने ब्राउज़िंग इतिहास से **{{DOMAIN}}** को ब्लैकलिस्ट करना चाहते हैं?<br/>इस डोमेन के भविष्य के विज़िट अब रिकॉर्ड नहीं किए जाएंगे, और **{{DOMAIN}}** के लिए सभी मौजूदा इतिहास प्रविष्टियाँ हटा दी जाएंगी।"
+  },
+  "blacklist_domain_already_present": {
+    "message": "<strong>{{DOMAIN}}</strong> पहले से ही ब्लैकलिस्ट में है।"
+  },
+  "enterDomainName": {
+    "message": "डोमेन नाम दर्ज करें"
+  },
+  "add": {
+    "message": "जोड़ें"
+  },
+  "deleteEntire": {
+    "message": "पूरा दिनांक हटाएँ"
+  },
+  "enterAValidDomain": {
+    "message": "एक वैध डोमेन दर्ज करें"
+  },
+  "clear": {
+    "message": "साफ़ करें"
+  },
+  "confirmDelete": {
+    "message": "हटाने की पुष्टि करें"
+  },
+  "deletedSelectedHistory": {
+    "message": "क्या आप {{selectedNumber}} चयनित इतिहास प्रविष्टियों को स्थायी रूप से हटाना चाहते हैं?<br/>यह कार्रवाई सभी {{selectedNumber}} चयनित प्रविष्टियों को स्थायी रूप से हटा देगी। एक बार हटाए जाने के बाद, इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "कौन से URL पैटर्न की अनुमति है?"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "किसी डोमेन के हर पृष्ठ को ब्लैकलिस्ट करने के लिए, लिखें:"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "किसी डोमेन और उसके सबडोमेन के हर पृष्ठ को ब्लैकलिस्ट करने के लिए, लिखें:"
+  },
+  "FeedbackSuccessAlert": {
+    "message": "धन्यवाद! आपकी प्रतिक्रिया सफलतापूर्वक सबमिट कर दी गई है।"
+  },
+  "WhatCanWeImprove": {
+    "message": "हम क्या सुधार सकते हैं?"
+  },
+  "todalWords": {
+    "message": "कुल शब्द"
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "कृपया अपनी सबमिशन पर अनुवर्ती कार्रवाई के लिए अपना ईमेल प्रदान करें।"
+  },
+  "generalContact": {
+    "message": "सामान्य संपर्क"
+  },
+  "featureRequest": {
+    "message": "फ़ीचर अनुरोध"
+  },
+  "bugReport": {
+    "message": "बग रिपोर्ट"
+  },
+  "FeedBackTextarePlaceholder": {
+    "message": "कृपया वर्णन करें कि हम क्या जोड़ सकते हैं या सुधार सकते हैं।"
+  },
+  "uploadScreenShot": {
+    "message": "स्क्रीनशॉट अपलोड करें"
+  },
+  "maxSize": {
+    "message": "अधिकतम आकार"
+  },
+  "email": {
+    "message": "ईमेल"
+  },
+  "submitFeedback": {
+    "message": "प्रतिक्रिया सबमिट करें"
+  },
+  "noFileSelectedMessage": {
+    "message": "कोई फ़ाइल चयनित नहीं है। कृपया एक वैध फ़ाइल अपलोड करें।"
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "फ़ाइल का आकार 5MB से अधिक है। कृपया एक छोटी फ़ाइल अपलोड करें।"
+  },
+  "invalidFileTypeMessage": {
+    "message": "अवैध फ़ाइल प्रकार। कृपया एक JPG या PNG छवि अपलोड करें।"
+  },
+  "betterHistoryDescription": {
+    "message": "<span class=\"font-bold\">{{betterHistory}}</span> <span class=\"font-bold\">BetterLogic Ltd</span> द्वारा विकसित एक अभिनव ब्राउज़र एक्सटेंशन है। यह उपयोगकर्ताओं को कस्टम विलोपन, सटीक फ़िल्टर और एक सहज ज्ञान युक्त इंटरफ़ेस जैसी उन्नत सुविधाएँ प्रदान करके आसानी से अपने ब्राउज़िंग इतिहास का प्रबंधन करने का अधिकार देता है। BetterLogic Ltd में, हम आपके ब्राउज़िंग अनुभव को बेहतर बनाने के लिए उपयोगकर्ता की गोपनीयता और निर्बाध कार्यक्षमता को प्राथमिकता देते हैं।"
+  },
+  "exploreOurProducts": {
+    "message": "हमारे उत्पाद खोजें"
+  },
+  "contactAndFeedback": {
+    "message": "संपर्क और प्रतिक्रिया"
+  },
+  "weValueYourInputMessage": {
+    "message": "हम आपके इनपुट को महत्व देते हैं और आपकी सहायता के लिए यहाँ हैं!"
+  },
+  "emailSupport": {
+    "message": "ईमेल समर्थन"
+  },
+  "feedbackForm": {
+    "message": "प्रतिक्रिया फॉर्म"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "आपके सुझाव और प्रतिक्रिया हमें BetterHistory को बेहतर बनाने और सर्वोत्तम उपयोगकर्ता अनुभव प्रदान करने में मदद करते हैं।"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "मुझे बताएं कि क्या आपको अतिरिक्त समायोजन की आवश्यकता है।"
+  },
+  "privacyTerms": {
+    "message": "गोपनीयता और शर्तें"
+  },
+  "understandYourRights": {
+    "message": "अपने अधिकार समझें"
+  },
+  "privacyPolicy": {
+    "message": "गोपनीयता नीति"
+  },
+  "viewHere": {
+    "message": "यहाँ देखें"
+  },
+  "termsOfService": {
+    "message": "सेवा की शर्तें"
+  },
+  "howToUseTheSearchTool": {
+    "message": "खोज टूल का उपयोग कैसे करें"
+  },
+  "searchToolDescription": {
+    "message": "यह टूल आपको सरल कीवर्ड या उन्नत **नियमित अभिव्यक्ति (RegEx)** का उपयोग करके अपने ब्राउज़िंग इतिहास को प्रभावी ढंग से खोजने की अनुमति देता है। आरंभ करने में आपकी सहायता के लिए नीचे कुछ उदाहरण दिए गए हैं:"
+  },
+  "basicSearch": {
+    "message": "मूल खोज"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "मिलान प्रविष्टियाँ खोजने के लिए कोई भी कीवर्ड टाइप करें।"
+  },
+  "startsWithDescription": {
+    "message": "<strong>इससे शुरू होता है:</strong> उन प्रविष्टियों को खोजने के लिए ^ का उपयोग करें जो एक विशिष्ट शब्द से शुरू होती हैं (उदाहरण के लिए, ^Inbox)।"
+  },
+  "containsMultipleWordsDescription": {
+    "message": "<strong>कई शब्द शामिल हैं:</strong> उन प्रविष्टियों को खोजने के लिए <code>{{pipe}}</code> का उपयोग करें जिनमें कई शब्दों में से एक शामिल है (उदाहरण के लिए, <code>{{example}}</code>)।"
+  },
+  "numbersOnlyDescription": {
+    "message": "<strong>केवल संख्याएँ:</strong> संख्याओं वाली प्रविष्टियों को खोजने के लिए <code>{{pattern}}</code> का उपयोग करें।"
+  },
+  "caseSensitivityDescription": {
+    "message": "<strong>केस संवेदनशीलता:</strong> खोजें डिफ़ॉल्ट रूप से केस-असंवेदनशील होती हैं।"
+  },
+  "basicSearchDescription": {
+    "message": "<strong>{{basicSearch}}:</strong> मिलान प्रविष्टियाँ खोजने के लिए कोई भी कीवर्ड टाइप करें (उदाहरण के लिए, \"Inbox\")।"
+  },
+  "startsWithInbox": {
+    "message": "\"Inbox\" से शुरू होता है"
+  },
+  "containsNewsOrInfo": {
+    "message": "\"News\" या \"Info\" शामिल है"
+  },
+  "containsNumbers": {
+    "message": "संख्याएँ शामिल हैं"
+  },
+  "allCapitalLetters": {
+    "message": "सभी बड़े अक्षर"
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 या अधिक वर्ण"
+  },
+  "exactWordProject": {
+    "message": "सटीक शब्द \"Project\""
+  },
+  "containsSpaces": {
+    "message": "रिक्त स्थान शामिल हैं"
+  },
+  "containsDotCom": {
+    "message": "\".com\" शामिल है"
+  },
+  "endsWithQuestionMark": {
+    "message": "\"?\" से समाप्त होता है"
+  },
+  "containsTODO": {
+    "message": "\"TODO\" शामिल है"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "मैं <a href=\"https://betterhistory.io/privacy/\" target=\"_blank\"><span class=\"font-bold\">गोपनीयता नीति</span></a> और डेटा प्रसंस्करण स्वीकार करता हूँ।"
+  },
+  "contactLimitReached": {
+    "message": "आप आज के लिए अपनी संपर्क सीमा पहले ही पहुँच चुके हैं।"
+  },
+  "noMoreResults": {
+    "message": "और कोई परिणाम नहीं"
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "<strong>{{DOMAIN}}</strong> एक वैध डोमेन नहीं है। कृपया ब्लैकलिस्ट में जोड़ने के लिए एक वैध डोमेन का उपयोग करें।"
+  },
+  "noResultsFound": {
+    "message": "कोई परिणाम नहीं मिला। अपने खोज शब्दों या फ़िल्टर को समायोजित करने का प्रयास करें।"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "कृपया प्रतिक्रिया सबमिट करने के लिए एक्सेस की अनुमति दें"
+  },
+  "howDidWeDo": {
+    "message": "हमने कैसा किया?"
+  },
+  "rateText": {
+    "message": "आपका इनपुट BetterHistory को बेहतर बनाने में हमारी मदद करता है। हमें बताएं कि हमने कैसा किया!"
+  },
+  "submit": {
+    "message": "सबमिट करें"
+  },
+  "noThanks": {
+    "message": "नहीं, धन्यवाद"
+  },
+  "thankYou": {
+    "message": "धन्यवाद!"
+  },
+  "ThanksForFeedBack": {
+    "message": "आपकी प्रतिक्रिया के लिए धन्यवाद!"
+  },
+  "emailArticle": {
+    "message": "समर्थन लेख"
+  },
+  "emailArticleDesc": {
+    "message": "<span class=\"font-bold\">{{emailArticle}}: </span><a href=\"https://betterhistory.io/support/\" target=\"_blank\"><span class=\"font-bold text-[#6886AB] hover:underline\">BetterHistory समर्थन</span></a> पर हमारे समर्थन गाइड और अक्सर पूछे जाने वाले प्रश्न ब्राउज़ करें।"
+  },
+  "blacklistInstructionText": {
+    "message": "BetterHistory में डोमेन ब्लैकलिस्ट सुविधा आपको विशिष्ट वेबसाइटों को आपके ब्राउज़िंग इतिहास में रिकॉर्ड होने से ब्लॉक करने की अनुमति देती है। एक बार जब कोई डोमेन ब्लैकलिस्ट हो जाता है, तो उस साइट के सभी पिछले और भविष्य के विज़िट स्वचालित रूप से हटा दिए जाएंगे।"
+  },
+  "pleaseRateUs": {
+    "message": "कृपया हमें रेट करें!"
+  },
+  "enterDomain": {
+    "message": "वह डोमेन दर्ज करें जिसे आप इतिहास से बाहर करना चाहते हैं"
+  },
+  "emailSupportDescription": {
+    "message": "<span class=\"font-bold\">{{emailSupport}}:</span> किसी भी प्रश्न या समस्या के लिए, हमसे 📧 <a href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io</a> पर संपर्क करें।"
+  },
+  "feedbackFormDescription": {
+    "message": "<span class=\"font-bold\">{{feedbackForm}}:</span> <span class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">अपनी प्रतिक्रिया सबमिट करने के लिए यहां क्लिक करें</span>"
+  },
+  "historyControlsFor": {
+    "message": "इसके लिए इतिहास नियंत्रण"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exportHistory": {
+    "message": "अपना पूरा ब्राउज़िंग इतिहास निर्यात करें"
+  },
+  "exportHistoryDescription": {
+    "message": "यह सुविधा आपको अपना पूरा ब्राउज़िंग इतिहास (90 दिनों तक) निर्यात करने या निर्यात के लिए एक कस्टम दिनांक सीमा चुनने की अनुमति देती है। कृपया ध्यान दें कि Chrome का इतिहास API केवल इतिहास के निर्यात का समर्थन करता है - यह इतिहास को वापस आयात करने की अनुमति नहीं देता है।"
+  },
+  "exportHistoryLimitation": {
+    "message": "इसके अतिरिक्त, Chrome स्वचालित रूप से 90 दिनों से अधिक पुराने इतिहास को हटा देता है, इसलिए BetterHistory केवल उन रिकॉर्डों को निर्यात कर सकता है जिन्हें Chrome बनाए रखता है।"
+  },
+  "entireExport": {
+    "message": "पूरा निर्यात (90 दिन)"
+  },
+  "customExport": {
+    "message": "कस्टम निर्यात"
+  },
+  "lastWeek": {
+    "message": "पिछले सप्ताह"
+  },
+  "lastMonth": {
+    "message": "पिछले माह"
+  },
+  "last3Months": {
+    "message": "पिछले 3 महीने"
+  },
+  "last2Months": {
+    "message": "पिछले 2 महीने"
+  },
+  "customRange": {
+    "message": "कस्टम रेंज"
+  },
+  "days": {
+    "message": "दिन"
+  },
+  "deleteUrlConfirm": {
+    "message": "क्या आप अपने इतिहास से <span class=\"font-bold break-words\">{{url}}</span> URL को हटाना चाहते हैं? इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।"
+  },
+  "deleteDomainConfirm": {
+    "message": "क्या आप **{{domain}}** डोमेन से सभी इतिहास को हटाना चाहते हैं? यह कार्रवाई सभी संबंधित प्रविष्टियों को हटा देगी और इसे पूर्ववत नहीं किया जा सकता है।"
+  },
+  "exportedHistoryKeyword": {
+    "message": "निर्यातित ब्राउज़िंग इतिहास - कीवर्ड:"
+  },
+  "exportedHistoryDate": {
+    "message": "निर्यातित ब्राउज़िंग इतिहास - दिनांक:"
+  },
+  "advanceExport": {
+    "message": "अग्रिम निर्यात"
+  },
+  "generatedUsing": {
+    "message": "यह दस्तावेज़ इसका उपयोग करके उत्पन्न किया गया था"
+  },
+  "show": {
+    "message": "दिखाएँ"
+  },
+  "entries": {
+    "message": "प्रविष्टियाँ"
+  },
+  "all": {
+    "message": "सभी"
+  },
+  "id": {
+    "message": "आईडी"
+  },
+  "title": {
+    "message": "शीर्षक"
+  },
+  "URL": {
+    "message": "URL"
+  },
+  "vstCount": {
+    "message": "विज़िट गणना"
+  },
+  "typdCount": {
+    "message": "टाइप की गई गणना"
+  },
+  "lastVisitTime": {
+    "message": "अंतिम विज़िट समय"
+  },
+  "page": {
+    "message": "पृष्ठ"
+  },
+  "of": {
+    "message": "का"
+  },
+  "totalEntries": {
+    "message": "कुल प्रविष्टियाँ"
+  },
+  "whitelistDomain": {
+    "message": "डोमेन व्हाइटलिस्ट करें"
+  },
+  "whitelist": {
+    "message": "व्हाइटलिस्ट"
+  },
+  "keepHistoryCheckText": {
+    "message": "उन वेबसाइटों से इतिहास रखें जिन्हें आपने अपनी व्हाइटलिस्ट में जोड़ा है"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "पूरा इतिहास हटाएँ?"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "क्या आप अपना पूरा ब्राउज़िंग इतिहास हटाना चाहते हैं? यह कार्रवाई स्थायी है और इसे पूर्ववत नहीं किया जा सकता है।"
+  },
+  "deleteHistory": {
+    "message": "इतिहास हटाएँ"
+  },
+  "smartHistoryCleanup": {
+    "message": "स्मार्ट इतिहास सफाई"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "उन वेबसाइटों को छोड़कर आपके ब्राउज़िंग इतिहास को साफ़ करता है जिन्हें आपने अपनी व्हाइटलिस्ट में जोड़ा है। यह सुविधा आपको विश्वसनीय या अक्सर उपयोग की जाने वाली साइटों से महत्वपूर्ण इतिहास को संरक्षित करते हुए आपकी गतिविधि को निजी रखने में मदद करती है।"
+  },
+  "enterDomainToWhitelist": {
+    "message": "व्हाइटलिस्ट करने के लिए डोमेन दर्ज करें (उदाहरण के लिए, example.com)"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "व्हाइटलिस्ट किए गए डोमेन को छोड़कर सभी इतिहास हटा दिया गया है"
+  },
+  "allHistoryDeleted": {
+    "message": "सभी इतिहास हटा दिया गया है"
+  },
+  "urlDeleted": {
+    "message": "URL हटा दिया गया है"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "सभी चयनित URL हटा दिए गए हैं"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "चयनित दिनांक इतिहास हटा दिया गया है"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "व्हाइटलिस्ट किए गए डोमेन को छोड़कर चयनित दिनांक इतिहास हटा दिया गया है"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "व्हाइटलिस्ट किए गए डोमेन को छोड़कर चयनित घंटे का इतिहास हटा दिया गया है"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "चयनित घंटे का इतिहास हटा दिया गया है"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "व्हाइटलिस्ट किए गए डोमेन को छोड़कर खोजे गए URL हटा दिए गए हैं"
+  },
+  "searchedUrlDeleted": {
+    "message": "खोजे गए URL हटा दिए गए हैं"
+  },
+  "dateAndTimeOrder": {
+    "message": "दिनांक और समय क्रम"
+  },
+  "ltr": {
+    "message": "LTR (बाएँ से दाएँ)"
+  },
+  "rtl": {
+    "message": "RTL (दाएँ से बाएँ)"
+  },
+  "whitelistedDomains": {
+    "message": "व्हाइटलिस्ट किए गए डोमेन"
+  },
+  "bulkAddDomains": {
+    "message": "एकमुश्त डोमेन जोड़ें"
+  },
+  "exportToCSV": {
+    "message": "CSV में निर्यात करें"
+  },
+  "exportToTXT": {
+    "message": "TXT में निर्यात करें"
+  },
+  "domainCannotBeEmpty": {
+    "message": "डोमेन खाली नहीं हो सकता"
+  },
+  "invalidDomainFormat": {
+    "message": "कृपया एक वैध डोमेन प्रारूप दर्ज करें (उदाहरण के लिए, example.com)"
+  },
+  "domainAlreadyExists": {
+    "message": "यह डोमेन पहले से ही आपकी सूची में है"
+  },
+  "urlPatternGuide": {
+    "message": "URL पैटर्न गाइड"
+  },
+  "basicDomain": {
+    "message": "मूल डोमेन"
+  },
+  "websites": {
+    "message": "वेबसाइटें"
+  },
+  "domainWithSubdomains": {
+    "message": "सभी सबडोमेन के साथ डोमेन"
+  },
+  "specificSubdomain": {
+    "message": "विशिष्ट सबडोमेन"
+  },
+  "specificPath": {
+    "message": "विशिष्ट पथ"
+  },
+  "specificPage": {
+    "message": "विशिष्ट पृष्ठ"
+  },
+  "tips": {
+    "message": "सुझाव"
+  },
+  "whitelistPrecedence": {
+    "message": "व्हाइटलिस्ट किए गए डोमेन को ब्लैकलिस्ट किए गए डोमेन पर प्राथमिकता मिलती है"
+  },
+  "useSpecificPaths": {
+    "message": "किसी वेबसाइट के केवल कुछ अनुभागों को व्हाइटलिस्ट करने के लिए विशिष्ट पथों का उपयोग करें"
+  },
+  "subdomainNote": {
+    "message": "किसी मुख्य डोमेन को व्हाइटलिस्ट करने से उसके सबडोमेन स्वचालित रूप से व्हाइटलिस्ट नहीं होते हैं"
+  },
+  "prefixesRemoved": {
+    "message": "'http://', 'https://', और 'www.' जैसे उपसर्ग स्वचालित रूप से हटा दिए जाते हैं"
+  },
+  "enterDomainPerLine": {
+    "message": "एक बार में अपनी व्हाइटलिस्ट में कई डोमेन जोड़ें। प्रति पंक्ति एक डोमेन दर्ज करें।"
+  },
+  "prefixesAutoRemoved": {
+    "message": "'http://', 'https://', और 'www.' जैसे उपसर्ग स्वचालित रूप से हटा दिए जाएंगे।"
+  },
+  "processing": {
+    "message": "प्रसंस्करण हो रहा है..."
+  },
+  "addDomains": {
+    "message": "डोमेन जोड़ें"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "कृपया कम से कम एक डोमेन दर्ज करें"
+  },
+  "domains": {
+    "message": "डोमेन"
+  },
+  "subdomains": {
+    "message": "सबडोमेन"
+  },
+  "paths": {
+    "message": "पथ"
+  },
+  "noDomains": {
+    "message": "अभी तक कोई डोमेन व्हाइटलिस्ट नहीं किया गया है"
+  },
+  "noDomainsType": {
+    "message": "आपकी व्हाइटलिस्ट में कोई {{type}} नहीं"
+  },
+  "clearBrowsingHistory": {
+    "message": "ब्राउज़िंग इतिहास साफ़ करें"
+  },
+  "clearHistoryConfirm": {
+    "message": "क्या आप अपना पूरा ब्राउज़िंग इतिहास हटाना चाहते हैं? यह कार्रवाई स्थायी है और इसे पूर्ववत नहीं किया जा सकता है।"
+  },
+  "typeDeleteToConfirm": {
+    "message": "पुष्टि करने के लिए \"delete\" टाइप करें:"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "उन वेबसाइटों से इतिहास रखें जिन्हें आपने अपनी व्हाइटलिस्ट में जोड़ा है"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "सफाई के दौरान व्हाइटलिस्ट किए गए डोमेन का इतिहास संरक्षित रहेगा"
+  },
+  "clearing": {
+    "message": "साफ़ किया जा रहा है..."
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "openMenu": {
+    "message": "मेनू खोलें"
+  },
+  "whitelistPatterns": {
+    "message": "आप व्हाइटलिस्ट करने के लिए निम्न पैटर्न का उपयोग कर सकते हैं:"
+  },
+  "whitelistExactDomain": {
+    "message": "केवल सटीक डोमेन को व्हाइटलिस्ट करता है, सबडोमेन या विशिष्ट पथों को नहीं।"
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "मुख्य डोमेन और उसके सभी सबडोमेन को व्हाइटलिस्ट करता है (mail.example.com, blog.example.com, आदि)।"
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "केवल एक विशिष्ट सबडोमेन को व्हाइटलिस्ट करता है, मुख्य डोमेन या अन्य सबडोमेन को नहीं।"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "whitelistSpecificPath": {
+    "message": "डोमेन पर एक विशिष्ट पथ के तहत सभी पृष्ठों को व्हाइटलिस्ट करता है।"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "whitelistSpecificPage": {
+    "message": "डोमेन पर केवल एक विशिष्ट पृष्ठ को व्हाइटलिस्ट करता है।"
+  },
+  "domainBlacklist": {
+    "message": "डोमेन ब्लैकलिस्ट"
+  },
+  "blacklistFeatureDescription": {
+    "message": "BetterHistory में डोमेन ब्लैकलिस्ट सुविधा आपको विशिष्ट वेबसाइटों को आपके ब्राउज़िंग इतिहास में रिकॉर्ड होने से ब्लॉक करने की अनुमति देती है। एक बार जब कोई डोमेन ब्लैकलिस्ट हो जाता है, तो उस साइट के सभी पिछले और भविष्य के विज़िट स्वचालित रूप से हटा दिए जाएंगे।"
+  },
+  "enterDomainToBlock": {
+    "message": "ब्लॉक करने के लिए डोमेन दर्ज करें (उदाहरण के लिए, example.com)"
+  },
+  "blacklistedDomains": {
+    "message": "ब्लैकलिस्ट किए गए डोमेन"
+  },
+  "noDomainBlacklisted": {
+    "message": "अभी तक कोई डोमेन ब्लैकलिस्ट नहीं किया गया है"
+  },
+  "noBlacklistType": {
+    "message": "आपकी ब्लैकलिस्ट में कोई {{type}} नहीं"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "आप वेबसाइटों को ब्लॉक करने के लिए निम्न पैटर्न का उपयोग कर सकते हैं:"
+  },
+  "blockExactDomain": {
+    "message": "केवल सटीक डोमेन को ब्लॉक करता है, सबडोमेन या विशिष्ट पथों को नहीं।"
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "मुख्य डोमेन और उसके सभी सबडोमेन को ब्लॉक करता है (mail.example.com, blog.example.com, आदि)।"
+  },
+  "blockSpecificSubdomain": {
+    "message": "केवल एक विशिष्ट सबडोमेन को ब्लॉक करता है, मुख्य डोमेन या अन्य सबडोमेन को नहीं।"
+  },
+  "blockSpecificPath": {
+    "message": "डोमेन पर एक विशिष्ट पथ के तहत सभी पृष्ठों को ब्लॉक करता है।"
+  },
+  "blockSpecificPage": {
+    "message": "डोमेन पर केवल एक विशिष्ट पृष्ठ को ब्लॉक करता है।"
+  },
+  "blacklistTips": {
+    "message": "सुझाव"
+  },
+  "wildcardWarning": {
+    "message": "वाइल्डकार्ड (*) का उपयोग सावधानी से करें क्योंकि यह इरादे से ज़्यादा ब्लॉक कर सकता है"
+  },
+  "socialMediaTip": {
+    "message": "सोशल मीडिया साइटों के लिए, विशिष्ट अनुभागों को ब्लॉक करने पर विचार करें (facebook.com/marketplace/*)"
+  },
+  "mainDomainNote": {
+    "message": "किसी मुख्य डोमेन को ब्लॉक करने से उसके सबडोमेन स्वचालित रूप से ब्लॉक नहीं होते हैं"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "एक बार में अपनी ब्लैकलिस्ट में कई डोमेन जोड़ें। प्रति पंक्ति एक डोमेन दर्ज करें।"
+  },
+  "enterValidDomain": {
+    "message": "कृपया कम से कम एक वैध डोमेन दर्ज करें"
+  },
+  "invalidDomainFormatLine": {
+    "message": "पंक्ति ${index + 1}: अवैध डोमेन प्रारूप (${line})"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "पंक्ति ${index + 1}: डोमेन पहले से मौजूद है (${cleanedDomain})"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "कुछ डोमेन जोड़े नहीं जा सके:\n${errors}"
+  },
+  "domainStats": {
+    "message": "डोमेन आँकड़े"
+  },
+  "visitSite": {
+    "message": "साइट पर जाएँ"
+  },
+  "last7Days": {
+    "message": "7 दिन"
+  },
+  "last15Days": {
+    "message": "15 दिन"
+  },
+  "last30Days": {
+    "message": "30 दिन"
+  },
+  "last60Days": {
+    "message": "60 दिन"
+  },
+  "last90Days": {
+    "message": "90 दिन"
+  },
+  "custom": {
+    "message": "कस्टम"
+  },
+  "selectDateRange": {
+    "message": "दिनांक सीमा चुनें"
+  },
+  "chooseStartAndEndDates": {
+    "message": "शुरुआत और समाप्ति की तारीखें चुनें"
+  },
+  "selected": {
+    "message": "चयनित"
+  },
+  "start": {
+    "message": "प्रारंभ"
+  },
+  "selectEndDate": {
+    "message": "समाप्ति तिथि चुनें"
+  },
+  "selectStartDate": {
+    "message": "प्रारंभ तिथि चुनें"
+  },
+  "clr": {
+    "message": "साफ़ करें"
+  },
+  "apply": {
+    "message": "लागू करें"
+  },
+  "sessions": {
+    "message": "सत्र"
+  },
+  "noActivityData": {
+    "message": "इस अवधि के लिए कोई गतिविधि डेटा नहीं"
+  },
+  "updatingData": {
+    "message": "डेटा अपडेट किया जा रहा है..."
+  },
+  "importJSON": {
+    "message": "JSON आयात करें"
+  },
+  "exportAsPDF": {
+    "message": "PDF के रूप में निर्यात करें"
+  },
+  "exportAsJSON": {
+    "message": "JSON के रूप में निर्यात करें"
+  },
+  "smartAutoCleanupSettings": {
+    "message": "स्मार्ट ऑटो सफाई सेटिंग्स"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "स्मार्ट ऑटो सफाई के साथ अपने ब्राउज़िंग इतिहास को स्वचालित रूप से प्रबंधित करें। चुनें कि सफाई कितनी बार चलनी चाहिए और आपका हालिया इतिहास कितने समय तक बरकरार रखा जाना चाहिए।"
+  },
+  "whenShouldCleanupRun": {
+    "message": "स्मार्ट ऑटो सफाई कब चलनी चाहिए?"
+  },
+  "autoCleanupDisabled": {
+    "message": "ऑटो-सफाई अक्षम है। जरूरत पड़ने पर आप अभी भी मैन्युअल रूप से इतिहास साफ़ कर सकते हैं।"
+  },
+  "autoCleanupEnabled": {
+    "message": "आपका ब्राउज़िंग इतिहास चयनित शेड्यूल के आधार पर स्वचालित रूप से साफ़ किया जाएगा।"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "ऑटो सफाई के बारे में और जानें"
+  },
+  "autoCleanupHelp": {
+    "message": "स्वचालित सफाई आपकी प्राथमिकताओं के अनुसार ब्राउज़िंग इतिहास को नियमित रूप से हटाकर आपकी गोपनीयता बनाए रखने में मदद करती है।"
+  },
+  "neverDisabled": {
+    "message": "कभी नहीं (अक्षम)"
+  },
+  "dailyAtMidnight": {
+    "message": "रोज़ाना (आधी रात को)"
+  },
+  "weeklyEverySunday": {
+    "message": "साप्ताहिक (हर रविवार)"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "मासिक (हर महीने की 1 तारीख को)"
+  },
+  "whenBrowserCloses": {
+    "message": "जब ब्राउज़र बंद होता है"
+  },
+  "howLongKeepHistory": {
+    "message": "आपके ब्राउज़िंग इतिहास को स्वचालित विलोपन के लिए पात्र होने से पहले कितने समय तक रखा जाना चाहिए?"
+  },
+  "historyRetentionHelp": {
+    "message": "इस चयनित समय सीमा के भीतर का इतिहास संरक्षित रहेगा और स्वचालित सफाई से बाहर रखा जाएगा।"
+  },
+  "learnMoreAboutRetention": {
+    "message": "प्रतिधारण अवधि के बारे में और जानें"
+  },
+  "retentionPeriodHelp": {
+    "message": "प्रतिधारण अवधि निर्धारित करती है कि आपका ब्राउज़िंग इतिहास कितनी दूर तक संरक्षित है। पुराना इतिहास सफाई के लिए पात्र होगा।"
+  },
+  "oneWeek": {
+    "message": "एक सप्ताह"
+  },
+  "twoWeeks": {
+    "message": "दो सप्ताह"
+  },
+  "oneMonth": {
+    "message": "एक महीना"
+  },
+  "threeMonths": {
+    "message": "तीन महीने"
+  },
+  "shortRetentionWarning": {
+    "message": "एक सप्ताह की छोटी प्रतिधारण अवधि निर्धारित करने का मतलब है कि आपका पुराना ब्राउज़िंग इतिहास अधिक बार साफ़ किया जाएगा। सुनिश्चित करें कि यह आपकी आवश्यकताओं के अनुरूप है।"
+  },
+  "saveSettings": {
+    "message": "सेटिंग्स सहेजें"
+  },
+  "noChangesToSave": {
+    "message": "सहेजने के लिए कोई बदलाव नहीं"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "स्मार्ट ऑटो सफाई सेटिंग्स की पुष्टि करें"
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "पुष्टि करने से पहले कृपया अपनी सेटिंग्स की समीक्षा करें।"
+  },
+  "autoCleanupSchedule": {
+    "message": "ऑटो सफाई शेड्यूल:"
+  },
+  "retentionPeriod": {
+    "message": "प्रतिधारण अवधि:"
+  },
+  "whatThisMeans": {
+    "message": "इसका क्या मतलब है:"
+  },
+  "understandSettings": {
+    "message": "मैं इन सेटिंग्स को समझता हूँ और वे मेरे ब्राउज़िंग इतिहास को कैसे प्रभावित करेंगी"
+  },
+  "confirmAndSave": {
+    "message": "पुष्टि करें और सहेजें"
+  },
+  "settingsSaved": {
+    "message": "सेटिंग्स सहेजी गईं"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "आपकी स्मार्ट ऑटो सफाई सेटिंग्स सफलतापूर्वक अपडेट कर दी गई हैं।"
+  },
+  "errorLoadingSettings": {
+    "message": "सेटिंग्स लोड करने में त्रुटि। डिफ़ॉल्ट मानों का उपयोग किया जा रहा है।"
+  },
+  "errorSavingSettings": {
+    "message": "सेटिंग्स सहेजने में विफल। कृपया पुन: प्रयास करें।"
+  },
+  "loadingSettings": {
+    "message": "सेटिंग्स लोड हो रही हैं..."
+  },
+  "errorLoadingData": {
+    "message": "डेटा लोड करने में त्रुटि"
+  },
+  "unableToLoadDomainStats": {
+    "message": "डोमेन आँकड़े लोड करने में असमर्थ। कृपया बाद में पुन: प्रयास करें।"
+  },
+  "groupSession": {
+    "message": "समूह सत्र"
+  },
+  "uniqueUrls": {
+    "message": "अद्वितीय URL"
+  },
+  "recordedVisits": {
+    "message": "इस डोमेन के रिकॉर्ड किए गए विज़िट"
+  },
+  "mostActiveDay": {
+    "message": "सबसे सक्रिय दिन"
+  },
+  "totalVisits": {
+    "message": "कुल विज़िट"
+  },
+  "allTime": {
+    "message": "हर समय"
+  },
+  "avgPerDay": {
+    "message": "औसत {{time}} प्रति दिन"
+  },
+  "smartAutoCleanup": {
+    "message": "स्मार्ट ऑटो सफाई"
+  },
+  "exportLocalData": {
+    "message": "स्थानीय डेटा निर्यात करें"
+  },
+  "whitelistDomains": {
+    "message": "व्हाइटलिस्ट डोमेन"
+  },
+  "clearStats": {
+    "message": "आँकड़े साफ़ करें"
+  },
+  "viewStats": {
+    "message": "आँकड़े देखें"
+  },
+  "showStats": {
+    "message": "आँकड़े दिखाएँ"
+  },
+  "Popup": {
+    "message": "पॉपअप"
+  },
+  "Sidebar": {
+    "message": "साइडबार"
+  },
+  "exportEntireLocalData": {
+    "message": "संपूर्ण स्थानीय डेटा निर्यात करें"
+  },
+  "importEntireLocalData": {
+    "message": "स्थानीय डेटा आयात करें"
+  },
+  "import": {
+    "message": "आयात करें"
+  },
+  "importSuccessful": {
+    "message": "डेटा सफलतापूर्वक आयात किया गया"
+  },
+  "importFailed": {
+    "message": "डेटा आयात करने में विफल"
+  },
+  "exportTimeTrackingData": {
+    "message": "समय ट्रैकिंग डेटा निर्यात करें"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "यह आपका स्थानीय रूप से संग्रहीत समय ट्रैकिंग डेटा है जिसे आप व्यक्तिगत उपयोग के लिए निर्यात कर सकते हैं। यह आपके विज़िट किए गए पृष्ठों पर बिताए गए समय को दर्शाता है, जिससे आपको अपनी ब्राउज़िंग आदतों का विश्लेषण करने में मदद मिलती है।"
+  },
+  "pleaseNote": {
+    "message": "कृपया ध्यान दें:"
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "यह डेटा केवल आपके ब्राउज़र में सहेजा जाता है और ऑनलाइन सिंक या संग्रहीत नहीं होता है। BetterHistory एक्सटेंशन को हटाने से सभी समय ट्रैकिंग डेटा स्थायी रूप से हट जाएगा। यदि आप बैकअप रखना चाहते हैं तो नियमित रूप से अपना डेटा निर्यात करें।"
+  },
+  "deleteDomainStats": {
+    "message": "डोमेन आँकड़े हटाएँ?"
+  },
+  "deleteStatsConfirmation": {
+    "message": "आप BetterHistory से <span class='font-medium'>{{DOMAIN}}</span> के लिए सभी ट्रैकिंग डेटा को स्थायी रूप से हटाने वाले हैं।<br><br>इस कार्रवाई को पूर्ववत नहीं किया जा सकता है।"
+  },
+  "enableStats": {
+    "message": "आँकड़े सक्षम करें"
+  },
+  "enableStatsDescription": {
+    "message": "सभी आँकड़े कार्यक्षमता को सक्षम या अक्षम करें। जब अक्षम होता है, तो कोई आँकड़ा एकत्र या प्रदर्शित नहीं किया जाएगा।"
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "उन्नत सुविधाओं के लिए अतिरिक्त अनुमतियाँ आवश्यक हैं:"
+  },
+  "idleDetectionDescription": {
+    "message": "• निष्क्रियता का पता लगाना (जब आप दूर होते हैं तो ट्रैकिंग बंद कर देता है)"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• मीडिया प्लेबैक का पता लगाना (वीडियो/संगीत के दौरान ट्रैकिंग जारी रखता है)"
+  },
+  "websiteAccessDescription": {
+    "message": "• वेबसाइट एक्सेस (गतिविधि की निगरानी के लिए)"
+  },
+  "permissionGranted": {
+    "message": "✓ स्वीकृत"
+  },
+  "permissionMissing": {
+    "message": "✗ अनुपलब्ध"
+  },
+  "allPermissionsGranted": {
+    "message": "सभी अनुमतियाँ स्वीकृत!"
+  },
+  "advancedFeaturesActive": {
+    "message": "उन्नत सुविधाएँ अब सक्रिय हैं।"
+  },
+  "somePermissionsMissing": {
+    "message": "कुछ अनुमतियाँ अनुपलब्ध हैं"
+  },
+  "clickToRequestPermissions": {
+    "message": "उन्हें अनुरोध करने के लिए नीचे दिए गए बटन पर क्लिक करें।"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "अनुमतियाँ पहले ही स्वीकृत हैं"
+  },
+  "grantPermissions": {
+    "message": "अनुमतियाँ स्वीकृत करें"
+  },
+  "debugToolsTitle": {
+    "message": "डीबग उपकरण (परीक्षण के लिए):"
+  },
+  "revokePermissions": {
+    "message": "अनुमतियाँ रद्द करें"
+  },
+  "timeTrackingStartedOn": {
+    "message": "समय ट्रैकिंग {{date}} पर शुरू हुई"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "वर्तमान में, आप पिछले {{days}} {{dayLabel}} के लिए डेटा देख सकते हैं। अधिक दिन स्वचालित रूप से जोड़े जाएंगे।"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "अधिक दिन स्वचालित रूप से जोड़े जाएंगे।"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "समय ट्रैकिंग के लिए नई अनुमति आवश्यक"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "हमने BetterHistory में एक नई समय ट्रैकिंग सुविधा शुरू की है!"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "आपको वेबसाइटों पर बिताए गए समय को ट्रैक करने, सत्र विवरण देखने और PDF में समय रिपोर्ट निर्यात करने में मदद करने के लिए, हमें आपके ब्राउज़िंग गतिविधि तक पहुंचने की अनुमति चाहिए।"
+  },
+  "statsPermissionDialogGrant": {
+    "message": "अनुमतियाँ स्वीकृत करें"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "रद्द करें"
+  },
+  "day": {
+    "message": "दिन"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "यह URL या डोमेन पहले ही व्हाइटलिस्ट डोमेन में सूचीबद्ध है"
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "यह URL या डोमेन पहले ही ब्लैकलिस्ट डोमेन में सूचीबद्ध है"
+  },
+  "noTitle": {
+    "message": "कोई शीर्षक नहीं"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "समय ट्रैकिंग और उपयोग के आँकड़े प्रबंधित करें"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "सक्षम होने पर, BetterHistory ट्रैक करता है कि आप प्रत्येक वेबसाइट पर कितना समय बिताते हैं, जिसमें सत्र की अवधि और सक्रिय बनाम निष्क्रिय समय शामिल है। सभी डेटा आपके ब्राउज़र में स्थानीय रूप से संग्रहीत होता है और इसका उपयोग केवल आपको विस्तृत ब्राउज़िंग अंतर्दृष्टि और समय विश्लेषण प्रदान करने के लिए किया जाता है।"
+  },
+  "viewStatsButton": {
+    "message": "आप विस्तृत समय डेटा तक त्वरित पहुँच के लिए गतिविधि पृष्ठ में प्रत्येक प्रविष्टि पर \"आँकड़े देखें\" बटन भी देखेंगे"
+  },
+  "disableTimeTracking": {
+    "message": "इसे अक्षम करने से ट्रैकिंग बंद हो जाएगी और सभी आँकड़े छिप जाएंगे।"
+  },
+  "result": {
+    "message": "परिणाम"
+  },
+  "close": {
+    "message": "बंद करें"
+  },
+  "error": {
+    "message": "त्रुटि"
+  },
+  "historyCleared": {
+    "message": "इतिहास साफ़ कर दिया गया"
+  },
+  "errorClearingHistory": {
+    "message": "इतिहास साफ़ करने में विफल। कृपया पुन: प्रयास करें।"
+  },
+  "statsCleared": {
+    "message": "आँकड़े साफ़ कर दिए गए"
+  },
+  "errorClearingStats": {
+    "message": "आँकड़े साफ़ करने में विफल"
+  },
+  "order": {
+    "message": "क्रम"
+  }
+}

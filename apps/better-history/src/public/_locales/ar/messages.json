@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "يرجى وصف ما يمكننا إضافته أو تحسينه."
+  },
+  "FeedbackSuccessAlert": {
+    "message": "شكرًا لك! تم إرسال ملاحظاتك بنجاح."
+  },
+  "Friday": {
+    "message": "الجمعة"
+  },
+  "Monday": {
+    "message": "الإثنين"
+  },
+  "Popup": {
+    "message": "نافذة منبثقة"
+  },
+  "Saturday": {
+    "message": "السبت"
+  },
+  "Sidebar": {
+    "message": "شريط جانبي"
+  },
+  "Sunday": {
+    "message": "الأحد"
+  },
+  "ThanksForFeedBack": {
+    "message": "شكرًا لك على ملاحظاتك!"
+  },
+  "Thursday": {
+    "message": "الخميس"
+  },
+  "Today": {
+    "message": "اليوم"
+  },
+  "Tuesday": {
+    "message": "الثلاثاء"
+  },
+  "URL": {
+    "message": "عنوان URL"
+  },
+  "Wednesday": {
+    "message": "الأربعاء"
+  },
+  "WhatCanWeImprove": {
+    "message": "ما الذي يمكننا تحسينه؟"
+  },
+  "Yesterday": {
+    "message": "الأمس"
+  },
+  "about": {
+    "message": "حول"
+  },
+  "activity": {
+    "message": "النشاط"
+  },
+  "add": {
+    "message": "إضافة"
+  },
+  "addDomains": {
+    "message": "إضافة نطاقات"
+  },
+  "addToBlackList": {
+    "message": "إضافة إلى القائمة السوداء"
+  },
+  "advanceExport": {
+    "message": "تصدير متقدم"
+  },
+  "advancedFeaturesActive": {
+    "message": "الميزات المتقدمة نشطة الآن."
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "تتطلب الميزات المتقدمة أذونات إضافية لـ:"
+  },
+  "all": {
+    "message": "الكل"
+  },
+  "allCapitalLetters": {
+    "message": "جميع الأحرف الكبيرة"
+  },
+  "allHistoryDeleted": {
+    "message": "تم حذف كل السجل"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "تم حذف كل السجل باستثناء نطاقات القائمة البيضاء"
+  },
+  "allPermissionsGranted": {
+    "message": "جميع الأذونات ممنوحة!"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "تم حذف جميع عناوين URL المحددة"
+  },
+  "allTime": {
+    "message": "كل الوقت"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "الرجاء السماح بالوصول لإرسال الملاحظات"
+  },
+  "appName": {
+    "message": "Better History | إدارة وتصدير وحذف السجل"
+  },
+  "apply": {
+    "message": "تطبيق"
+  },
+  "autoCleanupDisabled": {
+    "message": "التنظيف التلقائي معطل. لا يزال بإمكانك مسح السجل يدويًا عند الحاجة."
+  },
+  "autoCleanupEnabled": {
+    "message": "سيتم تنظيف سجل التصفح الخاص بك تلقائيًا بناءً على الجدول الزمني المحدد."
+  },
+  "autoCleanupHelp": {
+    "message": "يساعد التنظيف التلقائي في الحفاظ على خصوصيتك عن طريق إزالة سجل التصفح بانتظام وفقًا لتفضيلاتك."
+  },
+  "autoCleanupSchedule": {
+    "message": "جدول التنظيف التلقائي:"
+  },
+  "avgPerDay": {
+    "message": "المتوسط. {{time}} في اليوم"
+  },
+  "basicDomain": {
+    "message": "النطاق الأساسي"
+  },
+  "basicSearch": {
+    "message": "بحث أساسي"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}:\u003C/strong> اكتب أي كلمة رئيسية للعثور على الإدخالات المطابقة (مثل \"Inbox\")."
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> هو إضافة متصفح مبتكرة طورتها \u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span>. تُمكّن المستخدمين من إدارة سجل التصفح بسهولة، وتقدم ميزات متقدمة مثل الحذف المخصص، والفلاتر الدقيقة، وواجهة بديهية. في BetterLogic Ltd، نعطي الأولوية لخصوصية المستخدم والوظائف السلسة لتعزيز تجربة التصفح الخاصة بك."
+  },
+  "blacklist": {
+    "message": "القائمة السوداء"
+  },
+  "blacklistDomain": {
+    "message": "نطاق القائمة السوداء"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "حظر النطاق من السجل"
+  },
+  "blacklistDomains": {
+    "message": "نطاقات القائمة السوداء"
+  },
+  "blacklistFeatureDescription": {
+    "message": "تسمح لك ميزة القائمة السوداء للنطاقات في BetterHistory بحظر مواقع ويب محددة من أن يتم تسجيلها في سجل التصفح الخاص بك. بمجرد حظر النطاق، ستتم إزالة جميع الزيارات السابقة والمستقبلية لهذا الموقع تلقائيًا."
+  },
+  "blacklistInstructionText": {
+    "message": "تسمح لك ميزة القائمة السوداء للنطاقات في BetterHistory بحظر مواقع ويب محددة من أن يتم تسجيلها في سجل التصفح الخاص بك. بمجرد حظر النطاق، ستتم إزالة جميع الزيارات السابقة والمستقبلية لهذا الموقع تلقائيًا."
+  },
+  "blacklistTips": {
+    "message": "نصائح"
+  },
+  "blacklist_confirmation": {
+    "message": "هل أنت متأكد أنك تريد حظر \u003Cstrong>{{DOMAIN}}\u003C/strong> من سجل التصفح الخاص بك؟\u003Cbr/>لن يتم تسجيل الزيارات المستقبلية لهذا النطاق، وسيتم حذف جميع إدخالات السجل الحالية لـ \u003Cstrong>{{DOMAIN}}\u003C/strong>."
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> موجود بالفعل في القائمة السوداء."
+  },
+  "blacklistedDomains": {
+    "message": "النطاقات المحظورة"
+  },
+  "blockExactDomain": {
+    "message": "يحظر النطاق الدقيق فقط، وليس النطاقات الفرعية أو المسارات المحددة."
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "يحظر النطاق الرئيسي وجميع نطاقاته الفرعية (mail.example.com، blog.example.com، إلخ.)."
+  },
+  "blockSpecificPage": {
+    "message": "يحظر صفحة محددة فقط على النطاق."
+  },
+  "blockSpecificPath": {
+    "message": "يحظر جميع الصفحات ضمن مسار محدد على النطاق."
+  },
+  "blockSpecificSubdomain": {
+    "message": "يحظر نطاقًا فرعيًا محددًا فقط، وليس النطاق الرئيسي أو النطاقات الفرعية الأخرى."
+  },
+  "bugReport": {
+    "message": "تقرير خطأ"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "أضف نطاقات متعددة إلى قائمتك السوداء دفعة واحدة. أدخل نطاقًا واحدًا لكل سطر."
+  },
+  "bulkAddDomains": {
+    "message": "إضافة نطاقات بالجملة"
+  },
+  "cancel": {
+    "message": "إلغاء"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>حساسية حالة الأحرف:\u003C/strong> البحث غير حساس لحالة الأحرف افتراضيًا."
+  },
+  "chooseStartAndEndDates": {
+    "message": "اختر تاريخي البداية والنهاية"
+  },
+  "clear": {
+    "message": "مسح"
+  },
+  "clearBrowsingHistory": {
+    "message": "مسح سجل التصفح"
+  },
+  "clearHistory": {
+    "message": "مسح السجل"
+  },
+  "clearHistoryConfirm": {
+    "message": "هل أنت متأكد أنك تريد حذف سجل التصفح بالكامل؟ هذا الإجراء دائم ولا يمكن التراجع عنه."
+  },
+  "clearStats": {
+    "message": "مسح الإحصائيات"
+  },
+  "clearing": {
+    "message": "جارٍ المسح..."
+  },
+  "clearingHistory": {
+    "message": "إدارة السجل"
+  },
+  "clickToRequestPermissions": {
+    "message": "انقر على الزر أدناه لطلبها."
+  },
+  "close": {
+    "message": "إغلاق"
+  },
+  "clr": {
+    "message": "مسح"
+  },
+  "confirmAndSave": {
+    "message": "تأكيد وحفظ"
+  },
+  "confirmDelete": {
+    "message": "تأكيد الحذف"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "تأكيد إعدادات التنظيف التلقائي الذكي"
+  },
+  "contact": {
+    "message": "اتصال"
+  },
+  "contactAndFeedback": {
+    "message": "اتصال وملاحظات"
+  },
+  "contactLimitReached": {
+    "message": "لقد وصلت بالفعل إلى حد الاتصال الخاص بك لهذا اليوم."
+  },
+  "containsDotCom": {
+    "message": "يحتوي على \".com\""
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>يحتوي على كلمات متعددة:\u003C/strong> استخدم \u003Ccode>{{pipe}}\u003C/code> للبحث عن الإدخالات التي تحتوي على واحدة من عدة كلمات (مثل \u003Ccode>{{example}}\u003C/code>)."
+  },
+  "containsNewsOrInfo": {
+    "message": "يحتوي على \"News\" أو \"Info\""
+  },
+  "containsNumbers": {
+    "message": "يحتوي على أرقام"
+  },
+  "containsSpaces": {
+    "message": "يحتوي على مسافات"
+  },
+  "containsTODO": {
+    "message": "يحتوي على \"TODO\""
+  },
+  "current": {
+    "message": "من هذا الموقع"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "حاليًا، يمكنك عرض البيانات للأيام الـ {{days}} الماضية ({{dayLabel}}). ستتم إضافة المزيد من الأيام تلقائيًا."
+  },
+  "custom": {
+    "message": "مخصص"
+  },
+  "customExport": {
+    "message": "تصدير مخصص"
+  },
+  "customRange": {
+    "message": "نطاق مخصص"
+  },
+  "dailyAtMidnight": {
+    "message": "يوميًا (في منتصف الليل)"
+  },
+  "darkMode": {
+    "message": "الوضع الداكن"
+  },
+  "dateAndTimeOrder": {
+    "message": "ترتيب التاريخ والوقت"
+  },
+  "day": {
+    "message": "يوم"
+  },
+  "days": {
+    "message": "أيام"
+  },
+  "debugToolsTitle": {
+    "message": "أدوات التصحيح (للاختبار):"
+  },
+  "default": {
+    "message": "افتراضي"
+  },
+  "delete": {
+    "message": "حذف"
+  },
+  "deleteAllForHour": {
+    "message": "هل أنت متأكد أنك تريد حذف سجل التصفح بالكامل لـ \u003Cstrong>{{startHour}}\u003C/strong> بشكل دائم؟\u003Cbr>سيؤدي هذا إلى حذف سجل التصفح للساعة بأكملها ({{startAndendHour}}). بمجرد الحذف، لا يمكن التراجع عن هذا الإجراء."
+  },
+  "deleteAllFromDate": {
+    "message": "هل أنت متأكد أنك تريد حذف سجل التصفح بالكامل لـ \u003Cstrong>{{date}}\u003C/strong> بشكل دائم؟\u003Cbr>سيؤدي هذا إلى إزالة جميع السجلات من ذلك اليوم. بمجرد الحذف، لا يمكن التراجع عن هذا الإجراء."
+  },
+  "deleteAllSearchHistory": {
+    "message": "هل أنت متأكد أنك تريد حذف جميع إدخالات سجل التصفح التي تم البحث عنها والمدرجة في هذه الصفحة بشكل دائم؟\u003Cbr/>سيؤدي هذا الإجراء إلى إزالة جميع الإدخالات المعروضة في نتائج البحث الحالية. بمجرد الحذف، لا يمكن التراجع عن هذا الإجراء."
+  },
+  "deleteBulk": {
+    "message": "حذف"
+  },
+  "deleteDomainConfirm": {
+    "message": "هل أنت متأكد أنك تريد حذف كل السجل من نطاق \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span>؟ سيؤدي هذا الإجراء إلى إزالة جميع الإدخالات ذات الصلة ولا يمكن التراجع عنه."
+  },
+  "deleteDomainStats": {
+    "message": "حذف إحصائيات النطاق؟"
+  },
+  "deleteEntire": {
+    "message": "حذف التاريخ بأكمله"
+  },
+  "deleteEntireHistory": {
+    "message": "حذف السجل بأكمله"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "حذف السجل بأكمله؟"
+  },
+  "deleteHistory": {
+    "message": "حذف السجل"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "هل أنت متأكد أنك تريد حذف سجل التصفح بالكامل؟ هذا الإجراء دائم ولا يمكن التراجع عنه."
+  },
+  "deleteMsg": {
+    "message": "حذف جميع نتائج البحث؟"
+  },
+  "deleteSelectedHistory": {
+    "message": "حذف السجل المحدد"
+  },
+  "deleteSpecificDate": {
+    "message": "حذف تاريخ محدد"
+  },
+  "deleteStatsConfirmation": {
+    "message": "أنت على وشك حذف جميع بيانات التتبع الخاصة بـ \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> من BetterHistory بشكل دائم.\u003Cbr>\u003Cbr>لا يمكن التراجع عن هذا الإجراء."
+  },
+  "deleteUrlConfirm": {
+    "message": "هل أنت متأكد أنك تريد حذف عنوان URL \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> من سجلك؟ لا يمكن التراجع عن هذا الإجراء."
+  },
+  "deletedSelectedHistory": {
+    "message": "هل أنت متأكد أنك تريد حذف إدخالات السجل الـ {{selectedNumber}} المحددة بشكل دائم؟ \u003Cbr/>سيؤدي هذا الإجراء إلى حذف جميع الإدخالات الـ {{selectedNumber}} المحددة بشكل دائم. بمجرد الحذف، لا يمكن التراجع عن هذا الإجراء."
+  },
+  "devices": {
+    "message": "الأجهزة"
+  },
+  "disableTimeTracking": {
+    "message": "سيؤدي تعطيل هذا إلى إيقاف التتبع وإخفاء جميع الإحصائيات."
+  },
+  "domainAlreadyExists": {
+    "message": "هذا النطاق موجود بالفعل في قائمتك"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "السطر ${index + 1}: النطاق موجود بالفعل (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "القائمة السوداء للنطاقات"
+  },
+  "domainCannotBeEmpty": {
+    "message": "لا يمكن أن يكون النطاق فارغًا"
+  },
+  "domainStats": {
+    "message": "إحصائيات النطاق"
+  },
+  "domainWithSubdomains": {
+    "message": "النطاق مع جميع النطاقات الفرعية"
+  },
+  "domains": {
+    "message": "النطاقات"
+  },
+  "email": {
+    "message": "البريد الإلكتروني"
+  },
+  "emailArticle": {
+    "message": "مقالات الدعم"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}: \u003C/span>تصفح أدلة الدعم والأسئلة الشائعة على \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">دعم BetterHistory\u003C/span>\u003C/a>."
+  },
+  "emailSupport": {
+    "message": "دعم البريد الإلكتروني"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}:\u003C/span> لأي أسئلة أو مشاكل، تواصل معنا على 📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a>."
+  },
+  "enableStats": {
+    "message": "تمكين الإحصائيات"
+  },
+  "enableStatsDescription": {
+    "message": "تمكين أو تعطيل جميع وظائف الإحصائيات. عند التعطيل، لن يتم جمع أو عرض أي إحصائيات."
+  },
+  "enable_popup": {
+    "message": "تمكين النافذة المنبثقة"
+  },
+  "endsWithQuestionMark": {
+    "message": "ينتهي بـ \"؟\""
+  },
+  "enterAValidDomain": {
+    "message": "أدخل نطاقًا صالحًا"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "الرجاء إدخال نطاق واحد على الأقل"
+  },
+  "enterDomain": {
+    "message": "أدخل النطاق الذي تريد استبعاده من السجل"
+  },
+  "enterDomainName": {
+    "message": "أدخل اسم النطاق"
+  },
+  "enterDomainPerLine": {
+    "message": "أضف نطاقات متعددة إلى قائمتك البيضاء دفعة واحدة. أدخل نطاقًا واحدًا لكل سطر."
+  },
+  "enterDomainToBlock": {
+    "message": "أدخل النطاق لحظره (مثل example.com)"
+  },
+  "enterDomainToWhitelist": {
+    "message": "أدخل النطاق لإضافته إلى القائمة البيضاء (مثل example.com)"
+  },
+  "enterValidDomain": {
+    "message": "الرجاء إدخال نطاق صالح واحد على الأقل"
+  },
+  "entireExport": {
+    "message": "تصدير كامل (90 يومًا)"
+  },
+  "entries": {
+    "message": "الإدخالات"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "حذف كل السجل لهذا الموقع"
+  },
+  "error": {
+    "message": "خطأ"
+  },
+  "errorClearingHistory": {
+    "message": "فشل مسح السجل. الرجاء المحاولة مرة أخرى."
+  },
+  "errorClearingStats": {
+    "message": "فشل مسح الإحصائيات"
+  },
+  "errorLoadingData": {
+    "message": "خطأ في تحميل البيانات"
+  },
+  "errorLoadingSettings": {
+    "message": "خطأ في تحميل الإعدادات. سيتم استخدام القيم الافتراضية."
+  },
+  "errorSavingSettings": {
+    "message": "فشل حفظ الإعدادات. الرجاء المحاولة مرة أخرى."
+  },
+  "exactWordProject": {
+    "message": "الكلمة الدقيقة \"Project\""
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "اكتشف منتجاتنا"
+  },
+  "export": {
+    "message": "تصدير"
+  },
+  "exportAsJSON": {
+    "message": "تصدير كـ JSON"
+  },
+  "exportAsPDF": {
+    "message": "تصدير كـ PDF"
+  },
+  "exportCsv": {
+    "message": "تصدير CSV"
+  },
+  "exportEntireLocalData": {
+    "message": "تصدير جميع البيانات المحلية"
+  },
+  "exportHistory": {
+    "message": "تصدير سجل التصفح بالكامل"
+  },
+  "exportHistoryDescription": {
+    "message": "تسمح لك هذه الميزة بتصدير سجل التصفح بالكامل (حتى 90 يومًا) أو تحديد نطاق تاريخ مخصص للتصدير. يرجى ملاحظة أن واجهة برمجة تطبيقات السجل في Chrome تدعم التصدير فقط - ولا تسمح باستيراد السجل مرة أخرى."
+  },
+  "exportHistoryLimitation": {
+    "message": "بالإضافة إلى ذلك، يقوم Chrome تلقائيًا بحذف السجل الأقدم من 90 يومًا، لذا لا يمكن لـ BetterHistory سوى تصدير السجلات التي يحتفظ بها Chrome."
+  },
+  "exportHtml": {
+    "message": "تصدير HTML"
+  },
+  "exportLocalData": {
+    "message": "تصدير البيانات المحلية"
+  },
+  "exportSelectedCsv": {
+    "message": "تصدير CSV المحدد"
+  },
+  "exportSelectedHtml": {
+    "message": "تصدير HTML المحدد"
+  },
+  "exportTimeTrackingData": {
+    "message": "تصدير بيانات تتبع الوقت"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "هذه هي بيانات تتبع الوقت المخزنة محليًا والتي يمكنك تصديرها للاستخدام الشخصي. إنها تعكس الوقت الذي قضيته في الصفحات التي تمت زيارتها، مما يساعدك على تحليل عادات التصفح الخاصة بك."
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "يتم حفظ هذه البيانات في متصفحك فقط ولا تتم مزامنتها أو تخزينها عبر الإنترنت. ستؤدي إزالة إضافة BetterHistory إلى حذف جميع بيانات تتبع الوقت بشكل دائم. قم بتصدير بياناتك بانتظام إذا كنت ترغب في الاحتفاظ بنسخة احتياطية."
+  },
+  "exportToCSV": {
+    "message": "تصدير إلى CSV"
+  },
+  "exportToTXT": {
+    "message": "تصدير إلى TXT"
+  },
+  "exportedHistoryDate": {
+    "message": "سجل التصفح المصدر - التاريخ:"
+  },
+  "exportedHistoryKeyword": {
+    "message": "سجل التصفح المصدر - الكلمة الرئيسية:"
+  },
+  "featureRequest": {
+    "message": "طلب ميزة"
+  },
+  "feedback": {
+    "message": "الملاحظات"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "أوافق على \u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">سياسة الخصوصية\u003C/span>\u003C/a> ومعالجة البيانات."
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "يرجى تقديم بريدك الإلكتروني للمتابعة بشأن طلبك."
+  },
+  "feedbackForm": {
+    "message": "نموذج الملاحظات"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}:\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">انقر هنا لتقديم ملاحظاتك\u003C/span>."
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "حجم الملف يتجاوز 5 ميجابايت. يرجى تحميل ملف أصغر."
+  },
+  "find_all_visits_domain": {
+    "message": "البحث عن جميع الزيارات لـ {{d}}"
+  },
+  "generalContact": {
+    "message": "اتصال عام"
+  },
+  "generatedUsing": {
+    "message": "تم إنشاء هذا المستند باستخدام"
+  },
+  "grantPermissions": {
+    "message": "منح الأذونات"
+  },
+  "groupSession": {
+    "message": "تجميع الجلسات"
+  },
+  "history": {
+    "message": "السجل"
+  },
+  "historyCleared": {
+    "message": "تم مسح السجل"
+  },
+  "historyControlsFor": {
+    "message": "عناصر التحكم في السجل لـ"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "سيتم الاحتفاظ بالسجل من نطاقات القائمة البيضاء أثناء التنظيف"
+  },
+  "historyRetentionHelp": {
+    "message": "سيتم الاحتفاظ بالسجل ضمن هذا النطاق الزمني المحدد واستبعاده من التنظيف التلقائي."
+  },
+  "hourFormat": {
+    "message": "تنسيق الوقت"
+  },
+  "hours": {
+    "message": "ساعات"
+  },
+  "howDidWeDo": {
+    "message": "كيف كان أداؤنا؟"
+  },
+  "howLongKeepHistory": {
+    "message": "ما هي المدة التي يجب الاحتفاظ فيها بسجل التصفح الخاص بك قبل أن يصبح مؤهلاً للحذف التلقائي؟"
+  },
+  "howToUseTheSearchTool": {
+    "message": "كيفية استخدام أداة البحث"
+  },
+  "id": {
+    "message": "المعرّف"
+  },
+  "idleDetectionDescription": {
+    "message": "• كشف الخمول (يوقف التتبع عندما تكون بعيدًا)"
+  },
+  "import": {
+    "message": "استيراد"
+  },
+  "importEntireLocalData": {
+    "message": "استيراد البيانات المحلية"
+  },
+  "importFailed": {
+    "message": "فشل استيراد البيانات"
+  },
+  "importJSON": {
+    "message": "استيراد JSON"
+  },
+  "importSuccessful": {
+    "message": "تم استيراد البيانات بنجاح"
+  },
+  "infinityScroll": {
+    "message": "تمكين التمرير اللانهائي"
+  },
+  "interfaceStyle": {
+    "message": "إعدادات العرض"
+  },
+  "invalidDomainFormat": {
+    "message": "الرجاء إدخال تنسيق نطاق صالح (مثل example.com)"
+  },
+  "invalidDomainFormatLine": {
+    "message": "السطر ${index + 1}: تنسيق نطاق غير صالح (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "نوع ملف غير صالح. يرجى تحميل صورة JPG أو PNG."
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> ليس نطاقًا صالحًا. يرجى استخدام نطاق صالح للإضافة إلى القائمة السوداء."
+  },
+  "keepHistoryCheckText": {
+    "message": "الاحتفاظ بالسجل من مواقع الويب التي أضفتها إلى قائمتك البيضاء"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "الاحتفاظ بالسجل من مواقع الويب التي أضفتها إلى قائمتك البيضاء"
+  },
+  "large": {
+    "message": "كبير"
+  },
+  "last15Days": {
+    "message": "15 يومًا"
+  },
+  "last2Months": {
+    "message": "آخر شهرين"
+  },
+  "last30Days": {
+    "message": "30 يومًا"
+  },
+  "last3Months": {
+    "message": "آخر 3 أشهر"
+  },
+  "last60Days": {
+    "message": "60 يومًا"
+  },
+  "last7Days": {
+    "message": "7 أيام"
+  },
+  "last90Days": {
+    "message": "90 يومًا"
+  },
+  "lastMonth": {
+    "message": "الشهر الماضي"
+  },
+  "lastVisitTime": {
+    "message": "آخر وقت زيارة"
+  },
+  "lastWeek": {
+    "message": "الأسبوع الماضي"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "تعرف على المزيد حول التنظيف التلقائي"
+  },
+  "learnMoreAboutRetention": {
+    "message": "تعرف على المزيد حول فترة الاحتفاظ"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "أخبرني إذا كنت بحاجة إلى تعديلات إضافية."
+  },
+  "lightMode": {
+    "message": "الوضع الفاتح"
+  },
+  "loadingSettings": {
+    "message": "جارٍ تحميل الإعدادات..."
+  },
+  "ltr": {
+    "message": "من اليسار إلى اليمين (LTR)"
+  },
+  "mainDomainNote": {
+    "message": "حظر نطاق رئيسي لا يحظر نطاقاته الفرعية تلقائيًا"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "إدارة تتبع الوقت وإحصائيات الاستخدام"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "عند التمكين، يتتبع BetterHistory مقدار الوقت الذي تقضيه في كل موقع ويب، بما في ذلك مدد الجلسة والوقت النشط مقابل وقت الخمول. يتم تخزين جميع البيانات محليًا في متصفحك وتُستخدم فقط لتزويدك برؤى تصفح مفصلة وتحليلات زمنية."
+  },
+  "manifest_browser_action_title": {
+    "message": "تصفح السجل"
+  },
+  "manifest_description": {
+    "message": "مدير سجل أنيق: بحث قوي، تصدير بالجملة، حذف المختار خصيصًا، تصفية حسب اليوم والساعة، وحظر نطاقات محددة من السجل."
+  },
+  "maxSize": {
+    "message": "الحجم الأقصى"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• كشف تشغيل الوسائط (يستمر في التتبع أثناء مقاطع الفيديو/الموسيقى)"
+  },
+  "medium": {
+    "message": "متوسط"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "شهريًا (في الأول من كل شهر)"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "ستتم إضافة المزيد من الأيام تلقائيًا."
+  },
+  "moreFromSite": {
+    "message": "المزيد من هذا الموقع"
+  },
+  "mostActiveDay": {
+    "message": "اليوم الأكثر نشاطًا"
+  },
+  "neverDisabled": {
+    "message": "أبدًا (معطل)"
+  },
+  "noActivityData": {
+    "message": "لا توجد بيانات نشاط لهذه الفترة"
+  },
+  "noBlacklistType": {
+    "message": "لا توجد {{type}} في قائمتك السوداء"
+  },
+  "noChangesToSave": {
+    "message": "لا توجد تغييرات للحفظ"
+  },
+  "noDevices": {
+    "message": "لم يتم العثور على جلسات نشطة للجهاز."
+  },
+  "noDomainBlacklisted": {
+    "message": "لم يتم حظر أي نطاقات بعد"
+  },
+  "noDomains": {
+    "message": "لم يتم إضافة أي نطاقات إلى القائمة البيضاء بعد"
+  },
+  "noDomainsType": {
+    "message": "لا توجد {{type}} في قائمتك البيضاء"
+  },
+  "noFileSelectedMessage": {
+    "message": "لم يتم تحديد ملف. يرجى تحميل ملف صالح."
+  },
+  "noMoreResults": {
+    "message": "لا توجد نتائج أخرى"
+  },
+  "noResultsFound": {
+    "message": "لم يتم العثور على نتائج. حاول تعديل مصطلحات البحث أو الفلاتر الخاصة بك."
+  },
+  "noThanks": {
+    "message": "لا، شكرًا"
+  },
+  "noTitle": {
+    "message": "لا يوجد عنوان"
+  },
+  "noVisits": {
+    "message": "عذراً، لم يتم العثور على زيارات."
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>أرقام فقط:\u003C/strong> استخدم \u003Ccode>{{pattern}}\u003C/code> للعثور على الإدخالات التي تحتوي على أرقام."
+  },
+  "of": {
+    "message": "من"
+  },
+  "ok": {
+    "message": "موافق"
+  },
+  "oneMonth": {
+    "message": "شهر واحد"
+  },
+  "oneWeek": {
+    "message": "أسبوع واحد"
+  },
+  "openAllTabs": {
+    "message": "فتح جميع علامات التبويب"
+  },
+  "openMenu": {
+    "message": "فتح القائمة"
+  },
+  "openTab": {
+    "message": "فتح في علامة تبويب جديدة"
+  },
+  "order": {
+    "message": "الترتيب"
+  },
+  "otherOptions": {
+    "message": "التفضيلات العامة"
+  },
+  "page": {
+    "message": "صفحة"
+  },
+  "paths": {
+    "message": "المسارات"
+  },
+  "permissionGranted": {
+    "message": "✓ ممنوح"
+  },
+  "permissionMissing": {
+    "message": "✗ مفقود"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "تم منح الأذونات بالفعل"
+  },
+  "pleaseNote": {
+    "message": "يرجى ملاحظة ما يلي:"
+  },
+  "pleaseRateUs": {
+    "message": "الرجاء تقييمنا!"
+  },
+  "prefixesAutoRemoved": {
+    "message": "ستتم إزالة البادئات مثل 'http://'، 'https://'، و 'www.' تلقائيًا."
+  },
+  "prefixesRemoved": {
+    "message": "تتم إزالة البادئات مثل 'http://'، 'https://'، و 'www.' تلقائيًا"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "قائمة حظر هذا الموقع من تسجيل السجل"
+  },
+  "privacyPolicy": {
+    "message": "سياسة الخصوصية"
+  },
+  "privacyTerms": {
+    "message": "الخصوصية والشروط"
+  },
+  "processing": {
+    "message": "جارٍ المعالجة..."
+  },
+  "rateText": {
+    "message": "تساعدنا ملاحظاتك في تحسين BetterHistory. أخبرنا كيف كان أداؤنا!"
+  },
+  "recent": {
+    "message": "الزيارات الأخيرة"
+  },
+  "recordedVisits": {
+    "message": "الزيارات المسجلة لهذا النطاق"
+  },
+  "remove_url": {
+    "message": "حذف عنوان URL هذا من السجل"
+  },
+  "result": {
+    "message": "النتيجة"
+  },
+  "results": {
+    "message": "النتائج"
+  },
+  "retentionPeriod": {
+    "message": "فترة الاحتفاظ:"
+  },
+  "retentionPeriodHelp": {
+    "message": "تحدد فترة الاحتفاظ إلى أي مدى يتم الاحتفاظ بسجل التصفح الخاص بك. سيكون السجل الأقدم مؤهلاً للتنظيف."
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "يرجى مراجعة إعداداتك قبل التأكيد."
+  },
+  "revokePermissions": {
+    "message": "إلغاء الأذونات"
+  },
+  "rightTitle": {
+    "message": "خيارات قائمة السياق"
+  },
+  "rtl": {
+    "message": "من اليمين إلى اليسار (RTL)"
+  },
+  "saveSettings": {
+    "message": "حفظ الإعدادات"
+  },
+  "search": {
+    "message": "بحث"
+  },
+  "searchDeeper": {
+    "message": "البحث بشكل أعمق"
+  },
+  "searchDomainTitle": {
+    "message": "البحث حسب النطاق"
+  },
+  "searchEngine": {
+    "message": "محرك البحث"
+  },
+  "searchMsg": {
+    "message": "همسة... حاول البحث عن شيء ما"
+  },
+  "searchPlaceholder": {
+    "message": "ابحث بالاسم أو بعنوان URL"
+  },
+  "searchTextTitle": {
+    "message": "البحث حسب تحديد النص"
+  },
+  "searchTips": {
+    "message": "نصائح البحث"
+  },
+  "searchTipsMsg1": {
+    "message": "البحث باستخدام التعبير النمطي مدعوم الآن!"
+  },
+  "searchTipsMsg2": {
+    "message": "على سبيل المثال، حاول البحث عن"
+  },
+  "searchTipsMsg3": {
+    "message": "البحث عن الزيارات والتنزيلات"
+  },
+  "searchTipsMsg4": {
+    "message": "سيبحث البحث تلقائيًا عن الزيارات حسب اسم الصفحة وعنوان URL، والتنزيلات حسب اسم الملف وعنوان URL."
+  },
+  "searchTipsMsg5": {
+    "message": "يتم استخدام آخر 10,000 زيارة لإجراء بحث أولي سريع. للبحث بشكل أعمق، تفضل بزيارة أسفل الصفحة الأخيرة من النتائج وانقر على زر 'البحث بشكل أعمق'."
+  },
+  "searchToolDescription": {
+    "message": "تسمح لك هذه الأداة بالبحث في سجل التصفح بفعالية باستخدام كلمات رئيسية بسيطة أو \u003Cstrong>تعبيرات نمطية متقدمة (RegEx)\u003C/strong>. فيما يلي بعض الأمثلة لمساعدتك على البدء:"
+  },
+  "search_history": {
+    "message": "البحث في السجل"
+  },
+  "searchedUrlDeleted": {
+    "message": "تم حذف عناوين URL التي تم البحث عنها"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "تم حذف عناوين URL التي تم البحث عنها باستثناء نطاقات القائمة البيضاء"
+  },
+  "searching": {
+    "message": "جارٍ البحث"
+  },
+  "selectDateFormat": {
+    "message": "تنسيق التاريخ"
+  },
+  "selectDateRange": {
+    "message": "تحديد نطاق التاريخ"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "تحديد تاريخ لحذف السجل"
+  },
+  "selectEndDate": {
+    "message": "تحديد تاريخ الانتهاء"
+  },
+  "selectStartDate": {
+    "message": "تحديد تاريخ البدء"
+  },
+  "selected": {
+    "message": "المحدد"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "تم حذف سجل التاريخ المحدد"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "تم حذف سجل التاريخ المحدد باستثناء نطاقات القائمة البيضاء"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "تم حذف سجل الساعة المحددة"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "تم حذف سجل الساعة المحددة باستثناء نطاقات القائمة البيضاء"
+  },
+  "sessions": {
+    "message": "الجلسات"
+  },
+  "settings": {
+    "message": "الإعدادات"
+  },
+  "settingsSaved": {
+    "message": "تم حفظ الإعدادات"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "تم تحديث إعدادات التنظيف التلقائي الذكي بنجاح."
+  },
+  "shortRetentionWarning": {
+    "message": "تعيين فترة احتفاظ قصيرة لمدة أسبوع واحد يعني أن سجل التصفح الأقدم سيتم تنظيفه بشكل متكرر. تأكد من أن هذا يتوافق مع احتياجاتك."
+  },
+  "show": {
+    "message": "عرض"
+  },
+  "showAllHistory": {
+    "message": "عرض كل السجل"
+  },
+  "showStats": {
+    "message": "إظهار الإحصائيات"
+  },
+  "small": {
+    "message": "صغير"
+  },
+  "smartAutoCleanup": {
+    "message": "التنظيف التلقائي الذكي"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "إدارة سجل التصفح الخاص بك تلقائيًا باستخدام التنظيف التلقائي الذكي. اختر عدد مرات تشغيل التنظيف ومدة الاحتفاظ بسجلك الأخير."
+  },
+  "smartAutoCleanupSettings": {
+    "message": "إعدادات التنظيف التلقائي الذكي"
+  },
+  "smartHistoryCleanup": {
+    "message": "تنظيف السجل الذكي"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "يمسح سجل التصفح الخاص بك باستثناء مواقع الويب التي أضفتها إلى قائمتك البيضاء. تساعدك هذه الميزة على الحفاظ على خصوصية نشاطك مع الحفاظ على السجل المهم من المواقع الموثوقة أو التي يتم استخدامها بشكل متكرر."
+  },
+  "socialMediaTip": {
+    "message": "بالنسبة لمواقع التواصل الاجتماعي، فكر في حظر أقسام محددة (facebook.com/marketplace/*)"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "تعذر إضافة بعض النطاقات:\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "بعض الأذونات مفقودة"
+  },
+  "specificPage": {
+    "message": "صفحة محددة"
+  },
+  "specificPath": {
+    "message": "مسار محدد"
+  },
+  "specificSubdomain": {
+    "message": "نطاق فرعي محدد"
+  },
+  "start": {
+    "message": "بدء"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>يبدأ بـ:\u003C/strong> استخدم ^ للعثور على الإدخالات التي تبدأ بكلمة معينة (مثل ^Inbox)."
+  },
+  "startsWithInbox": {
+    "message": "يبدأ بـ \"Inbox\""
+  },
+  "statsCleared": {
+    "message": "تم مسح الإحصائيات"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "إلغاء"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "لمساعدتك في تتبع الوقت الذي تقضيه على مواقع الويب، وعرض تفاصيل الجلسة، وتصدير تقارير الوقت بتنسيق PDF، نحتاج إلى إذن للوصول إلى نشاط التصفح الخاص بك."
+  },
+  "statsPermissionDialogGrant": {
+    "message": "منح الأذونات"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "لقد قدمنا ميزة جديدة لتتبع الوقت في BetterHistory!"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "إذن جديد مطلوب لتتبع الوقت"
+  },
+  "subdomainNote": {
+    "message": "إضافة نطاق رئيسي إلى القائمة البيضاء لا يضيف نطاقاته الفرعية تلقائيًا"
+  },
+  "subdomains": {
+    "message": "النطاقات الفرعية"
+  },
+  "submit": {
+    "message": "إرسال"
+  },
+  "submitFeedback": {
+    "message": "إرسال الملاحظات"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "تساعدنا اقتراحاتك وملاحظاتك في تحسين BetterHistory وتقديم أفضل تجربة للمستخدم."
+  },
+  "tenOrMoreCharacters": {
+    "message": "10 أحرف أو أكثر"
+  },
+  "termsOfService": {
+    "message": "شروط الخدمة"
+  },
+  "thankYou": {
+    "message": "شكرًا لك!"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "لا يمكن التراجع عن هذا الإجراء."
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "عنوان URL أو النطاق هذا مدرج بالفعل في نطاقات القائمة السوداء"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "عنوان URL أو النطاق هذا مدرج بالفعل في نطاقات القائمة البيضاء"
+  },
+  "threeMonths": {
+    "message": "ثلاثة أشهر"
+  },
+  "timeTrackingStartedOn": {
+    "message": "بدأ تتبع الوقت في {{date}}"
+  },
+  "tips": {
+    "message": "نصائح"
+  },
+  "title": {
+    "message": "العنوان"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "لحظر كل صفحة على نطاق ونطاقاته الفرعية، اكتب:"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "لحظر كل صفحة على نطاق ما، اكتب:"
+  },
+  "todalWords": {
+    "message": "إجمالي الكلمات"
+  },
+  "today": {
+    "message": "اليوم"
+  },
+  "toolbarIcon": {
+    "message": "سمة أيقونة شريط الأدوات"
+  },
+  "totalEntries": {
+    "message": "إجمالي الإدخالات"
+  },
+  "totalVisits": {
+    "message": "إجمالي الزيارات"
+  },
+  "twoWeeks": {
+    "message": "أسبوعان"
+  },
+  "typdCount": {
+    "message": "عدد مرات الكتابة"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "اكتب أي كلمة رئيسية للعثور على الإدخالات المطابقة."
+  },
+  "typeDeleteToConfirm": {
+    "message": "اكتب \"delete\" للتأكيد:"
+  },
+  "typedCount": {
+    "message": "تمت كتابته {{times}} مرات في شريط العناوين"
+  },
+  "unableToLoadDomainStats": {
+    "message": "تعذر تحميل إحصائيات النطاق. الرجاء المحاولة مرة أخرى لاحقًا."
+  },
+  "understandSettings": {
+    "message": "أفهم هذه الإعدادات وكيف ستؤثر على سجل التصفح الخاص بي"
+  },
+  "understandYourRights": {
+    "message": "افهم حقوقك"
+  },
+  "uniqueUrls": {
+    "message": "عناوين URL فريدة"
+  },
+  "updatingData": {
+    "message": "جارٍ تحديث البيانات..."
+  },
+  "uploadScreenShot": {
+    "message": "تحميل لقطة شاشة"
+  },
+  "urlDeleted": {
+    "message": "تم حذف عنوان URL"
+  },
+  "urlPatternGuide": {
+    "message": "دليل نمط URL"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "يمكنك استخدام الأنماط التالية لحظر مواقع الويب:"
+  },
+  "useSpecificPaths": {
+    "message": "استخدم مسارات محددة لإضافة أقسام معينة فقط من موقع الويب إلى القائمة البيضاء"
+  },
+  "viewHere": {
+    "message": "عرض هنا"
+  },
+  "viewStats": {
+    "message": "عرض الإحصائيات"
+  },
+  "viewStatsButton": {
+    "message": "سترى أيضًا زر \"عرض الإحصائيات\" على كل إدخال في صفحة النشاط للوصول السريع إلى بيانات الوقت المفصلة"
+  },
+  "visitCount": {
+    "message": "تمت زيارة الرابط {{times}} مرات"
+  },
+  "visitSite": {
+    "message": "زيارة الموقع"
+  },
+  "visits_domain": {
+    "message": "عرض جميع الزيارات لهذا النطاق"
+  },
+  "vstCount": {
+    "message": "عدد الزيارات"
+  },
+  "weValueYourInputMessage": {
+    "message": "نحن نقدّر ملاحظاتك ومستعدون لمساعدتك!"
+  },
+  "websiteAccessDescription": {
+    "message": "• الوصول إلى موقع الويب (لمراقبة النشاط)"
+  },
+  "websites": {
+    "message": "مواقع الويب"
+  },
+  "weeklyEverySunday": {
+    "message": "أسبوعيًا (كل يوم أحد)"
+  },
+  "whatThisMeans": {
+    "message": "ماذا يعني هذا:"
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "ما هي أنماط URL المسموح بها؟"
+  },
+  "whenBrowserCloses": {
+    "message": "عند إغلاق المتصفح"
+  },
+  "whenShouldCleanupRun": {
+    "message": "متى يجب تشغيل التنظيف التلقائي الذكي؟"
+  },
+  "whitelist": {
+    "message": "القائمة البيضاء"
+  },
+  "whitelistDomain": {
+    "message": "نطاق القائمة البيضاء"
+  },
+  "whitelistDomains": {
+    "message": "نطاقات القائمة البيضاء"
+  },
+  "whitelistExactDomain": {
+    "message": "يضيف النطاق الدقيق فقط إلى القائمة البيضاء، وليس النطاقات الفرعية أو المسارات المحددة."
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "يضيف النطاق الرئيسي وجميع نطاقاته الفرعية إلى القائمة البيضاء (mail.example.com، blog.example.com، إلخ.)."
+  },
+  "whitelistPatterns": {
+    "message": "يمكنك استخدام الأنماط التالية للإضافة إلى القائمة البيضاء:"
+  },
+  "whitelistPrecedence": {
+    "message": "تأخذ نطاقات القائمة البيضاء الأسبقية على نطاقات القائمة السوداء"
+  },
+  "whitelistSpecificPage": {
+    "message": "يضيف صفحة محددة فقط على النطاق إلى القائمة البيضاء."
+  },
+  "whitelistSpecificPath": {
+    "message": "يضيف جميع الصفحات ضمن مسار محدد على النطاق إلى القائمة البيضاء."
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "يضيف نطاقًا فرعيًا محددًا فقط إلى القائمة البيضاء، وليس النطاق الرئيسي أو النطاقات الفرعية الأخرى."
+  },
+  "whitelistedDomains": {
+    "message": "نطاقات القائمة البيضاء"
+  },
+  "wildcardWarning": {
+    "message": "استخدم حرف البدل (*) بحذر لأنه قد يحظر أكثر مما هو مقصود"
+  },
+  "yesterday": {
+    "message": "الأمس"
+  }
+}

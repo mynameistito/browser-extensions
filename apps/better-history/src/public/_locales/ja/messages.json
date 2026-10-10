@@ -1,0 +1,1247 @@
+{
+  "FeedBackTextarePlaceholder": {
+    "message": "追加または改善できる点を説明してください。"
+  },
+  "FeedbackSuccessAlert": {
+    "message": "ありがとうございます！フィードバックが正常に送信されました。"
+  },
+  "Friday": {
+    "message": "金曜日"
+  },
+  "Monday": {
+    "message": "月曜日"
+  },
+  "Popup": {
+    "message": "ポップアップ"
+  },
+  "Saturday": {
+    "message": "土曜日"
+  },
+  "Sidebar": {
+    "message": "サイドバー"
+  },
+  "Sunday": {
+    "message": "日曜日"
+  },
+  "ThanksForFeedBack": {
+    "message": "フィードバックありがとうございます！"
+  },
+  "Thursday": {
+    "message": "木曜日"
+  },
+  "Today": {
+    "message": "今日"
+  },
+  "Tuesday": {
+    "message": "火曜日"
+  },
+  "URL": {
+    "message": "URL"
+  },
+  "Wednesday": {
+    "message": "水曜日"
+  },
+  "WhatCanWeImprove": {
+    "message": "何を改善できますか？"
+  },
+  "Yesterday": {
+    "message": "昨日"
+  },
+  "about": {
+    "message": "情報"
+  },
+  "activity": {
+    "message": "アクティビティ"
+  },
+  "add": {
+    "message": "追加"
+  },
+  "addDomains": {
+    "message": "ドメインを追加"
+  },
+  "addToBlackList": {
+    "message": "ブラックリストに追加"
+  },
+  "advanceExport": {
+    "message": "高度なエクスポート"
+  },
+  "advancedFeaturesActive": {
+    "message": "高度な機能が現在アクティブです。"
+  },
+  "advancedFeaturesPermissionsTitle": {
+    "message": "高度な機能には、以下の追加の権限が必要です："
+  },
+  "all": {
+    "message": "すべて"
+  },
+  "allCapitalLetters": {
+    "message": "すべて大文字"
+  },
+  "allHistoryDeleted": {
+    "message": "すべての履歴が削除されました"
+  },
+  "allHistoryDeletedExceptWhitelisted": {
+    "message": "ホワイトリストに登録されたドメインを除いて、すべての履歴が削除されました"
+  },
+  "allPermissionsGranted": {
+    "message": "すべての権限が許可されました！"
+  },
+  "allSelectedUrlDeleted": {
+    "message": "選択されたすべてのURLが削除されました"
+  },
+  "allTime": {
+    "message": "全期間"
+  },
+  "allowAccessToSubmitFeedback": {
+    "message": "フィードバックを送信するためにアクセスを許可してください"
+  },
+  "appName": {
+    "message": "Better History | 履歴の管理、エクスポート、削除"
+  },
+  "apply": {
+    "message": "適用"
+  },
+  "autoCleanupDisabled": {
+    "message": "自動クリーニングは無効になっています。必要な場合は、手動で履歴を消去できます。"
+  },
+  "autoCleanupEnabled": {
+    "message": "閲覧履歴は、選択されたスケジュールに基づいて自動的にクリーニングされます。"
+  },
+  "autoCleanupHelp": {
+    "message": "自動クリーニングは、設定に基づいて閲覧履歴を定期的に削除することで、プライバシーの維持に役立ちます。"
+  },
+  "autoCleanupSchedule": {
+    "message": "自動クリーニングスケジュール："
+  },
+  "avgPerDay": {
+    "message": "1日あたり平均 {{time}}"
+  },
+  "basicDomain": {
+    "message": "基本ドメイン"
+  },
+  "basicSearch": {
+    "message": "基本検索"
+  },
+  "basicSearchDescription": {
+    "message": "\u003Cstrong>{{basicSearch}}：\u003C/strong> 一致するエントリを見つけるには、任意のキーワードを入力してください（例：「受信トレイ」）。"
+  },
+  "betterHistory": {
+    "message": "BetterHistory"
+  },
+  "betterHistoryDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{betterHistory}}\u003C/span> は、\u003Cspan class=\"font-bold\">BetterLogic Ltd\u003C/span> が開発した革新的なブラウザ拡張機能です。カスタム削除、正確なフィルター、直感的なインターフェースなどの高度な機能を提供し、ユーザーが閲覧履歴を簡単に管理できるようにします。BetterLogic Ltdでは、お客様のブラウジング体験を向上させるために、ユーザーのプライバシーとシームレスな機能を最優先しています。"
+  },
+  "blacklist": {
+    "message": "ブラックリスト"
+  },
+  "blacklistDomain": {
+    "message": "ドメインをブラックリストに登録"
+  },
+  "blacklistDomainFromHistory": {
+    "message": "履歴からドメインをブラックリストに登録"
+  },
+  "blacklistDomains": {
+    "message": "ブラックリストドメイン"
+  },
+  "blacklistFeatureDescription": {
+    "message": "BetterHistoryのドメインブラックリスト機能を使用すると、特定のウェブサイトが閲覧履歴に記録されるのをブロックできます。一度ドメインがブラックリストに登録されると、そのサイトへの過去および将来のすべての訪問が自動的に削除されます。"
+  },
+  "blacklistInstructionText": {
+    "message": "BetterHistoryのドメインブラックリスト機能を使用すると、特定のウェブサイトが閲覧履歴に記録されるのをブロックできます。一度ドメインがブラックリストに登録されると、そのサイトへの過去および将来のすべての訪問が自動的に削除されます。"
+  },
+  "blacklistTips": {
+    "message": "ヒント"
+  },
+  "blacklist_confirmation": {
+    "message": "閲覧履歴から **{{DOMAIN}}** をブラックリストに登録してもよろしいですか？\u003Cbr/>このドメインへの今後の訪問は記録されなくなり、**{{DOMAIN}}** の既存の履歴エントリはすべて削除されます。"
+  },
+  "blacklist_domain_already_present": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> はすでにブラックリストに登録されています。"
+  },
+  "blacklistedDomains": {
+    "message": "ブラックリストに登録されたドメイン"
+  },
+  "blockExactDomain": {
+    "message": "サブドメインや特定のパスではなく、正確なドメインのみをブロックします。"
+  },
+  "blockMainDomainAndSubdomains": {
+    "message": "メインドメインとそのすべてのサブドメイン（mail.example.com、blog.example.comなど）をブロックします。"
+  },
+  "blockSpecificPage": {
+    "message": "ドメイン上の特定のページのみをブロックします。"
+  },
+  "blockSpecificPath": {
+    "message": "ドメイン上の特定のパス下のすべてのページをブロックします。"
+  },
+  "blockSpecificSubdomain": {
+    "message": "メインドメインや他のサブドメインではなく、特定のサブドメインのみをブロックします。"
+  },
+  "bugReport": {
+    "message": "バグ報告"
+  },
+  "bulkAddBlacklistDomains": {
+    "message": "一度に複数のドメインをブラックリストに追加します。1行に1つのドメインを入力してください。"
+  },
+  "bulkAddDomains": {
+    "message": "ドメインの一括追加"
+  },
+  "cancel": {
+    "message": "キャンセル"
+  },
+  "caseSensitivityDescription": {
+    "message": "\u003Cstrong>大文字/小文字の区別：\u003C/strong> 検索は既定で大文字/小文字を区別しません。"
+  },
+  "chooseStartAndEndDates": {
+    "message": "開始日と終了日を選択"
+  },
+  "clear": {
+    "message": "消去"
+  },
+  "clearBrowsingHistory": {
+    "message": "閲覧履歴を消去"
+  },
+  "clearHistory": {
+    "message": "履歴を消去"
+  },
+  "clearHistoryConfirm": {
+    "message": "閲覧履歴全体を削除してもよろしいですか？この操作は永続的であり、元に戻すことはできません。"
+  },
+  "clearStats": {
+    "message": "統計を消去"
+  },
+  "clearing": {
+    "message": "消去中..."
+  },
+  "clearingHistory": {
+    "message": "履歴管理"
+  },
+  "clickToRequestPermissions": {
+    "message": "不足している権限をリクエストするには、下のボタンをクリックしてください。"
+  },
+  "close": {
+    "message": "閉じる"
+  },
+  "clr": {
+    "message": "消去"
+  },
+  "confirmAndSave": {
+    "message": "確認して保存"
+  },
+  "confirmDelete": {
+    "message": "削除の確認"
+  },
+  "confirmSmartAutoCleanup": {
+    "message": "スマート自動クリーニング設定の確認"
+  },
+  "contact": {
+    "message": "連絡先"
+  },
+  "contactAndFeedback": {
+    "message": "連絡先とフィードバック"
+  },
+  "contactLimitReached": {
+    "message": "本日の連絡制限にすでに達しています。"
+  },
+  "containsDotCom": {
+    "message": "「.com」を含む"
+  },
+  "containsMultipleWordsDescription": {
+    "message": "\u003Cstrong>複数の単語を含む：\u003C/strong> \u003Ccode>{{pipe}}\u003C/code> を使用して、いくつかの単語のいずれかを含むエントリを検索します（例：\u003Ccode>{{example}}\u003C/code>）。"
+  },
+  "containsNewsOrInfo": {
+    "message": "「News」または「Info」を含む"
+  },
+  "containsNumbers": {
+    "message": "数字を含む"
+  },
+  "containsSpaces": {
+    "message": "スペースを含む"
+  },
+  "containsTODO": {
+    "message": "「TODO」を含む"
+  },
+  "current": {
+    "message": "このサイトから"
+  },
+  "currentlyYouCanViewDataForPastXDays": {
+    "message": "現在、過去 {{days}} {{dayLabel}} のデータを表示できます。今後、さらに日数が自動的に追加されます。"
+  },
+  "custom": {
+    "message": "カスタム"
+  },
+  "customExport": {
+    "message": "カスタムエクスポート"
+  },
+  "customRange": {
+    "message": "カスタム範囲"
+  },
+  "dailyAtMidnight": {
+    "message": "毎日（深夜0時）"
+  },
+  "darkMode": {
+    "message": "ダークモード"
+  },
+  "dateAndTimeOrder": {
+    "message": "日付と時刻の順序"
+  },
+  "day": {
+    "message": "日"
+  },
+  "days": {
+    "message": "日間"
+  },
+  "debugToolsTitle": {
+    "message": "デバッグツール（テスト用）："
+  },
+  "default": {
+    "message": "デフォルト"
+  },
+  "delete": {
+    "message": "削除"
+  },
+  "deleteAllForHour": {
+    "message": "**{{startHour}}** の閲覧履歴をすべて完全に削除してもよろしいですか？\u003Cbr>これにより、その時間帯全体（{{startAndendHour}}）の閲覧履歴が削除されます。一度削除すると、この操作は元に戻せません。"
+  },
+  "deleteAllFromDate": {
+    "message": "**{{date}}** の閲覧履歴をすべて完全に削除してもよろしいですか？\u003Cbr>これにより、その日のすべての記録が削除されます。一度削除すると、この操作は元に戻せません。"
+  },
+  "deleteAllSearchHistory": {
+    "message": "このページに表示されている、検索された閲覧履歴エントリをすべて完全に削除してもよろしいですか？\u003Cbr/>この操作により、現在の検索結果に表示されているすべてのエントリが削除されます。一度削除すると、この操作は元に戻せません。"
+  },
+  "deleteBulk": {
+    "message": "削除"
+  },
+  "deleteDomainConfirm": {
+    "message": "ドメイン \u003Cspan class=\"font-bold break-words\">{{domain}}\u003C/span> のすべての履歴を削除してもよろしいですか？この操作により、関連するすべてのエントリが削除され、元に戻せません。"
+  },
+  "deleteDomainStats": {
+    "message": "ドメイン統計を削除しますか？"
+  },
+  "deleteEntire": {
+    "message": "日付全体を削除"
+  },
+  "deleteEntireHistory": {
+    "message": "全履歴を削除"
+  },
+  "deleteEntireHistoryQues": {
+    "message": "全履歴を削除しますか？"
+  },
+  "deleteHistory": {
+    "message": "履歴を削除"
+  },
+  "deleteHistoryConfirmation": {
+    "message": "閲覧履歴全体を削除してもよろしいですか？この操作は永続的であり、元に戻すことはできません。"
+  },
+  "deleteMsg": {
+    "message": "すべての検索結果を削除しますか？"
+  },
+  "deleteSelectedHistory": {
+    "message": "選択した履歴を削除"
+  },
+  "deleteSpecificDate": {
+    "message": "特定の日付を削除"
+  },
+  "deleteStatsConfirmation": {
+    "message": "BetterHistoryから \u003Cspan class='font-medium'>{{DOMAIN}}\u003C/span> のすべての追跡データを完全に削除しようとしています。\u003Cbr>\u003Cbr>この操作は元に戻せません。"
+  },
+  "deleteUrlConfirm": {
+    "message": "履歴からURL \u003Cspan class=\"font-bold break-words\">{{url}}\u003C/span> を削除してもよろしいですか？この操作は元に戻せません。"
+  },
+  "deletedSelectedHistory": {
+    "message": "選択した {{selectedNumber}} 件の履歴エントリを完全に削除してもよろしいですか？\u003Cbr/>この操作により、選択したすべての {{selectedNumber}} 件のエントリが完全に削除されます。一度削除すると、この操作は元に戻せません。"
+  },
+  "devices": {
+    "message": "デバイス"
+  },
+  "disableTimeTracking": {
+    "message": "これを無効にすると、追跡が停止し、すべての統計が非表示になります。"
+  },
+  "domainAlreadyExists": {
+    "message": "このドメインはすでにリストにあります"
+  },
+  "domainAlreadyExistsLine": {
+    "message": "行 ${index + 1}：ドメインは既に存在します (${cleanedDomain})"
+  },
+  "domainBlacklist": {
+    "message": "ドメインブラックリスト"
+  },
+  "domainCannotBeEmpty": {
+    "message": "ドメインを空にすることはできません"
+  },
+  "domainStats": {
+    "message": "ドメイン統計"
+  },
+  "domainWithSubdomains": {
+    "message": "すべてのサブドメインを含むドメイン"
+  },
+  "domains": {
+    "message": "ドメイン"
+  },
+  "email": {
+    "message": "メールアドレス"
+  },
+  "emailArticle": {
+    "message": "サポート記事"
+  },
+  "emailArticleDesc": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailArticle}}：\u003C/span> \u003Ca href=\"https://betterhistory.io/support/\" target=\"_blank\">\u003Cspan class=\"font-bold text-[#6886AB] hover:underline\">BetterHistory サポート\u003C/span>\u003C/a>でサポートガイドとFAQをご覧ください。"
+  },
+  "emailSupport": {
+    "message": "メールサポート"
+  },
+  "emailSupportDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{emailSupport}}：\u003C/span> ご質問や問題については、📧 \u003Ca href=\"mailto:support@betterhistory.io\" class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">support@betterhistory.io\u003C/a> までご連絡ください。"
+  },
+  "enableStats": {
+    "message": "統計を有効にする"
+  },
+  "enableStatsDescription": {
+    "message": "すべての統計機能を有効または無効にします。無効にすると、統計は収集または表示されません。"
+  },
+  "enable_popup": {
+    "message": "ポップアップを有効にする"
+  },
+  "endsWithQuestionMark": {
+    "message": "「？」で終わる"
+  },
+  "enterAValidDomain": {
+    "message": "有効なドメインを入力してください"
+  },
+  "enterAtLeastOneDomain": {
+    "message": "少なくとも1つのドメインを入力してください"
+  },
+  "enterDomain": {
+    "message": "履歴から除外したいドメインを入力"
+  },
+  "enterDomainName": {
+    "message": "ドメイン名を入力"
+  },
+  "enterDomainPerLine": {
+    "message": "一度に複数のドメインをホワイトリストに追加します。1行に1つのドメインを入力してください。"
+  },
+  "enterDomainToBlock": {
+    "message": "ブロックするドメインを入力（例：example.com）"
+  },
+  "enterDomainToWhitelist": {
+    "message": "ホワイトリストに登録するドメインを入力（例：example.com）"
+  },
+  "enterValidDomain": {
+    "message": "少なくとも1つの有効なドメインを入力してください"
+  },
+  "entireExport": {
+    "message": "全体エクスポート（90日間）"
+  },
+  "entries": {
+    "message": "エントリ"
+  },
+  "eraseAllHistoryFromThisSite": {
+    "message": "このサイトの履歴をすべて削除"
+  },
+  "error": {
+    "message": "エラー"
+  },
+  "errorClearingHistory": {
+    "message": "履歴の消去に失敗しました。もう一度お試しください。"
+  },
+  "errorClearingStats": {
+    "message": "統計の消去に失敗しました"
+  },
+  "errorLoadingData": {
+    "message": "データの読み込みエラー"
+  },
+  "errorLoadingSettings": {
+    "message": "設定の読み込みエラー。デフォルト値を使用します。"
+  },
+  "errorSavingSettings": {
+    "message": "設定の保存に失敗しました。もう一度お試しください。"
+  },
+  "exactWordProject": {
+    "message": "正確な単語「Project」"
+  },
+  "exampleDomains": {
+    "message": "example.com\nhttps://blog.example.org\nwww.another-site.com/specific-path"
+  },
+  "examplePathPattern": {
+    "message": "example.com/path/*"
+  },
+  "exampleSpecificPage": {
+    "message": "example.com/specific-page.html"
+  },
+  "examplecom": {
+    "message": "example.com"
+  },
+  "exploreOurProducts": {
+    "message": "当社の製品を探す"
+  },
+  "export": {
+    "message": "エクスポート"
+  },
+  "exportAsJSON": {
+    "message": "JSONとしてエクスポート"
+  },
+  "exportAsPDF": {
+    "message": "PDFとしてエクスポート"
+  },
+  "exportCsv": {
+    "message": "CSVをエクスポート"
+  },
+  "exportEntireLocalData": {
+    "message": "ローカルデータ全体をエクスポート"
+  },
+  "exportHistory": {
+    "message": "閲覧履歴全体をエクスポート"
+  },
+  "exportHistoryDescription": {
+    "message": "この機能を使用すると、閲覧履歴全体（最大90日間）をエクスポートしたり、エクスポートするカスタム日付範囲を選択したりできます。Chromeの履歴APIは履歴のエクスポートのみをサポートしており、履歴の再インポートは許可されていないことに注意してください。"
+  },
+  "exportHistoryLimitation": {
+    "message": "さらに、Chromeは90日以上前の履歴を自動的に削除するため、BetterHistoryはChromeが保持している記録のみをエクスポートできます。"
+  },
+  "exportHtml": {
+    "message": "HTMLをエクスポート"
+  },
+  "exportLocalData": {
+    "message": "ローカルデータのエクスポート"
+  },
+  "exportSelectedCsv": {
+    "message": "選択した項目をCSVでエクスポート"
+  },
+  "exportSelectedHtml": {
+    "message": "選択した項目をHTMLでエクスポート"
+  },
+  "exportTimeTrackingData": {
+    "message": "時間追跡データのエクスポート"
+  },
+  "exportTimeTrackingDataDescription": {
+    "message": "これは、個人使用のためにエクスポートできるローカルに保存された時間追跡データです。訪問したページに費やした時間が反映され、閲覧習慣の分析に役立ちます。"
+  },
+  "exportTimeTrackingDataLimitation": {
+    "message": "このデータはブラウザにのみ保存され、オンラインで同期または保存されません。BetterHistory拡張機能を削除すると、すべての時間追跡データが完全に削除されます。バックアップを保持したい場合は、定期的にデータをエクスポートしてください。"
+  },
+  "exportToCSV": {
+    "message": "CSVにエクスポート"
+  },
+  "exportToTXT": {
+    "message": "TXTにエクスポート"
+  },
+  "exportedHistoryDate": {
+    "message": "エクスポートされた閲覧履歴 - 日付："
+  },
+  "exportedHistoryKeyword": {
+    "message": "エクスポートされた閲覧履歴 - キーワード："
+  },
+  "featureRequest": {
+    "message": "機能リクエスト"
+  },
+  "feedback": {
+    "message": "フィードバック"
+  },
+  "feedbackCheckprivacyPolicyText": {
+    "message": "\u003Ca href=\"https://betterhistory.io/privacy/\" target=\"_blank\">\u003Cspan class=\"font-bold\">プライバシーポリシー\u003C/span>\u003C/a>とデータ処理に同意します。"
+  },
+  "feedbackEmailFollowUpMessage": {
+    "message": "提出内容に関するフォローアップのために、あなたのメールアドレスを提供してください。"
+  },
+  "feedbackForm": {
+    "message": "フィードバックフォーム"
+  },
+  "feedbackFormDescription": {
+    "message": "\u003Cspan class=\"font-bold\">{{feedbackForm}}：\u003C/span> \u003Cspan class=\"text-[#6886AB] cursor-pointer font-bold hover:underline\">フィードバックを送信するにはここをクリック\u003C/span>"
+  },
+  "fileSizeEcveed5mdMessage": {
+    "message": "ファイルサイズが5MBを超えています。より小さいファイルをアップロードしてください。"
+  },
+  "find_all_visits_domain": {
+    "message": "{{d}} へのすべての訪問を検索"
+  },
+  "generalContact": {
+    "message": "一般連絡先"
+  },
+  "generatedUsing": {
+    "message": "このドキュメントは、これを使用して生成されました"
+  },
+  "grantPermissions": {
+    "message": "権限を許可"
+  },
+  "groupSession": {
+    "message": "セッションのグループ化"
+  },
+  "history": {
+    "message": "履歴"
+  },
+  "historyCleared": {
+    "message": "履歴が消去されました"
+  },
+  "historyControlsFor": {
+    "message": "履歴コントロール（対象：）"
+  },
+  "historyFromWhitelistedPreserved": {
+    "message": "ホワイトリストに登録されたドメインの履歴は、クリーニング中に保持されます"
+  },
+  "historyRetentionHelp": {
+    "message": "この選択された期間内の履歴は保持され、自動クリーニングから除外されます。"
+  },
+  "hourFormat": {
+    "message": "時刻の形式"
+  },
+  "hours": {
+    "message": "時間"
+  },
+  "howDidWeDo": {
+    "message": "私たちの出来栄えはいかがでしたか？"
+  },
+  "howLongKeepHistory": {
+    "message": "閲覧履歴が自動削除の対象となるまでに、どのくらいの期間保持されますか？"
+  },
+  "howToUseTheSearchTool": {
+    "message": "検索ツールの使い方"
+  },
+  "id": {
+    "message": "ID"
+  },
+  "idleDetectionDescription": {
+    "message": "• アイドル検出（離席時に追跡を停止）"
+  },
+  "import": {
+    "message": "インポート"
+  },
+  "importEntireLocalData": {
+    "message": "ローカルデータをインポート"
+  },
+  "importFailed": {
+    "message": "データのインポートに失敗しました"
+  },
+  "importJSON": {
+    "message": "JSONをインポート"
+  },
+  "importSuccessful": {
+    "message": "データが正常にインポートされました"
+  },
+  "infinityScroll": {
+    "message": "無限スクロールを有効にする"
+  },
+  "interfaceStyle": {
+    "message": "表示設定"
+  },
+  "invalidDomainFormat": {
+    "message": "有効なドメイン形式（例：example.com）を入力してください"
+  },
+  "invalidDomainFormatLine": {
+    "message": "行 ${index + 1}：無効なドメイン形式 (${line})"
+  },
+  "invalidFileTypeMessage": {
+    "message": "無効なファイル形式です。JPGまたはPNG画像をアップロードしてください。"
+  },
+  "isNotAValidDomainPleseUseValid": {
+    "message": "\u003Cstrong>{{DOMAIN}}\u003C/strong> は有効なドメインではありません。ブラックリストに追加するには、有効なドメインを使用してください。"
+  },
+  "keepHistoryCheckText": {
+    "message": "ホワイトリストに追加したウェブサイトの履歴を保持する"
+  },
+  "keepHistoryFromWhitelist": {
+    "message": "ホワイトリストに追加したウェブサイトの履歴を保持する"
+  },
+  "large": {
+    "message": "大"
+  },
+  "last15Days": {
+    "message": "15日間"
+  },
+  "last2Months": {
+    "message": "過去2か月"
+  },
+  "last30Days": {
+    "message": "30日間"
+  },
+  "last3Months": {
+    "message": "過去3か月"
+  },
+  "last60Days": {
+    "message": "60日間"
+  },
+  "last7Days": {
+    "message": "7日間"
+  },
+  "last90Days": {
+    "message": "90日間"
+  },
+  "lastMonth": {
+    "message": "先月"
+  },
+  "lastVisitTime": {
+    "message": "最終訪問時刻"
+  },
+  "lastWeek": {
+    "message": "先週"
+  },
+  "learnMoreAboutAutoCleanup": {
+    "message": "自動クリーニングについて詳しくはこちら"
+  },
+  "learnMoreAboutRetention": {
+    "message": "保持期間について詳しくはこちら"
+  },
+  "letMeKnowIfyouNeedAdditionalAdjustment": {
+    "message": "追加の調整が必要な場合はお知らせください。"
+  },
+  "lightMode": {
+    "message": "ライトモード"
+  },
+  "loadingSettings": {
+    "message": "設定を読み込み中..."
+  },
+  "ltr": {
+    "message": "LTR（左から右）"
+  },
+  "mainDomainNote": {
+    "message": "メインドメインをブロックしても、そのサブドメインが自動的にブロックされるわけではありません"
+  },
+  "manageTimeTrackingAndUsageStats": {
+    "message": "時間追跡と利用状況の統計を管理"
+  },
+  "manageTimeTrackingAndUsageStatsDescription": {
+    "message": "有効にすると、BetterHistoryは各ウェブサイトで費やした時間（セッション期間、アクティブ時間とアイドル時間を含む）を追跡します。すべてのデータはブラウザにローカルに保存され、詳細な閲覧インサイトと時間分析を提供するためだけに使用されます。"
+  },
+  "manifest_browser_action_title": {
+    "message": "履歴の閲覧"
+  },
+  "manifest_description": {
+    "message": "洗練された履歴マネージャー：強力な検索、一括エクスポート、カスタム選択削除、日別・時間別フィルタリング、特定のドメインを履歴からブロックする機能。"
+  },
+  "maxSize": {
+    "message": "最大サイズ"
+  },
+  "mediaPlaybackDescription": {
+    "message": "• メディア再生検出（動画/音楽中に追跡を続行）"
+  },
+  "medium": {
+    "message": "中"
+  },
+  "monthlyFirstOfMonth": {
+    "message": "毎月（毎月1日）"
+  },
+  "moreDaysWillBeAddedAutomatically": {
+    "message": "さらに日数が自動的に追加されます。"
+  },
+  "moreFromSite": {
+    "message": "このサイトからさらに表示"
+  },
+  "mostActiveDay": {
+    "message": "最もアクティブな日"
+  },
+  "neverDisabled": {
+    "message": "しない（無効）"
+  },
+  "noActivityData": {
+    "message": "この期間の活動データはありません"
+  },
+  "noBlacklistType": {
+    "message": "あなたのブラックリストに {{type}} はありません"
+  },
+  "noChangesToSave": {
+    "message": "保存する変更はありません"
+  },
+  "noDevices": {
+    "message": "アクティブなデバイスセッションは見つかりませんでした。"
+  },
+  "noDomainBlacklisted": {
+    "message": "まだドメインはブラックリストに登録されていません"
+  },
+  "noDomains": {
+    "message": "まだドメインはホワイトリストに登録されていません"
+  },
+  "noDomainsType": {
+    "message": "あなたのホワイトリストに {{type}} はありません"
+  },
+  "noFileSelectedMessage": {
+    "message": "ファイルが選択されていません。有効なファイルをアップロードしてください。"
+  },
+  "noMoreResults": {
+    "message": "これ以上結果はありません"
+  },
+  "noResultsFound": {
+    "message": "結果が見つかりませんでした。検索語句やフィルターを調整してみてください。"
+  },
+  "noThanks": {
+    "message": "いいえ、結構です"
+  },
+  "noTitle": {
+    "message": "タイトルなし"
+  },
+  "noVisits": {
+    "message": "申し訳ありません、訪問履歴は見つかりませんでした。"
+  },
+  "numbersOnlyDescription": {
+    "message": "\u003Cstrong>数字のみ：\u003C/strong> \u003Ccode>{{pattern}}\u003C/code> を使用して、数字を含むエントリを見つけます。"
+  },
+  "of": {
+    "message": "の"
+  },
+  "ok": {
+    "message": "OK"
+  },
+  "oneMonth": {
+    "message": "1か月"
+  },
+  "oneWeek": {
+    "message": "1週間"
+  },
+  "openAllTabs": {
+    "message": "すべてのタブを開く"
+  },
+  "openMenu": {
+    "message": "メニューを開く"
+  },
+  "openTab": {
+    "message": "新しいタブで開く"
+  },
+  "order": {
+    "message": "順序"
+  },
+  "otherOptions": {
+    "message": "一般設定"
+  },
+  "page": {
+    "message": "ページ"
+  },
+  "paths": {
+    "message": "パス"
+  },
+  "permissionGranted": {
+    "message": "✓ 許可済み"
+  },
+  "permissionMissing": {
+    "message": "✗ 不足"
+  },
+  "permissionsAlreadyGranted": {
+    "message": "権限は既に許可されています"
+  },
+  "pleaseNote": {
+    "message": "ご注意ください："
+  },
+  "pleaseRateUs": {
+    "message": "ぜひ評価してください！"
+  },
+  "prefixesAutoRemoved": {
+    "message": "「http://」「https://」「www.」などのプレフィックスは自動的に削除されます。"
+  },
+  "prefixesRemoved": {
+    "message": "「http://」「https://」「www.」などのプレフィックスは自動的に削除されます"
+  },
+  "preventFutureHistoryTracking": {
+    "message": "履歴の記録からこのサイトをブラックリストに登録"
+  },
+  "privacyPolicy": {
+    "message": "プライバシーポリシー"
+  },
+  "privacyTerms": {
+    "message": "プライバシーと利用規約"
+  },
+  "processing": {
+    "message": "処理中..."
+  },
+  "rateText": {
+    "message": "皆様からのご意見は、BetterHistoryの改善に役立ちます。ぜひご感想をお聞かせください！"
+  },
+  "recent": {
+    "message": "最近の訪問"
+  },
+  "recordedVisits": {
+    "message": "このドメインへの記録された訪問"
+  },
+  "remove_url": {
+    "message": "このURLを履歴から削除"
+  },
+  "result": {
+    "message": "結果"
+  },
+  "results": {
+    "message": "結果"
+  },
+  "retentionPeriod": {
+    "message": "保持期間："
+  },
+  "retentionPeriodHelp": {
+    "message": "保持期間は、閲覧履歴が過去にさかのぼって保持される期間を決定します。古い履歴はクリーニングの対象になります。"
+  },
+  "reviewSettingsBeforeConfirming": {
+    "message": "確認する前に、設定を確認してください。"
+  },
+  "revokePermissions": {
+    "message": "権限を取り消す"
+  },
+  "rightTitle": {
+    "message": "コンテキストメニューオプション"
+  },
+  "rtl": {
+    "message": "RTL（右から左）"
+  },
+  "saveSettings": {
+    "message": "設定を保存"
+  },
+  "search": {
+    "message": "検索"
+  },
+  "searchDeeper": {
+    "message": "さらに深く検索"
+  },
+  "searchDomainTitle": {
+    "message": "ドメインによる検索"
+  },
+  "searchEngine": {
+    "message": "検索エンジン"
+  },
+  "searchMsg": {
+    "message": "こっそり... 何か検索してみてください"
+  },
+  "searchPlaceholder": {
+    "message": "タイトルまたはURLを検索"
+  },
+  "searchTextTitle": {
+    "message": "テキスト選択による検索"
+  },
+  "searchTips": {
+    "message": "検索のヒント"
+  },
+  "searchTipsMsg1": {
+    "message": "正規表現による検索がサポートされました！"
+  },
+  "searchTipsMsg2": {
+    "message": "例えば、次のように検索してみてください"
+  },
+  "searchTipsMsg3": {
+    "message": "訪問とダウンロードを検索"
+  },
+  "searchTipsMsg4": {
+    "message": "検索は、ページタイトルとURLによる訪問、およびファイル名とURLによるダウンロードを自動的に探します。"
+  },
+  "searchTipsMsg5": {
+    "message": "最初の高速検索には、直近の10,000件の訪問が使用されます。さらに深く検索するには、結果の最後のページの下部に移動し、「さらに深く検索」ボタンをクリックしてください。"
+  },
+  "searchToolDescription": {
+    "message": "このツールを使用すると、シンプルなキーワードまたは高度な**正規表現（RegEx）**を使用して、閲覧履歴を効果的に検索できます。始めるのに役立ついくつかの例を以下に示します。"
+  },
+  "search_history": {
+    "message": "履歴を検索"
+  },
+  "searchedUrlDeleted": {
+    "message": "検索されたURLが削除されました"
+  },
+  "searchedUrlDeletedExceptWhitelisted": {
+    "message": "ホワイトリストに登録されたドメインを除いて、検索されたURLが削除されました"
+  },
+  "searching": {
+    "message": "検索中"
+  },
+  "selectDateFormat": {
+    "message": "日付の形式"
+  },
+  "selectDateRange": {
+    "message": "日付範囲を選択"
+  },
+  "selectDateToDeleteHistory": {
+    "message": "履歴を削除する日付を選択"
+  },
+  "selectEndDate": {
+    "message": "終了日を選択"
+  },
+  "selectStartDate": {
+    "message": "開始日を選択"
+  },
+  "selected": {
+    "message": "選択済み"
+  },
+  "selectedDateHistoryDeleted": {
+    "message": "選択された日付の履歴が削除されました"
+  },
+  "selectedDateHistoryDeletedExceptWhitelisted": {
+    "message": "ホワイトリストに登録されたドメインを除いて、選択された日付の履歴が削除されました"
+  },
+  "selectedHourHistoryDeleted": {
+    "message": "選択された時間の履歴が削除されました"
+  },
+  "selectedHourHistoryDeletedExceptWhitelisted": {
+    "message": "ホワイトリストに登録されたドメインを除いて、選択された時間の履歴が削除されました"
+  },
+  "sessions": {
+    "message": "セッション"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "settingsSaved": {
+    "message": "設定が保存されました"
+  },
+  "settingsUpdatedSuccessfully": {
+    "message": "スマート自動クリーニング設定が正常に更新されました。"
+  },
+  "shortRetentionWarning": {
+    "message": "保持期間を1週間と短く設定すると、古い閲覧履歴がより頻繁にクリーニングされます。これがあなたのニーズに合っていることを確認してください。"
+  },
+  "show": {
+    "message": "表示"
+  },
+  "showAllHistory": {
+    "message": "すべての履歴を表示"
+  },
+  "showStats": {
+    "message": "統計を表示"
+  },
+  "small": {
+    "message": "小"
+  },
+  "smartAutoCleanup": {
+    "message": "スマート自動クリーニング"
+  },
+  "smartAutoCleanupDescription": {
+    "message": "スマート自動クリーニングで閲覧履歴を自動的に管理します。クリーニングを実行する頻度と、最近の履歴を保持する期間を選択します。"
+  },
+  "smartAutoCleanupSettings": {
+    "message": "スマート自動クリーニング設定"
+  },
+  "smartHistoryCleanup": {
+    "message": "スマート履歴クリーニング"
+  },
+  "smartHistoryCleanupDescription": {
+    "message": "ホワイトリストに追加したウェブサイトを除いて、閲覧履歴を消去します。この機能は、信頼できるサイトや頻繁に利用するサイトからの重要な履歴を保持しつつ、アクティビティをプライベートに保つのに役立ちます。"
+  },
+  "socialMediaTip": {
+    "message": "ソーシャルメディアサイトの場合は、特定のセクションをブロックすることを検討してください（facebook.com/marketplace/*）"
+  },
+  "someDomainsCouldNotBeAdded": {
+    "message": "一部のドメインを追加できませんでした：\n${errors}"
+  },
+  "somePermissionsMissing": {
+    "message": "一部の権限が不足しています"
+  },
+  "specificPage": {
+    "message": "特定のページ"
+  },
+  "specificPath": {
+    "message": "特定のパス"
+  },
+  "specificSubdomain": {
+    "message": "特定のサブドメイン"
+  },
+  "start": {
+    "message": "開始"
+  },
+  "startsWithDescription": {
+    "message": "\u003Cstrong>〜で始まる：\u003C/strong> ^ を使用して、特定の単語で始まるエントリを見つけます（例：^受信トレイ）。"
+  },
+  "startsWithInbox": {
+    "message": "「受信トレイ」で始まる"
+  },
+  "statsCleared": {
+    "message": "統計が消去されました"
+  },
+  "statsPermissionDialogCancel": {
+    "message": "キャンセル"
+  },
+  "statsPermissionDialogDescription": {
+    "message": "ウェブサイトで費やした時間を追跡し、セッションの詳細を表示し、時間レポートをPDFでエクスポートできるようにするには、閲覧アクティビティへのアクセス権限が必要です。"
+  },
+  "statsPermissionDialogGrant": {
+    "message": "権限を許可"
+  },
+  "statsPermissionDialogIntro": {
+    "message": "BetterHistoryに新しい時間追跡機能が導入されました！"
+  },
+  "statsPermissionDialogTitle": {
+    "message": "時間追跡に必要な新しい権限"
+  },
+  "subdomainNote": {
+    "message": "メインドメインをホワイトリストに登録しても、そのサブドメインが自動的にホワイトリストに登録されるわけではありません"
+  },
+  "subdomains": {
+    "message": "サブドメイン"
+  },
+  "submit": {
+    "message": "送信"
+  },
+  "submitFeedback": {
+    "message": "フィードバックを送信"
+  },
+  "suggestionAndFeedBackMessage": {
+    "message": "皆様の提案とフィードバックは、BetterHistoryを改善し、最高のユーザーエクスペリエンスを提供するために役立ちます。"
+  },
+  "tenOrMoreCharacters": {
+    "message": "10文字以上"
+  },
+  "termsOfService": {
+    "message": "利用規約"
+  },
+  "thankYou": {
+    "message": "ありがとうございます！"
+  },
+  "thisActionCannotBeUndone": {
+    "message": "この操作は元に戻せません。"
+  },
+  "thisDomainIsAlrededListedInBlackListDomains": {
+    "message": "このURLまたはドメインは、すでにブラックリストドメインに登録されています"
+  },
+  "thisDomainIsAlrededListedInWhiteListDomains": {
+    "message": "このURLまたはドメインは、すでにホワイトリストドメインに登録されています"
+  },
+  "threeMonths": {
+    "message": "3か月"
+  },
+  "timeTrackingStartedOn": {
+    "message": "時間追跡は {{date}} に開始されました"
+  },
+  "tips": {
+    "message": "ヒント"
+  },
+  "title": {
+    "message": "タイトル"
+  },
+  "toBlackListEveryPageonDomainAndItsSubdomainWrite": {
+    "message": "ドメインとそのサブドメイン上のすべてのページをブラックリストに登録するには、次のように記述します。"
+  },
+  "toBlackListEveryPageonDomainWrite": {
+    "message": "ドメイン上のすべてのページをブラックリストに登録するには、次のように記述します。"
+  },
+  "todalWords": {
+    "message": "合計単語数"
+  },
+  "today": {
+    "message": "今日"
+  },
+  "toolbarIcon": {
+    "message": "ツールバーアイコンのテーマ"
+  },
+  "totalEntries": {
+    "message": "合計エントリ"
+  },
+  "totalVisits": {
+    "message": "合計訪問数"
+  },
+  "twoWeeks": {
+    "message": "2週間"
+  },
+  "typdCount": {
+    "message": "入力回数"
+  },
+  "typeAndKeyWordToDindMatch": {
+    "message": "一致するエントリを見つけるには、任意のキーワードを入力してください。"
+  },
+  "typeDeleteToConfirm": {
+    "message": "確認のために「delete」と入力してください："
+  },
+  "typedCount": {
+    "message": "アドレスバーに {{times}} 回入力されました"
+  },
+  "unableToLoadDomainStats": {
+    "message": "ドメイン統計を読み込めません。後でもう一度お試しください。"
+  },
+  "understandSettings": {
+    "message": "これらの設定と、それらが閲覧履歴にどのように影響するかを理解しています"
+  },
+  "understandYourRights": {
+    "message": "あなたの権利を理解する"
+  },
+  "uniqueUrls": {
+    "message": "ユニークなURL"
+  },
+  "updatingData": {
+    "message": "データを更新中..."
+  },
+  "uploadScreenShot": {
+    "message": "スクリーンショットをアップロード"
+  },
+  "urlDeleted": {
+    "message": "URLが削除されました"
+  },
+  "urlPatternGuide": {
+    "message": "URLパターンガイド"
+  },
+  "urlPatternGuideBlacklist": {
+    "message": "ウェブサイトをブロックするには、次のパターンを使用できます。"
+  },
+  "useSpecificPaths": {
+    "message": "ウェブサイトの特定のセクションのみをホワイトリストに登録するには、特定のパスを使用します"
+  },
+  "viewHere": {
+    "message": "こちらを見る"
+  },
+  "viewStats": {
+    "message": "統計を表示"
+  },
+  "viewStatsButton": {
+    "message": "アクティビティページの各エントリに「統計を表示」ボタンも表示され、詳細な時間データにすばやくアクセスできます"
+  },
+  "visitCount": {
+    "message": "リンクを {{times}} 回訪問しました"
+  },
+  "visitSite": {
+    "message": "サイトにアクセス"
+  },
+  "visits_domain": {
+    "message": "このドメインへのすべての訪問を表示"
+  },
+  "vstCount": {
+    "message": "訪問回数"
+  },
+  "weValueYourInputMessage": {
+    "message": "皆様からのご意見を大切にし、サポートさせていただきます！"
+  },
+  "websiteAccessDescription": {
+    "message": "• ウェブサイトアクセス（アクティビティの監視のため）"
+  },
+  "websites": {
+    "message": "ウェブサイト"
+  },
+  "weeklyEverySunday": {
+    "message": "毎週（毎週日曜日）"
+  },
+  "whatThisMeans": {
+    "message": "これが意味すること："
+  },
+  "whatUrlPatternsAreAllowed": {
+    "message": "許可されているURLパターンは何ですか？"
+  },
+  "whenBrowserCloses": {
+    "message": "ブラウザを閉じるとき"
+  },
+  "whenShouldCleanupRun": {
+    "message": "スマート自動クリーニングはいつ実行されますか？"
+  },
+  "whitelist": {
+    "message": "ホワイトリスト"
+  },
+  "whitelistDomain": {
+    "message": "ドメインをホワイトリストに登録"
+  },
+  "whitelistDomains": {
+    "message": "ホワイトリストドメイン"
+  },
+  "whitelistExactDomain": {
+    "message": "サブドメインや特定のパスではなく、正確なドメインのみをホワイトリストに登録します。"
+  },
+  "whitelistMainDomainAndSubdomains": {
+    "message": "メインドメインとそのすべてのサブドメイン（mail.example.com、blog.example.comなど）をホワイトリストに登録します。"
+  },
+  "whitelistPatterns": {
+    "message": "ホワイトリストに登録するには、次のパターンを使用できます。"
+  },
+  "whitelistPrecedence": {
+    "message": "ホワイトリストに登録されたドメインは、ブラックリストに登録されたドメインよりも優先されます"
+  },
+  "whitelistSpecificPage": {
+    "message": "ドメイン上の特定のページのみをホワイトリストに登録します。"
+  },
+  "whitelistSpecificPath": {
+    "message": "ドメイン上の特定のパス下のすべてのページをホワイトリストに登録します。"
+  },
+  "whitelistSpecificSubdomain": {
+    "message": "メインドメインや他のサブドメインではなく、特定のサブドメインのみをホワイトリストに登録します。"
+  },
+  "whitelistedDomains": {
+    "message": "ホワイトリストに登録されたドメイン"
+  },
+  "wildcardWarning": {
+    "message": "ワイルドカード（*）は、意図しないものまでブロックする可能性があるため、注意して使用してください"
+  },
+  "yesterday": {
+    "message": "昨日"
+  }
+}
