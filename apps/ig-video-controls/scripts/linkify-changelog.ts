@@ -1,24 +1,10 @@
-import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dir, "..");
 const CHANGELOG_PATH = path.resolve(ROOT, "CHANGELOG.md");
-
-const repoUrl = execSync("git remote get-url origin", {
-  cwd: ROOT,
-  encoding: "utf-8",
-}).trim();
-
-const repo = repoUrl.match(/github\.com[:/](?<repo>[^/]+\/[^/]+?)(?:\.git)?$/u)
-  ?.groups?.repo;
-
-if (!repo) {
-  console.error(`Cannot extract owner/repo from remote: ${repoUrl}`);
-  process.exit(1);
-}
-
-const commitUrlBase = `https://github.com/${repo}/commit`;
+const commitUrlBase =
+  "https://github.com/mynameistito/browser-extensions/commit";
 
 let content = readFileSync(CHANGELOG_PATH, "utf-8");
 
