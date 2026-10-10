@@ -77,7 +77,7 @@ const handleVisitsDomain = async (
     return;
   }
   await tabs.create({
-    url: browser.runtime.getURL(`/history.html#/domain/${host}`),
+    url: browser.runtime.getURL(`/history.html#/?q=${encodeURIComponent(host)}`),
   });
 };
 

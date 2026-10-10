@@ -70,21 +70,46 @@ export const HistoryList = ({ items, onDelete }: Props) => {
     });
   };
 
-  const allChecked = useMemo(
-    () => items.length > 0 && selected.size === items.length,
-    [items.length, selected.size]
+  const visibleSelected = useMemo(
+    () => items.filter((item) => selected.has(item.url)),
+    [items, selected]
   );
+  const allChecked =
+    items.length > 0 && visibleSelected.length === items.length;
 
   const toggleAll = () => {
-    setSelected(allChecked ? new Set() : new Set(items.map((i) => i.url)));
+    if (allChecked) {
+      setSelected((prev) => {
+        const next = new Set(prev);
+        for (const item of items) {
+          next.delete(item.url);
+        }
+        return next;
+      });
+    } else {
+      setSelected((prev) => {
+        const next = new Set(prev);
+        for (const item of items) {
+          next.add(item.url);
+        }
+        return next;
+      });
+    }
   };
 
   const deleteSelected = () => {
-    if (selected.size === 0) {
+    const urls = visibleSelected.map((item) => item.url);
+    if (urls.length === 0) {
       return;
     }
-    onDelete([...selected]);
-    setSelected(new Set());
+    onDelete(urls);
+    setSelected((prev) => {
+      const next = new Set(prev);
+      for (const url of urls) {
+        next.delete(url);
+      }
+      return next;
+    });
   };
 
   return (
@@ -99,7 +124,9 @@ export const HistoryList = ({ items, onDelete }: Props) => {
         />
         <div className="text-sm text-zinc-500">
           {items.length} result{items.length === 1 ? "" : "s"}
-          {selected.size > 0 ? ` · ${selected.size} selected` : ""}
+          {visibleSelected.length > 0
+            ? ` · ${visibleSelected.length} selected`
+            : ""}
         </div>
         <button
           className={cn(

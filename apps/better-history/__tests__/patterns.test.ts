@@ -64,6 +64,9 @@ describe("ruleMatches: path", () => {
   test("matches deeper path", () => {
     expect(ruleMatches(rule, "https://example.com/docs/intro")).toBe(true);
   });
+  test("rejects sibling path with shared prefix", () => {
+    expect(ruleMatches(rule, "https://example.com/docs-private")).toBe(false);
+  });
   test("rejects sibling path", () => {
     expect(ruleMatches(rule, "https://example.com/blog")).toBe(false);
   });

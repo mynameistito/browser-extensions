@@ -9,9 +9,14 @@ import { createRoot } from "react-dom/client";
 
 import { routeTree } from "@/routeTree.gen";
 
+const getInitialEntry = (): string => {
+  const hash = window.location.hash.replace(/^#/u, "");
+  return hash.length > 0 ? hash : "/";
+};
+
 const router = createRouter({
   defaultPreload: "intent",
-  history: createMemoryHistory({ initialEntries: ["/"] }),
+  history: createMemoryHistory({ initialEntries: [getInitialEntry()] }),
   routeTree,
 });
 
