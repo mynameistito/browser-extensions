@@ -192,6 +192,12 @@ export const CleanupForm = () => {
                 much recent history to keep, and whether whitelisted domains are
                 preserved during cleanup.
               </p>
+              <p className="max-w-2xl text-sm leading-6 text-zinc-500 dark:text-zinc-400">
+                When whitelist exemptions are enabled, cleanup preserves recent
+                activity for a URL. Older visits to that same URL may remain
+                because the browser cannot remove only that URL’s older visits
+                while preserving its recent visits and honoring URL exemptions.
+              </p>
             </div>
           </div>
           <div className="rounded-2xl border border-zinc-200 bg-white/70 p-4 text-sm shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70">

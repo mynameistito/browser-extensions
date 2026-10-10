@@ -59,6 +59,8 @@ const runCleanup = async (
     return Result.ok(null);
   }
 
+  // Search filters by each URL's most recent visit; deleteUrl removes every
+  // visit for a URL, so recent activity must keep the entire URL intact.
   const r = await history.search({
     endTime: cutoff,
     maxResults: 100_000,
