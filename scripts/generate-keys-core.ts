@@ -6,6 +6,7 @@ import { deriveChromeExtensionKey } from "./chrome-extension-key";
 
 /** Apps whose release workflows require stable Chromium signing keys. */
 export const supportedExtensions = [
+  "better-history",
   "hide-email-ext",
   "quote-viewer",
   "new-tab-ext",
@@ -17,6 +18,7 @@ export type Extension = (typeof supportedExtensions)[number];
 
 /** Per-app GitHub Actions secrets referenced by the workflows. */
 export const chromeKeySecrets = {
+  "better-history": "BETTER_HISTORY_WXT_CHROME_KEY",
   "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
   "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
   "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
@@ -42,7 +44,7 @@ export type ParseGenerateKeyOptionsResult =
   | { readonly kind: "ok"; readonly options: GenerateKeyOptions };
 
 const usage =
-  "Usage: bun run generate-keys [--app <hide-email-ext|quote-viewer|new-tab-ext|ig-video-controls>] [--repo <owner/name>] [--upload] [--force]";
+  "Usage: bun run generate-keys [--app <better-history|hide-email-ext|quote-viewer|new-tab-ext|ig-video-controls>] [--repo <owner/name>] [--upload] [--force]";
 
 /** Complete help text for the root key-generation command. */
 export const generateKeyHelp = `${usage}

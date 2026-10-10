@@ -32,6 +32,7 @@ describe("parseGenerateKeyOptions", () => {
 
   test("uses the release workflow secret name for each app", () => {
     expect(chromeKeySecrets).toEqual({
+      "better-history": "BETTER_HISTORY_WXT_CHROME_KEY",
       "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
       "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
       "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
@@ -54,6 +55,13 @@ describe("parseGenerateKeyOptions", () => {
         repository: "mynameistito/quote-viewer",
         upload: false,
       },
+    });
+  });
+
+  test("accepts Better History as a persistent-key target", () => {
+    expect(parseGenerateKeyOptions(["--app", "better-history"])).toMatchObject({
+      kind: "ok",
+      options: { extensions: ["better-history"] },
     });
   });
 

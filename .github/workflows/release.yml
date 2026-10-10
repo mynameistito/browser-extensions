@@ -131,3 +131,5 @@ jobs:
       - run: bun run --filter better-history ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQUIRE_CHROME_KEY: "1"
+          WXT_CHROME_KEY: ${{ secrets.BETTER_HISTORY_WXT_CHROME_KEY }}

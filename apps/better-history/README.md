@@ -22,6 +22,16 @@ Custom date ranges, per-domain views, synced device sessions, on-device time tra
 
 Runs entirely in your browser. No analytics, no telemetry, no remote API. See [`PRIVACY.md`](./PRIVACY.md).
 
+## Persistent extension ID (Chrome)
+
+Generate a signing key once from the workspace root and upload it to the release workflow secret:
+
+```bash
+bun run generate-keys -- --app better-history --upload
+```
+
+This writes `apps/better-history/key.pem` (ignored by Git) and configures `BETTER_HISTORY_WXT_CHROME_KEY` in the workspace repository. Keep the key private and do not replace it with `--force`; rotating it changes the extension ID.
+
 ## Stack
 
 - [wxt](https://wxt.dev) — extension framework, MV3, cross-browser

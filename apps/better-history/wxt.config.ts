@@ -1,7 +1,29 @@
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
+
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "wxt";
+
+import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
+
+const loadManifestKey = (): string | undefined => {
+  const pem =
+    process.env.WXT_CHROME_KEY ||
+    (existsSync(path.resolve("key.pem"))
+      ? readFileSync(path.resolve("key.pem"), "utf-8")
+      : undefined);
+  if (!pem) {
+    return;
+  }
+
+  try {
+    return deriveChromeExtensionKey(pem).manifestKey;
+  } catch (error) {
+    console.error("Failed to parse PEM into SPKI:", (error as Error).message);
+  }
+};
 
 export default defineConfig({
   manifest: ({ browser }) => {
@@ -29,8 +51,10 @@ export default defineConfig({
         },
       };
     }
+    const key = loadManifestKey();
     return {
       ...base,
+      ...(key ? { key } : {}),
       chrome_url_overrides: { history: "history.html" },
     };
   },
