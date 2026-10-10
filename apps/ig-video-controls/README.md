@@ -21,19 +21,17 @@ bun install
 
 ## Persistent extension ID (Chrome)
 
-1. Generate a signing key (run once):
-
-```powershell
-bun run gen-key
-```
-
-This creates `key.pem` at the repo root (gitignored) and prints the derived extension ID.
-
-2. Upload the key to GitHub Actions:
+Chrome assigns a random extension ID on each build unless an RSA key is embedded in the manifest. Generate one locally:
 
 ```bash
-gh secret set WXT_CHROME_KEY < key.pem # register the private key with CI (unix)
-Get-Content key.pem -Raw | gh secret set WXT_CHROME_KEY # register the private key with CI (win)
+# Run from the workspace root.
+bun run generate-keys -- --app ig-video-controls
+```
+
+The root-level script creates this app's gitignored `key.pem`, prints the stable Chromium extension ID, and prints the command to configure `IG_VIDEO_CONTROLS_WXT_CHROME_KEY` in the workspace repository. Do not commit or share `key.pem`; use `--force` only when intentionally changing the extension ID.
+
+```
+Get-Content apps/ig-video-controls/key.pem -Raw | gh secret set IG_VIDEO_CONTROLS_WXT_CHROME_KEY --repo mynameistito/browser-extensions
 ```
 
 ## Commands
@@ -47,17 +45,13 @@ Get-Content key.pem -Raw | gh secret set WXT_CHROME_KEY # register the private k
 | `bun run zip`           | Zip for Chrome Web Store           |
 | `bun run zip:firefox`   | Zip for AMO                        |
 | `bun run zip:all`       | Zip both browsers                  |
-| `bun run typecheck`     | Type-check with `tsgo`             |
+| `bun run typecheck`     | Type-check with `tsc`              |
 | `bun run check`         | Lint + format check (Ultracite)    |
 | `bun run fix`           | Auto-fix lint + format (Ultracite) |
 
 ## Release
 
-This repo uses [Changesets](https://github.com/changesets/changesets) + GitHub Actions:
-
-1. Run `bun run changeset` to describe your change.
-2. Commit the changeset file. When the PR merges to `main`, the Changesets bot opens a "Version Packages" PR.
-3. Merge the version PR — the CI workflow builds both browsers, tags, and uploads zips to a GitHub Release.
+This app is versioned and released from the `browser-extensions` monorepo with [Changesets](https://github.com/changesets/changesets) + GitHub Actions. See the workspace root README for the release flow.
 
 ## License
 

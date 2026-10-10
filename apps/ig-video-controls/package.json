@@ -17,7 +17,6 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
-    "generate-key": "bun scripts/generate-key.ts",
     "linkify-changelog": "bun scripts/linkify-changelog.ts"
   },
   "dependencies": {

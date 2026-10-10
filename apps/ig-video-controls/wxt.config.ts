@@ -1,8 +1,19 @@
-import { createPublicKey } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import { defineConfig } from "wxt";
+
+import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
+
+/**
+ * Derive the Chromium-compatible `manifest.key` (base64 SPKI public key) from
+ * the local `key.pem` (PKCS8 private key) so the extension always resolves to
+ * the same persistent ID locally.
+ *
+ * - In dev / local builds we read `key.pem` from the app directory.
+ * - In CI we accept `WXT_CHROME_KEY` as the raw private-key PEM (from a secret).
+ * - Only injected for Chromium targets — Firefox uses `browser_specific_settings`.
+ */
 
 const loadPemSource = (): string | undefined => {
   const fromEnv = process.env.WXT_CHROME_KEY;
@@ -25,21 +36,15 @@ const loadManifestKey = (): string | undefined => {
     return;
   }
 
-  let spkiPem: string;
+  let key: string;
   try {
-    spkiPem = createPublicKey(pem).export({
-      format: "pem",
-      type: "spki",
-    }) as string;
+    key = deriveChromeExtensionKey(pem).manifestKey;
   } catch (error) {
     console.error("Failed to parse PEM into SPKI:", (error as Error).message);
     return undefined;
   }
 
-  return spkiPem
-    .replaceAll("-----BEGIN PUBLIC KEY-----", "")
-    .replaceAll("-----END PUBLIC KEY-----", "")
-    .replaceAll(/\s+/gu, "");
+  return key;
 };
 
 export default defineConfig({
