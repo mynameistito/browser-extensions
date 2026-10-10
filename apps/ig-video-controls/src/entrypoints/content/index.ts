@@ -9,22 +9,9 @@ import {
   setVolumeIfChanged,
   setPlaybackRateIfChanged,
   getKnownVideoElements,
+  redefineWebkitMediaControlHidingCssRule,
 } from "./video-controls";
 import { initWheelHotkeys, updateWheelSettings } from "./wheel-hotkeys";
-
-const redefineWebkitMediaControlHidingCssRule = (): void => {
-  const id = "igvc-native-controls";
-  if (document.querySelector(`#${id}`)) {
-    return;
-  }
-
-  const css =
-    "video[data-igvc-init][controls]::-webkit-media-controls { display: flex; }";
-  const styleElement = document.createElement("style");
-  styleElement.id = id;
-  styleElement.append(document.createTextNode(css));
-  document.head.append(styleElement);
-};
 
 export default defineContentScript({
   allFrames: true,

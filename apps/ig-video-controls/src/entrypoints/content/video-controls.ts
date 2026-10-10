@@ -29,7 +29,7 @@ const videoControlsAlreadyInitialized = (
   videoPlayer: HTMLVideoElement
 ): boolean => videoPlayer.dataset.igvcInit === "1";
 
-const redefineWebkitMediaControlHidingCssRule = (): void => {
+export const redefineWebkitMediaControlHidingCssRule = (): void => {
   const id = "igvc-native-controls";
   const css =
     "video[data-igvc-init][controls]::-webkit-media-controls { display: flex; }";
