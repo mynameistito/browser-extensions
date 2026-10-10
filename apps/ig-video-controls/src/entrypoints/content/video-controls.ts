@@ -14,6 +14,7 @@ import {
   modifyVideoHeightIfSendMessageBoxOrLikeButtonIsBlockingVideoControls,
 } from "./overlay-fixes";
 import type { Settings } from "./settings";
+import { persistSettings } from "./settings";
 
 const knownVideoElements = new Set<HTMLVideoElement>();
 let currentSettings: Settings;
@@ -112,6 +113,8 @@ const handleVolumeChange = (videoPlayer: HTMLVideoElement) => {
     currentSettings.rememberVolumeLevel &&
     valuesAreDifferentEnough(currentSettings.volumeLevel, videoPlayer.volume)
   ) {
+    currentSettings.volumeLevel = videoPlayer.volume;
+    persistSettings({ volumeLevel: videoPlayer.volume });
     setVolumeOfPreviouslySeenVideoElements(videoPlayer.volume);
   }
 
@@ -129,6 +132,8 @@ const handleRateChange = (videoPlayer: HTMLVideoElement) => {
       videoPlayer.playbackRate
     )
   ) {
+    currentSettings.playbackRate = videoPlayer.playbackRate;
+    persistSettings({ playbackRate: videoPlayer.playbackRate });
     setPlaybackRateOfPreviouslySeenVideoElements(videoPlayer.playbackRate);
   }
 };

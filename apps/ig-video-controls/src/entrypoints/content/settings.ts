@@ -28,6 +28,21 @@ export const saveSettings = async (patch: Partial<Settings>): Promise<void> => {
   await browser.storage.local.set(patch);
 };
 
+/**
+ * Best-effort settings persistence for synchronous UI event handlers.
+ * Storage failures (for example an invalidated extension context after an
+ * update) must not break event handling; the next change retries the save.
+ */
+export const persistSettings = (patch: Partial<Settings>): void => {
+  void (async () => {
+    try {
+      await saveSettings(patch);
+    } catch {
+      // Ignore: persistence is best-effort from event handlers.
+    }
+  })();
+};
+
 const SETTINGS_KEYS = [
   "playbackRate",
   "playbackRateAdjustmentStepSize",
