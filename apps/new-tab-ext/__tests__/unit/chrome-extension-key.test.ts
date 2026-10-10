@@ -2,7 +2,7 @@ import { generateKeyPairSync } from "node:crypto";
 
 import { describe, expect, test } from "vitest";
 
-import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
+import { deriveChromeExtensionKey } from "../../../../scripts/chrome-extension-key";
 
 describe("deriveChromeExtensionKey", () => {
   test("derives the same manifest key and Chromium ID for the same private key", () => {

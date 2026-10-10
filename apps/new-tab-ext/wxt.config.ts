@@ -4,7 +4,7 @@ import path from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "wxt";
 
-import { deriveChromeExtensionKey } from "./scripts/chrome-extension-key";
+import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
 
 const loadChromePrivateKey = (): string | undefined => {
   const keyFromEnvironment = process.env.WXT_CHROME_KEY?.trim();

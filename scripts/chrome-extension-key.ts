@@ -27,5 +27,5 @@ export const deriveChromeExtensionKey = (
     )
     .join("");
 
-  return { manifestKey, extensionId };
+  return { extensionId, manifestKey };
 };

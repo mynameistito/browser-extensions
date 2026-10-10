@@ -39,17 +39,17 @@ jobs:
       - name: Require the persistent Chrome key for init-branch builds
         if: github.event_name == 'push' && matrix.task == 'build'
         env:
-          WXT_CHROME_KEY: ${{ secrets.WXT_CHROME_KEY }}
+          WXT_CHROME_KEY: ${{ secrets.NEW_TAB_WXT_CHROME_KEY }}
         run: |
           if [ -z "$WXT_CHROME_KEY" ]; then
-            echo "::error::Set the WXT_CHROME_KEY Actions secret before pushing to init."
+            echo "::error::Set the NEW_TAB_WXT_CHROME_KEY Actions secret before pushing to init."
             exit 1
           fi
 
       - name: Run task
         run: bun run ${{ matrix.task }}
         env:
-          WXT_CHROME_KEY: ${{ github.event_name == 'push' && matrix.task == 'build' && secrets.WXT_CHROME_KEY || '' }}
+          WXT_CHROME_KEY: ${{ github.event_name == 'push' && matrix.task == 'build' && secrets.NEW_TAB_WXT_CHROME_KEY || '' }}
 
       - name: Verify the persistent Chrome key is in the build
         if: github.event_name == 'push' && matrix.task == 'build'

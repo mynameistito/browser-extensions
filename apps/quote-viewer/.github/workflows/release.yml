@@ -41,4 +41,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REQUIRE_CHROME_KEY: "1"
-          WXT_CHROME_KEY: ${{ secrets.WXT_CHROME_KEY }}
+          WXT_CHROME_KEY: ${{ secrets.QUOTE_VIEWER_WXT_CHROME_KEY }}

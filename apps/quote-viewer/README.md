@@ -17,7 +17,6 @@ Originally forked from [View Quote Tweets on Twitter - QuickQuotes](https://chro
 ## Requirements
 
 - [Bun](https://bun.sh/)
-- OpenSSL, only if you need to generate a persistent Chromium extension key
 
 ## Setup
 
@@ -58,18 +57,19 @@ bun run knip
 
 ## Persistent Chromium ID
 
-Chromium derives an unpacked extension ID from the extension key. For local development, `wxt.config.ts` reads a gitignored `key.pem` from the repo root and converts it into `manifest.key`, keeping the same extension ID across rebuilds.
+Chromium derives an unpacked extension ID from the extension key. For local development, `wxt.config.ts` reads a gitignored `key.pem` from this app's directory and converts it into `manifest.key`, keeping the same extension ID across rebuilds.
 
 Generate a key with:
 
 ```bash
-bun run generate-key
+# Run from the workspace root.
+bun run generate-keys -- --app quote-viewer
 ```
 
-The script writes `key.pem` and prints the resulting extension ID plus the GitHub CLI command to register the private key as the `WXT_CHROME_KEY` GitHub Actions secret:
+The root-level script writes this app's gitignored `key.pem` and prints the resulting extension ID plus the GitHub CLI command to register the private key as the `QUOTE_VIEWER_WXT_CHROME_KEY` GitHub Actions secret. Do not commit or share the key; use `--force` only when intentionally changing the extension ID.
 
 ```bash
-Get-Content key.pem -Raw | gh secret set WXT_CHROME_KEY
+Get-Content apps/quote-viewer/key.pem -Raw | gh secret set QUOTE_VIEWER_WXT_CHROME_KEY --repo mynameistito/browser-extensions
 ```
 
 Firefox uses `browser_specific_settings.gecko.id` from `wxt.config.ts`, so it does not need this key.

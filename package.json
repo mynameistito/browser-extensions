@@ -18,6 +18,7 @@
     "init:ultracite": "ultracite init --pm bun --linter oxlint --quiet",
     "changeset": "changeset",
     "changeset-add": "bun scripts/changeset-add.ts",
+    "generate-keys": "bun scripts/generate-keys.ts",
     "version": "changeset version && bun run --filter quote-viewer linkify-changelog",
     "turbo": "turbo"
   },

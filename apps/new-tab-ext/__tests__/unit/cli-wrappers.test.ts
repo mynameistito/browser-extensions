@@ -1,5 +1,4 @@
-import { mkdtempSync, readdirSync, rmSync, unlinkSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { readdirSync, unlinkSync } from "node:fs";
 import path from "node:path";
 
 import { afterEach, describe, expect, test, vi } from "vitest";
@@ -14,7 +13,6 @@ afterEach(() => {
   process.chdir(originalDirectory);
   vi.restoreAllMocks();
 });
-
 describe("CLI entrypoints", () => {
   test("reports changeset usage errors", async () => {
     process.argv = ["bun", "changeset-add", "unknown"];
@@ -54,34 +52,6 @@ describe("CLI entrypoints", () => {
           unlinkSync(path.join(changesetDirectory, filename));
         }
       }
-    }
-  });
-
-  test("generates a key and reports CLI errors without touching the project key", async () => {
-    const directory = mkdtempSync(path.join(tmpdir(), "new-tab-key-cli-"));
-    process.chdir(directory);
-    process.argv = ["bun", "generate-key"];
-    const log = vi.spyOn(console, "log").mockImplementation(() => {});
-    vi.resetModules();
-
-    try {
-      await import("../../scripts/generate-key");
-      expect(readdirSync(directory)).toEqual(["key.pem"]);
-      expect(log).toHaveBeenCalledWith(
-        expect.stringMatching(/^Chrome extension ID: [a-p]{32}$/u)
-      );
-
-      process.argv = ["bun", "generate-key", "--unknown"];
-      const error = vi.spyOn(console, "error").mockImplementation(() => {});
-      vi.resetModules();
-      await import("../../scripts/generate-key");
-      expect(error).toHaveBeenCalledWith(
-        expect.stringContaining("Unknown option: --unknown")
-      );
-      expect(process.exitCode).toBe(1);
-    } finally {
-      process.chdir(originalDirectory);
-      rmSync(directory, { recursive: true, force: true });
     }
   });
 });
