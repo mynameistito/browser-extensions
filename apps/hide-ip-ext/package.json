@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "description": "A WXT browser extension that blurs your public IP address on web pages.",
+  "keywords": [
+    "browser-extension",
+    "ip-address",
+    "privacy",
+    "wxt"
+  ],
   "homepage": "https://github.com/mynameistito/hide-ip-ext#readme",
   "bugs": {
     "url": "https://github.com/mynameistito/hide-ip-ext/issues"
@@ -30,11 +36,11 @@
     "postinstall": "bun ../../scripts/run-wxt.ts prepare"
   },
   "dependencies": {
-    "zod": "^4.4.3"
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "@types/bun": "^1.4.2",
-    "@types/chrome": "^0.2.2",
-    "wxt": "^0.20.27"
+    "@types/bun": "catalog:",
+    "@types/chrome": "catalog:",
+    "wxt": "catalog:"
   }
 }

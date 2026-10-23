@@ -21,11 +21,11 @@ export const BackgroundLayer = () => {
 
     if (isLoaded && preferences.backgroundEnabled) {
       Effect.runFork(
-        Effect.either(loadBackgroundPhotos()).pipe(
+        Effect.result(loadBackgroundPhotos()).pipe(
           Effect.tap((result) =>
             Effect.sync(() => {
-              if (isMounted && result._tag === "Right") {
-                setPhotos(result.right);
+              if (isMounted && result._tag === "Success") {
+                setPhotos(result.success);
                 setLoadedDay(Date.now());
               }
             })

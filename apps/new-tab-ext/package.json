@@ -3,6 +3,18 @@
   "name": "new-tab-ext",
   "version": "0.2.1",
   "private": true,
+  "description": "A local-first browser new-tab dashboard built with WXT, React, and Effect.",
+  "keywords": [
+    "browser-extension",
+    "dashboard",
+    "local-first",
+    "new-tab",
+    "wxt"
+  ],
+  "homepage": "https://github.com/mynameistito/new-tab-ext#readme",
+  "bugs": {
+    "url": "https://github.com/mynameistito/new-tab-ext/issues"
+  },
   "license": "MIT",
   "author": {
     "name": "mynameistito",
@@ -34,24 +46,24 @@
     "postinstall": "bun ../../scripts/run-wxt.ts prepare"
   },
   "dependencies": {
-    "effect": "^3.22.2",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "effect": "^4.0.6",
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "@testing-library/react": "^16.3.3",
-    "@testing-library/user-event": "^14.6.7",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "@vitest/coverage-v8": "5.0.2",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitest/coverage-v8": "5.0.5",
     "@wxt-dev/module-react": "^1.2.2",
-    "happy-dom": "^20.10.6",
+    "happy-dom": "catalog:",
     "react-grab": "^0.2.0",
-    "tailwindcss": "^4.3.3",
-    "vite": "^8.0.16",
-    "vitest": "5.0.2",
-    "web-ext": "^10.7.0",
-    "wxt": "^0.21.4"
+    "tailwindcss": "catalog:",
+    "vite": "^8.3.5",
+    "vitest": "5.0.5",
+    "web-ext": "^10.8.0",
+    "wxt": "catalog:"
   }
 }

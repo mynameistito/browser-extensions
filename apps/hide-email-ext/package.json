@@ -2,6 +2,23 @@
   "name": "hide-email-ext",
   "version": "0.3.1",
   "private": true,
+  "description": "A cross-browser extension that redacts selected email addresses from web pages.",
+  "keywords": [
+    "browser-extension",
+    "email-privacy",
+    "redaction",
+    "wxt"
+  ],
+  "homepage": "https://github.com/mynameistito/hide-email-ext#readme",
+  "bugs": {
+    "url": "https://github.com/mynameistito/hide-email-ext/issues"
+  },
+  "license": "MIT",
+  "author": "My Name is Tito <github@mynameistito.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mynameistito/hide-email-ext.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "bun ../../scripts/run-wxt.ts",
@@ -21,8 +38,8 @@
     "knip": "bunx knip@latest"
   },
   "devDependencies": {
-    "@types/chrome": "^0.2.2",
-    "happy-dom": "^20.10.6",
-    "wxt": "^0.20.27"
+    "@types/chrome": "catalog:",
+    "happy-dom": "catalog:",
+    "wxt": "catalog:"
   }
 }

@@ -54,25 +54,32 @@ export const DEFAULT_PREFERENCES: Preferences = {
 };
 
 const WidgetPlacementSchema = Schema.Struct({
-  id: Schema.Literal("clock", "search", "weather"),
-  span: Schema.Literal(1, 2, 3),
+  id: Schema.Literals(["clock", "search", "weather"]),
+  span: Schema.Literals([1, 2, 3]),
   visible: Schema.Boolean,
 });
 
 const WeatherLocationSchema = Schema.Struct({
   country: Schema.String,
-  latitude: Schema.Number.pipe(Schema.between(-90, 90)),
-  longitude: Schema.Number.pipe(Schema.between(-180, 180)),
+  latitude: Schema.Number.check(
+    Schema.isBetween({ maximum: 90, minimum: -90 })
+  ),
+  longitude: Schema.Number.check(
+    Schema.isBetween({ maximum: 180, minimum: -180 })
+  ),
   name: Schema.String,
   region: Schema.String,
   timezone: Schema.String,
 });
 
 export const PreferencesSchema = Schema.Struct({
-  backgroundChangeNonce: Schema.Number.pipe(Schema.int(), Schema.nonNegative()),
+  backgroundChangeNonce: Schema.Number.check(
+    Schema.isInt(),
+    Schema.isGreaterThanOrEqualTo(0)
+  ),
   backgroundEnabled: Schema.Boolean,
-  searchProvider: Schema.Literal("google", "bing", "duckduckgo"),
-  theme: Schema.Literal("system", "light", "dark"),
+  searchProvider: Schema.Literals(["google", "bing", "duckduckgo"]),
+  theme: Schema.Literals(["system", "light", "dark"]),
   weatherLocation: Schema.NullOr(WeatherLocationSchema),
   widgetLayout: Schema.optional(Schema.Array(WidgetPlacementSchema)),
 });

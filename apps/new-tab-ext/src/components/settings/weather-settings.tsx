@@ -29,20 +29,20 @@ export const WeatherSettings = ({
     setCityResults([]);
 
     Effect.runFork(
-      Effect.either(searchCities(cityQuery)).pipe(
+      Effect.result(searchCities(cityQuery)).pipe(
         Effect.tap((result) =>
           Effect.sync(() => {
             setIsSearching(false);
 
-            if (result._tag === "Left") {
+            if (result._tag === "Failure") {
               setCityMessage(CITY_SEARCH_ERROR);
 
               return;
             }
 
-            setCityResults(result.right);
+            setCityResults(result.success);
             setCityMessage(
-              result.right.length === 0
+              result.success.length === 0
                 ? "No matches. Check the spelling and try again."
                 : ""
             );

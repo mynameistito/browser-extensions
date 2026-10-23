@@ -2,6 +2,24 @@
   "name": "quote-viewer",
   "version": "0.2.10",
   "private": true,
+  "description": "Restores the View Quote Tweets button on Twitter/X with a cross-browser extension.",
+  "keywords": [
+    "browser-extension",
+    "quote-tweets",
+    "twitter",
+    "wxt",
+    "x"
+  ],
+  "homepage": "https://github.com/mynameistito/quote-viewer#readme",
+  "bugs": {
+    "url": "https://github.com/mynameistito/quote-viewer/issues"
+  },
+  "license": "MIT",
+  "author": "My Name is Tito <github@mynameistito.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mynameistito/quote-viewer.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "bun ../../scripts/run-wxt.ts",
@@ -24,7 +42,7 @@
     "knip": "bunx knip@latest"
   },
   "devDependencies": {
-    "happy-dom": "^20.10.6",
-    "wxt": "^0.21.4"
+    "happy-dom": "catalog:",
+    "wxt": "catalog:"
   }
 }

@@ -10,10 +10,10 @@ export interface BackgroundPhoto {
   readonly licenseUrl: string;
 }
 
-const MetadataSchema = Schema.Record({
-  key: Schema.String,
-  value: Schema.Struct({ value: Schema.String }),
-});
+const MetadataSchema = Schema.Record(
+  Schema.String,
+  Schema.Struct({ value: Schema.String })
+);
 
 const ImageInfoSchema = Schema.Struct({
   descriptionurl: Schema.String,
@@ -23,13 +23,13 @@ const ImageInfoSchema = Schema.Struct({
 
 export const CommonsResponseSchema = Schema.Struct({
   query: Schema.Struct({
-    pages: Schema.Record({
-      key: Schema.String,
-      value: Schema.Struct({
+    pages: Schema.Record(
+      Schema.String,
+      Schema.Struct({
         imageinfo: Schema.Array(ImageInfoSchema),
         title: Schema.String,
-      }),
-    }),
+      })
+    ),
   }),
 });
 

@@ -1,4 +1,4 @@
-import { Effect, Either } from "effect";
+import { Effect, Result } from "effect";
 import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
 
 import { loadBackgroundPhotos } from "../../src/lib/background-client";
@@ -120,10 +120,10 @@ describe("Wikimedia Commons client", () => {
       vi.stubGlobal("fetch", fetchMock);
 
       const result = await Effect.runPromise(
-        Effect.either(loadBackgroundPhotos())
+        Effect.result(loadBackgroundPhotos())
       );
 
-      expect(Either.isLeft(result)).toBeTruthy();
+      expect(Result.isFailure(result)).toBeTruthy();
     }
   );
 

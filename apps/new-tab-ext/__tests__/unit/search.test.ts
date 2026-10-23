@@ -40,8 +40,8 @@ describe(createSearchUrl, () => {
   });
 
   it("fails with a typed error for a blank query", () => {
-    const result = Effect.runSync(Effect.either(createSearchUrl("web", "   ")));
+    const result = Effect.runSync(Effect.result(createSearchUrl("web", "   ")));
 
-    expect(result._tag).toBe("Left");
+    expect(result._tag).toBe("Failure");
   });
 });

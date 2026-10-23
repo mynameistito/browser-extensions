@@ -3,8 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "description": "Copy owner/repo from GitHub repository confirmation dialogs.",
-  "homepage": "https://github.com/mynameistito/browser-extensions#readme",
+  "keywords": [
+    "browser-extension",
+    "github",
+    "productivity",
+    "wxt"
+  ],
+  "homepage": "https://github.com/mynameistito/browser-extensions#github-settings-repo-copy",
+  "bugs": {
+    "url": "https://github.com/mynameistito/browser-extensions/issues"
+  },
   "license": "MIT",
+  "author": "My Name is Tito <github@mynameistito.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mynameistito/browser-extensions.git",
+    "directory": "apps/github-settings-repo-copy"
+  },
   "type": "module",
   "scripts": {
     "dev": "bun ../../scripts/run-wxt.ts",
@@ -22,7 +37,7 @@
     "postinstall": "bun ../../scripts/run-wxt.ts prepare"
   },
   "devDependencies": {
-    "@types/bun": "^1.4.2",
-    "wxt": "^0.20.27"
+    "@types/bun": "catalog:",
+    "wxt": "catalog:"
   }
 }

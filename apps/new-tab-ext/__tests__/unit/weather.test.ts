@@ -1,4 +1,4 @@
-import { Either, Schema } from "effect";
+import { Result, Schema } from "effect";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
@@ -64,7 +64,7 @@ describe("Open-Meteo response decoding", () => {
   });
 
   it("rejects malformed forecast conditions and maps valid conditions", () => {
-    const invalid = Schema.decodeUnknownEither(CurrentWeatherSchema)({
+    const invalid = Schema.decodeUnknownResult(CurrentWeatherSchema)({
       current: { temperature_2m: "cold" },
     });
 
@@ -80,7 +80,7 @@ describe("Open-Meteo response decoding", () => {
       },
     });
 
-    expect(Either.isLeft(invalid)).toBeTruthy();
+    expect(Result.isFailure(invalid)).toBeTruthy();
     expect(parseCurrentWeather(decoded)).toStrictEqual({
       apparentTemperature: 12,
       isDay: true,

@@ -48,17 +48,17 @@ export const PreferencesProvider = ({
     let isMounted = true;
 
     const load = async () => {
-      const exit = await Effect.runPromiseExit(Effect.either(loadPreferences));
+      const exit = await Effect.runPromiseExit(Effect.result(loadPreferences));
 
       if (!isMounted) {
         return;
       }
 
-      if (Exit.isFailure(exit) || exit.value._tag === "Left") {
+      if (Exit.isFailure(exit) || exit.value._tag === "Failure") {
         setStorageMessage(LOAD_ERROR_MESSAGE);
       } else {
-        preferencesRef.current = exit.value.right;
-        setPreferences(exit.value.right);
+        preferencesRef.current = exit.value.success;
+        setPreferences(exit.value.success);
       }
 
       setIsLoaded(true);
@@ -98,11 +98,11 @@ export const PreferencesProvider = ({
         }
 
         const exit = await Effect.runPromiseExit(
-          Effect.either(savePreferences(queuedPreferences))
+          Effect.result(savePreferences(queuedPreferences))
         );
 
         setStorageMessage(
-          Exit.isFailure(exit) || exit.value._tag === "Left"
+          Exit.isFailure(exit) || exit.value._tag === "Failure"
             ? SAVE_ERROR_MESSAGE
             : ""
         );

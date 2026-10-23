@@ -1,5 +1,5 @@
 import { GlobalWindow } from "happy-dom";
-import { fakeBrowser } from "wxt/testing";
+import { fakeBrowser } from "wxt/testing/fake-browser";
 
 const window = new GlobalWindow();
 
