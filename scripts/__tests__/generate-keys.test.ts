@@ -33,6 +33,7 @@ describe("parseGenerateKeyOptions", () => {
   test("uses the release workflow secret name for each app", () => {
     expect(chromeKeySecrets).toEqual({
       "better-history": "BETTER_HISTORY_WXT_CHROME_KEY",
+      "github-settings-repo-copy": "WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY",
       "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
       "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
       "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
@@ -77,6 +78,7 @@ describe("parseGenerateKeyOptions", () => {
           "quote-viewer",
           "new-tab-ext",
           "ig-video-controls",
+          "github-settings-repo-copy",
         ],
         force: true,
         upload: true,

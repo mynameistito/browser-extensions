@@ -1,0 +1,28 @@
+{
+  "name": "github-settings-repo-copy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Copy owner/repo from GitHub repository confirmation dialogs.",
+  "homepage": "https://github.com/mynameistito/browser-extensions#readme",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "bun ../../scripts/run-wxt.ts",
+    "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
+    "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",
+    "build:firefox": "bun ../../scripts/run-wxt.ts build -b firefox",
+    "zip": "bun run zip:all",
+    "zip:chrome": "bun ../../scripts/run-wxt.ts zip -b chrome",
+    "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
+    "zip:all": "bun run zip:chrome && bun run zip:firefox",
+    "typecheck": "tsc --noEmit",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "ci:release": "bun ../../scripts/release-app.ts",
+    "postinstall": "bun ../../scripts/run-wxt.ts prepare"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "wxt": "^0.20.27"
+  }
+}

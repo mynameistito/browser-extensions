@@ -133,3 +133,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REQUIRE_CHROME_KEY: "1"
           WXT_CHROME_KEY: ${{ secrets.BETTER_HISTORY_WXT_CHROME_KEY }}
+
+  release-github-settings-repo-copy:
+    needs: version
+    if: needs.version.outputs['has-changesets'] == 'false'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: 1.4.2
+      - run: bun install --frozen-lockfile
+      - run: bun run prepare:wxt
+      - run: bun run --filter github-settings-repo-copy ci:release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQUIRE_CHROME_KEY: "1"
+          WXT_CHROME_KEY: ${{ secrets.WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY }}
