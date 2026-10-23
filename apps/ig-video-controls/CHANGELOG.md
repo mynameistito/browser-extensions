@@ -1,5 +1,11 @@
 # ig-video-controls
 
+## 1.0.2
+
+### Patch Changes
+
+- [`f7e28a8`](https://github.com/mynameistito/browser-extensions/commit/f7e28a8): Republish after the skipped release workflow run.
+
 ## 1.0.1
 
 ### Patch Changes

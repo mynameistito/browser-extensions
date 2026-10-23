@@ -1,6 +1,6 @@
 {
   "name": "hide-email-ext",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "description": "A cross-browser extension that redacts selected email addresses from web pages.",
   "keywords": [

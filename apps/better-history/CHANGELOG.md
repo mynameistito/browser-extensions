@@ -1,5 +1,11 @@
 # better-history
 
+## 8.0.2
+
+### Patch Changes
+
+- f7e28a8: Republish after the skipped release workflow run.
+
 ## 8.0.1
 
 ### Patch Changes

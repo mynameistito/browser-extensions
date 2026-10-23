@@ -1,5 +1,11 @@
 # hide-email-ext
 
+## 0.3.3
+
+### Patch Changes
+
+- f7e28a8: Republish after the skipped release workflow run.
+
 ## 0.3.2
 
 ### Patch Changes

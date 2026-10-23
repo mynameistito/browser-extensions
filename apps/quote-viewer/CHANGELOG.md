@@ -1,5 +1,11 @@
 # quote-viewer
 
+## 0.2.12
+
+### Patch Changes
+
+- [`f7e28a8`](https://github.com/mynameistito/browser-extensions/commit/f7e28a8): Republish after the skipped release workflow run.
+
 ## 0.2.11
 
 ### Patch Changes
