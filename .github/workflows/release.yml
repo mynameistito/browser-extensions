@@ -44,7 +44,9 @@ jobs:
         with:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
+      - run: bun run --filter hide-email-ext postinstall
+        env:
+          WXT_CHROME_KEY: ${{ secrets.HIDE_EMAIL_WXT_CHROME_KEY }}
       - run: bun run --filter hide-email-ext ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,7 +63,9 @@ jobs:
         with:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
+      - run: bun run --filter quote-viewer postinstall
+        env:
+          WXT_CHROME_KEY: ${{ secrets.QUOTE_VIEWER_WXT_CHROME_KEY }}
       - run: bun run --filter quote-viewer ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -78,7 +82,9 @@ jobs:
         with:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
+      - run: bun run --filter new-tab-ext postinstall
+        env:
+          WXT_CHROME_KEY: ${{ secrets.NEW_TAB_WXT_CHROME_KEY }}
       - run: bun run --filter new-tab-ext ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -95,7 +101,7 @@ jobs:
         with:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
+      - run: bun run --filter hide-ip-ext postinstall
       - run: bun run --filter hide-ip-ext ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -110,7 +116,9 @@ jobs:
         with:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
+      - run: bun run --filter ig-video-controls postinstall
+        env:
+          WXT_CHROME_KEY: ${{ secrets.IG_VIDEO_CONTROLS_WXT_CHROME_KEY }}
       - run: bun run --filter ig-video-controls ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -127,7 +135,9 @@ jobs:
         with:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
+      - run: bun run --filter better-history postinstall
+        env:
+          WXT_CHROME_KEY: ${{ secrets.BETTER_HISTORY_WXT_CHROME_KEY }}
       - run: bun run --filter better-history ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -146,7 +156,9 @@ jobs:
         with:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
+      - run: bun run --filter github-settings-repo-copy postinstall
+        env:
+          WXT_CHROME_KEY: ${{ secrets.WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY }}
       - run: bun run --filter github-settings-repo-copy ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
