@@ -1,5 +1,12 @@
 # hide-email-ext
 
+## 0.3.2
+
+### Patch Changes
+
+- 8f8a5ac: Prepare hide-email-ext for its next publish.
+- 4a71266: Refresh package metadata and shared tooling dependencies across all extensions.
+
 ## 0.3.1
 
 ### Patch Changes

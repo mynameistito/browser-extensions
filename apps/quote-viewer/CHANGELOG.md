@@ -1,5 +1,12 @@
 # quote-viewer
 
+## 0.2.11
+
+### Patch Changes
+
+- [`8f8a5ac`](https://github.com/mynameistito/browser-extensions/commit/8f8a5ac): Prepare quote-viewer for its next publish.
+- [`4a71266`](https://github.com/mynameistito/browser-extensions/commit/4a71266): Refresh package metadata and shared tooling dependencies across all extensions.
+
 ## 0.2.10
 
 ### Patch Changes

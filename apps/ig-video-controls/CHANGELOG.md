@@ -1,5 +1,12 @@
 # ig-video-controls
 
+## 1.0.1
+
+### Patch Changes
+
+- [`8f8a5ac`](https://github.com/mynameistito/browser-extensions/commit/8f8a5ac): Prepare ig-video-controls for its next publish.
+- [`4a71266`](https://github.com/mynameistito/browser-extensions/commit/4a71266): Refresh package metadata and shared tooling dependencies across all extensions.
+
 ## 1.0.0
 
 ### Major Changes
