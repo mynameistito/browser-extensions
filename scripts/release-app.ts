@@ -6,16 +6,26 @@ type AppScript = "check" | "typecheck" | "test" | "zip:all";
 
 type AppScripts = Partial<Record<AppScript, string>>;
 
+type JsonValue =
+  | boolean
+  | null
+  | number
+  | string
+  | readonly JsonValue[]
+  | JsonObject;
+
+interface JsonObject {
+  readonly [key: string]: JsonValue;
+}
+
 interface AppPackage {
   readonly name: string;
   readonly version: string;
   readonly scripts?: AppScripts;
 }
 
-const isObject = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" &&
-  value !== null &&
-  Object.getPrototypeOf(value) === Object.prototype;
+const isObject = (value: unknown): value is JsonObject =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
 
 const isString = (value: unknown): value is string => typeof value === "string";
 
