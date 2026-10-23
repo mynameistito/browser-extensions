@@ -1,5 +1,15 @@
 # new-tab-ext
 
+## 0.2.2
+
+### Patch Changes
+
+- 8f8a5ac: Prepare new-tab-ext for its next publish.
+- Add React Grab for local development only
+- Use source aliases to satisfy the import-boundary lint rule
+- Wait for local preferences before loading rotating backgrounds
+- 4a71266: Refresh package metadata and shared tooling dependencies across all extensions.
+
 ## 0.2.1
 
 ### Patch Changes
