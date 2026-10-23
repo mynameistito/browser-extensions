@@ -1,5 +1,11 @@
 # hide-ip-ext
 
+## 0.1.2
+
+### Patch Changes
+
+- f7e28a8: Republish after the skipped release workflow run.
+
 ## 0.1.1
 
 ### Patch Changes

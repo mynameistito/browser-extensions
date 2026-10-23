@@ -1,5 +1,11 @@
 # new-tab-ext
 
+## 0.2.3
+
+### Patch Changes
+
+- f7e28a8: Republish after the skipped release workflow run.
+
 ## 0.2.2
 
 ### Patch Changes

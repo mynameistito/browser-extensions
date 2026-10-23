@@ -1,5 +1,11 @@
 # github-settings-repo-copy
 
+## 0.2.1
+
+### Patch Changes
+
+- f7e28a8: Republish after the skipped release workflow run.
+
 ## 0.2.0
 
 ### Minor Changes
