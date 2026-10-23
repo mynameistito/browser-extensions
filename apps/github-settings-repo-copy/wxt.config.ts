@@ -16,6 +16,9 @@ const getManifestKey = (): string | undefined => {
     return deriveChromeExtensionKey(pem).manifestKey;
   } catch (error) {
     console.error("Failed to derive Chrome extension key:", error);
+    if (process.env.REQUIRE_CHROME_KEY) {
+      throw error;
+    }
     return undefined;
   }
 };
