@@ -9,6 +9,7 @@ const appNames = [
   "hide-ip-ext",
   "ig-video-controls",
   "better-history",
+  "github-settings-repo-copy",
 ] as const;
 const changeTypes = ["patch", "minor", "major"] as const;
 
