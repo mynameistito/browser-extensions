@@ -26,12 +26,12 @@ export const SearchWidget = () => {
           window.open(url.toString(), "_blank", "noopener,noreferrer");
         })
       ),
-      Effect.either
+      Effect.result
     );
 
     const result = Effect.runSync(program);
 
-    if (result._tag === "Left") {
+    if (result._tag === "Failure") {
       setSearchError("Enter a search first.");
 
       return;

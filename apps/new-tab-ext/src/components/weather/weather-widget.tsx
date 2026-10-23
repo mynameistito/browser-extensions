@@ -1,5 +1,5 @@
 import { Effect } from "effect";
-import type { Either } from "effect";
+import type { Result } from "effect";
 import { useEffect, useState } from "react";
 
 import { usePreferences } from "@/components/preferences/preferences-provider";
@@ -15,14 +15,14 @@ const loadWeatherEffect = (
     ReturnType<typeof usePreferences>["preferences"]["weatherLocation"]
   >,
   onResult: (
-    result: Either.Either<
+    result: Result.Result<
       WeatherReading,
       WeatherRequestError | InvalidWeatherResponse
     >
   ) => void
 ) =>
   loadCurrentWeather(location).pipe(
-    Effect.either,
+    Effect.result,
     Effect.tap((result) =>
       Effect.sync(() => {
         onResult(result);
@@ -68,10 +68,10 @@ export const WeatherWidget = () => {
               return;
             }
 
-            if (result._tag === "Right") {
+            if (result._tag === "Success") {
               setReadingState({
                 locationKey: `${location.latitude},${location.longitude}`,
-                reading: result.right,
+                reading: result.success,
               });
               setErrorLocationKey("");
             } else {

@@ -204,6 +204,7 @@ export function createRedactor(root?: Document): Redactor;
 
 ```ts
 import { defineContentScript } from "wxt/sandbox";
+
 import { createRedactor } from "@/lib/redact";
 import { hiddenEmailsItem, watchHiddenEmails } from "@/lib/storage";
 
@@ -310,7 +311,9 @@ A runtime type guard validates the discriminator before dispatch — no `any` le
 ```ts
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
+
 import { defineConfig } from "wxt";
+
 import pkg from "./package.json";
 
 function loadKey(): string | undefined {
@@ -546,6 +549,7 @@ Run: `bun run generate-key`
 ```ts
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
+
 import { defineConfig } from "wxt";
 
 function loadKey(): string | undefined {

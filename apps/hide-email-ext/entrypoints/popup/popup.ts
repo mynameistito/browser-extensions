@@ -10,7 +10,7 @@ const getById = <T extends HTMLElement>(id: string, ctor: new () => T): T => {
   const el = document.querySelector<HTMLElement>(`#${id}`);
 
   if (!(el instanceof ctor)) {
-    throw new Error(`Element #${id} not found or wrong type`);
+    throw new TypeError(`Element #${id} not found or wrong type`);
   }
 
   return el;

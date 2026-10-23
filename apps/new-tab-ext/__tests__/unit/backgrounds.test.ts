@@ -1,4 +1,4 @@
-import { Either, Schema } from "effect";
+import { Result, Schema } from "effect";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
@@ -58,7 +58,7 @@ describe("Wikimedia Commons backgrounds", () => {
 
   it("rejects malformed metadata and rotates deterministically", () => {
     expect(
-      Either.isLeft(Schema.decodeUnknownEither(CommonsResponseSchema)({}))
+      Result.isFailure(Schema.decodeUnknownResult(CommonsResponseSchema)({}))
     ).toBeTruthy();
 
     const photos = parseBackgroundResponse(

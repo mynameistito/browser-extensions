@@ -1,4 +1,4 @@
-import { Effect, Either } from "effect";
+import { Effect, Result } from "effect";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { DEFAULT_PREFERENCES } from "../../src/lib/preferences";
@@ -66,17 +66,17 @@ describe("local preferences storage", () => {
   it("retains read and write failures as typed storage errors", async () => {
     const readError = new Error("read failed");
     failWxtStorage("local:preferences", "read", readError);
-    const readResult = await Effect.runPromise(Effect.either(loadPreferences));
-    expect(Either.isLeft(readResult)).toBeTruthy();
+    const readResult = await Effect.runPromise(Effect.result(loadPreferences));
+    expect(Result.isFailure(readResult)).toBeTruthy();
 
     clearWxtStorage();
     failWxtStorage("local:preferences", "write", new Error("write failed"));
 
     const writeResult = await Effect.runPromise(
-      Effect.either(savePreferences(DEFAULT_PREFERENCES))
+      Effect.result(savePreferences(DEFAULT_PREFERENCES))
     );
 
-    expect(Either.isLeft(writeResult)).toBeTruthy();
+    expect(Result.isFailure(writeResult)).toBeTruthy();
   });
 
   it("persists a valid preference value", async () => {

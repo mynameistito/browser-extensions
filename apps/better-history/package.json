@@ -2,6 +2,25 @@
   "name": "better-history",
   "version": "8.0.0",
   "private": true,
+  "description": "Powerful browser history search, filtering, and cleanup for Chrome and Firefox.",
+  "keywords": [
+    "browser-extension",
+    "history",
+    "privacy",
+    "search",
+    "wxt"
+  ],
+  "homepage": "https://github.com/mynameistito/browser-extensions/tree/main/apps/better-history",
+  "bugs": {
+    "url": "https://github.com/mynameistito/browser-extensions/issues"
+  },
+  "license": "MIT",
+  "author": "My Name is Tito <github@mynameistito.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mynameistito/browser-extensions.git",
+    "directory": "apps/better-history"
+  },
   "type": "module",
   "scripts": {
     "check": "ultracite check",
@@ -21,27 +40,27 @@
     "postinstall": "bun ../../scripts/run-wxt.ts prepare"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.3.0",
-    "@tanstack/react-query": "^5.100.9",
-    "@tanstack/react-router": "^1.169.2",
-    "better-result": "^2.9.2",
+    "@tailwindcss/vite": "catalog:",
+    "@tanstack/react-query": "^5.104.5",
+    "@tanstack/react-router": "^1.170.46",
+    "better-result": "^3.0.1",
     "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
-    "lucide-react": "^1.14.0",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "tailwind-merge": "^3.5.0",
-    "tailwindcss": "^4.3.0",
-    "virtua": "^0.49.1",
-    "zod": "^4.4.3"
+    "date-fns": "^4.4.0",
+    "lucide-react": "^1.61.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "catalog:",
+    "virtua": "^0.53.6",
+    "zod": "catalog:"
   },
   "devDependencies": {
-    "@tanstack/router-plugin": "^1.167.35",
-    "@types/bun": "^1.4.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "wxt": "^0.20.27"
+    "@tanstack/router-plugin": "^1.168.48",
+    "@types/bun": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "^6.1.2",
+    "wxt": "catalog:"
   },
   "peerDependencies": {
     "typescript": "^6.0.3"

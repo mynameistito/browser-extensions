@@ -29,8 +29,12 @@ const CityRecordSchema = Schema.Struct({
   admin1: Schema.optional(Schema.String),
   country: Schema.String,
   id: Schema.Number,
-  latitude: Schema.Number.pipe(Schema.between(-90, 90)),
-  longitude: Schema.Number.pipe(Schema.between(-180, 180)),
+  latitude: Schema.Number.check(
+    Schema.isBetween({ maximum: 90, minimum: -90 })
+  ),
+  longitude: Schema.Number.check(
+    Schema.isBetween({ maximum: 180, minimum: -180 })
+  ),
   name: Schema.String,
   timezone: Schema.String,
 });
@@ -42,15 +46,18 @@ export const CityResponseSchema = Schema.Struct({
 export const CurrentWeatherSchema = Schema.Struct({
   current: Schema.Struct({
     apparent_temperature: Schema.Number,
-    is_day: Schema.Literal(0, 1),
-    relative_humidity_2m: Schema.Number.pipe(
-      Schema.int(),
-      Schema.between(0, 100)
+    is_day: Schema.Literals([0, 1]),
+    relative_humidity_2m: Schema.Number.check(
+      Schema.isInt(),
+      Schema.isBetween({ maximum: 100, minimum: 0 })
     ),
     temperature_2m: Schema.Number,
     time: Schema.String,
-    weather_code: Schema.Number.pipe(Schema.int(), Schema.nonNegative()),
-    wind_speed_10m: Schema.Number.pipe(Schema.nonNegative()),
+    weather_code: Schema.Number.check(
+      Schema.isInt(),
+      Schema.isGreaterThanOrEqualTo(0)
+    ),
+    wind_speed_10m: Schema.Number.check(Schema.isGreaterThanOrEqualTo(0)),
   }),
 });
 

@@ -1,4 +1,4 @@
-import { Effect, Either } from "effect";
+import { Effect, Result } from "effect";
 import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
 
 import type { WeatherLocation } from "../../src/lib/preferences";
@@ -139,10 +139,10 @@ describe("Open-Meteo client", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     const result = await Effect.runPromise(
-      Effect.either(searchCities("Helsinki"))
+      Effect.result(searchCities("Helsinki"))
     );
 
-    expect(Either.isLeft(result)).toBeTruthy();
+    expect(Result.isFailure(result)).toBeTruthy();
   });
 
   it("returns a fresh matching cache without a request", async () => {
@@ -251,10 +251,10 @@ describe("Open-Meteo client", () => {
     );
 
     const result = await Effect.runPromise(
-      Effect.either(loadCurrentWeather(location))
+      Effect.result(loadCurrentWeather(location))
     );
 
-    expect(Either.isLeft(result)).toBeTruthy();
+    expect(Result.isFailure(result)).toBeTruthy();
   });
 
   it("continues when cache reads or writes fail", async () => {

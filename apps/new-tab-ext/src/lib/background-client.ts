@@ -1,4 +1,4 @@
-import { Data, Effect, Either, Schema } from "effect";
+import { Data, Effect, Result, Schema } from "effect";
 
 import { storage } from "#imports";
 
@@ -68,7 +68,7 @@ export const loadBackgroundPhotos = (): Effect.Effect<
   BackgroundRequestError
 > =>
   Effect.gen(function* loadBackgroundPhotosProgram() {
-    const cacheResult = yield* Effect.either(
+    const cacheResult = yield* Effect.result(
       Effect.tryPromise({
         catch: (cause) =>
           new BackgroundRequestError({ cause, operation: "cache" }),
@@ -76,19 +76,20 @@ export const loadBackgroundPhotos = (): Effect.Effect<
       })
     );
 
-    const storedCache = cacheResult._tag === "Right" ? cacheResult.right : null;
+    const storedCache =
+      cacheResult._tag === "Success" ? cacheResult.success : null;
 
-    const decodedCache = Schema.decodeUnknownEither(BackgroundCacheSchema)(
+    const decodedCache = Schema.decodeUnknownResult(BackgroundCacheSchema)(
       storedCache
     );
 
-    const cached = Either.isRight(decodedCache) ? decodedCache.right : null;
+    const cached = Result.isSuccess(decodedCache) ? decodedCache.success : null;
 
     if (cached && Date.now() - cached.fetchedAt < BACKGROUND_CACHE_DURATION) {
       return cached.photos;
     }
 
-    const responseResult = yield* Effect.either(
+    const responseResult = yield* Effect.result(
       Effect.tryPromise({
         catch: (cause) =>
           new BackgroundRequestError({ cause, operation: "request" }),
@@ -109,17 +110,17 @@ export const loadBackgroundPhotos = (): Effect.Effect<
 
           const payload: unknown = await response.json();
 
-          const decoded = Schema.decodeUnknownEither(CommonsResponseSchema)(
+          const decoded = Schema.decodeUnknownResult(CommonsResponseSchema)(
             payload
           );
 
-          if (Either.isLeft(decoded)) {
+          if (Result.isFailure(decoded)) {
             throw new Error(
               "Wikimedia Commons returned malformed image metadata."
             );
           }
 
-          const photos = parseBackgroundResponse(decoded.right);
+          const photos = parseBackgroundResponse(decoded.success);
 
           if (photos.length === 0) {
             throw new Error(
@@ -132,17 +133,17 @@ export const loadBackgroundPhotos = (): Effect.Effect<
       })
     );
 
-    if (responseResult._tag === "Left") {
+    if (responseResult._tag === "Failure") {
       if (cached) {
         return cached.photos;
       }
 
-      return yield* Effect.fail(responseResult.left);
+      return yield* Effect.fail(responseResult.failure);
     }
 
-    const photos = responseResult.right;
+    const photos = responseResult.success;
 
-    yield* Effect.either(
+    yield* Effect.result(
       Effect.tryPromise({
         catch: (cause) =>
           new BackgroundRequestError({ cause, operation: "cache" }),

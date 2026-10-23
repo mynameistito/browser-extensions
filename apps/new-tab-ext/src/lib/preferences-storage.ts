@@ -1,4 +1,4 @@
-import { Data, Effect, Either, Schema } from "effect";
+import { Data, Effect, Result, Schema } from "effect";
 
 import { storage } from "#imports";
 
@@ -28,16 +28,16 @@ export const loadPreferences = Effect.tryPromise({
   try: async () => await preferencesItem.getValue(),
 }).pipe(
   Effect.map((stored) => {
-    const parsed = Schema.decodeUnknownEither(PreferencesSchema)(stored);
+    const parsed = Schema.decodeUnknownResult(PreferencesSchema)(stored);
 
-    if (Either.isLeft(parsed)) {
+    if (Result.isFailure(parsed)) {
       return DEFAULT_PREFERENCES;
     }
 
     return {
-      ...parsed.right,
+      ...parsed.success,
       widgetLayout: normalizeWidgetLayout(
-        parsed.right.widgetLayout ?? DEFAULT_PREFERENCES.widgetLayout
+        parsed.success.widgetLayout ?? DEFAULT_PREFERENCES.widgetLayout
       ),
     };
   })

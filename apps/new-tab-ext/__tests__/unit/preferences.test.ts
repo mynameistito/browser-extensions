@@ -1,4 +1,4 @@
-import { Either, Schema } from "effect";
+import { Result, Schema } from "effect";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
@@ -20,18 +20,18 @@ describe(PreferencesSchema, () => {
 
   it("accepts the default first-run preferences", () => {
     const result =
-      Schema.decodeUnknownEither(PreferencesSchema)(DEFAULT_PREFERENCES);
+      Schema.decodeUnknownResult(PreferencesSchema)(DEFAULT_PREFERENCES);
 
-    expect(Either.isRight(result)).toBeTruthy();
+    expect(Result.isSuccess(result)).toBeTruthy();
   });
 
   it("rejects unsupported providers and invalid city coordinates", () => {
-    const invalidProvider = Schema.decodeUnknownEither(PreferencesSchema)({
+    const invalidProvider = Schema.decodeUnknownResult(PreferencesSchema)({
       ...DEFAULT_PREFERENCES,
       searchProvider: "example",
     });
 
-    const invalidCoordinates = Schema.decodeUnknownEither(PreferencesSchema)({
+    const invalidCoordinates = Schema.decodeUnknownResult(PreferencesSchema)({
       ...DEFAULT_PREFERENCES,
       weatherLocation: {
         country: "N/A",
@@ -43,8 +43,8 @@ describe(PreferencesSchema, () => {
       },
     });
 
-    expect(Either.isLeft(invalidProvider)).toBeTruthy();
-    expect(Either.isLeft(invalidCoordinates)).toBeTruthy();
+    expect(Result.isFailure(invalidProvider)).toBeTruthy();
+    expect(Result.isFailure(invalidCoordinates)).toBeTruthy();
   });
 
   it("accepts stored preferences created before widget layout was added", () => {
