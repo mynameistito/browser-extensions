@@ -176,26 +176,25 @@ describe("generateChromeKeyFile", () => {
     }
   });
 
-  test("restores owner-only permissions when force replaces a key", () => {
-    if (process.platform === "win32") {
-      return;
+  test.skipIf(process.platform === "win32")(
+    "restores owner-only permissions when force replaces a key",
+    () => {
+      const directory = mkdtempSync(path.join(tmpdir(), "extension-key-test-"));
+      const keyPath = path.join(directory, "key.pem");
+
+      try {
+        writeFileSync(keyPath, "old key", { mode: 0o644 });
+        chmodSync(keyPath, 0o644);
+
+        const result = generateChromeKeyFile(keyPath, true);
+
+        expect(result.kind).toBe("generated");
+        expect(statSync(keyPath).mode.toString(8).slice(-3)).toBe("600");
+      } finally {
+        rmSync(directory, { force: true, recursive: true });
+      }
     }
-
-    const directory = mkdtempSync(path.join(tmpdir(), "extension-key-test-"));
-    const keyPath = path.join(directory, "key.pem");
-
-    try {
-      writeFileSync(keyPath, "old key", { mode: 0o644 });
-      chmodSync(keyPath, 0o644);
-
-      const result = generateChromeKeyFile(keyPath, true);
-
-      expect(result.kind).toBe("generated");
-      expect(statSync(keyPath).mode.toString(8).slice(-3)).toBe("600");
-    } finally {
-      rmSync(directory, { force: true, recursive: true });
-    }
-  });
+  );
 });
 
 describe("uploadChromeKey", () => {
