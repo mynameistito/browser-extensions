@@ -5,12 +5,23 @@ import type { SearchProvider } from "./preferences";
 /** A supported destination for a search query. */
 export type SearchTarget = "web" | "chatgpt";
 
-/** The failure returned when a search is attempted without a query. */
-export class EmptySearchQuery extends Data.TaggedError("EmptySearchQuery")<
-  Record<never, never>
-> {}
+/** The empty query value retained when a search is rejected. */
+interface EmptySearchQueryDetails {
+  readonly query: string;
+}
 
-/** Build a destination URL from a non-empty user query. */
+/** The failure returned when a search is attempted without a query. */
+export class EmptySearchQuery extends Data.TaggedError(
+  "EmptySearchQuery"
+)<EmptySearchQueryDetails> {}
+
+/**
+ * Build a destination URL from a non-empty user query.
+ * @param target - Whether to open web results or a ChatGPT prompt.
+ * @param query - Search text entered by the user.
+ * @param provider - Web search provider, defaulting to Google.
+ * @returns An Effect containing the destination URL or an empty-query error.
+ */
 export const createSearchUrl = (
   target: SearchTarget,
   query: string,
@@ -20,17 +31,21 @@ export const createSearchUrl = (
     const normalizedQuery = query.trim();
 
     if (normalizedQuery.length === 0) {
-      return yield* Effect.fail(new EmptySearchQuery());
+      return yield* Effect.fail(
+        new EmptySearchQuery({ query: normalizedQuery })
+      );
     }
 
     const webSearchUrls = {
-      google: "https://www.google.com/search",
       bing: "https://www.bing.com/search",
       duckduckgo: "https://duckduckgo.com/",
+      google: "https://www.google.com/search",
     } satisfies Record<SearchProvider, string>;
+
     const url = new URL(
       target === "web" ? webSearchUrls[provider] : "https://chatgpt.com/"
     );
+
     url.searchParams.set("q", normalizedQuery);
 
     return url;

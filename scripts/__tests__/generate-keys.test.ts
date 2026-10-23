@@ -99,26 +99,42 @@ describe("parseGenerateKeyOptions", () => {
   });
 
   test("requires one app when overriding the repo or uploading", () => {
-    expect(parseGenerateKeyOptions(["--repo", "owner/repo"])).toMatchObject({
-      kind: "error",
-      message: expect.stringContaining("exactly one --app"),
-    });
-    expect(
-      parseGenerateKeyOptions(["--app", "quote-viewer", "--repo", "bad"])
-    ).toMatchObject({
-      kind: "error",
-      message: expect.stringContaining("owner/name"),
-    });
-    expect(parseGenerateKeyOptions(["--upload"])).toMatchObject({
-      kind: "error",
-      message: expect.stringContaining("explicit --app target"),
-    });
-    expect(
-      parseGenerateKeyOptions(["--app", "all", "--repo", "owner/repo"])
-    ).toMatchObject({
-      kind: "error",
-      message: expect.stringContaining("exactly one --app target"),
-    });
+    const repoWithoutApp = parseGenerateKeyOptions(["--repo", "owner/repo"]);
+
+    const invalidRepo = parseGenerateKeyOptions([
+      "--app",
+      "quote-viewer",
+      "--repo",
+      "bad",
+    ]);
+
+    const uploadWithoutApp = parseGenerateKeyOptions(["--upload"]);
+
+    const allWithRepo = parseGenerateKeyOptions([
+      "--app",
+      "all",
+      "--repo",
+      "owner/repo",
+    ]);
+
+    expect(repoWithoutApp.kind).toBe("error");
+
+    expect(invalidRepo.kind).toBe("error");
+
+    expect(uploadWithoutApp.kind).toBe("error");
+    expect(allWithRepo.kind).toBe("error");
+
+    if (
+      repoWithoutApp.kind === "error" &&
+      invalidRepo.kind === "error" &&
+      uploadWithoutApp.kind === "error" &&
+      allWithRepo.kind === "error"
+    ) {
+      expect(repoWithoutApp.message).toContain("exactly one --app");
+      expect(invalidRepo.message).toContain("owner/name");
+      expect(uploadWithoutApp.message).toContain("explicit --app target");
+      expect(allWithRepo.message).toContain("exactly one --app target");
+    }
   });
 });
 
@@ -131,6 +147,7 @@ describe("generateChromeKeyFile", () => {
       const result = generateChromeKeyFile(keyPath, false);
       expect(result.kind).toBe("generated");
       expect(readFileSync(keyPath, "utf-8")).toContain("BEGIN PRIVATE KEY");
+
       if (result.kind === "generated") {
         expect(result.extensionId).toMatch(/^[a-p]{32}$/u);
       }
@@ -145,10 +162,14 @@ describe("generateChromeKeyFile", () => {
 
     try {
       writeFileSync(keyPath, "preserve this key");
-      expect(generateChromeKeyFile(keyPath, false)).toMatchObject({
-        kind: "error",
-        message: expect.stringContaining("already exists"),
-      });
+      const result = generateChromeKeyFile(keyPath, false);
+
+      expect(result.kind).toBe("error");
+
+      if (result.kind === "error") {
+        expect(result.message).toContain("already exists");
+      }
+
       expect(readFileSync(keyPath, "utf-8")).toBe("preserve this key");
     } finally {
       rmSync(directory, { force: true, recursive: true });
@@ -193,7 +214,8 @@ describe("uploadChromeKey", () => {
         (args, keyPem) => {
           command = args;
           input = keyPem;
-          return { error: undefined, status: 0 };
+
+          return { error: null, status: 0 };
         }
       );
 

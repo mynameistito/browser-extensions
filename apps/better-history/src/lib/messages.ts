@@ -1,105 +1,124 @@
-interface MessageSpec {
-  request: unknown;
-  response: unknown;
+import { z } from "zod";
+
+const RuntimeResponseSchema = z.discriminatedUnion("ok", [
+  z.object({ ok: z.literal(true), value: z.unknown() }),
+  z.object({ error: z.string(), ok: z.literal(false) }),
+]);
+
+const RuntimeRequestSchema = z.object({
+  payload: z.unknown(),
+  type: z.string(),
+});
+
+type RuntimeResponse = z.infer<typeof RuntimeResponseSchema>;
+
+type JsonMessage =
+  | boolean
+  | JsonMessage[]
+  | null
+  | number
+  | string
+  | { [key: string]: JsonMessage };
+
+const CleanupRunNowRequestSchema = z.object({});
+
+type RuntimeMessageListener = (
+  message: JsonMessage,
+  sender: Browser.runtime.MessageSender,
+  sendResponse: (response: RuntimeResponse) => void
+) => boolean;
+
+interface RuntimeMessageEvent {
+  addListener: (listener: RuntimeMessageListener) => void;
+  removeListener: (listener: RuntimeMessageListener) => void;
 }
 
-type MessageKey<TProtocol> = Extract<keyof TProtocol, string>;
-type RequestFor<
-  TProtocol,
-  TKey extends MessageKey<TProtocol>,
-> = TProtocol[TKey] extends MessageSpec ? TProtocol[TKey]["request"] : never;
-type ResponseFor<
-  TProtocol,
-  TKey extends MessageKey<TProtocol>,
-> = TProtocol[TKey] extends MessageSpec ? TProtocol[TKey]["response"] : never;
+/** Response returned after the cleanup message finishes. */
+export const CleanupRunNowResponseSchema = z.object({
+  lastRunAt: z.number(),
+});
 
-interface RuntimeMessage<TKey extends string, TPayload> {
-  payload: TPayload;
-  type: TKey;
-}
+/** Validated result returned by an immediate cleanup run. */
+export type CleanupRunNowResponse = z.infer<typeof CleanupRunNowResponseSchema>;
 
-type RuntimeResponse<TValue> =
-  | { ok: true; value: TValue }
-  | { error: string; ok: false };
-
-export interface CleanupRunNowResponse {
-  lastRunAt: number;
-}
-
-interface ExtensionMessagingProtocol {
-  "cleanup.runNow": {
-    request: Record<string, never>;
-    response: CleanupRunNowResponse;
-  };
-}
-
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null;
-
-const messageError = (error: unknown) => {
-  if (error instanceof Error) {
-    return error.message;
-  }
-  return String(error);
-};
-
-const isMessageOfType = <TKey extends string>(
-  message: unknown,
-  type: TKey
-): message is RuntimeMessage<TKey, unknown> =>
-  isRecord(message) && message.type === type && "payload" in message;
-
-export const defineExtensionMessaging = <
-  TProtocol extends { [TKey in keyof TProtocol]: MessageSpec },
->() => ({
-  onMessage<TKey extends MessageKey<TProtocol>>(
-    type: TKey,
+export const extensionMessaging = {
+  onMessage(
+    type: "cleanup.runNow",
     handler: (
-      payload: RequestFor<TProtocol, TKey>,
+      payload: z.output<typeof CleanupRunNowRequestSchema>,
       sender: Browser.runtime.MessageSender
-    ) => Promise<ResponseFor<TProtocol, TKey>> | ResponseFor<TProtocol, TKey>
+    ) => Promise<CleanupRunNowResponse> | CleanupRunNowResponse
   ): () => void {
+    const messageEvent: RuntimeMessageEvent = browser.runtime.onMessage;
+
     const listener = (
-      message: unknown,
+      message: JsonMessage,
       sender: Browser.runtime.MessageSender,
-      sendResponse: (response: unknown) => void
-    ) => {
-      if (!isMessageOfType(message, type)) {
-        return;
+      sendResponse: (response: RuntimeResponse) => void
+    ): boolean => {
+      const parsedMessage = RuntimeRequestSchema.safeParse(message);
+
+      if (!parsedMessage.success || parsedMessage.data.type !== type) {
+        return false;
+      }
+
+      const payload = CleanupRunNowRequestSchema.safeParse(
+        parsedMessage.data.payload
+      );
+
+      if (!payload.success) {
+        sendResponse({ error: "Invalid message payload.", ok: false });
+
+        return false;
       }
 
       void (async () => {
         try {
-          const value = await handler(
-            message.payload as RequestFor<TProtocol, TKey>,
-            sender
-          );
+          const value = await handler(payload.data, sender);
+
           sendResponse({ ok: true, value });
-        } catch (error: unknown) {
-          sendResponse({ error: messageError(error), ok: false });
+        } catch {
+          sendResponse({ error: "Message handler failed.", ok: false });
         }
       })();
 
       return true;
     };
-    browser.runtime.onMessage.addListener(listener);
-    return () => browser.runtime.onMessage.removeListener(listener);
+
+    messageEvent.addListener(listener);
+
+    return () => {
+      messageEvent.removeListener(listener);
+    };
   },
 
-  async sendMessage<TKey extends MessageKey<TProtocol>>(
-    type: TKey,
-    payload: RequestFor<TProtocol, TKey>
-  ): Promise<ResponseFor<TProtocol, TKey>> {
-    const response = await browser.runtime.sendMessage<
-      RuntimeMessage<TKey, RequestFor<TProtocol, TKey>>,
-      RuntimeResponse<ResponseFor<TProtocol, TKey>>
-    >({ payload, type });
-    if (!response.ok) {
-      throw new Error(response.error);
+  async sendMessage(
+    type: "cleanup.runNow",
+    payload: z.output<typeof CleanupRunNowRequestSchema>
+  ): Promise<CleanupRunNowResponse> {
+    const response: unknown = await browser.runtime.sendMessage({
+      payload,
+      type,
+    });
+
+    const parsedResponse = RuntimeResponseSchema.safeParse(response);
+
+    if (!parsedResponse.success) {
+      throw new Error("Invalid runtime message response.");
     }
-    return response.value;
-  },
-});
 
-export const extensionMessaging =
-  defineExtensionMessaging<ExtensionMessagingProtocol>();
+    if (!parsedResponse.data.ok) {
+      throw new Error(parsedResponse.data.error);
+    }
+
+    const value = CleanupRunNowResponseSchema.safeParse(
+      parsedResponse.data.value
+    );
+
+    if (!value.success) {
+      throw new Error("Runtime message response did not match its schema.");
+    }
+
+    return value.data;
+  },
+};

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://www.schemastore.org/tsconfig.json",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "target": "ESNext",
+    "types": ["bun"]
+  },
+  "include": ["*.ts", "*.tsx", "scripts/**/*.ts", "scripts/**/*.tsx"]
+}

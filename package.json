@@ -2,15 +2,15 @@
   "name": "browser-extensions",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "type": "module",
   "scripts": {
     "build": "turbo run build",
     "check": "ultracite check",
     "fix": "ultracite fix",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "turbo run typecheck typecheck:root",
+    "typecheck:root": "tsc --noEmit -p tsconfig.json",
     "test": "turbo run test",
     "prepare:wxt": "bun run --filter hide-email-ext postinstall && bun run --filter quote-viewer postinstall && bun run --filter new-tab-ext postinstall && bun run --filter hide-ip-ext postinstall && bun run --filter ig-video-controls postinstall && bun run --filter better-history postinstall && bun run --filter github-settings-repo-copy postinstall",
     "prepare": "bun run lefthook install",
@@ -27,15 +27,18 @@
     "@shadcn/lint": "^0.2.0",
     "@types/bun": "^1.4.2",
     "@typescript/native": "npm:typescript@^7.0.2",
-    "eslint-plugin-github": "^6.1.2",
-    "eslint-plugin-sonarjs": "^4.2.1",
-    "lefthook": "^2.1.14",
+    "eslint-plugin-github": "6.1.2",
+    "eslint-plugin-jsdoc": "^65.1.0",
+    "eslint-plugin-sonarjs": "^4.2.2",
+    "eslint-plugin-tsdoc": "^0.5.4",
+    "lefthook": "^2.2.2",
     "oxfmt": "^0.71.0",
     "oxlint": "^1.86.0",
-    "oxlint-plugin-react-doctor": "^0.9.14",
+    "oxlint-plugin-react-doctor": "^0.9.16",
+    "oxlint-tsgolint": "^7.0.2004",
     "turbo": "^2.5.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "ultracite": "7.12.2"
+    "ultracite": "8.0.2"
   },
   "overrides": {
     "esbuild": "0.28.1",

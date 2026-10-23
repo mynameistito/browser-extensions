@@ -22,9 +22,9 @@ const widgetSpans: readonly {
   readonly label: string;
   readonly controlLabel: string;
 }[] = [
-  { value: 1, label: "Narrow", controlLabel: "S" },
-  { value: 2, label: "Medium", controlLabel: "M" },
-  { value: 3, label: "Wide", controlLabel: "L" },
+  { controlLabel: "S", label: "Narrow", value: 1 },
+  { controlLabel: "M", label: "Medium", value: 2 },
+  { controlLabel: "L", label: "Wide", value: 3 },
 ];
 
 const renderWidget = (id: WidgetId) => {
@@ -32,19 +32,26 @@ const renderWidget = (id: WidgetId) => {
     case "clock": {
       return <ClockWidget />;
     }
+
     case "search": {
       return <SearchWidget />;
     }
+
     case "weather": {
       return <WeatherWidget />;
     }
+
     default: {
       return null;
     }
   }
 };
 
-/** Render optional widgets with keyboard and pointer arrangement controls. */
+/**
+ * Render optional widgets with keyboard and pointer arrangement controls.
+ * @param props - Whether widget arrangement is currently enabled.
+ * @returns The configured dashboard widget grid.
+ */
 export const WidgetGrid = ({
   isArrangeMode,
 }: {
@@ -52,21 +59,26 @@ export const WidgetGrid = ({
 }) => {
   const { preferences, updatePreferences } = usePreferences();
   const [draggingId, setDraggingId] = useState<WidgetId | null>(null);
+
   const visibleWidgets = preferences.widgetLayout.filter(
     (placement) => placement.visible
   );
 
-  const setLayout = (widgetLayout: readonly WidgetPlacement[]) =>
+  const setLayout = (widgetLayout: readonly WidgetPlacement[]) => {
     updatePreferences((current) => ({ ...current, widgetLayout }));
+  };
 
-  const setSpan = (id: WidgetId, span: WidgetSpan) =>
+  const setSpan = (id: WidgetId, span: WidgetSpan) => {
     setLayout(resizeWidget(preferences.widgetLayout, id, span));
+  };
 
-  const moveEarlier = (id: WidgetId) =>
+  const moveEarlier = (id: WidgetId) => {
     setLayout(moveWidget(preferences.widgetLayout, id, -1));
+  };
 
-  const moveLater = (id: WidgetId) =>
+  const moveLater = (id: WidgetId) => {
     setLayout(moveWidget(preferences.widgetLayout, id, 1));
+  };
 
   const dropWidget = (targetId: WidgetId) => {
     if (!draggingId) {
@@ -98,9 +110,15 @@ export const WidgetGrid = ({
               <button
                 className="widget-arrange-title"
                 draggable
-                onDragEnd={() => setDraggingId(null)}
-                onDragOver={(event) => event.preventDefault()}
-                onDragStart={() => setDraggingId(placement.id)}
+                onDragEnd={() => {
+                  setDraggingId(null);
+                }}
+                onDragOver={(event) => {
+                  event.preventDefault();
+                }}
+                onDragStart={() => {
+                  setDraggingId(placement.id);
+                }}
                 onDrop={(event) => {
                   event.preventDefault();
                   dropWidget(placement.id);
@@ -119,7 +137,9 @@ export const WidgetGrid = ({
                     aria-pressed={placement.span === span.value}
                     className="widget-tool-button"
                     key={span.value}
-                    onClick={() => setSpan(placement.id, span.value)}
+                    onClick={() => {
+                      setSpan(placement.id, span.value);
+                    }}
                     type="button"
                   >
                     {span.controlLabel}
@@ -134,7 +154,9 @@ export const WidgetGrid = ({
                   aria-label={`Move ${widgetLabels[placement.id]} earlier`}
                   className="widget-tool-button"
                   disabled={index === 0}
-                  onClick={() => moveEarlier(placement.id)}
+                  onClick={() => {
+                    moveEarlier(placement.id);
+                  }}
                   type="button"
                 >
                   ↑
@@ -143,7 +165,9 @@ export const WidgetGrid = ({
                   aria-label={`Move ${widgetLabels[placement.id]} later`}
                   className="widget-tool-button"
                   disabled={index === visibleWidgets.length - 1}
-                  onClick={() => moveLater(placement.id)}
+                  onClick={() => {
+                    moveLater(placement.id);
+                  }}
                   type="button"
                 >
                   ↓

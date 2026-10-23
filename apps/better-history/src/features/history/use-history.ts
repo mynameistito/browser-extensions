@@ -5,6 +5,7 @@ import { history } from "@/lib/browser-api";
 import { presetRange } from "@/lib/ranges";
 import type { Preset } from "@/lib/ranges";
 
+/** A normalized browser history entry used by the history view. */
 export interface HistoryItem {
   id: string;
   lastVisitTime: number;
@@ -13,19 +14,26 @@ export interface HistoryItem {
   visitCount: number;
 }
 
+/** Fetches and filters browser history for the selected range and query.
+ * @param params - The text query and time preset.
+ * @returns The query state containing matching history items.
+ */
 export const useHistory = (params: { q: string; preset: Preset }) =>
   useQuery({
     queryFn: async (): Promise<HistoryItem[]> => {
       const range = presetRange(params.preset);
+
       const r = await history.search({
         endTime: range.endTime,
         maxResults: 10_000,
         startTime: range.startTime,
         text: params.q,
       });
+
       if (Result.isError(r)) {
         throw r.error;
       }
+
       return r.value
         .filter((i): i is Required<typeof i> & { url: string } =>
           Boolean(i.id && i.url)

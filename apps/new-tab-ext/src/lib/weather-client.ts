@@ -16,16 +16,24 @@ import type { CityResult, CurrentWeather } from "./weather";
 
 const WEATHER_CACHE_DURATION = 30 * 60 * 1000;
 
-interface WeatherCache {
-  readonly locationKey: string;
-  readonly fetchedAt: number;
-  readonly weather: CurrentWeather;
-}
+const WeatherCacheSchema = Schema.Struct({
+  fetchedAt: Schema.Number,
+  locationKey: Schema.String,
+  weather: Schema.Struct({
+    apparentTemperature: Schema.Number,
+    isDay: Schema.Boolean,
+    observedAt: Schema.String,
+    relativeHumidity: Schema.Number,
+    temperature: Schema.Number,
+    weatherCode: Schema.Number,
+    windSpeed: Schema.Number,
+  }),
+});
 
-const weatherCacheItem = storage.defineItem<WeatherCache | null>(
-  "local:weather-cache",
-  { fallback: null, version: 1 }
-);
+const weatherCacheItem = storage.defineItem<unknown>("local:weather-cache", {
+  fallback: null,
+  version: 1,
+});
 
 /** Typed failure from a remote weather request or its local cache. */
 export class WeatherRequestError extends Data.TaggedError(
@@ -44,38 +52,38 @@ export interface WeatherReading {
 const locationKey = (location: WeatherLocation): string =>
   `${location.latitude},${location.longitude}`;
 
-const getJson = <S extends Schema.Schema.AnyNoContext>(
+const getJson = <A, I>(
   url: URL,
   operation: "geocoding" | "forecast",
-  schema: S
-): Effect.Effect<
-  Schema.Schema.Type<S>,
-  WeatherRequestError | InvalidWeatherResponse
-> =>
+  schema: Schema.Schema<A, I>
+): Effect.Effect<A, WeatherRequestError | InvalidWeatherResponse> =>
   Effect.gen(function* getJsonProgram() {
     const response = yield* Effect.tryPromise({
-      try: () => fetch(url, { signal: AbortSignal.timeout(12_000) }),
-      catch: (cause) => new WeatherRequestError({ operation, cause }),
+      catch: (cause) => new WeatherRequestError({ cause, operation }),
+      try: async () =>
+        await fetch(url, { signal: AbortSignal.timeout(12_000) }),
     });
 
     if (!response.ok) {
       return yield* Effect.fail(
         new WeatherRequestError({
-          operation,
           cause: new Error(
             `Weather provider returned HTTP ${response.status}.`
           ),
+          operation,
         })
       );
     }
 
     const payload = yield* Effect.tryPromise({
+      catch: (cause) => new WeatherRequestError({ cause, operation }),
       try: async () => {
         const body: unknown = await response.json();
+
         return body;
       },
-      catch: (cause) => new WeatherRequestError({ operation, cause }),
     });
+
     const decoded = Schema.decodeUnknownEither(schema)(payload);
 
     if (Either.isLeft(decoded)) {
@@ -87,7 +95,11 @@ const getJson = <S extends Schema.Schema.AnyNoContext>(
     return decoded.right;
   });
 
-/** Look up global city matches using the city text entered by the user. */
+/**
+ * Look up global city matches using the city text entered by the user.
+ * @param query - City or place name entered by the user.
+ * @returns An Effect yielding matching cities or a typed request error.
+ */
 export const searchCities = (
   query: string
 ): Effect.Effect<
@@ -107,7 +119,11 @@ export const searchCities = (
   ).pipe(Effect.map(parseCityResults));
 };
 
-/** Fetch current conditions, reusing local data and falling back when offline. */
+/**
+ * Fetch current conditions, reusing local data and falling back when offline.
+ * @param location - Location selected by the user.
+ * @returns An Effect yielding current weather and its staleness state.
+ */
 export const loadCurrentWeather = (
   location: WeatherLocation
 ): Effect.Effect<
@@ -116,21 +132,28 @@ export const loadCurrentWeather = (
 > =>
   Effect.gen(function* loadCurrentWeatherProgram() {
     const key = locationKey(location);
+
     const cacheResult = yield* Effect.either(
       Effect.tryPromise({
-        try: () => weatherCacheItem.getValue(),
         catch: (cause) =>
-          new WeatherRequestError({ operation: "cache", cause }),
+          new WeatherRequestError({ cause, operation: "cache" }),
+        try: async () => await weatherCacheItem.getValue(),
       })
     );
-    const cached = cacheResult._tag === "Right" ? cacheResult.right : null;
+
+    const storedCache = cacheResult._tag === "Right" ? cacheResult.right : null;
+
+    const decodedCache =
+      Schema.decodeUnknownEither(WeatherCacheSchema)(storedCache);
+
+    const cached = Either.isRight(decodedCache) ? decodedCache.right : null;
     const now = Date.now();
 
     if (
       cached?.locationKey === key &&
       now - cached.fetchedAt < WEATHER_CACHE_DURATION
     ) {
-      return { weather: cached.weather, isStale: false };
+      return { isStale: false, weather: cached.weather };
     }
 
     const responseResult = yield* Effect.either(
@@ -139,7 +162,7 @@ export const loadCurrentWeather = (
 
     if (responseResult._tag === "Left") {
       if (cached?.locationKey === key) {
-        return { weather: cached.weather, isStale: true };
+        return { isStale: true, weather: cached.weather };
       }
 
       return yield* Effect.fail(responseResult.left);
@@ -147,19 +170,21 @@ export const loadCurrentWeather = (
 
     const parsed = parseCurrentWeather(responseResult.right);
 
-    const nextCache: WeatherCache = {
-      locationKey: key,
+    const nextCache = {
       fetchedAt: now,
+      locationKey: key,
       weather: parsed,
     };
 
     yield* Effect.either(
       Effect.tryPromise({
-        try: () => weatherCacheItem.setValue(nextCache),
         catch: (cause) =>
-          new WeatherRequestError({ operation: "cache", cause }),
+          new WeatherRequestError({ cause, operation: "cache" }),
+        try: async () => {
+          await weatherCacheItem.setValue(nextCache);
+        },
       })
     );
 
-    return { weather: parsed, isStale: false };
+    return { isStale: false, weather: parsed };
   });

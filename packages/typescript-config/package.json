@@ -1,8 +1,0 @@
-{
-  "name": "@browser-extensions/typescript-config",
-  "private": true,
-  "type": "module",
-  "exports": {
-    "./base.json": "./base.json"
-  }
-}

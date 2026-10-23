@@ -8,7 +8,11 @@ export interface ChromeExtensionKey {
   readonly extensionId: string;
 }
 
-/** Derive Chromium's public manifest key and extension ID from a private key. */
+/**
+ * Derive Chromium's public manifest key and extension ID from a private key.
+ * @param privateKeyPem - PKCS#8 RSA private key in PEM form.
+ * @returns Chromium's base64 manifest key and stable extension ID.
+ */
 export const deriveChromeExtensionKey = (
   privateKeyPem: string
 ): ChromeExtensionKey => {
@@ -16,16 +20,17 @@ export const deriveChromeExtensionKey = (
     format: "der",
     type: "spki",
   });
+
   const manifestKey = Buffer.from(subjectPublicKeyInfo).toString("base64");
+
   const digest = createHash("sha256")
     .update(subjectPublicKeyInfo)
     .digest("hex")
     .slice(0, 32);
-  const extensionId = [...digest]
-    .map((character) =>
-      String.fromCodePoint(97 + Number.parseInt(character, 16))
-    )
-    .join("");
+
+  const extensionId = Array.from(digest, (character) =>
+    String.fromCodePoint(97 + Number.parseInt(character, 16))
+  ).join("");
 
   return { extensionId, manifestKey };
 };

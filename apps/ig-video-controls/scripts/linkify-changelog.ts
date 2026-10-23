@@ -3,6 +3,7 @@ import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dir, "..");
 const CHANGELOG_PATH = path.resolve(ROOT, "CHANGELOG.md");
+
 const commitUrlBase =
   "https://github.com/mynameistito/browser-extensions/commit";
 
@@ -15,4 +16,5 @@ content = content.replaceAll(
 );
 
 writeFileSync(CHANGELOG_PATH, content);
+
 console.log("CHANGELOG.md: commit hashes hyperlinked.");

@@ -1,14 +1,34 @@
-import type { NormalizedEmail } from "./types";
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u;
-
-export const isEmail = (value: unknown): value is string => {
-  if (typeof value !== "string") {
-    return false;
-  }
+/** Checks whether a string is a syntactically valid email address.
+ * @param value - The value to validate.
+ * @returns Whether the value is a valid email address.
+ */
+export const isEmail = (value: string): boolean => {
   const normalized = value.trim().toLowerCase();
-  return EMAIL_RE.test(normalized);
+
+  const separator = normalized.indexOf("@");
+
+  const domainSeparator = normalized.lastIndexOf(".");
+
+  const hasLocalPart = separator > 0;
+  const hasSingleAtSign = separator === normalized.lastIndexOf("@");
+
+  const hasDomainAndSuffix =
+    domainSeparator > separator + 1 && domainSeparator < normalized.length - 1;
+
+  return (
+    hasLocalPart &&
+    hasSingleAtSign &&
+    hasDomainAndSuffix &&
+    !/\s/u.test(normalized)
+  );
 };
 
-export const normalize = (email: string): NormalizedEmail =>
-  email.trim().toLowerCase() as NormalizedEmail;
+/** Normalizes and validates an email address.
+ * @param email - The address to normalize.
+ * @returns The normalized address, or `null` when it is invalid.
+ */
+export const normalize = (email: string): string | null => {
+  const normalized = email.trim().toLowerCase();
+
+  return isEmail(normalized) ? normalized : null;
+};

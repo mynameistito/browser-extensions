@@ -1,6 +1,13 @@
 import { spawnSync } from "node:child_process";
 import { generateKeyPairSync } from "node:crypto";
-import { chmodSync, existsSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  chmodSync,
+  existsSync,
+  readFileSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
+import path from "node:path";
 
 import { deriveChromeExtensionKey } from "./chrome-extension-key";
 
@@ -76,7 +83,7 @@ Examples:
 `;
 
 interface GhCommandResult {
-  readonly error: Error | undefined;
+  readonly error: Error | null;
   readonly status: number | null;
 }
 
@@ -88,17 +95,90 @@ type GhSecretCommand = (
 const isExtension = (value: string): value is Extension =>
   supportedExtensions.some((extension) => extension === value);
 
+const parseAppTarget = (
+  value: string | undefined
+): readonly Extension[] | null => {
+  if (value === "all") {
+    return supportedExtensions;
+  }
+
+  return value !== undefined && isExtension(value) ? [value] : null;
+};
+
+const isRepository = (value: string | undefined): value is string =>
+  value !== undefined && /^[\w.-]+\/[\w.-]+$/u.test(value);
+
+/**
+ * Find GitHub CLI at a configured or standard installation path.
+ * @returns An absolute executable path, or null when GitHub CLI is unavailable.
+ */
+const findGhExecutable = (): string | null => {
+  const configuredPath = process.env.GH_CLI_PATH;
+
+  if (
+    configuredPath !== undefined &&
+    path.isAbsolute(configuredPath) &&
+    existsSync(configuredPath) &&
+    statSync(configuredPath).isFile()
+  ) {
+    return configuredPath;
+  }
+
+  const candidates: string[] = [];
+
+  if (process.platform === "win32") {
+    candidates.push(
+      path.join(
+        process.env.ProgramFiles ?? "C:\\Program Files",
+        "GitHub CLI",
+        "gh.exe"
+      )
+    );
+
+    if (process.env.LOCALAPPDATA !== undefined) {
+      candidates.push(
+        path.join(process.env.LOCALAPPDATA, "Programs", "GitHub CLI", "gh.exe")
+      );
+    }
+  } else if (process.platform === "darwin") {
+    candidates.push("/opt/homebrew/bin/gh", "/usr/local/bin/gh");
+  } else {
+    candidates.push("/usr/bin/gh", "/usr/local/bin/gh");
+  }
+
+  return (
+    candidates.find(
+      (candidate) => existsSync(candidate) && statSync(candidate).isFile()
+    ) ?? null
+  );
+};
+
 const runGhSecretCommand: GhSecretCommand = (args, input) => {
-  const result = spawnSync("gh", args, {
+  const executable = findGhExecutable();
+
+  if (executable === null) {
+    return {
+      error: new Error(
+        "GitHub CLI was not found. Set GH_CLI_PATH to its absolute executable path."
+      ),
+      status: null,
+    };
+  }
+
+  const result = spawnSync(executable, args, {
     encoding: "utf-8",
     input,
     stdio: ["pipe", "inherit", "inherit"],
   });
 
-  return { error: result.error, status: result.status };
+  return { error: result.error ?? null, status: result.status };
 };
 
-/** Parse CLI arguments and reject ambiguous repo/upload targets. */
+/**
+ * Parse CLI arguments and reject ambiguous repo/upload targets.
+ * @param args - The command-line arguments after the executable name.
+ * @returns The parsed options, help request, or validation error.
+ */
 export const parseGenerateKeyOptions = (
   args: readonly string[]
 ): ParseGenerateKeyOptionsResult => {
@@ -117,54 +197,50 @@ export const parseGenerateKeyOptions = (
 
     if (argument === "--force" || argument === "-f") {
       force = true;
-      continue;
-    }
-
-    if (argument === "--upload") {
+    } else if (argument === "--upload") {
       upload = true;
-      continue;
-    }
+    } else if (argument === "--app") {
+      const appTarget = parseAppTarget(args[index + 1]);
 
-    if (argument === "--app") {
-      const extension = args[index + 1];
-      if (extension === "all") {
-        selectedExtensions.push(...supportedExtensions);
-      } else if (extension && isExtension(extension)) {
-        selectedExtensions.push(extension);
-      } else {
+      if (appTarget === null) {
         return {
           kind: "error",
           message: `Missing or unknown app for --app. Choose a supported app or all.\n${usage}`,
         };
       }
+
+      selectedExtensions.push(...appTarget);
       hasAppSelection = true;
       index += 1;
-      continue;
-    }
-
-    if (argument === "--repo") {
+    } else if (argument === "--repo") {
       const value = args[index + 1];
-      if (!value || !/^[\w.-]+\/[\w.-]+$/u.test(value)) {
+
+      if (!isRepository(value)) {
         return {
           kind: "error",
           message: `Missing or invalid repository for --repo. Use owner/name.\n${usage}`,
         };
       }
+
       repository = value;
       index += 1;
-      continue;
+    } else {
+      return {
+        kind: "error",
+        message: `Unknown option: ${argument}\n${usage}`,
+      };
     }
-
-    return { kind: "error", message: `Unknown option: ${argument}\n${usage}` };
   }
 
   const uniqueExtensions = [...new Set(selectedExtensions)];
-  if (repository && uniqueExtensions.length !== 1) {
+
+  if (repository !== undefined && uniqueExtensions.length !== 1) {
     return {
       kind: "error",
       message: `--repo requires exactly one --app target.\n${usage}`,
     };
   }
+
   if (upload && !hasAppSelection) {
     return {
       kind: "error",
@@ -189,7 +265,12 @@ export type GenerateChromeKeyResult =
   | { readonly kind: "error"; readonly message: string }
   | { readonly kind: "generated"; readonly extensionId: string };
 
-/** Generate a PKCS#8 RSA key at the requested path without accidental rotation. */
+/**
+ * Generate a PKCS#8 RSA key at the requested path without accidental rotation.
+ * @param keyPath - Destination for the generated PEM key.
+ * @param force - Whether to replace an existing key.
+ * @returns The generated extension ID or a write error.
+ */
 export const generateChromeKeyFile = (
   keyPath: string,
   force: boolean
@@ -230,7 +311,14 @@ export const generateChromeKeyFile = (
   };
 };
 
-/** Upload a PEM key to the release workflow's per-app GitHub Actions secret. */
+/**
+ * Upload a PEM key to the release workflow's per-app GitHub Actions secret.
+ * @param keyPath - Path to the PEM key to upload.
+ * @param repository - GitHub repository in owner/name form.
+ * @param secretName - Actions secret name receiving the key.
+ * @param runCommand - Function that sends the secret to GitHub.
+ * @returns Whether the upload succeeded or an error explaining the failure.
+ */
 export const uploadChromeKey = (
   keyPath: string,
   repository: string,
@@ -241,6 +329,7 @@ export const uploadChromeKey = (
   | { readonly kind: "uploaded" } => {
   try {
     const keyPem = readFileSync(keyPath, "utf-8");
+
     const result = runCommand(
       ["secret", "set", secretName, "--repo", repository],
       keyPem
@@ -252,6 +341,7 @@ export const uploadChromeKey = (
         message: `Unable to run gh: ${result.error.message}`,
       };
     }
+
     if (result.status !== 0) {
       return {
         kind: "error",

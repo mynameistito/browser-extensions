@@ -1,4 +1,3 @@
-import type { NormalizedEmail } from "./types";
 import { REDACTION_TOKEN } from "./types";
 
 const SKIP_TAGS = new Set([
@@ -17,11 +16,13 @@ const EMAIL_HINT_RE = /[@.]/u;
 const escapeRegex = (str: string): string =>
   str.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 
-const buildRegex = (emails: NormalizedEmail[]): RegExp | null => {
+const buildRegex = (emails: string[]): RegExp | null => {
   if (emails.length === 0) {
     return null;
   }
+
   const pattern = emails.map((e) => escapeRegex(e)).join("|");
+
   return new RegExp(pattern, "giu");
 };
 
@@ -30,15 +31,20 @@ const shouldSkipCached = (
   cache: WeakMap<Element, boolean>
 ): boolean => {
   const parent = node.parentElement;
+
   if (!parent) {
     return false;
   }
+
   const cached = cache.get(parent);
+
   if (cached !== undefined) {
     return cached;
   }
+
   let el: HTMLElement | null = parent;
   let result = false;
+
   while (el) {
     if (
       SKIP_TAGS.has(el.tagName) ||
@@ -48,9 +54,12 @@ const shouldSkipCached = (
       result = true;
       break;
     }
+
     el = el.parentElement;
   }
+
   cache.set(parent, result);
+
   return result;
 };
 
@@ -59,17 +68,21 @@ const tryReplaceText = (
   regex: RegExp,
   skipCache: WeakMap<Element, boolean>
 ): void => {
-  if (!text.nodeValue) {
+  if (text.nodeValue === null || text.nodeValue.length === 0) {
     return;
   }
+
   if (shouldSkipCached(text, skipCache)) {
     return;
   }
+
   if (!EMAIL_HINT_RE.test(text.nodeValue)) {
     return;
   }
+
   regex.lastIndex = 0;
   const replaced = text.nodeValue.replaceAll(regex, REDACTION_TOKEN);
+
   if (replaced !== text.nodeValue) {
     text.nodeValue = replaced;
   }
@@ -88,19 +101,21 @@ const scanAttributes = (
   ) {
     return;
   }
+
   if (shouldSkipCached(root, skipCache)) {
     return;
   }
+
   for (const attr of SCANNABLE_ATTRS) {
     const value = root.getAttribute(attr);
-    if (!value) {
+
+    if (value === null || value.length === 0 || !EMAIL_HINT_RE.test(value)) {
       continue;
     }
-    if (!EMAIL_HINT_RE.test(value)) {
-      continue;
-    }
+
     regex.lastIndex = 0;
     const replaced = value.replaceAll(regex, REDACTION_TOKEN);
+
     if (replaced !== value) {
       root.setAttribute(attr, replaced);
     }
@@ -113,24 +128,57 @@ const scanSubtree = (
   skipCache: WeakMap<Element, boolean>
 ): void => {
   for (const child of root.childNodes) {
-    if (child.nodeType === Node.TEXT_NODE) {
-      tryReplaceText(child as Text, regex, skipCache);
+    if (child.nodeType === Node.TEXT_NODE && child instanceof Text) {
+      tryReplaceText(child, regex, skipCache);
     }
   }
+
   if (root instanceof Element) {
     scanAttributes(root, regex, skipCache);
+
     for (const child of root.children) {
       scanSubtree(child, regex, skipCache);
     }
   }
 };
 
+const scanMutation = (
+  mutation: MutationRecord,
+  regex: RegExp,
+  skipCache: WeakMap<Element, boolean>
+): void => {
+  if (mutation.type === "attributes" && mutation.target instanceof Element) {
+    scanAttributes(mutation.target, regex, skipCache);
+  }
+
+  if (mutation.type === "characterData" && mutation.target instanceof Text) {
+    tryReplaceText(mutation.target, regex, skipCache);
+  }
+
+  for (const node of mutation.addedNodes) {
+    if (node instanceof Element) {
+      scanSubtree(node, regex, skipCache);
+    } else if (node.nodeType === Node.TEXT_NODE && node instanceof Text) {
+      tryReplaceText(node, regex, skipCache);
+    }
+  }
+};
+
+/** Controls the email redaction observer. */
 export interface Redactor {
-  setEmails: (emails: NormalizedEmail[]) => void;
+  /** Replace the email list used by the redactor. */
+  setEmails: (emails: string[]) => void;
+  /** Begin observing and redact the existing document content. */
   start: () => void;
+  /** Stop observing and cancel queued scans. */
   stop: () => void;
 }
 
+/**
+ * Create an observer that redacts matching email addresses in a document.
+ * @param root - Document to scan, defaulting to the current document.
+ * @returns Controls for updating, starting, and stopping the redactor.
+ */
 export const createRedactor = (root?: Document): Redactor => {
   const doc = root ?? document;
   let regex: RegExp | null = null;
@@ -146,32 +194,15 @@ export const createRedactor = (root?: Document): Redactor => {
     if (!regex) {
       return;
     }
+
     skipCache = new WeakMap<Element, boolean>();
 
-    if (mutations) {
-      for (const mutation of mutations) {
-        if (
-          mutation.type === "attributes" &&
-          mutation.target instanceof Element
-        ) {
-          scanAttributes(mutation.target, regex, skipCache);
-        }
-        if (
-          mutation.type === "characterData" &&
-          mutation.target instanceof Text
-        ) {
-          tryReplaceText(mutation.target, regex, skipCache);
-        }
-        for (const node of mutation.addedNodes) {
-          if (node instanceof Element) {
-            scanSubtree(node, regex, skipCache);
-          } else if (node.nodeType === Node.TEXT_NODE) {
-            tryReplaceText(node as Text, regex, skipCache);
-          }
-        }
-      }
-    } else {
+    if (mutations === undefined) {
       scanSubtree(doc.body ?? doc, regex, skipCache);
+    } else {
+      for (const mutation of mutations) {
+        scanMutation(mutation, regex, skipCache);
+      }
     }
   };
 
@@ -179,10 +210,13 @@ export const createRedactor = (root?: Document): Redactor => {
     if (mutations) {
       pendingMutations.push(...mutations);
     }
+
     if (scheduled) {
       return;
     }
+
     scheduled = true;
+
     const run = () => {
       const captured = pendingMutations;
       pendingMutations = [];
@@ -191,12 +225,14 @@ export const createRedactor = (root?: Document): Redactor => {
       scheduled = false;
       pendingTimeout = null;
       pendingIdle = null;
+
       if (doFullRescan) {
         flush();
       } else {
         flush(captured);
       }
     };
+
     if ("requestIdleCallback" in window) {
       pendingIdle = requestIdleCallback(run, { timeout: 500 });
     } else {
@@ -208,20 +244,29 @@ export const createRedactor = (root?: Document): Redactor => {
     if (!regex) {
       return;
     }
+
     skipCache = new WeakMap<Element, boolean>();
     scanSubtree(doc.body ?? doc, regex, skipCache);
   };
 
   const start = (): void => {
     if (doc.readyState === "loading") {
-      doc.addEventListener("DOMContentLoaded", () => initialScan(), {
-        once: true,
-      });
+      doc.addEventListener(
+        "DOMContentLoaded",
+        () => {
+          initialScan();
+        },
+        {
+          once: true,
+        }
+      );
     } else {
       initialScan();
     }
 
-    observer = new MutationObserver((mutations) => scheduleFlush(mutations));
+    observer = new MutationObserver((mutations) => {
+      scheduleFlush(mutations);
+    });
     observer.observe(doc.documentElement, {
       attributeFilter: [...SCANNABLE_ATTRS],
       attributes: true,
@@ -234,22 +279,26 @@ export const createRedactor = (root?: Document): Redactor => {
   const stop = (): void => {
     observer?.disconnect();
     observer = null;
+
     if (pendingTimeout !== null) {
       clearTimeout(pendingTimeout);
       pendingTimeout = null;
     }
+
     if (pendingIdle !== null) {
       cancelIdleCallback(pendingIdle);
       pendingIdle = null;
     }
+
     scheduled = false;
     pendingMutations = [];
     pendingFullRescan = false;
   };
 
   return {
-    setEmails(emails: NormalizedEmail[]) {
+    setEmails(emails: string[]) {
       regex = buildRegex(emails);
+
       if (observer) {
         pendingFullRescan = true;
         scheduleFlush();

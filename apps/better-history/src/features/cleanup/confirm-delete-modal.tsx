@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 interface ConfirmDeleteModalProps {
   body: string;
@@ -9,6 +9,11 @@ interface ConfirmDeleteModalProps {
   title: string;
 }
 
+/**
+ * Ask the user to type a confirmation word before destructive cleanup.
+ * @param props - Modal labels, state, and close/confirm callbacks.
+ * @returns The confirmation dialog.
+ */
 export const ConfirmDeleteModal = ({
   body,
   confirmLabel,
@@ -18,49 +23,62 @@ export const ConfirmDeleteModal = ({
   title,
 }: ConfirmDeleteModalProps) => {
   const [value, setValue] = useState("");
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const canConfirm = value.trim().toLowerCase() === "delete" && !isBusy;
   const titleId = useId();
   const bodyId = useId();
 
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+
     if (canConfirm) {
       onConfirm();
     }
   };
 
   useEffect(() => {
-    const onDocKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !isBusy) {
-        event.preventDefault();
-        onClose();
+    const dialog = dialogRef.current;
+
+    if (dialog !== null && !dialog.open) {
+      dialog.showModal();
+    }
+
+    return () => {
+      if (dialog !== null && dialog.open) {
+        dialog.close();
       }
     };
-    document.addEventListener("keydown", onDocKeyDown);
-    return () => document.removeEventListener("keydown", onDocKeyDown);
-  }, [isBusy, onClose]);
+  }, []);
 
   return (
-    <div
+    <dialog
+      onCancel={(event) => {
+        if (isBusy) {
+          event.preventDefault();
+
+          return;
+        }
+
+        onClose();
+      }}
+      ref={dialogRef}
       aria-describedby={bodyId}
       aria-labelledby={titleId}
-      aria-modal="true"
-      className="fixed inset-0 z-50 grid place-items-center bg-zinc-950/45 p-4 backdrop-blur-sm"
-      role="dialog"
+      className="bg-card text-foreground backdrop:bg-foreground/45 m-auto w-full max-w-md rounded-2xl border p-0 shadow-2xl"
     >
       <form
-        className="w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-5 shadow-2xl dark:border-zinc-800 dark:bg-zinc-950"
+        className="border-border dark:border-border w-full rounded-2xl border p-5"
         onSubmit={handleSubmit}
       >
         <div className="space-y-2">
-          <p className="text-xs font-semibold tracking-[0.24em] text-red-600 uppercase">
+          <p className="tracking-eyebrow text-destructive text-xs font-semibold uppercase">
             Destructive cleanup
           </p>
           <h2 className="text-xl font-semibold" id={titleId}>
             {title}
           </h2>
           <p
-            className="text-sm leading-6 text-zinc-600 dark:text-zinc-400"
+            className="text-muted-foreground dark:text-muted-foreground text-sm leading-6"
             id={bodyId}
           >
             {body}
@@ -71,15 +89,17 @@ export const ConfirmDeleteModal = ({
           <span className="font-medium">Type “delete” to confirm</span>
           <input
             autoFocus
-            className="w-full rounded-lg border border-zinc-200 bg-transparent px-3 py-2 font-mono text-sm transition outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 dark:border-zinc-800"
-            onChange={(event) => setValue(event.target.value)}
+            className="border-border focus-visible:border-ring focus-visible:ring-ring/50 dark:border-border w-full rounded-lg border bg-transparent px-3 py-2 font-mono text-sm transition outline-none focus:ring-2"
+            onChange={(event) => {
+              setValue(event.target.value);
+            }}
             value={value}
           />
         </label>
 
         <div className="mt-5 flex justify-end gap-2">
           <button
-            className="rounded-lg border border-zinc-200 px-3 py-2 text-sm hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-zinc-800 dark:hover:bg-zinc-900"
+            className="border-border hover:bg-muted dark:border-border dark:hover:bg-muted rounded-lg border px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-60"
             disabled={isBusy}
             onClick={onClose}
             type="button"
@@ -87,7 +107,7 @@ export const ConfirmDeleteModal = ({
             Cancel
           </button>
           <button
-            className="rounded-lg bg-red-600 px-3 py-2 text-sm text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="bg-destructive text-primary-foreground hover:bg-destructive/90 rounded-lg px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
             disabled={!canConfirm}
             type="submit"
           >
@@ -95,6 +115,6 @@ export const ConfirmDeleteModal = ({
           </button>
         </div>
       </form>
-    </div>
+    </dialog>
   );
 };

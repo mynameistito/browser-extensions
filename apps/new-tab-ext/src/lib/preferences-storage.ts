@@ -24,11 +24,12 @@ class PreferencesStorageError extends Data.TaggedError(
 
 /** Load locally saved preferences, falling back to safe defaults if malformed. */
 export const loadPreferences = Effect.tryPromise({
-  try: () => preferencesItem.getValue(),
-  catch: (cause) => new PreferencesStorageError({ operation: "read", cause }),
+  catch: (cause) => new PreferencesStorageError({ cause, operation: "read" }),
+  try: async () => await preferencesItem.getValue(),
 }).pipe(
   Effect.map((stored) => {
     const parsed = Schema.decodeUnknownEither(PreferencesSchema)(stored);
+
     if (Either.isLeft(parsed)) {
       return DEFAULT_PREFERENCES;
     }
@@ -42,10 +43,16 @@ export const loadPreferences = Effect.tryPromise({
   })
 );
 
-/** Persist the current preference state to extension-local storage. */
+/**
+ * Persist the current preference state to extension-local storage.
+ * @param preferences - Preference state to store.
+ * @returns An Effect that resolves after storage has been updated.
+ */
 export const savePreferences = (preferences: Preferences) =>
   Effect.tryPromise({
-    try: () => preferencesItem.setValue(preferences),
     catch: (cause) =>
-      new PreferencesStorageError({ operation: "write", cause }),
+      new PreferencesStorageError({ cause, operation: "write" }),
+    try: async () => {
+      await preferencesItem.setValue(preferences);
+    },
   });

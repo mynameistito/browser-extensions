@@ -1,5 +1,5 @@
 import { Effect, Either } from "effect";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { beforeEach, describe, expect, vi, it } from "vitest";
 
 import type { WeatherLocation } from "../../src/lib/preferences";
 import { loadCurrentWeather, searchCities } from "../../src/lib/weather-client";
@@ -10,35 +10,35 @@ import {
 } from "../helpers/wxt-imports";
 
 const location: WeatherLocation = {
-  name: "Helsinki",
-  region: "Uusimaa",
   country: "Finland",
   latitude: 60.17,
   longitude: 24.94,
+  name: "Helsinki",
+  region: "Uusimaa",
   timezone: "Europe/Helsinki",
 };
 
 const forecastPayload = {
   current: {
-    temperature_2m: 14.3,
     apparent_temperature: 12,
-    relative_humidity_2m: 73,
-    wind_speed_10m: 8.1,
-    weather_code: 61,
     is_day: 1,
+    relative_humidity_2m: 73,
+    temperature_2m: 14.3,
     time: "2026-09-30T12:00",
+    weather_code: 61,
+    wind_speed_10m: 8.1,
   },
 };
 
 const cityPayload = {
   results: [
     {
-      id: 123,
-      name: "Helsinki",
       admin1: "Uusimaa",
       country: "Finland",
+      id: 123,
       latitude: 60.17,
       longitude: 24.94,
+      name: "Helsinki",
       timezone: "Europe/Helsinki",
     },
   ],
@@ -57,21 +57,35 @@ const jsonResponse = (
   status = 200
 ): Response => Response.json(payload, { status });
 
+const requestUrl = (input: RequestInfo | URL | undefined): string => {
+  if (input instanceof Request) {
+    return input.url;
+  }
+
+  if (input instanceof URL) {
+    return input.href;
+  }
+
+  return input ?? "";
+};
+
 describe("Open-Meteo client", () => {
   beforeEach(() => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-09-30T12:00:00Z"));
   });
 
-  test("skips city searches shorter than two characters", async () => {
+  it("skips city searches shorter than two characters", async () => {
     const fetchMock = vi.fn<typeof fetch>();
     vi.stubGlobal("fetch", fetchMock);
 
-    await expect(Effect.runPromise(searchCities(" x "))).resolves.toEqual([]);
+    await expect(Effect.runPromise(searchCities(" x "))).resolves.toStrictEqual(
+      []
+    );
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  test("searches normalized city names and parses results", async () => {
+  it("searches normalized city names and parses results", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn<typeof fetch>().mockResolvedValue(jsonResponse(cityPayload))
@@ -79,23 +93,23 @@ describe("Open-Meteo client", () => {
 
     await expect(
       Effect.runPromise(searchCities(" Helsinki "))
-    ).resolves.toEqual([
+    ).resolves.toStrictEqual([
       {
-        id: 123,
-        name: "Helsinki",
-        region: "Uusimaa",
         country: "Finland",
+        id: 123,
         latitude: 60.17,
         longitude: 24.94,
+        name: "Helsinki",
+        region: "Uusimaa",
         timezone: "Europe/Helsinki",
       },
     ]);
-    expect(String(vi.mocked(fetch).mock.calls[0]?.[0])).toContain(
+    expect(requestUrl(vi.mocked(fetch).mock.calls[0]?.[0])).toContain(
       "name=Helsinki"
     );
   });
 
-  test.each([
+  it.each([
     [
       "HTTP failure",
       vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({}, 503)),
@@ -116,24 +130,26 @@ describe("Open-Meteo client", () => {
     ],
   ])("maps city search %s to a typed failure", async (_name, fetchMock) => {
     vi.stubGlobal("fetch", fetchMock);
+
     const result = await Effect.runPromise(
       Effect.either(searchCities("Helsinki"))
     );
-    expect(Either.isLeft(result)).toBe(true);
+
+    expect(Either.isLeft(result)).toBeTruthy();
   });
 
-  test("returns a fresh matching cache without a request", async () => {
+  it("returns a fresh matching cache without a request", async () => {
     seedWxtStorage("local:weather-cache", {
-      locationKey: "60.17,24.94",
       fetchedAt: Date.now() - 1000,
+      locationKey: "60.17,24.94",
       weather: {
-        temperature: 13,
         apparentTemperature: 11,
-        relativeHumidity: 70,
-        windSpeed: 5,
-        weatherCode: 2,
         isDay: true,
         observedAt: "2026-09-30T11:00",
+        relativeHumidity: 70,
+        temperature: 13,
+        weatherCode: 2,
+        windSpeed: 5,
       },
     });
     const fetchMock = vi.fn<typeof fetch>();
@@ -141,11 +157,11 @@ describe("Open-Meteo client", () => {
 
     const reading = await Effect.runPromise(loadCurrentWeather(location));
     expect(reading.weather.temperature).toBe(13);
-    expect(reading.isStale).toBe(false);
+    expect(reading.isStale).toBeFalsy();
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  test("fetches forecasts, writes cache, and converts daytime data", async () => {
+  it("fetches forecasts, writes cache, and converts daytime data", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn<typeof fetch>().mockResolvedValue(jsonResponse(forecastPayload))
@@ -153,50 +169,54 @@ describe("Open-Meteo client", () => {
 
     await expect(
       Effect.runPromise(loadCurrentWeather(location))
-    ).resolves.toEqual({
+    ).resolves.toStrictEqual({
+      isStale: false,
       weather: {
-        temperature: 14.3,
         apparentTemperature: 12,
-        relativeHumidity: 73,
-        windSpeed: 8.1,
-        weatherCode: 61,
         isDay: true,
         observedAt: "2026-09-30T12:00",
+        relativeHumidity: 73,
+        temperature: 14.3,
+        weatherCode: 61,
+        windSpeed: 8.1,
       },
-      isStale: false,
     });
     expect(vi.mocked(fetch)).toHaveBeenCalledOnce();
   });
 
-  test("supports nighttime forecasts and auto timezone fallback", async () => {
+  it("supports nighttime forecasts and auto timezone fallback", async () => {
     const nighttimeLocation = { ...location, timezone: "" };
+
     const fetchMock = vi
       .fn<typeof fetch>()
       .mockResolvedValue(
         jsonResponse({ current: { ...forecastPayload.current, is_day: 0 } })
       );
+
     vi.stubGlobal("fetch", fetchMock);
 
     const reading = await Effect.runPromise(
       loadCurrentWeather(nighttimeLocation)
     );
-    expect(reading.weather.isDay).toBe(false);
-    expect(String(fetchMock.mock.calls[0]?.[0])).toContain("timezone=auto");
+
+    expect(reading.weather.isDay).toBeFalsy();
+    expect(requestUrl(fetchMock.mock.calls[0]?.[0])).toContain("timezone=auto");
   });
 
-  test("falls back to stale data for the same location after a request failure", async () => {
+  it("falls back to stale data for the same location after a request failure", async () => {
     const weather = {
-      temperature: 4,
       apparentTemperature: 1,
-      relativeHumidity: 80,
-      windSpeed: 3,
-      weatherCode: 3,
       isDay: false,
       observedAt: "2026-09-29T12:00",
+      relativeHumidity: 80,
+      temperature: 4,
+      weatherCode: 3,
+      windSpeed: 3,
     };
+
     seedWxtStorage("local:weather-cache", {
-      locationKey: "60.17,24.94",
       fetchedAt: Date.now() - 60 * 60 * 1000,
+      locationKey: "60.17,24.94",
       weather,
     });
     vi.stubGlobal(
@@ -206,16 +226,16 @@ describe("Open-Meteo client", () => {
 
     await expect(
       Effect.runPromise(loadCurrentWeather(location))
-    ).resolves.toEqual({
-      weather,
+    ).resolves.toStrictEqual({
       isStale: true,
+      weather,
     });
   });
 
-  test("does not use another city's stale cache when the forecast fails", async () => {
+  it("does not use another city's stale cache when the forecast fails", async () => {
     seedWxtStorage("local:weather-cache", {
-      locationKey: "0,0",
       fetchedAt: Date.now() - 60 * 60 * 1000,
+      locationKey: "0,0",
       weather: forecastPayload.current,
     });
     vi.stubGlobal(
@@ -226,10 +246,11 @@ describe("Open-Meteo client", () => {
     const result = await Effect.runPromise(
       Effect.either(loadCurrentWeather(location))
     );
-    expect(Either.isLeft(result)).toBe(true);
+
+    expect(Either.isLeft(result)).toBeTruthy();
   });
 
-  test("continues when cache reads or writes fail", async () => {
+  it("continues when cache reads or writes fail", async () => {
     failWxtStorage("local:weather-cache", "read", new Error("read failed"));
     vi.stubGlobal(
       "fetch",
@@ -238,8 +259,8 @@ describe("Open-Meteo client", () => {
     await expect(
       Effect.runPromise(loadCurrentWeather(location))
     ).resolves.toMatchObject({
-      weather: { temperature: 14.3 },
       isStale: false,
+      weather: { temperature: 14.3 },
     });
 
     clearWxtStorage();

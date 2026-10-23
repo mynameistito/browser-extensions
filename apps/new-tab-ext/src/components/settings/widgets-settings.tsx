@@ -8,7 +8,11 @@ const widgetNames: Record<WidgetId, string> = {
   weather: "Weather",
 };
 
-/** Show or hide each widget and restore the starter layout. */
+/**
+ * Show or hide each widget and restore the starter layout.
+ * @param props - Widget settings loading state.
+ * @returns Controls for visibility and layout restoration.
+ */
 export const WidgetsSettings = ({
   isLoaded,
 }: {
@@ -16,13 +20,14 @@ export const WidgetsSettings = ({
 }) => {
   const { preferences, updatePreferences } = usePreferences();
 
-  const setWidgetVisibility = (id: WidgetId, visible: boolean) =>
+  const setWidgetVisibility = (id: WidgetId, visible: boolean) => {
     updatePreferences((current) => ({
       ...current,
       widgetLayout: current.widgetLayout.map((item) =>
         item.id === id ? { ...item, visible } : item
       ),
     }));
+  };
 
   return (
     <section
@@ -41,9 +46,9 @@ export const WidgetsSettings = ({
             <input
               checked={placement.visible}
               disabled={!isLoaded}
-              onChange={(event) =>
-                setWidgetVisibility(placement.id, event.currentTarget.checked)
-              }
+              onChange={(event) => {
+                setWidgetVisibility(placement.id, event.currentTarget.checked);
+              }}
               type="checkbox"
             />
           </label>
@@ -52,12 +57,12 @@ export const WidgetsSettings = ({
       <button
         className="text-button"
         disabled={!isLoaded}
-        onClick={() =>
+        onClick={() => {
           updatePreferences((current) => ({
             ...current,
             widgetLayout: DEFAULT_PREFERENCES.widgetLayout,
-          }))
-        }
+          }));
+        }}
         type="button"
       >
         Reset widget layout

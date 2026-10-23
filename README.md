@@ -30,9 +30,9 @@ Run `bun run generate-keys --help` for all options and examples.
 
 ```text
 apps/       Independently buildable WXT extensions
-packages/   Shared tooling and configuration packages
+scripts/    Shared Node.js tooling scripts
 ```
 
-Lint/format configuration is centralized in the root `oxlint.config.ts` and `oxfmt.config.ts`. The new-tab app adds its React/TanStack-specific Oxlint presets in its local config while inheriting the same Ultracite core. The shared TypeScript base lives in `packages/typescript-config`.
+Lint/format configuration is centralized in the root `oxlint.config.ts` and `oxfmt.config.ts`. The new-tab app adds its React/TanStack-specific Oxlint presets in its local config while inheriting the same Ultracite core. All project TypeScript configs inherit shared compiler options from the root `tsconfig.base.json`.
 
 Before enabling automated Chrome releases, add these repository Actions secrets, each containing that extension's own PEM key: `BETTER_HISTORY_WXT_CHROME_KEY`, `HIDE_EMAIL_WXT_CHROME_KEY`, `QUOTE_VIEWER_WXT_CHROME_KEY`, `NEW_TAB_WXT_CHROME_KEY`, `IG_VIDEO_CONTROLS_WXT_CHROME_KEY`, and `WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY`. `hide-ip-ext` does not currently use a persistent Chrome key.

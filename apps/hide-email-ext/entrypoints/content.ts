@@ -2,11 +2,11 @@ import { defineContentScript } from "wxt/utils/define-content-script";
 
 import { createRedactor } from "@/src/lib/redact";
 import { hiddenEmailsItem } from "@/src/lib/storage";
-import type { NormalizedEmail } from "@/src/lib/types";
 
 export default defineContentScript({
   async main() {
-    let emails: NormalizedEmail[] = [];
+    let emails: string[] = [];
+
     try {
       emails = (await hiddenEmailsItem.getValue()) ?? [];
     } catch {
@@ -16,9 +16,10 @@ export default defineContentScript({
     const redactor = createRedactor();
     let started = false;
 
-    const apply = (next: NormalizedEmail[] | null | undefined): void => {
+    const apply = (next: string[] | null | undefined): void => {
       const list = next ?? [];
       redactor.setEmails(list);
+
       if (!started && list.length > 0) {
         started = true;
         redactor.start();
@@ -31,6 +32,7 @@ export default defineContentScript({
     if (emails.length > 0) {
       apply(emails);
     }
+
     hiddenEmailsItem.watch(apply);
   },
   matches: ["<all_urls>"],

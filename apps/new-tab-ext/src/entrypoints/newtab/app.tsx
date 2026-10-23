@@ -5,7 +5,10 @@ import { usePreferences } from "@/components/preferences/preferences-provider";
 import { SettingsPanel } from "@/components/settings/settings-panel";
 import { WidgetGrid } from "@/components/widgets/widget-grid";
 
-/** The initial new-tab dashboard with a clock and search actions. */
+/**
+ * Render the new-tab dashboard and its settings controls.
+ * @returns The initial dashboard with its clock and search actions.
+ */
 export const App = () => {
   const { preferences, isLoaded, updatePreferences } = usePreferences();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -18,8 +21,8 @@ export const App = () => {
   const changeBackground = () => {
     updatePreferences((current) => ({
       ...current,
-      backgroundEnabled: true,
       backgroundChangeNonce: current.backgroundChangeNonce + 1,
+      backgroundEnabled: true,
     }));
   };
 
@@ -41,7 +44,9 @@ export const App = () => {
               isArrangeMode ? "customize-button is-active" : "customize-button"
             }
             disabled={!isLoaded}
-            onClick={() => setIsArrangeMode((current) => !current)}
+            onClick={() => {
+              setIsArrangeMode((current) => !current);
+            }}
             type="button"
           >
             {isArrangeMode ? "Done arranging" : "Arrange"}
@@ -51,7 +56,9 @@ export const App = () => {
             aria-haspopup="dialog"
             className="customize-button"
             disabled={!isLoaded}
-            onClick={() => setIsSettingsOpen(true)}
+            onClick={() => {
+              setIsSettingsOpen(true);
+            }}
             type="button"
           >
             Customize
@@ -68,7 +75,9 @@ export const App = () => {
       </footer>
 
       <SettingsPanel
-        onClose={() => setIsSettingsOpen(false)}
+        onClose={() => {
+          setIsSettingsOpen(false);
+        }}
         onNextBackground={changeBackground}
         open={isSettingsOpen}
       />

@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Result } from "better-result";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { ConfirmDeleteModal } from "@/features/cleanup/confirm-delete-modal";
 import { extensionMessaging } from "@/lib/messages";
@@ -72,104 +72,174 @@ const RETENTIONS: {
 
 type PendingAction = "run-now" | "save";
 
+interface CleanupFormState {
+  readonly draftOverride: CleanupConfig | null;
+  readonly errorMessage: string | null;
+  readonly isDirty: boolean;
+  readonly isWorking: boolean;
+  readonly pendingAction: PendingAction | null;
+  readonly status: string | null;
+}
+
+type CleanupActionResult =
+  | { readonly kind: "error"; readonly message: string }
+  | {
+      readonly kind: "success";
+      readonly message: string;
+      readonly saved: boolean;
+    };
+
+const lastRunFormatter = new Intl.DateTimeFormat(undefined, {
+  dateStyle: "medium",
+  timeStyle: "short",
+});
+
 const formatLastRun = (lastRunAt: number | undefined) => {
   if (lastRunAt === undefined) {
     return "Never run";
   }
-  return new Intl.DateTimeFormat(undefined, {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(lastRunAt);
+
+  return lastRunFormatter.format(lastRunAt);
+};
+
+const runCleanupAction = async (
+  action: PendingAction,
+  draft: CleanupConfig,
+  invalidateQueries: () => Promise<void>
+): Promise<CleanupActionResult> => {
+  try {
+    if (action === "save") {
+      const result = await writeKey("cleanup", draft);
+
+      if (Result.isError(result)) {
+        return { kind: "error", message: result.error.message };
+      }
+
+      await invalidateQueries();
+
+      return {
+        kind: "success",
+        message: "Cleanup settings saved.",
+        saved: true,
+      };
+    }
+
+    const response = await extensionMessaging.sendMessage("cleanup.runNow", {});
+
+    await invalidateQueries();
+
+    return {
+      kind: "success",
+      message: `Cleanup finished at ${formatLastRun(response.lastRunAt)}.`,
+      saved: false,
+    };
+  } catch (error) {
+    return {
+      kind: "error",
+      message: error instanceof Error ? error.message : String(error),
+    };
+  }
 };
 
 const optionClasses = (isSelected: boolean) =>
   [
     "rounded-xl border p-4 text-left transition",
     isSelected
-      ? "border-zinc-900 bg-zinc-950 text-white shadow-lg shadow-zinc-950/10 dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-950"
-      : "border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-700 dark:hover:bg-zinc-900",
+      ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/10 dark:border-border dark:bg-muted dark:text-foreground"
+      : "border-border bg-card hover:border-border hover:bg-muted dark:border-border dark:bg-card dark:hover:border-border dark:hover:bg-muted",
   ].join(" ");
 
+/**
+ * Render schedule and retention controls for automatic history cleanup.
+ * @returns The cleanup schedule and retention settings form.
+ */
 export const CleanupForm = () => {
   const queryClient = useQueryClient();
-  const [draft, setDraft] = useState<CleanupConfig>(DEFAULT_CLEANUP);
-  const [isDirty, setIsDirty] = useState(false);
-  const [pendingAction, setPendingAction] = useState<PendingAction | null>(
-    null
-  );
-  const [isWorking, setIsWorking] = useState(false);
-  const [status, setStatus] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const [formState, setFormState] = useState<CleanupFormState>({
+    draftOverride: null,
+    errorMessage: null,
+    isDirty: false,
+    isWorking: false,
+    pendingAction: null,
+    status: null,
+  });
 
   const query = useQuery({
     queryFn: async (): Promise<CleanupConfig> => {
       const result = await readKeyOr("cleanup", DEFAULT_CLEANUP);
+
       if (Result.isError(result)) {
         throw result.error;
       }
+
       return result.value;
     },
     queryKey: ["cleanup"],
   });
 
-  useEffect(() => {
-    if (query.data && !isDirty) {
-      setDraft(query.data);
-    }
-  }, [query.data, isDirty]);
+  const draft = formState.draftOverride ?? query.data ?? DEFAULT_CLEANUP;
 
   const updateDraft = (updater: (current: CleanupConfig) => CleanupConfig) => {
-    setDraft(updater);
-    setIsDirty(true);
+    setFormState((current) => ({
+      ...current,
+      draftOverride: updater(
+        current.draftOverride ?? query.data ?? DEFAULT_CLEANUP
+      ),
+      isDirty: true,
+    }));
   };
 
   const closeModal = () => {
-    if (!isWorking) {
-      setPendingAction(null);
+    if (!formState.isWorking) {
+      setFormState((current) => ({ ...current, pendingAction: null }));
     }
   };
 
   const confirmAction = async () => {
-    if (!pendingAction) {
+    if (!formState.pendingAction) {
       return;
     }
 
-    setIsWorking(true);
-    setErrorMessage(null);
-    setStatus(null);
+    setFormState((current) => ({
+      ...current,
+      errorMessage: null,
+      isWorking: true,
+      status: null,
+    }));
 
-    try {
-      if (pendingAction === "save") {
-        const result = await writeKey("cleanup", draft);
-        if (Result.isError(result)) {
-          throw result.error;
-        }
-        setIsDirty(false);
+    const result = await runCleanupAction(
+      formState.pendingAction,
+      draft,
+      async () => {
         await queryClient.invalidateQueries({ queryKey: ["cleanup"] });
-        setStatus("Cleanup settings saved.");
-      } else {
-        const response = await extensionMessaging.sendMessage(
-          "cleanup.runNow",
-          {}
-        );
-        await queryClient.invalidateQueries({ queryKey: ["cleanup"] });
-        setStatus(`Cleanup finished at ${formatLastRun(response.lastRunAt)}.`);
       }
-      setPendingAction(null);
-    } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : String(error));
-    } finally {
-      setIsWorking(false);
-    }
+    );
+
+    setFormState((current) => ({
+      ...current,
+      draftOverride:
+        result.kind === "success" && result.saved
+          ? null
+          : current.draftOverride,
+      errorMessage: result.kind === "error" ? result.message : null,
+      isDirty:
+        result.kind === "success" && result.saved ? false : current.isDirty,
+      isWorking: false,
+      pendingAction: result.kind === "success" ? null : current.pendingAction,
+      status: result.kind === "success" ? result.message : null,
+    }));
   };
 
   if (query.isPending) {
-    return <p className="text-sm text-zinc-500">Loading cleanup settings…</p>;
+    return (
+      <p className="text-muted-foreground text-sm">Loading cleanup settings…</p>
+    );
   }
 
   if (query.isError) {
     return (
-      <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-950 dark:bg-red-950/30 dark:text-red-300">
+      <div className="border-destructive/20 bg-destructive/10 text-destructive dark:border-destructive/20 dark:bg-destructive/10 dark:text-destructive rounded-xl border p-4 text-sm">
         Failed to load cleanup settings: {String(query.error)}
       </div>
     );
@@ -177,22 +247,22 @@ export const CleanupForm = () => {
 
   return (
     <div className="max-w-5xl space-y-6">
-      <section className="overflow-hidden rounded-3xl border border-zinc-200 bg-[radial-gradient(circle_at_top_right,rgba(244,63,94,0.16),transparent_34%),linear-gradient(135deg,#ffffff,#fafafa)] p-6 dark:border-zinc-800 dark:bg-[radial-gradient(circle_at_top_right,rgba(244,63,94,0.22),transparent_34%),linear-gradient(135deg,#09090b,#18181b)]">
+      <section className="border-border cleanup-hero dark:border-border overflow-hidden rounded-3xl border p-6">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
-            <p className="text-xs font-semibold tracking-[0.24em] text-rose-600 uppercase dark:text-rose-400">
+            <p className="tracking-eyebrow text-primary dark:text-primary text-xs font-semibold uppercase">
               Smart cleanup
             </p>
             <div className="space-y-2">
               <h2 className="text-3xl font-semibold tracking-tight">
                 Prune old history without touching the places you trust.
               </h2>
-              <p className="max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+              <p className="text-muted-foreground dark:text-muted-foreground max-w-2xl text-sm leading-6">
                 Choose how often Better History should remove older visits, how
                 much recent history to keep, and whether whitelisted domains are
                 preserved during cleanup.
               </p>
-              <p className="max-w-2xl text-sm leading-6 text-zinc-500 dark:text-zinc-400">
+              <p className="text-muted-foreground dark:text-muted-foreground max-w-2xl text-sm leading-6">
                 When whitelist exemptions are enabled, cleanup preserves recent
                 activity for a URL. Older visits to that same URL may remain
                 because the browser cannot remove only that URL’s older visits
@@ -200,8 +270,8 @@ export const CleanupForm = () => {
               </p>
             </div>
           </div>
-          <div className="rounded-2xl border border-zinc-200 bg-white/70 p-4 text-sm shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70">
-            <p className="text-zinc-500">Last cleanup</p>
+          <div className="border-border bg-card/70 dark:border-border dark:bg-card/70 rounded-2xl border p-4 text-sm shadow-sm backdrop-blur">
+            <p className="text-muted-foreground">Last cleanup</p>
             <p className="mt-1 font-medium">{formatLastRun(draft.lastRunAt)}</p>
           </div>
         </div>
@@ -210,7 +280,7 @@ export const CleanupForm = () => {
       <section className="space-y-3">
         <div>
           <h3 className="text-lg font-semibold">Schedule</h3>
-          <p className="text-sm text-zinc-500">
+          <p className="text-muted-foreground text-sm">
             Automatic cleanup runs in the background alarm loop.
           </p>
         </div>
@@ -224,12 +294,12 @@ export const CleanupForm = () => {
                 checked={draft.schedule === option.value}
                 className="sr-only"
                 name="cleanup-schedule"
-                onChange={() =>
+                onChange={() => {
                   updateDraft((current) => ({
                     ...current,
                     schedule: option.value,
-                  }))
-                }
+                  }));
+                }}
                 type="radio"
               />
               <span className="text-sm font-medium">{option.label}</span>
@@ -244,7 +314,7 @@ export const CleanupForm = () => {
       <section className="space-y-3">
         <div>
           <h3 className="text-lg font-semibold">Retention</h3>
-          <p className="text-sm text-zinc-500">
+          <p className="text-muted-foreground text-sm">
             Visits older than this window are eligible for deletion.
           </p>
         </div>
@@ -258,12 +328,12 @@ export const CleanupForm = () => {
                 checked={draft.retention === option.value}
                 className="sr-only"
                 name="cleanup-retention"
-                onChange={() =>
+                onChange={() => {
                   updateDraft((current) => ({
                     ...current,
                     retention: option.value,
-                  }))
-                }
+                  }));
+                }}
                 type="radio"
               />
               <span className="text-sm font-medium">{option.label}</span>
@@ -275,80 +345,94 @@ export const CleanupForm = () => {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+      <section className="border-border bg-card dark:border-border dark:bg-card rounded-2xl border p-4">
         <label className="flex items-start justify-between gap-4">
           <span>
             <span className="block text-sm font-medium">
               Exempt whitelisted domains
             </span>
-            <span className="mt-1 block text-sm leading-6 text-zinc-500">
+            <span className="text-muted-foreground mt-1 block text-sm leading-6">
               When enabled, cleanup preserves visits matching your whitelist
               rules even if they are older than the retention window.
             </span>
           </span>
           <input
             checked={draft.whitelistExempt}
-            className="mt-1 size-5 accent-zinc-900 dark:accent-zinc-100"
-            onChange={(event) =>
+            className="accent-primary dark:accent-primary mt-1 size-5"
+            onChange={(event) => {
               updateDraft((current) => ({
                 ...current,
                 whitelistExempt: event.target.checked,
-              }))
-            }
+              }));
+            }}
             type="checkbox"
           />
         </label>
       </section>
 
-      {(status || errorMessage) && (
+      {(formState.status !== null || formState.errorMessage !== null) && (
         <div
           className={
-            errorMessage
-              ? "rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-950 dark:bg-red-950/30 dark:text-red-300"
-              : "rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-700 dark:border-emerald-950 dark:bg-emerald-950/30 dark:text-emerald-300"
+            formState.errorMessage === null
+              ? "border-success/20 bg-success/10 text-success dark:border-success/20 dark:bg-success/10 dark:text-success rounded-xl border p-3 text-sm"
+              : "border-destructive/20 bg-destructive/10 text-destructive dark:border-destructive/20 dark:bg-destructive/10 dark:text-destructive rounded-xl border p-3 text-sm"
           }
         >
-          {errorMessage ?? status}
+          {formState.errorMessage ?? formState.status}
         </div>
       )}
 
-      <div className="flex flex-col gap-2 border-t border-zinc-200 pt-5 sm:flex-row sm:justify-end dark:border-zinc-800">
+      <div className="border-border dark:border-border flex flex-col gap-2 border-t pt-5 sm:flex-row sm:justify-end">
         <button
-          className="rounded-lg border border-zinc-200 px-4 py-2 text-sm hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:hover:bg-zinc-900"
-          disabled={isWorking || isDirty}
-          onClick={() => setPendingAction("run-now")}
-          title={
-            isDirty ? "Save your changes before running cleanup." : undefined
-          }
+          className="border-border hover:bg-muted dark:border-border dark:hover:bg-muted rounded-lg border px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+          disabled={formState.isWorking || formState.isDirty}
+          onClick={() => {
+            setFormState((current) => ({
+              ...current,
+              pendingAction: "run-now",
+            }));
+          }}
           type="button"
         >
           Run now
         </button>
+        {formState.isDirty && (
+          <span className="text-muted-foreground self-center text-xs">
+            Save your changes before running cleanup.
+          </span>
+        )}
         <button
-          className="rounded-lg bg-zinc-900 px-4 py-2 text-sm text-white hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
-          disabled={!isDirty || isWorking}
-          onClick={() => setPendingAction("save")}
+          className="bg-primary text-primary-foreground hover:bg-primary/90 dark:bg-muted dark:text-foreground dark:hover:bg-muted rounded-lg px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+          disabled={!formState.isDirty || formState.isWorking}
+          onClick={() => {
+            setFormState((current) => ({
+              ...current,
+              pendingAction: "save",
+            }));
+          }}
           type="button"
         >
           Save cleanup settings
         </button>
       </div>
 
-      {pendingAction && (
+      {formState.pendingAction && (
         <ConfirmDeleteModal
           body={
-            pendingAction === "save"
+            formState.pendingAction === "save"
               ? "These settings control automatic history deletion. Better History will delete eligible visits according to this schedule."
               : "Better History will immediately delete visits older than your retention window. This cannot be undone."
           }
           confirmLabel={
-            pendingAction === "save" ? "Save settings" : "Run cleanup"
+            formState.pendingAction === "save" ? "Save settings" : "Run cleanup"
           }
-          isBusy={isWorking}
+          isBusy={formState.isWorking}
           onClose={closeModal}
-          onConfirm={confirmAction}
+          onConfirm={() => {
+            void confirmAction();
+          }}
           title={
-            pendingAction === "save"
+            formState.pendingAction === "save"
               ? "Confirm cleanup settings"
               : "Run cleanup now?"
           }

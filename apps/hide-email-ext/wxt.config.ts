@@ -4,32 +4,37 @@ import path from "node:path";
 import { defineConfig } from "wxt";
 
 import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
-
-const pkg = JSON.parse(
-  readFileSync(path.resolve(import.meta.dirname, "package.json"), "utf-8")
-) as { version: string };
+import pkg from "./package.json";
 
 /**
  * Derive the Chromium-compatible `manifest.key` (base64 SPKI public key) from
  * the local `key.pem` or CI-provided `WXT_CHROME_KEY` private-key PEM so local
  * and release builds keep the same persistent Chromium extension ID.
  */
+/** Loads the private key from the environment or app root.
+ * @returns The PEM text when available.
+ */
 const loadPemSource = (): string | undefined => {
   const fromEnv = process.env.WXT_CHROME_KEY;
-  if (fromEnv && fromEnv.length > 0) {
+
+  if (fromEnv !== undefined && fromEnv.length > 0) {
     return fromEnv;
   }
 
   const keyPath = path.resolve(import.meta.dirname, "key.pem");
+
   if (existsSync(keyPath)) {
     return readFileSync(keyPath, "utf-8");
   }
+
+  return undefined;
 };
 
 const loadManifestKey = (): string | undefined => {
   const pem = loadPemSource();
-  if (!pem) {
-    return;
+
+  if (pem === undefined) {
+    return undefined;
   }
 
   return deriveChromeExtensionKey(pem).manifestKey;
@@ -66,7 +71,8 @@ export default defineConfig({
     }
 
     const key = loadManifestKey();
-    if (!key) {
+
+    if (key === undefined || key.length === 0) {
       if (process.env.REQUIRE_CHROME_KEY === "1") {
         throw new Error(
           "WXT_CHROME_KEY or key.pem is required when REQUIRE_CHROME_KEY=1."
@@ -78,10 +84,13 @@ export default defineConfig({
       );
     }
 
-    return {
-      ...base,
-      ...(key ? { key } : {}),
-    };
+    const manifest: typeof base & { key?: string } = { ...base };
+
+    if (key !== undefined && key.length > 0) {
+      manifest.key = key;
+    }
+
+    return manifest;
   },
   srcDir: ".",
   suppressWarnings: {

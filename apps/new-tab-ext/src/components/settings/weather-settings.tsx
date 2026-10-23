@@ -7,7 +7,11 @@ import { searchCities } from "@/lib/weather-client";
 
 const CITY_SEARCH_ERROR = "Could not find cities right now. Try again shortly.";
 
-/** Edit the user's manually selected weather city. */
+/**
+ * Edit the user's manually selected weather city.
+ * @param props - Whether stored preferences have finished loading.
+ * @returns City search, selection, and removal controls.
+ */
 export const WeatherSettings = ({
   isLoaded,
 }: {
@@ -32,6 +36,7 @@ export const WeatherSettings = ({
 
             if (result._tag === "Left") {
               setCityMessage(CITY_SEARCH_ERROR);
+
               return;
             }
 
@@ -68,12 +73,12 @@ export const WeatherSettings = ({
           </span>
           <button
             className="text-button"
-            onClick={() =>
+            onClick={() => {
               updatePreferences((current) => ({
                 ...current,
                 weatherLocation: null,
-              }))
-            }
+              }));
+            }}
             type="button"
           >
             Remove
@@ -88,7 +93,9 @@ export const WeatherSettings = ({
           autoComplete="off"
           disabled={!isLoaded}
           id="city-query"
-          onChange={(event) => setCityQuery(event.currentTarget.value)}
+          onChange={(event) => {
+            setCityQuery(event.currentTarget.value);
+          }}
           onKeyDown={(event) => {
             if (event.key === "Enter") {
               event.preventDefault();
@@ -122,11 +129,11 @@ export const WeatherSettings = ({
                   updatePreferences((current) => ({
                     ...current,
                     weatherLocation: {
-                      name: city.name,
-                      region: city.region,
                       country: city.country,
                       latitude: city.latitude,
                       longitude: city.longitude,
+                      name: city.name,
+                      region: city.region,
                       timezone: city.timezone,
                     },
                   }));

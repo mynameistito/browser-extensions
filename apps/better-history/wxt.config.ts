@@ -9,20 +9,27 @@ import { defineConfig } from "wxt";
 import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
 
 const loadManifestKey = (): string | undefined => {
-  const pem =
-    process.env.WXT_CHROME_KEY ||
-    (existsSync(path.resolve("key.pem"))
-      ? readFileSync(path.resolve("key.pem"), "utf-8")
-      : undefined);
-  if (!pem) {
-    return;
+  const environmentPem = process.env.WXT_CHROME_KEY;
+  const localKeyPath = path.resolve("key.pem");
+  let pem = environmentPem;
+
+  if (pem === undefined || pem.length === 0) {
+    pem = existsSync(localKeyPath)
+      ? readFileSync(localKeyPath, "utf-8")
+      : undefined;
+  }
+
+  if (pem === undefined) {
+    return undefined;
   }
 
   try {
     return deriveChromeExtensionKey(pem).manifestKey;
   } catch (error) {
-    console.error("Failed to parse PEM into SPKI:", (error as Error).message);
+    console.error("Failed to parse PEM into SPKI:", error);
   }
+
+  return undefined;
 };
 
 export default defineConfig({
@@ -43,6 +50,7 @@ export default defineConfig({
         ...(browser === "chrome" ? ["favicon"] : []),
       ],
     };
+
     if (browser === "firefox") {
       return {
         ...base,
@@ -51,12 +59,22 @@ export default defineConfig({
         },
       };
     }
+
     const key = loadManifestKey();
-    return {
+
+    const manifest: typeof base & {
+      chrome_url_overrides: { history: string };
+      key?: string;
+    } = {
       ...base,
-      ...(key ? { key } : {}),
       chrome_url_overrides: { history: "history.html" },
     };
+
+    if (key !== undefined && key.length > 0) {
+      manifest.key = key;
+    }
+
+    return manifest;
   },
   manifestVersion: 3,
   publicDir: "src/public",

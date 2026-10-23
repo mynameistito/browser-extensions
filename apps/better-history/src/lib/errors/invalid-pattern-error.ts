@@ -5,4 +5,5 @@ const InvalidPatternErrorBase = defineTaggedErrorClass("InvalidPatternError")<{
   reason: string;
 }>();
 
+/** A domain rule pattern that cannot be parsed or matched. */
 export class InvalidPatternError extends InvalidPatternErrorBase {}

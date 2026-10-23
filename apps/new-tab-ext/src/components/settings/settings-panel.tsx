@@ -24,7 +24,11 @@ const sections: readonly {
   { id: "privacy", label: "Privacy" },
 ];
 
-/** Edit all dashboard preferences without leaving the new-tab page. */
+/**
+ * Edit all dashboard preferences without leaving the new-tab page.
+ * @param props - Open state and callbacks for the settings dialog.
+ * @returns The settings dialog and its preference controls.
+ */
 export const SettingsPanel = ({
   open,
   onClose,
@@ -36,6 +40,7 @@ export const SettingsPanel = ({
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [section, setSection] = useState<SettingsSection>("appearance");
+
   const { preferences, isLoaded, storageMessage, updatePreferences } =
     usePreferences();
 
@@ -77,7 +82,9 @@ export const SettingsPanel = ({
                     : "settings-nav-item"
                 }
                 key={item.id}
-                onClick={() => setSection(item.id)}
+                onClick={() => {
+                  setSection(item.id);
+                }}
                 type="button"
               >
                 {item.label}
@@ -104,6 +111,7 @@ export const SettingsPanel = ({
                   id="theme-select"
                   onChange={(event) => {
                     const theme = event.currentTarget.value;
+
                     if (
                       theme === "system" ||
                       theme === "light" ||
@@ -130,12 +138,12 @@ export const SettingsPanel = ({
                     aria-label="Enable rotating backgrounds"
                     checked={preferences.backgroundEnabled}
                     disabled={!isLoaded}
-                    onChange={(event) =>
+                    onChange={(event) => {
                       updatePreferences((current) => ({
                         ...current,
                         backgroundEnabled: event.currentTarget.checked,
-                      }))
-                    }
+                      }));
+                    }}
                     type="checkbox"
                   />
                 </div>
@@ -167,6 +175,7 @@ export const SettingsPanel = ({
                   id="search-provider"
                   onChange={(event) => {
                     const searchProvider = event.currentTarget.value;
+
                     if (
                       searchProvider === "google" ||
                       searchProvider === "bing" ||

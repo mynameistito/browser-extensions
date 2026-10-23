@@ -1,5 +1,5 @@
 import { Either, Schema } from "effect";
-import { describe, expect, test } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import {
   chooseDailyBackground,
@@ -11,10 +11,8 @@ const commonsPayload = {
   query: {
     pages: {
       "42": {
-        title: "File:Mountain.jpg",
         imageinfo: [
           {
-            thumburl: "https://thumb.wikimedia.org/example.jpg",
             descriptionurl:
               "https://commons.wikimedia.org/wiki/File:Mountain.jpg",
             extmetadata: {
@@ -24,38 +22,37 @@ const commonsPayload = {
                 value: "https://creativecommons.org/licenses/by-sa/4.0/",
               },
             },
+            thumburl: "https://thumb.wikimedia.org/example.jpg",
           },
         ],
+        title: "File:Mountain.jpg",
       },
     },
   },
 };
 
 describe("Wikimedia Commons backgrounds", () => {
-  test("decodes and preserves attribution for eligible photos", () => {
-    const decoded = Schema.decodeUnknownEither(CommonsResponseSchema)(
+  it("decodes and preserves attribution for eligible photos", () => {
+    const decoded = Schema.decodeUnknownSync(CommonsResponseSchema)(
       commonsPayload
     );
 
-    expect(Either.isRight(decoded)).toBe(true);
-    if (Either.isRight(decoded)) {
-      expect(parseBackgroundResponse(decoded.right)).toEqual([
-        {
-          title: "Mountain.jpg",
-          imageUrl: "https://thumb.wikimedia.org/example.jpg",
-          pageUrl: "https://commons.wikimedia.org/wiki/File:Mountain.jpg",
-          artist: "Photographer & co",
-          license: "CC BY-SA 4.0",
-          licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
-        },
-      ]);
-    }
+    expect(parseBackgroundResponse(decoded)).toStrictEqual([
+      {
+        artist: "Photographer & co",
+        imageUrl: "https://thumb.wikimedia.org/example.jpg",
+        license: "CC BY-SA 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+        pageUrl: "https://commons.wikimedia.org/wiki/File:Mountain.jpg",
+        title: "Mountain.jpg",
+      },
+    ]);
   });
 
-  test("rejects malformed metadata and rotates deterministically", () => {
+  it("rejects malformed metadata and rotates deterministically", () => {
     expect(
       Either.isLeft(Schema.decodeUnknownEither(CommonsResponseSchema)({}))
-    ).toBe(true);
+    ).toBeTruthy();
 
     const photos = parseBackgroundResponse(
       Schema.decodeUnknownSync(CommonsResponseSchema)(commonsPayload)
@@ -66,37 +63,37 @@ describe("Wikimedia Commons backgrounds", () => {
     expect(chooseDailyBackground([...photos, ...photos], 0, -1)).toBeNull();
   });
 
-  test("filters unsafe URLs and missing attribution while decoding artist text", () => {
+  it("filters unsafe URLs and missing attribution while decoding artist text", () => {
     const payload = {
       query: {
         pages: {
+          malformed: {
+            imageinfo: [],
+            title: "File:Malformed.jpg",
+          },
           missing: {
-            title: "File:Missing.jpg",
             imageinfo: [
               {
-                thumburl: "https://thumb.wikimedia.org/missing.jpg",
                 descriptionurl: "https://commons.wikimedia.org/wiki/Missing",
                 extmetadata: {},
+                thumburl: "https://thumb.wikimedia.org/missing.jpg",
               },
             ],
+            title: "File:Missing.jpg",
           },
           unsafe: {
-            title: "File:Unsafe.jpg",
             imageinfo: [
               {
-                thumburl: `http:${"//thumb.wikimedia.org/unsafe.jpg"}`,
                 descriptionurl: "https://commons.wikimedia.org/wiki/Unsafe",
                 extmetadata: {
                   Artist: { value: "Artist" },
                   LicenseShortName: { value: "CC" },
-                  LicenseUrl: { value: `${"java"}script:alert(1)` },
+                  LicenseUrl: { value: "data:text/html,alert(1)" },
                 },
+                thumburl: `http://thumb.wikimedia.org/unsafe.jpg`,
               },
             ],
-          },
-          malformed: {
-            title: "File:Malformed.jpg",
-            imageinfo: [],
+            title: "File:Unsafe.jpg",
           },
         },
       },
@@ -106,18 +103,16 @@ describe("Wikimedia Commons backgrounds", () => {
       parseBackgroundResponse(
         Schema.decodeUnknownSync(CommonsResponseSchema)(payload)
       )
-    ).toEqual([]);
+    ).toStrictEqual([]);
   });
 
-  test("cleans supported HTML entities and rejects invalid origins", () => {
+  it("cleans supported HTML entities and rejects invalid origins", () => {
     const payload = {
       query: {
         pages: {
           encoded: {
-            title: "Landscape.jpg",
             imageinfo: [
               {
-                thumburl: "https://thumb.wikimedia.org/image.jpg",
                 descriptionurl: "https://commons.wikimedia.org/wiki/Image",
                 extmetadata: {
                   Artist: {
@@ -127,36 +122,38 @@ describe("Wikimedia Commons backgrounds", () => {
                   LicenseShortName: { value: "CC" },
                   LicenseUrl: { value: "https://creativecommons.org/license" },
                 },
+                thumburl: "https://thumb.wikimedia.org/image.jpg",
               },
             ],
-          },
-          wrongHost: {
-            title: "File:Wrong.jpg",
-            imageinfo: [
-              {
-                thumburl: "https://example.com/image.jpg",
-                descriptionurl: "https://commons.wikimedia.org/wiki/Wrong",
-                extmetadata: {
-                  Artist: { value: "Artist" },
-                  LicenseShortName: { value: "CC" },
-                  LicenseUrl: { value: "https://creativecommons.org/license" },
-                },
-              },
-            ],
+            title: "Landscape.jpg",
           },
           malformedUrl: {
-            title: "File:Malformed-url.jpg",
             imageinfo: [
               {
-                thumburl: "not a valid URL",
                 descriptionurl: "https://commons.wikimedia.org/wiki/Invalid",
                 extmetadata: {
                   Artist: { value: "Artist" },
                   LicenseShortName: { value: "CC" },
                   LicenseUrl: { value: "https://creativecommons.org/license" },
                 },
+                thumburl: "not a valid URL",
               },
             ],
+            title: "File:Malformed-url.jpg",
+          },
+          wrongHost: {
+            imageinfo: [
+              {
+                descriptionurl: "https://commons.wikimedia.org/wiki/Wrong",
+                extmetadata: {
+                  Artist: { value: "Artist" },
+                  LicenseShortName: { value: "CC" },
+                  LicenseUrl: { value: "https://creativecommons.org/license" },
+                },
+                thumburl: "https://example.com/image.jpg",
+              },
+            ],
+            title: "File:Wrong.jpg",
           },
         },
       },

@@ -2,7 +2,11 @@ import { Schema } from "effect";
 
 /** Supported web search providers. */
 export type SearchProvider = "google" | "bing" | "duckduckgo";
+
+/** Stable identifier for a supported dashboard widget. */
 export type WidgetId = "clock" | "search" | "weather";
+
+/** Number of grid columns a widget may occupy. */
 export type WidgetSpan = 1 | 2 | 3;
 
 /** Supported color theme preferences. */
@@ -37,53 +41,59 @@ export interface WidgetPlacement {
 
 /** Safe initial values for a new installation. */
 export const DEFAULT_PREFERENCES: Preferences = {
+  backgroundChangeNonce: 0,
+  backgroundEnabled: true,
   searchProvider: "google",
   theme: "system",
-  backgroundEnabled: true,
-  backgroundChangeNonce: 0,
   weatherLocation: null,
   widgetLayout: [
-    { id: "clock", visible: true, span: 2 },
-    { id: "search", visible: true, span: 3 },
-    { id: "weather", visible: false, span: 1 },
+    { id: "clock", span: 2, visible: true },
+    { id: "search", span: 3, visible: true },
+    { id: "weather", span: 1, visible: false },
   ],
 };
 
 const WidgetPlacementSchema = Schema.Struct({
   id: Schema.Literal("clock", "search", "weather"),
-  visible: Schema.Boolean,
   span: Schema.Literal(1, 2, 3),
+  visible: Schema.Boolean,
 });
 
 const WeatherLocationSchema = Schema.Struct({
-  name: Schema.String,
-  region: Schema.String,
   country: Schema.String,
   latitude: Schema.Number.pipe(Schema.between(-90, 90)),
   longitude: Schema.Number.pipe(Schema.between(-180, 180)),
+  name: Schema.String,
+  region: Schema.String,
   timezone: Schema.String,
 });
 
 export const PreferencesSchema = Schema.Struct({
+  backgroundChangeNonce: Schema.Number.pipe(Schema.int(), Schema.nonNegative()),
+  backgroundEnabled: Schema.Boolean,
   searchProvider: Schema.Literal("google", "bing", "duckduckgo"),
   theme: Schema.Literal("system", "light", "dark"),
-  backgroundEnabled: Schema.Boolean,
-  backgroundChangeNonce: Schema.Number.pipe(Schema.int(), Schema.nonNegative()),
   weatherLocation: Schema.NullOr(WeatherLocationSchema),
   widgetLayout: Schema.optional(Schema.Array(WidgetPlacementSchema)),
 });
 
-/** Ensure persisted layouts include each supported widget exactly once. */
+/**
+ * Ensure persisted layouts include each supported widget exactly once.
+ * @param layout - Layout entries read from preferences.
+ * @returns A layout with duplicate entries removed and missing widgets added.
+ */
 export const normalizeWidgetLayout = (
   layout: readonly WidgetPlacement[]
 ): readonly WidgetPlacement[] => {
   const seen = new Set<WidgetId>();
+
   const unique = layout.filter((placement) => {
     if (seen.has(placement.id)) {
       return false;
     }
 
     seen.add(placement.id);
+
     return true;
   });
 
@@ -95,7 +105,13 @@ export const normalizeWidgetLayout = (
   ];
 };
 
-/** Move an item among visible widgets while preserving hidden widget order. */
+/**
+ * Move an item among visible widgets while preserving hidden widget order.
+ * @param layout - Current widget layout.
+ * @param id - Visible widget to move.
+ * @param direction - One visible position left or right.
+ * @returns The updated layout, or the original when movement is out of bounds.
+ */
 export const moveWidget = (
   layout: readonly WidgetPlacement[],
   id: WidgetId,
@@ -104,9 +120,11 @@ export const moveWidget = (
   const visibleIndexes = layout.flatMap((placement, index) =>
     placement.visible ? [index] : []
   );
+
   const currentIndex = visibleIndexes.findIndex(
     (index) => layout[index]?.id === id
   );
+
   const destinationIndex = currentIndex + direction;
   const currentPosition = visibleIndexes[currentIndex];
   const destinationPosition = visibleIndexes[destinationIndex];
@@ -116,17 +134,26 @@ export const moveWidget = (
   }
 
   const next = [...layout];
-  // SAFETY: Both positions came from indices computed from this same dense input layout.
-  const current = next[currentPosition] as WidgetPlacement;
-  // SAFETY: destinationPosition was checked against visibleIndexes before indexing this dense layout.
-  const destination = next[destinationPosition] as WidgetPlacement;
+  const current = next[currentPosition];
+  const destination = next[destinationPosition];
+
+  if (current === undefined || destination === undefined) {
+    return layout;
+  }
+
   next[currentPosition] = destination;
   next[destinationPosition] = current;
 
   return next;
 };
 
-/** Swap two visible widgets, as used when a card is dropped on another. */
+/**
+ * Swap two visible widgets, as used when a card is dropped on another.
+ * @param layout - Current widget layout.
+ * @param firstId - First visible widget.
+ * @param secondId - Second visible widget.
+ * @returns The updated layout, or the original when either widget is absent.
+ */
 export const swapWidgetPositions = (
   layout: readonly WidgetPlacement[],
   firstId: WidgetId,
@@ -135,6 +162,7 @@ export const swapWidgetPositions = (
   const firstIndex = layout.findIndex(
     (placement) => placement.visible && placement.id === firstId
   );
+
   const secondIndex = layout.findIndex(
     (placement) => placement.visible && placement.id === secondId
   );
@@ -144,17 +172,26 @@ export const swapWidgetPositions = (
   }
 
   const next = [...layout];
-  // SAFETY: Both indices were found in this same dense input layout.
-  const first = next[firstIndex] as WidgetPlacement;
-  // SAFETY: secondIndex was found by searching this same dense input layout.
-  const second = next[secondIndex] as WidgetPlacement;
+  const first = next[firstIndex];
+  const second = next[secondIndex];
+
+  if (first === undefined || second === undefined) {
+    return layout;
+  }
+
   next[firstIndex] = second;
   next[secondIndex] = first;
 
   return next;
 };
 
-/** Change the grid width for one widget. */
+/**
+ * Change the grid width for one widget.
+ * @param layout - Current widget layout.
+ * @param id - Widget whose width should change.
+ * @param span - New grid width.
+ * @returns The layout with the selected widget resized.
+ */
 export const resizeWidget = (
   layout: readonly WidgetPlacement[],
   id: WidgetId,

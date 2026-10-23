@@ -9,6 +9,9 @@
       "dependsOn": ["^typecheck"],
       "outputs": []
     },
+    "//#typecheck:root": {
+      "outputs": []
+    },
     "test": {
       "dependsOn": ["^test"],
       "outputs": []

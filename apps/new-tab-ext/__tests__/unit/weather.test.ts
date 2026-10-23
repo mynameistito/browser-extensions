@@ -1,5 +1,5 @@
 import { Either, Schema } from "effect";
-import { describe, expect, test } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import {
   CityResponseSchema,
@@ -10,48 +10,45 @@ import {
 } from "../../src/lib/weather";
 
 describe("Open-Meteo response decoding", () => {
-  test("maps a geocoding result to a city choice", () => {
-    const decoded = Schema.decodeUnknownEither(CityResponseSchema)({
+  it("maps a geocoding result to a city choice", () => {
+    const decoded = Schema.decodeUnknownSync(CityResponseSchema)({
       results: [
         {
-          id: 123,
-          name: "Helsinki",
           admin1: "Uusimaa",
           country: "Finland",
+          id: 123,
           latitude: 60.17,
           longitude: 24.94,
+          name: "Helsinki",
           timezone: "Europe/Helsinki",
         },
       ],
     });
 
-    expect(Either.isRight(decoded)).toBe(true);
-    if (Either.isRight(decoded)) {
-      expect(parseCityResults(decoded.right)).toEqual([
-        {
-          id: 123,
-          name: "Helsinki",
-          region: "Uusimaa",
-          country: "Finland",
-          latitude: 60.17,
-          longitude: 24.94,
-          timezone: "Europe/Helsinki",
-        },
-      ]);
-    }
+    expect(parseCityResults(decoded)).toStrictEqual([
+      {
+        country: "Finland",
+        id: 123,
+        latitude: 60.17,
+        longitude: 24.94,
+        name: "Helsinki",
+        region: "Uusimaa",
+        timezone: "Europe/Helsinki",
+      },
+    ]);
   });
 
-  test("handles missing, empty, and regionless geocoding results", () => {
-    expect(parseCityResults({})).toEqual([]);
+  it("handles missing, empty, and regionless geocoding results", () => {
+    expect(parseCityResults({})).toStrictEqual([]);
     expect(
       parseCityResults({
         results: [
           {
-            id: 4,
-            name: "Oslo",
             country: "Norway",
+            id: 4,
             latitude: 59.9,
             longitude: 10.7,
+            name: "Oslo",
             timezone: "Europe/Oslo",
           },
         ],
@@ -59,38 +56,36 @@ describe("Open-Meteo response decoding", () => {
     ).toBe("");
   });
 
-  test("rejects malformed forecast conditions and maps valid conditions", () => {
+  it("rejects malformed forecast conditions and maps valid conditions", () => {
     const invalid = Schema.decodeUnknownEither(CurrentWeatherSchema)({
       current: { temperature_2m: "cold" },
     });
-    const decoded = Schema.decodeUnknownEither(CurrentWeatherSchema)({
+
+    const decoded = Schema.decodeUnknownSync(CurrentWeatherSchema)({
       current: {
-        temperature_2m: 14.3,
         apparent_temperature: 12,
-        relative_humidity_2m: 73,
-        wind_speed_10m: 8.1,
-        weather_code: 61,
         is_day: 1,
+        relative_humidity_2m: 73,
+        temperature_2m: 14.3,
         time: "2026-09-30T12:00",
+        weather_code: 61,
+        wind_speed_10m: 8.1,
       },
     });
 
-    expect(Either.isLeft(invalid)).toBe(true);
-    expect(Either.isRight(decoded)).toBe(true);
-    if (Either.isRight(decoded)) {
-      expect(parseCurrentWeather(decoded.right)).toEqual({
-        temperature: 14.3,
-        apparentTemperature: 12,
-        relativeHumidity: 73,
-        windSpeed: 8.1,
-        weatherCode: 61,
-        isDay: true,
-        observedAt: "2026-09-30T12:00",
-      });
-    }
+    expect(Either.isLeft(invalid)).toBeTruthy();
+    expect(parseCurrentWeather(decoded)).toStrictEqual({
+      apparentTemperature: 12,
+      isDay: true,
+      observedAt: "2026-09-30T12:00",
+      relativeHumidity: 73,
+      temperature: 14.3,
+      weatherCode: 61,
+      windSpeed: 8.1,
+    });
   });
 
-  test("describes common weather codes", () => {
+  it("describes common weather codes", () => {
     const cases: readonly (readonly [number, string])[] = [
       [0, "Clear sky"],
       [1, "Mostly clear"],

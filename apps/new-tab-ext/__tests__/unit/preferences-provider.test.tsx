@@ -5,7 +5,7 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import {
   PreferencesProvider,
@@ -23,12 +23,12 @@ const PreferencesProbe = () => {
       <output aria-label="Theme">{preferences.theme}</output>
       <output aria-label="Storage message">{storageMessage}</output>
       <button
-        onClick={() =>
+        onClick={() => {
           updatePreferences((current) => ({
             ...current,
             theme: current.theme === "dark" ? "light" : "dark",
-          }))
-        }
+          }));
+        }}
         type="button"
       >
         Toggle theme
@@ -37,14 +37,14 @@ const PreferencesProbe = () => {
   );
 };
 
-describe("PreferencesProvider", () => {
-  test("requires the provider for the preference hook", () => {
+describe(PreferencesProvider, () => {
+  it("requires the provider for the preference hook", () => {
     expect(() => render(<PreferencesProbe />)).toThrow(
       "usePreferences must be used within PreferencesProvider."
     );
   });
 
-  test("loads defaults and persists preference updates", async () => {
+  it("loads defaults and persists preference updates", async () => {
     render(
       <PreferencesProvider>
         <PreferencesProbe />
@@ -52,17 +52,17 @@ describe("PreferencesProvider", () => {
     );
 
     expect(screen.getByLabelText("Loaded").textContent).toBe("false");
-    await waitFor(() =>
-      expect(screen.getByLabelText("Loaded").textContent).toBe("true")
-    );
+    await waitFor(() => {
+      expect(screen.getByLabelText("Loaded").textContent).toBe("true");
+    });
 
     fireEvent.click(screen.getByRole("button", { name: "Toggle theme" }));
-    await waitFor(() =>
-      expect(screen.getByLabelText("Theme").textContent).toBe("dark")
-    );
+    await waitFor(() => {
+      expect(screen.getByLabelText("Theme").textContent).toBe("dark");
+    });
   });
 
-  test("does not persist pre-load edits and drains queued updates in order", async () => {
+  it("does not persist pre-load edits and drains queued updates in order", async () => {
     render(
       <PreferencesProvider>
         <PreferencesProbe />
@@ -70,17 +70,19 @@ describe("PreferencesProvider", () => {
     );
 
     fireEvent.click(screen.getByRole("button", { name: "Toggle theme" }));
-    await waitFor(() =>
-      expect(screen.getByLabelText("Loaded").textContent).toBe("true")
-    );
+    await waitFor(() => {
+      expect(screen.getByLabelText("Loaded").textContent).toBe("true");
+    });
     fireEvent.click(screen.getByRole("button", { name: "Toggle theme" }));
     fireEvent.click(screen.getByRole("button", { name: "Toggle theme" }));
-    await waitFor(() =>
-      expect(screen.getByLabelText("Theme").textContent).toBe("light")
-    );
+    await waitFor(() => {
+      expect(screen.getByLabelText("Theme").textContent).toBe("light");
+    });
   });
 
-  test("ignores load completion after unmount", async () => {
+  it("ignores load completion after unmount", async () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+
     const view = render(
       <PreferencesProvider>
         <PreferencesProbe />
@@ -92,9 +94,12 @@ describe("PreferencesProvider", () => {
       await Promise.resolve();
       await Promise.resolve();
     });
+
+    expect(error).not.toHaveBeenCalled();
+    error.mockRestore();
   });
 
-  test("reports load failures while still showing defaults", async () => {
+  it("reports load failures while still showing defaults", async () => {
     failWxtStorage(
       "local:preferences",
       "read",
@@ -107,29 +112,27 @@ describe("PreferencesProvider", () => {
       </PreferencesProvider>
     );
 
-    expect(
-      await screen.findByText(
-        "Settings could not be loaded. Defaults are shown."
-      )
-    ).toBeTruthy();
+    await expect(
+      screen.findByText("Settings could not be loaded. Defaults are shown.")
+    ).resolves.toBeTruthy();
     expect(screen.getByLabelText("Theme").textContent).toBe("system");
     expect(screen.getByLabelText("Loaded").textContent).toBe("true");
   });
 
-  test("reports persistence failures", async () => {
+  it("reports persistence failures", async () => {
     render(
       <PreferencesProvider>
         <PreferencesProbe />
       </PreferencesProvider>
     );
-    await waitFor(() =>
-      expect(screen.getByLabelText("Loaded").textContent).toBe("true")
-    );
+    await waitFor(() => {
+      expect(screen.getByLabelText("Loaded").textContent).toBe("true");
+    });
 
     failWxtStorage("local:preferences", "write", new Error("disk full"));
     fireEvent.click(screen.getByRole("button", { name: "Toggle theme" }));
-    expect(
-      await screen.findByText("This change could not be saved on this device.")
-    ).toBeTruthy();
+    await expect(
+      screen.findByText("This change could not be saved on this device.")
+    ).resolves.toBeTruthy();
   });
 });

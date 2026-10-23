@@ -3,6 +3,7 @@ type OsdType = "volume" | "speed";
 const OSD_HIDE_DELAY_MS = 500;
 
 const osdElements = new WeakMap<HTMLVideoElement, HTMLElement>();
+
 const osdTimers = new WeakMap<
   HTMLVideoElement,
   ReturnType<typeof setTimeout>
@@ -12,6 +13,7 @@ const formatValue = (type: OsdType, value: number): string => {
   if (type === "volume") {
     return `${Math.round(value * 100)}%`;
   }
+
   return `${value.toFixed(2)}x`;
 };
 
@@ -44,8 +46,9 @@ const applyInlineStyles = (el: HTMLElement): void => {
 };
 
 const applyChildStyles = (el: HTMLElement): void => {
-  const value = el.querySelector(".igvc-osd-value") as HTMLElement | null;
-  if (value) {
+  const value = el.querySelector("span.igvc-osd-value");
+
+  if (value instanceof HTMLElement) {
     value.style.fontSize = "20px";
     value.style.fontWeight = "600";
     value.style.lineHeight = "1";
@@ -67,9 +70,9 @@ const createOsdElement = (video: HTMLVideoElement): HTMLElement => {
   const el = document.createElement("div");
   el.classList.add("igvc-osd");
 
-  el.innerHTML = `
-    <span class="igvc-osd-value"></span>
-  `;
+  const value = document.createElement("span");
+  value.classList.add("igvc-osd-value");
+  el.append(value);
 
   applyInlineStyles(el);
   applyChildStyles(el);
@@ -82,10 +85,12 @@ const createOsdElement = (video: HTMLVideoElement): HTMLElement => {
 
 const getOrCreateOsd = (video: HTMLVideoElement): HTMLElement => {
   let el = osdElements.get(video);
+
   if (!el || !el.isConnected) {
     el = createOsdElement(video);
     osdElements.set(video, el);
   }
+
   return el;
 };
 
@@ -98,9 +103,9 @@ const showOsd = (
 
   positionOsd(el, video);
 
-  const valueEl = el.querySelector(".igvc-osd-value") as HTMLElement | null;
+  const valueEl = el.querySelector("span.igvc-osd-value");
 
-  if (valueEl) {
+  if (valueEl instanceof HTMLElement) {
     valueEl.textContent = formatValue(type, value);
   }
 
@@ -108,6 +113,7 @@ const showOsd = (
   el.classList.add("igvc-osd-visible");
 
   const existingTimer = osdTimers.get(video);
+
   if (existingTimer !== undefined) {
     clearTimeout(existingTimer);
   }
@@ -122,6 +128,11 @@ const showOsd = (
   );
 };
 
+/**
+ * Show the current video volume in its on-screen display.
+ * @param video - Video whose volume should be displayed.
+ * @param volume - Current volume from zero to one.
+ */
 export const showVolumeOsd = (
   video: HTMLVideoElement,
   volume: number
@@ -129,6 +140,11 @@ export const showVolumeOsd = (
   showOsd(video, "volume", volume);
 };
 
+/**
+ * Show the current playback rate in its on-screen display.
+ * @param video - Video whose playback rate should be displayed.
+ * @param rate - Current playback rate.
+ */
 export const showSpeedOsd = (video: HTMLVideoElement, rate: number): void => {
   showOsd(video, "speed", rate);
 };

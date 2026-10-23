@@ -1,5 +1,5 @@
 import { Effect, Either } from "effect";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { beforeEach, describe, expect, vi, it } from "vitest";
 
 import { loadBackgroundPhotos } from "../../src/lib/background-client";
 import {
@@ -9,10 +9,8 @@ import {
 } from "../helpers/wxt-imports";
 
 const photo = {
-  title: "File:Mountain.jpg",
   imageinfo: [
     {
-      thumburl: "https://thumb.wikimedia.org/mountain.jpg",
       descriptionurl: "https://commons.wikimedia.org/wiki/File:Mountain.jpg",
       extmetadata: {
         Artist: { value: "Photographer" },
@@ -21,19 +19,23 @@ const photo = {
           value: "https://creativecommons.org/licenses/by-sa/4.0/",
         },
       },
+      thumburl: "https://thumb.wikimedia.org/mountain.jpg",
     },
   ],
+  title: "File:Mountain.jpg",
 };
 
 const commonsPayload = { query: { pages: { "42": photo } } };
+
 const parsedPhoto = {
-  title: "Mountain.jpg",
-  imageUrl: "https://thumb.wikimedia.org/mountain.jpg",
-  pageUrl: "https://commons.wikimedia.org/wiki/File:Mountain.jpg",
   artist: "Photographer",
+  imageUrl: "https://thumb.wikimedia.org/mountain.jpg",
   license: "CC BY-SA 4.0",
   licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+  pageUrl: "https://commons.wikimedia.org/wiki/File:Mountain.jpg",
+  title: "Mountain.jpg",
 };
+
 type JsonValue =
   | string
   | number
@@ -53,7 +55,7 @@ describe("Wikimedia Commons client", () => {
     vi.setSystemTime(new Date("2026-09-30T12:00:00Z"));
   });
 
-  test("returns metadata from a fresh cache without fetching", async () => {
+  it("returns metadata from a fresh cache without fetching", async () => {
     seedWxtStorage("local:background-cache", {
       fetchedAt: Date.now() - 1000,
       photos: [parsedPhoto],
@@ -61,28 +63,28 @@ describe("Wikimedia Commons client", () => {
     const fetchMock = vi.fn<typeof fetch>();
     vi.stubGlobal("fetch", fetchMock);
 
-    await expect(Effect.runPromise(loadBackgroundPhotos())).resolves.toEqual([
-      parsedPhoto,
-    ]);
+    await expect(
+      Effect.runPromise(loadBackgroundPhotos())
+    ).resolves.toStrictEqual([parsedPhoto]);
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  test("fetches valid metadata with request headers and persists it", async () => {
+  it("fetches valid metadata with request headers and persists it", async () => {
     const fetchMock = vi
       .fn<typeof fetch>()
       .mockResolvedValue(jsonResponse(commonsPayload));
+
     vi.stubGlobal("fetch", fetchMock);
 
-    await expect(Effect.runPromise(loadBackgroundPhotos())).resolves.toEqual([
-      parsedPhoto,
-    ]);
+    await expect(
+      Effect.runPromise(loadBackgroundPhotos())
+    ).resolves.toStrictEqual([parsedPhoto]);
     expect(fetchMock).toHaveBeenCalledOnce();
-    expect(fetchMock.mock.calls[0]?.[1]?.headers).toMatchObject({
-      "Api-User-Agent": expect.stringContaining("NewTabExt"),
-    });
+    const headers = new Headers(fetchMock.mock.calls[0]?.[1]?.headers);
+    expect(headers.get("Api-User-Agent") ?? "").toContain("NewTabExt");
   });
 
-  test.each([
+  it.each([
     [
       "HTTP failure",
       vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({}, 503)),
@@ -113,11 +115,12 @@ describe("Wikimedia Commons client", () => {
       const result = await Effect.runPromise(
         Effect.either(loadBackgroundPhotos())
       );
-      expect(Either.isLeft(result)).toBe(true);
+
+      expect(Either.isLeft(result)).toBeTruthy();
     }
   );
 
-  test("uses expired cache when a refresh fails", async () => {
+  it("uses expired cache when a refresh fails", async () => {
     seedWxtStorage("local:background-cache", {
       fetchedAt: Date.now() - 25 * 60 * 60 * 1000,
       photos: [parsedPhoto],
@@ -127,20 +130,20 @@ describe("Wikimedia Commons client", () => {
       vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({}, 500))
     );
 
-    await expect(Effect.runPromise(loadBackgroundPhotos())).resolves.toEqual([
-      parsedPhoto,
-    ]);
+    await expect(
+      Effect.runPromise(loadBackgroundPhotos())
+    ).resolves.toStrictEqual([parsedPhoto]);
   });
 
-  test("continues when local cache reads or writes fail", async () => {
+  it("continues when local cache reads or writes fail", async () => {
     failWxtStorage("local:background-cache", "read", new Error("read failed"));
     vi.stubGlobal(
       "fetch",
       vi.fn<typeof fetch>().mockResolvedValue(jsonResponse(commonsPayload))
     );
-    await expect(Effect.runPromise(loadBackgroundPhotos())).resolves.toEqual([
-      parsedPhoto,
-    ]);
+    await expect(
+      Effect.runPromise(loadBackgroundPhotos())
+    ).resolves.toStrictEqual([parsedPhoto]);
 
     clearWxtStorage();
     failWxtStorage(
@@ -152,8 +155,8 @@ describe("Wikimedia Commons client", () => {
       "fetch",
       vi.fn<typeof fetch>().mockResolvedValue(jsonResponse(commonsPayload))
     );
-    await expect(Effect.runPromise(loadBackgroundPhotos())).resolves.toEqual([
-      parsedPhoto,
-    ]);
+    await expect(
+      Effect.runPromise(loadBackgroundPhotos())
+    ).resolves.toStrictEqual([parsedPhoto]);
   });
 });

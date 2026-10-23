@@ -1,5 +1,5 @@
 import { Either, Schema } from "effect";
-import { describe, expect, test } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import {
   DEFAULT_PREFERENCES,
@@ -10,62 +10,64 @@ import {
   swapWidgetPositions,
 } from "../../src/lib/preferences";
 
-describe("PreferencesSchema", () => {
-  test("accepts the default first-run preferences", () => {
+describe(PreferencesSchema, () => {
+  it("accepts the default first-run preferences", () => {
     const result =
       Schema.decodeUnknownEither(PreferencesSchema)(DEFAULT_PREFERENCES);
 
-    expect(Either.isRight(result)).toBe(true);
+    expect(Either.isRight(result)).toBeTruthy();
   });
 
-  test("rejects unsupported providers and invalid city coordinates", () => {
+  it("rejects unsupported providers and invalid city coordinates", () => {
     const invalidProvider = Schema.decodeUnknownEither(PreferencesSchema)({
       ...DEFAULT_PREFERENCES,
       searchProvider: "example",
     });
+
     const invalidCoordinates = Schema.decodeUnknownEither(PreferencesSchema)({
       ...DEFAULT_PREFERENCES,
       weatherLocation: {
-        name: "Nowhere",
-        region: "",
         country: "N/A",
         latitude: 95,
         longitude: 0,
+        name: "Nowhere",
+        region: "",
         timezone: "UTC",
       },
     });
 
-    expect(Either.isLeft(invalidProvider)).toBe(true);
-    expect(Either.isLeft(invalidCoordinates)).toBe(true);
+    expect(Either.isLeft(invalidProvider)).toBeTruthy();
+    expect(Either.isLeft(invalidCoordinates)).toBeTruthy();
   });
 
-  test("accepts stored preferences created before widget layout was added", () => {
-    const decoded = Schema.decodeUnknownEither(PreferencesSchema)({
+  it("accepts stored preferences created before widget layout was added", () => {
+    const decoded = Schema.decodeUnknownSync(PreferencesSchema)({
+      backgroundChangeNonce: 4,
+      backgroundEnabled: false,
       searchProvider: "bing",
       theme: "light",
-      backgroundEnabled: false,
-      backgroundChangeNonce: 4,
       weatherLocation: null,
     });
 
-    expect(Either.isRight(decoded)).toBe(true);
-    if (Either.isRight(decoded)) {
-      expect(
-        normalizeWidgetLayout(
-          decoded.right.widgetLayout ?? DEFAULT_PREFERENCES.widgetLayout
-        )
-      ).toEqual(DEFAULT_PREFERENCES.widgetLayout);
-    }
+    expect(
+      normalizeWidgetLayout(
+        decoded.widgetLayout ?? DEFAULT_PREFERENCES.widgetLayout
+      )
+    ).toStrictEqual(DEFAULT_PREFERENCES.widgetLayout);
   });
 
-  test("normalizes, moves, and swaps visible widgets without dropping hidden ones", () => {
+  it("normalizes, moves, and swaps visible widgets without dropping hidden ones", () => {
     const layout = normalizeWidgetLayout([
-      { id: "weather", visible: true, span: 1 },
-      { id: "weather", visible: false, span: 3 },
+      { id: "weather", span: 1, visible: true },
+      { id: "weather", span: 3, visible: false },
     ]);
 
-    expect(layout.map(({ id }) => id)).toEqual(["weather", "clock", "search"]);
-    expect(moveWidget(layout, "clock", 1).map(({ id }) => id)).toEqual([
+    expect(layout.map(({ id }) => id)).toStrictEqual([
+      "weather",
+      "clock",
+      "search",
+    ]);
+    expect(moveWidget(layout, "clock", 1).map(({ id }) => id)).toStrictEqual([
       "weather",
       "search",
       "clock",
@@ -76,13 +78,13 @@ describe("PreferencesSchema", () => {
       swapWidgetPositions(visibleLayout, "weather", "search").map(
         ({ id }) => id
       )
-    ).toEqual(["search", "clock", "weather"]);
+    ).toStrictEqual(["search", "clock", "weather"]);
     expect(
       resizeWidget(layout, "clock", 3).find(({ id }) => id === "clock")?.span
     ).toBe(3);
   });
 
-  test("leaves layouts unchanged when a widget cannot be moved or swapped", () => {
+  it("leaves layouts unchanged when a widget cannot be moved or swapped", () => {
     const layout = DEFAULT_PREFERENCES.widgetLayout;
     expect(moveWidget(layout, "clock", -1)).toBe(layout);
     expect(moveWidget(layout, "weather", 1)).toBe(layout);

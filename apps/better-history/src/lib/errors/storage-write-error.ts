@@ -5,4 +5,5 @@ const StorageWriteErrorBase = defineTaggedErrorClass("StorageWriteError")<{
   key: string;
 }>();
 
+/** Failure while persisting a value to extension storage. */
 export class StorageWriteError extends StorageWriteErrorBase {}

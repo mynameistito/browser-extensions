@@ -1,7 +1,7 @@
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 describe("production-mode entrypoint", () => {
-  test("does not attempt to load React Grab outside development", async () => {
+  it("does not attempt to load React Grab outside development", async () => {
     document.body.textContent = "";
     vi.stubEnv("DEV", false);
 

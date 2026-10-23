@@ -8,14 +8,14 @@ const TABS = [
 
 const SettingsLayout = () => (
   <div className="flex h-full flex-col">
-    <div className="flex items-center gap-1 border-b border-zinc-200 px-4 dark:border-zinc-800">
+    <div className="border-border dark:border-border flex items-center gap-1 border-b px-4">
       {TABS.map((t) => (
         <Link
           activeProps={{
             className:
-              "border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100",
+              "border-primary text-foreground dark:border-border dark:text-foreground",
           }}
-          className="border-b-2 border-transparent px-3 py-3 text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+          className="text-muted-foreground hover:text-foreground dark:hover:text-foreground border-b-2 border-transparent px-3 py-3 text-sm"
           key={t.to}
           to={t.to}
         >

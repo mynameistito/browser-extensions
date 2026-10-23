@@ -16,6 +16,7 @@ const findPlayButton = (
   vid: HTMLVideoElement
 ): Element | undefined => {
   const byLabel = root.querySelector("[role=button][aria-label=Play]");
+
   if (byLabel) {
     return byLabel;
   }
@@ -23,10 +24,13 @@ const findPlayButton = (
   return [...root.querySelectorAll("[role=button][aria-label]")].find((el) => {
     const rect = el.getBoundingClientRect();
     const parentEl = el.parentElement;
+
     if (!parentEl) {
       return false;
     }
+
     const parentRect = parentEl.getBoundingClientRect();
+
     if (
       rect.width >= 80 &&
       rect.height >= 80 &&
@@ -35,6 +39,7 @@ const findPlayButton = (
     ) {
       return looksLikeCoversVideo(parentEl, vid);
     }
+
     return false;
   });
 };
@@ -44,9 +49,11 @@ const findControlButton = (
   vid: HTMLVideoElement
 ): Element | undefined => {
   const byLabel = root.querySelector("[role=button][aria-label=Control]");
+
   if (byLabel) {
     return byLabel;
   }
+
   return getVideoCoveringButtons(root, vid)[0];
 };
 
@@ -55,17 +62,17 @@ const getPercentageCssRuleVal = (
   cssProperty: string
 ): string => {
   if (!elem.parentElement) {
-    return getComputedStyle(elem)[
-      cssProperty as keyof CSSStyleDeclaration
-    ] as string;
+    return getComputedStyle(elem).getPropertyValue(cssProperty);
   }
-  const parentStyle = (elem.parentElement as HTMLElement).style;
+
+  const parentStyle = elem.parentElement.style;
   const prevDisplay = parentStyle.display;
   parentStyle.display = "none";
-  const cssRuleValue = getComputedStyle(elem)[
-    cssProperty as keyof CSSStyleDeclaration
-  ] as string;
+
+  const cssRuleValue = getComputedStyle(elem).getPropertyValue(cssProperty);
+
   parentStyle.display = prevDisplay;
+
   return cssRuleValue;
 };
 
@@ -77,12 +84,12 @@ const ensure100PercentHeight = (video: HTMLVideoElement): void => {
 
     const heightAsDeclared = getPercentageCssRuleVal(ancestor, "height");
 
-    if (/\d+px/u.test(heightAsDeclared)) {
-      break;
+    if (heightAsDeclared.endsWith("px")) {
+      return;
     }
 
-    if (heightAsDeclared === "auto") {
-      (ancestor as HTMLElement).style.setProperty("height", "100%");
+    if (heightAsDeclared === "auto" && ancestor instanceof HTMLElement) {
+      ancestor.style.setProperty("height", "100%");
     }
   }
 };
@@ -94,27 +101,27 @@ const adjustVisualCompletionOverlay = (
   const divPresentation = divVisualCompletion.querySelector(
     "div[role=presentation]"
   );
+
   if (!divPresentation) {
     return;
   }
-  (divVisualCompletion as HTMLElement).style.setProperty(
-    "bottom",
-    heightOfHtml5Controls
-  );
-  (divVisualCompletion as HTMLElement).style.setProperty(
-    "height",
-    `calc(100% - ${heightOfHtml5Controls})`
-  );
-  if (!isInstagramReelsPage()) {
-    (divPresentation as HTMLElement).style.setProperty(
-      "bottom",
-      heightOfHtml5Controls
+
+  if (divVisualCompletion instanceof HTMLElement) {
+    divVisualCompletion.style.setProperty("bottom", heightOfHtml5Controls);
+    divVisualCompletion.style.setProperty(
+      "height",
+      `calc(100% - ${heightOfHtml5Controls})`
     );
+  }
+
+  if (!isInstagramReelsPage() && divPresentation instanceof HTMLElement) {
+    divPresentation.style.setProperty("bottom", heightOfHtml5Controls);
   }
 };
 
 const hideIgVolumeControl = (root: Element): void => {
   const slider = root.querySelector('[aria-label="Adjust volume"]');
+
   if (!slider?.parentElement) {
     return;
   }
@@ -124,11 +131,13 @@ const hideIgVolumeControl = (root: Element): void => {
   wrapper.style.setProperty("pointer-events", "none", "important");
 };
 
+/** Hide every Instagram volume control found in the current document. */
 export const hideAllIgVolumeControls = (): void => {
   for (const slider of document.querySelectorAll(
     '[data-instancekey] [aria-label="Adjust volume"]'
   )) {
     const instanceKey = slider.closest("[data-instancekey]");
+
     if (instanceKey) {
       hideIgVolumeControl(instanceKey);
     }
@@ -144,6 +153,7 @@ const handleInstanceKeyOverlay = (
   const divVisualCompletion = divInstanceKey.querySelector(
     "div[data-visualcompletion]"
   );
+
   if (divVisualCompletion) {
     adjustVisualCompletionOverlay(divVisualCompletion, heightOfHtml5Controls);
   }
@@ -159,9 +169,11 @@ const handleInstanceKeyOverlay = (
     // gradient-styled elements (thumbnails, story rings, etc.) are
     // not restyled.
     const IG_GRADIENT_CLASS = "xutac5l";
+
     let gradientEls: Iterable<Element> = embedRootElem.querySelectorAll(
       `.${IG_GRADIENT_CLASS}`
     );
+
     if ([...gradientEls].length === 0) {
       // Restrict structural fallback to overlay-like containers inside
       // the instancekey wrapper, then require the element to visually
@@ -169,18 +181,23 @@ const handleInstanceKeyOverlay = (
       const candidates = divInstanceKey.querySelectorAll(
         '[data-visualcompletion] [style*="gradient"], [role="presentation"] [style*="gradient"], [data-testid*="gradient"]'
       );
+
       gradientEls = [...candidates].filter((el) =>
         looksLikeCoversVideo(el, video)
       );
     }
+
     if ([...gradientEls].length === 0) {
       console.warn(
         "igvc: could not locate reel gradient overlay via class or structural selectors — selectors may need updating"
       );
     }
+
     for (const el of gradientEls) {
-      (el as HTMLElement).style.backgroundImage =
-        "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 98%, rgba(0,0,0,0) 100%)";
+      if (el instanceof HTMLElement) {
+        el.style.backgroundImage =
+          "linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 98%, rgba(0,0,0,0) 100%)";
+      }
     }
   }
 };
@@ -193,21 +210,24 @@ const findInstanceKeyAmongAncestorSiblings = (
     if (ancestor.tagName === "SECTION") {
       break;
     }
-    const parent = ancestor.parentElement;
-    if (!parent) {
-      continue;
-    }
 
-    const found = [...parent.children].find(
-      (el) =>
-        el !== ancestor &&
-        Object.hasOwn((el as HTMLElement).dataset, "instancekey") &&
-        el.querySelector("[data-visualcompletion]")
-    );
-    if (found) {
-      return found;
+    const parent = ancestor.parentElement;
+
+    if (parent) {
+      const found = [...parent.children].find(
+        (el) =>
+          el !== ancestor &&
+          el instanceof HTMLElement &&
+          Object.hasOwn(el.dataset, "instancekey") &&
+          el.querySelector("[data-visualcompletion]") !== null
+      );
+
+      if (found) {
+        return found;
+      }
     }
   }
+
   return null;
 };
 
@@ -215,10 +235,13 @@ const findInstanceKeyAmongDirectSiblings = (
   video: HTMLVideoElement
 ): Element | undefined => {
   const siblings = [...(video.parentElement?.children ?? [])];
+
   return siblings.find(
     (elem) =>
-      Object.hasOwn((elem as HTMLElement).dataset, "instancekey") &&
-      elem.querySelector("[data-visualcompletion] div[role=presentation]")
+      elem instanceof HTMLElement &&
+      Object.hasOwn(elem.dataset, "instancekey") &&
+      elem.querySelector("[data-visualcompletion] div[role=presentation]") !==
+        null
   );
 };
 
@@ -227,12 +250,18 @@ const handleNoInstanceKeyOverlay = (
   video: HTMLVideoElement
 ): void => {
   const volumeOrTags = findVolumeOrTagsButtons(embedRootElem, video);
+
   for (const button of volumeOrTags.buttons) {
     button.parentElement?.classList.add("igvc-raise-button");
     button.parentElement?.classList.add("igvc-fade-button");
   }
 };
 
+/**
+ * Adjust playback overlays while preserving Instagram's native controls.
+ * @param embedRootElem - Root element containing the embedded video UI.
+ * @param video - Video element whose overlay is being adjusted.
+ */
 export const modifyOverlayWithInstagramPlayControl = (
   embedRootElem: Element,
   video: HTMLVideoElement
@@ -250,20 +279,24 @@ export const modifyOverlayWithInstagramPlayControl = (
 
   const heightOfHtml5Controls = HTML5_CONTROL_HEIGHT;
   const playButton = findPlayButton(embedRootElem, video);
+
   if (playButton) {
     const parent = playButton.parentElement;
+
     if (parent) {
       parent.style.bottom = heightOfHtml5Controls;
     }
   }
 
   const controlButton = findControlButton(embedRootElem, video);
+
   if (
     controlButton &&
+    controlButton instanceof HTMLElement &&
     !controlButton.closest("[data-instancekey]") &&
     !controlButton.matches("[data-visualcompletion]")
   ) {
-    (controlButton as HTMLElement).style.bottom = heightOfHtml5Controls;
+    controlButton.style.bottom = heightOfHtml5Controls;
   }
 
   const divInstanceKey =
@@ -282,22 +315,34 @@ export const modifyOverlayWithInstagramPlayControl = (
   }
 };
 
+/**
+ * Hide sibling overlays that pause a story video when hovered.
+ * @param videoElement - Story video whose sibling overlays should be hidden.
+ */
 export const incapacitateStoryVideoPausingOverlays = (
   videoElement: HTMLVideoElement
 ): void => {
   const parent = videoElement.parentElement;
+
   if (!parent) {
     return;
   }
+
   const siblings = [...parent.children].filter((el) => el !== videoElement);
+
   for (const el of siblings) {
     hide(el);
   }
 };
 
+/**
+ * Reduce story video height when a message box or like button overlaps it.
+ * @param video - Story video whose visible area may need adjustment.
+ */
 export const modifyVideoHeightIfSendMessageBoxOrLikeButtonIsBlockingVideoControls =
   (video: HTMLVideoElement): void => {
     const componentRoot = getComponentRootForStoryVideo(video);
+
     if (!componentRoot) {
       return;
     }
@@ -306,29 +351,40 @@ export const modifyVideoHeightIfSendMessageBoxOrLikeButtonIsBlockingVideoControl
 
     const findLikeButton = (): Element | null => {
       const likeButtonSvg = componentRoot.querySelector("[aria-label=Like]");
+
       if (likeButtonSvg) {
         return likeButtonSvg.closest("button");
       }
 
       return (
         queryAll("button > * svg", componentRoot)
-          .filter((el) => !el.closest("header") && el.closest("button"))
+          .filter(
+            (el) => !el.closest("header") && el.closest("button") !== null
+          )
           .map((el) => el.closest("button"))[0] ?? null
       );
     };
 
     const likeButton = findLikeButton();
+
     if (!textarea && !likeButton) {
       return;
     }
 
-    const targetElement = (textarea ?? likeButton) as Element;
+    const targetElement = textarea ?? likeButton;
+
+    if (!targetElement) {
+      return;
+    }
+
     const heightOfRow = targetElement.getBoundingClientRect().height;
     const videoRect = video.getBoundingClientRect();
 
     let sendMessageContainer: Element | undefined;
+
     for (const potentialContainer of nParents(targetElement, 8)) {
       const potentialContainerRect = potentialContainer.getBoundingClientRect();
+
       if (
         videoRect.width - potentialContainerRect.width <
         videoRect.width * 0.25
@@ -347,20 +403,24 @@ export const modifyVideoHeightIfSendMessageBoxOrLikeButtonIsBlockingVideoControl
 
     const videoParent = video.parentElement;
     const videoParentParent = videoParent?.parentElement;
+
     if (videoParent && videoParentParent) {
       const videoParentHeight = videoParent.getBoundingClientRect().height;
+
       const videoParentParentHeight =
         videoParentParent.getBoundingClientRect().height;
+
       if (videoParentHeight > videoParentParentHeight) {
-        (videoParent as HTMLElement).style.height =
-          `${videoParentParentHeight}px`;
+        videoParent.style.height = `${videoParentParentHeight}px`;
       }
     }
 
     const videoAndControlsContainer = componentRoot;
+
     const distanceFromTopOfSendMessageToBottomOfParentContainer =
       videoAndControlsContainer.getBoundingClientRect().bottom -
       sendMessageContainer.getBoundingClientRect().top;
+
     const videoHeightAdjustment =
       distanceFromTopOfSendMessageToBottomOfParentContainer +
       (textarea ? TEXTAREA_ADJUST_PADDING : 0);

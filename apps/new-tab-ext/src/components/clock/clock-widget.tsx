@@ -6,19 +6,26 @@ const timeFormatter = new Intl.DateTimeFormat(undefined, {
 });
 
 const dateFormatter = new Intl.DateTimeFormat(undefined, {
-  weekday: "long",
-  month: "long",
   day: "numeric",
+  month: "long",
+  weekday: "long",
 });
 
-/** Display the current local time and date. */
+/**
+ * Display the current local time and date.
+ * @returns The clock widget.
+ */
 export const ClockWidget = () => {
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
-    const intervalId = window.setInterval(() => setNow(Date.now()), 1000);
+    const intervalId = window.setInterval(() => {
+      setNow(Date.now());
+    }, 1000);
 
-    return () => window.clearInterval(intervalId);
+    return () => {
+      window.clearInterval(intervalId);
+    };
   }, []);
 
   const currentDate = new Date(now);

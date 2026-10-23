@@ -11,6 +11,7 @@ const appNames = [
   "better-history",
   "github-settings-repo-copy",
 ] as const;
+
 const changeTypes = ["patch", "minor", "major"] as const;
 
 const [appName, changeType, ...summaryParts] = process.argv.slice(2);
@@ -34,9 +35,11 @@ if (!summary) {
 }
 
 const changesetDir = path.join(import.meta.dirname, "..", ".changeset");
+
 mkdirSync(changesetDir, { recursive: true });
 
 let filename: string;
+
 do {
   filename = path.join(changesetDir, `${randomBytes(4).toString("hex")}.md`);
 } while (existsSync(filename));
@@ -45,4 +48,5 @@ writeFileSync(
   filename,
   `---\n"${appName}": ${changeType}\n---\n\n${summary}\n`
 );
+
 console.log(`Created changeset for ${appName}: ${path.basename(filename)}`);

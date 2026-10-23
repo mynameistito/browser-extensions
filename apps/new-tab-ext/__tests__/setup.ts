@@ -1,33 +1,33 @@
 import { cleanup } from "@testing-library/react";
-import { afterAll, afterEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, vi } from "vitest";
 
 import { clearWxtStorage } from "./helpers/wxt-imports";
 
-afterEach(() => {
-  cleanup();
-  clearWxtStorage();
-  vi.unstubAllGlobals();
-  vi.unstubAllEnvs();
-  vi.useRealTimers();
-});
+describe("test environment", () => {
+  beforeEach(() => {
+    vi.spyOn(HTMLDialogElement.prototype, "showModal").mockImplementation(
+      function showModal(this: HTMLDialogElement) {
+        this.open = true;
+      }
+    );
+    vi.spyOn(HTMLDialogElement.prototype, "close").mockImplementation(
+      function close(this: HTMLDialogElement) {
+        if (!this.open) {
+          return;
+        }
 
-const originalShowModal = HTMLDialogElement.prototype.showModal;
-const originalClose = HTMLDialogElement.prototype.close;
+        this.open = false;
+        this.dispatchEvent(new Event("close"));
+      }
+    );
+  });
 
-HTMLDialogElement.prototype.showModal = function showModal() {
-  this.open = true;
-};
-
-HTMLDialogElement.prototype.close = function close() {
-  if (!this.open) {
-    return;
-  }
-
-  this.open = false;
-  this.dispatchEvent(new Event("close"));
-};
-
-afterAll(() => {
-  HTMLDialogElement.prototype.showModal = originalShowModal;
-  HTMLDialogElement.prototype.close = originalClose;
+  afterEach(() => {
+    cleanup();
+    clearWxtStorage();
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+    vi.unstubAllEnvs();
+    vi.useRealTimers();
+  });
 });
