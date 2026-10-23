@@ -10,15 +10,16 @@
     "video-controls",
     "wxt"
   ],
-  "homepage": "https://github.com/mynameistito/ig-video-controls#readme",
+  "homepage": "https://github.com/mynameistito/browser-extensions/tree/main/apps/ig-video-controls",
   "bugs": {
-    "url": "https://github.com/mynameistito/ig-video-controls/issues"
+    "url": "https://github.com/mynameistito/browser-extensions/issues"
   },
   "license": "MIT",
   "author": "My Name is Tito <github@mynameistito.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mynameistito/ig-video-controls.git"
+    "url": "git+https://github.com/mynameistito/browser-extensions.git",
+    "directory": "apps/ig-video-controls"
   },
   "type": "module",
   "scripts": {

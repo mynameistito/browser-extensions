@@ -10,15 +10,16 @@
     "wxt",
     "x"
   ],
-  "homepage": "https://github.com/mynameistito/quote-viewer#readme",
+  "homepage": "https://github.com/mynameistito/browser-extensions/tree/main/apps/quote-viewer",
   "bugs": {
-    "url": "https://github.com/mynameistito/quote-viewer/issues"
+    "url": "https://github.com/mynameistito/browser-extensions/issues"
   },
   "license": "MIT",
   "author": "My Name is Tito <github@mynameistito.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mynameistito/quote-viewer.git"
+    "url": "git+https://github.com/mynameistito/browser-extensions.git",
+    "directory": "apps/quote-viewer"
   },
   "type": "module",
   "scripts": {

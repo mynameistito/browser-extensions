@@ -11,9 +11,9 @@
     "new-tab",
     "wxt"
   ],
-  "homepage": "https://github.com/mynameistito/new-tab-ext#readme",
+  "homepage": "https://github.com/mynameistito/browser-extensions/tree/main/apps/new-tab-ext",
   "bugs": {
-    "url": "https://github.com/mynameistito/new-tab-ext/issues"
+    "url": "https://github.com/mynameistito/browser-extensions/issues"
   },
   "license": "MIT",
   "author": {
@@ -23,7 +23,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mynameistito/new-tab-ext.git"
+    "url": "git+https://github.com/mynameistito/browser-extensions.git",
+    "directory": "apps/new-tab-ext"
   },
   "type": "module",
   "scripts": {
