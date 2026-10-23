@@ -1,9 +1,11 @@
 # SHARED SCRIPT MAP
 
 ## OVERVIEW
+
 Root-level Bun/Node TypeScript utilities used by the workspace and individual app packages.
 
 ## WHERE TO LOOK
+
 | Task | Location | Notes |
 | --- | --- | --- |
 | WXT CLI bridge | `run-wxt.ts` | Run with an app as the current working directory. |
@@ -14,6 +16,7 @@ Root-level Bun/Node TypeScript utilities used by the workspace and individual ap
 | Tests | `__tests__/` | Root script tests; not automatically run by root Turbo `test`. |
 
 ## CONVENTIONS
+
 - Keep command-line side effects in the thin entrypoint and put reusable behavior in `*-core.ts` modules where practical.
 - Resolve workspace paths from `import.meta.dirname`; app-specific scripts may be invoked with an app working directory, so do not silently rely on repository-root `process.cwd()` unless that is the intended contract.
 - Use `node:child_process` `execFileSync` with argument arrays for external commands; propagate the intended cwd and stdio explicitly.
@@ -21,4 +24,5 @@ Root-level Bun/Node TypeScript utilities used by the workspace and individual ap
 - Release orchestration can run checks, write `.output/release-notes.md`, and create a GitHub release; inspect its behavior before invoking it.
 
 ## TESTING
+
 Root tests use Bun's test runner. Test extracted core logic without invoking external release or GitHub commands; run an individual test with `bun test scripts/__tests__/generate-keys.test.ts`.
