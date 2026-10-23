@@ -1,11 +1,15 @@
 import { Either, Schema } from "effect";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
   chooseDailyBackground,
   CommonsResponseSchema,
   parseBackgroundResponse,
 } from "../../src/lib/backgrounds";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 const commonsPayload = {
   query: {
@@ -32,6 +36,9 @@ const commonsPayload = {
 };
 
 describe("Wikimedia Commons backgrounds", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("decodes and preserves attribution for eligible photos", () => {
     const decoded = Schema.decodeUnknownSync(CommonsResponseSchema)(
       commonsPayload

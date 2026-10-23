@@ -1,11 +1,15 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, vi, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
 
 import { BackgroundLayer } from "../../src/components/background/background-layer";
 import { App } from "../../src/entrypoints/newtab/app";
 import { DEFAULT_PREFERENCES } from "../../src/lib/preferences";
 import { renderWithPreferences } from "../helpers/render-with-preferences";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 import { seedWxtStorage } from "../helpers/wxt-imports";
 
 const commonsPayload = {
@@ -33,6 +37,9 @@ const commonsPayload = {
 };
 
 describe("new-tab app and background layer", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("loads a Commons photo, shows source attribution, and falls back on image error", async () => {
     vi.stubGlobal(
       "fetch",

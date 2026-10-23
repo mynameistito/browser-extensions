@@ -1,7 +1,11 @@
 import { Effect, Either } from "effect";
-import { beforeEach, describe, expect, vi, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
 
 import { loadBackgroundPhotos } from "../../src/lib/background-client";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 import {
   clearWxtStorage,
   failWxtStorage,
@@ -51,9 +55,12 @@ const jsonResponse = (
 
 describe("Wikimedia Commons client", () => {
   beforeEach(() => {
+    setupTestEnvironment();
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-09-30T12:00:00Z"));
   });
+
+  afterEach(cleanupTestEnvironment);
 
   it("returns metadata from a fresh cache without fetching", async () => {
     seedWxtStorage("local:background-cache", {

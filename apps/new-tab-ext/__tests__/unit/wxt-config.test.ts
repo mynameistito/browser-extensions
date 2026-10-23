@@ -3,9 +3,13 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { createManifest, createViteConfig } from "../../wxt.config";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 const originalDirectory = process.cwd();
 const { WXT_CHROME_KEY: originalChromeKey } = process.env;
@@ -13,7 +17,10 @@ const { WXT_CHROME_KEY: originalChromeKey } = process.env;
 const getManifest = (browser: "chrome" | "firefox") => createManifest(browser);
 
 describe("WXT browser configuration", () => {
+  beforeEach(setupTestEnvironment);
+
   afterEach(() => {
+    cleanupTestEnvironment();
     process.chdir(originalDirectory);
 
     if (originalChromeKey === undefined) {

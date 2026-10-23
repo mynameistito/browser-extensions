@@ -1,11 +1,15 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, vi, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
 
 import { PreferencesProvider } from "../../src/components/preferences/preferences-provider";
 import { SettingsPanel } from "../../src/components/settings/settings-panel";
 import { WeatherSettings } from "../../src/components/settings/weather-settings";
 import { renderWithPreferences } from "../helpers/render-with-preferences";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 import { failWxtStorage } from "../helpers/wxt-imports";
 
 const cityResults = {
@@ -31,6 +35,9 @@ const cityResults = {
 };
 
 describe("settings UI", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("opens and closes the customize dialog", async () => {
     const user = userEvent.setup();
     const onClose = vi.fn<() => void>();
@@ -70,7 +77,7 @@ describe("settings UI", () => {
     await user.click(
       screen.getByRole("button", { name: "Close customize settings" })
     );
-    expect(onClose).toHaveBeenCalledWith();
+    expect(onClose).toHaveBeenCalledOnce();
     view.rerender(
       <PreferencesProvider>
         <SettingsPanel

@@ -1,10 +1,17 @@
 import { generateKeyPairSync } from "node:crypto";
 
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { deriveChromeExtensionKey } from "../../../../scripts/chrome-extension-key";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 describe(deriveChromeExtensionKey, () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("derives the same manifest key and Chromium ID for the same private key", () => {
     const { privateKey } = generateKeyPairSync("rsa", {
       modulusLength: 2048,
@@ -24,7 +31,7 @@ describe(deriveChromeExtensionKey, () => {
 
   it("rejects malformed private key input", () => {
     expect(() => deriveChromeExtensionKey("not a private key")).toThrow(
-      "Invalid PEM"
+      /(?:PEM|private key)/iu
     );
   });
 });

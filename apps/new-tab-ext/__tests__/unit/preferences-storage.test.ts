@@ -1,5 +1,5 @@
 import { Effect, Either } from "effect";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { DEFAULT_PREFERENCES } from "../../src/lib/preferences";
 import {
@@ -7,12 +7,19 @@ import {
   savePreferences,
 } from "../../src/lib/preferences-storage";
 import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
+import {
   clearWxtStorage,
   failWxtStorage,
   seedWxtStorage,
 } from "../helpers/wxt-imports";
 
 describe("local preferences storage", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("returns defaults when storage has no saved value", async () => {
     await expect(Effect.runPromise(loadPreferences)).resolves.toStrictEqual(
       DEFAULT_PREFERENCES

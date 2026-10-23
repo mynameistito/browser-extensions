@@ -1,8 +1,15 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { syncSettingsDialog } from "../../src/lib/settings-dialog";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 describe("settings dialog synchronization", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("does nothing when the dialog ref is not attached", () => {
     expect(() => {
       syncSettingsDialog(null, true);

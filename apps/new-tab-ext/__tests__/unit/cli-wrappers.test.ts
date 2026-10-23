@@ -1,18 +1,25 @@
 import { readdirSync, unlinkSync } from "node:fs";
 import path from "node:path";
 
-import { afterEach, describe, expect, vi, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
+
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 const originalArgv = [...process.argv];
 const originalExitCode = process.exitCode;
 const originalDirectory = process.cwd();
 
 describe("CLI entrypoints", () => {
+  beforeEach(setupTestEnvironment);
+
   afterEach(() => {
+    cleanupTestEnvironment();
     process.argv = [...originalArgv];
     process.exitCode = originalExitCode;
     process.chdir(originalDirectory);
-    vi.restoreAllMocks();
   });
 
   it("reports changeset usage errors", async () => {

@@ -1,5 +1,5 @@
 import { Either, Schema } from "effect";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
   DEFAULT_PREFERENCES,
@@ -9,8 +9,15 @@ import {
   resizeWidget,
   swapWidgetPositions,
 } from "../../src/lib/preferences";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 describe(PreferencesSchema, () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("accepts the default first-run preferences", () => {
     const result =
       Schema.decodeUnknownEither(PreferencesSchema)(DEFAULT_PREFERENCES);

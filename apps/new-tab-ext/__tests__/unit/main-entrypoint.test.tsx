@@ -1,9 +1,16 @@
 import { act } from "@testing-library/react";
-import { describe, expect, vi, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
 
 import { requireNewTabRoot } from "../../src/entrypoints/newtab/root";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 describe("new-tab entrypoint", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("requires the extension page root", () => {
     expect(() => requireNewTabRoot(null)).toThrow(
       "The new-tab root element is missing."

@@ -2,9 +2,13 @@ import { mkdtempSync, readFileSync, readdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { createChangeset } from "../../scripts/changeset-add-core";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 const errorMessage = (result: ReturnType<typeof createChangeset>): string => {
   if (result.kind === "error") {
@@ -35,6 +39,9 @@ const withTempDirectory = async (
 };
 
 describe("release script helpers", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("validates changeset type, summary presence, and non-blank summary", () => {
     const invalidType = createChangeset(["invalid", "summary"], "unused");
     const missingSummary = createChangeset(["patch"], "unused");

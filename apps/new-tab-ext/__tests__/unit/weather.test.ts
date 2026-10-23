@@ -1,5 +1,5 @@
 import { Either, Schema } from "effect";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
   CityResponseSchema,
@@ -8,8 +8,15 @@ import {
   parseCityResults,
   parseCurrentWeather,
 } from "../../src/lib/weather";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 describe("Open-Meteo response decoding", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("maps a geocoding result to a city choice", () => {
     const decoded = Schema.decodeUnknownSync(CityResponseSchema)({
       results: [

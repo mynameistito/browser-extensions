@@ -5,12 +5,16 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
   PreferencesProvider,
   usePreferences,
 } from "../../src/components/preferences/preferences-provider";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 import { failWxtStorage } from "../helpers/wxt-imports";
 
 const PreferencesProbe = () => {
@@ -38,6 +42,9 @@ const PreferencesProbe = () => {
 };
 
 describe(PreferencesProvider, () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("requires the provider for the preference hook", () => {
     expect(() => render(<PreferencesProbe />)).toThrow(
       "usePreferences must be used within PreferencesProvider."

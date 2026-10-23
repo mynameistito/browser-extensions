@@ -1,9 +1,16 @@
 import { Effect } from "effect";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { createSearchUrl } from "../../src/lib/search";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 describe(createSearchUrl, () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("creates an encoded Google search URL", () => {
     const url = Effect.runSync(createSearchUrl("web", "  effect typescript  "));
 

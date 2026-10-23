@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
-import { describe, expect, vi, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
 
 import { ClockWidget } from "../../src/components/clock/clock-widget";
 import { usePreferences } from "../../src/components/preferences/preferences-provider";
@@ -17,6 +17,10 @@ import { WeatherWidget } from "../../src/components/weather/weather-widget";
 import { WidgetGrid } from "../../src/components/widgets/widget-grid";
 import { DEFAULT_PREFERENCES } from "../../src/lib/preferences";
 import { renderWithPreferences } from "../helpers/render-with-preferences";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 import { seedWxtStorage } from "../helpers/wxt-imports";
 
 const city = {
@@ -52,6 +56,9 @@ const UnsupportedWidgetLayout = () => {
 };
 
 describe("dashboard widgets", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
   it("clock updates once per second and clears its interval", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-09-30T12:00:00Z"));
@@ -301,7 +308,7 @@ describe("dashboard widgets", () => {
       screen.findByText("Weather is unavailable right now.")
     ).resolves.toBeTruthy();
     view.unmount();
-    expect(clearTimeout).toHaveBeenCalledWith();
+    expect(clearTimeout).toHaveBeenCalledWith(expect.anything());
 
     seedWxtStorage("local:weather-cache", {
       fetchedAt: Date.now() - 60 * 60 * 1000,

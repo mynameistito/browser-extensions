@@ -1,8 +1,12 @@
 import { Effect, Either } from "effect";
-import { beforeEach, describe, expect, vi, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
 
 import type { WeatherLocation } from "../../src/lib/preferences";
 import { loadCurrentWeather, searchCities } from "../../src/lib/weather-client";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 import {
   clearWxtStorage,
   failWxtStorage,
@@ -71,9 +75,12 @@ const requestUrl = (input: RequestInfo | URL | undefined): string => {
 
 describe("Open-Meteo client", () => {
   beforeEach(() => {
+    setupTestEnvironment();
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-09-30T12:00:00Z"));
   });
+
+  afterEach(cleanupTestEnvironment);
 
   it("skips city searches shorter than two characters", async () => {
     const fetchMock = vi.fn<typeof fetch>();
