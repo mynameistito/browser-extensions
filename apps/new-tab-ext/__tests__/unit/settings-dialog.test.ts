@@ -1,28 +1,37 @@
-import { describe, expect, test } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { syncSettingsDialog } from "../../src/lib/settings-dialog";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 describe("settings dialog synchronization", () => {
-  test("does nothing when the dialog ref is not attached", () => {
-    expect(() => syncSettingsDialog(null, true)).not.toThrow();
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
+  it("does nothing when the dialog ref is not attached", () => {
+    expect(() => {
+      syncSettingsDialog(null, true);
+    }).not.toThrow();
   });
 
-  test("opens a closed dialog and leaves an open dialog untouched", () => {
+  it("opens a closed dialog and leaves an open dialog untouched", () => {
     const dialog = document.createElement("dialog");
     syncSettingsDialog(dialog, true);
-    expect(dialog.open).toBe(true);
+    expect(dialog.open).toBeTruthy();
 
     syncSettingsDialog(dialog, true);
-    expect(dialog.open).toBe(true);
+    expect(dialog.open).toBeTruthy();
   });
 
-  test("closes an open dialog and leaves a closed dialog untouched", () => {
+  it("closes an open dialog and leaves a closed dialog untouched", () => {
     const dialog = document.createElement("dialog");
     syncSettingsDialog(dialog, false);
-    expect(dialog.open).toBe(false);
+    expect(dialog.open).toBeFalsy();
 
     dialog.showModal();
     syncSettingsDialog(dialog, false);
-    expect(dialog.open).toBe(false);
+    expect(dialog.open).toBeFalsy();
   });
 });

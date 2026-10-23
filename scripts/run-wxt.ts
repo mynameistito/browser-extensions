@@ -9,7 +9,7 @@ process.env.NODE_PATH = [process.env.NODE_PATH, rootNodeModules]
   .filter(Boolean)
   .join(path.delimiter);
 
-execFileSync("bun", ["x", "wxt", ...process.argv.slice(2)], {
+execFileSync(process.execPath, ["x", "wxt", ...process.argv.slice(2)], {
   cwd: appDir,
   env: process.env,
   stdio: "inherit",

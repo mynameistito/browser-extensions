@@ -14,21 +14,30 @@ import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
  * - In CI we accept `WXT_CHROME_KEY` as the raw private-key PEM (from a secret).
  * - Only injected for Chromium targets — Firefox uses `browser_specific_settings`.
  */
+/** Loads the private key from the environment or app root.
+ * @returns The PEM text when available.
+ */
 const loadPemSource = (): string | undefined => {
   const fromEnv = process.env.WXT_CHROME_KEY;
-  if (fromEnv && fromEnv.length > 0) {
+
+  if (fromEnv !== undefined && fromEnv.length > 0) {
     return fromEnv;
   }
+
   const keyPath = path.resolve("key.pem");
+
   if (existsSync(keyPath)) {
     return readFileSync(keyPath, "utf-8");
   }
+
+  return undefined;
 };
 
 const loadManifestKey = (): string | undefined => {
   const pem = loadPemSource();
-  if (!pem) {
-    return;
+
+  if (pem === undefined) {
+    return undefined;
   }
 
   return deriveChromeExtensionKey(pem).manifestKey;
@@ -56,10 +65,12 @@ export default defineConfig({
     }
 
     const key = loadManifestKey();
-    return {
-      ...base,
-      ...(key ? { key } : {}),
-    };
+
+    if (key !== undefined && key.length > 0) {
+      return { ...base, key };
+    }
+
+    return base;
   },
   outDir: ".output",
   srcDir: "src",

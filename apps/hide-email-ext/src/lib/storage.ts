@@ -1,29 +1,40 @@
 import { storage } from "wxt/utils/storage";
 
-import type { NormalizedEmail } from "./types";
-
-export const hiddenEmailsItem = storage.defineItem<NormalizedEmail[]>(
+export const hiddenEmailsItem = storage.defineItem<string[]>(
   "sync:hiddenEmails",
   { fallback: [] }
 );
 
-export const getHiddenEmails = (): Promise<NormalizedEmail[]> =>
-  hiddenEmailsItem.getValue();
+/** Returns the normalized email addresses currently hidden by the extension.
+ * @returns The stored email addresses.
+ */
+export const getHiddenEmails = async (): Promise<string[]> =>
+  await hiddenEmailsItem.getValue();
 
-export const addHiddenEmail = async (email: NormalizedEmail): Promise<void> => {
+/** Adds an email address to the hidden list if it is not already present.
+ * @param email - The address to add.
+ * @returns Nothing.
+ */
+export const addHiddenEmail = async (email: string): Promise<void> => {
   const current = await getHiddenEmails();
+
   if (current.includes(email)) {
     return;
   }
+
   await hiddenEmailsItem.setValue([...current, email]);
 };
 
-export const removeHiddenEmail = async (
-  email: NormalizedEmail
-): Promise<void> => {
+/** Removes an email address from the hidden list when present.
+ * @param email - The address to remove.
+ * @returns Nothing.
+ */
+export const removeHiddenEmail = async (email: string): Promise<void> => {
   const current = await getHiddenEmails();
+
   if (!current.includes(email)) {
     return;
   }
+
   await hiddenEmailsItem.setValue(current.filter((e) => e !== email));
 };

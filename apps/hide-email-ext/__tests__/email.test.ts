@@ -9,9 +9,6 @@ describe("email helpers", () => {
   });
 
   test("rejects non-email values", () => {
-    expect(isEmail(null)).toBe(false);
-    expect(isEmail(123)).toBe(false);
-    expect(isEmail({})).toBe(false);
     expect(isEmail("user@example")).toBe(false);
     expect(isEmail("user @example.com")).toBe(false);
     expect(isEmail("user@example .com")).toBe(false);

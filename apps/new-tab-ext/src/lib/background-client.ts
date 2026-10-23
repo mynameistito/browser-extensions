@@ -8,15 +8,24 @@ import type { BackgroundPhoto } from "./backgrounds";
 const BACKGROUND_CACHE_DURATION = 24 * 60 * 60 * 1000;
 const COMMONS_API = "https://commons.wikimedia.org/w/api.php";
 
-interface BackgroundCache {
-  readonly fetchedAt: number;
-  readonly photos: readonly BackgroundPhoto[];
-}
+const BackgroundCacheSchema = Schema.Struct({
+  fetchedAt: Schema.Number,
+  photos: Schema.Array(
+    Schema.Struct({
+      artist: Schema.String,
+      imageUrl: Schema.String,
+      license: Schema.String,
+      licenseUrl: Schema.String,
+      pageUrl: Schema.String,
+      title: Schema.String,
+    })
+  ),
+});
 
-const backgroundsItem = storage.defineItem<BackgroundCache | null>(
-  "local:background-cache",
-  { fallback: null, version: 1 }
-);
+const backgroundsItem = storage.defineItem<unknown>("local:background-cache", {
+  fallback: null,
+  version: 1,
+});
 
 /** Typed failure from Wikimedia Commons or its local metadata cache. */
 export class BackgroundRequestError extends Data.TaggedError(
@@ -28,6 +37,7 @@ export class BackgroundRequestError extends Data.TaggedError(
 
 const createCommonsUrl = (): URL => {
   const url = new URL(COMMONS_API);
+
   const parameters = new Map([
     ["action", "query"],
     ["generator", "categorymembers"],
@@ -49,7 +59,10 @@ const createCommonsUrl = (): URL => {
   return url;
 };
 
-/** Load cached landscape metadata or refresh Wikimedia Commons once per day. */
+/**
+ * Load cached landscape metadata or refresh Wikimedia Commons once per day.
+ * @returns An Effect yielding cached or freshly loaded photos.
+ */
 export const loadBackgroundPhotos = (): Effect.Effect<
   readonly BackgroundPhoto[],
   BackgroundRequestError
@@ -57,12 +70,19 @@ export const loadBackgroundPhotos = (): Effect.Effect<
   Effect.gen(function* loadBackgroundPhotosProgram() {
     const cacheResult = yield* Effect.either(
       Effect.tryPromise({
-        try: () => backgroundsItem.getValue(),
         catch: (cause) =>
-          new BackgroundRequestError({ operation: "cache", cause }),
+          new BackgroundRequestError({ cause, operation: "cache" }),
+        try: async () => await backgroundsItem.getValue(),
       })
     );
-    const cached = cacheResult._tag === "Right" ? cacheResult.right : null;
+
+    const storedCache = cacheResult._tag === "Right" ? cacheResult.right : null;
+
+    const decodedCache = Schema.decodeUnknownEither(BackgroundCacheSchema)(
+      storedCache
+    );
+
+    const cached = Either.isRight(decodedCache) ? decodedCache.right : null;
 
     if (cached && Date.now() - cached.fetchedAt < BACKGROUND_CACHE_DURATION) {
       return cached.photos;
@@ -70,6 +90,8 @@ export const loadBackgroundPhotos = (): Effect.Effect<
 
     const responseResult = yield* Effect.either(
       Effect.tryPromise({
+        catch: (cause) =>
+          new BackgroundRequestError({ cause, operation: "request" }),
         try: async (): Promise<readonly BackgroundPhoto[]> => {
           const response = await fetch(createCommonsUrl(), {
             headers: {
@@ -86,6 +108,7 @@ export const loadBackgroundPhotos = (): Effect.Effect<
           }
 
           const payload: unknown = await response.json();
+
           const decoded = Schema.decodeUnknownEither(CommonsResponseSchema)(
             payload
           );
@@ -106,8 +129,6 @@ export const loadBackgroundPhotos = (): Effect.Effect<
 
           return photos;
         },
-        catch: (cause) =>
-          new BackgroundRequestError({ operation: "request", cause }),
       })
     );
 
@@ -123,9 +144,11 @@ export const loadBackgroundPhotos = (): Effect.Effect<
 
     yield* Effect.either(
       Effect.tryPromise({
-        try: () => backgroundsItem.setValue({ fetchedAt: Date.now(), photos }),
         catch: (cause) =>
-          new BackgroundRequestError({ operation: "cache", cause }),
+          new BackgroundRequestError({ cause, operation: "cache" }),
+        try: async () => {
+          await backgroundsItem.setValue({ fetchedAt: Date.now(), photos });
+        },
       })
     );
 

@@ -8,7 +8,8 @@ const getManifestKey = (): string | undefined => {
   const pem =
     process.env.WXT_CHROME_KEY ??
     (existsSync("key.pem") ? readFileSync("key.pem", "utf-8") : undefined);
-  if (!pem) {
+
+  if (pem === undefined || pem.length === 0) {
     return undefined;
   }
 
@@ -16,9 +17,14 @@ const getManifestKey = (): string | undefined => {
     return deriveChromeExtensionKey(pem).manifestKey;
   } catch (error) {
     console.error("Failed to derive Chrome extension key:", error);
-    if (process.env.REQUIRE_CHROME_KEY) {
+
+    if (
+      process.env.REQUIRE_CHROME_KEY !== undefined &&
+      process.env.REQUIRE_CHROME_KEY.length > 0
+    ) {
       throw error;
     }
+
     return undefined;
   }
 };
@@ -46,7 +52,14 @@ export default defineConfig({
     }
 
     const key = getManifestKey();
-    return { ...base, ...(key ? { key } : {}) };
+
+    const manifest: typeof base & { key?: string } = { ...base };
+
+    if (key !== undefined && key.length > 0) {
+      manifest.key = key;
+    }
+
+    return manifest;
   },
   outDir: ".output",
   srcDir: ".",

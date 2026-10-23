@@ -42,6 +42,7 @@ describe("ruleMatches: specific-sub", () => {
     kind: "specific-sub",
     pattern: "blog.example.com",
   };
+
   test("matches that sub", () => {
     expect(ruleMatches(rule, "https://blog.example.com/x")).toBe(true);
   });
@@ -58,6 +59,7 @@ describe("ruleMatches: path", () => {
     kind: "path",
     pattern: "https://example.com/docs",
   };
+
   test("matches exact path", () => {
     expect(ruleMatches(rule, "https://example.com/docs")).toBe(true);
   });
@@ -93,6 +95,7 @@ describe("ruleMatches: page", () => {
     kind: "page",
     pattern: "https://example.com/docs/intro",
   };
+
   test("matches exact page", () => {
     expect(ruleMatches(rule, "https://example.com/docs/intro")).toBe(true);
   });
@@ -107,6 +110,7 @@ describe("anyRuleMatches", () => {
       { kind: "exact", pattern: "a.com" },
       { kind: "subdomain", pattern: "b.com" },
     ];
+
     expect(anyRuleMatches(rules, "https://x.b.com/")).toBe(true);
     expect(anyRuleMatches(rules, "https://c.com/")).toBe(false);
   });

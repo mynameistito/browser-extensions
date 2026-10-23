@@ -1,9 +1,7 @@
 {
-  "extends": [
-    "./.wxt/tsconfig.json",
-    "../../packages/typescript-config/base.json"
-  ],
+  "extends": ["./.wxt/tsconfig.json", "../../tsconfig.base.json"],
   "compilerOptions": {
+    "types": ["bun", "chrome"],
     "strict": true
   }
 }

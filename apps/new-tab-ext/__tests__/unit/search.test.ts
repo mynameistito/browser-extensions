@@ -1,10 +1,17 @@
 import { Effect } from "effect";
-import { describe, expect, test } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { createSearchUrl } from "../../src/lib/search";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
-describe("createSearchUrl", () => {
-  test("creates an encoded Google search URL", () => {
+describe(createSearchUrl, () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
+  it("creates an encoded Google search URL", () => {
     const url = Effect.runSync(createSearchUrl("web", "  effect typescript  "));
 
     expect(url.origin).toBe("https://www.google.com");
@@ -12,15 +19,16 @@ describe("createSearchUrl", () => {
     expect(url.searchParams.get("q")).toBe("effect typescript");
   });
 
-  test("creates a ChatGPT prompt URL", () => {
+  it("creates a ChatGPT prompt URL", () => {
     const url = Effect.runSync(createSearchUrl("chatgpt", "Explain Effect"));
 
     expect(url.origin).toBe("https://chatgpt.com");
     expect(url.searchParams.get("q")).toBe("Explain Effect");
   });
 
-  test("supports the selected web search provider", () => {
+  it("supports the selected web search provider", () => {
     const bing = Effect.runSync(createSearchUrl("web", "weather", "bing"));
+
     const duckDuckGo = Effect.runSync(
       createSearchUrl("web", "weather", "duckduckgo")
     );
@@ -31,7 +39,7 @@ describe("createSearchUrl", () => {
     expect(duckDuckGo.searchParams.get("q")).toBe("weather");
   });
 
-  test("fails with a typed error for a blank query", () => {
+  it("fails with a typed error for a blank query", () => {
     const result = Effect.runSync(Effect.either(createSearchUrl("web", "   ")));
 
     expect(result._tag).toBe("Left");

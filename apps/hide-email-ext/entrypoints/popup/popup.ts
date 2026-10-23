@@ -5,13 +5,14 @@ import {
   hiddenEmailsItem,
   removeHiddenEmail,
 } from "@/src/lib/storage";
-import type { NormalizedEmail } from "@/src/lib/types";
 
 const getById = <T extends HTMLElement>(id: string, ctor: new () => T): T => {
   const el = document.querySelector<HTMLElement>(`#${id}`);
+
   if (!(el instanceof ctor)) {
     throw new Error(`Element #${id} not found or wrong type`);
   }
+
   return el;
 };
 
@@ -20,8 +21,9 @@ const addBtn = getById("add-btn", HTMLButtonElement);
 const errorSpan = getById("error", HTMLSpanElement);
 const list = getById("email-list", HTMLUListElement);
 
-const renderList = (emails: NormalizedEmail[]): void => {
-  list.innerHTML = "";
+const renderList = (emails: string[]): void => {
+  list.replaceChildren();
+
   for (const email of emails) {
     const li = document.createElement("li");
     const span = document.createElement("span");
@@ -30,12 +32,14 @@ const renderList = (emails: NormalizedEmail[]): void => {
     btn.className = "remove-btn";
     btn.textContent = "\u00D7";
     btn.setAttribute("aria-label", `Remove ${email}`);
-    btn.addEventListener("click", async () => {
-      try {
-        await removeHiddenEmail(email);
-      } catch (error) {
-        errorSpan.textContent = `Failed to remove email: ${error instanceof Error ? error.message : "unknown error"}`;
-      }
+    btn.addEventListener("click", () => {
+      void (async () => {
+        try {
+          await removeHiddenEmail(email);
+        } catch (error) {
+          errorSpan.textContent = `Failed to remove email: ${error instanceof Error ? error.message : "unknown error"}`;
+        }
+      })();
     });
     li.append(span);
     li.append(btn);
@@ -46,11 +50,21 @@ const renderList = (emails: NormalizedEmail[]): void => {
 const handleAdd = async (): Promise<void> => {
   errorSpan.textContent = "";
   const raw = input.value;
+
   if (!isEmail(raw)) {
     errorSpan.textContent = "Please enter a valid email address.";
+
     return;
   }
+
   const email = normalize(raw);
+
+  if (email === null) {
+    errorSpan.textContent = "Please enter a valid email address.";
+
+    return;
+  }
+
   try {
     await addHiddenEmail(email);
     input.value = "";
@@ -69,8 +83,13 @@ const handleKeydown = async (e: KeyboardEvent): Promise<void> => {
   }
 };
 
-addBtn.addEventListener("click", handleAdd);
-input.addEventListener("keydown", handleKeydown);
+addBtn.addEventListener("click", () => {
+  void handleAdd();
+});
+
+input.addEventListener("keydown", (event) => {
+  void handleKeydown(event);
+});
 
 const init = async (): Promise<void> => {
   try {
@@ -79,6 +98,7 @@ const init = async (): Promise<void> => {
     console.error("Failed to load emails:", error);
     renderList([]);
   }
+
   hiddenEmailsItem.watch((next) => {
     renderList(next ?? []);
   });

@@ -1,5 +1,11 @@
+import { z } from "zod";
+
 const VEIL_CLASS = "ip-veil-hidden";
 const STYLE_ID = "ip-veil-styles";
+const BLURRED_LABEL = "Your IP address is blurred. Hover to reveal.";
+const ARIA_LABEL_ATTRIBUTE = "aria-label";
+const IpResponseSchema = z.string().nullable();
+
 const EXCLUDED_TAGS = new Set([
   "SCRIPT",
   "STYLE",
@@ -14,6 +20,7 @@ const escapeRegExp = (value: string): string =>
 
 const shouldProcess = (node: Node): boolean => {
   const parent = node.parentElement;
+
   return Boolean(
     parent &&
     !parent.closest(`.${VEIL_CLASS}`) &&
@@ -25,10 +32,7 @@ const createVeil = (ip: string): HTMLSpanElement => {
   const veil = document.createElement("span");
   veil.className = VEIL_CLASS;
   veil.dataset.ip = ip;
-  veil.setAttribute(
-    "aria-label",
-    "Your IP address is blurred. Hover to reveal."
-  );
+  veil.setAttribute(ARIA_LABEL_ATTRIBUTE, BLURRED_LABEL);
 
   const value = document.createElement("span");
   value.className = "ip-veil-value";
@@ -41,14 +45,11 @@ const createVeil = (ip: string): HTMLSpanElement => {
 
   veil.addEventListener("pointerenter", () => {
     veil.classList.add("ip-veil-visible");
-    veil.setAttribute("aria-label", "Your IP address is visible.");
+    veil.setAttribute(ARIA_LABEL_ATTRIBUTE, "Your IP address is visible.");
   });
   veil.addEventListener("pointerleave", () => {
     veil.classList.remove("ip-veil-visible");
-    veil.setAttribute(
-      "aria-label",
-      "Your IP address is blurred. Hover to reveal."
-    );
+    veil.setAttribute(ARIA_LABEL_ATTRIBUTE, BLURRED_LABEL);
   });
 
   return veil;
@@ -56,19 +57,23 @@ const createVeil = (ip: string): HTMLSpanElement => {
 
 const veilTextNode = (textNode: Text, matcher: RegExp): void => {
   const value = textNode.nodeValue;
-  if (!value || !matcher.test(value)) {
+
+  if (value === null || value.length === 0 || !matcher.test(value)) {
     return;
   }
+
   matcher.lastIndex = 0;
 
   const fragment = document.createDocumentFragment();
   let cursor = 0;
+
   for (const match of value.matchAll(matcher)) {
     const matchStart = match.index ?? 0;
     fragment.append(value.slice(cursor, matchStart));
     fragment.append(createVeil(match[0]));
     cursor = matchStart + match[0].length;
   }
+
   fragment.append(value.slice(cursor));
   textNode.replaceWith(fragment);
 };
@@ -80,11 +85,13 @@ const veilMatches = (root: ParentNode, matcher: RegExp): void => {
   });
 
   const textNodes: Text[] = [];
+
   while (walker.nextNode()) {
     if (walker.currentNode instanceof Text) {
       textNodes.push(walker.currentNode);
     }
   }
+
   for (const node of textNodes) {
     veilTextNode(node, matcher);
   }
@@ -93,6 +100,7 @@ const veilMatches = (root: ParentNode, matcher: RegExp): void => {
 const veilNode = (node: Node, matcher: RegExp): void => {
   if (node instanceof Text) {
     veilTextNode(node, matcher);
+
     return;
   }
 
@@ -103,13 +111,15 @@ const veilNode = (node: Node, matcher: RegExp): void => {
 
 const redactTitles = (ip: string): void => {
   const replacement = "your-ip";
+
   if (document.title.includes(ip)) {
     document.title = document.title.replaceAll(ip, replacement);
   }
 
   for (const element of document.querySelectorAll<HTMLElement>("[title]")) {
     const title = element.getAttribute("title");
-    if (title?.includes(ip)) {
+
+    if (title !== null && title.includes(ip)) {
       element.setAttribute("title", title.replaceAll(ip, replacement));
     }
   }
@@ -119,6 +129,7 @@ const injectStyles = (): void => {
   if (document.querySelector(`#${STYLE_ID}`)) {
     return;
   }
+
   const style = document.createElement("style");
   style.id = STYLE_ID;
   style.textContent = `
@@ -158,23 +169,32 @@ const injectStyles = (): void => {
 };
 
 const start = async (): Promise<void> => {
-  let response: unknown;
+  let response: string | null;
+
   try {
-    response = await browser.runtime.sendMessage({ type: "IP_VEIL_GET_IP" });
+    const messageResult: unknown = await browser.runtime.sendMessage({
+      type: "IP_VEIL_GET_IP",
+    });
+
+    const parsedResponse = IpResponseSchema.safeParse(messageResult);
+
+    response = parsedResponse.success ? parsedResponse.data : null;
   } catch {
     // A lookup failure should never affect the website being visited.
     return;
   }
 
-  if (typeof response !== "string" || !response) {
+  if (response === null || response.length === 0) {
     return;
   }
 
   injectStyles();
+
   const matcher = new RegExp(
     `(?<![\\w.:])${escapeRegExp(response)}(?![\\w.:])`,
     "gu"
   );
+
   veilMatches(document.body, matcher);
   redactTitles(response);
 
@@ -184,6 +204,7 @@ const start = async (): Promise<void> => {
         veilNode(node, matcher);
       }
     }
+
     redactTitles(response);
   });
 

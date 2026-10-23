@@ -6,7 +6,10 @@ import { loadBackgroundPhotos } from "@/lib/background-client";
 import { chooseDailyBackground } from "@/lib/backgrounds";
 import type { BackgroundPhoto } from "@/lib/backgrounds";
 
-/** Display one cached, attributed Wikimedia landscape behind the dashboard. */
+/**
+ * Display one cached, attributed Wikimedia landscape behind the dashboard.
+ * @returns The current background image and its attribution when available.
+ */
 export const BackgroundLayer = () => {
   const { preferences, isLoaded } = usePreferences();
   const [photos, setPhotos] = useState<readonly BackgroundPhoto[]>([]);
@@ -14,24 +17,22 @@ export const BackgroundLayer = () => {
   const [failedImageUrl, setFailedImageUrl] = useState("");
 
   useEffect(() => {
-    if (!isLoaded || !preferences.backgroundEnabled) {
-      return;
-    }
-
     let isMounted = true;
 
-    Effect.runFork(
-      Effect.either(loadBackgroundPhotos()).pipe(
-        Effect.tap((result) =>
-          Effect.sync(() => {
-            if (isMounted && result._tag === "Right") {
-              setPhotos(result.right);
-              setLoadedDay(Date.now());
-            }
-          })
+    if (isLoaded && preferences.backgroundEnabled) {
+      Effect.runFork(
+        Effect.either(loadBackgroundPhotos()).pipe(
+          Effect.tap((result) =>
+            Effect.sync(() => {
+              if (isMounted && result._tag === "Right") {
+                setPhotos(result.right);
+                setLoadedDay(Date.now());
+              }
+            })
+          )
         )
-      )
-    );
+      );
+    }
 
     return () => {
       isMounted = false;
@@ -63,7 +64,9 @@ export const BackgroundLayer = () => {
       <img
         alt=""
         className="background-image"
-        onError={() => setFailedImageUrl(photo.imageUrl)}
+        onError={() => {
+          setFailedImageUrl(photo.imageUrl);
+        }}
         src={photo.imageUrl}
       />
       <div aria-hidden="true" className="background-scrim" />

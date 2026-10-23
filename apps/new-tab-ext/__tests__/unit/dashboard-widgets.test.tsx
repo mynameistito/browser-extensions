@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
-import { describe, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, vi, it } from "vitest";
 
 import { ClockWidget } from "../../src/components/clock/clock-widget";
 import { usePreferences } from "../../src/components/preferences/preferences-provider";
@@ -16,16 +16,19 @@ import { WidgetsSettings } from "../../src/components/settings/widgets-settings"
 import { WeatherWidget } from "../../src/components/weather/weather-widget";
 import { WidgetGrid } from "../../src/components/widgets/widget-grid";
 import { DEFAULT_PREFERENCES } from "../../src/lib/preferences";
-import type { WidgetPlacement } from "../../src/lib/preferences";
 import { renderWithPreferences } from "../helpers/render-with-preferences";
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 import { seedWxtStorage } from "../helpers/wxt-imports";
 
 const city = {
-  name: "Helsinki",
-  region: "Uusimaa",
   country: "Finland",
   latitude: 60.17,
   longitude: 24.94,
+  name: "Helsinki",
+  region: "Uusimaa",
   timezone: "Europe/Helsinki",
 };
 
@@ -33,41 +36,49 @@ const UnsupportedWidgetLayout = () => {
   const { updatePreferences } = usePreferences();
 
   useEffect(() => {
-    // SAFETY: This deliberately bypasses the validated preferences schema to exercise the widget's defensive unknown-ID fallback.
-    const unsupportedId = ["unsupported"][0] as WidgetPlacement["id"];
-    const unsupportedPlacement = {
-      id: unsupportedId,
-      visible: true,
-      span: 1,
-    } satisfies WidgetPlacement;
-    updatePreferences((current) => ({
-      ...current,
-      widgetLayout: [unsupportedPlacement],
-    }));
+    updatePreferences((current) => {
+      const [placement] = current.widgetLayout;
+
+      if (placement === undefined) {
+        return current;
+      }
+
+      const unsupportedPlacement = { ...placement };
+      Object.defineProperty(unsupportedPlacement, "id", {
+        value: "unsupported",
+      });
+
+      return { ...current, widgetLayout: [unsupportedPlacement] };
+    });
   }, [updatePreferences]);
 
   return <WidgetGrid isArrangeMode={false} />;
 };
 
 describe("dashboard widgets", () => {
-  test("clock updates once per second and clears its interval", () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
+  it("clock updates once per second and clears its interval", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-09-30T12:00:00Z"));
     const view = renderWithPreferences(<ClockWidget />);
     const clock = view.container.querySelector("time");
 
     expect(clock?.dateTime).toBe("2026-09-30T12:00:00.000Z");
-    act(() => vi.advanceTimersByTime(1000));
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
     expect(clock?.dateTime).toBe("2026-09-30T12:00:01.000Z");
     view.unmount();
     expect(vi.getTimerCount()).toBe(0);
   });
 
-  test("hides weather by default and exposes an empty state when all widgets are hidden", async () => {
+  it("hides weather by default and exposes an empty state when all widgets are hidden", async () => {
     const view = renderWithPreferences(<WidgetGrid isArrangeMode={false} />);
-    await waitFor(() =>
-      expect(screen.getAllByRole("listitem")).toHaveLength(2)
-    );
+    await waitFor(() => {
+      expect(screen.getAllByRole("listitem")).toHaveLength(2);
+    });
     expect(screen.queryByLabelText("Weather widget")).toBeNull();
     view.unmount();
 
@@ -79,14 +90,12 @@ describe("dashboard widgets", () => {
       })),
     });
     renderWithPreferences(<WidgetGrid isArrangeMode={false} />);
-    expect(
-      await screen.findByText(
-        "No widgets are showing. Open Customize to add one."
-      )
-    ).toBeTruthy();
+    await expect(
+      screen.findByText("No widgets are showing. Open Customize to add one.")
+    ).resolves.toBeTruthy();
   });
 
-  test("renders an enabled weather widget through the grid", async () => {
+  it("renders an enabled weather widget through the grid", async () => {
     seedWxtStorage("local:preferences", {
       ...DEFAULT_PREFERENCES,
       widgetLayout: DEFAULT_PREFERENCES.widgetLayout.map((item) =>
@@ -98,21 +107,24 @@ describe("dashboard widgets", () => {
       vi.fn<typeof fetch>().mockRejectedValue(new Error("offline"))
     );
     renderWithPreferences(<WidgetGrid isArrangeMode={false} />);
-    expect(await screen.findByLabelText("Weather widget")).toBeTruthy();
+    await expect(
+      screen.findByLabelText("Weather widget")
+    ).resolves.toBeTruthy();
   });
 
-  test("ignores an unknown widget ID supplied at runtime", async () => {
+  it("ignores an unknown widget ID supplied at runtime", async () => {
     renderWithPreferences(<UnsupportedWidgetLayout />);
-    expect(await screen.findByRole("list", { name: "Widgets" })).toBeTruthy();
+    await expect(
+      screen.findByRole("list", { name: "Widgets" })
+    ).resolves.toBeTruthy();
     expect(screen.queryByText("undefined widget")).toBeNull();
   });
 
-  test("resizes, keyboard-reorders, and drag-swaps in Arrange mode", async () => {
+  it("resizes and keyboard-reorders widgets in Arrange mode", async () => {
     const user = userEvent.setup();
     renderWithPreferences(<WidgetGrid isArrangeMode />);
     await screen.findAllByRole("listitem");
     const clockCard = screen.getByRole("listitem", { name: "Clock widget" });
-    const searchCard = screen.getByRole("listitem", { name: "Search widget" });
 
     expect(clockCard.dataset.arranging).toBe("true");
     expect(
@@ -145,6 +157,11 @@ describe("dashboard widgets", () => {
     expect(screen.getAllByRole("listitem")[0]?.getAttribute("aria-label")).toBe(
       "Clock widget"
     );
+  });
+
+  it("drag-swaps arranged widgets and clears drag state", async () => {
+    renderWithPreferences(<WidgetGrid isArrangeMode />);
+    await screen.findAllByRole("listitem");
 
     const currentClock = screen.getByText("Clock", { selector: "button" });
     const currentSearch = screen.getByText("Search", { selector: "button" });
@@ -160,10 +177,12 @@ describe("dashboard widgets", () => {
 
     fireEvent.drop(currentSearch);
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
-    expect(searchCard).toBeTruthy();
+    expect(currentSearch.closest("li")?.getAttribute("aria-label")).toBe(
+      "Search widget"
+    );
   });
 
-  test("disables widget visibility controls before preferences load", () => {
+  it("disables widget visibility controls before preferences load", () => {
     renderWithPreferences(<WidgetsSettings isLoaded={false} />);
     const weatherToggle = screen.getByRole("checkbox", { name: "Weather" });
     expect(weatherToggle).toHaveProperty("disabled", true);
@@ -172,12 +191,14 @@ describe("dashboard widgets", () => {
     ).toHaveProperty("disabled", true);
   });
 
-  test("persists visibility changes and resets the starter layout", async () => {
+  it("persists visibility changes and resets the starter layout", async () => {
     const user = userEvent.setup();
     renderWithPreferences(<WidgetsSettings isLoaded />);
+
     const weatherToggle = await screen.findByRole("checkbox", {
       name: "Weather",
     });
+
     await user.click(weatherToggle);
     expect(weatherToggle).toHaveProperty("checked", true);
     await user.click(
@@ -186,9 +207,9 @@ describe("dashboard widgets", () => {
     expect(weatherToggle).toHaveProperty("checked", false);
   });
 
-  test("submits web and ChatGPT searches and reports blank queries", async () => {
+  it("submits web and ChatGPT searches and reports blank queries", async () => {
     const user = userEvent.setup();
-    const open = vi.fn();
+    const open = vi.fn<Window["open"]>();
     vi.stubGlobal("open", open);
     seedWxtStorage("local:preferences", {
       ...DEFAULT_PREFERENCES,
@@ -199,11 +220,14 @@ describe("dashboard widgets", () => {
     const webButton = await screen.findByRole("button", { name: "Search web" });
     expect(screen.getByText("DuckDuckGo · ChatGPT prompt")).toBeTruthy();
     await user.click(webButton);
-    expect(await screen.findByText("Enter a search first.")).toBeTruthy();
+    await expect(
+      screen.findByText("Enter a search first.")
+    ).resolves.toBeTruthy();
 
     const input = screen.getByRole("searchbox", {
       name: "Search the web or ask ChatGPT",
     });
+
     await user.type(input, "  weather today  ");
     await user.click(webButton);
     expect(open).toHaveBeenLastCalledWith(
@@ -221,11 +245,11 @@ describe("dashboard widgets", () => {
     expect(screen.getByText("DuckDuckGo · ChatGPT prompt")).toBeTruthy();
   });
 
-  test("shows the unconfigured weather prompt and selected-city conditions", async () => {
+  it("shows the unconfigured weather prompt and selected-city conditions", async () => {
     const noCity = renderWithPreferences(<WeatherWidget />);
-    expect(
-      await screen.findByText("Set a city in Customize to see local weather.")
-    ).toBeTruthy();
+    await expect(
+      screen.findByText("Set a city in Customize to see local weather.")
+    ).resolves.toBeTruthy();
     noCity.unmount();
 
     seedWxtStorage("local:preferences", {
@@ -237,24 +261,24 @@ describe("dashboard widgets", () => {
       vi.fn<typeof fetch>().mockResolvedValue(
         Response.json({
           current: {
-            temperature_2m: 14.3,
             apparent_temperature: 12,
-            relative_humidity_2m: 73,
-            wind_speed_10m: 8.1,
-            weather_code: 61,
             is_day: 1,
+            relative_humidity_2m: 73,
+            temperature_2m: 14.3,
             time: "2026-09-30T12:00",
+            weather_code: 61,
+            wind_speed_10m: 8.1,
           },
         })
       )
     );
     renderWithPreferences(<WeatherWidget />);
-    expect(await screen.findByText("Helsinki, Uusimaa")).toBeTruthy();
-    expect(await screen.findByText("Rain")).toBeTruthy();
+    await expect(screen.findByText("Helsinki, Uusimaa")).resolves.toBeTruthy();
+    await expect(screen.findByText("Rain")).resolves.toBeTruthy();
     expect(screen.getByText("Weather data by Open-Meteo")).toBeTruthy();
   });
 
-  test("renders a location without a region", async () => {
+  it("renders a location without a region", async () => {
     seedWxtStorage("local:preferences", {
       ...DEFAULT_PREFERENCES,
       weatherLocation: { ...city, region: "" },
@@ -264,10 +288,10 @@ describe("dashboard widgets", () => {
       vi.fn<typeof fetch>().mockRejectedValue(new Error("offline"))
     );
     renderWithPreferences(<WeatherWidget />);
-    expect(await screen.findByText("Helsinki")).toBeTruthy();
+    await expect(screen.findByText("Helsinki")).resolves.toBeTruthy();
   });
 
-  test("shows offline errors, stale readings, and cancels refresh timers", async () => {
+  it("shows offline errors, stale readings, and cancels refresh timers", async () => {
     const clearTimeout = vi.spyOn(window, "clearTimeout");
     seedWxtStorage("local:preferences", {
       ...DEFAULT_PREFERENCES,
@@ -280,32 +304,32 @@ describe("dashboard widgets", () => {
         .mockResolvedValue(Response.json({}, { status: 503 }))
     );
     const view = renderWithPreferences(<WeatherWidget />);
-    expect(
-      await screen.findByText("Weather is unavailable right now.")
-    ).toBeTruthy();
+    await expect(
+      screen.findByText("Weather is unavailable right now.")
+    ).resolves.toBeTruthy();
     view.unmount();
-    expect(clearTimeout).toHaveBeenCalled();
+    expect(clearTimeout).toHaveBeenCalledWith(expect.anything());
 
     seedWxtStorage("local:weather-cache", {
-      locationKey: "60.17,24.94",
       fetchedAt: Date.now() - 60 * 60 * 1000,
+      locationKey: "60.17,24.94",
       weather: {
-        temperature: 8,
         apparentTemperature: 6,
-        relativeHumidity: 80,
-        windSpeed: 4,
-        weatherCode: 2,
         isDay: true,
         observedAt: "2026-09-30T11:00",
+        relativeHumidity: 80,
+        temperature: 8,
+        weatherCode: 2,
+        windSpeed: 4,
       },
     });
     renderWithPreferences(<WeatherWidget />);
-    expect(
-      await screen.findByText("Partly cloudy · saved reading")
-    ).toBeTruthy();
+    await expect(
+      screen.findByText("Partly cloudy · saved reading")
+    ).resolves.toBeTruthy();
   });
 
-  test("ignores a weather request that completes after widget unmount", async () => {
+  it("ignores a weather request that completes after widget unmount", async () => {
     const response = Promise.withResolvers<Response>();
     const fetchMock = vi.fn<typeof fetch>().mockReturnValue(response.promise);
     vi.stubGlobal("fetch", fetchMock);
@@ -314,20 +338,22 @@ describe("dashboard widgets", () => {
       weatherLocation: city,
     });
     const view = renderWithPreferences(<WeatherWidget />);
-    await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledOnce();
+    });
 
     view.unmount();
     await act(async () => {
       response.resolve(
         Response.json({
           current: {
-            temperature_2m: 14,
             apparent_temperature: 12,
-            relative_humidity_2m: 70,
-            wind_speed_10m: 5,
-            weather_code: 1,
             is_day: 1,
+            relative_humidity_2m: 70,
+            temperature_2m: 14,
             time: "2026-09-30T12:00",
+            weather_code: 1,
+            wind_speed_10m: 5,
           },
         })
       );

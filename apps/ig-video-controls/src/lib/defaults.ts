@@ -1,3 +1,4 @@
+/** User-configurable playback settings and their value types. */
 export interface Settings {
   playbackRate: number;
   playbackRateAdjustmentStepSize: number;

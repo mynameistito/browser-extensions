@@ -15,7 +15,7 @@ import { readKeyOr, writeKey } from "@/lib/storage";
 const ALARM_NAME = "bh.enforce";
 const PERIOD_MIN = 5;
 
-const RETENTION_MS: Record<string, number> = {
+const RETENTION_MS = {
   "1m": 30 * 24 * 60 * 60 * 1000,
   "1w": 7 * 24 * 60 * 60 * 1000,
   "2w": 14 * 24 * 60 * 60 * 1000,
@@ -29,33 +29,42 @@ const runCleanup = async (
   whitelistExempt: boolean
 ): Promise<Result<null, CleanupError>> => {
   const ms = RETENTION_MS[retention];
+
   if (ms === undefined) {
     return Result.ok(null);
   }
+
   const cutoff = Date.now() - ms;
+
   if (!whitelistExempt) {
     const removed = await history.deleteRange({
       endTime: cutoff,
       startTime: 0,
     });
+
     if (Result.isError(removed)) {
       return Result.err<null, CleanupError>(removed.error);
     }
+
     return Result.ok(null);
   }
 
   const wl = await readKeyOr("whitelist", []);
+
   if (Result.isError(wl)) {
     return Result.err<null, CleanupError>(wl.error);
   }
+
   if (wl.value.length === 0) {
     const removed = await history.deleteRange({
       endTime: cutoff,
       startTime: 0,
     });
+
     if (Result.isError(removed)) {
       return Result.err<null, CleanupError>(removed.error);
     }
+
     return Result.ok(null);
   }
 
@@ -67,22 +76,27 @@ const runCleanup = async (
     startTime: 0,
     text: "",
   });
+
   if (Result.isError(r)) {
     return Result.err<null, CleanupError>(r.error);
   }
+
   const { anyRuleMatches } = await import("@/lib/patterns");
+
   const deletions = await Promise.all(
     r.value.flatMap((item) =>
-      item.url && !anyRuleMatches(wl.value, item.url)
+      item.url !== undefined && !anyRuleMatches(wl.value, item.url)
         ? [history.deleteUrl({ url: item.url })]
         : []
     )
   );
+
   for (const deletion of deletions) {
     if (Result.isError(deletion)) {
       return Result.err<null, CleanupError>(deletion.error);
     }
   }
+
   return Result.ok(null);
 };
 
@@ -91,11 +105,14 @@ const runCleanupWithConfig = async (
   now = Date.now()
 ): Promise<number> => {
   const cleaned = await runCleanup(cfg.retention, cfg.whitelistExempt);
+
   if (Result.isError(cleaned)) {
     console.error("[enforcement] cleanup failed", cleaned.error);
     throw cleaned.error;
   }
+
   const written = await writeKey("cleanup", { ...cfg, lastRunAt: now });
+
   if (Result.isError(written)) {
     console.error(
       "[enforcement] failed to persist cleanup.lastRunAt",
@@ -103,6 +120,7 @@ const runCleanupWithConfig = async (
     );
     throw written.error;
   }
+
   return now;
 };
 
@@ -112,26 +130,30 @@ const enforceBlacklist = async (): Promise<void> => {
     readKeyOr("whitelist", []),
     readKeyOr("settings", SettingsSchema.parse({})),
   ]);
+
   if (Result.isError(bl) || Result.isError(wl) || Result.isError(settings)) {
     return;
   }
+
   if (bl.value.length === 0) {
     return;
   }
 
   const since = Date.now() - 24 * 60 * 60 * 1000;
+
   const r = await history.search({
     maxResults: 10_000,
     startTime: since,
     text: "",
   });
+
   if (Result.isError(r)) {
     return;
   }
 
   await Promise.all(
     r.value.flatMap((item) =>
-      item.url &&
+      item.url !== undefined &&
       shouldDelete(
         item.url,
         bl.value,
@@ -146,10 +168,13 @@ const enforceBlacklist = async (): Promise<void> => {
 
 const maybeRunScheduledCleanup = async (): Promise<void> => {
   const c = await readKeyOr("cleanup", CleanupSchema.parse({}));
+
   if (Result.isError(c)) {
     return;
   }
+
   const cfg = c.value;
+
   if (cfg.schedule === "never" || cfg.schedule === "on-close") {
     return;
   }
@@ -158,6 +183,7 @@ const maybeRunScheduledCleanup = async (): Promise<void> => {
   const last = cfg.lastRunAt ?? 0;
   const DAY_MS = 24 * 60 * 60 * 1000;
   let interval: number;
+
   if (cfg.schedule === "daily") {
     interval = DAY_MS;
   } else if (cfg.schedule === "weekly") {
@@ -165,6 +191,7 @@ const maybeRunScheduledCleanup = async (): Promise<void> => {
   } else {
     interval = 30 * DAY_MS;
   }
+
   if (now - last < interval) {
     return;
   }
@@ -184,45 +211,62 @@ const tick = async (): Promise<void> => {
   await Promise.all([enforceBlacklist(), maybeRunScheduledCleanup()]);
 };
 
+/** Create the periodic maintenance alarm when one does not exist. */
 export const ensureAlarm = async (): Promise<void> => {
   const existing = await browser.alarms.get(ALARM_NAME);
+
   if (existing) {
     return;
   }
-  browser.alarms.create(ALARM_NAME, {
+
+  void browser.alarms.create(ALARM_NAME, {
     delayInMinutes: 1,
     periodInMinutes: PERIOD_MIN,
   });
 };
 
+/** Register the recurring history enforcement alarm handler. */
 export const registerAlarmHandler = (): void => {
-  browser.alarms.onAlarm.addListener(async (alarm) => {
-    if (alarm.name !== ALARM_NAME) {
-      return;
-    }
-    await tick();
+  browser.alarms.onAlarm.addListener((alarm) => {
+    void (async () => {
+      if (alarm.name !== ALARM_NAME) {
+        return;
+      }
+
+      await tick();
+    })();
   });
 };
 
+/** Run cleanup with the persisted preferences and return its completion time.
+ * @returns The time when cleanup completed.
+ */
 export const runConfiguredCleanup = async (): Promise<{
   lastRunAt: number;
 }> => {
   const c = await readKeyOr("cleanup", CleanupSchema.parse({}));
+
   if (Result.isError(c)) {
     throw c.error;
   }
+
   const lastRunAt = await runCleanupWithConfig(c.value);
+
   return { lastRunAt };
 };
 
+/** Run cleanup at browser shutdown when the schedule is set to on-close. */
 export const runOnCloseCleanup = async (): Promise<void> => {
   const c = await readKeyOr("cleanup", CleanupSchema.parse({}));
+
   if (Result.isError(c)) {
     return;
   }
+
   if (c.value.schedule !== "on-close") {
     return;
   }
+
   try {
     await runCleanupWithConfig(c.value);
   } catch (error) {
@@ -230,6 +274,12 @@ export const runOnCloseCleanup = async (): Promise<void> => {
   }
 };
 
+/** Register the runtime message that triggers an immediate cleanup run.
+ * @returns Nothing.
+ */
 export const registerCleanupMessages = (): void => {
-  extensionMessaging.onMessage("cleanup.runNow", () => runConfiguredCleanup());
+  extensionMessaging.onMessage(
+    "cleanup.runNow",
+    async () => await runConfiguredCleanup()
+  );
 };

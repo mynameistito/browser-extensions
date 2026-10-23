@@ -23,58 +23,68 @@ const loadWeatherEffect = (
 ) =>
   loadCurrentWeather(location).pipe(
     Effect.either,
-    Effect.tap((result) => Effect.sync(() => onResult(result)))
+    Effect.tap((result) =>
+      Effect.sync(() => {
+        onResult(result);
+      })
+    )
   );
 
-/** Show current weather for a city explicitly selected by the user. */
+/**
+ * Show current weather for a city explicitly selected by the user.
+ * @returns The selected city's weather or a setup prompt.
+ */
 export const WeatherWidget = () => {
   const { preferences } = usePreferences();
   const location = preferences.weatherLocation;
+
   const [readingState, setReadingState] = useState<{
     readonly locationKey: string;
     readonly reading: WeatherReading;
   } | null>(null);
+
   const [errorLocationKey, setErrorLocationKey] = useState("");
+
   const currentLocationKey = location
     ? `${location.latitude},${location.longitude}`
     : "";
+
   const reading =
     readingState?.locationKey === currentLocationKey
       ? readingState.reading
       : null;
+
   const error = errorLocationKey === currentLocationKey;
 
   useEffect(() => {
-    if (!location) {
-      return;
-    }
-
     let isMounted = true;
     let refreshTimer = 0;
 
-    const refresh = () => {
-      Effect.runFork(
-        loadWeatherEffect(location, (result) => {
-          if (!isMounted) {
-            return;
-          }
+    if (location) {
+      const refresh = () => {
+        Effect.runFork(
+          loadWeatherEffect(location, (result) => {
+            if (!isMounted) {
+              return;
+            }
 
-          if (result._tag === "Right") {
-            setReadingState({
-              locationKey: `${location.latitude},${location.longitude}`,
-              reading: result.right,
-            });
-            setErrorLocationKey("");
-          } else {
-            setErrorLocationKey(`${location.latitude},${location.longitude}`);
-          }
+            if (result._tag === "Right") {
+              setReadingState({
+                locationKey: `${location.latitude},${location.longitude}`,
+                reading: result.right,
+              });
+              setErrorLocationKey("");
+            } else {
+              setErrorLocationKey(`${location.latitude},${location.longitude}`);
+            }
 
-          refreshTimer = window.setTimeout(refresh, WEATHER_REFRESH_INTERVAL);
-        })
-      );
-    };
+            refreshTimer = window.setTimeout(refresh, WEATHER_REFRESH_INTERVAL);
+          })
+        );
+      };
 
-    refresh();
+      refresh();
+    }
 
     return () => {
       isMounted = false;

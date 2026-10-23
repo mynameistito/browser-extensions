@@ -5,4 +5,5 @@ const BrowserApiErrorBase = defineTaggedErrorClass("BrowserApiError")<{
   cause: unknown;
 }>();
 
+/** Failure from a browser extension API call. */
 export class BrowserApiError extends BrowserApiErrorBase {}

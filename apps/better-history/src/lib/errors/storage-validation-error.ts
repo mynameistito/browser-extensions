@@ -7,4 +7,5 @@ const StorageValidationErrorBase = defineTaggedErrorClass(
   key: string;
 }>();
 
+/** Stored data did not match its key's schema. */
 export class StorageValidationError extends StorageValidationErrorBase {}

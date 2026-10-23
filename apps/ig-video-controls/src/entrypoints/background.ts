@@ -1,9 +1,17 @@
 import { defineBackground } from "#imports";
 import { DEFAULTS } from "@/lib/defaults";
 
-const DEFAULTS_AS_RECORD = DEFAULTS as unknown as Record<string, unknown>;
-
-export default defineBackground(async () => {
-  const current = await browser.storage.local.get(DEFAULTS_AS_RECORD);
+/** Initializes missing local settings with their defaults.
+ * @returns A promise that resolves after settings are initialized.
+ */
+const initializeSettings = async (): Promise<void> => {
+  const current = await browser.storage.local.get(Object.keys(DEFAULTS));
   await browser.storage.local.set({ ...DEFAULTS, ...current });
+};
+
+/** Registers the extension background initialization handler.
+ * @returns Nothing.
+ */
+export default defineBackground(() => {
+  void initializeSettings();
 });

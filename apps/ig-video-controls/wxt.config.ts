@@ -15,32 +15,43 @@ import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
  * - Only injected for Chromium targets — Firefox uses `browser_specific_settings`.
  */
 
+/** Loads the private key from the environment or app root.
+ * @returns The PEM text when available.
+ */
 const loadPemSource = (): string | undefined => {
   const fromEnv = process.env.WXT_CHROME_KEY;
-  if (fromEnv && fromEnv.length > 0) {
+
+  if (fromEnv !== undefined && fromEnv.length > 0) {
     return fromEnv;
   }
+
   const keyPath = path.resolve("key.pem");
+
   if (existsSync(keyPath)) {
     try {
       return readFileSync(keyPath, "utf-8");
     } catch (error) {
-      console.error(`Failed to read ${keyPath}:`, (error as Error).message);
+      console.error(`Failed to read ${keyPath}:`, error);
     }
   }
+
+  return undefined;
 };
 
 const loadManifestKey = (): string | undefined => {
   const pem = loadPemSource();
-  if (!pem) {
-    return;
+
+  if (pem === undefined) {
+    return undefined;
   }
 
   let key: string;
+
   try {
     key = deriveChromeExtensionKey(pem).manifestKey;
   } catch (error) {
-    console.error("Failed to parse PEM into SPKI:", (error as Error).message);
+    console.error("Failed to parse PEM into SPKI:", error);
+
     return undefined;
   }
 
@@ -72,11 +83,12 @@ export default defineConfig({
     }
 
     const key = loadManifestKey();
-    return {
-      ...base,
-      ...(key ? { key } : {}),
-      minimum_chrome_version: "88",
-    };
+
+    if (key !== undefined && key.length > 0) {
+      return { ...base, key, minimum_chrome_version: "88" };
+    }
+
+    return { ...base, minimum_chrome_version: "88" };
   },
   outDir: ".output",
   srcDir: "src",

@@ -11,17 +11,22 @@ import {
 } from "@/background/enforcement";
 import { seedDefaults } from "@/background/install";
 
+/** Register lifecycle listeners and background maintenance handlers. */
 export default defineBackground(() => {
-  browser.runtime.onInstalled.addListener(async () => {
-    await seedDefaults();
-    await rebuildContextMenus();
-    await ensureAlarm();
+  browser.runtime.onInstalled.addListener(() => {
+    void (async () => {
+      await seedDefaults();
+      await rebuildContextMenus();
+      await ensureAlarm();
+    })();
   });
 
-  browser.runtime.onStartup.addListener(async () => {
-    await ensureAlarm();
-    await rebuildContextMenus();
-    await runOnCloseCleanup();
+  browser.runtime.onStartup.addListener(() => {
+    void (async () => {
+      await ensureAlarm();
+      await rebuildContextMenus();
+      await runOnCloseCleanup();
+    })();
   });
 
   browser.runtime.onSuspend.addListener(() => {

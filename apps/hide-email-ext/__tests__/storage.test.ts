@@ -7,10 +7,9 @@ import {
   getHiddenEmails,
   removeHiddenEmail,
 } from "../src/lib/storage";
-import type { NormalizedEmail } from "../src/lib/types";
 
-const email1 = "alice@example.com" as NormalizedEmail;
-const email2 = "bob@test.org" as NormalizedEmail;
+const email1 = "alice@example.com";
+const email2 = "bob@test.org";
 
 describe("storage", () => {
   beforeEach(() => {

@@ -5,4 +5,5 @@ const StorageReadErrorBase = defineTaggedErrorClass("StorageReadError")<{
   key: string;
 }>();
 
+/** Failure while retrieving a value from extension storage. */
 export class StorageReadError extends StorageReadErrorBase {}

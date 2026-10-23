@@ -1,7 +1,15 @@
-import { describe, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import {
+  cleanupTestEnvironment,
+  setupTestEnvironment,
+} from "../helpers/test-environment";
 
 describe("production-mode entrypoint", () => {
-  test("does not attempt to load React Grab outside development", async () => {
+  beforeEach(setupTestEnvironment);
+  afterEach(cleanupTestEnvironment);
+
+  it("does not attempt to load React Grab outside development", async () => {
     document.body.textContent = "";
     vi.stubEnv("DEV", false);
 

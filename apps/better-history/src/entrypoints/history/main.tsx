@@ -11,6 +11,7 @@ import { routeTree } from "@/routeTree.gen";
 
 const getInitialEntry = (): string => {
   const hash = window.location.hash.replace(/^#/u, "");
+
   return hash.length > 0 ? hash : "/";
 };
 
@@ -29,6 +30,7 @@ declare module "@tanstack/react-router" {
 const queryClient = new QueryClient();
 
 const root = document.querySelector("#app");
+
 if (!root) {
   throw new Error("Root element #app not found");
 }

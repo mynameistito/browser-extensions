@@ -16,9 +16,9 @@ const MetadataSchema = Schema.Record({
 });
 
 const ImageInfoSchema = Schema.Struct({
-  thumburl: Schema.String,
   descriptionurl: Schema.String,
   extmetadata: MetadataSchema,
+  thumburl: Schema.String,
 });
 
 export const CommonsResponseSchema = Schema.Struct({
@@ -26,8 +26,8 @@ export const CommonsResponseSchema = Schema.Struct({
     pages: Schema.Record({
       key: Schema.String,
       value: Schema.Struct({
-        title: Schema.String,
         imageinfo: Schema.Array(ImageInfoSchema),
+        title: Schema.String,
       }),
     }),
   }),
@@ -36,6 +36,7 @@ export const CommonsResponseSchema = Schema.Struct({
 const isHttpsUrl = (value: string, hostname?: string): boolean => {
   try {
     const url = new URL(value);
+
     return (
       url.protocol === "https:" &&
       (hostname === undefined || url.hostname === hostname)
@@ -65,7 +66,15 @@ const toPhoto = (
   const license = info.extmetadata.LicenseShortName?.value;
   const licenseUrl = info.extmetadata.LicenseUrl?.value;
 
-  if (!artist || !license || !licenseUrl) {
+  if (
+    artist === undefined ||
+    license === undefined ||
+    licenseUrl === undefined
+  ) {
+    return null;
+  }
+
+  if ([artist, license, licenseUrl].some((value) => value.length === 0)) {
     return null;
   }
 
@@ -78,29 +87,37 @@ const toPhoto = (
   }
 
   return {
-    title: title.replace(/^File:/u, ""),
-    imageUrl: info.thumburl,
-    pageUrl: info.descriptionurl,
     artist: textFromHtml(artist),
+    imageUrl: info.thumburl,
     license,
     licenseUrl,
+    pageUrl: info.descriptionurl,
+    title: title.replace(/^File:/u, ""),
   };
 };
 
-/** Convert a decoded Commons response into attributable landscape photos. */
+/**
+ * Convert a decoded Commons response into attributable landscape photos.
+ * @param input - Validated Wikimedia Commons response.
+ * @returns Photos with safe URLs and attribution metadata.
+ */
 export const parseBackgroundResponse = (
   input: Schema.Schema.Type<typeof CommonsResponseSchema>
-): readonly BackgroundPhoto[] => {
-  const photos = Object.values(input.query.pages).flatMap((page) => {
+): readonly BackgroundPhoto[] =>
+  Object.values(input.query.pages).flatMap((page) => {
     const [info] = page.imageinfo;
     const photo = info ? toPhoto(page.title, info) : null;
+
     return photo ? [photo] : [];
   });
 
-  return photos;
-};
-
-/** Pick one cached background consistently for the current day and user nonce. */
+/**
+ * Pick one cached background consistently for the current day and user nonce.
+ * @param photos - Available background photos.
+ * @param now - Current time in milliseconds.
+ * @param nonce - User setting used to rotate the daily choice.
+ * @returns The selected photo, or null when no photos are available.
+ */
 export const chooseDailyBackground = (
   photos: readonly BackgroundPhoto[],
   now: number,
@@ -111,5 +128,6 @@ export const chooseDailyBackground = (
   }
 
   const day = Math.floor(now / (24 * 60 * 60 * 1000));
+
   return photos[(day + nonce) % photos.length] ?? null;
 };

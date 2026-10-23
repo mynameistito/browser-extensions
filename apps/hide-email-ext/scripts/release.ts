@@ -9,6 +9,33 @@ interface PackageJson {
   readonly version: string;
 }
 
+const isObject = (value: unknown): value is object =>
+  value !== null && Object.prototype.toString.call(value) === "[object Object]";
+
+const isString = (value: unknown): value is string =>
+  Object.prototype.toString.call(value) === "[object String]";
+
+const parsePackageJson = (json: string): PackageJson => {
+  const value: unknown = JSON.parse(json);
+
+  if (!isObject(value)) {
+    throw new TypeError("Invalid package manifest.");
+  }
+
+  const name: unknown = Object.getOwnPropertyDescriptor(value, "name")?.value;
+
+  const version: unknown = Object.getOwnPropertyDescriptor(
+    value,
+    "version"
+  )?.value;
+
+  if (!isString(name) || !isString(version)) {
+    throw new TypeError("Invalid package manifest.");
+  }
+
+  return { name, version };
+};
+
 const run = (command: string, args: string[]): string =>
   execFileSync(command, args, {
     cwd: root,
@@ -46,6 +73,7 @@ const releaseHasExpectedAssets = (
 ): boolean => {
   try {
     const names = fetchReleaseAssetNames(tag);
+
     return expectedAssets(name, version).every((asset) =>
       names.includes(asset)
     );
@@ -55,12 +83,20 @@ const releaseHasExpectedAssets = (
 };
 
 const requireStableChromeKey = (): void => {
-  if (!process.env.REQUIRE_CHROME_KEY) {
+  if (
+    process.env.REQUIRE_CHROME_KEY === undefined ||
+    process.env.REQUIRE_CHROME_KEY.length === 0
+  ) {
     return;
   }
 
   const keyPath = path.resolve(root, "key.pem");
-  if (existsSync(keyPath) || process.env.WXT_CHROME_KEY) {
+
+  if (
+    existsSync(keyPath) ||
+    (process.env.WXT_CHROME_KEY !== undefined &&
+      process.env.WXT_CHROME_KEY.length > 0)
+  ) {
     return;
   }
 
@@ -75,24 +111,32 @@ const escapeRegex = (str: string): string =>
 
 const readReleaseNotes = (version: string): string => {
   const changelogPath = path.resolve(root, "CHANGELOG.md");
+
   if (!existsSync(changelogPath)) {
     return `Release v${version}`;
   }
 
   const changelog = readFileSync(changelogPath, "utf-8");
   const escapedVersion = escapeRegex(version);
+
   const sectionRegex = new RegExp(
     `## ${escapedVersion}\n([\\s\\S]*?)(?=\n## |$)`,
     "u"
   );
+
   const match = changelog.match(sectionRegex);
 
-  return match?.[1]?.trim() || `Release v${version}`;
+  const releaseNotes = match?.[1]?.trim();
+
+  return releaseNotes === undefined || releaseNotes.length === 0
+    ? `Release v${version}`
+    : releaseNotes;
 };
 
-const pkg = JSON.parse(
+const pkg = parsePackageJson(
   readFileSync(path.resolve(root, "package.json"), "utf-8")
-) as PackageJson;
+);
+
 const tag = `v${pkg.version}`;
 
 if (releaseHasExpectedAssets(tag, pkg.name, pkg.version)) {
@@ -103,12 +147,19 @@ if (releaseHasExpectedAssets(tag, pkg.name, pkg.version)) {
 requireStableChromeKey();
 
 runInherited("bun", ["run", "check"]);
+
 runInherited("bun", ["run", "typecheck"]);
+
 runInherited("bun", ["run", "test"]);
+
 runInherited("bun", ["run", "knip"]);
+
 runInherited("bun", ["run", "build"]);
+
 runInherited("bun", ["run", "build:firefox"]);
+
 runInherited("bun", ["run", "zip"]);
+
 runInherited("bun", ["run", "zip:firefox"]);
 
 const chromeZip = path.resolve(
@@ -116,6 +167,7 @@ const chromeZip = path.resolve(
   ".output",
   `${pkg.name}-${pkg.version}-chrome.zip`
 );
+
 const firefoxZip = path.resolve(
   root,
   ".output",
@@ -129,6 +181,7 @@ for (const zip of [chromeZip, firefoxZip]) {
 }
 
 const notesPath = path.resolve(root, ".changeset", "RELEASE_NOTES.md");
+
 writeFileSync(notesPath, readReleaseNotes(pkg.version));
 
 const target = run("git", ["rev-parse", "HEAD"]);
@@ -149,6 +202,7 @@ try {
   ]);
 } catch (error) {
   let present: string[];
+
   try {
     present = fetchReleaseAssetNames(tag);
   } catch {

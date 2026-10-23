@@ -5,9 +5,11 @@ import { useRules } from "@/features/domains/use-rules";
 
 const WhitelistPage = () => {
   const { data, isPending, save } = useRules("whitelist");
+
   if (isPending) {
-    return <p className="text-sm text-zinc-500">Loading…</p>;
+    return <p className="text-muted-foreground text-sm">Loading…</p>;
   }
+
   return (
     <RulesEditor onChange={save} rules={data ?? []} title="Domain Whitelist" />
   );

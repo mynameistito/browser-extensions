@@ -27,7 +27,11 @@ const PreferencesContext = createContext<PreferencesContextValue | null>(null);
 const LOAD_ERROR_MESSAGE = "Settings could not be loaded. Defaults are shown.";
 const SAVE_ERROR_MESSAGE = "This change could not be saved on this device.";
 
-/** Load and persist local settings around the new-tab application. */
+/**
+ * Load and persist local settings around the new-tab application.
+ * @param props - Child elements that need access to preferences.
+ * @returns A provider for current preferences and update actions.
+ */
 export const PreferencesProvider = ({
   children,
 }: {
@@ -85,8 +89,14 @@ export const PreferencesProvider = ({
         }
 
         isSaving.current = true;
-        // SAFETY: The guard above verified the queue is non-empty; no code mutates it before this synchronous shift.
-        const queuedPreferences = saveQueue.current.shift() as Preferences;
+        const queuedPreferences = saveQueue.current.shift();
+
+        if (queuedPreferences === undefined) {
+          isSaving.current = false;
+
+          return;
+        }
+
         const exit = await Effect.runPromiseExit(
           Effect.either(savePreferences(queuedPreferences))
         );
@@ -109,7 +119,7 @@ export const PreferencesProvider = ({
   );
 
   const contextValue = useMemo(
-    () => ({ preferences, isLoaded, storageMessage, updatePreferences }),
+    () => ({ isLoaded, preferences, storageMessage, updatePreferences }),
     [preferences, isLoaded, storageMessage, updatePreferences]
   );
 
@@ -120,7 +130,10 @@ export const PreferencesProvider = ({
   );
 };
 
-/** Read and update the current device's new-tab preferences. */
+/**
+ * Read and update the current device's new-tab preferences.
+ * @returns The preferences context value.
+ */
 export const usePreferences = (): PreferencesContextValue => {
   const context = useContext(PreferencesContext);
 

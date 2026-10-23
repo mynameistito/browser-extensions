@@ -8,6 +8,11 @@ import {
 import { StorageSchema } from "@/lib/schemas";
 import type { StorageKey, StorageValue } from "@/lib/schemas";
 
+/**
+ * Read and validate one value from browser local storage.
+ * @param key - Storage key to read.
+ * @returns The parsed value, absence, or a read/validation error.
+ */
 export const readKey = async <K extends StorageKey>(
   key: K
 ): Promise<
@@ -15,8 +20,9 @@ export const readKey = async <K extends StorageKey>(
 > => {
   const raw = await Result.tryPromise({
     catch: (cause) => new StorageReadError({ cause, key }),
-    try: () => browser.storage.local.get(key),
+    try: async () => await browser.storage.local.get(key),
   });
+
   if (Result.isError(raw)) {
     return Result.err<
       StorageValue<K> | undefined,
@@ -25,19 +31,28 @@ export const readKey = async <K extends StorageKey>(
   }
 
   const value = raw.value[key];
+
   if (value === undefined) {
-    return Result.ok(value as StorageValue<K> | undefined);
+    return Result.ok(value);
   }
 
   const parsed = StorageSchema[key].safeParse(value);
+
   if (!parsed.success) {
     return Result.err(
       new StorageValidationError({ issues: parsed.error.issues, key })
     );
   }
-  return Result.ok(parsed.data as StorageValue<K>);
+
+  return Result.ok(parsed.data);
 };
 
+/**
+ * Read one storage value and use a fallback when it is absent.
+ * @param key - Storage key to read.
+ * @param fallback - Value returned when storage has no entry for the key.
+ * @returns The parsed value or fallback, or a read/validation error.
+ */
 export const readKeyOr = async <K extends StorageKey>(
   key: K,
   fallback: StorageValue<K>
@@ -45,42 +60,60 @@ export const readKeyOr = async <K extends StorageKey>(
   Result<StorageValue<K>, StorageReadError | StorageValidationError>
 > => {
   const r = await readKey(key);
+
   if (Result.isError(r)) {
     return Result.err<
       StorageValue<K>,
       StorageReadError | StorageValidationError
     >(r.error);
   }
+
   return Result.ok(r.value ?? fallback);
 };
 
-export const writeKey = <K extends StorageKey>(
+/**
+ * Validate and write one value to browser local storage.
+ * @param key - Storage key to write.
+ * @param value - Value to validate and persist.
+ * @returns A write or validation error when the operation fails.
+ */
+export const writeKey = async <K extends StorageKey>(
   key: K,
   value: StorageValue<K>
 ): Promise<Result<void, StorageWriteError | StorageValidationError>> => {
   const parsed = StorageSchema[key].safeParse(value);
+
   if (!parsed.success) {
-    return Promise.resolve(
-      Result.err(
-        new StorageValidationError({ issues: parsed.error.issues, key })
-      )
+    return Result.err(
+      new StorageValidationError({ issues: parsed.error.issues, key })
     );
   }
 
-  return Result.tryPromise({
+  return await Result.tryPromise({
     catch: (cause) => new StorageWriteError({ cause, key }),
-    try: () => browser.storage.local.set({ [key]: parsed.data }),
+    try: async () => {
+      await browser.storage.local.set({ [key]: parsed.data });
+    },
   });
 };
 
+/**
+ * Read, update, validate, and write a storage value.
+ * @param key - Storage key to update.
+ * @param fallback - Value used when no stored entry exists.
+ * @param fn - Function that creates the next value.
+ * @returns The storage result with any read, validation, or write error.
+ */
 export const updateKey = async <K extends StorageKey>(
   key: K,
   fallback: StorageValue<K>,
   fn: (current: StorageValue<K>) => StorageValue<K>
 ) => {
   const r = await readKeyOr(key, fallback);
+
   if (Result.isError(r)) {
     return r;
   }
-  return writeKey(key, fn(r.value));
+
+  return await writeKey(key, fn(r.value));
 };

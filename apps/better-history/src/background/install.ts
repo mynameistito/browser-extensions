@@ -9,25 +9,34 @@ const seedKey = async <K extends StorageKey>(
   fallback: StorageValue<K>
 ): Promise<void> => {
   const current = await readKey(key);
+
   if (Result.isError(current)) {
     console.error(`seedDefaults: ${key} read failed`, current.error);
+
     return;
   }
+
   if (current.value !== undefined) {
     return;
   }
+
   const written = await writeKey(key, fallback);
+
   if (Result.isError(written)) {
     console.error(`seedDefaults: ${key} seed failed`, written.error);
   }
 };
 
+/** Seed extension storage with default values when it is first installed. */
 export const seedDefaults = async (): Promise<void> => {
   const meta = await readKeyOr("meta", MetaSchema.parse({}));
+
   if (Result.isError(meta)) {
     console.error("seedDefaults: meta read failed", meta.error);
+
     return;
   }
+
   if (!meta.value.firstInit) {
     await writeKey("meta", {
       ...meta.value,
@@ -35,6 +44,7 @@ export const seedDefaults = async (): Promise<void> => {
       installedVersion: browser.runtime.getManifest().version,
       lastReloadTime: Date.now(),
     });
+
     return;
   }
 

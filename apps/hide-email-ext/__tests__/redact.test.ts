@@ -1,14 +1,18 @@
 import { afterEach, describe, expect, test } from "bun:test";
 
 import { createRedactor } from "../src/lib/redact";
-import type { NormalizedEmail } from "../src/lib/types";
 import { REDACTION_TOKEN } from "../src/lib/types";
 
 const flush = async (): Promise<void> => {
   await Bun.sleep(200);
 };
 
-const email = "user@example.com" as NormalizedEmail;
+const email = "user@example.com";
+
+const setMarkup = (element: Element, markup: string): void => {
+  const parsed = new DOMParser().parseFromString(markup, "text/html");
+  element.replaceChildren(...parsed.body.childNodes);
+};
 
 describe("redactor", () => {
   let redactor: ReturnType<typeof createRedactor> | null = null;
@@ -16,7 +20,7 @@ describe("redactor", () => {
   afterEach(() => {
     redactor?.stop();
     redactor = null;
-    document.body.innerHTML = "";
+    document.body.replaceChildren();
     document.documentElement.removeAttribute("title");
     document.documentElement.removeAttribute("aria-label");
     document.documentElement.removeAttribute("alt");
@@ -24,7 +28,7 @@ describe("redactor", () => {
   });
 
   test("redacts matching email text in document body", async () => {
-    document.body.innerHTML = `<p>Contact me at ${email}</p>`;
+    setMarkup(document.body, `<p>Contact me at ${email}</p>`);
 
     redactor = createRedactor();
     redactor.setEmails([email]);
@@ -37,7 +41,10 @@ describe("redactor", () => {
   });
 
   test("does not redact inside skipped tags", async () => {
-    document.body.innerHTML = `<script>var e = "${email}";</script><style>a[data="${email}"]{}</style><textarea>${email}</textarea>`;
+    setMarkup(
+      document.body,
+      `<script>var e = "${email}";</script><style>a[data="${email}"]{}</style><textarea>${email}</textarea>`
+    );
 
     redactor = createRedactor();
     redactor.setEmails([email]);
@@ -53,7 +60,10 @@ describe("redactor", () => {
   });
 
   test("redacts email in scannable attributes", async () => {
-    document.body.innerHTML = `<a title="Email ${email}" aria-label="Copy ${email}">link</a>`;
+    setMarkup(
+      document.body,
+      `<a title="Email ${email}" aria-label="Copy ${email}">link</a>`
+    );
 
     redactor = createRedactor();
     redactor.setEmails([email]);
@@ -70,7 +80,7 @@ describe("redactor", () => {
   });
 
   test("skips elements marked with data-redacted", async () => {
-    document.body.innerHTML = `<div data-redacted="true"><p>${email}</p></div>`;
+    setMarkup(document.body, `<div data-redacted="true"><p>${email}</p></div>`);
 
     redactor = createRedactor();
     redactor.setEmails([email]);
@@ -82,7 +92,7 @@ describe("redactor", () => {
   });
 
   test("does not redact when no emails are set", async () => {
-    document.body.innerHTML = `<p>${email}</p>`;
+    setMarkup(document.body, `<p>${email}</p>`);
 
     redactor = createRedactor();
     redactor.start();
@@ -93,9 +103,9 @@ describe("redactor", () => {
   });
 
   test("redacts multiple distinct emails", async () => {
-    const second = "admin@other.io" as NormalizedEmail;
+    const second = "admin@other.io";
 
-    document.body.innerHTML = `<span>${email}</span><span>${second}</span>`;
+    setMarkup(document.body, `<span>${email}</span><span>${second}</span>`);
 
     redactor = createRedactor();
     redactor.setEmails([email, second]);
@@ -109,7 +119,7 @@ describe("redactor", () => {
   });
 
   test("setEmails with empty array disables redaction", async () => {
-    document.body.innerHTML = `<p>${email}</p>`;
+    setMarkup(document.body, `<p>${email}</p>`);
 
     redactor = createRedactor();
     redactor.setEmails([]);
@@ -121,7 +131,7 @@ describe("redactor", () => {
   });
 
   test("updates emails and rescans while running", async () => {
-    document.body.innerHTML = `<p>${email}</p>`;
+    setMarkup(document.body, `<p>${email}</p>`);
 
     redactor = createRedactor();
     redactor.start();
@@ -136,7 +146,7 @@ describe("redactor", () => {
   });
 
   test("handles empty text nodes without error", async () => {
-    document.body.innerHTML = `<p></p>`;
+    setMarkup(document.body, "<p></p>");
     const p = document.body.querySelector("p");
     p?.append(document.createTextNode(""));
 
@@ -157,7 +167,7 @@ describe("redactor", () => {
   });
 
   test("stop cancels pending idle callback", () => {
-    document.body.innerHTML = `<p>${email}</p>`;
+    setMarkup(document.body, `<p>${email}</p>`);
 
     redactor = createRedactor();
     redactor.setEmails([email]);
@@ -168,17 +178,13 @@ describe("redactor", () => {
   });
 
   test("stop cancels pending timeout fallback", () => {
-    const w = window as unknown as Record<
-      string,
-      ((...args: unknown[]) => unknown) | undefined
-    >;
-    const ric = w.requestIdleCallback;
-    const cic = w.cancelIdleCallback;
-    delete w.requestIdleCallback;
-    delete w.cancelIdleCallback;
+    const ric = Object.getOwnPropertyDescriptor(window, "requestIdleCallback");
+    const cic = Object.getOwnPropertyDescriptor(window, "cancelIdleCallback");
+    Reflect.deleteProperty(window, "requestIdleCallback");
+    Reflect.deleteProperty(window, "cancelIdleCallback");
 
     try {
-      document.body.innerHTML = `<p>${email}</p>`;
+      setMarkup(document.body, `<p>${email}</p>`);
 
       redactor = createRedactor();
       redactor.setEmails([email]);
@@ -187,8 +193,13 @@ describe("redactor", () => {
       redactor.stop();
       redactor = null;
     } finally {
-      w.requestIdleCallback = ric;
-      w.cancelIdleCallback = cic;
+      if (ric !== undefined) {
+        Object.defineProperty(window, "requestIdleCallback", ric);
+      }
+
+      if (cic !== undefined) {
+        Object.defineProperty(window, "cancelIdleCallback", cic);
+      }
     }
   });
 
@@ -204,7 +215,7 @@ describe("redactor", () => {
         value: "loading",
       });
 
-      document.body.innerHTML = `<p>${email}</p>`;
+      setMarkup(document.body, `<p>${email}</p>`);
 
       redactor = createRedactor();
       redactor.setEmails([email]);
@@ -225,7 +236,7 @@ describe("redactor", () => {
       if (originalDescriptor) {
         Object.defineProperty(document, "readyState", originalDescriptor);
       } else {
-        delete (document as { readyState?: DocumentReadyState }).readyState;
+        Reflect.deleteProperty(document, "readyState");
       }
     }
   });

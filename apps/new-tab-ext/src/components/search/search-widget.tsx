@@ -1,12 +1,15 @@
 import { Effect } from "effect";
 import { useState } from "react";
-import type { FormEvent } from "react";
+import type { SubmitEvent } from "react";
 
 import { usePreferences } from "@/components/preferences/preferences-provider";
 import { createSearchUrl } from "@/lib/search";
 import type { SearchTarget } from "@/lib/search";
 
-/** Search the web or open a query as a ChatGPT prompt. */
+/**
+ * Search the web or open a query as a ChatGPT prompt.
+ * @returns The search field and provider shortcuts.
+ */
 export const SearchWidget = () => {
   const [query, setQuery] = useState("");
   const [searchError, setSearchError] = useState("");
@@ -30,13 +33,14 @@ export const SearchWidget = () => {
 
     if (result._tag === "Left") {
       setSearchError("Enter a search first.");
+
       return;
     }
 
     setSearchError("");
   };
 
-  const handleWebSearch = (event: FormEvent<HTMLFormElement>) => {
+  const handleWebSearch = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     submitSearch("web");
   };
@@ -51,7 +55,9 @@ export const SearchWidget = () => {
         autoCorrect="off"
         id="search-query"
         name="q"
-        onChange={(event) => setQuery(event.currentTarget.value)}
+        onChange={(event) => {
+          setQuery(event.currentTarget.value);
+        }}
         placeholder="What are you looking for?"
         spellCheck={false}
         type="search"
@@ -68,7 +74,9 @@ export const SearchWidget = () => {
         <button
           className="search-button search-button-secondary"
           disabled={!isLoaded}
-          onClick={() => submitSearch("chatgpt")}
+          onClick={() => {
+            submitSearch("chatgpt");
+          }}
           type="button"
         >
           Ask ChatGPT

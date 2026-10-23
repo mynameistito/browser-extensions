@@ -20,7 +20,7 @@ export default defineContentScript({
     const settings = await loadSettings();
     setSettings(settings);
 
-    const _cleanupWheel = initWheelHotkeys(settings);
+    initWheelHotkeys(settings);
 
     let prevSettings = settings;
 
@@ -36,6 +36,7 @@ export default defineContentScript({
           setVolumeIfChanged(video, newSettings.volumeLevel);
         }
       }
+
       if (
         newSettings.rememberPlaybackRate &&
         newSettings.playbackRate !== prevSettings.playbackRate
@@ -56,14 +57,17 @@ export default defineContentScript({
 
       for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {
-          if ((node as Element).tagName === "VIDEO") {
-            videos.push(node as HTMLVideoElement);
+          if (node instanceof HTMLVideoElement) {
+            videos.push(node);
           }
-          if (node instanceof Element && node.querySelectorAll) {
-            const vids = node.querySelectorAll("video");
-            if (vids.length) {
-              videos.push(...([...vids] as HTMLVideoElement[]));
-            }
+
+          if (node instanceof Element) {
+            const nestedVideos = [...node.querySelectorAll("video")].filter(
+              (element): element is HTMLVideoElement =>
+                element instanceof HTMLVideoElement
+            );
+
+            videos.push(...nestedVideos);
           }
         }
       }

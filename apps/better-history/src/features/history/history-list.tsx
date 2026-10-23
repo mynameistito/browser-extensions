@@ -29,7 +29,7 @@ const Row = ({
   }, [item.url]);
 
   return (
-    <div className="flex items-center gap-3 border-b border-zinc-100 px-4 py-2 hover:bg-zinc-50 dark:border-zinc-900 dark:hover:bg-zinc-900/50">
+    <div className="border-border hover:bg-muted dark:border-border dark:hover:bg-accent/50 flex items-center gap-3 border-b px-4 py-2">
       <input
         aria-label="Select item"
         checked={checked}
@@ -46,26 +46,33 @@ const Row = ({
         >
           {item.title}
         </a>
-        <div className="truncate text-xs text-zinc-500">{host}</div>
+        <div className="text-muted-foreground truncate text-xs">{host}</div>
       </div>
-      <div className="shrink-0 text-xs text-zinc-400 tabular-nums">
+      <div className="text-muted-foreground shrink-0 text-xs tabular-nums">
         {format(new Date(item.lastVisitTime), "HH:mm")}
       </div>
     </div>
   );
 };
 
+/**
+ * Render a selectable, virtualized list of history entries.
+ * @param props - History entries and the selected-entry delete callback.
+ * @returns The history list and its selection controls.
+ */
 export const HistoryList = ({ items, onDelete }: Props) => {
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const toggle = (url: string) => {
     setSelected((prev) => {
       const next = new Set(prev);
+
       if (next.has(url)) {
         next.delete(url);
       } else {
         next.add(url);
       }
+
       return next;
     });
   };
@@ -74,6 +81,7 @@ export const HistoryList = ({ items, onDelete }: Props) => {
     () => items.filter((item) => selected.has(item.url)),
     [items, selected]
   );
+
   const allChecked =
     items.length > 0 && visibleSelected.length === items.length;
 
@@ -81,17 +89,21 @@ export const HistoryList = ({ items, onDelete }: Props) => {
     if (allChecked) {
       setSelected((prev) => {
         const next = new Set(prev);
+
         for (const item of items) {
           next.delete(item.url);
         }
+
         return next;
       });
     } else {
       setSelected((prev) => {
         const next = new Set(prev);
+
         for (const item of items) {
           next.add(item.url);
         }
+
         return next;
       });
     }
@@ -99,22 +111,26 @@ export const HistoryList = ({ items, onDelete }: Props) => {
 
   const deleteSelected = () => {
     const urls = visibleSelected.map((item) => item.url);
+
     if (urls.length === 0) {
       return;
     }
+
     onDelete(urls);
     setSelected((prev) => {
       const next = new Set(prev);
+
       for (const url of urls) {
         next.delete(url);
       }
+
       return next;
     });
   };
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex items-center gap-3 border-b border-zinc-200 px-4 py-2 dark:border-zinc-800">
+      <div className="border-border dark:border-border flex items-center gap-3 border-b px-4 py-2">
         <input
           aria-label="Select all"
           checked={allChecked}
@@ -122,7 +138,7 @@ export const HistoryList = ({ items, onDelete }: Props) => {
           onChange={toggleAll}
           type="checkbox"
         />
-        <div className="text-sm text-zinc-500">
+        <div className="text-muted-foreground text-sm">
           {items.length} result{items.length === 1 ? "" : "s"}
           {visibleSelected.length > 0
             ? ` · ${visibleSelected.length} selected`
@@ -132,8 +148,8 @@ export const HistoryList = ({ items, onDelete }: Props) => {
           className={cn(
             "ml-auto flex items-center gap-1 rounded-md px-2 py-1 text-sm",
             selected.size > 0
-              ? "bg-red-600 text-white hover:bg-red-700"
-              : "cursor-not-allowed bg-zinc-100 text-zinc-400 dark:bg-zinc-800"
+              ? "bg-destructive text-primary-foreground hover:bg-destructive/90"
+              : "bg-muted text-muted-foreground dark:bg-border cursor-not-allowed"
           )}
           disabled={selected.size === 0}
           onClick={deleteSelected}
@@ -144,13 +160,15 @@ export const HistoryList = ({ items, onDelete }: Props) => {
       </div>
 
       <div className="flex-1">
-        <VList style={{ height: "100%" }}>
+        <VList className="h-full">
           {items.map((item) => (
             <Row
               checked={selected.has(item.url)}
               item={item}
               key={item.id}
-              onToggle={() => toggle(item.url)}
+              onToggle={() => {
+                toggle(item.url);
+              }}
             />
           ))}
         </VList>

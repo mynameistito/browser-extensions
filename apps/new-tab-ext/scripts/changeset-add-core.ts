@@ -3,16 +3,24 @@ import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const changesetTypes = ["patch", "minor", "major"] as const;
+
 type ChangesetType = (typeof changesetTypes)[number];
 
 const isChangesetType = (value: string | undefined): value is ChangesetType =>
   changesetTypes.some((type) => type === value);
 
+/** Result returned by the changeset creation helper. */
 export type ChangesetCreationResult =
   | { readonly kind: "error"; readonly message: string }
   | { readonly kind: "created"; readonly relativePath: string };
 
-/** Create a changeset in the requested directory and report a CLI-ready result. */
+/**
+ * Create a changeset in the requested directory and report a CLI-ready result.
+ * @param args - Changeset type followed by the summary words.
+ * @param changesetDirectory - Directory where the changeset should be written.
+ * @param filename - Filename to use for the new changeset.
+ * @returns Whether creation succeeded and the path or error message.
+ */
 export const createChangeset = (
   args: readonly string[],
   changesetDirectory: string,
@@ -32,6 +40,7 @@ export const createChangeset = (
   if (summary.length === 0) {
     return { kind: "error", message: "Changeset summary must not be empty." };
   }
+
   const changesetPath = path.join(changesetDirectory, filename);
   mkdirSync(changesetDirectory, { recursive: true });
 
@@ -44,6 +53,7 @@ export const createChangeset = (
 
   const content = `---\n"new-tab-ext": ${requestedType}\n---\n\n${summary}\n`;
   writeFileSync(changesetPath, content, { flag: "wx" });
+
   return {
     kind: "created",
     relativePath: path.relative(process.cwd(), changesetPath),

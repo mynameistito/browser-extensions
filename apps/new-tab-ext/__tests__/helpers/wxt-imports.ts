@@ -6,22 +6,66 @@ type StorageValue =
   | readonly StorageValue[]
   | { readonly [key: string]: StorageValue };
 
-const values = new Map<string, StorageValue>();
+const values = new Map<string, unknown>();
+
+const isStorageValue = <TValue>(
+  value: TValue
+): value is TValue & StorageValue => {
+  if (
+    value === null ||
+    typeof value === "boolean" ||
+    typeof value === "number" ||
+    typeof value === "string"
+  ) {
+    return true;
+  }
+
+  if (Array.isArray(value)) {
+    return value.every(isStorageValue);
+  }
+
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    Object.values(value).every(isStorageValue)
+  );
+};
+
 const failures = new Map<
   string,
   { readonly read?: Error; readonly write?: Error }
 >();
 
+/** Clears values and simulated storage errors between tests. */
 export const clearWxtStorage = (): void => {
   values.clear();
   failures.clear();
 };
 
-export const seedWxtStorage = <T>(key: string, value: T): void => {
-  // SAFETY: Tests seed extension storage with JSON-compatible domain records; production boundaries decode these values before use.
-  values.set(key, value as StorageValue);
+/** Seeds a key with a JSON-compatible value for a test.
+ * @param key - The storage key.
+ * @param value - The value to return for that key.
+ * @returns Nothing.
+ */
+export const seedWxtStorage = <TSeed>(
+  key: string,
+  value: TSeed
+): TSeed & StorageValue => {
+  if (!isStorageValue(value)) {
+    throw new TypeError("WXT test storage only accepts JSON values.");
+  }
+
+  values.set(key, value);
+
+  return value;
 };
 
+/** Configures a storage operation to reject with an error.
+ * @param key - The storage key.
+ * @param operation - Whether reads or writes should fail.
+ * @param error - The error to reject with.
+ * @returns Nothing.
+ */
 export const failWxtStorage = (
   key: string,
   operation: "read" | "write",
@@ -31,30 +75,29 @@ export const failWxtStorage = (
 };
 
 export const storage = {
-  defineItem<T>(key: string, options: { readonly fallback: T }) {
+  defineItem(key: string, options: { readonly fallback: StorageValue }) {
     return {
-      getValue: (): Promise<T> => {
+      getValue: async (): Promise<StorageValue> => {
+        await Promise.resolve();
         const error = failures.get(key)?.read;
+
         if (error) {
-          return Promise.reject(error);
+          throw error;
         }
 
-        if (!values.has(key)) {
-          return Promise.resolve(options.fallback);
-        }
+        const value = values.get(key);
 
-        // SAFETY: Values are stored per key through this same typed item API; a missing value uses the typed fallback.
-        return Promise.resolve(values.get(key) as T);
+        return isStorageValue(value) ? value : options.fallback;
       },
-      setValue: (value: T): Promise<void> => {
+      setValue: async (value: StorageValue): Promise<void> => {
+        await Promise.resolve();
         const error = failures.get(key)?.write;
+
         if (error) {
-          return Promise.reject(error);
+          throw error;
         }
 
-        // SAFETY: App storage values are JSON-compatible preferences and provider cache records.
-        values.set(key, value as StorageValue);
-        return Promise.resolve();
+        values.set(key, value);
       },
     };
   },

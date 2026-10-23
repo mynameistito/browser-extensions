@@ -6,4 +6,5 @@ const PermissionDeniedErrorBase = defineTaggedErrorClass(
   permissions: string[];
 }>();
 
+/** The browser declined a requested extension permission. */
 export class PermissionDeniedError extends PermissionDeniedErrorBase {}
