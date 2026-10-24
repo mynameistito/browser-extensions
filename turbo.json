@@ -6,7 +6,7 @@
       "outputs": [".output/**", "!.output/**/*.map"]
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"],
+      "dependsOn": ["^typecheck", "//#typecheck:root"],
       "outputs": []
     },
     "//#typecheck:root": {
