@@ -1,15 +1,13 @@
 /// <reference types="bun" />
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 
-import { Result } from "better-result";
-
 import {
   enforceBlacklist,
   maybeRunScheduledCleanup,
   runConfiguredCleanup,
   runOnCloseCleanup,
 } from "../src/background/enforcement";
-import { history } from "../src/lib/browser-api";
+import { BrowserApiError } from "../src/lib/errors/browser-api-error";
 import type { Cleanup, DomainRule } from "../src/lib/schemas";
 
 const NOW = 1_800_000_000_000;
@@ -123,6 +121,20 @@ const historyItem = (url: string): Browser.history.HistoryItem =>
     url,
     visitCount: 1,
   }) satisfies Browser.history.HistoryItem;
+
+const getCleanupFailureApi = async (): Promise<string | null> => {
+  try {
+    await runConfiguredCleanup();
+
+    return null;
+  } catch (error) {
+    if (!(error instanceof BrowserApiError)) {
+      throw error;
+    }
+
+    return error.api;
+  }
+};
 
 beforeEach(() => {
   Date.now = () => NOW;
@@ -250,6 +262,24 @@ describe("history cleanup", () => {
     );
   });
 
+  test("runs due scheduled cleanup and persists its completion time", async () => {
+    const mocks = installBrowserMocks(
+      storageEntries([
+        "cleanup",
+        cleanup({ schedule: "daily", lastRunAt: NOW - DAY_MS }),
+      ])
+    );
+
+    await maybeRunScheduledCleanup();
+
+    expect(mocks.deletedRanges).toEqual([
+      { endTime: NOW - 7 * DAY_MS, startTime: 0 },
+    ]);
+    expect(mocks.storage.get("cleanup")).toEqual(
+      cleanup({ schedule: "daily", lastRunAt: NOW })
+    );
+  });
+
   test("on-close cleanup does nothing for other schedules", async () => {
     const mocks = installBrowserMocks(
       storageEntries(["cleanup", cleanup({ schedule: "daily" })])
@@ -264,7 +294,7 @@ describe("history cleanup", () => {
   });
 
   test("surfaces browser API errors from range deletion", async () => {
-    installBrowserMocks();
+    installBrowserMocks(storageEntries(["cleanup", cleanup()]));
 
     const failingBrowser = {
       history: {
@@ -286,15 +316,13 @@ describe("history cleanup", () => {
       value: failingBrowser,
     });
 
-    const result = await history.deleteRange({
-      endTime: NOW - 7 * DAY_MS,
-      startTime: 0,
-    });
+    const originalConsoleError = console.error;
+    console.error = () => {};
 
-    expect(Result.isError(result)).toBe(true);
-
-    if (Result.isError(result)) {
-      expect(result.error.api).toBe("history.deleteRange");
+    try {
+      expect(await getCleanupFailureApi()).toBe("history.deleteRange");
+    } finally {
+      console.error = originalConsoleError;
     }
   });
 });
