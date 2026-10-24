@@ -227,6 +227,25 @@ describe("content DOM behavior", () => {
     expect(nativeQuotes.getAttribute("aria-hidden")).toBe("true");
   });
 
+  test("hides only the native quotes menu item, not its menu", () => {
+    const menu = document.createElement("div");
+    menu.setAttribute("role", "menu");
+    const wrapper = document.createElement("div");
+    const menuItem = document.createElement("a");
+    menuItem.setAttribute("role", "menuitem");
+    menuItem.href = "/jack/status/12345/quotes";
+    wrapper.append(menuItem);
+    menu.append(wrapper);
+    document.body.append(menu);
+
+    createQuoteViewer(document).hideNativeQuotesLinks(document);
+
+    expect(menu.dataset.quoteViewerHiddenNativeQuotes).toBeUndefined();
+    expect(menu.getAttribute("aria-hidden")).toBeNull();
+    expect(menuItem.dataset.quoteViewerHiddenNativeQuotes).toBe("true");
+    expect(menuItem.getAttribute("aria-hidden")).toBe("true");
+  });
+
   test("does not hide non-quotes links", () => {
     const article = createArticle({ href: "/jack/status/12345" });
 
