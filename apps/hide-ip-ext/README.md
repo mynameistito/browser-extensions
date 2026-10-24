@@ -4,12 +4,21 @@ Hide IP Extension is a WXT browser extension that fetches your public IP address
 
 ## Run it
 
+From the workspace root, install dependencies and generate the WXT types:
+
 ```bash
-npm install
-npm run dev
+bun install
+bun run prepare:wxt
 ```
 
-For a production build, run `npm run build`. Load the generated `dist/chrome-mv3` folder as an unpacked extension in a Chromium browser.
+Then run the app scripts from `apps/hide-ip-ext`:
+
+```bash
+bun run dev
+bun run build
+```
+
+The build creates Chrome and Firefox extensions in `.output/chrome-mv3` and `.output/firefox-mv2`. Load `apps/hide-ip-ext/.output/chrome-mv3` as an unpacked extension in a Chromium browser.
 
 ## Privacy notes
 
