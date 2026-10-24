@@ -84,10 +84,14 @@ export default defineContentScript({
     observer.observe(document.body, { childList: true, subtree: true });
 
     setInterval(() => {
+      if (document.hidden) {
+        return;
+      }
+
       modifyAllPresentVideos();
       redefineWebkitMediaControlHidingCssRule();
       hideAllIgVolumeControls();
-    }, 1000);
+    }, 5000);
 
     document.addEventListener("visibilitychange", () => {
       if (!document.hidden) {
