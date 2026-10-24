@@ -4,28 +4,27 @@ import path from "node:path";
 
 import { defineConfig } from "wxt";
 
-const loadManifestKey = (): string | undefined => {
-  const environmentKey = process.env.WXT_CHROME_KEY;
-  const pem =
-    typeof environmentKey === "string" && environmentKey.length > 0
-      ? environmentKey
-      : (() => {
-          const keyPath = path.resolve("key.pem");
-          return existsSync(keyPath)
-            ? readFileSync(keyPath, "utf-8")
-            : undefined;
-        })();
-
-  if (typeof pem !== "string" || pem.length === 0) {
-    return undefined;
-  }
-
-  return createPublicKey(pem)
+const extractManifestKey = (pem: string): string =>
+  createPublicKey(pem)
     .export({ format: "pem", type: "spki" })
-    .toString()
     .replaceAll("-----BEGIN PUBLIC KEY-----", "")
     .replaceAll("-----END PUBLIC KEY-----", "")
     .replaceAll(/\s+/gu, "");
+
+const loadManifestKey = (): string | undefined => {
+  const environmentKey = process.env.WXT_CHROME_KEY;
+
+  if (environmentKey !== undefined && environmentKey.length > 0) {
+    return extractManifestKey(environmentKey);
+  }
+
+  const keyPath = path.resolve("key.pem");
+
+  if (!existsSync(keyPath)) {
+    return undefined;
+  }
+
+  return extractManifestKey(readFileSync(keyPath, "utf-8"));
 };
 
 export default defineConfig({
@@ -71,9 +70,17 @@ export default defineConfig({
     }
 
     const key = loadManifestKey();
+
+    if (key !== undefined && key.length > 0) {
+      return {
+        ...base,
+        key,
+        permissions: [...base.permissions, "offscreen"],
+      };
+    }
+
     return {
       ...base,
-      ...(typeof key === "string" && key.length > 0 ? { key } : {}),
       permissions: [...base.permissions, "offscreen"],
     };
   },

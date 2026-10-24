@@ -32,6 +32,13 @@ describe("getMutedTabs", () => {
     await chrome.storage.session.set({ mutedTabs: 42 });
     expect(await getMutedTabs()).toEqual({});
   });
+
+  test("returns {} when stored map contains non-boolean values", async () => {
+    await chrome.storage.session.set({
+      mutedTabs: { 1: true, 2: "muted" },
+    });
+    expect(await getMutedTabs()).toEqual({});
+  });
 });
 
 describe("setTabMuted", () => {

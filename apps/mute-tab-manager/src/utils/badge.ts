@@ -24,6 +24,13 @@ const makeFallbackIconPaths = (): Record<string, string> =>
     ICON_SIZES.map((size) => [size, `${ICON_BASE}-${size}.png`])
   );
 
+/**
+ * Updates the tab badge and icon to reflect its mute state.
+ *
+ * @param tabId - The browser tab ID.
+ * @param muted - Whether the tab is muted.
+ * @returns A promise that settles after the badge and icon update.
+ */
 export const updateBadgeAndIcon = async (
   tabId: number,
   muted: boolean
