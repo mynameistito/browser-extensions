@@ -34,3 +34,25 @@ export const deriveChromeExtensionKey = (
 
   return { extensionId, manifestKey };
 };
+
+/**
+ * Derive a manifest key while allowing malformed local keys only when the key
+ * is optional. Release builds can require a valid key and fail closed.
+ * @param privateKeyPem - PKCS#8 RSA private key in PEM form.
+ * @param required - Whether an invalid key must fail the build.
+ * @returns The base64 manifest key, or undefined for an invalid optional key.
+ */
+export const deriveOptionalChromeManifestKey = (
+  privateKeyPem: string,
+  required: boolean
+): string | undefined => {
+  try {
+    return deriveChromeExtensionKey(privateKeyPem).manifestKey;
+  } catch (error) {
+    if (required) {
+      throw error;
+    }
+
+    return undefined;
+  }
+};

@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { defineConfig } from "wxt";
 
-import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
+import { deriveOptionalChromeManifestKey } from "../../scripts/chrome-extension-key";
 
 /**
  * Derive the Chromium-compatible `manifest.key` (base64 SPKI public key) from
@@ -45,17 +45,11 @@ const loadManifestKey = (): string | undefined => {
     return undefined;
   }
 
-  let key: string;
-
-  try {
-    key = deriveChromeExtensionKey(pem).manifestKey;
-  } catch (error) {
-    console.error("Failed to parse PEM into SPKI:", error);
-
-    return undefined;
-  }
-
-  return key;
+  return deriveOptionalChromeManifestKey(
+    pem,
+    process.env.REQUIRE_CHROME_KEY !== undefined &&
+      process.env.REQUIRE_CHROME_KEY.length > 0
+  );
 };
 
 export default defineConfig({

@@ -6,7 +6,7 @@ import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "wxt";
 
-import { deriveChromeExtensionKey } from "../../scripts/chrome-extension-key";
+import { deriveOptionalChromeManifestKey } from "../../scripts/chrome-extension-key";
 
 const loadManifestKey = (): string | undefined => {
   const environmentPem = process.env.WXT_CHROME_KEY;
@@ -23,13 +23,11 @@ const loadManifestKey = (): string | undefined => {
     return undefined;
   }
 
-  try {
-    return deriveChromeExtensionKey(pem).manifestKey;
-  } catch (error) {
-    console.error("Failed to parse PEM into SPKI:", error);
-  }
-
-  return undefined;
+  return deriveOptionalChromeManifestKey(
+    pem,
+    process.env.REQUIRE_CHROME_KEY !== undefined &&
+      process.env.REQUIRE_CHROME_KEY.length > 0
+  );
 };
 
 export default defineConfig({
