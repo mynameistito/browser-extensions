@@ -1,5 +1,11 @@
 # better-history
 
+## 8.0.3
+
+### Patch Changes
+
+- eff2fda: Fail closed on malformed required Chrome signing keys in Better History and Instagram Video Controls.
+
 ## 8.0.2
 
 ### Patch Changes

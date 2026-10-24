@@ -1,6 +1,6 @@
 {
   "name": "better-history",
-  "version": "8.0.2",
+  "version": "8.0.3",
   "private": true,
   "description": "Powerful browser history search, filtering, and cleanup for Chrome and Firefox.",
   "keywords": [
