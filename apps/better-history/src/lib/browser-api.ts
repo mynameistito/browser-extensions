@@ -1,6 +1,7 @@
 import { Result } from "better-result";
 
-import { BrowserApiError, PermissionDeniedError } from "@/lib/errors";
+import { BrowserApiError } from "./errors/browser-api-error";
+import { PermissionDeniedError } from "./errors/permission-denied-error";
 
 type Async<T> = Promise<Result<T, BrowserApiError>>;
 
