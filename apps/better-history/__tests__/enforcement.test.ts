@@ -68,30 +68,33 @@ const installBrowserMocks = (
     history: {
       deleteRange: async (range: Browser.history.Range) => {
         state.deletedRanges.push(range);
-
-        return Promise.resolve();
+        await Promise.resolve();
       },
       deleteUrl: async ({ url }: Browser.history.UrlDetails) => {
         state.deletedUrls.push(url);
-
-        return Promise.resolve();
+        await Promise.resolve();
       },
       search: async (query: Browser.history.HistoryQuery) => {
         state.searchQueries.push(query);
 
-        return Promise.resolve(state.searchResults);
+        await Promise.resolve();
+
+        return state.searchResults;
       },
     },
     storage: {
       local: {
-        get: async (key: string) =>
-          Promise.resolve({ [key]: state.storage.get(key) }),
+        get: async (key: string) => {
+          await Promise.resolve();
+
+          return { [key]: state.storage.get(key) };
+        },
         set: async (values: Record<string, StorageData>) => {
           for (const [key, value] of Object.entries(values)) {
             state.storage.set(key, value);
           }
 
-          return Promise.resolve();
+          await Promise.resolve();
         },
       },
     },
@@ -298,15 +301,29 @@ describe("history cleanup", () => {
 
     const failingBrowser = {
       history: {
-        deleteRange: async () =>
-          Promise.reject(new Error("history unavailable")),
-        deleteUrl: async () => Promise.resolve(),
-        search: async () => Promise.resolve([]),
+        deleteRange: async () => {
+          await Promise.resolve();
+          throw new Error("history unavailable");
+        },
+        deleteUrl: async () => {
+          await Promise.resolve();
+        },
+        search: async () => {
+          await Promise.resolve();
+
+          return [];
+        },
       },
       storage: {
         local: {
-          get: async () => Promise.resolve({ cleanup: cleanup() }),
-          set: async () => Promise.resolve(),
+          get: async () => {
+            await Promise.resolve();
+
+            return { cleanup: cleanup() };
+          },
+          set: async () => {
+            await Promise.resolve();
+          },
         },
       },
     } satisfies BrowserApiMock;
