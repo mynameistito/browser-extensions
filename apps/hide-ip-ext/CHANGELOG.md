@@ -1,5 +1,11 @@
 # hide-ip-ext
 
+## 0.1.3
+
+### Patch Changes
+
+- 4cda50b: Limit IP title redaction after DOM changes to updated or newly added elements.
+
 ## 0.1.2
 
 ### Patch Changes

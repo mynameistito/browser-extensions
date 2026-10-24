@@ -1,5 +1,12 @@
 # ig-video-controls
 
+## 1.0.3
+
+### Patch Changes
+
+- [`298295a`](https://github.com/mynameistito/browser-extensions/commit/298295a): Reduce idle video scanning on Instagram pages.
+- [`eff2fda`](https://github.com/mynameistito/browser-extensions/commit/eff2fda): Fail closed on malformed required Chrome signing keys in Better History and Instagram Video Controls.
+
 ## 1.0.2
 
 ### Patch Changes
