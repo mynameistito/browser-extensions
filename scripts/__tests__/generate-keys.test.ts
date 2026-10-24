@@ -36,6 +36,7 @@ describe("parseGenerateKeyOptions", () => {
       "github-settings-repo-copy": "WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY",
       "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
       "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
+      "mute-tab-manager": "MUTE_TAB_MANAGER_WXT_CHROME_KEY",
       "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
       "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
     });
@@ -66,10 +67,24 @@ describe("parseGenerateKeyOptions", () => {
     });
   });
 
-  test("accepts all apps with force and upload", () => {
+  test("accepts Mute Tab Manager as a persistent-key target", () => {
     expect(
-      parseGenerateKeyOptions(["--app", "all", "--force", "--upload"])
+      parseGenerateKeyOptions(["--app", "mute-tab-manager"])
     ).toMatchObject({
+      kind: "ok",
+      options: { extensions: ["mute-tab-manager"] },
+    });
+  });
+
+  test("accepts all apps with force and upload", () => {
+    const result = parseGenerateKeyOptions([
+      "--app",
+      "all",
+      "--force",
+      "--upload",
+    ]);
+
+    expect(result).toMatchObject({
       kind: "ok",
       options: {
         extensions: [
@@ -79,11 +94,16 @@ describe("parseGenerateKeyOptions", () => {
           "new-tab-ext",
           "ig-video-controls",
           "github-settings-repo-copy",
+          "mute-tab-manager",
         ],
         force: true,
         upload: true,
       },
     });
+
+    if (result.kind === "ok") {
+      expect(result.options.repository).toBeUndefined();
+    }
   });
 
   test("allows direct upload when one app is selected", () => {

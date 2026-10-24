@@ -10,6 +10,7 @@ const appNames = [
   "ig-video-controls",
   "better-history",
   "github-settings-repo-copy",
+  "mute-tab-manager",
 ] as const;
 
 const changeTypes = ["patch", "minor", "major"] as const;
