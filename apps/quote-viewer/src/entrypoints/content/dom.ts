@@ -17,7 +17,11 @@ const NATIVE_QUOTES_LINK_SELECTOR = 'a[href$="/quotes"]';
 const HIDDEN_NATIVE_QUOTES_ATTR = "data-quote-viewer-hidden-native-quotes";
 
 const hideNativeQuotesLink = (anchor: Element): void => {
-  const target = anchor.parentElement ?? anchor;
+  // X nests menu-item links inside layout wrappers. Hiding the immediate
+  // parent can hide the entire menu (and prevent the More menu from opening).
+  const target =
+    anchor.closest('[role="menuitem"]') ?? anchor.parentElement ?? anchor;
+
   target.setAttribute(HIDDEN_NATIVE_QUOTES_ATTR, "true");
   target.setAttribute("aria-hidden", "true");
 
