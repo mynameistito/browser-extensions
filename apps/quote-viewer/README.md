@@ -36,7 +36,7 @@ WXT writes development builds to `.output/`. You can also load the generated ext
 ## Build And Package
 
 ```bash
-bun run build          # build Chromium output
+bun run build          # build Chrome and Firefox outputs
 bun run build:firefox  # build Firefox output
 bun run zip:all        # create Chrome and Firefox zip files in .output/
 ```

@@ -36,18 +36,18 @@ Get-Content apps/ig-video-controls/key.pem -Raw | gh secret set IG_VIDEO_CONTROL
 
 ## Commands
 
-| Command                 | Description                        |
-| ----------------------- | ---------------------------------- |
-| `bun run dev`           | Dev mode (Chrome)                  |
-| `bun run dev:firefox`   | Dev mode (Firefox)                 |
-| `bun run build`         | Production build (Chrome)          |
-| `bun run build:firefox` | Production build (Firefox)         |
-| `bun run zip`           | Zip for Chrome Web Store           |
-| `bun run zip:firefox`   | Zip for AMO                        |
-| `bun run zip:all`       | Zip both browsers                  |
-| `bun run typecheck`     | Type-check with `tsc`              |
-| `bun run check`         | Lint + format check (Ultracite)    |
-| `bun run fix`           | Auto-fix lint + format (Ultracite) |
+| Command                 | Description                          |
+| ----------------------- | ------------------------------------ |
+| `bun run dev`           | Dev mode (Chrome)                    |
+| `bun run dev:firefox`   | Dev mode (Firefox)                   |
+| `bun run build`         | Production builds (Chrome + Firefox) |
+| `bun run build:firefox` | Production build (Firefox)           |
+| `bun run zip`           | Zip for Chrome Web Store             |
+| `bun run zip:firefox`   | Zip for AMO                          |
+| `bun run zip:all`       | Zip both browsers                    |
+| `bun run typecheck`     | Type-check with `tsc`                |
+| `bun run check`         | Lint + format check (Ultracite)      |
+| `bun run fix`           | Auto-fix lint + format (Ultracite)   |
 
 ## Release
 
