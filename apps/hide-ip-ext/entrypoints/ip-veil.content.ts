@@ -109,19 +109,37 @@ const veilNode = (node: Node, matcher: RegExp): void => {
   }
 };
 
-const redactTitles = (ip: string): void => {
+const redactDocumentTitle = (ip: string): void => {
   const replacement = "your-ip";
 
   if (document.title.includes(ip)) {
     document.title = document.title.replaceAll(ip, replacement);
   }
+};
 
-  for (const element of document.querySelectorAll<HTMLElement>("[title]")) {
-    const title = element.getAttribute("title");
+const redactTitle = (element: Element, ip: string): void => {
+  const title = element.getAttribute("title");
 
-    if (title !== null && title.includes(ip)) {
-      element.setAttribute("title", title.replaceAll(ip, replacement));
-    }
+  if (title !== null && title.includes(ip)) {
+    element.setAttribute("title", title.replaceAll(ip, "your-ip"));
+  }
+};
+
+const redactTitlesIn = (root: Element, ip: string): void => {
+  if (root.hasAttribute("title")) {
+    redactTitle(root, ip);
+  }
+
+  for (const element of root.querySelectorAll("[title]")) {
+    redactTitle(element, ip);
+  }
+};
+
+const redactAllTitles = (ip: string): void => {
+  redactDocumentTitle(ip);
+
+  for (const element of document.querySelectorAll("[title]")) {
+    redactTitle(element, ip);
   }
 };
 
@@ -196,16 +214,27 @@ const start = async (): Promise<void> => {
   );
 
   veilMatches(document.body, matcher);
-  redactTitles(response);
+  redactAllTitles(response);
 
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
+      if (
+        mutation.type === "attributes" &&
+        mutation.target instanceof Element
+      ) {
+        redactTitle(mutation.target, response);
+      }
+
       for (const node of mutation.addedNodes) {
         veilNode(node, matcher);
+
+        if (node instanceof Element) {
+          redactTitlesIn(node, response);
+        }
       }
     }
 
-    redactTitles(response);
+    redactDocumentTitle(response);
   });
 
   observer.observe(document.documentElement, {
