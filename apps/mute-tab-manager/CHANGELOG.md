@@ -1,5 +1,12 @@
 # mute-tab-manager
 
+## 1.0.3
+
+### Patch Changes
+
+- bb0dd5f: Harden mute-state handling and report background failures
+- 8f601f1: Move Mute Tab Manager into the monorepo release pipeline
+
 ## 1.0.2
 
 ### Patch Changes
