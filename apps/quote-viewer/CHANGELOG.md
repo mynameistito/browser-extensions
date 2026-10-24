@@ -1,5 +1,11 @@
 # quote-viewer
 
+## 0.2.13
+
+### Patch Changes
+
+- [`2919386`](https://github.com/mynameistito/browser-extensions/commit/2919386): Keep X's post More menu available by hiding only its native quotes menu item.
+
 ## 0.2.12
 
 ### Patch Changes
