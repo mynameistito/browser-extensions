@@ -28,7 +28,8 @@ describe("sendMuteToContentScript", () => {
 
   test("silently ignores rejection", async () => {
     mockConfig.tabs.sendMessageShouldReject = true;
-    expect(await sendMuteToContentScript(3, true)).toBeUndefined();
+    await sendMuteToContentScript(3, true);
+    expect(mockCalls.tabs.sendMessage).toHaveLength(1);
   });
 });
 
@@ -65,13 +66,13 @@ describe("toggleMuteActiveTab", () => {
   test("no-op when query returns empty array", async () => {
     mockConfig.tabs.queryResult = [];
     await toggleMuteActiveTab();
-    expect(mockCalls.tabs.update.length).toBe(0);
+    expect(mockCalls.tabs.update).toHaveLength(0);
   });
 
   test("no-op when tab has no id", async () => {
-    mockConfig.tabs.queryResult = [{ id: undefined, title: "No id tab" }];
+    mockConfig.tabs.queryResult = [{ title: "No id tab" }];
     await toggleMuteActiveTab();
-    expect(mockCalls.tabs.update.length).toBe(0);
+    expect(mockCalls.tabs.update).toHaveLength(0);
   });
 });
 
@@ -103,9 +104,7 @@ describe("muteAllTabs", () => {
       { id: 3, mutedInfo: { muted: false } },
     ];
     await muteAllTabs();
-    expect(mockCalls.tabs.update.length).toBe(1);
-    expect(
-      (mockCalls.tabs.update[0] as [number, chrome.tabs.UpdateProperties])[0]
-    ).toBe(3);
+    expect(mockCalls.tabs.update).toHaveLength(1);
+    expect(mockCalls.tabs.update[0]?.[0]).toBe(3);
   });
 });

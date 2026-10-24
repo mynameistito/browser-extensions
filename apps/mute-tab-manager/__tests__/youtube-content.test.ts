@@ -15,21 +15,18 @@ beforeAll(async () => {
   // Importing the entrypoint with our defineContentScript stub immediately
   // invokes main() and registers DOM/runtime listeners.
   const mod = await import("@/entrypoints/youtube.content.ts");
-  // The default export is the object returned by defineContentScript;
-  // invoke its main() to install runtime listeners (idempotent).
-  // WXT passes a ContentScriptContext at runtime — pass a stub for tests.
-  mod.default.main({} as never);
+  mod.installYoutubeContentHandlers();
   myListeners = listenerDelta(before, snapshotListeners());
 });
 
 beforeEach(async () => {
   resetChromeMock();
   restoreListeners(myListeners);
-  document.body.innerHTML = "";
+  document.body.replaceChildren();
   // Reset module-level isMuted via a SET_MUTED:false message
   await mockEvents.runtime.onMessage.fire(
     { muted: false, type: "SET_MUTED" },
-    {} as chrome.runtime.MessageSender,
+    {},
     () => {}
   );
 });
@@ -41,7 +38,7 @@ describe("SET_MUTED message", () => {
 
     await mockEvents.runtime.onMessage.fire(
       { muted: true, type: "SET_MUTED" },
-      {} as chrome.runtime.MessageSender,
+      {},
       () => {}
     );
 
@@ -55,7 +52,7 @@ describe("SET_MUTED message", () => {
 
     await mockEvents.runtime.onMessage.fire(
       { muted: false, type: "SET_MUTED" },
-      {} as chrome.runtime.MessageSender,
+      {},
       () => {}
     );
 
@@ -63,13 +60,11 @@ describe("SET_MUTED message", () => {
   });
 
   test("no error when no videos present", async () => {
-    await expect(
-      mockEvents.runtime.onMessage.fire(
-        { muted: true, type: "SET_MUTED" },
-        {} as chrome.runtime.MessageSender,
-        () => {}
-      )
-    ).resolves.toBeUndefined();
+    await mockEvents.runtime.onMessage.fire(
+      { muted: true, type: "SET_MUTED" },
+      {},
+      () => {}
+    );
   });
 });
 
@@ -80,7 +75,7 @@ describe("yt-navigate-finish event", () => {
 
     await mockEvents.runtime.onMessage.fire(
       { muted: true, type: "SET_MUTED" },
-      {} as chrome.runtime.MessageSender,
+      {},
       () => {}
     );
 

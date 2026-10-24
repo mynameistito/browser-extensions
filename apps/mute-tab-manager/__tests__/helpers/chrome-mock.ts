@@ -8,30 +8,42 @@ import { Window as HappyWindow } from "happy-dom";
 const happyWindow = new HappyWindow({ url: "https://localhost/" });
 
 // happy-dom v20's SelectorParser reads these from `this.window.*`.
-(happyWindow as unknown as Record<string, unknown>).SyntaxError = SyntaxError;
-(happyWindow as unknown as Record<string, unknown>).TypeError = TypeError;
-(happyWindow as unknown as Record<string, unknown>).RangeError = RangeError;
-(happyWindow as unknown as Record<string, unknown>).Error = Error;
-(happyWindow as unknown as Record<string, unknown>).DOMException = DOMException;
+Object.assign(happyWindow, {
+  DOMException,
+  Error,
+  RangeError,
+  SyntaxError,
+  TypeError,
+});
 
-const g = globalThis as Record<string, unknown>;
-g.window = happyWindow;
-g.document = happyWindow.document;
-g.HTMLElement = happyWindow.HTMLElement;
-g.HTMLVideoElement = happyWindow.HTMLVideoElement;
-g.Node = happyWindow.Node;
-g.EventTarget = happyWindow.EventTarget;
-g.Event = happyWindow.Event;
+Object.assign(globalThis, {
+  Event: happyWindow.Event,
+  EventTarget: happyWindow.EventTarget,
+  HTMLElement: happyWindow.HTMLElement,
+  HTMLVideoElement: happyWindow.HTMLVideoElement,
+  Node: happyWindow.Node,
+  document: happyWindow.document,
+  window: happyWindow,
+});
 
 // MutationObserver that reliably fires on DOM insertions across platforms
 // (happy-dom's native impl is flaky on Linux CI). Limited to childList
 // insertions, which is all this codebase requires.
+interface TestMutationRecord {
+  addedNodes: Node[];
+}
+
+type TestMutationCallback = (
+  records: TestMutationRecord[],
+  observer: TestMutationObserver
+) => void;
+
 class TestMutationObserver {
-  private readonly _handleMutations: MutationCallback;
+  private readonly _handleMutations: TestMutationCallback;
   private readonly _patched = new WeakSet<Node>();
   private _disconnected = false;
 
-  constructor(handleMutations: MutationCallback) {
+  constructor(handleMutations: TestMutationCallback) {
     this._handleMutations = handleMutations;
   }
 
@@ -42,7 +54,7 @@ class TestMutationObserver {
   observe(target: Node, options?: MutationObserverInit) {
     this._patchInsertionMethods(target);
 
-    if (options?.subtree) {
+    if (options?.subtree === true) {
       const walk = (node: Node) => {
         for (const child of node.childNodes) {
           if (child.nodeType === 1) {
@@ -51,6 +63,7 @@ class TestMutationObserver {
           }
         }
       };
+
       walk(target);
     }
   }
@@ -59,38 +72,23 @@ class TestMutationObserver {
     if (this._patched.has(node)) {
       return;
     }
+
     this._patched.add(node);
 
-    const handleMutations = this._handleMutations;
-    const observer = this as unknown as MutationObserver;
-
-    const fireCallback = (addedNodes: Node[], removedNodes: Node[] = []) => {
+    const fireCallback = (addedNodes: Node[]) => {
       queueMicrotask(() => {
         if (this._disconnected) {
           return;
         }
-        handleMutations(
-          [
-            {
-              addedNodes: addedNodes as unknown as NodeList,
-              attributeName: null,
-              attributeNamespace: null,
-              nextSibling: null,
-              oldValue: null,
-              previousSibling: null,
-              removedNodes: removedNodes as unknown as NodeList,
-              target: node,
-              type: "childList",
-            } as unknown as MutationRecord,
-          ],
-          observer
-        );
+
+        this._handleMutations([{ addedNodes }], this);
       });
     };
 
     const patchNewSubtree = (n: Node) => {
       if (n.nodeType === 1) {
         this._patchInsertionMethods(n);
+
         for (const child of n.childNodes) {
           patchNewSubtree(child);
         }
@@ -102,6 +100,7 @@ class TestMutationObserver {
       const result = origAppendChild(child);
       fireCallback([child]);
       patchNewSubtree(child);
+
       return result;
     };
 
@@ -110,24 +109,28 @@ class TestMutationObserver {
       const result = origInsertBefore(child, ref);
       fireCallback([child]);
       patchNewSubtree(child);
+
       return result;
     };
 
     const origReplaceChild = node.replaceChild.bind(node);
     node.replaceChild = <T extends Node>(child: Node, old: T): T => {
       const result = origReplaceChild(child, old);
-      fireCallback([child], [old]);
+      fireCallback([child]);
       patchNewSubtree(child);
+
       return result;
     };
 
-    if ("append" in node && typeof node.append === "function") {
+    if (node instanceof HTMLElement) {
       const origAppend = node.append.bind(node);
       node.append = (...nodes: (string | Node)[]): void => {
         origAppend(...nodes);
         const added = nodes.filter((n): n is Node => n instanceof Node);
+
         if (added.length > 0) {
           fireCallback(added);
+
           for (const n of added) {
             patchNewSubtree(n);
           }
@@ -135,13 +138,15 @@ class TestMutationObserver {
       };
     }
 
-    if ("prepend" in node && typeof node.prepend === "function") {
+    if (node instanceof HTMLElement) {
       const origPrepend = node.prepend.bind(node);
       node.prepend = (...nodes: (string | Node)[]): void => {
         origPrepend(...nodes);
         const added = nodes.filter((n): n is Node => n instanceof Node);
+
         if (added.length > 0) {
           fireCallback(added);
+
           for (const n of added) {
             patchNewSubtree(n);
           }
@@ -158,19 +163,20 @@ class TestMutationObserver {
     if (this._disconnected) {
       return [];
     }
+
     return [];
   }
 }
 
-g.MutationObserver = TestMutationObserver;
-(happyWindow as unknown as Record<string, unknown>).MutationObserver =
-  TestMutationObserver;
+Object.assign(globalThis, { MutationObserver: TestMutationObserver });
+
+Object.assign(happyWindow, { MutationObserver: TestMutationObserver });
 
 interface MockEventBase {
-  _listeners: unknown[];
+  _listeners: MockListener[];
 }
 
-type MockListener = (...args: never[]) => unknown;
+type MockListener = (...args: never[]) => void | Promise<void>;
 
 interface MockEvent<TCallback extends MockListener> extends MockEventBase {
   _listeners: TCallback[];
@@ -184,6 +190,7 @@ const createMockEvent = <
   TCallback extends MockListener,
 >(): MockEvent<TCallback> => {
   const listeners: TCallback[] = [];
+
   return {
     _listeners: listeners,
     addListener(listener: TCallback) {
@@ -194,13 +201,19 @@ const createMockEvent = <
     },
     async fire(...args: Parameters<TCallback>) {
       await Promise.all(
-        listeners.map((listener) =>
-          (listener as unknown as (...a: unknown[]) => unknown)(...args)
-        )
+        listeners.map(async (listener) => {
+          await Promise.resolve();
+          const result = listener(...args);
+
+          if (result instanceof Promise) {
+            await result;
+          }
+        })
       );
     },
     removeListener(listener: TCallback) {
       const idx = listeners.indexOf(listener);
+
       if (idx !== -1) {
         listeners.splice(idx, 1);
       }
@@ -208,46 +221,68 @@ const createMockEvent = <
   };
 };
 
-let sessionStore: Record<string, unknown> = {};
+type SessionValue = boolean | Record<string, boolean>;
+
+type SessionStore = Record<string, SessionValue>;
+
+interface MockMessage {
+  readonly isDark?: boolean;
+  readonly muted?: boolean;
+  readonly type: string;
+}
+
+interface MockIconDetails {
+  path: Record<string, string>;
+  tabId: number;
+}
+
+interface MockTab {
+  id?: number;
+  mutedInfo?: chrome.tabs.MutedInfo;
+  title?: string;
+}
+
+const createList = <T>(): T[] => [];
+const emptyContexts: chrome.runtime.ExtensionContext[] = [];
+const defaultMockTab: MockTab = { id: 1, mutedInfo: { muted: false } };
+
+let sessionStore: SessionStore = {};
 
 export const mockConfig = {
   action: {
     setIconRejectTimes: 0,
   },
   runtime: {
-    getContextsResult: [] as Partial<chrome.runtime.ExtensionContext>[],
+    getContextsResult: emptyContexts,
   },
   tabs: {
-    getResult: {
-      id: 1,
-      mutedInfo: { muted: false },
-    } as Partial<chrome.tabs.Tab>,
-    queryResult: [] as Partial<chrome.tabs.Tab>[],
+    getResult: defaultMockTab,
+    queryResult: createList<MockTab>(),
     sendMessageShouldReject: false,
   },
 };
 
 export const mockCalls = {
   action: {
-    setBadgeBackgroundColor: [] as chrome.action.BadgeColorDetails[],
-    setBadgeText: [] as chrome.action.BadgeTextDetails[],
-    setIcon: [] as chrome.action.TabIconDetails[],
+    setBadgeBackgroundColor: createList<chrome.action.BadgeColorDetails>(),
+    setBadgeText: createList<chrome.action.BadgeTextDetails>(),
+    setIcon: createList<MockIconDetails>(),
   },
   contextMenus: {
-    create: [] as chrome.contextMenus.CreateProperties[],
+    create: createList<chrome.contextMenus.CreateProperties>(),
   },
   offscreen: {
-    createDocument: [] as chrome.offscreen.CreateParameters[],
+    createDocument: createList<chrome.offscreen.CreateParameters>(),
   },
   runtime: {
-    getContexts: [] as chrome.runtime.ContextFilter[],
-    sendMessage: [] as unknown[],
+    getContexts: createList<chrome.runtime.ContextFilter>(),
+    sendMessage: createList<MockMessage>(),
   },
   tabs: {
-    get: [] as number[],
-    query: [] as chrome.tabs.QueryInfo[],
-    sendMessage: [] as [number, unknown][],
-    update: [] as [number, chrome.tabs.UpdateProperties][],
+    get: createList<number>(),
+    query: createList<chrome.tabs.QueryInfo>(),
+    sendMessage: createList<[number, MockMessage]>(),
+    update: createList<[number, chrome.tabs.UpdateProperties]>(),
   },
 };
 
@@ -270,9 +305,9 @@ export const mockEvents = {
     onMessage:
       createMockEvent<
         (
-          message: unknown,
+          message: MockMessage,
           sender: chrome.runtime.MessageSender,
-          sendResponse: (r?: unknown) => void
+          sendResponse: (r?: MockMessage) => void
         ) => void
       >(),
   },
@@ -299,45 +334,71 @@ export const mockEvents = {
   },
 };
 
+const allMockEvents: MockEventBase[] = [
+  mockEvents.action.onClicked,
+  mockEvents.commands.onCommand,
+  mockEvents.contextMenus.onClicked,
+  mockEvents.runtime.onInstalled,
+  mockEvents.runtime.onMessage,
+  mockEvents.tabs.onActivated,
+  mockEvents.tabs.onRemoved,
+  mockEvents.tabs.onUpdated,
+];
+
 /**
- * Snapshot the current listeners on all mock events. Use with `listenerDelta`
- * to isolate listeners registered by a single module under test.
+ * Snapshots all mock event listeners.
+ *
+ * @returns A copy of each mock event's listeners.
  */
-export const snapshotListeners = (): Map<MockEventBase, unknown[]> => {
-  const snap = new Map<MockEventBase, unknown[]>();
-  for (const group of Object.values(mockEvents)) {
-    for (const event of Object.values(group) as MockEventBase[]) {
-      snap.set(event, [...event._listeners]);
-    }
+export const snapshotListeners = (): Map<MockEventBase, MockListener[]> => {
+  const snap = new Map<MockEventBase, MockListener[]>();
+
+  for (const event of allMockEvents) {
+    snap.set(event, [...event._listeners]);
   }
+
   return snap;
 };
 
-/** Compute the listeners added between two snapshots (after - before). */
+/**
+ * Computes the listeners added between two snapshots.
+ *
+ * @param before - The earlier listener snapshot.
+ * @param after - The later listener snapshot.
+ * @returns The listeners added since the earlier snapshot.
+ */
 export const listenerDelta = (
-  before: Map<MockEventBase, unknown[]>,
-  after: Map<MockEventBase, unknown[]>
-): Map<MockEventBase, unknown[]> => {
-  const delta = new Map<MockEventBase, unknown[]>();
+  before: Map<MockEventBase, MockListener[]>,
+  after: Map<MockEventBase, MockListener[]>
+): Map<MockEventBase, MockListener[]> => {
+  const delta = new Map<MockEventBase, MockListener[]>();
+
   for (const [event, afterListeners] of after) {
     const beforeCount = before.get(event)?.length ?? 0;
     delta.set(event, afterListeners.slice(beforeCount));
   }
+
   return delta;
 };
 
-/** Clear all listeners then restore only those in the given snapshot. */
-export const restoreListeners = (snap: Map<MockEventBase, unknown[]>): void => {
-  for (const group of Object.values(mockEvents)) {
-    for (const event of Object.values(group) as MockEventBase[]) {
-      event._listeners.length = 0;
-    }
+/**
+ * Restores mock events to a previously captured listener snapshot.
+ *
+ * @param snap - The listener snapshot to restore.
+ */
+export const restoreListeners = (
+  snap: Map<MockEventBase, MockListener[]>
+): void => {
+  for (const event of allMockEvents) {
+    event._listeners.length = 0;
   }
+
   for (const [event, listeners] of snap) {
     event._listeners.push(...listeners);
   }
 };
 
+/** Resets recorded API calls, configuration, and session storage between tests. */
 export const resetChromeMock = (): void => {
   sessionStore = {};
   mockCalls.action.setBadgeText.length = 0;
@@ -368,13 +429,16 @@ const chromeMock = {
     setBadgeText: (details: chrome.action.BadgeTextDetails) => {
       mockCalls.action.setBadgeText.push(details);
     },
-    setIcon: (details: chrome.action.TabIconDetails) => {
+    setIcon: async (details: MockIconDetails) => {
       mockCalls.action.setIcon.push(details);
+
+      await Promise.resolve();
+
       if (mockConfig.action.setIconRejectTimes > 0) {
         mockConfig.action.setIconRejectTimes -= 1;
-        return Promise.reject(new Error("setIcon failed"));
+
+        throw new Error("setIcon failed");
       }
-      return Promise.resolve();
     },
   },
   commands: {
@@ -390,108 +454,100 @@ const chromeMock = {
     Reason: {
       MATCH_MEDIA: "MATCH_MEDIA",
     },
-    createDocument: (params: chrome.offscreen.CreateParameters) => {
+    createDocument: async (params: chrome.offscreen.CreateParameters) => {
       mockCalls.offscreen.createDocument.push(params);
-      return Promise.resolve();
+
+      await Promise.resolve();
     },
   },
   runtime: {
     ContextType: {
       OFFSCREEN_DOCUMENT: "OFFSCREEN_DOCUMENT",
     },
-    getContexts: (filter: chrome.runtime.ContextFilter) => {
+    getContexts: async (filter: chrome.runtime.ContextFilter) => {
       mockCalls.runtime.getContexts.push(filter);
-      return Promise.resolve(mockConfig.runtime.getContextsResult);
+
+      await Promise.resolve();
+
+      return mockConfig.runtime.getContextsResult;
     },
     onInstalled: mockEvents.runtime.onInstalled,
     onMessage: mockEvents.runtime.onMessage,
-    sendMessage: (message: unknown) => {
+    sendMessage: async (message: MockMessage) => {
       mockCalls.runtime.sendMessage.push(message);
-      return Promise.resolve();
+
+      await Promise.resolve();
     },
   },
   storage: {
     session: {
-      get: (keys?: string | string[] | Record<string, unknown> | null) => {
-        if (keys === null || keys === undefined) {
-          return Promise.resolve({ ...sessionStore });
+      get: async (key: string) => {
+        await Promise.resolve();
+        const result: SessionStore = {};
+
+        if (Object.hasOwn(sessionStore, key)) {
+          result[key] = sessionStore[key] ?? false;
         }
-        let keyArr: string[];
-        let keysObj: Record<string, unknown> | undefined;
-        if (typeof keys === "string") {
-          keyArr = [keys];
-        } else if (Array.isArray(keys)) {
-          keyArr = keys;
-        } else {
-          keysObj = keys;
-          keyArr = Object.keys(keys);
-        }
-        const result: Record<string, unknown> = {};
-        for (const k of keyArr) {
-          result[k] = Object.hasOwn(sessionStore, k)
-            ? sessionStore[k]
-            : keysObj?.[k];
-        }
-        return Promise.resolve(result);
+
+        return result;
       },
-      set: (items: Record<string, unknown>) => {
+      set: async (items: SessionStore) => {
         Object.assign(sessionStore, items);
-        return Promise.resolve();
+
+        await Promise.resolve();
       },
     },
   },
   tabs: {
-    get: (tabId: number) => {
+    get: async (tabId: number) => {
       mockCalls.tabs.get.push(tabId);
-      return Promise.resolve(mockConfig.tabs.getResult as chrome.tabs.Tab);
+
+      await Promise.resolve();
+
+      return mockConfig.tabs.getResult;
     },
     onActivated: mockEvents.tabs.onActivated,
     onRemoved: mockEvents.tabs.onRemoved,
     onUpdated: mockEvents.tabs.onUpdated,
-    query: (queryInfo: chrome.tabs.QueryInfo) => {
+    query: async (queryInfo: chrome.tabs.QueryInfo) => {
       mockCalls.tabs.query.push(queryInfo);
-      return Promise.resolve(mockConfig.tabs.queryResult as chrome.tabs.Tab[]);
+
+      await Promise.resolve();
+
+      return mockConfig.tabs.queryResult;
     },
-    sendMessage: (tabId: number, message: unknown) => {
+    sendMessage: async (tabId: number, message: MockMessage) => {
       mockCalls.tabs.sendMessage.push([tabId, message]);
+
+      await Promise.resolve();
+
       if (mockConfig.tabs.sendMessageShouldReject) {
-        return Promise.reject(new Error("sendMessage failed"));
+        throw new Error("sendMessage failed");
       }
-      return Promise.resolve();
     },
-    update: (tabId: number, props: chrome.tabs.UpdateProperties) => {
+    update: async (tabId: number, props: chrome.tabs.UpdateProperties) => {
       mockCalls.tabs.update.push([tabId, props]);
-      return Promise.resolve(mockConfig.tabs.getResult as chrome.tabs.Tab);
+
+      await Promise.resolve();
+
+      return mockConfig.tabs.getResult;
     },
   },
 };
 
-(globalThis as unknown as { chrome: typeof chromeMock }).chrome = chromeMock;
+Reflect.set(globalThis, "chrome", chromeMock);
 
 // Stub WXT auto-imports used by entrypoints when imported directly under test.
-(
-  globalThis as unknown as {
-    defineBackground: (def: { main: () => void } | { main: () => void }) => {
-      main: () => void;
-    };
-  }
-).defineBackground = (def) => def;
+Reflect.set(
+  globalThis,
+  "defineBackground",
+  (definition: { main: () => void }) => definition
+);
 
-(
-  globalThis as unknown as {
-    defineContentScript: (def: { main: () => void }) => { main: () => void };
-  }
-).defineContentScript = (def) => def;
+Reflect.set(
+  globalThis,
+  "defineContentScript",
+  (definition: { main: () => void }) => definition
+);
 
-// Minimal import.meta.env.BROWSER shim for tests
-interface ImportMetaEnv {
-  BROWSER?: string;
-}
-interface ImportMetaWithEnv {
-  env?: ImportMetaEnv;
-}
-const meta = import.meta as unknown as ImportMetaWithEnv & {
-  env: ImportMetaEnv;
-};
-meta.env ??= {};
-meta.env.BROWSER ??= "chrome";
+Reflect.set(import.meta, "env", { BROWSER: "chrome" });
