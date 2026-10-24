@@ -1,0 +1,11 @@
+export const STORAGE_KEY_MUTED_TABS = "mutedTabs" as const;
+export const STORAGE_KEY_DARK_MODE = "isDarkMode" as const;
+export const COMMAND_TOGGLE_MUTE = "toggle-mute" as const;
+export const CONTEXT_MENU_TOGGLE_ID = "mute-tab" as const;
+export const CONTEXT_MENU_MUTE_ALL = "mute-all-tabs" as const;
+export const BADGE_MUTED = "M" as const;
+export const BADGE_UNMUTED = "" as const;
+export const BADGE_COLOR_MUTED = "#E53E3E" as const;
+export const BADGE_COLOR_UNMUTED = "#38A169" as const;
+export const ICON_BASE = "icons/icon" as const;
+export const ICON_SIZES = ["16", "48", "128"] as const;

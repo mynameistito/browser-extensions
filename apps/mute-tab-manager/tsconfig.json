@@ -1,0 +1,25 @@
+{
+  "extends": ["./.wxt/tsconfig.json", "../../tsconfig.base.json"],
+  "compilerOptions": {
+    "paths": {
+      "@": ["./src"],
+      "@/*": ["./src/*"],
+      "@/tests/*": ["./__tests__/*"]
+    },
+    "types": ["bun", "chrome"],
+    "lib": ["ESNext", "DOM"],
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true
+  },
+  "include": [".wxt/wxt.d.ts", "src/**/*", "__tests__/**/*", "wxt.config.ts"]
+}

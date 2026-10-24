@@ -1,0 +1,47 @@
+{
+  "name": "mute-tab-manager",
+  "version": "1.0.2",
+  "private": true,
+  "description": "Mute and unmute browser tabs with YouTube player support.",
+  "keywords": [
+    "browser-extension",
+    "mute",
+    "tabs",
+    "wxt",
+    "youtube"
+  ],
+  "homepage": "https://github.com/mynameistito/browser-extensions/tree/main/apps/mute-tab-manager",
+  "bugs": {
+    "url": "https://github.com/mynameistito/browser-extensions/issues"
+  },
+  "license": "MIT",
+  "author": "My Name is Tito <github@mynameistito.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mynameistito/browser-extensions.git",
+    "directory": "apps/mute-tab-manager"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "bun ../../scripts/run-wxt.ts",
+    "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
+    "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",
+    "build:chrome": "bun ../../scripts/run-wxt.ts build",
+    "build:firefox": "bun ../../scripts/run-wxt.ts build -b firefox",
+    "zip": "bun ../../scripts/run-wxt.ts zip && bun ../../scripts/run-wxt.ts zip -b firefox",
+    "zip:chrome": "bun ../../scripts/run-wxt.ts zip -b chrome",
+    "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
+    "zip:all": "bun run zip",
+    "postinstall": "bun ../../scripts/run-wxt.ts prepare",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "check": "ultracite check",
+    "ci:release": "bun ../../scripts/release-app.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "@types/chrome": "catalog:",
+    "happy-dom": "catalog:",
+    "wxt": "catalog:"
+  }
+}

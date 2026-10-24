@@ -13,6 +13,7 @@ Each child directory is an independently versioned WXT browser extension, not a 
 | `hide-email-ext/` | Email redaction content script, popup, background, and `src/lib/`. |
 | `hide-ip-ext/` | IP masking content script with background messaging. |
 | `ig-video-controls/` | Modular Instagram video content script; see its local `AGENTS.md`. |
+| `mute-tab-manager/` | Cross-browser tab muting with YouTube player synchronization. |
 | `new-tab-ext/` | Local-first React dashboard; see its existing local `AGENTS.md`. |
 | `quote-viewer/` | X quote-viewer content script and tweet helpers. |
 

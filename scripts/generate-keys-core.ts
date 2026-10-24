@@ -19,6 +19,7 @@ export const supportedExtensions = [
   "new-tab-ext",
   "ig-video-controls",
   "github-settings-repo-copy",
+  "mute-tab-manager",
 ] as const;
 
 /** An app configured to use a persistent Chromium signing key. */
@@ -32,6 +33,7 @@ export const chromeKeySecrets = {
   "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
   "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
   "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
+  "mute-tab-manager": "MUTE_TAB_MANAGER_WXT_CHROME_KEY",
 } as const satisfies Record<Extension, string>;
 
 /** Parsed options for the key-generation command. */
@@ -53,7 +55,7 @@ export type ParseGenerateKeyOptionsResult =
   | { readonly kind: "ok"; readonly options: GenerateKeyOptions };
 
 const usage =
-  "Usage: bun generate-keys [--app <all|better-history|hide-email-ext|quote-viewer|new-tab-ext|ig-video-controls|github-settings-repo-copy>] [--repo <owner/name>] [--upload] [--force]";
+  "Usage: bun generate-keys [--app <all|better-history|hide-email-ext|quote-viewer|new-tab-ext|ig-video-controls|github-settings-repo-copy|mute-tab-manager>] [--repo <owner/name>] [--upload] [--force]";
 
 /** Complete help text for the root key-generation command. */
 export const generateKeyHelp = `${usage}

@@ -36,6 +36,7 @@ describe("parseGenerateKeyOptions", () => {
       "github-settings-repo-copy": "WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY",
       "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
       "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
+      "mute-tab-manager": "MUTE_TAB_MANAGER_WXT_CHROME_KEY",
       "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
       "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
     });
@@ -66,6 +67,15 @@ describe("parseGenerateKeyOptions", () => {
     });
   });
 
+  test("accepts Mute Tab Manager as a persistent-key target", () => {
+    expect(
+      parseGenerateKeyOptions(["--app", "mute-tab-manager"])
+    ).toMatchObject({
+      kind: "ok",
+      options: { extensions: ["mute-tab-manager"] },
+    });
+  });
+
   test("accepts all apps with force and upload", () => {
     expect(
       parseGenerateKeyOptions(["--app", "all", "--force", "--upload"])
@@ -79,8 +89,10 @@ describe("parseGenerateKeyOptions", () => {
           "new-tab-ext",
           "ig-video-controls",
           "github-settings-repo-copy",
+          "mute-tab-manager",
         ],
         force: true,
+        repository: undefined,
         upload: true,
       },
     });

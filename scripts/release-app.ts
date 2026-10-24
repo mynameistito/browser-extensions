@@ -96,7 +96,7 @@ const runInherited = (command: string, args: string[]): void => {
   execFileSync(command, args, { cwd: appDir, stdio: "inherit" });
 };
 
-let previousPackage: AppPackage;
+let previousPackage: AppPackage | undefined;
 
 try {
   const previousPackageJson = run("git", [
@@ -107,12 +107,11 @@ try {
   previousPackage = parseAppPackage(previousPackageJson);
 } catch {
   console.log(
-    `Skipping ${pkg.name}: it had no package manifest in the previous commit.`
+    `Releasing ${pkg.name}: it has no package manifest in the previous commit.`
   );
-  process.exit(0);
 }
 
-if (previousPackage.version === pkg.version) {
+if (previousPackage?.version === pkg.version) {
   console.log(
     `Skipping ${pkg.name}: version ${pkg.version} did not change in this commit.`
   );
