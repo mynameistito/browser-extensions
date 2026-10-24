@@ -77,9 +77,14 @@ describe("parseGenerateKeyOptions", () => {
   });
 
   test("accepts all apps with force and upload", () => {
-    expect(
-      parseGenerateKeyOptions(["--app", "all", "--force", "--upload"])
-    ).toMatchObject({
+    const result = parseGenerateKeyOptions([
+      "--app",
+      "all",
+      "--force",
+      "--upload",
+    ]);
+
+    expect(result).toMatchObject({
       kind: "ok",
       options: {
         extensions: [
@@ -92,10 +97,13 @@ describe("parseGenerateKeyOptions", () => {
           "mute-tab-manager",
         ],
         force: true,
-        repository: undefined,
         upload: true,
       },
     });
+
+    if (result.kind === "ok") {
+      expect(result.options.repository).toBeUndefined();
+    }
   });
 
   test("allows direct upload when one app is selected", () => {
