@@ -1,12 +1,10 @@
 import { Result } from "better-result";
 
-import {
-  StorageReadError,
-  StorageValidationError,
-  StorageWriteError,
-} from "@/lib/errors";
-import { StorageSchema } from "@/lib/schemas";
-import type { StorageKey, StorageValue } from "@/lib/schemas";
+import { StorageReadError } from "./errors/storage-read-error";
+import { StorageValidationError } from "./errors/storage-validation-error";
+import { StorageWriteError } from "./errors/storage-write-error";
+import { StorageSchema } from "./schemas";
+import type { StorageKey, StorageValue } from "./schemas";
 
 /**
  * Read and validate one value from browser local storage.

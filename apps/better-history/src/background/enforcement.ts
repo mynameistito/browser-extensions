@@ -1,16 +1,16 @@
 import { Result } from "better-result";
 
-import { history } from "@/lib/browser-api";
+import { history } from "../lib/browser-api";
 import type {
   BrowserApiError,
   StorageReadError,
   StorageValidationError,
-} from "@/lib/errors";
-import { extensionMessaging } from "@/lib/messages";
-import { shouldDelete } from "@/lib/patterns";
-import type { Cleanup } from "@/lib/schemas";
-import { CleanupSchema, SettingsSchema } from "@/lib/schemas";
-import { readKeyOr, writeKey } from "@/lib/storage";
+} from "../lib/errors";
+import { extensionMessaging } from "../lib/messages";
+import { shouldDelete } from "../lib/patterns";
+import type { Cleanup } from "../lib/schemas";
+import { CleanupSchema, SettingsSchema } from "../lib/schemas";
+import { readKeyOr, writeKey } from "../lib/storage";
 
 const ALARM_NAME = "bh.enforce";
 const PERIOD_MIN = 5;
@@ -81,7 +81,7 @@ const runCleanup = async (
     return Result.err<null, CleanupError>(r.error);
   }
 
-  const { anyRuleMatches } = await import("@/lib/patterns");
+  const { anyRuleMatches } = await import("../lib/patterns");
 
   const deletions = await Promise.all(
     r.value.flatMap((item) =>
@@ -124,7 +124,8 @@ const runCleanupWithConfig = async (
   return now;
 };
 
-const enforceBlacklist = async (): Promise<void> => {
+/** Delete recent history entries matching the configured blacklist. */
+export const enforceBlacklist = async (): Promise<void> => {
   const [bl, wl, settings] = await Promise.all([
     readKeyOr("blacklist", []),
     readKeyOr("whitelist", []),
@@ -166,7 +167,8 @@ const enforceBlacklist = async (): Promise<void> => {
   );
 };
 
-const maybeRunScheduledCleanup = async (): Promise<void> => {
+/** Run cleanup when its persisted schedule is due. */
+export const maybeRunScheduledCleanup = async (): Promise<void> => {
   const c = await readKeyOr("cleanup", CleanupSchema.parse({}));
 
   if (Result.isError(c)) {
