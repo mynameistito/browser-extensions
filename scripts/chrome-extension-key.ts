@@ -56,3 +56,27 @@ export const deriveOptionalChromeManifestKey = (
     return undefined;
   }
 };
+
+/**
+ * Ensure a required release signing key is present and can be parsed.
+ * @param privateKeyPem - PKCS#8 RSA private key in PEM form, when supplied.
+ * @param required - Whether the release requires a stable Chrome key.
+ */
+export const assertRequiredChromeExtensionKey = (
+  privateKeyPem: string | undefined,
+  required: boolean
+): void => {
+  if (!required) {
+    return;
+  }
+
+  if (privateKeyPem === undefined || privateKeyPem.length === 0) {
+    throw new Error("WXT_CHROME_KEY is required to release this app.");
+  }
+
+  try {
+    deriveChromeExtensionKey(privateKeyPem);
+  } catch {
+    throw new Error("WXT_CHROME_KEY must contain a valid Chrome private key.");
+  }
+};

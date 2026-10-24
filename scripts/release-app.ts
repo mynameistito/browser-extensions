@@ -2,6 +2,8 @@ import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
+import { assertRequiredChromeExtensionKey } from "./chrome-extension-key";
+
 type AppScript = "check" | "typecheck" | "test" | "zip:all";
 
 type AppScripts = Partial<Record<AppScript, string>>;
@@ -117,6 +119,12 @@ if (previousPackage.version === pkg.version) {
   process.exit(0);
 }
 
+assertRequiredChromeExtensionKey(
+  process.env.WXT_CHROME_KEY,
+  process.env.REQUIRE_CHROME_KEY !== undefined &&
+    process.env.REQUIRE_CHROME_KEY.length > 0
+);
+
 const readReleaseAssetNames = (): readonly string[] => {
   const output = run("gh", [
     "release",
@@ -142,15 +150,6 @@ try {
   }
 } catch {
   // A missing release is created below; other gh errors will surface on create.
-}
-
-if (
-  process.env.REQUIRE_CHROME_KEY !== undefined &&
-  process.env.REQUIRE_CHROME_KEY.length > 0 &&
-  (process.env.WXT_CHROME_KEY === undefined ||
-    process.env.WXT_CHROME_KEY.length === 0)
-) {
-  throw new Error(`WXT_CHROME_KEY is required to release ${pkg.name}.`);
 }
 
 const scriptsToRun = ["check", "typecheck", "test", "zip:all"] as const;
