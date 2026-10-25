@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test } from "bun:test";
+import { it, describe, expect, beforeEach } from "vitest";
 
 import {
   mockCalls,
@@ -13,12 +13,12 @@ import {
   BADGE_UNMUTED,
 } from "@/utils/constants.ts";
 
-beforeEach(() => {
-  resetChromeMock();
-});
+describe(updateBadgeAndIcon, () => {
+  beforeEach(() => {
+    resetChromeMock();
+  });
 
-describe("updateBadgeAndIcon", () => {
-  test("sets badge text to 'M' when muted", async () => {
+  it("sets badge text to 'M' when muted", async () => {
     await updateBadgeAndIcon(1, true);
     expect(mockCalls.action.setBadgeText).toContainEqual({
       tabId: 1,
@@ -26,7 +26,7 @@ describe("updateBadgeAndIcon", () => {
     });
   });
 
-  test("sets badge text to '' when unmuted", async () => {
+  it("sets badge text to '' when unmuted", async () => {
     await updateBadgeAndIcon(1, false);
     expect(mockCalls.action.setBadgeText).toContainEqual({
       tabId: 1,
@@ -34,7 +34,7 @@ describe("updateBadgeAndIcon", () => {
     });
   });
 
-  test("sets red color when muted", async () => {
+  it("sets red color when muted", async () => {
     await updateBadgeAndIcon(1, true);
     expect(mockCalls.action.setBadgeBackgroundColor).toContainEqual({
       color: BADGE_COLOR_MUTED,
@@ -42,7 +42,7 @@ describe("updateBadgeAndIcon", () => {
     });
   });
 
-  test("sets green color when unmuted", async () => {
+  it("sets green color when unmuted", async () => {
     await updateBadgeAndIcon(1, false);
     expect(mockCalls.action.setBadgeBackgroundColor).toContainEqual({
       color: BADGE_COLOR_UNMUTED,
@@ -50,19 +50,19 @@ describe("updateBadgeAndIcon", () => {
     });
   });
 
-  test("uses muted-light icon paths in light mode when muted", async () => {
+  it("uses muted-light icon paths in light mode when muted", async () => {
     await updateBadgeAndIcon(1, true);
     expect(mockCalls.action.setIcon.length).toBeGreaterThan(0);
     expect(mockCalls.action.setIcon[0]?.path["16"]).toContain("muted-light");
   });
 
-  test("uses unmuted-dark icon paths in dark mode when unmuted", async () => {
+  it("uses unmuted-dark icon paths in dark mode when unmuted", async () => {
     await chrome.storage.session.set({ isDarkMode: true });
     await updateBadgeAndIcon(1, false);
     expect(mockCalls.action.setIcon[0]?.path["16"]).toContain("unmuted-dark");
   });
 
-  test("falls back to base icons when setIcon rejects on first call", async () => {
+  it("falls back to base icons when setIcon rejects on first call", async () => {
     mockConfig.action.setIconRejectTimes = 1;
     await updateBadgeAndIcon(1, true);
     expect(mockCalls.action.setIcon).toHaveLength(2);
