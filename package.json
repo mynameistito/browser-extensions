@@ -59,8 +59,8 @@
   },
   "overrides": {
     "esbuild": "0.28.1",
-    "js-yaml": "4.2.0",
-    "shell-quote": "1.8.4",
+    "js-yaml": "4.3.2",
+    "shell-quote": "1.11.0",
     "tmp": "0.2.7",
     "uuid": "11.1.1",
     "vite": "8.3.5"
