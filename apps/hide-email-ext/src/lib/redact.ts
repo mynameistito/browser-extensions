@@ -40,6 +40,9 @@ interface WrapperRestoration {
   readonly restore: () => void;
   readonly restoreGroup?: () => boolean;
   readonly dispose: () => void;
+  readonly cancelPendingHover: () => void;
+  readonly pattern: string | null;
+  readonly detached: boolean;
 }
 
 interface RedactorRestorations {
@@ -342,8 +345,11 @@ const tryReplaceText = (
     };
 
     restorations.wrappers.set(wrapper, {
+      cancelPendingHover: clearHoverTimeout,
+      detached: false,
       dispose,
       isRestorable,
+      pattern: regex.source,
       restore: () => {
         dispose();
 
@@ -373,22 +379,32 @@ const tryReplaceText = (
     }
 
     const restoreOriginalText = (): boolean => {
-      const parent = generatedNodes[0]?.parentNode;
+      const liveNodes = generatedNodes.filter(
+        (node) => node.parentNode !== null
+      );
 
-      if (
-        parent === null ||
-        generatedNodes.some((node) => node.parentNode !== parent)
-      ) {
+      const [firstNode] = liveNodes;
+      const parent = firstNode?.parentNode;
+
+      if (firstNode === undefined || parent === null || parent === undefined) {
         return false;
       }
 
-      for (let index = 1; index < generatedNodes.length; index += 1) {
-        if (generatedNodes[index - 1]?.nextSibling !== generatedNodes[index]) {
+      if (liveNodes.some((node) => node.parentNode !== parent)) {
+        return false;
+      }
+
+      for (let index = 1; index < liveNodes.length; index += 1) {
+        if (liveNodes[index - 1]?.nextSibling !== liveNodes[index]) {
           return false;
         }
       }
 
       for (const [node, value] of generatedText) {
+        if (node.parentNode === null && value.length === 0) {
+          continue;
+        }
+
         if (node.nodeValue === null || node.nodeValue !== value) {
           return false;
         }
@@ -402,12 +418,6 @@ const tryReplaceText = (
         }
       }
 
-      const [firstNode] = generatedNodes;
-
-      if (firstNode === undefined) {
-        return false;
-      }
-
       for (const wrapper of wrappers) {
         restorations.wrappers.get(wrapper)?.dispose();
         restorations.wrappers.delete(wrapper);
@@ -415,7 +425,7 @@ const tryReplaceText = (
 
       firstNode.before(text);
 
-      for (const node of generatedNodes) {
+      for (const node of liveNodes) {
         node.remove();
       }
 
@@ -593,12 +603,18 @@ const restoreTrackedContent = (
     return;
   }
 
+  const children: Node[] = [];
   let child = root.firstChild;
 
   while (child !== null) {
-    const { nextSibling } = child;
-    restoreTrackedContent(child, restorations);
-    child = nextSibling;
+    children.push(child);
+    child = child.nextSibling;
+  }
+
+  for (const childNode of children) {
+    if (childNode.parentNode === root) {
+      restoreTrackedContent(childNode, restorations);
+    }
   }
 };
 
@@ -609,10 +625,68 @@ const cleanupRemovedSubtree = (
   restorations: RedactorRestorations
 ): void => {
   const wasReinserted = doc.documentElement.contains(node);
+  const previousParent = node.parentNode;
+
+  if (!wasReinserted && node instanceof HTMLElement) {
+    const wrapper = restorations.wrappers.get(node);
+
+    if (wrapper) {
+      wrapper.cancelPendingHover();
+      restorations.wrappers.set(node, { ...wrapper, detached: true });
+
+      return;
+    }
+  }
+
   restoreTrackedContent(node, restorations);
 
   if (wasReinserted && regex) {
-    scanSubtree(node, regex, new WeakMap(), restorations);
+    const scanRoot = node.parentNode === null ? previousParent : node;
+
+    if (scanRoot !== null) {
+      scanSubtree(scanRoot, regex, new WeakMap(), restorations);
+    }
+  }
+};
+
+const refreshReinsertedWrappers = (
+  node: Node,
+  regex: RegExp | null,
+  restorations: RedactorRestorations
+): void => {
+  if (node instanceof HTMLElement) {
+    const restoration = restorations.wrappers.get(node);
+
+    if (restoration !== undefined && restoration.detached) {
+      if (restoration.pattern === (regex?.source ?? null)) {
+        restorations.wrappers.set(node, { ...restoration, detached: false });
+
+        return;
+      }
+
+      const parent = node.parentNode;
+      restoreTrackedContent(node, restorations);
+
+      if (regex && parent instanceof Element) {
+        scanSubtree(parent, regex, new WeakMap(), restorations);
+      }
+
+      return;
+    }
+  }
+
+  const children: Node[] = [];
+  let child = node.firstChild;
+
+  while (child !== null) {
+    children.push(child);
+    child = child.nextSibling;
+  }
+
+  for (const childNode of children) {
+    if (childNode.parentNode === node) {
+      refreshReinsertedWrappers(childNode, regex, restorations);
+    }
   }
 };
 
@@ -641,6 +715,23 @@ export const createRedactor = (root?: Document): Redactor => {
   let pendingMutations: MutationRecord[] = [];
   let skipCache = new WeakMap<Element, boolean>();
   const restorations = createRestorations();
+
+  const processMutationRecords = (
+    mutations: readonly MutationRecord[],
+    activeRegex: RegExp | null
+  ): void => {
+    for (const mutation of mutations) {
+      for (const node of mutation.removedNodes) {
+        cleanupRemovedSubtree(node, doc, activeRegex, restorations);
+      }
+    }
+
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes) {
+        refreshReinsertedWrappers(node, activeRegex, restorations);
+      }
+    }
+  };
 
   const flush = (mutations?: MutationRecord[]): void => {
     skipCache = new WeakMap<Element, boolean>();
@@ -686,6 +777,29 @@ export const createRedactor = (root?: Document): Redactor => {
     }
   };
 
+  const cancelScheduledFlush = (): void => {
+    if (pendingTimeout !== null) {
+      clearTimeout(pendingTimeout);
+      pendingTimeout = null;
+    }
+
+    if (pendingIdle !== null) {
+      cancelIdleCallback(pendingIdle);
+      pendingIdle = null;
+    }
+
+    scheduled = false;
+  };
+
+  const drainPendingMutations = (): void => {
+    const queuedMutations = pendingMutations;
+    pendingMutations = [];
+    cancelScheduledFlush();
+
+    const observerMutations = observer?.takeRecords() ?? [];
+    processMutationRecords([...queuedMutations, ...observerMutations], regex);
+  };
+
   const initialScan = (): void => {
     if (!regex) {
       return;
@@ -711,12 +825,7 @@ export const createRedactor = (root?: Document): Redactor => {
     }
 
     observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        for (const node of mutation.removedNodes) {
-          cleanupRemovedSubtree(node, doc, regex, restorations);
-        }
-      }
-
+      processMutationRecords(mutations, regex);
       scheduleFlush(mutations);
     });
     observer.observe(doc.documentElement, {
@@ -729,25 +838,15 @@ export const createRedactor = (root?: Document): Redactor => {
   };
 
   const stop = (): void => {
+    drainPendingMutations();
     observer?.disconnect();
     observer = null;
-
-    if (pendingTimeout !== null) {
-      clearTimeout(pendingTimeout);
-      pendingTimeout = null;
-    }
-
-    if (pendingIdle !== null) {
-      cancelIdleCallback(pendingIdle);
-      pendingIdle = null;
-    }
-
-    scheduled = false;
     pendingMutations = [];
   };
 
   return {
     setEmails(emails: string[]) {
+      drainPendingMutations();
       restoreTrackedContent(doc.documentElement ?? doc, restorations);
       regex = buildRegex(emails);
 

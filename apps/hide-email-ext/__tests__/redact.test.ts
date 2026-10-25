@@ -384,6 +384,43 @@ describe("redactor", () => {
     expect(document.body.querySelectorAll('[role="button"]')).toHaveLength(1);
   });
 
+  test("restores normalized redaction fragments before rescanning overlaps", async () => {
+    const longerEmail = `${email}.au`;
+    setMarkup(document.body, `<p>${longerEmail}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email, longerEmail]);
+    redactor.start();
+    await flush();
+
+    document.body.querySelector("p")?.normalize();
+    redactor.setEmails([longerEmail]);
+
+    expect(document.body.textContent).not.toContain(longerEmail);
+    expect(document.body.querySelectorAll('[role="button"]')).toHaveLength(1);
+
+    await flush();
+
+    expect(document.body.textContent).not.toContain(longerEmail);
+    expect(document.body.querySelectorAll('[role="button"]')).toHaveLength(1);
+  });
+
+  test("restores text matches in later siblings after a text group is restored", async () => {
+    setMarkup(document.body, `<p>${email}<b>${email}</b></p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    redactor.setEmails([]);
+
+    expect(document.body.querySelector("p")?.textContent).toBe(
+      `${email}${email}`
+    );
+    expect(document.body.querySelector("b")?.textContent).toBe(email);
+  });
+
   test("restores redacted link text and attributes when the list is cleared", async () => {
     setMarkup(
       document.body,
@@ -499,6 +536,40 @@ describe("redactor", () => {
     expect(document.body.querySelector("p")?.textContent).toBe(email);
   });
 
+  test("keeps an individually detached toggle operable and restorable", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    const paragraph = document.body.querySelector("p");
+
+    const wrapper = paragraph?.querySelector<HTMLElement>(
+      '[data-redacted="toggle-container"]'
+    );
+
+    wrapper?.remove();
+    await flush();
+
+    if (wrapper) {
+      paragraph?.append(wrapper);
+    }
+
+    await flush();
+
+    const toggle = wrapper?.querySelector<HTMLElement>('[role="button"]');
+    const click = new Event("click", { bubbles: true, cancelable: true });
+    toggle?.dispatchEvent(click);
+
+    expect(click.defaultPrevented).toBe(true);
+    expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+
+    redactor.setEmails([]);
+    expect(paragraph?.textContent).toBe(email);
+  });
+
   test("restores detached redactions when the list is cleared before reinsertion", async () => {
     setMarkup(
       document.body,
@@ -567,6 +638,34 @@ describe("redactor", () => {
     expect(section?.querySelector("a")?.textContent).toBe(`Contact ${second}`);
     expect(section?.querySelector("a")?.getAttribute("title")).toBe(
       `Contact ${second}`
+    );
+  });
+
+  test("drains removed subtrees before clearing and stopping", async () => {
+    setMarkup(
+      document.body,
+      `<section><p>${email}</p><a href="/profile" title="Contact ${email}">Contact ${email}</a></section>`
+    );
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    const section = document.body.querySelector("section");
+    section?.remove();
+    redactor.setEmails([]);
+    redactor.stop();
+
+    if (section) {
+      document.body.append(section);
+    }
+
+    expect(section?.querySelector('[role="button"]')).toBeNull();
+    expect(section?.querySelector("p")?.textContent).toBe(email);
+    expect(section?.querySelector("a")?.textContent).toBe(`Contact ${email}`);
+    expect(section?.querySelector("a")?.getAttribute("title")).toBe(
+      `Contact ${email}`
     );
   });
 
