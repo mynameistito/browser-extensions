@@ -8,6 +8,7 @@ const flush = async (): Promise<void> => {
 };
 
 const email = "user@example.com";
+const DECOY_EMAIL_PATTERN = /^[a-z0-9]{8}@[a-z0-9]{7}\.tld$/u;
 
 const setMarkup = (element: Element, markup: string): void => {
   const parsed = new DOMParser().parseFromString(markup, "text/html");
@@ -37,7 +38,10 @@ describe("redactor", () => {
     await flush();
 
     const toggle = document.body.querySelector<HTMLElement>('[role="button"]');
-    expect(toggle?.textContent).toBe(email);
+    const decoyEmail = toggle?.textContent ?? "";
+
+    expect(decoyEmail).toMatch(DECOY_EMAIL_PATTERN);
+    expect(decoyEmail).not.toBe(email);
     expect(toggle?.getAttribute("aria-label")).toBe("Toggle email visibility");
     expect(toggle?.getAttribute("aria-pressed")).toBe("false");
     expect(toggle?.style.filter).toBe("blur(4px)");
@@ -46,6 +50,7 @@ describe("redactor", () => {
       new Event("click", { bubbles: true, cancelable: true })
     );
 
+    expect(toggle?.textContent).toBe(email);
     expect(toggle?.getAttribute("aria-pressed")).toBe("true");
     expect(toggle?.getAttribute("aria-label")).toBe(email);
     expect(toggle?.style.filter).toBe("none");
@@ -54,6 +59,7 @@ describe("redactor", () => {
       new Event("click", { bubbles: true, cancelable: true })
     );
 
+    expect(toggle?.textContent).toBe(decoyEmail);
     expect(toggle?.getAttribute("aria-pressed")).toBe("false");
     expect(toggle?.getAttribute("aria-label")).toBe("Toggle email visibility");
     expect(toggle?.style.filter).toBe("blur(4px)");
@@ -297,8 +303,10 @@ describe("redactor", () => {
     await flush();
 
     const toggles = document.body.querySelectorAll('[role="button"]');
-    expect(toggles[0]?.textContent).toBe(email);
-    expect(toggles[1]?.textContent).toBe(second);
+    expect(toggles[0]?.textContent).toMatch(DECOY_EMAIL_PATTERN);
+    expect(toggles[0]?.textContent).not.toBe(email);
+    expect(toggles[1]?.textContent).toMatch(DECOY_EMAIL_PATTERN);
+    expect(toggles[1]?.textContent).not.toBe(second);
   });
 
   test("setEmails with empty array disables redaction", async () => {
@@ -325,8 +333,8 @@ describe("redactor", () => {
     redactor.setEmails([email]);
     await flush();
 
-    expect(document.body.querySelector('[role="button"]')?.textContent).toBe(
-      email
+    expect(document.body.querySelector('[role="button"]')?.textContent).toMatch(
+      DECOY_EMAIL_PATTERN
     );
   });
 
@@ -416,9 +424,9 @@ describe("redactor", () => {
       document.dispatchEvent(new Event("DOMContentLoaded"));
       await flush();
 
-      expect(document.body.querySelector('[role="button"]')?.textContent).toBe(
-        email
-      );
+      expect(
+        document.body.querySelector('[role="button"]')?.textContent
+      ).toMatch(DECOY_EMAIL_PATTERN);
     } finally {
       if (originalDescriptor) {
         Object.defineProperty(document, "readyState", originalDescriptor);

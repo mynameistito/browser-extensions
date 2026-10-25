@@ -22,6 +22,20 @@ const REVEAL_TOOLTIP = "Click to reveal email";
 const HIDE_TOOLTIP = "Click to hide email";
 const TOOLTIP_PADDING = "2px 6px";
 const TOOLTIP_HOVER_DELAY_MS = 500;
+const RANDOM_EMAIL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+const createRandomEmailPart = (length: number): string => {
+  const randomValues = globalThis.crypto.getRandomValues(
+    new Uint8Array(length)
+  );
+
+  return Array.from(randomValues, (value) =>
+    RANDOM_EMAIL_CHARS.charAt(value % RANDOM_EMAIL_CHARS.length)
+  ).join("");
+};
+
+const createDecoyEmail = (): string =>
+  `${createRandomEmailPart(8)}@${createRandomEmailPart(7)}.tld`;
 
 const escapeRegex = (str: string): string =>
   str.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&");
@@ -109,6 +123,7 @@ const tryReplaceText = (
     matched = true;
     const matchEnd = regex.lastIndex;
     const matchedText = text.nodeValue.slice(match.index, matchEnd);
+    const decoyEmail = createDecoyEmail();
     fragment.append(
       text.ownerDocument.createTextNode(
         text.nodeValue.slice(cursor, match.index)
@@ -121,7 +136,7 @@ const tryReplaceText = (
     wrapper.style.position = "relative";
 
     const toggle = text.ownerDocument.createElement("span");
-    toggle.textContent = matchedText;
+    toggle.textContent = decoyEmail;
     toggle.dataset.redacted = "toggle";
     toggle.setAttribute(ARIA_LABEL, EMAIL_VISIBILITY_LABEL);
     toggle.setAttribute("aria-description", REVEAL_TOOLTIP);
@@ -228,6 +243,7 @@ const tryReplaceText = (
       tooltip.textContent = hint;
       toggle.setAttribute("aria-description", hint);
       toggle.style.filter = isHidden ? "none" : BLUR_FILTER;
+      toggle.textContent = isHidden ? matchedText : decoyEmail;
     };
 
     toggle.addEventListener("click", (event) => {
