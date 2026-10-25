@@ -5,7 +5,7 @@ import { jsPluginSettings, selectJsPlugins } from "ultracite/oxlint/js-plugins";
 import vitest from "ultracite/oxlint/vitest";
 
 const vitestConfig = defineConfig({
-  overrides: vitest.overrides.map((override) => ({
+  overrides: (vitest.overrides ?? []).map((override) => ({
     ...override,
     rules: {
       ...override.rules,
