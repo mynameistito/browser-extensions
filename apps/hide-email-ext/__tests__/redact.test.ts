@@ -59,6 +59,44 @@ describe("redactor", () => {
     expect(toggle?.style.filter).toBe("blur(4px)");
   });
 
+  test("toggles email visibility with Enter and Space", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+
+    await flush();
+
+    const toggle = document.body.querySelector<HTMLElement>('[role="button"]');
+
+    for (const key of ["Enter", " "]) {
+      const reveal = new window.KeyboardEvent("keydown", {
+        bubbles: true,
+        cancelable: true,
+        key,
+      });
+
+      toggle?.dispatchEvent(reveal);
+
+      expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+      expect(toggle?.style.filter).toBe("none");
+      expect(reveal.defaultPrevented).toBe(true);
+
+      const hide = new window.KeyboardEvent("keydown", {
+        bubbles: true,
+        cancelable: true,
+        key,
+      });
+
+      toggle?.dispatchEvent(hide);
+
+      expect(toggle?.getAttribute("aria-pressed")).toBe("false");
+      expect(toggle?.style.filter).toBe("blur(4px)");
+      expect(hide.defaultPrevented).toBe(true);
+    }
+  });
+
   test("shows a reveal tooltip on hover and focus", async () => {
     setMarkup(document.body, `<p>${email}</p>`);
 
