@@ -5,6 +5,20 @@ export const hiddenEmailsItem = storage.defineItem<string[]>(
   { fallback: [] }
 );
 
+let hiddenEmailsQueue: Promise<void> = Promise.resolve();
+
+const serializeHiddenEmailsUpdate = async (
+  update: () => Promise<void>
+): Promise<void> => {
+  const operation = hiddenEmailsQueue.then(update);
+
+  hiddenEmailsQueue = operation.catch(() => {
+    // Keep the queue usable while returning the original rejection to its caller.
+  });
+
+  await operation;
+};
+
 /** Returns the normalized email addresses currently hidden by the extension.
  * @returns The stored email addresses.
  */
@@ -16,13 +30,15 @@ export const getHiddenEmails = async (): Promise<string[]> =>
  * @returns Nothing.
  */
 export const addHiddenEmail = async (email: string): Promise<void> => {
-  const current = await getHiddenEmails();
+  await serializeHiddenEmailsUpdate(async () => {
+    const current = await getHiddenEmails();
 
-  if (current.includes(email)) {
-    return;
-  }
+    if (current.includes(email)) {
+      return;
+    }
 
-  await hiddenEmailsItem.setValue([...current, email]);
+    await hiddenEmailsItem.setValue([...current, email]);
+  });
 };
 
 /** Removes an email address from the hidden list when present.
@@ -30,11 +46,13 @@ export const addHiddenEmail = async (email: string): Promise<void> => {
  * @returns Nothing.
  */
 export const removeHiddenEmail = async (email: string): Promise<void> => {
-  const current = await getHiddenEmails();
+  await serializeHiddenEmailsUpdate(async () => {
+    const current = await getHiddenEmails();
 
-  if (!current.includes(email)) {
-    return;
-  }
+    if (!current.includes(email)) {
+      return;
+    }
 
-  await hiddenEmailsItem.setValue(current.filter((e) => e !== email));
+    await hiddenEmailsItem.setValue(current.filter((e) => e !== email));
+  });
 };
