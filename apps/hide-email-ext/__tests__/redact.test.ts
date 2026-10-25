@@ -78,6 +78,7 @@ describe("redactor", () => {
     );
     expect(tooltip?.textContent).toBe("Click to reveal email");
     expect(tooltip?.style.display).toBe("none");
+    expect(tooltip?.style.padding).toBe("2px 6px");
 
     toggle?.dispatchEvent(new Event("focus"));
 
@@ -87,6 +88,10 @@ describe("redactor", () => {
     expect(tooltip?.style.display).toBe("none");
 
     toggle?.dispatchEvent(new Event("mouseenter"));
+    expect(tooltip?.style.display).toBe("none");
+
+    await Bun.sleep(550);
+
     expect(tooltip?.style.display).toBe("block");
 
     toggle?.dispatchEvent(

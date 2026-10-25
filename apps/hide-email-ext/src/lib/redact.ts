@@ -20,6 +20,8 @@ const HIDDEN_STATE = "false";
 const VISIBLE_STATE = "true";
 const REVEAL_TOOLTIP = "Click to reveal email";
 const HIDE_TOOLTIP = "Click to hide email";
+const TOOLTIP_PADDING = "2px 6px";
+const TOOLTIP_HOVER_DELAY_MS = 500;
 
 const escapeRegex = (str: string): string =>
   str.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&");
@@ -141,7 +143,7 @@ const tryReplaceText = (
     tooltip.style.transform = "translateX(-50%)";
     tooltip.style.zIndex = "2147483647";
     tooltip.style.display = "none";
-    tooltip.style.padding = "4px 8px";
+    tooltip.style.padding = TOOLTIP_PADDING;
     tooltip.style.border = "1px solid rgba(255, 255, 255, 0.12)";
     tooltip.style.borderRadius = "999px";
     tooltip.style.backgroundColor = "#222";
@@ -159,17 +161,57 @@ const tryReplaceText = (
       tooltip.setAttribute("aria-hidden", String(!visible));
     };
 
+    let isHovered = false;
+    let isFocused = false;
+    let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const clearHoverTimeout = (): void => {
+      if (hoverTimeout !== null) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = null;
+      }
+    };
+
+    const scheduleHoverTooltip = (): void => {
+      setTooltipVisibility(false);
+      clearHoverTimeout();
+      hoverTimeout = setTimeout(() => {
+        hoverTimeout = null;
+
+        if (isHovered && !isFocused) {
+          setTooltipVisibility(true);
+        }
+      }, TOOLTIP_HOVER_DELAY_MS);
+    };
+
     toggle.addEventListener("mouseenter", () => {
-      setTooltipVisibility(true);
+      isHovered = true;
+
+      if (!isFocused) {
+        scheduleHoverTooltip();
+      }
     });
     toggle.addEventListener("mouseleave", () => {
-      setTooltipVisibility(false);
+      isHovered = false;
+      clearHoverTimeout();
+
+      if (!isFocused) {
+        setTooltipVisibility(false);
+      }
     });
     toggle.addEventListener("focus", () => {
+      isFocused = true;
+      clearHoverTimeout();
       setTooltipVisibility(true);
     });
     toggle.addEventListener("blur", () => {
-      setTooltipVisibility(false);
+      isFocused = false;
+
+      if (isHovered) {
+        scheduleHoverTooltip();
+      } else {
+        setTooltipVisibility(false);
+      }
     });
 
     const toggleVisibility = (): void => {
