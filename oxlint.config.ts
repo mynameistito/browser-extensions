@@ -9,7 +9,7 @@ const vitestConfig = defineConfig({
     ...override,
     rules: {
       ...override.rules,
-      "vitest/prefer-importing-vitest-globals": "off",
+      "vitest/prefer-importing-vitest-globals": "error",
     },
   })),
 });
