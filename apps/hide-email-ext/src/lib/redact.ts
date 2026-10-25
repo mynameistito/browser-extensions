@@ -36,9 +36,10 @@ interface AttributeRestoration {
 }
 
 interface WrapperRestoration {
+  readonly isRestorable: () => boolean;
   readonly restore: () => void;
+  readonly restoreGroup?: () => boolean;
   readonly dispose: () => void;
-  readonly cancelPendingHover: () => void;
 }
 
 interface RedactorRestorations {
@@ -156,6 +157,7 @@ const tryReplaceText = (
   }
 
   const fragment = text.ownerDocument.createDocumentFragment();
+  const wrappers: HTMLElement[] = [];
   let cursor = 0;
   let matched = false;
   let match: RegExpExecArray | null;
@@ -172,6 +174,7 @@ const tryReplaceText = (
     );
 
     const wrapper = text.ownerDocument.createElement("span");
+    wrappers.push(wrapper);
     wrapper.dataset.redacted = "toggle-container";
     wrapper.style.display = "inline-block";
     wrapper.style.position = "relative";
@@ -324,24 +327,27 @@ const tryReplaceText = (
       toggle.removeEventListener("keydown", onKeydown);
     };
 
+    const isRestorable = (): boolean => {
+      if (wrapper.parentNode === null || wrapper.childNodes.length !== 2) {
+        return false;
+      }
+
+      if (wrapper.firstChild !== toggle || wrapper.lastChild !== tooltip) {
+        return false;
+      }
+
+      return (
+        toggle.textContent === decoyEmail || toggle.textContent === matchedText
+      );
+    };
+
     restorations.wrappers.set(wrapper, {
-      cancelPendingHover: clearHoverTimeout,
       dispose,
+      isRestorable,
       restore: () => {
         dispose();
 
-        if (wrapper.parentNode === null) {
-          return;
-        }
-
-        if (wrapper.firstChild !== toggle || wrapper.lastChild !== tooltip) {
-          return;
-        }
-
-        if (
-          toggle.textContent !== decoyEmail &&
-          toggle.textContent !== matchedText
-        ) {
+        if (!isRestorable()) {
           return;
         }
 
@@ -355,6 +361,78 @@ const tryReplaceText = (
     fragment.append(
       text.ownerDocument.createTextNode(text.nodeValue.slice(cursor))
     );
+
+    const generatedNodes = [...fragment.childNodes];
+
+    const generatedText = new Map<Text, string>();
+
+    for (const node of generatedNodes) {
+      if (node instanceof Text) {
+        generatedText.set(node, node.nodeValue ?? "");
+      }
+    }
+
+    const restoreOriginalText = (): boolean => {
+      const parent = generatedNodes[0]?.parentNode;
+
+      if (
+        parent === null ||
+        generatedNodes.some((node) => node.parentNode !== parent)
+      ) {
+        return false;
+      }
+
+      for (let index = 1; index < generatedNodes.length; index += 1) {
+        if (generatedNodes[index - 1]?.nextSibling !== generatedNodes[index]) {
+          return false;
+        }
+      }
+
+      for (const [node, value] of generatedText) {
+        if (node.nodeValue === null || node.nodeValue !== value) {
+          return false;
+        }
+      }
+
+      for (const wrapper of wrappers) {
+        const restoration = restorations.wrappers.get(wrapper);
+
+        if (restoration === undefined || !restoration.isRestorable()) {
+          return false;
+        }
+      }
+
+      const [firstNode] = generatedNodes;
+
+      if (firstNode === undefined) {
+        return false;
+      }
+
+      for (const wrapper of wrappers) {
+        restorations.wrappers.get(wrapper)?.dispose();
+        restorations.wrappers.delete(wrapper);
+      }
+
+      firstNode.before(text);
+
+      for (const node of generatedNodes) {
+        node.remove();
+      }
+
+      return true;
+    };
+
+    for (const wrapper of wrappers) {
+      const restoration = restorations.wrappers.get(wrapper);
+
+      if (restoration) {
+        restorations.wrappers.set(wrapper, {
+          ...restoration,
+          restoreGroup: restoreOriginalText,
+        });
+      }
+    }
+
     text.replaceWith(fragment);
   }
 };
@@ -492,7 +570,10 @@ const restoreTrackedElement = (
     return false;
   }
 
-  wrapper.restore();
+  if (wrapper.restoreGroup === undefined || !wrapper.restoreGroup()) {
+    wrapper.restore();
+  }
+
   restorations.wrappers.delete(element);
 
   return true;
@@ -524,22 +605,14 @@ const restoreTrackedContent = (
 const cleanupRemovedSubtree = (
   node: Node,
   doc: Document,
+  regex: RegExp | null,
   restorations: RedactorRestorations
 ): void => {
-  if (doc.documentElement.contains(node)) {
-    return;
-  }
+  const wasReinserted = doc.documentElement.contains(node);
+  restoreTrackedContent(node, restorations);
 
-  if (node instanceof HTMLElement) {
-    restorations.wrappers.get(node)?.cancelPendingHover();
-  }
-
-  let child = node.firstChild;
-
-  while (child !== null) {
-    const { nextSibling } = child;
-    cleanupRemovedSubtree(child, doc, restorations);
-    child = nextSibling;
+  if (wasReinserted && regex) {
+    scanSubtree(node, regex, new WeakMap(), restorations);
   }
 };
 
@@ -640,7 +713,7 @@ export const createRedactor = (root?: Document): Redactor => {
     observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         for (const node of mutation.removedNodes) {
-          cleanupRemovedSubtree(node, doc, restorations);
+          cleanupRemovedSubtree(node, doc, regex, restorations);
         }
       }
 
