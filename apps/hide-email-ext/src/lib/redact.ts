@@ -756,6 +756,20 @@ const cancelPendingHoverInSubtree = (
   }
 };
 
+const trackDetachedSubtree = (
+  node: Node,
+  regex: RegExp | null,
+  restorations: RedactorRestorations
+): void => {
+  const alreadyTracked = [...restorations.detachedSubtrees.keys()].some(
+    (reference) => reference.deref() === node
+  );
+
+  if (!alreadyTracked) {
+    restorations.detachedSubtrees.set(new WeakRef(node), regex?.source ?? null);
+  }
+};
+
 const cleanupRemovedSubtree = (
   node: Node,
   doc: Document,
@@ -779,6 +793,7 @@ const cleanupRemovedSubtree = (
         detached: true,
         detachedReference,
       });
+      trackDetachedSubtree(node, regex, restorations);
 
       return;
     }
@@ -786,17 +801,7 @@ const cleanupRemovedSubtree = (
 
   if (!wasReinserted) {
     cancelPendingHoverInSubtree(node, restorations);
-
-    const alreadyTracked = [...restorations.detachedSubtrees.keys()].some(
-      (reference) => reference.deref() === node
-    );
-
-    if (!alreadyTracked) {
-      restorations.detachedSubtrees.set(
-        new WeakRef(node),
-        regex?.source ?? null
-      );
-    }
+    trackDetachedSubtree(node, regex, restorations);
 
     return;
   }

@@ -756,6 +756,9 @@ describe("redactor", () => {
 
     wrapper?.remove();
     await flush();
+    redactor.setEmails([email, "admin@other.io"]);
+
+    expect(wrapper?.textContent).not.toContain(email);
 
     if (wrapper) {
       paragraph?.append(wrapper);
