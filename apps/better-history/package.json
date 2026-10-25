@@ -27,7 +27,7 @@
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
     "typecheck": "tsc --noEmit",
-    "test": "bun test",
+    "test": "vitest run",
     "dev": "bun ../../scripts/run-wxt.ts",
     "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
     "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",

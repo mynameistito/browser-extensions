@@ -21,7 +21,7 @@ Multi-surface WXT extension: React popup/history pages, background logic, and do
 - Keep UI feature logic in the corresponding `src/features/<domain>/`; shared browser and persistence boundaries belong in `src/lib/`.
 - Route files use TanStack Router conventions; update routes and regenerate the route tree through the project's normal tooling rather than editing generated output.
 - Validate stored/message data through the schemas and typed error abstractions in `src/lib/` instead of duplicating parsing at UI call sites.
-- Tests use Bun (`bun test`) and are colocated under `__tests__/` at the app root.
+- Tests use Vitest (`bun run test`) and are colocated under `__tests__/` at the app root.
 
 ## COMMANDS
 
@@ -31,5 +31,5 @@ Run from this app directory or target it from the root with Turbo:
 bun run dev
 bun run build
 bun run typecheck
-bun test
+bun run test
 ```
