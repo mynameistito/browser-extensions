@@ -94,9 +94,7 @@ const tryReplaceText = (
 
   const link = text.parentElement?.closest("a[href]");
 
-  if (
-    link?.getAttribute("href")?.toLowerCase().startsWith("mailto:") === true
-  ) {
+  if (link !== null && link !== undefined) {
     text.nodeValue = text.nodeValue.replaceAll(regex, REDACTION_TOKEN);
 
     return;
