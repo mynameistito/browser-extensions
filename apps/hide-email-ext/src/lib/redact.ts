@@ -214,6 +214,8 @@ const tryReplaceText = (
 
     const toggleVisibility = (): void => {
       const isHidden = toggle.getAttribute(ARIA_PRESSED) === HIDDEN_STATE;
+      clearHoverTimeout();
+      setTooltipVisibility(false);
       toggle.setAttribute(
         ARIA_PRESSED,
         isHidden ? VISIBLE_STATE : HIDDEN_STATE

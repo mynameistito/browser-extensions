@@ -146,6 +146,35 @@ describe("redactor", () => {
     expect(tooltip?.style.display).toBe("none");
   });
 
+  test("dismisses the visible tooltip when the email is clicked", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+
+    await flush();
+
+    const toggle = document.body.querySelector<HTMLElement>('[role="button"]');
+
+    const tooltip =
+      toggle?.parentElement?.querySelector<HTMLElement>('[role="tooltip"]');
+
+    toggle?.dispatchEvent(new Event("mouseenter"));
+    await Bun.sleep(550);
+
+    expect(tooltip?.style.display).toBe("block");
+
+    toggle?.dispatchEvent(
+      new Event("click", { bubbles: true, cancelable: true })
+    );
+
+    expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+    expect(tooltip?.textContent).toBe("Click to hide email");
+    expect(tooltip?.style.display).toBe("none");
+    expect(tooltip?.getAttribute("aria-hidden")).toBe("true");
+  });
+
   test("keeps mailto links clickable while redacting their email text", async () => {
     setMarkup(document.body, `<a href="mailto:${email}">Contact ${email}</a>`);
 
