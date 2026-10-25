@@ -409,6 +409,32 @@ describe("redactor", () => {
     expect(document.body.textContent).not.toContain(third);
   });
 
+  test("cleans up toggle listeners and timers when redacted content is removed", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    const paragraph = document.body.querySelector("p");
+    const toggle = paragraph?.querySelector<HTMLElement>('[role="button"]');
+    const tooltip = paragraph?.querySelector<HTMLElement>('[role="tooltip"]');
+
+    toggle?.dispatchEvent(new Event("mouseenter"));
+    paragraph?.remove();
+    await flush();
+    await Bun.sleep(550);
+
+    expect(tooltip?.style.display).toBe("none");
+
+    const click = new Event("click", { bubbles: true, cancelable: true });
+    toggle?.dispatchEvent(click);
+
+    expect(click.defaultPrevented).toBe(false);
+    expect(toggle?.getAttribute("aria-pressed")).toBe("false");
+  });
+
   test("handles empty text nodes without error", async () => {
     setMarkup(document.body, "<p></p>");
     const p = document.body.querySelector("p");

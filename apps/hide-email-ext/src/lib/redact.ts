@@ -25,6 +25,33 @@ const TOOLTIP_PADDING = "2px 6px";
 const TOOLTIP_HOVER_DELAY_MS = 500;
 const RANDOM_EMAIL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
 
+interface TextRestoration {
+  readonly originalValue: string;
+  readonly redactedValue: string;
+}
+
+interface AttributeRestoration {
+  readonly originalValue: string;
+  readonly redactedValue: string;
+}
+
+interface WrapperRestoration {
+  readonly restore: () => void;
+  readonly dispose: () => void;
+}
+
+interface RedactorRestorations {
+  readonly text: WeakMap<Text, TextRestoration>;
+  readonly attributes: WeakMap<Element, Map<string, AttributeRestoration>>;
+  readonly wrappers: WeakMap<HTMLElement, WrapperRestoration>;
+}
+
+const createRestorations = (): RedactorRestorations => ({
+  attributes: new WeakMap(),
+  text: new WeakMap(),
+  wrappers: new WeakMap(),
+});
+
 const createRandomEmailPart = (length: number): string => {
   const randomValues = globalThis.crypto.getRandomValues(
     new Uint8Array(length)
@@ -92,7 +119,7 @@ const tryReplaceText = (
   text: Text,
   regex: RegExp,
   skipCache: WeakMap<Element, boolean>,
-  restorations: Set<() => void>
+  restorations: RedactorRestorations
 ): void => {
   if (text.nodeValue === null || text.nodeValue.length === 0) {
     return;
@@ -114,10 +141,9 @@ const tryReplaceText = (
     const originalValue = text.nodeValue;
     const redactedValue = originalValue.replaceAll(regex, REDACTION_TOKEN);
     text.nodeValue = redactedValue;
-    restorations.add(() => {
-      if (text.nodeValue === redactedValue) {
-        text.nodeValue = originalValue;
-      }
+    restorations.text.set(text, {
+      originalValue,
+      redactedValue,
     });
 
     return;
@@ -281,7 +307,8 @@ const tryReplaceText = (
 
     wrapper.append(toggle, tooltip);
     fragment.append(wrapper);
-    restorations.add(() => {
+
+    const dispose = (): void => {
       clearHoverTimeout();
       toggle.removeEventListener("mouseenter", onMouseEnter);
       toggle.removeEventListener("mouseleave", onMouseLeave);
@@ -289,23 +316,30 @@ const tryReplaceText = (
       toggle.removeEventListener("blur", onBlur);
       toggle.removeEventListener("click", onClick);
       toggle.removeEventListener("keydown", onKeydown);
+    };
 
-      if (wrapper.parentNode === null) {
-        return;
-      }
+    restorations.wrappers.set(wrapper, {
+      dispose,
+      restore: () => {
+        dispose();
 
-      if (wrapper.firstChild !== toggle || wrapper.lastChild !== tooltip) {
-        return;
-      }
+        if (wrapper.parentNode === null) {
+          return;
+        }
 
-      if (
-        toggle.textContent !== decoyEmail &&
-        toggle.textContent !== matchedText
-      ) {
-        return;
-      }
+        if (wrapper.firstChild !== toggle || wrapper.lastChild !== tooltip) {
+          return;
+        }
 
-      wrapper.replaceWith(text.ownerDocument.createTextNode(matchedText));
+        if (
+          toggle.textContent !== decoyEmail &&
+          toggle.textContent !== matchedText
+        ) {
+          return;
+        }
+
+        wrapper.replaceWith(wrapper.ownerDocument.createTextNode(matchedText));
+      },
     });
     cursor = matchEnd;
   }
@@ -322,7 +356,7 @@ const scanAttributes = (
   root: Element,
   regex: RegExp,
   skipCache: WeakMap<Element, boolean>,
-  restorations: Set<() => void>
+  restorations: RedactorRestorations
 ): void => {
   if (
     root instanceof HTMLElement &&
@@ -349,10 +383,16 @@ const scanAttributes = (
 
     if (replaced !== value) {
       root.setAttribute(attr, replaced);
-      restorations.add(() => {
-        if (root.getAttribute(attr) === replaced) {
-          root.setAttribute(attr, value);
-        }
+      let attributes = restorations.attributes.get(root);
+
+      if (!attributes) {
+        attributes = new Map();
+        restorations.attributes.set(root, attributes);
+      }
+
+      attributes.set(attr, {
+        originalValue: value,
+        redactedValue: replaced,
       });
     }
   }
@@ -362,7 +402,7 @@ const scanSubtree = (
   root: Node,
   regex: RegExp,
   skipCache: WeakMap<Element, boolean>,
-  restorations: Set<() => void>
+  restorations: RedactorRestorations
 ): void => {
   for (const child of root.childNodes) {
     if (child.nodeType === Node.TEXT_NODE && child instanceof Text) {
@@ -383,7 +423,7 @@ const scanMutation = (
   mutation: MutationRecord,
   regex: RegExp,
   skipCache: WeakMap<Element, boolean>,
-  restorations: Set<() => void>
+  restorations: RedactorRestorations
 ): void => {
   if (mutation.type === "attributes" && mutation.target instanceof Element) {
     scanAttributes(mutation.target, regex, skipCache, restorations);
@@ -399,6 +439,111 @@ const scanMutation = (
     } else if (node.nodeType === Node.TEXT_NODE && node instanceof Text) {
       tryReplaceText(node, regex, skipCache, restorations);
     }
+  }
+};
+
+const restoreTrackedText = (
+  text: Text,
+  restorations: RedactorRestorations
+): void => {
+  const restoration = restorations.text.get(text);
+
+  if (!restoration) {
+    return;
+  }
+
+  if (text.nodeValue === restoration.redactedValue) {
+    text.nodeValue = restoration.originalValue;
+  }
+
+  restorations.text.delete(text);
+};
+
+const restoreTrackedElement = (
+  element: Element,
+  restorations: RedactorRestorations
+): boolean => {
+  const attributes = restorations.attributes.get(element);
+
+  if (attributes) {
+    for (const [name, restoration] of attributes) {
+      if (element.getAttribute(name) === restoration.redactedValue) {
+        element.setAttribute(name, restoration.originalValue);
+      }
+    }
+
+    restorations.attributes.delete(element);
+  }
+
+  if (!(element instanceof HTMLElement)) {
+    return false;
+  }
+
+  const wrapper = restorations.wrappers.get(element);
+
+  if (!wrapper) {
+    return false;
+  }
+
+  wrapper.restore();
+  restorations.wrappers.delete(element);
+
+  return true;
+};
+
+const restoreTrackedContent = (
+  root: Node,
+  restorations: RedactorRestorations
+): void => {
+  if (root instanceof Text) {
+    restoreTrackedText(root, restorations);
+
+    return;
+  }
+
+  if (root instanceof Element && restoreTrackedElement(root, restorations)) {
+    return;
+  }
+
+  let child = root.firstChild;
+
+  while (child !== null) {
+    const { nextSibling } = child;
+    restoreTrackedContent(child, restorations);
+    child = nextSibling;
+  }
+};
+
+const cleanupRemovedSubtree = (
+  node: Node,
+  doc: Document,
+  restorations: RedactorRestorations
+): void => {
+  if (doc.documentElement.contains(node)) {
+    return;
+  }
+
+  if (node instanceof Text) {
+    restorations.text.delete(node);
+
+    return;
+  }
+
+  if (node instanceof Element) {
+    restorations.attributes.delete(node);
+
+    if (node instanceof HTMLElement) {
+      restorations.wrappers.get(node)?.dispose();
+      restorations.wrappers.delete(node);
+    }
+  }
+
+  let child = node.firstChild;
+
+  while (child !== null) {
+    const { nextSibling } = child;
+    cleanupRemovedSubtree(child, doc, restorations);
+    child = nextSibling;
   }
 };
 
@@ -427,15 +572,7 @@ export const createRedactor = (root?: Document): Redactor => {
   let pendingMutations: MutationRecord[] = [];
   let pendingFullRescan = false;
   let skipCache = new WeakMap<Element, boolean>();
-  const restorations = new Set<() => void>();
-
-  const restoreTrackedContent = (): void => {
-    for (const restore of restorations) {
-      restore();
-    }
-
-    restorations.clear();
-  };
+  const restorations = createRestorations();
 
   const flush = (mutations?: MutationRecord[]): void => {
     skipCache = new WeakMap<Element, boolean>();
@@ -512,6 +649,12 @@ export const createRedactor = (root?: Document): Redactor => {
     }
 
     observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.removedNodes) {
+          cleanupRemovedSubtree(node, doc, restorations);
+        }
+      }
+
       scheduleFlush(mutations);
     });
     observer.observe(doc.documentElement, {
@@ -544,7 +687,7 @@ export const createRedactor = (root?: Document): Redactor => {
 
   return {
     setEmails(emails: string[]) {
-      restoreTrackedContent();
+      restoreTrackedContent(doc.body ?? doc, restorations);
       regex = buildRegex(emails);
 
       if (observer) {
