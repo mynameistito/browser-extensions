@@ -59,6 +59,30 @@ describe("redactor", () => {
     expect(toggle?.style.filter).toBe("blur(4px)");
   });
 
+  test("keeps mailto links clickable while redacting their email text", async () => {
+    setMarkup(document.body, `<a href="mailto:${email}">Contact ${email}</a>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+
+    await flush();
+
+    const link = document.body.querySelector("a");
+    expect(link?.textContent).toBe(`Contact ${REDACTION_TOKEN}`);
+    expect(link?.querySelector('[role="button"]')).toBeNull();
+
+    let receivedClick = false;
+    link?.addEventListener("click", () => {
+      receivedClick = true;
+    });
+    const click = new Event("click", { bubbles: true, cancelable: true });
+    link?.dispatchEvent(click);
+
+    expect(receivedClick).toBe(true);
+    expect(click.defaultPrevented).toBe(false);
+  });
+
   test("does not redact inside skipped tags", async () => {
     setMarkup(
       document.body,

@@ -88,6 +88,16 @@ const tryReplaceText = (
 
   regex.lastIndex = 0;
 
+  const link = text.parentElement?.closest("a[href]");
+
+  if (
+    link?.getAttribute("href")?.toLowerCase().startsWith("mailto:") === true
+  ) {
+    text.nodeValue = text.nodeValue.replaceAll(regex, REDACTION_TOKEN);
+
+    return;
+  }
+
   const fragment = text.ownerDocument.createDocumentFragment();
   let cursor = 0;
   let matched = false;
