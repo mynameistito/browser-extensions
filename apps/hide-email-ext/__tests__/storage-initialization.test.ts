@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { it, describe, expect } from "vitest";
 
 import {
   createContentEmailApplier,
@@ -33,7 +33,7 @@ const createWatchSource = (): WatchSource => {
 };
 
 describe("storage initialization", () => {
-  test("content applies a watcher update instead of a late snapshot", async () => {
+  it("content applies a watcher update instead of a late snapshot", async () => {
     const initial = createDeferred<StorageValue>();
     const applied: StorageValue[] = [];
     const source = createWatchSource();
@@ -50,10 +50,10 @@ describe("storage initialization", () => {
     initial.resolve(["old@example.com"]);
     await initialization;
 
-    expect(applied).toEqual([["new@example.com"]]);
+    expect(applied).toStrictEqual([["new@example.com"]]);
   });
 
-  test("content applies a nonempty initial snapshot when no update arrives", async () => {
+  it("content applies a nonempty initial snapshot when no update arrives", async () => {
     const applied: StorageValue[] = [];
 
     await initializeContentEmails(
@@ -64,10 +64,10 @@ describe("storage initialization", () => {
       }
     );
 
-    expect(applied).toEqual([["initial@example.com"]]);
+    expect(applied).toStrictEqual([["initial@example.com"]]);
   });
 
-  test("content applies empty state without requiring a watcher update", async () => {
+  it("content applies empty state without requiring a watcher update", async () => {
     const applied: StorageValue[] = [];
 
     await initializeContentEmails(
@@ -78,10 +78,10 @@ describe("storage initialization", () => {
       }
     );
 
-    expect(applied).toEqual([[]]);
+    expect(applied).toStrictEqual([[]]);
   });
 
-  test("content does not start the redactor for an empty list", () => {
+  it("content does not start the redactor for an empty list", () => {
     const started: string[] = [];
 
     const apply = createContentEmailApplier({
@@ -98,10 +98,10 @@ describe("storage initialization", () => {
 
     apply([]);
 
-    expect(started).toEqual(["setEmails"]);
+    expect(started).toStrictEqual(["setEmails"]);
   });
 
-  test("content starts for a nonempty initial list and stops when it empties", () => {
+  it("content starts for a nonempty initial list and stops when it empties", () => {
     const actions: string[] = [];
 
     const apply = createContentEmailApplier({
@@ -119,10 +119,10 @@ describe("storage initialization", () => {
     apply(["initial@example.com"]);
     apply([]);
 
-    expect(actions).toEqual(["set:1", "start", "set:0", "stop"]);
+    expect(actions).toStrictEqual(["set:1", "start", "set:0", "stop"]);
   });
 
-  test("popup applies a watcher update instead of a late snapshot", async () => {
+  it("popup applies a watcher update instead of a late snapshot", async () => {
     const elements = [
       Object.assign(document.createElement("input"), { id: "email-input" }),
       Object.assign(document.createElement("button"), { id: "add-btn" }),
@@ -164,6 +164,6 @@ describe("storage initialization", () => {
     initial.resolve(["old@example.com"]);
     await initialization;
 
-    expect(applied).toEqual([["new@example.com"]]);
+    expect(applied).toStrictEqual([["new@example.com"]]);
   });
 });
