@@ -6,6 +6,40 @@ import {
   removeHiddenEmail,
 } from "@/src/lib/storage";
 
+/**
+ * Subscribe to email changes before applying the initial storage snapshot.
+ *
+ * @param read - Reads the initial stored value.
+ * @param watch - Subscribes to subsequent stored values.
+ * @param apply - Applies the selected value.
+ * @returns Nothing.
+ */
+export const initializePopupEmails = async (
+  read: () => Promise<string[] | null | undefined>,
+  watch: (listener: (value: string[] | null | undefined) => void) => void,
+  apply: (value: string[] | null | undefined) => void
+): Promise<void> => {
+  let hasReceivedUpdate = false;
+
+  watch((value) => {
+    hasReceivedUpdate = true;
+    apply(value);
+  });
+
+  try {
+    const initialValue = await read();
+
+    if (!hasReceivedUpdate) {
+      apply(initialValue ?? []);
+    }
+  } catch (error) {
+    if (!hasReceivedUpdate) {
+      console.error("Failed to load emails:", error);
+      apply([]);
+    }
+  }
+};
+
 const getById = <T extends HTMLElement>(id: string, ctor: new () => T): T => {
   const el = document.querySelector<HTMLElement>(`#${id}`);
 
@@ -92,16 +126,15 @@ input.addEventListener("keydown", (event) => {
 });
 
 const init = async (): Promise<void> => {
-  try {
-    renderList((await getHiddenEmails()) ?? []);
-  } catch (error) {
-    console.error("Failed to load emails:", error);
-    renderList([]);
-  }
-
-  hiddenEmailsItem.watch((next) => {
-    renderList(next ?? []);
-  });
+  await initializePopupEmails(
+    async () => await getHiddenEmails(),
+    (listener) => {
+      hiddenEmailsItem.watch(listener);
+    },
+    (next) => {
+      renderList(next ?? []);
+    }
+  );
 };
 
 void (async () => {
