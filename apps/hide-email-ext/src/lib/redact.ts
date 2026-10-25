@@ -1121,7 +1121,11 @@ export const createRedactor = (root?: Document): Redactor => {
         skipCache = new WeakMap<Element, boolean>();
 
         if (regex) {
-          scanSubtree(doc.documentElement, regex, skipCache, restorations);
+          scanSubtree(doc.body ?? doc, regex, skipCache, restorations);
+
+          if (doc.body !== null) {
+            scanAttributes(doc.documentElement, regex, skipCache, restorations);
+          }
         }
       }
     },

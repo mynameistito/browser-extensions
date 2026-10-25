@@ -936,6 +936,23 @@ describe("redactor", () => {
     expect(document.documentElement.getAttribute("title")).toBe(email);
   });
 
+  test("does not wrap title text when the email list changes", () => {
+    document.title = email;
+    document.documentElement.setAttribute("title", email);
+
+    redactor = createRedactor();
+    redactor.start();
+    redactor.setEmails([email]);
+
+    expect(document.title).toBe(email);
+    expect(document.documentElement.getAttribute("title")).toBe(
+      REDACTION_TOKEN
+    );
+    expect(
+      document.head?.querySelector('[data-redacted="toggle-container"]')
+    ).toBeNull();
+  });
+
   test("stop cancels pending idle callback", () => {
     setMarkup(document.body, `<p>${email}</p>`);
 
