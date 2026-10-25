@@ -15,6 +15,7 @@ const SCANNABLE_ATTRS = ["title", ARIA_LABEL, "alt", "placeholder"] as const;
 const EMAIL_HINT_RE = /[@.]/u;
 const EMAIL_VISIBILITY_LABEL = "Toggle email visibility";
 const BLUR_FILTER = "blur(4px)";
+const FILTER_TRANSITION = "filter 150ms cubic-bezier(0.4, 0, 0.2, 1)";
 const ARIA_PRESSED = "aria-pressed";
 const HIDDEN_STATE = "false";
 const VISIBLE_STATE = "true";
@@ -145,6 +146,7 @@ const tryReplaceText = (
     toggle.tabIndex = 0;
     toggle.style.cursor = "pointer";
     toggle.style.filter = BLUR_FILTER;
+    toggle.style.transition = FILTER_TRANSITION;
 
     const tooltip = text.ownerDocument.createElement("span");
     tooltip.textContent = REVEAL_TOOLTIP;

@@ -45,6 +45,9 @@ describe("redactor", () => {
     expect(toggle?.getAttribute("aria-label")).toBe("Toggle email visibility");
     expect(toggle?.getAttribute("aria-pressed")).toBe("false");
     expect(toggle?.style.filter).toBe("blur(4px)");
+    expect(toggle?.style.transition).toBe(
+      "filter 150ms cubic-bezier(0.4, 0, 0.2, 1)"
+    );
 
     toggle?.dispatchEvent(
       new Event("click", { bubbles: true, cancelable: true })
