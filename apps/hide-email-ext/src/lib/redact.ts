@@ -91,7 +91,8 @@ const shouldSkipCached = (
 const tryReplaceText = (
   text: Text,
   regex: RegExp,
-  skipCache: WeakMap<Element, boolean>
+  skipCache: WeakMap<Element, boolean>,
+  restorations: Set<() => void>
 ): void => {
   if (text.nodeValue === null || text.nodeValue.length === 0) {
     return;
@@ -110,7 +111,14 @@ const tryReplaceText = (
   const link = text.parentElement?.closest("a[href]");
 
   if (link !== null && link !== undefined) {
-    text.nodeValue = text.nodeValue.replaceAll(regex, REDACTION_TOKEN);
+    const originalValue = text.nodeValue;
+    const redactedValue = originalValue.replaceAll(regex, REDACTION_TOKEN);
+    text.nodeValue = redactedValue;
+    restorations.add(() => {
+      if (text.nodeValue === redactedValue) {
+        text.nodeValue = originalValue;
+      }
+    });
 
     return;
   }
@@ -199,27 +207,30 @@ const tryReplaceText = (
       }, TOOLTIP_HOVER_DELAY_MS);
     };
 
-    toggle.addEventListener("mouseenter", () => {
+    const onMouseEnter = (): void => {
       isHovered = true;
 
       if (!isFocused) {
         scheduleHoverTooltip();
       }
-    });
-    toggle.addEventListener("mouseleave", () => {
+    };
+
+    const onMouseLeave = (): void => {
       isHovered = false;
       clearHoverTimeout();
 
       if (!isFocused) {
         setTooltipVisibility(false);
       }
-    });
-    toggle.addEventListener("focus", () => {
+    };
+
+    const onFocus = (): void => {
       isFocused = true;
       clearHoverTimeout();
       setTooltipVisibility(true);
-    });
-    toggle.addEventListener("blur", () => {
+    };
+
+    const onBlur = (): void => {
       isFocused = false;
 
       if (isHovered) {
@@ -227,7 +238,7 @@ const tryReplaceText = (
       } else {
         setTooltipVisibility(false);
       }
-    });
+    };
 
     const toggleVisibility = (): void => {
       const isHidden = toggle.getAttribute(ARIA_PRESSED) === HIDDEN_STATE;
@@ -248,20 +259,54 @@ const tryReplaceText = (
       toggle.textContent = isHidden ? matchedText : decoyEmail;
     };
 
-    toggle.addEventListener("click", (event) => {
+    const onClick = (event: MouseEvent): void => {
       event.preventDefault();
       event.stopPropagation();
       toggleVisibility();
-    });
-    toggle.addEventListener("keydown", (event) => {
+    };
+
+    const onKeydown = (event: KeyboardEvent): void => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         toggleVisibility();
       }
-    });
+    };
+
+    toggle.addEventListener("mouseenter", onMouseEnter);
+    toggle.addEventListener("mouseleave", onMouseLeave);
+    toggle.addEventListener("focus", onFocus);
+    toggle.addEventListener("blur", onBlur);
+    toggle.addEventListener("click", onClick);
+    toggle.addEventListener("keydown", onKeydown);
 
     wrapper.append(toggle, tooltip);
     fragment.append(wrapper);
+    restorations.add(() => {
+      clearHoverTimeout();
+      toggle.removeEventListener("mouseenter", onMouseEnter);
+      toggle.removeEventListener("mouseleave", onMouseLeave);
+      toggle.removeEventListener("focus", onFocus);
+      toggle.removeEventListener("blur", onBlur);
+      toggle.removeEventListener("click", onClick);
+      toggle.removeEventListener("keydown", onKeydown);
+
+      if (wrapper.parentNode === null) {
+        return;
+      }
+
+      if (wrapper.firstChild !== toggle || wrapper.lastChild !== tooltip) {
+        return;
+      }
+
+      if (
+        toggle.textContent !== decoyEmail &&
+        toggle.textContent !== matchedText
+      ) {
+        return;
+      }
+
+      wrapper.replaceWith(text.ownerDocument.createTextNode(matchedText));
+    });
     cursor = matchEnd;
   }
 
@@ -276,7 +321,8 @@ const tryReplaceText = (
 const scanAttributes = (
   root: Element,
   regex: RegExp,
-  skipCache: WeakMap<Element, boolean>
+  skipCache: WeakMap<Element, boolean>,
+  restorations: Set<() => void>
 ): void => {
   if (
     root instanceof HTMLElement &&
@@ -303,6 +349,11 @@ const scanAttributes = (
 
     if (replaced !== value) {
       root.setAttribute(attr, replaced);
+      restorations.add(() => {
+        if (root.getAttribute(attr) === replaced) {
+          root.setAttribute(attr, value);
+        }
+      });
     }
   }
 };
@@ -310,19 +361,20 @@ const scanAttributes = (
 const scanSubtree = (
   root: Node,
   regex: RegExp,
-  skipCache: WeakMap<Element, boolean>
+  skipCache: WeakMap<Element, boolean>,
+  restorations: Set<() => void>
 ): void => {
   for (const child of root.childNodes) {
     if (child.nodeType === Node.TEXT_NODE && child instanceof Text) {
-      tryReplaceText(child, regex, skipCache);
+      tryReplaceText(child, regex, skipCache, restorations);
     }
   }
 
   if (root instanceof Element) {
-    scanAttributes(root, regex, skipCache);
+    scanAttributes(root, regex, skipCache, restorations);
 
     for (const child of root.children) {
-      scanSubtree(child, regex, skipCache);
+      scanSubtree(child, regex, skipCache, restorations);
     }
   }
 };
@@ -330,21 +382,22 @@ const scanSubtree = (
 const scanMutation = (
   mutation: MutationRecord,
   regex: RegExp,
-  skipCache: WeakMap<Element, boolean>
+  skipCache: WeakMap<Element, boolean>,
+  restorations: Set<() => void>
 ): void => {
   if (mutation.type === "attributes" && mutation.target instanceof Element) {
-    scanAttributes(mutation.target, regex, skipCache);
+    scanAttributes(mutation.target, regex, skipCache, restorations);
   }
 
   if (mutation.type === "characterData" && mutation.target instanceof Text) {
-    tryReplaceText(mutation.target, regex, skipCache);
+    tryReplaceText(mutation.target, regex, skipCache, restorations);
   }
 
   for (const node of mutation.addedNodes) {
     if (node instanceof Element) {
-      scanSubtree(node, regex, skipCache);
+      scanSubtree(node, regex, skipCache, restorations);
     } else if (node.nodeType === Node.TEXT_NODE && node instanceof Text) {
-      tryReplaceText(node, regex, skipCache);
+      tryReplaceText(node, regex, skipCache, restorations);
     }
   }
 };
@@ -374,19 +427,28 @@ export const createRedactor = (root?: Document): Redactor => {
   let pendingMutations: MutationRecord[] = [];
   let pendingFullRescan = false;
   let skipCache = new WeakMap<Element, boolean>();
+  const restorations = new Set<() => void>();
+
+  const restoreTrackedContent = (): void => {
+    for (const restore of restorations) {
+      restore();
+    }
+
+    restorations.clear();
+  };
 
   const flush = (mutations?: MutationRecord[]): void => {
+    skipCache = new WeakMap<Element, boolean>();
+
     if (!regex) {
       return;
     }
 
-    skipCache = new WeakMap<Element, boolean>();
-
     if (mutations === undefined) {
-      scanSubtree(doc.body ?? doc, regex, skipCache);
+      scanSubtree(doc.body ?? doc, regex, skipCache, restorations);
     } else {
       for (const mutation of mutations) {
-        scanMutation(mutation, regex, skipCache);
+        scanMutation(mutation, regex, skipCache, restorations);
       }
     }
   };
@@ -431,7 +493,7 @@ export const createRedactor = (root?: Document): Redactor => {
     }
 
     skipCache = new WeakMap<Element, boolean>();
-    scanSubtree(doc.body ?? doc, regex, skipCache);
+    scanSubtree(doc.body ?? doc, regex, skipCache, restorations);
   };
 
   const start = (): void => {
@@ -482,6 +544,7 @@ export const createRedactor = (root?: Document): Redactor => {
 
   return {
     setEmails(emails: string[]) {
+      restoreTrackedContent();
       regex = buildRegex(emails);
 
       if (observer) {

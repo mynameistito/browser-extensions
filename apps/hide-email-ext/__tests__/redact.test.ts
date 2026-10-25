@@ -341,6 +341,74 @@ describe("redactor", () => {
     );
   });
 
+  test("restores removed matches while keeping configured matches redacted", async () => {
+    const second = "admin@other.io";
+    setMarkup(document.body, `<p>${email} and ${second}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email, second]);
+    redactor.start();
+    await flush();
+
+    redactor.setEmails([second]);
+    await flush();
+
+    expect(document.body.textContent).toContain(email);
+    expect(document.body.querySelectorAll('[role="button"]')).toHaveLength(1);
+    expect(document.body.querySelector('[role="button"]')?.textContent).toMatch(
+      DECOY_EMAIL_PATTERN
+    );
+  });
+
+  test("restores redacted link text and attributes when the list is cleared", async () => {
+    setMarkup(
+      document.body,
+      `<a title="Contact ${email}">Contact ${email}</a>`
+    );
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    const linkBeforeClear = document.body.querySelector("a");
+    expect(linkBeforeClear?.getAttribute("title")).toBe(
+      `Contact ${REDACTION_TOKEN}`
+    );
+
+    for (const element of document.body.querySelectorAll("*")) {
+      for (const attribute of element.attributes) {
+        expect(attribute.value).not.toContain(email);
+      }
+    }
+
+    redactor.setEmails([]);
+    await flush();
+
+    const link = document.body.querySelector("a");
+    expect(link?.textContent).toBe(`Contact ${email}`);
+    expect(link?.getAttribute("title")).toBe(`Contact ${email}`);
+  });
+
+  test("replaces matches and restores only addresses no longer configured", async () => {
+    const second = "admin@other.io";
+    const third = "team@sample.net";
+    setMarkup(document.body, `<p>${email} ${second} ${third}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email, second]);
+    redactor.start();
+    await flush();
+
+    redactor.setEmails([second, third]);
+    await flush();
+
+    expect(document.body.textContent).toContain(email);
+    expect(document.body.querySelectorAll('[role="button"]')).toHaveLength(2);
+    expect(document.body.textContent).not.toContain(second);
+    expect(document.body.textContent).not.toContain(third);
+  });
+
   test("handles empty text nodes without error", async () => {
     setMarkup(document.body, "<p></p>");
     const p = document.body.querySelector("p");
