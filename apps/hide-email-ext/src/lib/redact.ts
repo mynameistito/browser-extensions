@@ -38,6 +38,7 @@ interface AttributeRestoration {
 interface WrapperRestoration {
   readonly restore: () => void;
   readonly dispose: () => void;
+  readonly cancelPendingHover: () => void;
 }
 
 interface RedactorRestorations {
@@ -140,6 +141,11 @@ const tryReplaceText = (
   if (link !== null && link !== undefined) {
     const originalValue = text.nodeValue;
     const redactedValue = originalValue.replaceAll(regex, REDACTION_TOKEN);
+
+    if (redactedValue === originalValue) {
+      return;
+    }
+
     text.nodeValue = redactedValue;
     restorations.text.set(text, {
       originalValue,
@@ -319,6 +325,7 @@ const tryReplaceText = (
     };
 
     restorations.wrappers.set(wrapper, {
+      cancelPendingHover: clearHoverTimeout,
       dispose,
       restore: () => {
         dispose();
@@ -523,19 +530,8 @@ const cleanupRemovedSubtree = (
     return;
   }
 
-  if (node instanceof Text) {
-    restorations.text.delete(node);
-
-    return;
-  }
-
-  if (node instanceof Element) {
-    restorations.attributes.delete(node);
-
-    if (node instanceof HTMLElement) {
-      restorations.wrappers.get(node)?.dispose();
-      restorations.wrappers.delete(node);
-    }
+  if (node instanceof HTMLElement) {
+    restorations.wrappers.get(node)?.cancelPendingHover();
   }
 
   let child = node.firstChild;
@@ -570,7 +566,6 @@ export const createRedactor = (root?: Document): Redactor => {
   let pendingTimeout: ReturnType<typeof setTimeout> | null = null;
   let pendingIdle: number | null = null;
   let pendingMutations: MutationRecord[] = [];
-  let pendingFullRescan = false;
   let skipCache = new WeakMap<Element, boolean>();
   const restorations = createRestorations();
 
@@ -604,17 +599,11 @@ export const createRedactor = (root?: Document): Redactor => {
     const run = () => {
       const captured = pendingMutations;
       pendingMutations = [];
-      const doFullRescan = pendingFullRescan;
-      pendingFullRescan = false;
       scheduled = false;
       pendingTimeout = null;
       pendingIdle = null;
 
-      if (doFullRescan) {
-        flush();
-      } else {
-        flush(captured);
-      }
+      flush(captured);
     };
 
     if ("requestIdleCallback" in window) {
@@ -682,17 +671,19 @@ export const createRedactor = (root?: Document): Redactor => {
 
     scheduled = false;
     pendingMutations = [];
-    pendingFullRescan = false;
   };
 
   return {
     setEmails(emails: string[]) {
-      restoreTrackedContent(doc.body ?? doc, restorations);
+      restoreTrackedContent(doc.documentElement ?? doc, restorations);
       regex = buildRegex(emails);
 
       if (observer) {
-        pendingFullRescan = true;
-        scheduleFlush();
+        skipCache = new WeakMap<Element, boolean>();
+
+        if (regex) {
+          scanSubtree(doc.documentElement, regex, skipCache, restorations);
+        }
       }
     },
     start,

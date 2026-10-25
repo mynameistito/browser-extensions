@@ -351,6 +351,10 @@ describe("redactor", () => {
     await flush();
 
     redactor.setEmails([second]);
+
+    expect(document.body.textContent).not.toContain(second);
+    expect(document.body.querySelectorAll('[role="button"]')).toHaveLength(1);
+
     await flush();
 
     expect(document.body.textContent).toContain(email);
@@ -409,7 +413,35 @@ describe("redactor", () => {
     expect(document.body.textContent).not.toContain(third);
   });
 
-  test("cleans up toggle listeners and timers when redacted content is removed", async () => {
+  test("restores dynamic link text with punctuation after clearing the list", async () => {
+    setMarkup(document.body, "");
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    setMarkup(
+      document.body,
+      `<a href="mailto:${email}">Contact ${email}.</a><a href="/profile">Contact ${email}.</a>`
+    );
+    await flush();
+    await flush();
+
+    expect(document.body.textContent).not.toContain(email);
+
+    redactor.setEmails([]);
+    await flush();
+
+    expect(document.body.querySelectorAll("a")[0]?.textContent).toBe(
+      `Contact ${email}.`
+    );
+    expect(document.body.querySelectorAll("a")[1]?.textContent).toBe(
+      `Contact ${email}.`
+    );
+  });
+
+  test("keeps removed redaction toggles operable if their subtree is reinserted", async () => {
     setMarkup(document.body, `<p>${email}</p>`);
 
     redactor = createRedactor();
@@ -428,11 +460,20 @@ describe("redactor", () => {
 
     expect(tooltip?.style.display).toBe("none");
 
+    if (paragraph) {
+      document.body.append(paragraph);
+    }
+
+    await flush();
+
     const click = new Event("click", { bubbles: true, cancelable: true });
     toggle?.dispatchEvent(click);
 
-    expect(click.defaultPrevented).toBe(false);
-    expect(toggle?.getAttribute("aria-pressed")).toBe("false");
+    expect(click.defaultPrevented).toBe(true);
+    expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+
+    redactor.setEmails([]);
+    expect(document.body.querySelector("p")?.textContent).toBe(email);
   });
 
   test("handles empty text nodes without error", async () => {
@@ -454,6 +495,15 @@ describe("redactor", () => {
 
     document.documentElement.setAttribute("title", email);
     await flush();
+
+    expect(document.documentElement.getAttribute("title")).toBe(
+      REDACTION_TOKEN
+    );
+
+    redactor.setEmails([]);
+    await flush();
+
+    expect(document.documentElement.getAttribute("title")).toBe(email);
   });
 
   test("stop cancels pending idle callback", () => {
