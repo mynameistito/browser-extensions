@@ -9,7 +9,8 @@ const SKIP_TAGS = new Set([
   "SELECT",
 ]);
 
-const SCANNABLE_ATTRS = ["title", "aria-label", "alt", "placeholder"] as const;
+const ARIA_LABEL = "aria-label";
+const SCANNABLE_ATTRS = ["title", ARIA_LABEL, "alt", "placeholder"] as const;
 
 const EMAIL_HINT_RE = /[@.]/u;
 const EMAIL_VISIBILITY_LABEL = "Toggle email visibility";
@@ -86,6 +87,7 @@ const tryReplaceText = (
   }
 
   regex.lastIndex = 0;
+
   const fragment = text.ownerDocument.createDocumentFragment();
   let cursor = 0;
   let matched = false;
@@ -104,7 +106,7 @@ const tryReplaceText = (
     const toggle = text.ownerDocument.createElement("span");
     toggle.textContent = matchedText;
     toggle.dataset.redacted = "toggle";
-    toggle.setAttribute("aria-label", EMAIL_VISIBILITY_LABEL);
+    toggle.setAttribute(ARIA_LABEL, EMAIL_VISIBILITY_LABEL);
     toggle.setAttribute(ARIA_PRESSED, HIDDEN_STATE);
     toggle.setAttribute("role", "button");
     toggle.tabIndex = 0;
@@ -116,6 +118,10 @@ const tryReplaceText = (
       toggle.setAttribute(
         ARIA_PRESSED,
         isHidden ? VISIBLE_STATE : HIDDEN_STATE
+      );
+      toggle.setAttribute(
+        ARIA_LABEL,
+        isHidden ? matchedText : EMAIL_VISIBILITY_LABEL
       );
       toggle.style.filter = isHidden ? "none" : BLUR_FILTER;
     };

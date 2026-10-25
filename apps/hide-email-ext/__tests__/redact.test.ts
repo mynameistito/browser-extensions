@@ -47,6 +47,7 @@ describe("redactor", () => {
     );
 
     expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+    expect(toggle?.getAttribute("aria-label")).toBe(email);
     expect(toggle?.style.filter).toBe("none");
 
     toggle?.dispatchEvent(
@@ -54,6 +55,7 @@ describe("redactor", () => {
     );
 
     expect(toggle?.getAttribute("aria-pressed")).toBe("false");
+    expect(toggle?.getAttribute("aria-label")).toBe("Toggle email visibility");
     expect(toggle?.style.filter).toBe("blur(4px)");
   });
 
