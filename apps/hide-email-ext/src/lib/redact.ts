@@ -1054,12 +1054,11 @@ export const createRedactor = (root?: Document): Redactor => {
   };
 
   const drainPendingMutations = (): void => {
-    const queuedMutations = pendingMutations;
     pendingMutations = [];
     cancelScheduledFlush();
 
     const observerMutations = observer?.takeRecords() ?? [];
-    processMutationRecords([...queuedMutations, ...observerMutations], regex);
+    processMutationRecords(observerMutations, regex);
   };
 
   const initialScan = (): void => {
