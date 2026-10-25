@@ -18,6 +18,8 @@ const BLUR_FILTER = "blur(4px)";
 const ARIA_PRESSED = "aria-pressed";
 const HIDDEN_STATE = "false";
 const VISIBLE_STATE = "true";
+const REVEAL_TOOLTIP = "Click to reveal email";
+const HIDE_TOOLTIP = "Click to hide email";
 
 const escapeRegex = (str: string): string =>
   str.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&");
@@ -113,15 +115,62 @@ const tryReplaceText = (
       )
     );
 
+    const wrapper = text.ownerDocument.createElement("span");
+    wrapper.dataset.redacted = "toggle-container";
+    wrapper.style.display = "inline-block";
+    wrapper.style.position = "relative";
+
     const toggle = text.ownerDocument.createElement("span");
     toggle.textContent = matchedText;
     toggle.dataset.redacted = "toggle";
     toggle.setAttribute(ARIA_LABEL, EMAIL_VISIBILITY_LABEL);
+    toggle.setAttribute("aria-description", REVEAL_TOOLTIP);
     toggle.setAttribute(ARIA_PRESSED, HIDDEN_STATE);
     toggle.setAttribute("role", "button");
     toggle.tabIndex = 0;
     toggle.style.cursor = "pointer";
     toggle.style.filter = BLUR_FILTER;
+
+    const tooltip = text.ownerDocument.createElement("span");
+    tooltip.textContent = REVEAL_TOOLTIP;
+    tooltip.setAttribute("role", "tooltip");
+    tooltip.setAttribute("aria-hidden", VISIBLE_STATE);
+    tooltip.style.position = "absolute";
+    tooltip.style.bottom = "calc(100% + 6px)";
+    tooltip.style.left = "50%";
+    tooltip.style.transform = "translateX(-50%)";
+    tooltip.style.zIndex = "2147483647";
+    tooltip.style.display = "none";
+    tooltip.style.padding = "4px 8px";
+    tooltip.style.border = "1px solid rgba(255, 255, 255, 0.12)";
+    tooltip.style.borderRadius = "999px";
+    tooltip.style.backgroundColor = "#222";
+    tooltip.style.color = "#fff";
+    tooltip.style.fontFamily = "inherit";
+    tooltip.style.fontSize = "12px";
+    tooltip.style.fontWeight = "500";
+    tooltip.style.lineHeight = "1.2";
+    tooltip.style.whiteSpace = "nowrap";
+    tooltip.style.pointerEvents = "none";
+    tooltip.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.25)";
+
+    const setTooltipVisibility = (visible: boolean): void => {
+      tooltip.style.display = visible ? "block" : "none";
+      tooltip.setAttribute("aria-hidden", String(!visible));
+    };
+
+    toggle.addEventListener("mouseenter", () => {
+      setTooltipVisibility(true);
+    });
+    toggle.addEventListener("mouseleave", () => {
+      setTooltipVisibility(false);
+    });
+    toggle.addEventListener("focus", () => {
+      setTooltipVisibility(true);
+    });
+    toggle.addEventListener("blur", () => {
+      setTooltipVisibility(false);
+    });
 
     const toggleVisibility = (): void => {
       const isHidden = toggle.getAttribute(ARIA_PRESSED) === HIDDEN_STATE;
@@ -133,6 +182,9 @@ const tryReplaceText = (
         ARIA_LABEL,
         isHidden ? matchedText : EMAIL_VISIBILITY_LABEL
       );
+      const hint = isHidden ? HIDE_TOOLTIP : REVEAL_TOOLTIP;
+      tooltip.textContent = hint;
+      toggle.setAttribute("aria-description", hint);
       toggle.style.filter = isHidden ? "none" : BLUR_FILTER;
     };
 
@@ -148,7 +200,8 @@ const tryReplaceText = (
       }
     });
 
-    fragment.append(toggle);
+    wrapper.append(toggle, tooltip);
+    fragment.append(wrapper);
     cursor = matchEnd;
   }
 

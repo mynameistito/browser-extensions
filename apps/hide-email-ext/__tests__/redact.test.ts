@@ -59,6 +59,50 @@ describe("redactor", () => {
     expect(toggle?.style.filter).toBe("blur(4px)");
   });
 
+  test("shows a reveal tooltip on hover and focus", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+
+    await flush();
+
+    const toggle = document.body.querySelector<HTMLElement>('[role="button"]');
+
+    const tooltip =
+      toggle?.parentElement?.querySelector<HTMLElement>('[role="tooltip"]');
+
+    expect(toggle?.getAttribute("aria-description")).toBe(
+      "Click to reveal email"
+    );
+    expect(tooltip?.textContent).toBe("Click to reveal email");
+    expect(tooltip?.style.display).toBe("none");
+
+    toggle?.dispatchEvent(new Event("focus"));
+
+    expect(tooltip?.style.display).toBe("block");
+
+    toggle?.dispatchEvent(new Event("blur"));
+    expect(tooltip?.style.display).toBe("none");
+
+    toggle?.dispatchEvent(new Event("mouseenter"));
+    expect(tooltip?.style.display).toBe("block");
+
+    toggle?.dispatchEvent(
+      new Event("click", { bubbles: true, cancelable: true })
+    );
+
+    expect(tooltip?.textContent).toBe("Click to hide email");
+    expect(toggle?.getAttribute("aria-description")).toBe(
+      "Click to hide email"
+    );
+
+    toggle?.dispatchEvent(new Event("mouseleave"));
+
+    expect(tooltip?.style.display).toBe("none");
+  });
+
   test("keeps mailto links clickable while redacting their email text", async () => {
     setMarkup(document.body, `<a href="mailto:${email}">Contact ${email}</a>`);
 
