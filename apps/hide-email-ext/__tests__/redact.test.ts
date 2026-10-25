@@ -834,6 +834,10 @@ describe("redactor", () => {
       document.body.append(section);
     }
 
+    await Promise.resolve();
+
+    expect(section?.textContent).not.toContain(second);
+
     await flush();
 
     expect(section?.querySelector("p")?.textContent).toContain(email);

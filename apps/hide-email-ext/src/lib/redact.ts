@@ -51,10 +51,12 @@ interface RedactorRestorations {
   readonly attributes: WeakMap<Element, Map<string, AttributeRestoration>>;
   readonly wrappers: WeakMap<HTMLElement, WrapperRestoration>;
   readonly detachedWrappers: Set<WeakRef<HTMLElement>>;
+  readonly detachedSubtrees: Map<WeakRef<Node>, string | null>;
 }
 
 const createRestorations = (): RedactorRestorations => ({
   attributes: new WeakMap(),
+  detachedSubtrees: new Map(),
   detachedWrappers: new Set(),
   text: new WeakMap(),
   wrappers: new WeakMap(),
@@ -739,6 +741,19 @@ const restoreTrackedContent = (
   }
 };
 
+const cancelPendingHoverInSubtree = (
+  root: Node,
+  restorations: RedactorRestorations
+): void => {
+  if (root instanceof HTMLElement) {
+    restorations.wrappers.get(root)?.cancelPendingHover();
+  }
+
+  for (const child of root.childNodes) {
+    cancelPendingHoverInSubtree(child, restorations);
+  }
+};
+
 const cleanupRemovedSubtree = (
   node: Node,
   doc: Document,
@@ -767,6 +782,23 @@ const cleanupRemovedSubtree = (
     }
   }
 
+  if (!wasReinserted) {
+    cancelPendingHoverInSubtree(node, restorations);
+
+    const alreadyTracked = [...restorations.detachedSubtrees.keys()].some(
+      (reference) => reference.deref() === node
+    );
+
+    if (!alreadyTracked) {
+      restorations.detachedSubtrees.set(
+        new WeakRef(node),
+        regex?.source ?? null
+      );
+    }
+
+    return;
+  }
+
   restoreTrackedContent(node, restorations);
 
   if (wasReinserted && regex) {
@@ -782,6 +814,37 @@ const cleanupRemovedSubtree = (
   }
 };
 
+const isReinsertedSubtree = (node: Node, root: Node): boolean =>
+  root === node || (node instanceof Element && node.contains(root));
+
+const refreshDetachedSubtrees = (
+  node: Node,
+  regex: RegExp | null,
+  restorations: RedactorRestorations
+): void => {
+  for (const [reference, pattern] of restorations.detachedSubtrees) {
+    const detachedRoot = reference.deref();
+
+    if (detachedRoot === undefined) {
+      restorations.detachedSubtrees.delete(reference);
+    } else if (isReinsertedSubtree(node, detachedRoot)) {
+      restorations.detachedSubtrees.delete(reference);
+
+      if (pattern !== (regex?.source ?? null)) {
+        restoreTrackedContent(detachedRoot, restorations);
+      }
+
+      if (regex) {
+        if (detachedRoot instanceof Text) {
+          tryReplaceText(detachedRoot, regex, new WeakMap(), restorations);
+        } else {
+          scanSubtree(detachedRoot, regex, new WeakMap(), restorations);
+        }
+      }
+    }
+  }
+};
+
 const refreshReinsertedWrappers = (
   node: Node,
   doc: Document,
@@ -791,6 +854,8 @@ const refreshReinsertedWrappers = (
   if (!doc.documentElement.contains(node)) {
     return;
   }
+
+  refreshDetachedSubtrees(node, regex, restorations);
 
   if (node instanceof HTMLElement) {
     const restoration = restorations.wrappers.get(node);
@@ -842,6 +907,46 @@ const restoreDetachedWrappers = (restorations: RedactorRestorations): void => {
     }
 
     restorations.detachedWrappers.delete(reference);
+  }
+};
+
+const restoreDetachedSubtrees = (restorations: RedactorRestorations): void => {
+  for (const [reference] of restorations.detachedSubtrees) {
+    const root = reference.deref();
+
+    if (root !== undefined && !root.isConnected) {
+      restoreTrackedContent(root, restorations);
+    }
+
+    restorations.detachedSubtrees.delete(reference);
+  }
+};
+
+const reconcileDetachedSubtrees = (
+  restorations: RedactorRestorations,
+  regex: RegExp | null
+): void => {
+  for (const [reference] of restorations.detachedSubtrees) {
+    const root = reference.deref();
+
+    if (root === undefined) {
+      restorations.detachedSubtrees.delete(reference);
+      continue;
+    }
+
+    if (!root.isConnected) {
+      restoreTrackedContent(root, restorations);
+
+      if (regex) {
+        if (root instanceof Text) {
+          tryReplaceText(root, regex, new WeakMap(), restorations);
+        } else {
+          scanSubtree(root, regex, new WeakMap(), restorations);
+        }
+      }
+    }
+
+    restorations.detachedSubtrees.set(reference, regex?.source ?? null);
   }
 };
 
@@ -997,6 +1102,7 @@ export const createRedactor = (root?: Document): Redactor => {
   const stop = (): void => {
     drainPendingMutations();
     restoreDetachedWrappers(restorations);
+    restoreDetachedSubtrees(restorations);
     observer?.disconnect();
     observer = null;
     pendingMutations = [];
@@ -1006,8 +1112,9 @@ export const createRedactor = (root?: Document): Redactor => {
     setEmails(emails: string[]) {
       drainPendingMutations();
       restoreDetachedWrappers(restorations);
-      restoreTrackedContent(doc.documentElement ?? doc, restorations);
       regex = buildRegex(emails);
+      reconcileDetachedSubtrees(restorations, regex);
+      restoreTrackedContent(doc.documentElement ?? doc, restorations);
 
       if (observer) {
         skipCache = new WeakMap<Element, boolean>();
