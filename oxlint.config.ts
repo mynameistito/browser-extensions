@@ -4,6 +4,16 @@ import core from "ultracite/oxlint/core";
 import { jsPluginSettings, selectJsPlugins } from "ultracite/oxlint/js-plugins";
 import vitest from "ultracite/oxlint/vitest";
 
+const vitestConfig = defineConfig({
+  overrides: vitest.overrides.map((override) => ({
+    ...override,
+    rules: {
+      ...override.rules,
+      "vitest/prefer-importing-vitest-globals": "off",
+    },
+  })),
+});
+
 export const sharedJsPlugins = selectJsPlugins([
   "github",
   "jsdoc-js",
@@ -13,7 +23,7 @@ export const sharedJsPlugins = selectJsPlugins([
 
 export const baseConfig = defineConfig({
   env: core.env,
-  extends: [core, antiSlop, vitest, sharedJsPlugins],
+  extends: [core, antiSlop, vitestConfig, sharedJsPlugins],
   ignorePatterns: core.ignorePatterns,
   jsPlugins: sharedJsPlugins.jsPlugins,
   settings: jsPluginSettings,
