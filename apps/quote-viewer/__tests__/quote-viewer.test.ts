@@ -1,6 +1,5 @@
-import { afterEach, beforeEach, describe, expect, test } from "bun:test";
-
 import { Window } from "happy-dom";
+import { it, afterEach, describe, expect, beforeEach } from "vitest";
 
 import {
   createQuoteIconSvg,
@@ -112,12 +111,11 @@ const captureAddedNodes = (
   return observer.takeRecords();
 };
 
-beforeEach(installWindow);
+describe(getTweetDetails, () => {
+  beforeEach(installWindow);
+  afterEach(restoreWindow);
 
-afterEach(restoreWindow);
-
-describe("getTweetDetails", () => {
-  test("extracts the handle and tweet ID from relative tweet links", () => {
+  it("extracts the handle and tweet ID from relative tweet links", () => {
     const article = createArticle({ href: "/jack/status/12345" });
 
     expect(getTweetDetails(article)).toStrictEqual({
@@ -126,7 +124,7 @@ describe("getTweetDetails", () => {
     });
   });
 
-  test("extracts handles followed by whitespace", () => {
+  it("extracts handles followed by whitespace", () => {
     const article = createArticle({
       href: "https://twitter.com/jack/status/999",
       text: "Display Name @jack 1h",
@@ -138,7 +136,7 @@ describe("getTweetDetails", () => {
     });
   });
 
-  test("defaults to x when no handle can be parsed", () => {
+  it("defaults to x when no handle can be parsed", () => {
     const article = createArticle({
       href: "/someone/status/42",
       text: "Display Name",
@@ -150,7 +148,7 @@ describe("getTweetDetails", () => {
     });
   });
 
-  test("returns a null tweet ID when there is no matching status link", () => {
+  it("returns a null tweet ID when there is no matching status link", () => {
     const article = createArticle({ href: "/jack/with_replies" });
 
     expect(getTweetDetails(article)).toStrictEqual({
@@ -159,7 +157,7 @@ describe("getTweetDetails", () => {
     });
   });
 
-  test("ignores invalid URLs", () => {
+  it("ignores invalid URLs", () => {
     const article = createArticle({ href: "https://[invalid" });
 
     expect(getTweetDetails(article)).toStrictEqual({
@@ -169,8 +167,11 @@ describe("getTweetDetails", () => {
   });
 });
 
-describe("viewQuotedTweets", () => {
-  test("updates browser state, dispatches popstate, and scrolls to top", () => {
+describe(viewQuotedTweets, () => {
+  beforeEach(installWindow);
+  afterEach(restoreWindow);
+
+  it("updates browser state, dispatches popstate, and scrolls to top", () => {
     let popStateCount = 0;
     const scrollPositions: (readonly [number, number])[] = [];
     window.addEventListener("popstate", () => {
@@ -191,7 +192,10 @@ describe("viewQuotedTweets", () => {
 });
 
 describe("content DOM behavior", () => {
-  test("creates the quote icon SVG", () => {
+  beforeEach(installWindow);
+  afterEach(restoreWindow);
+
+  it("creates the quote icon SVG", () => {
     const svg = createQuoteIconSvg(document);
 
     expect(svg.tagName).toBe("svg");
@@ -199,7 +203,7 @@ describe("content DOM behavior", () => {
     expect(svg.querySelectorAll("path")).toHaveLength(2);
   });
 
-  test("attaches one quote button to an article action bar", () => {
+  it("attaches one quote button to an article action bar", () => {
     const article = createArticle({ href: "/jack/status/12345" });
 
     const viewer = createQuoteViewer(document);
@@ -215,7 +219,7 @@ describe("content DOM behavior", () => {
     );
   });
 
-  test("hides native quotes links during setup", () => {
+  it("hides native quotes links during setup", () => {
     const article = createArticle({ href: "/jack/status/12345" });
 
     const nativeQuotes = appendNativeQuotesLink(article);
@@ -227,7 +231,7 @@ describe("content DOM behavior", () => {
     expect(nativeQuotes.getAttribute("aria-hidden")).toBe("true");
   });
 
-  test("hides only the native quotes menu item, not its menu", () => {
+  it("hides only the native quotes menu item, not its menu", () => {
     const menu = document.createElement("div");
     menu.setAttribute("role", "menu");
     const wrapper = document.createElement("div");
@@ -246,7 +250,7 @@ describe("content DOM behavior", () => {
     expect(menuItem.getAttribute("aria-hidden")).toBe("true");
   });
 
-  test("does not hide non-quotes links", () => {
+  it("does not hide non-quotes links", () => {
     const article = createArticle({ href: "/jack/status/12345" });
 
     const nativeQuotes = appendNativeQuotesLink(
@@ -263,7 +267,7 @@ describe("content DOM behavior", () => {
     expect(nativeQuotes.getAttribute("aria-hidden")).toBeNull();
   });
 
-  test("clicking the quote button navigates to quotes", () => {
+  it("clicking the quote button navigates to quotes", () => {
     const article = createArticle({ href: "/jack/status/12345" });
     const viewer = createQuoteViewer(document);
     viewer.trySetIcon(article);
@@ -273,7 +277,7 @@ describe("content DOM behavior", () => {
     expect(window.location.pathname).toBe("/jack/status/12345/quotes");
   });
 
-  test("does not navigate when a tweet ID is missing", () => {
+  it("does not navigate when a tweet ID is missing", () => {
     const article = createArticle();
     const viewer = createQuoteViewer(document);
     viewer.trySetIcon(article);
@@ -283,7 +287,7 @@ describe("content DOM behavior", () => {
     expect(window.location.pathname).toBe("/");
   });
 
-  test("observes existing articles during setup", () => {
+  it("observes existing articles during setup", () => {
     const article = createArticle({ href: "/jack/status/12345" });
     const observer = createQuoteViewer(document).main();
 
@@ -293,7 +297,7 @@ describe("content DOM behavior", () => {
     expect(observer).toBeInstanceOf(MutationObserver);
   });
 
-  test("setupQuoteViewer uses the global document and observer", () => {
+  it("setupQuoteViewer uses the global document and observer", () => {
     const article = createArticle({ href: "/jack/status/12345" });
 
     const observer = setupQuoteViewer();
@@ -304,7 +308,7 @@ describe("content DOM behavior", () => {
     expect(observer).toBeInstanceOf(MutationObserver);
   });
 
-  test("processes newly inserted articles and nested articles", () => {
+  it("processes newly inserted articles and nested articles", () => {
     const viewer = createQuoteViewer(document);
     const direct = document.createElement("article");
     const wrapper = document.createElement("div");
@@ -336,7 +340,7 @@ describe("content DOM behavior", () => {
     expect(nested.querySelectorAll(".quoted-tweets-container")).toHaveLength(1);
   });
 
-  test("attaches an icon when a pending article later receives a group", () => {
+  it("attaches an icon when a pending article later receives a group", () => {
     const article = createArticle({
       href: "/jack/status/12345",
       includeGroup: false,
