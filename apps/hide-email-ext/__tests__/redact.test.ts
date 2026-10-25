@@ -460,6 +460,26 @@ describe("redactor", () => {
     expect(paragraph?.textContent).not.toContain("Contact");
   });
 
+  test("does not restore a detached nonempty generated text fragment", async () => {
+    setMarkup(document.body, `<p>Contact ${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    const paragraph = document.body.querySelector("p");
+
+    const prefix = [...(paragraph?.childNodes ?? [])].find(
+      (node) => node instanceof Text && node.nodeValue === "Contact "
+    );
+
+    prefix?.remove();
+    redactor.setEmails([]);
+
+    expect(paragraph?.textContent).toBe(email);
+  });
+
   test("does not duplicate generated text after normalizing adjacent originals", async () => {
     setMarkup(document.body, "<p>Before </p>");
     const paragraph = document.body.querySelector("p");

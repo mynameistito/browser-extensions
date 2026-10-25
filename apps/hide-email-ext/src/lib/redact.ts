@@ -141,11 +141,13 @@ const shouldSkipCached = (
 const hasRestorableGeneratedText = (
   generatedText: Map<Text, string>
 ): boolean =>
-  [...generatedText].every(
-    ([node, value]) =>
-      (node.parentNode !== null || value.length === 0) &&
-      (node.parentNode === null || node.nodeValue === value)
-  );
+  [...generatedText].every(([node, value]) => {
+    if (node.parentNode === null) {
+      return value.length === 0;
+    }
+
+    return node.nodeValue === value;
+  });
 
 const areGeneratedNodesContiguous = (
   nodes: Node[],
