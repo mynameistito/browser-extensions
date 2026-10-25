@@ -1,5 +1,6 @@
-import { describe, expect, test } from "bun:test";
 import { generateKeyPairSync } from "node:crypto";
+
+import { it, describe, expect } from "vitest";
 
 import { assertRequiredChromeExtensionKey } from "../chrome-extension-key";
 
@@ -9,26 +10,26 @@ const validPrivateKeyPem = generateKeyPairSync("rsa", {
   publicKeyEncoding: { format: "pem", type: "spki" },
 }).privateKey;
 
-describe("assertRequiredChromeExtensionKey", () => {
-  test("accepts a valid required release key", () => {
+describe(assertRequiredChromeExtensionKey, () => {
+  it("accepts a valid required release key", () => {
     expect(() => {
       assertRequiredChromeExtensionKey(validPrivateKeyPem, true);
     }).not.toThrow();
   });
 
-  test("rejects a missing required release key", () => {
+  it("rejects a missing required release key", () => {
     expect(() => {
       assertRequiredChromeExtensionKey(undefined, true);
     }).toThrow("WXT_CHROME_KEY is required");
   });
 
-  test("rejects a malformed required release key", () => {
+  it("rejects a malformed required release key", () => {
     expect(() => {
       assertRequiredChromeExtensionKey("invalid PEM", true);
     }).toThrow("WXT_CHROME_KEY must contain a valid Chrome private key");
   });
 
-  test("preserves optional local build behavior", () => {
+  it("preserves optional local build behavior", () => {
     expect(() => {
       assertRequiredChromeExtensionKey("invalid PEM", false);
     }).not.toThrow();
