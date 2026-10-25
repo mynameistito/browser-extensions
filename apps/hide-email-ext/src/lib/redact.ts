@@ -9,9 +9,34 @@ const SKIP_TAGS = new Set([
   "SELECT",
 ]);
 
-const SCANNABLE_ATTRS = ["title", "aria-label", "alt", "placeholder"] as const;
+const ARIA_LABEL = "aria-label";
+const SCANNABLE_ATTRS = ["title", ARIA_LABEL, "alt", "placeholder"] as const;
 
 const EMAIL_HINT_RE = /[@.]/u;
+const EMAIL_VISIBILITY_LABEL = "Toggle email visibility";
+const BLUR_FILTER = "blur(4px)";
+const FILTER_TRANSITION = "filter 150ms cubic-bezier(0.4, 0, 0.2, 1)";
+const ARIA_PRESSED = "aria-pressed";
+const HIDDEN_STATE = "false";
+const VISIBLE_STATE = "true";
+const REVEAL_TOOLTIP = "Click to reveal email";
+const HIDE_TOOLTIP = "Click to hide email";
+const TOOLTIP_PADDING = "2px 6px";
+const TOOLTIP_HOVER_DELAY_MS = 500;
+const RANDOM_EMAIL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+const createRandomEmailPart = (length: number): string => {
+  const randomValues = globalThis.crypto.getRandomValues(
+    new Uint8Array(length)
+  );
+
+  return Array.from(randomValues, (value) =>
+    RANDOM_EMAIL_CHARS.charAt(value % RANDOM_EMAIL_CHARS.length)
+  ).join("");
+};
+
+const createDecoyEmail = (): string =>
+  `${createRandomEmailPart(8)}@${createRandomEmailPart(7)}.tld`;
 
 const escapeRegex = (str: string): string =>
   str.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&");
@@ -81,10 +106,170 @@ const tryReplaceText = (
   }
 
   regex.lastIndex = 0;
-  const replaced = text.nodeValue.replaceAll(regex, REDACTION_TOKEN);
 
-  if (replaced !== text.nodeValue) {
-    text.nodeValue = replaced;
+  const link = text.parentElement?.closest("a[href]");
+
+  if (link !== null && link !== undefined) {
+    text.nodeValue = text.nodeValue.replaceAll(regex, REDACTION_TOKEN);
+
+    return;
+  }
+
+  const fragment = text.ownerDocument.createDocumentFragment();
+  let cursor = 0;
+  let matched = false;
+  let match: RegExpExecArray | null;
+
+  while ((match = regex.exec(text.nodeValue)) !== null) {
+    matched = true;
+    const matchEnd = regex.lastIndex;
+    const matchedText = text.nodeValue.slice(match.index, matchEnd);
+    const decoyEmail = createDecoyEmail();
+    fragment.append(
+      text.ownerDocument.createTextNode(
+        text.nodeValue.slice(cursor, match.index)
+      )
+    );
+
+    const wrapper = text.ownerDocument.createElement("span");
+    wrapper.dataset.redacted = "toggle-container";
+    wrapper.style.display = "inline-block";
+    wrapper.style.position = "relative";
+
+    const toggle = text.ownerDocument.createElement("span");
+    toggle.textContent = decoyEmail;
+    toggle.dataset.redacted = "toggle";
+    toggle.setAttribute(ARIA_LABEL, EMAIL_VISIBILITY_LABEL);
+    toggle.setAttribute("aria-description", REVEAL_TOOLTIP);
+    toggle.setAttribute(ARIA_PRESSED, HIDDEN_STATE);
+    toggle.setAttribute("role", "button");
+    toggle.tabIndex = 0;
+    toggle.style.cursor = "pointer";
+    toggle.style.filter = BLUR_FILTER;
+    toggle.style.transition = FILTER_TRANSITION;
+
+    const tooltip = text.ownerDocument.createElement("span");
+    tooltip.textContent = REVEAL_TOOLTIP;
+    tooltip.setAttribute("role", "tooltip");
+    tooltip.setAttribute("aria-hidden", VISIBLE_STATE);
+    tooltip.style.position = "absolute";
+    tooltip.style.bottom = "calc(100% + 6px)";
+    tooltip.style.left = "50%";
+    tooltip.style.transform = "translateX(-50%)";
+    tooltip.style.zIndex = "2147483647";
+    tooltip.style.display = "none";
+    tooltip.style.padding = TOOLTIP_PADDING;
+    tooltip.style.border = "1px solid rgba(255, 255, 255, 0.12)";
+    tooltip.style.borderRadius = "999px";
+    tooltip.style.backgroundColor = "#222";
+    tooltip.style.color = "#fff";
+    tooltip.style.fontFamily = "inherit";
+    tooltip.style.fontSize = "12px";
+    tooltip.style.fontWeight = "500";
+    tooltip.style.lineHeight = "1.2";
+    tooltip.style.whiteSpace = "nowrap";
+    tooltip.style.pointerEvents = "none";
+    tooltip.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.25)";
+
+    const setTooltipVisibility = (visible: boolean): void => {
+      tooltip.style.display = visible ? "block" : "none";
+      tooltip.setAttribute("aria-hidden", String(!visible));
+    };
+
+    let isHovered = false;
+    let isFocused = false;
+    let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const clearHoverTimeout = (): void => {
+      if (hoverTimeout !== null) {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = null;
+      }
+    };
+
+    const scheduleHoverTooltip = (): void => {
+      setTooltipVisibility(false);
+      clearHoverTimeout();
+      hoverTimeout = setTimeout(() => {
+        hoverTimeout = null;
+
+        if (isHovered && !isFocused) {
+          setTooltipVisibility(true);
+        }
+      }, TOOLTIP_HOVER_DELAY_MS);
+    };
+
+    toggle.addEventListener("mouseenter", () => {
+      isHovered = true;
+
+      if (!isFocused) {
+        scheduleHoverTooltip();
+      }
+    });
+    toggle.addEventListener("mouseleave", () => {
+      isHovered = false;
+      clearHoverTimeout();
+
+      if (!isFocused) {
+        setTooltipVisibility(false);
+      }
+    });
+    toggle.addEventListener("focus", () => {
+      isFocused = true;
+      clearHoverTimeout();
+      setTooltipVisibility(true);
+    });
+    toggle.addEventListener("blur", () => {
+      isFocused = false;
+
+      if (isHovered) {
+        scheduleHoverTooltip();
+      } else {
+        setTooltipVisibility(false);
+      }
+    });
+
+    const toggleVisibility = (): void => {
+      const isHidden = toggle.getAttribute(ARIA_PRESSED) === HIDDEN_STATE;
+      clearHoverTimeout();
+      setTooltipVisibility(false);
+      toggle.setAttribute(
+        ARIA_PRESSED,
+        isHidden ? VISIBLE_STATE : HIDDEN_STATE
+      );
+      toggle.setAttribute(
+        ARIA_LABEL,
+        isHidden ? matchedText : EMAIL_VISIBILITY_LABEL
+      );
+      const hint = isHidden ? HIDE_TOOLTIP : REVEAL_TOOLTIP;
+      tooltip.textContent = hint;
+      toggle.setAttribute("aria-description", hint);
+      toggle.style.filter = isHidden ? "none" : BLUR_FILTER;
+      toggle.textContent = isHidden ? matchedText : decoyEmail;
+    };
+
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleVisibility();
+    });
+    toggle.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleVisibility();
+      }
+    });
+
+    wrapper.append(toggle, tooltip);
+    fragment.append(wrapper);
+    cursor = matchEnd;
+  }
+
+  if (matched) {
+    fragment.append(
+      text.ownerDocument.createTextNode(text.nodeValue.slice(cursor))
+    );
+    text.replaceWith(fragment);
   }
 };
 

@@ -8,6 +8,7 @@ const flush = async (): Promise<void> => {
 };
 
 const email = "user@example.com";
+const DECOY_EMAIL_PATTERN = /^[a-z0-9]{8}@[a-z0-9]{7}\.tld$/u;
 
 const setMarkup = (element: Element, markup: string): void => {
   const parsed = new DOMParser().parseFromString(markup, "text/html");
@@ -27,7 +28,7 @@ describe("redactor", () => {
     document.documentElement.removeAttribute("placeholder");
   });
 
-  test("redacts matching email text in document body", async () => {
+  test("blurs matching email text and reveals it when activated", async () => {
     setMarkup(document.body, `<p>Contact me at ${email}</p>`);
 
     redactor = createRedactor();
@@ -36,8 +37,199 @@ describe("redactor", () => {
 
     await flush();
 
-    expect(document.body.textContent).toContain(REDACTION_TOKEN);
-    expect(document.body.textContent).not.toContain(email);
+    const toggle = document.body.querySelector<HTMLElement>('[role="button"]');
+    const decoyEmail = toggle?.textContent ?? "";
+
+    expect(decoyEmail).toMatch(DECOY_EMAIL_PATTERN);
+    expect(decoyEmail).not.toBe(email);
+    expect(toggle?.getAttribute("aria-label")).toBe("Toggle email visibility");
+    expect(toggle?.getAttribute("aria-pressed")).toBe("false");
+    expect(toggle?.style.filter).toBe("blur(4px)");
+    expect(toggle?.style.transition).toBe(
+      "filter 150ms cubic-bezier(0.4, 0, 0.2, 1)"
+    );
+
+    toggle?.dispatchEvent(
+      new Event("click", { bubbles: true, cancelable: true })
+    );
+
+    expect(toggle?.textContent).toBe(email);
+    expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+    expect(toggle?.getAttribute("aria-label")).toBe(email);
+    expect(toggle?.style.filter).toBe("none");
+
+    toggle?.dispatchEvent(
+      new Event("click", { bubbles: true, cancelable: true })
+    );
+
+    expect(toggle?.textContent).toBe(decoyEmail);
+    expect(toggle?.getAttribute("aria-pressed")).toBe("false");
+    expect(toggle?.getAttribute("aria-label")).toBe("Toggle email visibility");
+    expect(toggle?.style.filter).toBe("blur(4px)");
+  });
+
+  test("toggles email visibility with Enter and Space", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+
+    await flush();
+
+    const toggle = document.body.querySelector<HTMLElement>('[role="button"]');
+
+    for (const key of ["Enter", " "]) {
+      const reveal = new window.KeyboardEvent("keydown", {
+        bubbles: true,
+        cancelable: true,
+        key,
+      });
+
+      toggle?.dispatchEvent(reveal);
+
+      expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+      expect(toggle?.style.filter).toBe("none");
+      expect(reveal.defaultPrevented).toBe(true);
+
+      const hide = new window.KeyboardEvent("keydown", {
+        bubbles: true,
+        cancelable: true,
+        key,
+      });
+
+      toggle?.dispatchEvent(hide);
+
+      expect(toggle?.getAttribute("aria-pressed")).toBe("false");
+      expect(toggle?.style.filter).toBe("blur(4px)");
+      expect(hide.defaultPrevented).toBe(true);
+    }
+  });
+
+  test("shows a reveal tooltip on hover and focus", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+
+    await flush();
+
+    const toggle = document.body.querySelector<HTMLElement>('[role="button"]');
+
+    const tooltip =
+      toggle?.parentElement?.querySelector<HTMLElement>('[role="tooltip"]');
+
+    expect(toggle?.getAttribute("aria-description")).toBe(
+      "Click to reveal email"
+    );
+    expect(tooltip?.textContent).toBe("Click to reveal email");
+    expect(tooltip?.style.display).toBe("none");
+    expect(tooltip?.style.padding).toBe("2px 6px");
+
+    toggle?.dispatchEvent(new Event("focus"));
+
+    expect(tooltip?.style.display).toBe("block");
+
+    toggle?.dispatchEvent(new Event("blur"));
+    expect(tooltip?.style.display).toBe("none");
+
+    toggle?.dispatchEvent(new Event("mouseenter"));
+    expect(tooltip?.style.display).toBe("none");
+
+    await Bun.sleep(550);
+
+    expect(tooltip?.style.display).toBe("block");
+
+    toggle?.dispatchEvent(
+      new Event("click", { bubbles: true, cancelable: true })
+    );
+
+    expect(tooltip?.textContent).toBe("Click to hide email");
+    expect(toggle?.getAttribute("aria-description")).toBe(
+      "Click to hide email"
+    );
+
+    toggle?.dispatchEvent(new Event("mouseleave"));
+
+    expect(tooltip?.style.display).toBe("none");
+  });
+
+  test("dismisses the visible tooltip when the email is clicked", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+
+    await flush();
+
+    const toggle = document.body.querySelector<HTMLElement>('[role="button"]');
+
+    const tooltip =
+      toggle?.parentElement?.querySelector<HTMLElement>('[role="tooltip"]');
+
+    toggle?.dispatchEvent(new Event("mouseenter"));
+    await Bun.sleep(550);
+
+    expect(tooltip?.style.display).toBe("block");
+
+    toggle?.dispatchEvent(
+      new Event("click", { bubbles: true, cancelable: true })
+    );
+
+    expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+    expect(tooltip?.textContent).toBe("Click to hide email");
+    expect(tooltip?.style.display).toBe("none");
+    expect(tooltip?.getAttribute("aria-hidden")).toBe("true");
+  });
+
+  test("keeps mailto links clickable while redacting their email text", async () => {
+    setMarkup(document.body, `<a href="mailto:${email}">Contact ${email}</a>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+
+    await flush();
+
+    const link = document.body.querySelector("a");
+    expect(link?.textContent).toBe(`Contact ${REDACTION_TOKEN}`);
+    expect(link?.querySelector('[role="button"]')).toBeNull();
+
+    let receivedClick = false;
+    link?.addEventListener("click", () => {
+      receivedClick = true;
+    });
+    const click = new Event("click", { bubbles: true, cancelable: true });
+    link?.dispatchEvent(click);
+
+    expect(receivedClick).toBe(true);
+    expect(click.defaultPrevented).toBe(false);
+  });
+
+  test("keeps other links clickable while redacting their email text", async () => {
+    setMarkup(document.body, `<a href="/profile">${email}</a>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+
+    await flush();
+
+    const link = document.body.querySelector("a");
+    expect(link?.textContent).toBe(REDACTION_TOKEN);
+    expect(link?.querySelector('[role="button"]')).toBeNull();
+
+    let receivedClick = false;
+    link?.addEventListener("click", () => {
+      receivedClick = true;
+    });
+    const click = new Event("click", { bubbles: true, cancelable: true });
+    link?.dispatchEvent(click);
+
+    expect(receivedClick).toBe(true);
+    expect(click.defaultPrevented).toBe(false);
   });
 
   test("does not redact inside skipped tags", async () => {
@@ -113,9 +305,11 @@ describe("redactor", () => {
 
     await flush();
 
-    const spans = document.body.querySelectorAll("span");
-    expect(spans[0]?.textContent).toBe(REDACTION_TOKEN);
-    expect(spans[1]?.textContent).toBe(REDACTION_TOKEN);
+    const toggles = document.body.querySelectorAll('[role="button"]');
+    expect(toggles[0]?.textContent).toMatch(DECOY_EMAIL_PATTERN);
+    expect(toggles[0]?.textContent).not.toBe(email);
+    expect(toggles[1]?.textContent).toMatch(DECOY_EMAIL_PATTERN);
+    expect(toggles[1]?.textContent).not.toBe(second);
   });
 
   test("setEmails with empty array disables redaction", async () => {
@@ -142,7 +336,9 @@ describe("redactor", () => {
     redactor.setEmails([email]);
     await flush();
 
-    expect(document.body.textContent).toContain(REDACTION_TOKEN);
+    expect(document.body.querySelector('[role="button"]')?.textContent).toMatch(
+      DECOY_EMAIL_PATTERN
+    );
   });
 
   test("handles empty text nodes without error", async () => {
@@ -231,7 +427,9 @@ describe("redactor", () => {
       document.dispatchEvent(new Event("DOMContentLoaded"));
       await flush();
 
-      expect(document.body.textContent).toContain(REDACTION_TOKEN);
+      expect(
+        document.body.querySelector('[role="button"]')?.textContent
+      ).toMatch(DECOY_EMAIL_PATTERN);
     } finally {
       if (originalDescriptor) {
         Object.defineProperty(document, "readyState", originalDescriptor);
