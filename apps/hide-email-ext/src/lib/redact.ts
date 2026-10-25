@@ -37,22 +37,25 @@ interface AttributeRestoration {
 
 interface WrapperRestoration {
   readonly isRestorable: () => boolean;
-  readonly restore: () => void;
+  readonly restore: () => boolean;
   readonly restoreGroup?: () => boolean;
   readonly dispose: () => void;
   readonly cancelPendingHover: () => void;
   readonly pattern: string | null;
   readonly detached: boolean;
+  readonly detachedReference: WeakRef<HTMLElement> | null;
 }
 
 interface RedactorRestorations {
   readonly text: WeakMap<Text, TextRestoration>;
   readonly attributes: WeakMap<Element, Map<string, AttributeRestoration>>;
   readonly wrappers: WeakMap<HTMLElement, WrapperRestoration>;
+  readonly detachedWrappers: Set<WeakRef<HTMLElement>>;
 }
 
 const createRestorations = (): RedactorRestorations => ({
   attributes: new WeakMap(),
+  detachedWrappers: new Set(),
   text: new WeakMap(),
   wrappers: new WeakMap(),
 });
@@ -119,6 +122,35 @@ const shouldSkipCached = (
 
   return result;
 };
+
+const hasRestorableGeneratedText = (
+  generatedText: Map<Text, string>
+): boolean =>
+  [...generatedText].every(
+    ([node, value]) =>
+      (node.parentNode !== null || value.length === 0) &&
+      (node.parentNode === null || node.nodeValue === value)
+  );
+
+const areGeneratedNodesContiguous = (
+  nodes: Node[],
+  parent: ParentNode
+): boolean =>
+  nodes.every(
+    (node, index) =>
+      node.parentNode === parent &&
+      (index === 0 || nodes[index - 1]?.nextSibling === node)
+  );
+
+const areWrappersRestorable = (
+  wrappers: HTMLElement[],
+  restorations: RedactorRestorations
+): boolean =>
+  wrappers.every((wrapper) => {
+    const restoration = restorations.wrappers.get(wrapper);
+
+    return restoration !== undefined && restoration.isRestorable();
+  });
 
 const tryReplaceText = (
   text: Text,
@@ -331,7 +363,7 @@ const tryReplaceText = (
     };
 
     const isRestorable = (): boolean => {
-      if (wrapper.parentNode === null || wrapper.childNodes.length !== 2) {
+      if (wrapper.childNodes.length !== 2) {
         return false;
       }
 
@@ -347,6 +379,7 @@ const tryReplaceText = (
     restorations.wrappers.set(wrapper, {
       cancelPendingHover: clearHoverTimeout,
       detached: false,
+      detachedReference: null,
       dispose,
       isRestorable,
       pattern: regex.source,
@@ -354,10 +387,20 @@ const tryReplaceText = (
         dispose();
 
         if (!isRestorable()) {
-          return;
+          return false;
         }
 
-        wrapper.replaceWith(wrapper.ownerDocument.createTextNode(matchedText));
+        const originalText = wrapper.ownerDocument.createTextNode(matchedText);
+
+        if (wrapper.parentNode === null) {
+          wrapper.replaceChildren(originalText);
+          delete wrapper.dataset.redacted;
+          wrapper.removeAttribute("style");
+        } else {
+          wrapper.replaceWith(originalText);
+        }
+
+        return true;
       },
     });
     cursor = matchEnd;
@@ -390,32 +433,16 @@ const tryReplaceText = (
         return false;
       }
 
-      if (liveNodes.some((node) => node.parentNode !== parent)) {
+      if (!hasRestorableGeneratedText(generatedText)) {
         return false;
       }
 
-      for (let index = 1; index < liveNodes.length; index += 1) {
-        if (liveNodes[index - 1]?.nextSibling !== liveNodes[index]) {
-          return false;
-        }
+      if (!areGeneratedNodesContiguous(liveNodes, parent)) {
+        return false;
       }
 
-      for (const [node, value] of generatedText) {
-        if (node.parentNode === null && value.length === 0) {
-          continue;
-        }
-
-        if (node.nodeValue === null || node.nodeValue !== value) {
-          return false;
-        }
-      }
-
-      for (const wrapper of wrappers) {
-        const restoration = restorations.wrappers.get(wrapper);
-
-        if (restoration === undefined || !restoration.isRestorable()) {
-          return false;
-        }
+      if (!areWrappersRestorable(wrappers, restorations)) {
+        return false;
       }
 
       for (const wrapper of wrappers) {
@@ -493,17 +520,83 @@ const scanAttributes = (
   }
 };
 
+const scanTextRun = (
+  root: Node,
+  textRun: Text[],
+  regex: RegExp,
+  skipCache: WeakMap<Element, boolean>,
+  restorations: RedactorRestorations
+): void => {
+  const combined = textRun.map((text) => text.nodeValue ?? "").join("");
+  regex.lastIndex = 0;
+
+  if (
+    regex.test(combined) &&
+    textRun.every((text) => text.parentNode === root)
+  ) {
+    const [firstText, ...remainingText] = textRun;
+
+    if (firstText) {
+      firstText.nodeValue = combined;
+
+      for (const text of remainingText) {
+        text.remove();
+      }
+
+      tryReplaceText(firstText, regex, skipCache, restorations);
+
+      return;
+    }
+  }
+
+  for (const text of textRun) {
+    tryReplaceText(text, regex, skipCache, restorations);
+  }
+};
+
+const scanTextChildren = (
+  root: Node,
+  regex: RegExp,
+  skipCache: WeakMap<Element, boolean>,
+  restorations: RedactorRestorations
+): void => {
+  const children = [...root.childNodes];
+  let index = 0;
+
+  while (index < children.length) {
+    const textRun: Text[] = [];
+
+    while (children[index] instanceof Text) {
+      const candidate = children[index];
+
+      if (candidate instanceof Text && candidate.parentNode === root) {
+        textRun.push(candidate);
+      }
+
+      index += 1;
+    }
+
+    if (textRun.length === 1) {
+      const [onlyText] = textRun;
+
+      if (onlyText) {
+        tryReplaceText(onlyText, regex, skipCache, restorations);
+      }
+    } else if (textRun.length > 1) {
+      scanTextRun(root, textRun, regex, skipCache, restorations);
+    } else {
+      index += 1;
+    }
+  }
+};
+
 const scanSubtree = (
   root: Node,
   regex: RegExp,
   skipCache: WeakMap<Element, boolean>,
   restorations: RedactorRestorations
 ): void => {
-  for (const child of root.childNodes) {
-    if (child.nodeType === Node.TEXT_NODE && child instanceof Text) {
-      tryReplaceText(child, regex, skipCache, restorations);
-    }
-  }
+  scanTextChildren(root, regex, skipCache, restorations);
 
   if (root instanceof Element) {
     scanAttributes(root, regex, skipCache, restorations);
@@ -580,7 +673,11 @@ const restoreTrackedElement = (
     return false;
   }
 
-  if (wrapper.restoreGroup === undefined || !wrapper.restoreGroup()) {
+  if (
+    wrapper.detached ||
+    wrapper.restoreGroup === undefined ||
+    !wrapper.restoreGroup()
+  ) {
     wrapper.restore();
   }
 
@@ -632,7 +729,13 @@ const cleanupRemovedSubtree = (
 
     if (wrapper) {
       wrapper.cancelPendingHover();
-      restorations.wrappers.set(node, { ...wrapper, detached: true });
+      const detachedReference = new WeakRef(node);
+      restorations.detachedWrappers.add(detachedReference);
+      restorations.wrappers.set(node, {
+        ...wrapper,
+        detached: true,
+        detachedReference,
+      });
 
       return;
     }
@@ -661,6 +764,10 @@ const refreshReinsertedWrappers = (
       if (restoration.pattern === (regex?.source ?? null)) {
         restorations.wrappers.set(node, { ...restoration, detached: false });
 
+        if (restoration.detachedReference) {
+          restorations.detachedWrappers.delete(restoration.detachedReference);
+        }
+
         return;
       }
 
@@ -687,6 +794,19 @@ const refreshReinsertedWrappers = (
     if (childNode.parentNode === node) {
       refreshReinsertedWrappers(childNode, regex, restorations);
     }
+  }
+};
+
+const restoreDetachedWrappers = (restorations: RedactorRestorations): void => {
+  for (const reference of restorations.detachedWrappers) {
+    const wrapper = reference.deref();
+    const shouldRestore = wrapper !== undefined && !wrapper.isConnected;
+
+    if (shouldRestore && wrapper !== undefined) {
+      restoreTrackedContent(wrapper, restorations);
+    }
+
+    restorations.detachedWrappers.delete(reference);
   }
 };
 
@@ -839,6 +959,7 @@ export const createRedactor = (root?: Document): Redactor => {
 
   const stop = (): void => {
     drainPendingMutations();
+    restoreDetachedWrappers(restorations);
     observer?.disconnect();
     observer = null;
     pendingMutations = [];
@@ -847,6 +968,7 @@ export const createRedactor = (root?: Document): Redactor => {
   return {
     setEmails(emails: string[]) {
       drainPendingMutations();
+      restoreDetachedWrappers(restorations);
       restoreTrackedContent(doc.documentElement ?? doc, restorations);
       regex = buildRegex(emails);
 

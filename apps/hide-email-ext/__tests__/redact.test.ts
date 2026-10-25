@@ -405,6 +405,74 @@ describe("redactor", () => {
     expect(document.body.querySelectorAll('[role="button"]')).toHaveLength(1);
   });
 
+  test("rescans an edited adjacent text run without losing the page edit", async () => {
+    const longerEmail = `${email}.au`;
+    setMarkup(document.body, `<p>${longerEmail}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email, longerEmail]);
+    redactor.start();
+    await flush();
+
+    const paragraph = document.body.querySelector("p");
+
+    const suffix = [...(paragraph?.childNodes ?? [])].find(
+      (node) => node instanceof Text && node.nodeValue === ".au"
+    );
+
+    if (suffix instanceof Text) {
+      suffix.nodeValue = `${suffix.nodeValue} updated`;
+    }
+
+    redactor.setEmails([longerEmail]);
+
+    expect(paragraph?.textContent).not.toContain(longerEmail);
+    expect(paragraph?.textContent).toContain(" updated");
+
+    await flush();
+
+    expect(paragraph?.textContent).not.toContain(longerEmail);
+    expect(paragraph?.textContent).toContain(" updated");
+  });
+
+  test("does not restore a removed generated nonempty text fragment", async () => {
+    setMarkup(document.body, `<p>Contact ${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    const paragraph = document.body.querySelector("p");
+
+    const contact = [...(paragraph?.childNodes ?? [])].find(
+      (node) => node instanceof Text && node.nodeValue === "Contact "
+    );
+
+    contact?.remove();
+
+    redactor.setEmails([]);
+
+    expect(paragraph?.textContent).toBe(email);
+    expect(paragraph?.textContent).not.toContain("Contact");
+  });
+
+  test("does not duplicate generated text after normalizing adjacent originals", async () => {
+    setMarkup(document.body, "<p>Before </p>");
+    const paragraph = document.body.querySelector("p");
+    paragraph?.append(document.createTextNode(`Contact ${email}`));
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    paragraph?.normalize();
+    redactor.setEmails([]);
+
+    expect(paragraph?.textContent).toBe(`Before Contact ${email}`);
+  });
+
   test("restores text matches in later siblings after a text group is restored", async () => {
     setMarkup(document.body, `<p>${email}<b>${email}</b></p>`);
 
@@ -567,6 +635,35 @@ describe("redactor", () => {
     expect(toggle?.getAttribute("aria-pressed")).toBe("true");
 
     redactor.setEmails([]);
+    expect(paragraph?.textContent).toBe(email);
+  });
+
+  test("restores an individually detached toggle on clear and stop", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    const paragraph = document.body.querySelector("p");
+
+    const wrapper = paragraph?.querySelector<HTMLElement>(
+      '[data-redacted="toggle-container"]'
+    );
+
+    wrapper?.remove();
+
+    redactor.setEmails([]);
+    redactor.stop();
+
+    if (wrapper) {
+      paragraph?.append(wrapper);
+    }
+
+    expect(wrapper?.textContent).toBe(email);
+    expect(wrapper?.querySelector('[role="button"]')).toBeNull();
+    expect(wrapper?.dataset.redacted).toBeUndefined();
     expect(paragraph?.textContent).toBe(email);
   });
 
