@@ -27,7 +27,7 @@ describe("redactor", () => {
     document.documentElement.removeAttribute("placeholder");
   });
 
-  test("redacts matching email text in document body", async () => {
+  test("blurs matching email text and reveals it when activated", async () => {
     setMarkup(document.body, `<p>Contact me at ${email}</p>`);
 
     redactor = createRedactor();
@@ -36,8 +36,25 @@ describe("redactor", () => {
 
     await flush();
 
-    expect(document.body.textContent).toContain(REDACTION_TOKEN);
-    expect(document.body.textContent).not.toContain(email);
+    const toggle = document.body.querySelector<HTMLElement>('[role="button"]');
+    expect(toggle?.textContent).toBe(email);
+    expect(toggle?.getAttribute("aria-label")).toBe("Toggle email visibility");
+    expect(toggle?.getAttribute("aria-pressed")).toBe("false");
+    expect(toggle?.style.filter).toBe("blur(4px)");
+
+    toggle?.dispatchEvent(
+      new Event("click", { bubbles: true, cancelable: true })
+    );
+
+    expect(toggle?.getAttribute("aria-pressed")).toBe("true");
+    expect(toggle?.style.filter).toBe("none");
+
+    toggle?.dispatchEvent(
+      new Event("click", { bubbles: true, cancelable: true })
+    );
+
+    expect(toggle?.getAttribute("aria-pressed")).toBe("false");
+    expect(toggle?.style.filter).toBe("blur(4px)");
   });
 
   test("does not redact inside skipped tags", async () => {
@@ -113,9 +130,9 @@ describe("redactor", () => {
 
     await flush();
 
-    const spans = document.body.querySelectorAll("span");
-    expect(spans[0]?.textContent).toBe(REDACTION_TOKEN);
-    expect(spans[1]?.textContent).toBe(REDACTION_TOKEN);
+    const toggles = document.body.querySelectorAll('[role="button"]');
+    expect(toggles[0]?.textContent).toBe(email);
+    expect(toggles[1]?.textContent).toBe(second);
   });
 
   test("setEmails with empty array disables redaction", async () => {
@@ -142,7 +159,9 @@ describe("redactor", () => {
     redactor.setEmails([email]);
     await flush();
 
-    expect(document.body.textContent).toContain(REDACTION_TOKEN);
+    expect(document.body.querySelector('[role="button"]')?.textContent).toBe(
+      email
+    );
   });
 
   test("handles empty text nodes without error", async () => {
@@ -231,7 +250,9 @@ describe("redactor", () => {
       document.dispatchEvent(new Event("DOMContentLoaded"));
       await flush();
 
-      expect(document.body.textContent).toContain(REDACTION_TOKEN);
+      expect(document.body.querySelector('[role="button"]')?.textContent).toBe(
+        email
+      );
     } finally {
       if (originalDescriptor) {
         Object.defineProperty(document, "readyState", originalDescriptor);

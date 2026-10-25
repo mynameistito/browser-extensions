@@ -12,6 +12,11 @@ const SKIP_TAGS = new Set([
 const SCANNABLE_ATTRS = ["title", "aria-label", "alt", "placeholder"] as const;
 
 const EMAIL_HINT_RE = /[@.]/u;
+const EMAIL_VISIBILITY_LABEL = "Toggle email visibility";
+const BLUR_FILTER = "blur(4px)";
+const ARIA_PRESSED = "aria-pressed";
+const HIDDEN_STATE = "false";
+const VISIBLE_STATE = "true";
 
 const escapeRegex = (str: string): string =>
   str.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&");
@@ -81,10 +86,61 @@ const tryReplaceText = (
   }
 
   regex.lastIndex = 0;
-  const replaced = text.nodeValue.replaceAll(regex, REDACTION_TOKEN);
+  const fragment = text.ownerDocument.createDocumentFragment();
+  let cursor = 0;
+  let matched = false;
+  let match: RegExpExecArray | null;
 
-  if (replaced !== text.nodeValue) {
-    text.nodeValue = replaced;
+  while ((match = regex.exec(text.nodeValue)) !== null) {
+    matched = true;
+    const matchEnd = regex.lastIndex;
+    const matchedText = text.nodeValue.slice(match.index, matchEnd);
+    fragment.append(
+      text.ownerDocument.createTextNode(
+        text.nodeValue.slice(cursor, match.index)
+      )
+    );
+
+    const toggle = text.ownerDocument.createElement("span");
+    toggle.textContent = matchedText;
+    toggle.dataset.redacted = "toggle";
+    toggle.setAttribute("aria-label", EMAIL_VISIBILITY_LABEL);
+    toggle.setAttribute(ARIA_PRESSED, HIDDEN_STATE);
+    toggle.setAttribute("role", "button");
+    toggle.tabIndex = 0;
+    toggle.style.cursor = "pointer";
+    toggle.style.filter = BLUR_FILTER;
+
+    const toggleVisibility = (): void => {
+      const isHidden = toggle.getAttribute(ARIA_PRESSED) === HIDDEN_STATE;
+      toggle.setAttribute(
+        ARIA_PRESSED,
+        isHidden ? VISIBLE_STATE : HIDDEN_STATE
+      );
+      toggle.style.filter = isHidden ? "none" : BLUR_FILTER;
+    };
+
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleVisibility();
+    });
+    toggle.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleVisibility();
+      }
+    });
+
+    fragment.append(toggle);
+    cursor = matchEnd;
+  }
+
+  if (matched) {
+    fragment.append(
+      text.ownerDocument.createTextNode(text.nodeValue.slice(cursor))
+    );
+    text.replaceWith(fragment);
   }
 };
 
