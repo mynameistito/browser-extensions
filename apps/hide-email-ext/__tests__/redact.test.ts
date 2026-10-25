@@ -1,6 +1,9 @@
 import { afterEach, describe, expect, test } from "bun:test";
 
-import { createRedactor } from "../src/lib/redact";
+import {
+  createRedactor,
+  pruneDetachedWrapperReferences,
+} from "../src/lib/redact";
 import { REDACTION_TOKEN } from "../src/lib/types";
 
 const flush = async (): Promise<void> => {
@@ -471,6 +474,119 @@ describe("redactor", () => {
     redactor.setEmails([]);
 
     expect(paragraph?.textContent).toBe(`Before Contact ${email}`);
+  });
+
+  test("immediately redacts moved text nodes from links", async () => {
+    setMarkup(document.body, `<a href="/old">${email}</a><a href="/new"></a>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    const [source, destination] = document.body.querySelectorAll("a");
+    const movedText = source?.firstChild;
+
+    if (movedText instanceof Text) {
+      destination?.append(movedText);
+    }
+
+    expect(destination?.textContent).not.toContain(email);
+
+    await flush();
+
+    expect(destination?.textContent).not.toContain(email);
+    expect(destination?.textContent).toContain(REDACTION_TOKEN);
+  });
+
+  test("does not restore a deleted match when another match's group is restored", async () => {
+    const second = "admin@other.io";
+    setMarkup(document.body, `<p>${email} and ${second}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email, second]);
+    redactor.start();
+    await flush();
+
+    const paragraph = document.body.querySelector("p");
+
+    const wrappers = paragraph?.querySelectorAll<HTMLElement>(
+      '[data-redacted="toggle-container"]'
+    );
+
+    wrappers?.[0]?.remove();
+    await flush();
+    paragraph?.remove();
+    await flush();
+
+    redactor.setEmails([]);
+
+    expect(paragraph?.textContent).not.toContain(email);
+    expect(paragraph?.textContent).toContain(second);
+  });
+
+  test("preserves adjacent editable text nodes during scanning", async () => {
+    const editable = document.createElement("div");
+    editable.contentEditable = "true";
+    const firstText = document.createTextNode("Contact ");
+    const secondText = document.createTextNode(email);
+    editable.append(firstText, secondText);
+    document.body.replaceChildren(editable);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    expect(editable.childNodes[0]).toBe(firstText);
+    expect(editable.childNodes[1]).toBe(secondText);
+    expect(editable.textContent).toBe(`Contact ${email}`);
+
+    firstText.nodeValue = "Edited ";
+    expect(editable.childNodes[0]).toBe(firstText);
+    expect(editable.childNodes[1]).toBe(secondText);
+  });
+
+  test("retains detached state when a regenerated wrapper is removed in the same batch", async () => {
+    setMarkup(document.body, `<p>${email}</p>`);
+
+    redactor = createRedactor();
+    redactor.setEmails([email]);
+    redactor.start();
+    await flush();
+
+    redactor.setEmails([email]);
+    const paragraph = document.body.querySelector("p");
+
+    const wrapper = paragraph?.querySelector<HTMLElement>(
+      '[data-redacted="toggle-container"]'
+    );
+
+    wrapper?.remove();
+    await flush();
+
+    redactor.setEmails([]);
+    redactor.stop();
+
+    if (wrapper) {
+      paragraph?.append(wrapper);
+    }
+
+    expect(wrapper?.textContent).toBe(email);
+    expect(wrapper?.querySelector('[role="button"]')).toBeNull();
+    expect(wrapper?.dataset.redacted).toBeUndefined();
+  });
+
+  test("prunes collected detached-wrapper references deterministically", () => {
+    const reference = new WeakRef(document.createElement("span"));
+    Object.defineProperty(reference, "deref", {
+      value: () => {},
+    });
+    const references = new Set([reference]);
+
+    pruneDetachedWrapperReferences(references);
+
+    expect(references.size).toBe(0);
   });
 
   test("restores text matches in later siblings after a text group is restored", async () => {

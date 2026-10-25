@@ -60,6 +60,19 @@ const createRestorations = (): RedactorRestorations => ({
   wrappers: new WeakMap(),
 });
 
+/** Remove collected wrapper references from the detached-wrapper registry.
+ * @param references - Detached wrapper references to sweep.
+ */
+export const pruneDetachedWrapperReferences = (
+  references: Set<WeakRef<HTMLElement>>
+): void => {
+  for (const reference of references) {
+    if (reference.deref() === undefined) {
+      references.delete(reference);
+    }
+  }
+};
+
 const createRandomEmailPart = (length: number): string => {
   const randomValues = globalThis.crypto.getRandomValues(
     new Uint8Array(length)
@@ -144,12 +157,17 @@ const areGeneratedNodesContiguous = (
 
 const areWrappersRestorable = (
   wrappers: HTMLElement[],
+  parent: ParentNode,
   restorations: RedactorRestorations
 ): boolean =>
   wrappers.every((wrapper) => {
     const restoration = restorations.wrappers.get(wrapper);
 
-    return restoration !== undefined && restoration.isRestorable();
+    return (
+      wrapper.parentNode === parent &&
+      restoration !== undefined &&
+      restoration.isRestorable()
+    );
   });
 
 const tryReplaceText = (
@@ -441,7 +459,7 @@ const tryReplaceText = (
         return false;
       }
 
-      if (!areWrappersRestorable(wrappers, restorations)) {
+      if (!areWrappersRestorable(wrappers, parent, restorations)) {
         return false;
       }
 
@@ -527,6 +545,12 @@ const scanTextRun = (
   skipCache: WeakMap<Element, boolean>,
   restorations: RedactorRestorations
 ): void => {
+  const [firstText] = textRun;
+
+  if (firstText === undefined || shouldSkipCached(firstText, skipCache)) {
+    return;
+  }
+
   const combined = textRun.map((text) => text.nodeValue ?? "").join("");
   regex.lastIndex = 0;
 
@@ -534,16 +558,16 @@ const scanTextRun = (
     regex.test(combined) &&
     textRun.every((text) => text.parentNode === root)
   ) {
-    const [firstText, ...remainingText] = textRun;
+    const [matchedFirstText, ...remainingText] = textRun;
 
-    if (firstText) {
-      firstText.nodeValue = combined;
+    if (matchedFirstText) {
+      matchedFirstText.nodeValue = combined;
 
       for (const text of remainingText) {
         text.remove();
       }
 
-      tryReplaceText(firstText, regex, skipCache, restorations);
+      tryReplaceText(matchedFirstText, regex, skipCache, restorations);
 
       return;
     }
@@ -729,7 +753,9 @@ const cleanupRemovedSubtree = (
 
     if (wrapper) {
       wrapper.cancelPendingHover();
-      const detachedReference = new WeakRef(node);
+
+      const detachedReference = wrapper.detachedReference ?? new WeakRef(node);
+
       restorations.detachedWrappers.add(detachedReference);
       restorations.wrappers.set(node, {
         ...wrapper,
@@ -744,19 +770,28 @@ const cleanupRemovedSubtree = (
   restoreTrackedContent(node, restorations);
 
   if (wasReinserted && regex) {
-    const scanRoot = node.parentNode === null ? previousParent : node;
+    if (node instanceof Text) {
+      tryReplaceText(node, regex, new WeakMap(), restorations);
+    } else {
+      const scanRoot = node.parentNode === null ? previousParent : node;
 
-    if (scanRoot !== null) {
-      scanSubtree(scanRoot, regex, new WeakMap(), restorations);
+      if (scanRoot !== null) {
+        scanSubtree(scanRoot, regex, new WeakMap(), restorations);
+      }
     }
   }
 };
 
 const refreshReinsertedWrappers = (
   node: Node,
+  doc: Document,
   regex: RegExp | null,
   restorations: RedactorRestorations
 ): void => {
+  if (!doc.documentElement.contains(node)) {
+    return;
+  }
+
   if (node instanceof HTMLElement) {
     const restoration = restorations.wrappers.get(node);
 
@@ -792,7 +827,7 @@ const refreshReinsertedWrappers = (
 
   for (const childNode of children) {
     if (childNode.parentNode === node) {
-      refreshReinsertedWrappers(childNode, regex, restorations);
+      refreshReinsertedWrappers(childNode, doc, regex, restorations);
     }
   }
 };
@@ -840,6 +875,8 @@ export const createRedactor = (root?: Document): Redactor => {
     mutations: readonly MutationRecord[],
     activeRegex: RegExp | null
   ): void => {
+    pruneDetachedWrapperReferences(restorations.detachedWrappers);
+
     for (const mutation of mutations) {
       for (const node of mutation.removedNodes) {
         cleanupRemovedSubtree(node, doc, activeRegex, restorations);
@@ -848,7 +885,7 @@ export const createRedactor = (root?: Document): Redactor => {
 
     for (const mutation of mutations) {
       for (const node of mutation.addedNodes) {
-        refreshReinsertedWrappers(node, activeRegex, restorations);
+        refreshReinsertedWrappers(node, doc, activeRegex, restorations);
       }
     }
   };
