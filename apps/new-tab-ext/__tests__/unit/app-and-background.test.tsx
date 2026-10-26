@@ -86,22 +86,31 @@ describe("new-tab app and background layer", () => {
   });
 
   it("keeps a local fallback when Wikimedia is unavailable", async () => {
-    vi.stubGlobal(
-      "fetch",
-      vi.fn<typeof fetch>().mockRejectedValue(new Error("offline"))
-    );
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockRejectedValue(new Error("offline"));
+
+    vi.stubGlobal("fetch", fetchMock);
+
     renderWithPreferences(<BackgroundLayer />);
     await waitFor(() => {
       expect(screen.queryByRole("img")).toBeNull();
+    });
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledOnce();
     });
   });
 
   it("composes dashboard settings and arrange mode from the new-tab page", async () => {
     const user = userEvent.setup();
-    vi.stubGlobal(
-      "fetch",
-      vi.fn<typeof fetch>().mockRejectedValue(new Error("offline"))
-    );
+
+    const fetchMock = vi
+      .fn<typeof fetch>()
+      .mockRejectedValue(new Error("offline"));
+
+    vi.stubGlobal("fetch", fetchMock);
+
     renderWithPreferences(<App />);
 
     await waitFor(() => {
@@ -109,6 +118,10 @@ describe("new-tab app and background layer", () => {
         "disabled",
         false
       );
+    });
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledOnce();
     });
     expect(document.documentElement.dataset.theme).toBe("system");
     await user.click(screen.getByRole("button", { name: "Arrange" }));
