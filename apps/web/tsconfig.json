@@ -1,5 +1,5 @@
 {
-  "extends": "./.blume-verify/tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
@@ -7,5 +7,10 @@
     "target": "ESNext",
     "types": ["@cloudflare/workers-types", "bun"]
   },
-  "include": [".blume-verify/.astro/types.d.ts", "**/*"]
+  "include": [
+    "alchemy.run.ts",
+    "blume.config.ts",
+    "scripts/**/*.ts",
+    "src/**/*.ts"
+  ]
 }
