@@ -13,7 +13,7 @@ Root-level Bun/Node TypeScript utilities used by the workspace and individual ap
 | Signing-key CLI | `generate-keys.ts` | Argument handling and per-app key generation orchestration. |
 | Signing-key logic | `generate-keys-core.ts`, `chrome-extension-key.ts` | Core operations and key/secret mapping. |
 | Changeset helper | `changeset-add.ts`, `changeset-core.ts` | Root Changeset command and shared generation logic. |
-| Tests | `__tests__/` | Root script tests; not automatically run by root Turbo `test`. |
+| Tests | `__tests__/` | Root script tests run through the `test:root` Turbo task. |
 
 ## CONVENTIONS
 
@@ -25,4 +25,4 @@ Root-level Bun/Node TypeScript utilities used by the workspace and individual ap
 
 ## TESTING
 
-Root tests use Bun's test runner. Test extracted core logic without invoking external release or GitHub commands; run an individual test with `bun test scripts/__tests__/generate-keys.test.ts`.
+Root tests use Vitest. Test extracted core logic without invoking external release or GitHub commands; run an individual test with `bunx vitest run scripts/__tests__/generate-keys.test.ts`.

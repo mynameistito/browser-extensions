@@ -146,7 +146,7 @@ Opt-in, gated by `enableStats` setting + `idle` permission.
 - [ ] Unit tests: ranges (preset → time window), exporters (CSV/JSON/HTML escaping), tracker state machine
 - [ ] Integration tests: storage roundtrip with zod (already partial)
 - [ ] E2E smoke with `@wxt-dev/test` or Playwright headless: load extension, open history page, search, delete, verify
-- [ ] GitHub Actions: matrix `[chrome, firefox]` → `bun run check && bun test && bun run build && bun run zip`
+- [ ] GitHub Actions: matrix `[chrome, firefox]` → `bun run check && bun run test && bun run build && bun run zip`
 - [ ] Upload zip artifacts on tag
 
 **Files:** `.github/workflows/ci.yml`, `tests/e2e/*`

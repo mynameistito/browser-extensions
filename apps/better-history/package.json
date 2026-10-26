@@ -27,7 +27,7 @@
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
     "typecheck": "tsc --noEmit",
-    "test": "bun test",
+    "test": "vitest run",
     "dev": "bun ../../scripts/run-wxt.ts",
     "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
     "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",
@@ -60,6 +60,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "^6.1.2",
+    "vitest": "catalog:",
     "wxt": "catalog:"
   },
   "peerDependencies": {

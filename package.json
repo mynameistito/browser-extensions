@@ -28,7 +28,7 @@
     "typecheck": "turbo run typecheck",
     "typecheck:root": "tsc --noEmit -p tsconfig.json",
     "test": "turbo run test test:root",
-    "test:root": "bun test scripts/__tests__",
+    "test:root": "vitest run scripts/__tests__",
     "prepare:wxt": "bun run --filter hide-email-ext postinstall && bun run --filter quote-viewer postinstall && bun run --filter new-tab-ext postinstall && bun run --filter hide-ip-ext postinstall && bun run --filter ig-video-controls postinstall && bun run --filter better-history postinstall && bun run --filter github-settings-repo-copy postinstall && bun run --filter mute-tab-manager postinstall",
     "prepare": "bun run lefthook install",
     "release:all": "bun run --filter hide-email-ext ci:release && bun run --filter quote-viewer ci:release && bun run --filter new-tab-ext ci:release && bun run --filter hide-ip-ext ci:release && bun run --filter ig-video-controls ci:release && bun run --filter better-history ci:release && bun run --filter github-settings-repo-copy ci:release && bun run --filter mute-tab-manager ci:release",
@@ -55,7 +55,8 @@
     "oxlint-tsgolint": "^7.0.2005",
     "turbo": "^2.11.10",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "ultracite": "8.0.2"
+    "ultracite": "8.0.2",
+    "vitest": "catalog:"
   },
   "overrides": {
     "esbuild": "0.28.1",
@@ -72,10 +73,12 @@
     "@types/chrome": "^0.3.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@vitest/coverage-v8": "5.0.5",
     "happy-dom": "^21.0.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "tailwindcss": "^4.3.3",
+    "vitest": "5.0.5",
     "wxt": "^0.21.4",
     "zod": "^4.6.7"
   }

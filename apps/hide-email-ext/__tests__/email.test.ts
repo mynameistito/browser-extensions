@@ -1,20 +1,20 @@
-import { describe, expect, test } from "bun:test";
+import { it, describe, expect } from "vitest";
 
 import { isEmail, normalize } from "../src/lib/email";
 
 describe("email helpers", () => {
-  test("accepts valid email strings after trimming and lowercasing", () => {
-    expect(isEmail("USER@example.com")).toBe(true);
-    expect(isEmail("  user.name+tag@example.co.uk  ")).toBe(true);
+  it("accepts valid email strings after trimming and lowercasing", () => {
+    expect(isEmail("USER@example.com")).toBeTruthy();
+    expect(isEmail("  user.name+tag@example.co.uk  ")).toBeTruthy();
   });
 
-  test("rejects non-email values", () => {
-    expect(isEmail("user@example")).toBe(false);
-    expect(isEmail("user @example.com")).toBe(false);
-    expect(isEmail("user@example .com")).toBe(false);
+  it("rejects non-email values", () => {
+    expect(isEmail("user@example")).toBeFalsy();
+    expect(isEmail("user @example.com")).toBeFalsy();
+    expect(isEmail("user@example .com")).toBeFalsy();
   });
 
-  test("normalizes emails for stable storage and matching", () => {
+  it("normalizes emails for stable storage and matching", () => {
     const normalized = normalize("  USER.Name+Tag@Example.COM  ");
 
     expect(String(normalized)).toBe("user.name+tag@example.com");

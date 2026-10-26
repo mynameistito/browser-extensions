@@ -1,5 +1,4 @@
-/// <reference types="bun" />
-import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
   enforceBlacklist,
@@ -139,32 +138,32 @@ const getCleanupFailureApi = async (): Promise<string | null> => {
   }
 };
 
-beforeEach(() => {
-  Date.now = () => NOW;
-});
-
-afterEach(() => {
-  Date.now = originalDateNow;
-
-  if (originalBrowser) {
-    Object.defineProperty(globalThis, "browser", originalBrowser);
-  } else {
-    Reflect.deleteProperty(globalThis, "browser");
-  }
-});
-
 describe("history cleanup", () => {
-  test("deletes the exact range ending at the retention cutoff", async () => {
+  beforeEach(() => {
+    Date.now = () => NOW;
+  });
+
+  afterEach(() => {
+    Date.now = originalDateNow;
+
+    if (originalBrowser) {
+      Object.defineProperty(globalThis, "browser", originalBrowser);
+    } else {
+      Reflect.deleteProperty(globalThis, "browser");
+    }
+  });
+
+  it("deletes the exact range ending at the retention cutoff", async () => {
     const mocks = installBrowserMocks(storageEntries(["cleanup", cleanup()]));
 
     await runConfiguredCleanup();
 
-    expect(mocks.deletedRanges).toEqual([
+    expect(mocks.deletedRanges).toStrictEqual([
       { endTime: NOW - 7 * DAY_MS, startTime: 0 },
     ]);
   });
 
-  test("preserves whitelist matches and deletes nonmatching URLs", async () => {
+  it("preserves whitelist matches and deletes nonmatching URLs", async () => {
     const whitelist: DomainRule[] = [
       { kind: "subdomain", pattern: "keep.example" },
     ];
@@ -183,11 +182,11 @@ describe("history cleanup", () => {
 
     await runConfiguredCleanup();
 
-    expect(mocks.deletedUrls).toEqual(["https://remove.example/page"]);
-    expect(mocks.deletedRanges).toEqual([]);
+    expect(mocks.deletedUrls).toStrictEqual(["https://remove.example/page"]);
+    expect(mocks.deletedRanges).toStrictEqual([]);
   });
 
-  test("does not delete any visits for a URL with a recent visit", async () => {
+  it("does not delete any visits for a URL with a recent visit", async () => {
     const mocks = installBrowserMocks(
       storageEntries(
         ["cleanup", cleanup({ whitelistExempt: true })],
@@ -200,7 +199,7 @@ describe("history cleanup", () => {
 
     await runConfiguredCleanup();
 
-    expect(mocks.searchQueries).toEqual([
+    expect(mocks.searchQueries).toStrictEqual([
       {
         endTime: NOW - 7 * DAY_MS,
         maxResults: 100_000,
@@ -208,10 +207,10 @@ describe("history cleanup", () => {
         text: "",
       },
     ]);
-    expect(mocks.deletedUrls).toEqual([]);
+    expect(mocks.deletedUrls).toStrictEqual([]);
   });
 
-  test("applies whitelist precedence when enforcing blacklisted URLs", async () => {
+  it("applies whitelist precedence when enforcing blacklisted URLs", async () => {
     const blacklist: DomainRule[] = [
       { kind: "subdomain", pattern: "example.com" },
     ];
@@ -232,10 +231,10 @@ describe("history cleanup", () => {
 
     await enforceBlacklist();
 
-    expect(mocks.deletedUrls).toEqual(["https://sub.example.com/"]);
+    expect(mocks.deletedUrls).toStrictEqual(["https://sub.example.com/"]);
   });
 
-  test("blacklist wins when whitelist precedence is disabled", async () => {
+  it("blacklist wins when whitelist precedence is disabled", async () => {
     const rules: DomainRule[] = [{ kind: "exact", pattern: "example.com" }];
 
     const mocks = installBrowserMocks(
@@ -249,23 +248,23 @@ describe("history cleanup", () => {
 
     await enforceBlacklist();
 
-    expect(mocks.deletedUrls).toEqual(["https://example.com/"]);
+    expect(mocks.deletedUrls).toStrictEqual(["https://example.com/"]);
   });
 
-  test("scheduled cleanup does nothing for on-close schedules", async () => {
+  it("scheduled cleanup does nothing for on-close schedules", async () => {
     const mocks = installBrowserMocks(
       storageEntries(["cleanup", cleanup({ schedule: "on-close" })])
     );
 
     await maybeRunScheduledCleanup();
 
-    expect(mocks.deletedRanges).toEqual([]);
-    expect(mocks.storage.get("cleanup")).toEqual(
+    expect(mocks.deletedRanges).toStrictEqual([]);
+    expect(mocks.storage.get("cleanup")).toStrictEqual(
       cleanup({ schedule: "on-close" })
     );
   });
 
-  test("runs due scheduled cleanup and persists its completion time", async () => {
+  it("runs due scheduled cleanup and persists its completion time", async () => {
     const mocks = installBrowserMocks(
       storageEntries([
         "cleanup",
@@ -275,28 +274,28 @@ describe("history cleanup", () => {
 
     await maybeRunScheduledCleanup();
 
-    expect(mocks.deletedRanges).toEqual([
+    expect(mocks.deletedRanges).toStrictEqual([
       { endTime: NOW - 7 * DAY_MS, startTime: 0 },
     ]);
-    expect(mocks.storage.get("cleanup")).toEqual(
+    expect(mocks.storage.get("cleanup")).toStrictEqual(
       cleanup({ schedule: "daily", lastRunAt: NOW })
     );
   });
 
-  test("on-close cleanup does nothing for other schedules", async () => {
+  it("on-close cleanup does nothing for other schedules", async () => {
     const mocks = installBrowserMocks(
       storageEntries(["cleanup", cleanup({ schedule: "daily" })])
     );
 
     await runOnCloseCleanup();
 
-    expect(mocks.deletedRanges).toEqual([]);
-    expect(mocks.storage.get("cleanup")).toEqual(
+    expect(mocks.deletedRanges).toStrictEqual([]);
+    expect(mocks.storage.get("cleanup")).toStrictEqual(
       cleanup({ schedule: "daily" })
     );
   });
 
-  test("surfaces browser API errors from range deletion", async () => {
+  it("surfaces browser API errors from range deletion", async () => {
     installBrowserMocks(storageEntries(["cleanup", cleanup()]));
 
     const failingBrowser = {
@@ -337,7 +336,7 @@ describe("history cleanup", () => {
     console.error = () => {};
 
     try {
-      expect(await getCleanupFailureApi()).toBe("history.deleteRange");
+      await expect(getCleanupFailureApi()).resolves.toBe("history.deleteRange");
     } finally {
       console.error = originalConsoleError;
     }

@@ -1,5 +1,4 @@
-/// <reference types="bun" />
-import { describe, expect, test } from "bun:test";
+import { describe, expect, it } from "vitest";
 
 import { anyRuleMatches, ruleMatches, shouldDelete } from "../src/lib/patterns";
 import type { DomainRule } from "../src/lib/schemas";
@@ -7,33 +6,40 @@ import type { DomainRule } from "../src/lib/schemas";
 describe("ruleMatches: exact", () => {
   const rule: DomainRule = { kind: "exact", pattern: "example.com" };
 
-  test("matches bare host", () => {
-    expect(ruleMatches(rule, "https://example.com/foo")).toBe(true);
+  it("matches bare host", () => {
+    expect(ruleMatches(rule, "https://example.com/foo")).toBeTruthy();
   });
-  test("matches www", () => {
-    expect(ruleMatches(rule, "https://www.example.com/foo")).toBe(true);
+
+  it("matches www", () => {
+    expect(ruleMatches(rule, "https://www.example.com/foo")).toBeTruthy();
   });
-  test("rejects subdomain", () => {
-    expect(ruleMatches(rule, "https://blog.example.com/")).toBe(false);
+
+  it("rejects subdomain", () => {
+    expect(ruleMatches(rule, "https://blog.example.com/")).toBeFalsy();
   });
-  test("rejects different domain", () => {
-    expect(ruleMatches(rule, "https://other.com/")).toBe(false);
+
+  it("rejects different domain", () => {
+    expect(ruleMatches(rule, "https://other.com/")).toBeFalsy();
   });
 });
 
 describe("ruleMatches: subdomain", () => {
   const rule: DomainRule = { kind: "subdomain", pattern: "example.com" };
-  test("matches root", () => {
-    expect(ruleMatches(rule, "https://example.com/")).toBe(true);
+
+  it("matches root", () => {
+    expect(ruleMatches(rule, "https://example.com/")).toBeTruthy();
   });
-  test("matches one level sub", () => {
-    expect(ruleMatches(rule, "https://blog.example.com/")).toBe(true);
+
+  it("matches one level sub", () => {
+    expect(ruleMatches(rule, "https://blog.example.com/")).toBeTruthy();
   });
-  test("matches deep sub", () => {
-    expect(ruleMatches(rule, "https://a.b.example.com/")).toBe(true);
+
+  it("matches deep sub", () => {
+    expect(ruleMatches(rule, "https://a.b.example.com/")).toBeTruthy();
   });
-  test("rejects sibling domain", () => {
-    expect(ruleMatches(rule, "https://notexample.com/")).toBe(false);
+
+  it("rejects sibling domain", () => {
+    expect(ruleMatches(rule, "https://notexample.com/")).toBeFalsy();
   });
 });
 
@@ -43,14 +49,16 @@ describe("ruleMatches: specific-sub", () => {
     pattern: "blog.example.com",
   };
 
-  test("matches that sub", () => {
-    expect(ruleMatches(rule, "https://blog.example.com/x")).toBe(true);
+  it("matches that sub", () => {
+    expect(ruleMatches(rule, "https://blog.example.com/x")).toBeTruthy();
   });
-  test("rejects different sub", () => {
-    expect(ruleMatches(rule, "https://news.example.com/")).toBe(false);
+
+  it("rejects different sub", () => {
+    expect(ruleMatches(rule, "https://news.example.com/")).toBeFalsy();
   });
-  test("rejects root", () => {
-    expect(ruleMatches(rule, "https://example.com/")).toBe(false);
+
+  it("rejects root", () => {
+    expect(ruleMatches(rule, "https://example.com/")).toBeFalsy();
   });
 });
 
@@ -60,33 +68,38 @@ describe("ruleMatches: path", () => {
     pattern: "https://example.com/docs",
   };
 
-  test("matches exact path", () => {
-    expect(ruleMatches(rule, "https://example.com/docs")).toBe(true);
+  it("matches exact path", () => {
+    expect(ruleMatches(rule, "https://example.com/docs")).toBeTruthy();
   });
-  test("matches deeper path", () => {
-    expect(ruleMatches(rule, "https://example.com/docs/intro")).toBe(true);
+
+  it("matches deeper path", () => {
+    expect(ruleMatches(rule, "https://example.com/docs/intro")).toBeTruthy();
   });
-  test("matches the root path prefix", () => {
+
+  it("matches the root path prefix", () => {
     expect(
       ruleMatches(
         { kind: "path", pattern: "https://example.com/" },
         "https://example.com/docs/intro"
       )
-    ).toBe(true);
+    ).toBeTruthy();
   });
-  test("matches a trailing-slash prefix without the slash", () => {
+
+  it("matches a trailing-slash prefix without the slash", () => {
     expect(
       ruleMatches(
         { kind: "path", pattern: "https://example.com/docs/" },
         "https://example.com/docs"
       )
-    ).toBe(true);
+    ).toBeTruthy();
   });
-  test("rejects sibling path with shared prefix", () => {
-    expect(ruleMatches(rule, "https://example.com/docs-private")).toBe(false);
+
+  it("rejects sibling path with shared prefix", () => {
+    expect(ruleMatches(rule, "https://example.com/docs-private")).toBeFalsy();
   });
-  test("rejects sibling path", () => {
-    expect(ruleMatches(rule, "https://example.com/blog")).toBe(false);
+
+  it("rejects sibling path", () => {
+    expect(ruleMatches(rule, "https://example.com/blog")).toBeFalsy();
   });
 });
 
@@ -96,23 +109,24 @@ describe("ruleMatches: page", () => {
     pattern: "https://example.com/docs/intro",
   };
 
-  test("matches exact page", () => {
-    expect(ruleMatches(rule, "https://example.com/docs/intro")).toBe(true);
+  it("matches exact page", () => {
+    expect(ruleMatches(rule, "https://example.com/docs/intro")).toBeTruthy();
   });
-  test("rejects deeper", () => {
-    expect(ruleMatches(rule, "https://example.com/docs/intro/x")).toBe(false);
+
+  it("rejects deeper", () => {
+    expect(ruleMatches(rule, "https://example.com/docs/intro/x")).toBeFalsy();
   });
 });
 
-describe("anyRuleMatches", () => {
-  test("ors rules", () => {
+describe(anyRuleMatches, () => {
+  it("ors rules", () => {
     const rules: DomainRule[] = [
       { kind: "exact", pattern: "a.com" },
       { kind: "subdomain", pattern: "b.com" },
     ];
 
-    expect(anyRuleMatches(rules, "https://x.b.com/")).toBe(true);
-    expect(anyRuleMatches(rules, "https://c.com/")).toBe(false);
+    expect(anyRuleMatches(rules, "https://x.b.com/")).toBeTruthy();
+    expect(anyRuleMatches(rules, "https://c.com/")).toBeFalsy();
   });
 });
 
@@ -120,22 +134,25 @@ describe("shouldDelete: precedence", () => {
   const black: DomainRule[] = [{ kind: "subdomain", pattern: "example.com" }];
   const white: DomainRule[] = [{ kind: "exact", pattern: "example.com" }];
 
-  test("whitelist beats blacklist when precedence true", () => {
-    expect(shouldDelete("https://example.com/", black, white, true)).toBe(
-      false
-    );
+  it("whitelist beats blacklist when precedence true", () => {
+    expect(
+      shouldDelete("https://example.com/", black, white, true)
+    ).toBeFalsy();
   });
-  test("subdomain still deleted when whitelist only covers root", () => {
-    expect(shouldDelete("https://x.example.com/", black, white, true)).toBe(
-      true
-    );
+
+  it("subdomain still deleted when whitelist only covers root", () => {
+    expect(
+      shouldDelete("https://x.example.com/", black, white, true)
+    ).toBeTruthy();
   });
-  test("blacklist wins when precedence false", () => {
-    expect(shouldDelete("https://example.com/", black, white, false)).toBe(
-      true
-    );
+
+  it("blacklist wins when precedence false", () => {
+    expect(
+      shouldDelete("https://example.com/", black, white, false)
+    ).toBeTruthy();
   });
-  test("clean url not deleted", () => {
-    expect(shouldDelete("https://other.com/", black, white, true)).toBe(false);
+
+  it("clean url not deleted", () => {
+    expect(shouldDelete("https://other.com/", black, white, true)).toBeFalsy();
   });
 });

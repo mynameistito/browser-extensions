@@ -19,7 +19,7 @@ Each child directory is an independently versioned WXT browser extension, not a 
 
 ## CONVENTIONS
 
-- Use each app's own `package.json` for supported commands; script availability and test runner vary by package.
+- Use each app's own `package.json` for supported commands; script availability varies by package.
 - Run shared WXT wrapper scripts from an app package (workspace scripts already do this); the wrapper takes its working directory as the WXT project root.
 - Respect the app's configured WXT source root. Root-level `entrypoints/` and `src/entrypoints/` layouts both occur.
 - Keep app dependencies and release versions local to the app. Root workspace membership is defined by `apps/*`.

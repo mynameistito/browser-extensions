@@ -1,4 +1,3 @@
-import { describe, expect, test } from "bun:test";
 import {
   chmodSync,
   mkdtempSync,
@@ -10,6 +9,8 @@ import {
 import { tmpdir } from "node:os";
 import path from "node:path";
 
+import { it, describe, expect } from "vitest";
+
 import {
   chromeKeySecrets,
   generateKeyHelp,
@@ -17,21 +18,30 @@ import {
   parseGenerateKeyOptions,
   uploadChromeKey,
 } from "../generate-keys-core";
+import type { ParseGenerateKeyOptionsResult } from "../generate-keys-core";
 
-describe("parseGenerateKeyOptions", () => {
-  test("prints help for both long and short flags", () => {
-    expect(parseGenerateKeyOptions(["--help"])).toEqual({
+const getErrorMessage = (result: ParseGenerateKeyOptionsResult): string => {
+  if (result.kind !== "error") {
+    throw new Error("Expected option parsing to fail.");
+  }
+
+  return result.message;
+};
+
+describe(parseGenerateKeyOptions, () => {
+  it("prints help for both long and short flags", () => {
+    expect(parseGenerateKeyOptions(["--help"])).toStrictEqual({
       kind: "help",
       message: generateKeyHelp,
     });
-    expect(parseGenerateKeyOptions(["-h"])).toEqual({
+    expect(parseGenerateKeyOptions(["-h"])).toStrictEqual({
       kind: "help",
       message: generateKeyHelp,
     });
   });
 
-  test("uses the release workflow secret name for each app", () => {
-    expect(chromeKeySecrets).toEqual({
+  it("uses the release workflow secret name for each app", () => {
+    expect(chromeKeySecrets).toStrictEqual({
       "better-history": "BETTER_HISTORY_WXT_CHROME_KEY",
       "github-settings-repo-copy": "WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY",
       "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
@@ -42,7 +52,7 @@ describe("parseGenerateKeyOptions", () => {
     });
   });
 
-  test("accepts a repository override for one app", () => {
+  it("accepts a repository override for one app", () => {
     expect(
       parseGenerateKeyOptions([
         "--app",
@@ -60,14 +70,14 @@ describe("parseGenerateKeyOptions", () => {
     });
   });
 
-  test("accepts Better History as a persistent-key target", () => {
+  it("accepts Better History as a persistent-key target", () => {
     expect(parseGenerateKeyOptions(["--app", "better-history"])).toMatchObject({
       kind: "ok",
       options: { extensions: ["better-history"] },
     });
   });
 
-  test("accepts Mute Tab Manager as a persistent-key target", () => {
+  it("accepts Mute Tab Manager as a persistent-key target", () => {
     expect(
       parseGenerateKeyOptions(["--app", "mute-tab-manager"])
     ).toMatchObject({
@@ -76,7 +86,7 @@ describe("parseGenerateKeyOptions", () => {
     });
   });
 
-  test("accepts all apps with force and upload", () => {
+  it("accepts all apps with force and upload", () => {
     const result = parseGenerateKeyOptions([
       "--app",
       "all",
@@ -101,12 +111,14 @@ describe("parseGenerateKeyOptions", () => {
       },
     });
 
-    if (result.kind === "ok") {
-      expect(result.options.repository).toBeUndefined();
+    if (result.kind !== "ok") {
+      throw new Error("Expected all-app options to parse successfully.");
     }
+
+    expect(result.options.repository).toBeUndefined();
   });
 
-  test("allows direct upload when one app is selected", () => {
+  it("allows direct upload when one app is selected", () => {
     expect(
       parseGenerateKeyOptions(["--app", "quote-viewer", "--upload"])
     ).toMatchObject({
@@ -118,7 +130,7 @@ describe("parseGenerateKeyOptions", () => {
     });
   });
 
-  test("requires one app when overriding the repo or uploading", () => {
+  it("requires one app when overriding the repo or uploading", () => {
     const repoWithoutApp = parseGenerateKeyOptions(["--repo", "owner/repo"]);
 
     const invalidRepo = parseGenerateKeyOptions([
@@ -137,29 +149,17 @@ describe("parseGenerateKeyOptions", () => {
       "owner/repo",
     ]);
 
-    expect(repoWithoutApp.kind).toBe("error");
-
-    expect(invalidRepo.kind).toBe("error");
-
-    expect(uploadWithoutApp.kind).toBe("error");
-    expect(allWithRepo.kind).toBe("error");
-
-    if (
-      repoWithoutApp.kind === "error" &&
-      invalidRepo.kind === "error" &&
-      uploadWithoutApp.kind === "error" &&
-      allWithRepo.kind === "error"
-    ) {
-      expect(repoWithoutApp.message).toContain("exactly one --app");
-      expect(invalidRepo.message).toContain("owner/name");
-      expect(uploadWithoutApp.message).toContain("explicit --app target");
-      expect(allWithRepo.message).toContain("exactly one --app target");
-    }
+    expect(getErrorMessage(repoWithoutApp)).toContain("exactly one --app");
+    expect(getErrorMessage(invalidRepo)).toContain("owner/name");
+    expect(getErrorMessage(uploadWithoutApp)).toContain(
+      "explicit --app target"
+    );
+    expect(getErrorMessage(allWithRepo)).toContain("exactly one --app target");
   });
 });
 
-describe("generateChromeKeyFile", () => {
-  test("writes a PKCS#8 key and returns its stable Chromium ID", () => {
+describe(generateChromeKeyFile, () => {
+  it("writes a PKCS#8 key and returns its stable Chromium ID", () => {
     const directory = mkdtempSync(path.join(tmpdir(), "extension-key-test-"));
     const keyPath = path.join(directory, "key.pem");
 
@@ -168,15 +168,17 @@ describe("generateChromeKeyFile", () => {
       expect(result.kind).toBe("generated");
       expect(readFileSync(keyPath, "utf-8")).toContain("BEGIN PRIVATE KEY");
 
-      if (result.kind === "generated") {
-        expect(result.extensionId).toMatch(/^[a-p]{32}$/u);
+      if (result.kind !== "generated") {
+        throw new Error("Expected key generation to succeed.");
       }
+
+      expect(result.extensionId).toMatch(/^[a-p]{32}$/u);
     } finally {
       rmSync(directory, { force: true, recursive: true });
     }
   });
 
-  test("does not overwrite an existing key without explicit force", () => {
+  it("does not overwrite an existing key without explicit force", () => {
     const directory = mkdtempSync(path.join(tmpdir(), "extension-key-test-"));
     const keyPath = path.join(directory, "key.pem");
 
@@ -186,17 +188,18 @@ describe("generateChromeKeyFile", () => {
 
       expect(result.kind).toBe("error");
 
-      if (result.kind === "error") {
-        expect(result.message).toContain("already exists");
+      if (result.kind !== "error") {
+        throw new Error("Expected existing key generation to fail.");
       }
 
+      expect(result.message).toContain("already exists");
       expect(readFileSync(keyPath, "utf-8")).toBe("preserve this key");
     } finally {
       rmSync(directory, { force: true, recursive: true });
     }
   });
 
-  test.skipIf(process.platform === "win32")(
+  it.skipIf(process.platform === "win32")(
     "restores owner-only permissions when force replaces a key",
     () => {
       const directory = mkdtempSync(path.join(tmpdir(), "extension-key-test-"));
@@ -217,8 +220,8 @@ describe("generateChromeKeyFile", () => {
   );
 });
 
-describe("uploadChromeKey", () => {
-  test("sends the key to the configured app secret and repository", () => {
+describe(uploadChromeKey, () => {
+  it("sends the key to the configured app secret and repository", () => {
     const directory = mkdtempSync(path.join(tmpdir(), "extension-key-test-"));
     const keyPath = path.join(directory, "key.pem");
     writeFileSync(keyPath, "private test key");
@@ -238,8 +241,8 @@ describe("uploadChromeKey", () => {
         }
       );
 
-      expect(result).toEqual({ kind: "uploaded" });
-      expect(command).toEqual([
+      expect(result).toStrictEqual({ kind: "uploaded" });
+      expect(command).toStrictEqual([
         "secret",
         "set",
         "QUOTE_VIEWER_WXT_CHROME_KEY",

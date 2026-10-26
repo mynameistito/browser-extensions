@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { it, describe, expect } from "vitest";
 
 import {
   BADGE_MUTED,
@@ -11,25 +11,31 @@ import {
 } from "@/utils/constants.ts";
 
 describe("constants", () => {
-  test("STORAGE_KEY_MUTED_TABS", () => {
+  it("STORAGE_KEY_MUTED_TABS", () => {
     expect(STORAGE_KEY_MUTED_TABS).toBe("mutedTabs");
   });
-  test("STORAGE_KEY_DARK_MODE", () => {
+
+  it("STORAGE_KEY_DARK_MODE", () => {
     expect(STORAGE_KEY_DARK_MODE).toBe("isDarkMode");
   });
-  test("COMMAND_TOGGLE_MUTE", () => {
+
+  it("COMMAND_TOGGLE_MUTE", () => {
     expect(COMMAND_TOGGLE_MUTE).toBe("toggle-mute");
   });
-  test("CONTEXT_MENU_TOGGLE_ID", () => {
+
+  it("CONTEXT_MENU_TOGGLE_ID", () => {
     expect(CONTEXT_MENU_TOGGLE_ID).toBe("mute-tab");
   });
-  test("CONTEXT_MENU_MUTE_ALL", () => {
+
+  it("CONTEXT_MENU_MUTE_ALL", () => {
     expect(CONTEXT_MENU_MUTE_ALL).toBe("mute-all-tabs");
   });
-  test("BADGE_MUTED", () => {
+
+  it("BADGE_MUTED", () => {
     expect(BADGE_MUTED).toBe("M");
   });
-  test("BADGE_UNMUTED", () => {
+
+  it("BADGE_UNMUTED", () => {
     expect(BADGE_UNMUTED).toBe("");
   });
 });
