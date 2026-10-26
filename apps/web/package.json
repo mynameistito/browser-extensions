@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "blume dev",
-    "build": "blume build",
+    "build": "blume build && blume validate --strict",
     "preview": "blume preview",
     "build:preview-artifact": "bun scripts/build-preview-artifact.ts",
     "typecheck": "blume check --isolated",
