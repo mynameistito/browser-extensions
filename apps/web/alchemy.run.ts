@@ -15,6 +15,7 @@ const site = Website.StaticSite(
     main: "./src/worker.ts",
     name: "browser-ext",
     observability: {
+      issues: { enabled: true },
       logs: { enabled: true, invocationLogs: true, persist: true },
       traces: { enabled: true, headSamplingRate: 1 },
     },
