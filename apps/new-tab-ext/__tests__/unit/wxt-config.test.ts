@@ -49,7 +49,8 @@ describe("WXT browser configuration", () => {
   });
 
   it("delegates WXT manifest generation to the browser config", () => {
-    expect(config.manifest({ browser: "firefox" })).toHaveProperty(
+    expect(config.manifest).toStrictEqual(expect.any(Function));
+    expect(createManifest("firefox")).toHaveProperty(
       "browser_specific_settings.gecko.id",
       "new-tab-ext@mynameistito.com"
     );
