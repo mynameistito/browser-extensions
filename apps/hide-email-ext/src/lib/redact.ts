@@ -439,21 +439,23 @@ const tryReplaceText = (
 
     for (const node of generatedNodes) {
       if (node instanceof Text) {
-        generatedText.set(node, node.nodeValue ?? "");
+        generatedText.set(node, node.data);
       }
     }
 
     const restoreOriginalText = (): boolean => {
       const liveNodes = generatedNodes.filter(
-        (node) => node.parentNode !== null
+        (node): node is ChildNode & { parentNode: ParentNode } =>
+          node.parentNode !== null
       );
 
       const [firstNode] = liveNodes;
-      const parent = firstNode?.parentNode;
 
-      if (firstNode === undefined || parent === null || parent === undefined) {
+      if (!firstNode) {
         return false;
       }
+
+      const parent = firstNode.parentNode;
 
       if (!hasRestorableGeneratedText(generatedText)) {
         return false;
@@ -555,26 +557,25 @@ const scanTextRun = (
     return;
   }
 
-  const combined = textRun.map((text) => text.nodeValue ?? "").join("");
+  const combined = textRun.map((text) => text.data).join("");
   regex.lastIndex = 0;
 
   if (
     regex.test(combined) &&
     textRun.every((text) => text.parentNode === root)
   ) {
-    const [matchedFirstText, ...remainingText] = textRun;
+    const matchedFirstText = firstText;
+    const remainingText = textRun.slice(1);
 
-    if (matchedFirstText) {
-      matchedFirstText.nodeValue = combined;
+    matchedFirstText.nodeValue = combined;
 
-      for (const text of remainingText) {
-        text.remove();
-      }
-
-      tryReplaceText(matchedFirstText, regex, skipCache, restorations);
-
-      return;
+    for (const text of remainingText) {
+      text.remove();
     }
+
+    tryReplaceText(matchedFirstText, regex, skipCache, restorations);
+
+    return;
   }
 
   for (const text of textRun) {
@@ -592,29 +593,25 @@ const scanTextChildren = (
   let index = 0;
 
   while (index < children.length) {
+    const startIndex = index;
     const textRun: Text[] = [];
 
-    while (children[index] instanceof Text) {
+    while (true) {
       const candidate = children[index];
 
-      if (candidate instanceof Text && candidate.parentNode === root) {
+      if (!(candidate instanceof Text)) {
+        break;
+      }
+
+      if (candidate.parentNode === root) {
         textRun.push(candidate);
       }
 
       index += 1;
     }
 
-    if (textRun.length === 1) {
-      const [onlyText] = textRun;
-
-      if (onlyText) {
-        tryReplaceText(onlyText, regex, skipCache, restorations);
-      }
-    } else if (textRun.length > 1) {
-      scanTextRun(root, textRun, regex, skipCache, restorations);
-    } else {
-      index += 1;
-    }
+    scanTextRun(root, textRun, regex, skipCache, restorations);
+    index = Math.max(index, startIndex + 1);
   }
 };
 
@@ -777,7 +774,6 @@ const cleanupRemovedSubtree = (
   restorations: RedactorRestorations
 ): void => {
   const wasReinserted = doc.documentElement.contains(node);
-  const previousParent = node.parentNode;
 
   if (!wasReinserted && node instanceof HTMLElement) {
     const wrapper = restorations.wrappers.get(node);
@@ -808,15 +804,11 @@ const cleanupRemovedSubtree = (
 
   restoreTrackedContent(node, restorations);
 
-  if (wasReinserted && regex) {
+  if (regex) {
     if (node instanceof Text) {
       tryReplaceText(node, regex, new WeakMap(), restorations);
     } else {
-      const scanRoot = node.parentNode === null ? previousParent : node;
-
-      if (scanRoot !== null) {
-        scanSubtree(scanRoot, regex, new WeakMap(), restorations);
-      }
+      scanSubtree(node, regex, new WeakMap(), restorations);
     }
   }
 };
@@ -1002,26 +994,20 @@ export const createRedactor = (root?: Document): Redactor => {
     }
   };
 
-  const flush = (mutations?: MutationRecord[]): void => {
+  const flush = (mutations: MutationRecord[]): void => {
     skipCache = new WeakMap<Element, boolean>();
 
     if (!regex) {
       return;
     }
 
-    if (mutations === undefined) {
-      scanSubtree(doc.body ?? doc, regex, skipCache, restorations);
-    } else {
-      for (const mutation of mutations) {
-        scanMutation(mutation, regex, skipCache, restorations);
-      }
+    for (const mutation of mutations) {
+      scanMutation(mutation, regex, skipCache, restorations);
     }
   };
 
-  const scheduleFlush = (mutations?: MutationRecord[]): void => {
-    if (mutations) {
-      pendingMutations.push(...mutations);
-    }
+  const scheduleFlush = (mutations: MutationRecord[]): void => {
+    pendingMutations.push(...mutations);
 
     if (scheduled) {
       return;

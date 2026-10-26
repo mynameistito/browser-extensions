@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@types/chrome": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
     "happy-dom": "catalog:",
     "vitest": "catalog:",
     "wxt": "catalog:"
