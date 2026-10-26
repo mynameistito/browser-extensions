@@ -22,6 +22,7 @@
   ],
   "type": "module",
   "scripts": {
+    "dev": "bun scripts/dev.ts",
     "build": "turbo run build",
     "check": "ultracite check",
     "fix": "ultracite fix",
@@ -41,6 +42,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
+    "@clack/prompts": "^1.8.1",
     "@shadcn/lint": "^0.2.3",
     "@types/bun": "catalog:",
     "@typescript/native": "npm:typescript@^7.0.2",
