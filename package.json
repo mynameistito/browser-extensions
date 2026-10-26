@@ -23,12 +23,12 @@
   "type": "module",
   "scripts": {
     "dev": "bun scripts/dev.ts",
-    "build": "turbo run build",
+    "build": "bun scripts/run-turbo.ts run build",
     "check": "ultracite check",
     "fix": "ultracite fix",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "bun scripts/run-turbo.ts run typecheck",
     "typecheck:root": "tsc --noEmit -p tsconfig.json",
-    "test": "turbo run test test:root",
+    "test": "bun scripts/run-turbo.ts run test test:root",
     "test:root": "vitest run scripts/__tests__ --coverage",
     "prepare:wxt": "bun run --filter hide-email-ext postinstall && bun run --filter quote-viewer postinstall && bun run --filter new-tab-ext postinstall && bun run --filter hide-ip-ext postinstall && bun run --filter ig-video-controls postinstall && bun run --filter better-history postinstall && bun run --filter github-settings-repo-copy postinstall && bun run --filter mute-tab-manager postinstall",
     "prepare": "bun run lefthook install",
@@ -38,7 +38,7 @@
     "changeset-add": "bun scripts/changeset-add.ts",
     "generate-keys": "bun scripts/generate-keys.ts",
     "version": "changeset version && bun run --filter quote-viewer linkify-changelog && bun run --filter ig-video-controls linkify-changelog",
-    "turbo": "turbo"
+    "turbo": "bun scripts/run-turbo.ts"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
