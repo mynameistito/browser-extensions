@@ -134,6 +134,7 @@
       "version": "0.2.13",
       "devDependencies": {
         "happy-dom": "catalog:",
+        "vitest": "catalog:",
         "wxt": "catalog:",
       },
     },
