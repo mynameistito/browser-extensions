@@ -49,14 +49,15 @@ jobs:
     if: needs.version.outputs['has-changesets'] == 'false'
     runs-on: ubuntu-24.04
     outputs:
-      changed-packages: ${{ steps.detect.outputs.changed-packages }}
+      has-releases: ${{ steps.detect.outputs.has-releases }}
+      matrix: ${{ steps.detect.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 2
 
-      - name: Find apps with a version change
+      - name: Build matrix for changed app versions
         id: detect
         run: |
           node --input-type=module <<'NODE'
@@ -65,7 +66,17 @@ jobs:
           import path from 'node:path';
 
           const appsDirectory = 'apps';
-          const changedPackages = [];
+          const releaseSecrets = {
+            'better-history': 'BETTER_HISTORY_WXT_CHROME_KEY',
+            'github-settings-repo-copy': 'WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY',
+            'hide-email-ext': 'HIDE_EMAIL_WXT_CHROME_KEY',
+            'hide-ip-ext': 'HIDE_IP_WXT_CHROME_KEY',
+            'ig-video-controls': 'IG_VIDEO_CONTROLS_WXT_CHROME_KEY',
+            'mute-tab-manager': 'MUTE_TAB_MANAGER_WXT_CHROME_KEY',
+            'new-tab-ext': 'NEW_TAB_WXT_CHROME_KEY',
+            'quote-viewer': 'QUOTE_VIEWER_WXT_CHROME_KEY',
+          };
+          const packagesToRelease = [];
 
           for (const directory of readdirSync(appsDirectory, { withFileTypes: true })) {
             if (!directory.isDirectory()) continue;
@@ -85,17 +96,35 @@ jobs:
               // A newly added app has no previous package manifest and needs an initial release.
             }
 
-            if (previous?.version !== current.version) changedPackages.push(current.name);
+            if (previous?.version !== current.version) {
+              const chromeSecret = releaseSecrets[current.name];
+
+              if (chromeSecret === undefined) {
+                throw new Error(`No Chrome signing secret is configured for ${current.name}.`);
+              }
+
+              packagesToRelease.push({
+                package: current.name,
+                'chrome-secret': chromeSecret,
+              });
+            }
           }
 
-          appendFileSync(process.env.GITHUB_OUTPUT, `changed-packages=${JSON.stringify(changedPackages)}\n`);
+          const outputPath = process.env.GITHUB_OUTPUT;
+
+          if (outputPath === undefined) throw new Error('GITHUB_OUTPUT is not set.');
+
+          appendFileSync(
+            outputPath,
+            `has-releases=${String(packagesToRelease.length > 0)}\nmatrix=${JSON.stringify({ include: packagesToRelease })}\n`
+          );
           NODE
 
   release:
     name: Release / ${{ matrix.package }}
     needs: [version, detect-releases]
     if: >-
-      needs.version.outputs['has-changesets'] == 'false' && contains(fromJSON(needs.detect-releases.outputs.changed-packages), matrix.package)
+      needs.version.outputs['has-changesets'] == 'false' && needs.detect-releases.outputs['has-releases'] == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
@@ -103,24 +132,7 @@ jobs:
     strategy:
       fail-fast: false
       max-parallel: 4
-      matrix:
-        include:
-          - package: hide-email-ext
-            chrome-secret: HIDE_EMAIL_WXT_CHROME_KEY
-          - package: quote-viewer
-            chrome-secret: QUOTE_VIEWER_WXT_CHROME_KEY
-          - package: new-tab-ext
-            chrome-secret: NEW_TAB_WXT_CHROME_KEY
-          - package: hide-ip-ext
-            chrome-secret: HIDE_IP_WXT_CHROME_KEY
-          - package: ig-video-controls
-            chrome-secret: IG_VIDEO_CONTROLS_WXT_CHROME_KEY
-          - package: better-history
-            chrome-secret: BETTER_HISTORY_WXT_CHROME_KEY
-          - package: github-settings-repo-copy
-            chrome-secret: WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY
-          - package: mute-tab-manager
-            chrome-secret: MUTE_TAB_MANAGER_WXT_CHROME_KEY
+      matrix: ${{ fromJSON(needs.detect-releases.outputs.matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
