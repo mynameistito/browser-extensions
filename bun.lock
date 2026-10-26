@@ -10,6 +10,7 @@
         "@shadcn/lint": "^0.2.3",
         "@types/bun": "catalog:",
         "@typescript/native": "npm:typescript@^7.0.2",
+        "@vitest/coverage-v8": "catalog:",
         "eslint-plugin-github": "6.1.2",
         "eslint-plugin-jsdoc": "^65.4.2",
         "eslint-plugin-sonarjs": "^4.2.2",
