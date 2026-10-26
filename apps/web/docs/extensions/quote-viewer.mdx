@@ -1,0 +1,41 @@
+---
+title: Quote Viewer
+description: Add a View quotes action to X and Twitter posts, then open the post's quote page directly, including from dynamically loaded timelines and profiles.
+---
+
+Quote Viewer restores a **View quotes** action to posts on X/Twitter. It adds a quote icon to tweet action bars and opens the post's `/quotes` route when selected. It also handles timelines, profiles, and tweet pages that load content dynamically.
+
+## Open quotes
+
+1. Visit `x.com` or `twitter.com` in the browser.
+2. Find the post whose quotes you want to view.
+3. Select the quote-viewer icon in that post's action bar. The extension navigates directly to the post's quotes page.
+
+Quote Viewer is a content-script-only extension; it has no popup or background page.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/quote-viewer/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/quote-viewer/firefox)
+- [All Quote Viewer releases](https://github.com/mynameistito/browser-extensions/releases?q=quote-viewer)
+
+The download links always redirect to the latest stable release for this extension.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions), then run `bun install` and `bun run prepare:wxt` from its root.
+2. Run `bun run --filter quote-viewer build`.
+3. Load `apps/quote-viewer/.output/chrome-mv3` from `chrome://extensions` with Developer mode enabled.
+4. Load the Firefox manifest from `apps/quote-viewer/.output/firefox-mv2` using `about:debugging#/runtime/this-firefox`.
+
+## Permissions and privacy
+
+The content script adds an action to posts on X/Twitter pages and navigates to X's own quotes route. The extension does not add Firefox data-collection permissions. Quote data is fetched by the site when you open its route; the extension does not proxy it through a separate service.
+
+## Troubleshooting
+
+- **The icon is missing:** reload the X/Twitter page and check that the extension is enabled for the site.
+- **The quotes page is empty:** confirm the post has quote posts and that X/Twitter is available in your browser session.
+- **The timeline changes after loading:** allow the page to finish updating; the extension supports dynamically loaded posts.
+
+See the [Quote Viewer source and release notes](https://github.com/mynameistito/browser-extensions/tree/main/apps/quote-viewer).

@@ -1,0 +1,26 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "User documentation for the browser extensions workspace.",
+  "type": "module",
+  "scripts": {
+    "dev": "blume dev",
+    "build": "blume build",
+    "preview": "blume preview",
+    "build:preview-artifact": "bun scripts/build-preview-artifact.ts",
+    "typecheck": "tsc --noEmit",
+    "check": "ultracite check"
+  },
+  "dependencies": {
+    "@alchemy.run/cloudflare": "2.0.0-beta.84",
+    "alchemy": "2.0.0-beta.84",
+    "blume": "2.2.6",
+    "effect": "^4.0.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261012.1",
+    "@effect/platform-bun": "^4.0.5",
+    "typescript": "^6.0.3"
+  }
+}

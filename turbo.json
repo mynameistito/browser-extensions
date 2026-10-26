@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".output/**", "!.output/**/*.map"]
+      "outputs": [".output/**", "dist/**", "!.output/**/*.map"]
     },
     "typecheck": {
       "dependsOn": ["^typecheck", "//#typecheck:root"],

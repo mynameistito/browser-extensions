@@ -1,0 +1,45 @@
+---
+title: New Tab
+description: Customize your new-tab dashboard with a clock, search, optional weather, rearrangeable widgets, theme controls, and credited landscape backgrounds.
+---
+
+New Tab replaces the browser's new-tab page with a dashboard that keeps preferences in your browser profile. Arrange the clock, search, and weather widgets, pick a theme, and use attributed landscape photographs as rotating backgrounds.
+
+## Customize the dashboard
+
+1. Open a new tab and select **Customize**.
+2. In **Appearance**, choose system, light, or dark mode. Enable or disable landscape backgrounds, or select **Change background now** to rotate the image.
+3. In **Search**, choose Google, Bing, or DuckDuckGo for web searches. ChatGPT remains a separate action.
+4. In **Widgets**, choose which widgets to show and adjust their layout.
+5. In **Weather**, optionally search for a city by name and choose a result. The extension never requests device location.
+6. Close settings. Use **Arrange** on the dashboard to reorder visible widgets, then select **Done arranging**.
+
+Weather is off until a city is selected. Weather data comes from Open-Meteo; background photos and attribution come from Wikimedia Commons.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/new-tab-ext/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/new-tab-ext/firefox)
+- [All New Tab releases](https://github.com/mynameistito/browser-extensions/releases?q=new-tab-ext)
+
+The download links always redirect to the latest stable release for this extension.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions), then run `bun install` and `bun run prepare:wxt` from its root.
+2. Run `bun run --filter new-tab-ext build`.
+3. Load `apps/new-tab-ext/.output/chrome-mv3` in Chrome through `chrome://extensions` with Developer mode enabled.
+4. Load the Firefox manifest from `apps/new-tab-ext/.output/firefox-mv2` through `about:debugging#/runtime/this-firefox`.
+
+## Preferences and privacy
+
+Preferences are stored on this device in the browser profile. No account, analytics, or app backend is used. Search queries go directly to the provider you choose; ChatGPT actions open ChatGPT. Weather city searches and selected coordinates are sent to Open-Meteo to retrieve weather. No device location is read. Wikimedia receives requests for background images, not your search or city. The weather feature uses Open-Meteo's free API, which is for non-commercial use.
+
+## Troubleshooting
+
+- **Weather is blank:** enable the widget in **Widgets**, choose a city in **Weather**, and check access to Open-Meteo.
+- **Search opens the wrong provider:** update the selection in **Customize → Search**.
+- **Backgrounds are not changing:** enable landscape backgrounds and check access to Wikimedia Commons.
+- **A layout change did not persist:** confirm the extension is enabled and the browser profile's storage is available.
+
+See the [New Tab source and settings](https://github.com/mynameistito/browser-extensions/tree/main/apps/new-tab-ext).

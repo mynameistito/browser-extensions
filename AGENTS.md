@@ -13,12 +13,12 @@ This block is written and re-added by `turbo` before repository-scoped commands 
 
 ## OVERVIEW
 
-Seven independently versioned WXT browser extensions in a Bun workspace. Turbo orchestrates builds, tests, and typechecks; root scripts handle release and signing-key tooling.
+Eight independently versioned WXT browser extensions plus a Changesets-versioned Blume documentation site in a Bun workspace. Turbo orchestrates builds, tests, and typechecks; root scripts handle extension releases and signing-key tooling.
 
 ## STRUCTURE
 
 ```text
-apps/       Seven standalone extension packages; see apps/AGENTS.md
+apps/       Eight extension packages and the web documentation site; see apps/AGENTS.md
 scripts/    Shared Node/Bun release, WXT, Changeset, and signing-key utilities
 .github/    CI and app-specific release workflows
 .changeset/ Per-app release notes consumed by Changesets
@@ -29,6 +29,8 @@ scripts/    Shared Node/Bun release, WXT, Changeset, and signing-key utilities
 | Task | Location | Notes |
 | --- | --- | --- |
 | Understand an extension | `apps/<name>/` | Each app owns its WXT config, manifest, dependencies, and release version. |
+| Maintain extension docs | `apps/web/docs/extensions/` | Keep user-facing steps and privacy notes grounded in app READMEs, manifests, and source. |
+| Build/deploy the docs site | `apps/web/` | Blume content, Alchemy stack, and Workers deployment; production deploys only after a web package version bump. |
 | Shared app conventions | `apps/AGENTS.md` | WXT invocation, package layout differences, checks. |
 | Better History architecture | `apps/better-history/AGENTS.md` | React surfaces, routes, background and features. |
 | Instagram video controls | `apps/ig-video-controls/AGENTS.md` | Content-script modules and media integration. |
@@ -50,6 +52,7 @@ scripts/    Shared Node/Bun release, WXT, Changeset, and signing-key utilities
 ## CONVENTIONS
 
 - Use Bun (`bun@1.4.2`) and workspace scripts; app dependencies and check scripts are not uniform.
+- `apps/web` is not a WXT extension. Keep it out of WXT preparation and extension ZIP releases; its deploy workflow is `.github/workflows/deploy-web.yml`.
 - All app TypeScript configs inherit strict compiler options from the root baseline.
 - WXT source roots differ: some apps use package-root `entrypoints/`, others use `src/entrypoints/`. Follow the app's `wxt.config.ts`; do not relocate files based on another app.
 - App versions and releases are independent. Use Changesets rather than editing versions directly.

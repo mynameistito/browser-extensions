@@ -89,6 +89,9 @@ jobs:
               continue;
             }
 
+            // The docs site deploys through Alchemy, not the extension ZIP release flow.
+            if (current.name === 'web') continue;
+
             let previous;
             try {
               previous = JSON.parse(execFileSync('git', ['show', `HEAD^:${packagePath}`], { encoding: 'utf8' }));

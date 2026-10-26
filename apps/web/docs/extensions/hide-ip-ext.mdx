@@ -1,0 +1,41 @@
+---
+title: Hide IP
+description: Blur the exact public IP address returned by ipify in page text, tab titles, and tooltips, with hover-to-reveal behavior and no page-content uploads.
+---
+
+Hide IP looks up your public IP address, then blurs matching text on pages, in browser-tab titles, and in `title` tooltips. Hover over a blurred address to reveal it; move away to hide it again.
+
+## First use
+
+1. Install and enable the extension.
+2. Open a page that contains your public IP address. The extension requests the address from `api.ipify.org`, then checks page text for that exact value.
+3. Hover over a blurred match to read it. Move the pointer away to blur it again.
+
+The fetched address is cached in memory for 15 minutes. Text in inputs and textareas is left untouched. The extension does not collect or transmit page content.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/hide-ip-ext/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/hide-ip-ext/firefox)
+- [All Hide IP releases](https://github.com/mynameistito/browser-extensions/releases?q=hide-ip-ext)
+
+The download links always redirect to the latest stable release for this extension.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions), then run `bun install` and `bun run prepare:wxt` from its root.
+2. Run `bun run --filter hide-ip-ext build`.
+3. Load `apps/hide-ip-ext/.output/chrome-mv3` in Chrome through `chrome://extensions` with Developer mode enabled.
+4. For Firefox, load the manifest from `apps/hide-ip-ext/.output/firefox-mv2` using `about:debugging#/runtime/this-firefox`.
+
+## Permissions and privacy
+
+The extension requests `storage` and permission to contact `https://api.ipify.org/*`. The IP lookup sends a request to ipify; as with any IP lookup service, that service receives the network request and can see the connecting public IP. The extension then matches only that exact address locally. Page contents are not uploaded.
+
+## Troubleshooting
+
+- **Nothing is blurred:** check that the page contains the same public IP returned by ipify and reload after enabling the extension.
+- **The lookup fails:** check network access to `api.ipify.org` and try again later.
+- **Text in a form is visible:** inputs and textareas are intentionally excluded.
+
+See the [Hide IP source and privacy notes](https://github.com/mynameistito/browser-extensions/tree/main/apps/hide-ip-ext).

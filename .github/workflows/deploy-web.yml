@@ -1,0 +1,144 @@
+name: Deploy web
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+  pull_request:
+    types: [closed]
+  schedule:
+    - cron: "23 4 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: alchemy-deploy-${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.event.workflow_run.event == 'pull_request' && format('pr-{0}', github.event.workflow_run.pull_requests[0].number) || github.event.workflow_run.event == 'push' && 'prod' || 'invalid' }}
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    name: Check deployment eligibility
+    runs-on: ubuntu-24.04
+    outputs:
+      deploy: ${{ steps.preview.outputs.deploy || steps.version.outputs.deploy || 'false' }}
+    steps:
+      - name: Check out the successful main commit
+        if: >-
+          github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Require a web Changesets version bump for production
+        id: version
+        if: >-
+          github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main'
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync, readFileSync } from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+
+          const current = JSON.parse(readFileSync('apps/web/package.json', 'utf8'));
+          let previousVersion;
+          let previousChangelog;
+          try {
+            const previous = execFileSync(
+              'git',
+              ['show', 'HEAD^:apps/web/package.json'],
+              { encoding: 'utf8' },
+            );
+            previousVersion = JSON.parse(previous).version;
+          } catch {
+            // The initial web package has no prior version to compare.
+          }
+
+          try {
+            previousChangelog = execFileSync(
+              'git',
+              ['show', 'HEAD^:apps/web/CHANGELOG.md'],
+              { encoding: 'utf8' },
+            );
+          } catch {
+            // The initial web package has no prior changelog.
+          }
+
+          const changelog = readFileSync('apps/web/CHANGELOG.md', 'utf8');
+          const hasVersionNote = new RegExp(
+            `^## ${String(current.version).replaceAll('.', '\\.')}\\s*$`,
+            'mu',
+          ).test(changelog);
+          const deploy =
+            previousVersion !== undefined &&
+            previousVersion !== current.version &&
+            previousChangelog !== changelog &&
+            hasVersionNote;
+          const output = process.env.GITHUB_OUTPUT;
+          if (output === undefined) throw new Error('GITHUB_OUTPUT is not set.');
+          appendFileSync(output, `deploy=${String(deploy)}\n`);
+          NODE
+
+      - name: Allow pull-request previews after successful CI
+        id: preview
+        if: >-
+          github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+        run: echo "deploy=true" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    name: Deploy or clean up Worker
+    needs: gate
+    if: >-
+      (github.event_name == 'workflow_run' && needs.gate.outputs.deploy == 'true') || (github.event_name == 'pull_request' && github.event.action == 'closed')
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: read
+      deployments: write
+      pull-requests: write
+    steps:
+      - name: Deploy with Alchemy
+        uses: mynameistito/alchemy-deploy@68f577f3032660bd4919dfcc5725db21d5b64f9d # v3.1.5
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          worker-name: browser-ext
+          deploy-command: cd apps/web && bunx --no-install alchemy deploy --stage "$STAGE" --yes
+          destroy-command: cd apps/web && bunx --no-install alchemy destroy --stage "$STAGE" --yes
+          production-stage: prod
+          production-url: https://browser-ext.mynameistito.com
+          production-branch: main
+          preview-artifact: alchemy-worker
+          preview-entrypoint: index.js
+          preview-assets-directory: site
+          preview-assets-config: '{"htmlHandling":"drop-trailing-slash","notFoundHandling":"404-page"}'
+          preview-compatibility-date: "2026-10-26"
+
+  reconcile:
+    name: Reconcile closed pull-request previews
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: read
+      deployments: write
+      pull-requests: read
+    steps:
+      - name: Reconcile with Alchemy
+        uses: mynameistito/alchemy-deploy@68f577f3032660bd4919dfcc5725db21d5b64f9d # v3.1.5
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          worker-name: browser-ext
+          deploy-command: cd apps/web && bunx --no-install alchemy deploy --stage "$STAGE" --yes
+          destroy-command: cd apps/web && bunx --no-install alchemy destroy --stage "$STAGE" --yes
+          production-stage: prod
+          production-url: https://browser-ext.mynameistito.com
+          production-branch: main
+          reconcile: true

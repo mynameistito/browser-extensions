@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-Each child directory is an independently versioned WXT browser extension, not a shared library package.
+Each child directory is an independently versioned app. Eight are WXT browser extensions; `web/` is the Blume documentation site and has its own Cloudflare Worker deployment.
 
 ## WHERE TO LOOK
 
@@ -16,6 +16,7 @@ Each child directory is an independently versioned WXT browser extension, not a 
 | `mute-tab-manager/` | Cross-browser tab muting with YouTube player synchronization. |
 | `new-tab-ext/` | Local-first React dashboard; see its existing local `AGENTS.md`. |
 | `quote-viewer/` | X quote-viewer content script and tweet helpers. |
+| `web/` | Blume documentation site for all extensions; deploys to Cloudflare Workers through Alchemy. |
 
 ## CONVENTIONS
 
@@ -23,6 +24,7 @@ Each child directory is an independently versioned WXT browser extension, not a 
 - Run shared WXT wrapper scripts from an app package (workspace scripts already do this); the wrapper takes its working directory as the WXT project root.
 - Respect the app's configured WXT source root. Root-level `entrypoints/` and `src/entrypoints/` layouts both occur.
 - Keep app dependencies and release versions local to the app. Root workspace membership is defined by `apps/*`.
+- `web/` is not a WXT app: do not add it to WXT preparation or browser-extension artifact release steps. Its production deployment is gated on its Changesets version bump.
 - `postinstall` generally runs WXT `prepare` to generate app-local types; avoid hand-editing generated `.wxt/` files.
 
 ## ANTI-PATTERNS

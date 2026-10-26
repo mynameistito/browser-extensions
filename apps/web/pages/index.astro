@@ -1,0 +1,1783 @@
+---
+import data from "blume:data";
+// oxlint-disable-next-line sonarjs/unused-import -- Astro markup consumes this imported layout.
+import PageLayout from "blume/components/layout/PageLayout.astro";
+
+const repositoryUrl = "https://github.com/mynameistito/browser-extensions";
+
+const extensions = [
+  {
+      description:
+        "Search, filter, and clean up browser history with URL rules and scheduled cleanup.",
+      href: "/extensions/better-history",
+      packageName: "better-history",
+      preview: "history",
+      title: "Better History",
+  },
+  {
+      description:
+        "Copy an owner/repository name from GitHub confirmation dialogs.",
+      href: "/extensions/github-settings-repo-copy",
+      packageName: "github-settings-repo-copy",
+      preview: "repository",
+      title: "GitHub Settings Repo Copy",
+  },
+  {
+      description:
+        "Redact the email addresses you choose from text on the page.",
+      href: "/extensions/hide-email-ext",
+      packageName: "hide-email-ext",
+      preview: "email",
+      title: "Hide Email",
+  },
+  {
+      description:
+        "Blur your public IP in page text, tab titles, and tooltips. Hover to reveal it.",
+      href: "/extensions/hide-ip-ext",
+      packageName: "hide-ip-ext",
+      preview: "ip",
+      title: "Hide IP",
+  },
+  {
+      description:
+        "Add familiar seek, volume, fullscreen, and picture-in-picture controls to Instagram videos.",
+      href: "/extensions/ig-video-controls",
+      packageName: "ig-video-controls",
+      preview: "video",
+      title: "Instagram Video Controls",
+  },
+  {
+      description:
+        "Mute tabs with a shortcut or toolbar action, including YouTube playback.",
+      href: "/extensions/mute-tab-manager",
+      packageName: "mute-tab-manager",
+      preview: "tabs",
+      title: "Mute Tab Manager",
+  },
+  {
+      description:
+        "Make a new tab your own with a clock, search, weather, and flexible widgets.",
+      href: "/extensions/new-tab-ext",
+      packageName: "new-tab-ext",
+      preview: "new-tab",
+      title: "New Tab",
+  },
+  {
+      description:
+        "Open the quote-post view directly from an X or Twitter post.",
+      href: "/extensions/quote-viewer",
+      packageName: "quote-viewer",
+      preview: "quotes",
+      title: "Quote Viewer",
+  },
+];
+
+const { config } = data;
+---
+
+<PageLayout
+  analytics={config.analytics}
+  banner={config.banner}
+  favicon={config.favicon}
+  fontCssVars={data.fontCssVars}
+  logo={config.logo}
+  navigation={data.navigation}
+  ogEnabled={config.og.enabled}
+  page={{
+    description:
+      "Eight open-source browser extensions for privacy, history, tabs, and the pages you use.",
+    route: "/",
+    title: "Small fixes for your browser",
+  }}
+  searchEnabled={config.search.enabled}
+  site={{ title: config.title, description: config.description }}
+  siteUrl={config.site}
+  themeMode={config.theme.mode}
+>
+  <main class="home">
+    <section class="hero hp-frame" aria-labelledby="home-title">
+      <div class="hero-main">
+        <h1 id="home-title">Small fixes for your browser.</h1>
+        <div class="hero-lower">
+          <p class="hero-description">
+            Eight open-source extensions for Chrome and Firefox. Pick one useful
+            thing, build it from source, and make it yours.
+          </p>
+          <div class="install-widget" data-install-widget>
+            <label for="extension-select">Choose a build</label>
+            <select aria-label="Extension to build" id="extension-select">
+              {extensions.map((extension) => (
+                <option value={extension.packageName}>{extension.title}</option>
+              ))}
+            </select>
+            <div class="install-command">
+              <span class="prompt-mark" aria-hidden="true">$</span>
+              <code aria-live="polite" class="command-value">bun run --filter better-history build</code>
+              <button aria-label="Copy build command" class="copy-command" type="button">
+                <span class="copy-label">Copy</span>
+                <span aria-hidden="true" class="copy-check">Copied</span>
+              </button>
+            </div>
+            <p class="install-hint">
+              Start with <a href="#install">the source setup steps</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="extensions hp-frame" id="extensions" aria-labelledby="extensions-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="extensions-title">Eight small fixes, shown in context.</h2>
+          <p>Each extension solves one everyday browser annoyance.</p>
+        </div>
+        <span class="extension-count">8 extensions</span>
+      </div>
+      <div class="showcase-list">
+        {extensions.map((extension) => (
+          <article class="extension-showcase">
+            <div class="showcase-copy">
+              <h3>{extension.title}</h3>
+              <p>{extension.description}</p>
+              <a
+                class:list={["showcase-link", extension.preview === "video" && "showcase-link-video"]}
+                href={extension.href}
+              >
+                Explore {extension.preview === "video" ? "IG Video Controls" : extension.title} <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+
+            {extension.preview === "email" ? (
+              <div class="browser-demo showcase-email-demo" data-ui>
+                <div class="browser-chrome">
+                  <div aria-hidden="true" class="window-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="address-bar">example.com/contact</div>
+                  <span class="browser-mark" aria-hidden="true"></span>
+                </div>
+                <div class="browser-content">
+                  <p class="browser-kicker">Contact</p>
+                  <h4>We’d love to hear from you.</h4>
+                  <p class="browser-paragraph">
+                    Send a note to{" "}
+                    <button
+                      aria-description="Click to reveal email"
+                      aria-label="Toggle email visibility"
+                      aria-pressed="false"
+                      class="email-example"
+                      data-email-example
+                      title="Click to reveal email"
+                      type="button"
+                    >
+                      m8q2r4x9@p7c3z1k.tld
+                    </button>{" "}and we’ll get back to you soon.
+                  </p>
+                  <div class="redaction-row">
+                    <span class="redaction-status" data-redaction-status>Address hidden</span>
+                    <button
+                      aria-pressed="true"
+                      class="redaction-toggle"
+                      data-redaction-toggle
+                      type="button"
+                    >
+                      <span class="switch" aria-hidden="true"></span>
+                      <span data-redaction-label>Show address</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div
+                aria-hidden={extension.preview === "ip" ? undefined : "true"}
+                class:list={["extension-preview", `preview-${extension.preview}`]}
+                data-ui
+              >
+                {extension.preview === "history" && (
+                  <div class="preview-window history-window">
+                    <div class="preview-heading"><span>History</span><span>Today</span></div>
+                    <div class="history-entry"><span class="site-dot site-blue"></span><span><b>Project notes</b><small>docs.example.com</small></span><time>2 min</time></div>
+                    <div class="history-entry"><span class="site-dot site-violet"></span><span><b>TypeScript handbook</b><small>typescriptlang.org</small></span><time>18 min</time></div>
+                    <div class="history-entry"><span class="site-dot site-green"></span><span><b>Pull request · main</b><small>github.com</small></span><time>1 hr</time></div>
+                  </div>
+                )}
+                {extension.preview === "repository" && (
+                  <div class="preview-window repo-window">
+                    <div class="preview-heading"><span>Confirm repository</span><span>×</span></div>
+                    <p>Are you sure you want to continue?</p>
+                    <div class="repo-value"><span>mynameistito/browser-extensions</span><b>Copy</b></div>
+                  </div>
+                )}
+                {extension.preview === "ip" && (
+                  <div class="browser-demo showcase-ip-demo" data-ip-demo>
+                    <div class="browser-chrome">
+                      <div aria-hidden="true" class="window-dots">
+                        <span></span><span></span><span></span>
+                      </div>
+                      <div class="address-bar">example.com/network</div>
+                      <span class="browser-mark" aria-hidden="true"></span>
+                    </div>
+                    <div class="ip-demo-content">
+                      <span class="preview-overline">YOUR NETWORK</span>
+                      <p>Public address <button aria-label="Reveal public IP" aria-pressed="false" class="ip-example" data-ip-value type="button">000.000.000.000</button></p>
+                      <small data-ip-status aria-live="polite">Page text, tab titles, and tooltips</small>
+                      <div class="redaction-row">
+                        <span class="redaction-status" data-ip-label>Address hidden</span>
+                        <button aria-pressed="true" class="redaction-toggle" data-ip-toggle type="button">
+                          <span class="switch" aria-hidden="true"></span>
+                          <span data-ip-toggle-label>Show address</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {extension.preview === "video" && (
+                  <div class="video-scene">
+                    <div class="video-subject"></div>
+                    <div class="video-controls"><span>−10</span><span class="play-glyph"></span><span>+10</span><span class="video-spacer"></span><span>PiP</span><span>Full</span></div>
+                  </div>
+                )}
+                {extension.preview === "tabs" && (
+                  <div class="preview-window tabs-window">
+                    <div class="tab-entry"><span class="sound-glyph">◖</span><span><b>Reference video</b><small>YouTube</small></span><span class="tab-state">Muted</span></div>
+                    <div class="tab-entry"><span class="sound-glyph sound-on">◖</span><span><b>Focus playlist</b><small>YouTube</small></span><span class="tab-state">Playing</span></div>
+                    <div class="tab-entry"><span class="sound-glyph">◖</span><span><b>Release notes</b><small>github.com</small></span><span class="tab-state">Quiet</span></div>
+                  </div>
+                )}
+                {extension.preview === "new-tab" && (
+                  <div class="newtab-scene">
+                    <span class="newtab-time">09:41</span>
+                    <div class="newtab-search"><span>Search the web</span><span>↵</span></div>
+                    <div class="newtab-weather"><span class="weather-sun"></span><b>18°</b><small>Portland</small></div>
+                  </div>
+                )}
+                {extension.preview === "quotes" && (
+                  <div class="preview-quotes">
+                    <div class="browser-demo showcase-quote-demo">
+                      <div class="browser-chrome">
+                        <div aria-hidden="true" class="window-dots">
+                          <span></span><span></span><span></span>
+                        </div>
+                        <div class="address-bar">social.example/post/108</div>
+                        <span aria-hidden="true" class="browser-mark"></span>
+                      </div>
+                      <article aria-label="Example social post" class="quote-post">
+                        <header class="quote-post-header">
+                          <span aria-hidden="true" class="avatar-dot">
+                            <img alt="" height="32" src="/assets/mynameistito-avatar.png" width="32" />
+                          </span>
+                          <span class="quote-author">
+                            <b>mynameistito</b>
+                            <small>@mynameistito · 3h</small>
+                          </span>
+                        </header>
+                        <p>Made something small that makes the day a little easier.</p>
+                        <footer aria-label="Post activity" class="quote-action" role="group">
+                          <span class="post-metric">
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-4 2v-5.5a7.5 7.5 0 1 1 17.5-4Z" /></svg>
+                            8
+                          </span>
+                          <span class="post-metric">
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4" /><path d="M3 11V9a3 3 0 0 1 3-3h15" /><path d="m7 22-4-4 4-4" /><path d="M21 13v2a3 3 0 0 1-3 3H3" /></svg>
+                            8
+                          </span>
+                          <span class="post-metric">
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" /></svg>
+                            31
+                          </span>
+                          <span class="post-metric">
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 20v-6m5 6V4m5 16v-9m5 9V7" /></svg>
+                            960
+                          </span>
+                          <span aria-hidden="true" class="post-bookmark">
+                            <svg viewBox="0 0 24 24"><path d="M6 3.5A1.5 1.5 0 0 1 7.5 2h9A1.5 1.5 0 0 1 18 3.5V22l-6-4-6 4V3.5Z" /></svg>
+                          </span>
+                          <span aria-hidden="true" class="post-share">
+                            <svg viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5" /><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" /></svg>
+                          </span>
+                          <a
+                            aria-label="View quoted posts"
+                            class="quote-view-link"
+                            href={extension.href}
+                            title="View quoted posts"
+                          >
+                            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 11H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5v7Zm0 0c0 4-2 6-5 8m16-8h-5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5v7Zm0 0c0 4-2 6-5 8" /></svg>
+                          </a>
+                        </footer>
+                      </article>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="source-band" id="install" aria-labelledby="source-title">
+      <div class="hp-frame source-layout">
+        <div class="source-copy">
+          <h2 id="source-title">Build it yourself.</h2>
+          <p>
+            These extensions are installed from source, not a browser-store
+            listing. Follow a guide for the exact build output and unpacked
+            install steps for your browser.
+          </p>
+          <a class="source-button" href={repositoryUrl}>
+            Browse the source on GitHub <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <div class="source-steps">
+          <ol>
+            <li>
+              <span>Clone the repository</span>
+              <code>git clone https://github.com/mynameistito/browser-extensions.git</code>
+            </li>
+            <li>
+              <span>Install dependencies and prepare WXT</span>
+              <code>bun install &amp;&amp; bun run prepare:wxt</code>
+            </li>
+            <li>
+              <span>Build the extension you chose</span>
+              <code>bun run --filter &lt;name&gt; build</code>
+            </li>
+          </ol>
+          <a class="steps-link" href="/extensions/hide-email-ext#install-a-local-build">
+            See a complete install guide <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="privacy hp-frame" id="privacy" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Know what each tool uses.</h2>
+        <div class="privacy-copy">
+          <p>
+          Each extension handles data differently. Hide Email syncs your
+          redaction list and scans page text on your device. Hide IP checks your
+          public IP through this site's Cloudflare endpoint; page contents stay
+          on your device.
+          </p>
+          <p>
+          New Tab sends searches and weather requests to the providers you
+          choose. Each guide explains its permissions and data use.
+          </p>
+        <a href="/extensions/hide-ip-ext#permissions-and-privacy">
+          Read the privacy notes <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="home-footer hp-frame" slot="footer">
+    <a class="footer-brand" href="/">Browser Extensions</a>
+    <p>Open-source tools for a more useful browser.</p>
+    <nav aria-label="Footer">
+      <a href="#extensions">Extensions</a>
+      <a href="#install">Install</a>
+      <a href={repositoryUrl}>GitHub</a>
+    </nav>
+  </footer>
+</PageLayout>
+
+<script>
+  const bindInstallWidget = (widget: HTMLElement): void => {
+    if (widget.dataset.bound === "true") {
+      return;
+    }
+
+    const select = widget.querySelector<HTMLSelectElement>("#extension-select");
+    const commandText = widget.querySelector<HTMLElement>(".command-value");
+    const copyButton = widget.querySelector<HTMLButtonElement>(".copy-command");
+
+    if (!(select && commandText && copyButton)) {
+      return;
+    }
+
+    widget.dataset.bound = "true";
+
+    const updateCommand = (): void => {
+      commandText.textContent = `bun run --filter ${select.value} build`;
+    };
+
+    select.addEventListener("change", updateCommand);
+    copyButton.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(commandText.textContent ?? "");
+      copyButton.classList.add("is-copied");
+      window.setTimeout(() => copyButton.classList.remove("is-copied"), 1400);
+    });
+  };
+
+  const ariaPressedAttribute = "aria-pressed";
+
+  const makePlaceholderIp = (): string =>
+    Array.from(crypto.getRandomValues(new Uint16Array(4)), (number) =>
+      String(number % 1000).padStart(3, "0")
+    ).join(".");
+
+  const bindDemo = (demo: HTMLElement): void => {
+    if (demo.dataset.bound === "true") {
+      return;
+    }
+
+    const toggle = demo.querySelector<HTMLButtonElement>("[data-redaction-toggle]");
+    const email = demo.querySelector<HTMLButtonElement>("[data-email-example]");
+    const status = demo.querySelector<HTMLElement>("[data-redaction-status]");
+    const label = demo.querySelector<HTMLElement>("[data-redaction-label]");
+
+    if (!(toggle && email && status && label)) {
+      return;
+    }
+
+    demo.dataset.bound = "true";
+    const decoyEmail = "m8q2r4x9@p7c3z1k.tld";
+    const visibleEmail = "hello@example.com";
+
+    const setVisibility = (visible: boolean): void => {
+      const hint = visible ? "Click to hide email" : "Click to reveal email";
+      email.textContent = visible ? visibleEmail : decoyEmail;
+      email.setAttribute(ariaPressedAttribute, String(visible));
+      email.setAttribute(
+        "aria-label",
+        visible ? visibleEmail : "Toggle email visibility"
+      );
+      email.setAttribute("aria-description", hint);
+      email.setAttribute("title", hint);
+      status.textContent = visible ? "Address visible" : "Address hidden";
+      label.textContent = visible ? "Hide address" : "Show address";
+      toggle.setAttribute(ariaPressedAttribute, String(!visible));
+    };
+
+    email.addEventListener("click", () => {
+      setVisibility(email.getAttribute(ariaPressedAttribute) !== "true");
+    });
+    toggle.addEventListener("click", () => {
+      setVisibility(toggle.getAttribute(ariaPressedAttribute) === "true");
+    });
+  };
+
+  const bindIpDemo = (demo: HTMLElement): void => {
+    if (demo.dataset.bound === "true") {
+      return;
+    }
+
+    const value = demo.querySelector<HTMLButtonElement>("[data-ip-value]");
+    const toggle = demo.querySelector<HTMLButtonElement>("[data-ip-toggle]");
+    const toggleLabel = demo.querySelector<HTMLElement>("[data-ip-toggle-label]");
+    const label = demo.querySelector<HTMLElement>("[data-ip-label]");
+    const status = demo.querySelector<HTMLElement>("[data-ip-status]");
+
+    if (!value) {
+      return;
+    }
+
+    if (!toggle) {
+      return;
+    }
+
+    if (!toggleLabel) {
+      return;
+    }
+
+    if (!label) {
+      return;
+    }
+
+    if (!status) {
+      return;
+    }
+
+    demo.dataset.bound = "true";
+    let placeholderIp = makePlaceholderIp();
+    let publicIp: string | undefined;
+    let visible = false;
+    let loading = false;
+    let lookupFailed = false;
+
+    const render = (): void => {
+      value.textContent = visible && publicIp ? publicIp : placeholderIp;
+      value.classList.toggle("is-revealed", visible);
+      value.setAttribute(ariaPressedAttribute, String(visible));
+      value.setAttribute("aria-label", visible ? "Hide public IP" : "Reveal public IP");
+
+      if (lookupFailed) {
+        value.title = "Could not check your IP. Click to retry.";
+      } else if (visible) {
+        value.title = "Click to hide address";
+      } else {
+        value.title = "Click to reveal address";
+      }
+
+      label.textContent = visible ? "Address visible" : "Address hidden";
+      toggleLabel.textContent = visible ? "Hide address" : "Show address";
+      toggle.setAttribute(ariaPressedAttribute, String(!visible));
+
+      status.textContent = visible
+        ? "Your public IP is visible."
+        : "Your public IP is hidden.";
+    };
+
+    const loadIp = async (): Promise<void> => {
+      if (publicIp || loading) {
+        return;
+      }
+
+      loading = true;
+      lookupFailed = false;
+      render();
+
+      try {
+        const endpoint = import.meta.env.DEV
+          ? "https://api.ipify.org?format=json"
+          : "/api/v1/ip";
+
+        const response = await fetch(endpoint, { cache: "no-store" });
+
+        if (!response.ok) {
+          throw new Error("IP lookup failed");
+        }
+
+        // SAFETY: The production endpoint and the configured ipify JSON endpoint both return { ip: string }.
+        const result = (await response.json()) as { readonly ip: string };
+        publicIp = result.ip;
+      } catch {
+        lookupFailed = true;
+      } finally {
+        loading = false;
+        render();
+      }
+    };
+
+    const toggleVisibility = async (): Promise<void> => {
+      if (visible) {
+        visible = false;
+        placeholderIp = makePlaceholderIp();
+        render();
+
+        return;
+      }
+
+      await loadIp();
+
+      if (publicIp) {
+        visible = true;
+        render();
+      }
+    };
+
+    render();
+    value.addEventListener("click", async () => {
+      await toggleVisibility();
+    });
+    toggle.addEventListener("click", async () => {
+      await toggleVisibility();
+    });
+  };
+
+  const setupHome = (): void => {
+    for (const widget of document.querySelectorAll<HTMLElement>("[data-install-widget]")) {
+      bindInstallWidget(widget);
+    }
+
+    for (const demo of document.querySelectorAll<HTMLElement>(".browser-demo")) {
+      bindDemo(demo);
+    }
+
+    for (const demo of document.querySelectorAll<HTMLElement>("[data-ip-demo]")) {
+      bindIpDemo(demo);
+    }
+  };
+
+  setupHome();
+
+  document.addEventListener("astro:page-load", setupHome);
+</script>
+
+<style>
+  .home {
+    --hp-ink: #131311;
+    --hp-paper: #f2f6f8;
+    --hp-muted: color-mix(in srgb, var(--blume-foreground) 68%, var(--blume-background));
+    --hp-accent: var(--blume-accent, #147f82);
+    --hp-accent-fill: #a7e8d8;
+    --hp-band: #153947;
+    --hp-band-ink: #f1f7f8;
+    --hp-band-muted: #c1d2d8;
+    --hp-border: rgb(19 19 17 / 12%);
+    color: var(--blume-foreground, var(--hp-ink));
+    background: var(--blume-background, var(--hp-paper));
+  }
+
+  .hp-frame {
+    width: min(100%, 80rem);
+    margin-inline: auto;
+    border-inline: 1px solid var(--blume-border, var(--hp-border));
+  }
+
+  .hero-main {
+    padding: clamp(3.5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 5rem) clamp(3rem, 6vw, 5rem);
+  }
+
+  .hero h1 {
+    max-width: 16ch;
+    margin: 0;
+    color: var(--blume-foreground, var(--hp-ink));
+    font-size: clamp(3.4rem, 8.3vw, 7.1rem);
+    font-weight: 520;
+    letter-spacing: -0.065em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .hero-lower {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(390px, 0.92fr);
+    align-items: end;
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-top: clamp(2.5rem, 5vw, 4.25rem);
+  }
+
+  .hero-description {
+    max-width: 40ch;
+    margin: 0;
+    color: var(--hp-muted);
+    font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .install-widget {
+    display: grid;
+    gap: 0.6rem;
+    min-width: 0;
+  }
+
+  .install-widget > label {
+    color: var(--blume-foreground, var(--hp-ink));
+    font-size: 0.9rem;
+    font-weight: 550;
+  }
+
+  .install-widget > select {
+    width: 100%;
+    height: 2.75rem;
+    padding-inline: 0.75rem;
+    border: 1px solid var(--blume-border, var(--hp-border));
+    border-radius: 0.3rem;
+    color: var(--blume-foreground, var(--hp-ink));
+    background: var(--blume-background, var(--hp-paper));
+    font: inherit;
+    font-size: 0.9375rem;
+  }
+
+  .install-widget > select:focus-visible {
+    outline: 2px solid var(--hp-accent);
+    outline-offset: 3px;
+  }
+
+  .install-command {
+    display: flex;
+    height: 3.75rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.35rem 0.4rem 0.35rem 1rem;
+    border: 1px solid var(--blume-foreground, var(--hp-ink));
+    border-radius: 0.35rem;
+    background: var(--blume-code-background, #fbfbf9);
+    font-family: var(--font-mono, ui-monospace, monospace);
+  }
+
+  .prompt-mark {
+    color: var(--hp-accent);
+    font-size: 1rem;
+  }
+
+  .command-value {
+    width: 0;
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    color: inherit;
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .copy-command {
+    min-width: 4.6rem;
+    height: 2.85rem;
+    padding-inline: 0.75rem;
+    border: 0;
+    border-radius: 0.25rem;
+    color: #102a32;
+    background: var(--hp-accent-fill);
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 650;
+    cursor: pointer;
+    transition: filter 150ms ease, transform 150ms ease;
+  }
+
+  .copy-command:hover,
+  .source-button:hover {
+    filter: brightness(0.95);
+  }
+
+  .copy-command:active,
+  .source-button:active {
+    transform: translateY(1px);
+  }
+
+  .copy-command:focus-visible,
+  .email-example:focus-visible,
+  .redaction-toggle:focus-visible,
+  .showcase-link:focus-visible,
+  .source-button:focus-visible,
+  .home a:focus-visible,
+  .home-footer a:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  .copy-check {
+    display: none;
+  }
+
+  .copy-command.is-copied .copy-label {
+    display: none;
+  }
+
+  .copy-command.is-copied .copy-check {
+    display: inline;
+  }
+
+  .install-hint {
+    margin: 0;
+    color: var(--hp-muted);
+    font-size: 0.875rem;
+  }
+
+  .install-hint a,
+  .privacy-copy a,
+  .steps-link {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+  }
+
+  .source-copy h2 {
+    max-width: 11ch;
+    margin: 0;
+    font-size: clamp(2.5rem, 4.5vw, 4rem);
+    font-weight: 520;
+    letter-spacing: -0.055em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  .source-copy p {
+    max-width: 42ch;
+    margin: 1.25rem 0 1.5rem;
+    color: var(--hp-band-muted);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .browser-demo {
+    overflow: hidden;
+    border: 1px solid rgb(232 234 237 / 14%);
+    border-radius: 0.55rem;
+    color: #e8eaed;
+    background: #202124;
+    box-shadow: 0 1.4rem 4rem rgb(19 19 17 / 24%);
+  }
+
+  .showcase-ip-demo {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .browser-chrome {
+    display: grid;
+    height: 3.4rem;
+    grid-template-columns: 4.5rem minmax(0, 1fr) 2.2rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding-inline: 1rem;
+    background: #303134;
+  }
+
+  .window-dots {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .window-dots span {
+    width: 0.58rem;
+    height: 0.58rem;
+    border-radius: 50%;
+    background: #5f6368;
+  }
+
+  .address-bar {
+    overflow: hidden;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.25rem;
+    color: #bdc1c6;
+    background: #202124;
+    font-size: 0.8125rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .browser-mark {
+    width: 0.55rem;
+    height: 0.55rem;
+    justify-self: end;
+    border-radius: 50%;
+    background: var(--hp-accent);
+  }
+
+  .browser-content {
+    max-width: 590px;
+    margin-inline: auto;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  .ip-demo-content {
+    padding: clamp(1.4rem, 3vw, 2.25rem);
+  }
+
+  .ip-demo-content > p {
+    margin: 0.8rem 0 0.35rem;
+    color: #e8eaed;
+    font-size: 1rem;
+  }
+
+  .ip-demo-content > small {
+    color: #9aa0a6;
+    font-size: 0.8rem;
+  }
+
+  .ip-example {
+    padding: 0 0.15rem;
+    border: 0;
+    border-radius: 0.15rem;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+    filter: blur(3px);
+    transition: filter 150ms ease;
+  }
+
+  .ip-example.is-revealed {
+    filter: none;
+  }
+
+  .ip-example:focus-visible {
+    outline: 2px solid #a7e8d8;
+    outline-offset: 3px;
+  }
+
+  .ip-demo-content .redaction-row {
+    margin-top: 1.25rem;
+  }
+
+  .browser-kicker {
+    margin: 0 0 0.7rem;
+    color: #9aa0a6;
+    font-size: 0.875rem;
+  }
+
+  .browser-content h4 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 580;
+    letter-spacing: -0.045em;
+    line-height: 1.1;
+  }
+
+  .browser-paragraph {
+    margin: 1rem 0 2rem;
+    color: #bdc1c6;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .email-example {
+    padding: 0;
+    border: 0;
+    color: #e8eaed;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+    filter: blur(4px);
+    vertical-align: baseline;
+    transition: background-color 180ms ease, filter 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .email-example[aria-pressed="true"] {
+    filter: none;
+  }
+
+  .redaction-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgb(232 234 237 / 14%);
+  }
+
+  .redaction-status {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .redaction-toggle {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.3rem 0.1rem 0.3rem 0.5rem;
+    border: 0;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .switch {
+    position: relative;
+    width: 2.3rem;
+    height: 1.3rem;
+    border-radius: 999px;
+    background: #5f6368;
+    transition: background-color 160ms ease;
+  }
+
+  .switch::after {
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    background: white;
+    content: "";
+    transition: transform 160ms ease;
+  }
+
+  .redaction-toggle[aria-pressed="true"] .switch {
+    background: #81c995;
+  }
+
+  .redaction-toggle[aria-pressed="true"] .switch::after {
+    transform: translateX(1rem);
+  }
+
+  .extensions {
+    padding: clamp(4rem, 8vw, 7.5rem) clamp(1.25rem, 5vw, 5rem);
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-heading h2,
+  .privacy h2 {
+    max-width: 16ch;
+    margin: 0;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 520;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .section-heading p {
+    margin: 1rem 0 0;
+    color: var(--hp-muted);
+    font-size: 1.0625rem;
+  }
+
+  .extension-count {
+    flex: none;
+    padding-bottom: 0.25rem;
+    color: var(--hp-muted);
+    font-size: 0.9375rem;
+  }
+
+  .showcase-list {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .extension-showcase {
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.7fr) minmax(0, 1.3fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6rem);
+    min-height: 27rem;
+    padding: clamp(2rem, 5vw, 4.5rem);
+    color: var(--hp-band-ink);
+    background: var(--hp-band);
+  }
+
+  .extension-showcase:nth-child(even) {
+    grid-template-columns: minmax(0, 1.3fr) minmax(15rem, 0.7fr);
+    background: #1b4350;
+  }
+
+  .extension-showcase:nth-child(even) > .showcase-copy {
+    order: 2;
+    text-align: right;
+  }
+
+  .extension-showcase:nth-child(even) > .showcase-copy h3,
+  .extension-showcase:nth-child(even) > .showcase-copy p {
+    margin-left: auto;
+  }
+
+  .extension-showcase:nth-child(even) > .extension-preview,
+  .extension-showcase:nth-child(even) > .browser-demo,
+  .extension-showcase:nth-child(even) > .preview-ip > .browser-demo,
+  .extension-showcase:nth-child(even) > .preview-quotes > .browser-demo {
+    order: 1;
+  }
+
+  .showcase-copy h3 {
+    max-width: 18ch;
+    margin: 0;
+    font-size: clamp(2.2rem, 4vw, 3.65rem);
+    font-weight: 520;
+    letter-spacing: -0.055em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  .showcase-copy p {
+    max-width: 38ch;
+    margin: 1.25rem 0 1.5rem;
+    color: var(--hp-band-muted);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .showcase-link {
+    display: inline-flex;
+    min-height: 2.85rem;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.95rem;
+    border-radius: 0.3rem;
+    color: #102a32;
+    background: var(--hp-accent-fill);
+    font-weight: 650;
+    text-decoration: none;
+    transition: filter 150ms ease, transform 150ms ease;
+  }
+
+  .showcase-link-video {
+    white-space: nowrap;
+  }
+
+  .showcase-link span {
+    color: #102a32;
+    transition: transform 160ms ease;
+  }
+
+  .showcase-link:hover span {
+    transform: translate(2px, -2px);
+  }
+
+  .showcase-link:hover {
+    filter: brightness(0.95);
+  }
+
+  .showcase-link:active {
+    transform: translateY(1px);
+  }
+
+  .extension-preview {
+    display: grid;
+    min-height: 21rem;
+    align-items: center;
+    overflow: hidden;
+    padding: clamp(1rem, 3vw, 2.25rem);
+    color: #e8f1f4;
+    background: #0d2732;
+    box-shadow: 0 1.4rem 4rem rgb(8 21 27 / 24%);
+  }
+
+  .preview-ip {
+    display: contents;
+  }
+
+  .preview-window {
+    width: 100%;
+    max-width: 42rem;
+    min-height: 15rem;
+    justify-self: center;
+    padding: clamp(1.1rem, 2.5vw, 2rem);
+    border-radius: 0.35rem;
+    background: #203945;
+  }
+
+  .preview-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    color: #e7f1f4;
+    font-size: 1rem;
+    font-weight: 650;
+  }
+
+  .preview-heading > span:last-child,
+  .history-entry time,
+  .history-entry small,
+  .tab-entry small,
+  .quote-author small {
+    color: #9db2ba;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .history-entry,
+  .tab-entry {
+    display: grid;
+    grid-template-columns: 0.6rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding-block: 0.65rem;
+  }
+
+  .history-entry > span:nth-child(2),
+  .tab-entry > span:nth-child(2),
+  .quote-author {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+
+  .history-entry b,
+  .tab-entry b,
+  .quote-author b {
+    overflow: hidden;
+    font-size: 0.9rem;
+    font-weight: 550;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-dot,
+  .avatar-dot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: #89d7c9;
+  }
+
+  .site-blue { background: #79b8ee; }
+  .site-violet { background: #b5a1e8; }
+  .site-green { background: #9bd5a9; }
+
+  .repo-window p,
+  .text-window p {
+    margin: 0.7rem 0;
+    color: #d2e0e4;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .repo-value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 0.25rem;
+    color: #e8f1f4;
+    background: #142b38;
+    font-size: 0.85rem;
+  }
+
+  .repo-value span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .repo-value b {
+    flex: none;
+    color: #a7e8d8;
+    font-size: 0.8rem;
+  }
+
+  .preview-overline {
+    color: #9db2ba;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .text-window p {
+    margin: 0.7rem 0 0.45rem;
+    font-size: 1.1rem;
+  }
+
+  .text-window small {
+    color: #9db2ba;
+    font-size: 0.8rem;
+  }
+
+  .blurred-sample,
+  .ip-window p b {
+    color: #e4f4f6;
+    font-weight: 550;
+    filter: blur(2.5px);
+  }
+
+  .ip-window p b { filter: blur(3px); }
+
+  .video-scene {
+    display: flex;
+    min-height: 18rem;
+    flex-direction: column;
+    justify-content: end;
+    overflow: hidden;
+    padding: 1rem;
+    border-radius: 0.35rem;
+    background: #345361;
+  }
+
+  .video-subject {
+    width: 3.2rem;
+    height: 3.2rem;
+    align-self: center;
+    margin: auto;
+    border: 1px solid rgb(232 241 244 / 25%);
+    border-radius: 50%;
+    background: rgb(232 241 244 / 8%);
+  }
+
+  .video-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.55rem;
+    border-radius: 0.25rem;
+    color: #e8f1f4;
+    background: rgb(11 27 35 / 86%);
+    font-size: 0.8rem;
+  }
+
+  .play-glyph {
+    width: 0;
+    height: 0;
+    border-block: 0.3rem solid transparent;
+    border-left: 0.42rem solid #a7e8d8;
+  }
+
+  .video-spacer { flex: 1; }
+
+  .tab-state {
+    color: #a7e8d8;
+    font-size: 0.8rem;
+  }
+
+  .sound-glyph {
+    color: #a7e8d8;
+    font-size: 1rem;
+  }
+
+  .sound-on { color: #9db2ba; }
+
+  .newtab-scene {
+    display: grid;
+    justify-items: center;
+    gap: 0.55rem;
+    padding: 0.4rem;
+    text-align: center;
+  }
+
+  .newtab-time {
+    color: #eff7f9;
+    font-size: 2rem;
+    font-weight: 520;
+    letter-spacing: -0.06em;
+  }
+
+  .newtab-search {
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+    padding: 0.45rem 0.65rem;
+    border-radius: 999px;
+    color: #b4c5cb;
+    background: #203945;
+    font-size: 0.8rem;
+  }
+
+  .newtab-weather {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #e8f1f4;
+  }
+
+  .newtab-weather b { font-size: 1rem; }
+  .newtab-weather small { color: #b4c5cb; font-size: 0.8rem; }
+
+  .weather-sun {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: #a7e8d8;
+  }
+
+  .preview-quotes {
+    display: contents;
+  }
+
+  .showcase-quote-demo {
+    width: 100%;
+    min-width: 0;
+    border-color: #242424;
+    background: #000;
+  }
+
+  .showcase-quote-demo .browser-chrome {
+    background: #000;
+  }
+
+  .showcase-quote-demo .address-bar {
+    color: #aab0b6;
+    background: #16181c;
+  }
+
+  .quote-post {
+    max-width: 42rem;
+    min-height: 15rem;
+    margin-inline: auto;
+    padding: clamp(1.4rem, 3vw, 2.25rem);
+    background: #000;
+  }
+
+  .quote-post-header {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .quote-post-header .avatar-dot {
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #000;
+  }
+
+  .quote-post-header .avatar-dot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .quote-post > p {
+    margin: 1.25rem 0 2rem;
+    color: #e8eaed;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .quote-action {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: 0.25rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgb(232 241 244 / 12%);
+    color: #9db2ba;
+    font-size: 0.8rem;
+  }
+
+  .post-metric {
+    display: inline-flex;
+    min-width: 0;
+    min-height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .post-bookmark,
+  .post-share {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    color: #9db2ba;
+  }
+
+  .post-metric svg,
+  .post-bookmark svg,
+  .post-share svg,
+  .quote-view-link svg {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+  }
+
+  .post-bookmark,
+  .post-share {
+    display: inline-flex;
+  }
+
+  .quote-view-link {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    color: #a7e8d8;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .source-band {
+    width: min(100%, 80rem);
+    margin-inline: auto;
+    color: var(--hp-band-ink);
+    background: var(--hp-band);
+  }
+
+  .source-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(3rem, 8vw, 8rem);
+    padding: clamp(3.5rem, 7vw, 6.5rem) clamp(1.25rem, 5vw, 5rem);
+    border-inline: 0;
+  }
+
+  .source-copy > p {
+    margin-bottom: 1.75rem;
+  }
+
+  .source-button {
+    display: inline-flex;
+    min-height: 3.25rem;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 0.75rem 1.1rem;
+    border-radius: 0.3rem;
+    color: #102a32;
+    background: var(--hp-accent-fill);
+    font-size: 0.9375rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition: filter 150ms ease, transform 150ms ease;
+  }
+
+  .source-steps {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: 0.45rem;
+    color: #e7f1f3;
+    background: #0d2732;
+  }
+
+  .source-steps ol {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .source-steps li {
+    display: grid;
+    gap: 0.65rem;
+    padding-block: 1.05rem;
+    border-bottom: 1px solid rgb(244 243 239 / 17%);
+    font-size: 0.9375rem;
+  }
+
+  .source-steps code {
+    overflow-wrap: anywhere;
+    color: #a7e8d8;
+    font-size: 0.8125rem;
+  }
+
+  .steps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    color: var(--hp-band-ink);
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  .privacy {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    padding: clamp(4rem, 8vw, 7.5rem) clamp(1.25rem, 5vw, 5rem);
+  }
+
+  .privacy-copy p {
+    max-width: 62ch;
+    margin: 0 0 1rem;
+    color: var(--hp-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .privacy-copy a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.35rem;
+    color: inherit;
+    font-weight: 600;
+  }
+
+  .home-footer {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.75rem clamp(1.25rem, 5vw, 5rem);
+    border-top: 1px solid var(--blume-border, var(--hp-border));
+    color: var(--hp-muted);
+    font-size: 0.875rem;
+  }
+
+  .footer-brand {
+    color: var(--blume-foreground, var(--hp-ink));
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .home-footer p {
+    margin: 0;
+    text-align: center;
+  }
+
+  .home-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: 0.75rem 1.25rem;
+  }
+
+  .home-footer nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .home-footer nav a:hover {
+    color: var(--blume-foreground, var(--hp-ink));
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  @media (max-width: 900px) {
+    .hero-lower,
+    .source-layout,
+    .privacy {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-lower {
+      gap: 2rem;
+    }
+
+    .hero-description {
+      max-width: 52ch;
+    }
+
+    .source-layout {
+      gap: 2.5rem;
+    }
+
+    .privacy {
+      gap: 1.5rem;
+    }
+
+    .extension-showcase {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+      min-height: 0;
+    }
+
+    .extension-showcase > .showcase-copy,
+    .extension-showcase > .extension-preview,
+    .extension-showcase > .browser-demo,
+    .extension-showcase > .preview-ip > .browser-demo,
+    .extension-showcase > .preview-quotes > .browser-demo {
+      order: initial;
+    }
+
+    .extension-showcase:nth-child(even) > .showcase-copy {
+      text-align: left;
+    }
+
+    .extension-showcase:nth-child(even) > .showcase-copy h3,
+    .extension-showcase:nth-child(even) > .showcase-copy p {
+      margin-left: 0;
+    }
+
+    .extension-preview {
+      min-height: 19rem;
+    }
+
+    .showcase-email-demo .browser-content {
+      padding: clamp(1.5rem, 5vw, 3rem);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hp-frame {
+      border-inline: 0;
+    }
+
+    .hero-main {
+      padding: 3.5rem 1.25rem 3rem;
+    }
+
+    .hero h1 {
+      max-width: 10ch;
+      font-size: clamp(3rem, 13vw, 4.5rem);
+    }
+
+    .hero-lower {
+      margin-top: 2rem;
+    }
+
+    .install-command {
+      gap: 0.5rem;
+      padding-left: 0.75rem;
+    }
+
+    .copy-command {
+      min-width: 3.75rem;
+    }
+
+    .browser-content {
+      padding: 1.4rem 1.2rem;
+    }
+
+    .redaction-row {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .extensions {
+      padding: 3.5rem 1.25rem;
+    }
+
+    .section-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading h2,
+    .privacy h2 {
+      font-size: clamp(2.5rem, 10vw, 3.5rem);
+    }
+
+    .showcase-list {
+      gap: 0.9rem;
+    }
+
+    .extension-showcase {
+      gap: 1.5rem;
+      padding: 1.5rem 1.1rem;
+    }
+
+    .showcase-copy h3 {
+      font-size: clamp(2rem, 9vw, 3rem);
+    }
+
+    .extension-preview {
+      min-height: 14rem;
+      padding: 0.8rem;
+    }
+
+    .preview-window {
+      min-height: 11rem;
+      padding: 1rem;
+    }
+
+    .video-scene {
+      min-height: 12rem;
+    }
+
+    .history-entry time {
+      display: none;
+    }
+
+    .source-layout {
+      padding: 3.5rem 1.25rem;
+    }
+
+    .source-steps {
+      padding: 1.25rem;
+    }
+
+    .privacy {
+      padding: 3.5rem 1.25rem;
+    }
+
+    .home-footer {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+      padding: 1.5rem 1.25rem;
+    }
+
+    .home-footer p {
+      text-align: start;
+    }
+
+    .home-footer nav {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

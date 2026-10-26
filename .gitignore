@@ -1,5 +1,7 @@
 node_modules/
 .turbo/
+.blume/
+.taste-skill/
 .output/
 .wxt/
 dist/
