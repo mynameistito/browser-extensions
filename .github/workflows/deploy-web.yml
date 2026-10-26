@@ -39,7 +39,7 @@ jobs:
         shell: bash
         run: |
           node --input-type=module <<'NODE'
-          import { appendFileSync, readFileSync } from 'node:fs';
+          import { appendFileSync, existsSync, readFileSync } from 'node:fs';
           import { execFileSync } from 'node:child_process';
 
           const current = JSON.parse(readFileSync('apps/web/package.json', 'utf8'));
@@ -66,11 +66,16 @@ jobs:
             // The initial web package has no prior changelog.
           }
 
-          const changelog = readFileSync('apps/web/CHANGELOG.md', 'utf8');
-          const hasVersionNote = new RegExp(
-            `^## ${String(current.version).replaceAll('.', '\\.')}\\s*$`,
-            'mu',
-          ).test(changelog);
+          const changelogPath = 'apps/web/CHANGELOG.md';
+          const changelog = existsSync(changelogPath)
+            ? readFileSync(changelogPath, 'utf8')
+            : undefined;
+          const hasVersionNote =
+            changelog !== undefined &&
+            new RegExp(
+              `^## ${String(current.version).replaceAll('.', '\\.')}\\s*$`,
+              'mu',
+            ).test(changelog);
           const deploy =
             previousVersion !== undefined &&
             previousVersion !== current.version &&
@@ -99,7 +104,35 @@ jobs:
       deployments: write
       pull-requests: write
     steps:
+      - name: Check for production Worker before preview deployment
+        id: production-worker
+        if: >-
+          github.event_name == 'workflow_run' && needs.gate.outputs.deploy == 'true' && github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.pull_requests[0].head.repo.full_name == github.repository
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          WORKER_NAME: browser-ext
+        shell: bash
+        run: |
+          status=$(curl --silent --show-error --connect-timeout 15 --max-time 30 --output /dev/null --write-out '%{http_code}' \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/scripts/$WORKER_NAME")
+          case "$status" in
+            200)
+              echo "exists=true" >> "$GITHUB_OUTPUT"
+              ;;
+            404)
+              echo "exists=false" >> "$GITHUB_OUTPUT"
+              echo "Skipping the PR preview because the production Worker '$WORKER_NAME' has not been deployed yet." >> "$GITHUB_STEP_SUMMARY"
+              ;;
+            *)
+              echo "::error::Could not check whether the production Worker exists (Cloudflare returned HTTP $status)."
+              exit 1
+              ;;
+          esac
+
       - name: Deploy with Alchemy
+        if: steps.production-worker.outputs.exists != 'false'
         uses: mynameistito/alchemy-deploy@68f577f3032660bd4919dfcc5725db21d5b64f9d # v3.1.5
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
