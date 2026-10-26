@@ -7,10 +7,5 @@
     "target": "ESNext",
     "types": ["@cloudflare/workers-types", "bun"]
   },
-  "include": [
-    "alchemy.run.ts",
-    "blume.config.ts",
-    "scripts/**/*.ts",
-    "src/**/*.ts"
-  ]
+  "include": [".blume/.astro/types.d.ts", "**/*"]
 }

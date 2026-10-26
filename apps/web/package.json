@@ -9,7 +9,7 @@
     "build": "blume build",
     "preview": "blume preview",
     "build:preview-artifact": "bun scripts/build-preview-artifact.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "blume check --isolated",
     "check": "ultracite check"
   },
   "dependencies": {
