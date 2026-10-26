@@ -67,7 +67,14 @@ export default defineConfig({
     };
 
     if (browser === "firefox") {
-      return base;
+      return {
+        ...base,
+        browser_specific_settings: {
+          gecko: {
+            id: "hide-email-ext@mynameistito.com",
+          },
+        },
+      };
     }
 
     const key = loadManifestKey();
@@ -92,6 +99,7 @@ export default defineConfig({
 
     return manifest;
   },
+  manifestVersion: 3,
   srcDir: ".",
   suppressWarnings: {
     firefoxDataCollection: true,

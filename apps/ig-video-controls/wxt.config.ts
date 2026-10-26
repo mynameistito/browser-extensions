@@ -84,6 +84,7 @@ export default defineConfig({
 
     return { ...base, minimum_chrome_version: "88" };
   },
+  manifestVersion: 3,
   outDir: ".output",
   srcDir: "src",
 });

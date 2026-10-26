@@ -77,6 +77,7 @@ export const createViteConfig = () => ({
 
 export default defineConfig({
   manifest: ({ browser }) => createManifest(browser),
+  manifestVersion: 3,
   modules: ["@wxt-dev/module-react"],
   srcDir: "src",
   vite: createViteConfig,
