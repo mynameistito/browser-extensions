@@ -39,7 +39,7 @@ jobs:
         shell: bash
         run: |
           node --input-type=module <<'NODE'
-          import { appendFileSync, readFileSync } from 'node:fs';
+          import { appendFileSync, existsSync, readFileSync } from 'node:fs';
           import { execFileSync } from 'node:child_process';
 
           const current = JSON.parse(readFileSync('apps/web/package.json', 'utf8'));
@@ -66,11 +66,16 @@ jobs:
             // The initial web package has no prior changelog.
           }
 
-          const changelog = readFileSync('apps/web/CHANGELOG.md', 'utf8');
-          const hasVersionNote = new RegExp(
-            `^## ${String(current.version).replaceAll('.', '\\.')}\\s*$`,
-            'mu',
-          ).test(changelog);
+          const changelogPath = 'apps/web/CHANGELOG.md';
+          const changelog = existsSync(changelogPath)
+            ? readFileSync(changelogPath, 'utf8')
+            : undefined;
+          const hasVersionNote =
+            changelog !== undefined &&
+            new RegExp(
+              `^## ${String(current.version).replaceAll('.', '\\.')}\\s*$`,
+              'mu',
+            ).test(changelog);
           const deploy =
             previousVersion !== undefined &&
             previousVersion !== current.version &&
