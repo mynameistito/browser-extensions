@@ -288,7 +288,7 @@ export const mockCalls = {
 
 export const mockEvents = {
   action: {
-    onClicked: createMockEvent<(tab: chrome.tabs.Tab) => void>(),
+    onClicked: createMockEvent<(tab: MockTab) => void>(),
   },
   commands: {
     onCommand: createMockEvent<(command: string) => void>(),
@@ -328,7 +328,7 @@ export const mockEvents = {
         (
           tabId: number,
           changeInfo: { status?: string; url?: string },
-          tab: chrome.tabs.Tab
+          tab: MockTab
         ) => void
       >(),
   },
@@ -471,6 +471,7 @@ const chromeMock = {
 
       return mockConfig.runtime.getContextsResult;
     },
+    getURL: (path: string) => path,
     onInstalled: mockEvents.runtime.onInstalled,
     onMessage: mockEvents.runtime.onMessage,
     sendMessage: async (message: MockMessage) => {
