@@ -113,6 +113,35 @@ describe("Wikimedia Commons backgrounds", () => {
     ).toStrictEqual([]);
   });
 
+  it("rejects empty attribution fields", () => {
+    const payload = {
+      query: {
+        pages: {
+          emptyArtist: {
+            imageinfo: [
+              {
+                descriptionurl: "https://commons.wikimedia.org/wiki/Image",
+                extmetadata: {
+                  Artist: { value: "" },
+                  LicenseShortName: { value: "CC" },
+                  LicenseUrl: { value: "https://creativecommons.org/license" },
+                },
+                thumburl: "https://thumb.wikimedia.org/image.jpg",
+              },
+            ],
+            title: "File:No-artist.jpg",
+          },
+        },
+      },
+    };
+
+    expect(
+      parseBackgroundResponse(
+        Schema.decodeUnknownSync(CommonsResponseSchema)(payload)
+      )
+    ).toStrictEqual([]);
+  });
+
   it("cleans supported HTML entities and rejects invalid origins", () => {
     const payload = {
       query: {
