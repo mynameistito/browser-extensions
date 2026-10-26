@@ -19,6 +19,7 @@ export const supportedExtensions = [
   "new-tab-ext",
   "ig-video-controls",
   "github-settings-repo-copy",
+  "hide-ip-ext",
   "mute-tab-manager",
 ] as const;
 
@@ -30,6 +31,7 @@ export const chromeKeySecrets = {
   "better-history": "BETTER_HISTORY_WXT_CHROME_KEY",
   "github-settings-repo-copy": "WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY",
   "hide-email-ext": "HIDE_EMAIL_WXT_CHROME_KEY",
+  "hide-ip-ext": "HIDE_IP_WXT_CHROME_KEY",
   "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
   "mute-tab-manager": "MUTE_TAB_MANAGER_WXT_CHROME_KEY",
   "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
@@ -55,7 +57,7 @@ export type ParseGenerateKeyOptionsResult =
   | { readonly kind: "ok"; readonly options: GenerateKeyOptions };
 
 const usage =
-  "Usage: bun generate-keys [--app <all|better-history|hide-email-ext|quote-viewer|new-tab-ext|ig-video-controls|github-settings-repo-copy|mute-tab-manager>] [--repo <owner/name>] [--upload] [--force]";
+  "Usage: bun generate-keys [--app <all|better-history|hide-email-ext|hide-ip-ext|quote-viewer|new-tab-ext|ig-video-controls|github-settings-repo-copy|mute-tab-manager>] [--repo <owner/name>] [--upload] [--force]";
 
 /** Complete help text for the root key-generation command. */
 export const generateKeyHelp = `${usage}
