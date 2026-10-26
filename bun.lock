@@ -62,6 +62,9 @@
       "version": "0.2.1",
       "devDependencies": {
         "@types/bun": "catalog:",
+        "@vitest/coverage-v8": "catalog:",
+        "happy-dom": "catalog:",
+        "vitest": "catalog:",
         "wxt": "catalog:",
       },
     },
