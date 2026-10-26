@@ -1,18 +1,15 @@
 import { spawnSync } from "node:child_process";
+import { readdirSync } from "node:fs";
 import path from "node:path";
 
 import { isCancel, select } from "@clack/prompts";
 
-const apps = [
-  "better-history",
-  "github-settings-repo-copy",
-  "hide-email-ext",
-  "hide-ip-ext",
-  "ig-video-controls",
-  "mute-tab-manager",
-  "new-tab-ext",
-  "quote-viewer",
-] as const;
+const appsDirectory = path.resolve(import.meta.dirname, "..", "apps");
+
+const apps = readdirSync(appsDirectory, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name)
+  .toSorted((left, right) => left.localeCompare(right));
 
 const selectedApp = await select({
   message: "Which extension would you like to run dev on?",
@@ -27,7 +24,7 @@ const result = spawnSync(
   process.execPath,
   ["run", "dev", ...process.argv.slice(2)],
   {
-    cwd: path.resolve(import.meta.dirname, "..", "apps", selectedApp),
+    cwd: path.join(appsDirectory, selectedApp),
     stdio: "inherit",
   }
 );
