@@ -24,7 +24,7 @@ export const sharedJsPlugins = selectJsPlugins([
 export const baseConfig = defineConfig({
   env: core.env,
   extends: [core, antiSlop, vitestConfig, sharedJsPlugins],
-  ignorePatterns: core.ignorePatterns,
+  ignorePatterns: core.ignorePatterns ?? [],
   jsPlugins: sharedJsPlugins.jsPlugins,
   settings: jsPluginSettings,
 });

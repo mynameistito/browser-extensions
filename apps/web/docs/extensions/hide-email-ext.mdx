@@ -1,0 +1,42 @@
+---
+title: Hide Email
+description: Redact email addresses you select from web-page text, including dynamically added content, while leaving inputs and editable fields unchanged.
+---
+
+Hide Email replaces occurrences of the addresses you specify with `[Email Redacted]`. It works on regular pages and dynamically updated pages, while leaving input fields and editable content alone.
+
+## Add and remove addresses
+
+1. Open the Hide Email toolbar popup.
+2. Add an email address to the redaction list. The extension validates and normalizes entries before saving.
+3. Visit a page containing that address; matching text is replaced as the page is scanned.
+4. Remove an address from the popup when you want it to appear normally again.
+
+The list is saved with browser sync storage, so it can follow your browser profile when sync is enabled. A page's visible text is scanned locally, including new content added by single-page apps or infinite scrolling.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/hide-email-ext/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/hide-email-ext/firefox)
+- [All Hide Email releases](https://github.com/mynameistito/browser-extensions/releases?q=hide-email-ext)
+
+The download links always redirect to the latest stable release for this extension.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions), then run `bun install` and `bun run prepare:wxt` from its root.
+2. Run `bun run --filter hide-email-ext build`.
+3. In Chrome, load `apps/hide-email-ext/.output/chrome-mv3` from `chrome://extensions` with Developer mode enabled.
+4. In Firefox, select `apps/hide-email-ext/.output/firefox-mv3/manifest.json` through `about:debugging#/runtime/this-firefox`.
+
+## Permissions and privacy
+
+`storage` saves the address list in `browser.storage.sync`. `<all_urls>` allows the content script to redact matching text on pages you visit. The extension does not send the addresses or page text to a server. It skips inputs, textareas, and contenteditable fields so it does not alter text you are entering.
+
+## Troubleshooting
+
+- **An address remains visible:** confirm it is in the popup list and appears as ordinary page text, not inside an editable field.
+- **A new page element is not updated:** wait for the page's content changes to finish, then check that the extension is enabled for that site.
+- **Settings do not sync:** browser sync must be enabled for the profile; local redaction still works on the current profile.
+
+See the [Hide Email source and privacy notes](https://github.com/mynameistito/browser-extensions/tree/main/apps/hide-email-ext).

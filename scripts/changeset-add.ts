@@ -11,6 +11,7 @@ const appNames = [
   "better-history",
   "github-settings-repo-copy",
   "mute-tab-manager",
+  "web",
 ] as const;
 
 const changeTypes = ["patch", "minor", "major"] as const;

@@ -1,0 +1,46 @@
+---
+title: Instagram Video Controls
+description: Add familiar seek, volume, fullscreen, and picture-in-picture controls to Instagram videos, with saved playback preferences and mouse-wheel shortcuts.
+---
+
+Instagram Video Controls adds familiar HTML5-style controls to Instagram videos, remembers volume and playback speed, and adds mouse-wheel shortcuts. It is a complete rewrite of an earlier extension; telemetry and uninstall analytics were removed.
+
+## Video controls
+
+Use the video seek bar to move through a clip, the volume slider to adjust sound, and the fullscreen or picture-in-picture controls when available. Volume and playback speed preferences are remembered across tabs and sessions.
+
+## Keyboard and mouse shortcuts
+
+| Gesture | Result |
+| --- | --- |
+| `Ctrl` + mouse wheel over a video | Change playback speed by 0.25× per step. |
+| Hold the right mouse button and use the wheel over a video | Change volume by 0.1 per step. |
+
+Right-clicking without scrolling continues to open the normal context menu. The context menu is suppressed only when you scroll while holding the right mouse button.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/ig-video-controls/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/ig-video-controls/firefox)
+- [All Instagram Video Controls releases](https://github.com/mynameistito/browser-extensions/releases?q=ig-video-controls)
+
+The download links always redirect to the latest stable release for this extension.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions), then run `bun install` and `bun run prepare:wxt` from the repository root.
+2. Run `bun run --filter ig-video-controls build`.
+3. Load the Chrome output from `apps/ig-video-controls/.output/chrome-mv3` in `chrome://extensions` with Developer mode enabled.
+4. Select `apps/ig-video-controls/.output/firefox-mv3/manifest.json` through `about:debugging#/runtime/this-firefox`.
+
+## Permissions and privacy
+
+The extension uses `storage` to remember settings such as volume and speed. It works with Instagram video elements and does not use telemetry or uninstall analytics. Firefox's manifest declares no data collection.
+
+## Troubleshooting
+
+- **Controls are missing:** reload Instagram after installing and check that the video has finished loading.
+- **A shortcut does nothing:** place the pointer over the video; the shortcuts are scoped to a video.
+- **Context menu is suppressed:** release the right mouse button or stop scrolling; an ordinary right-click is preserved.
+
+See the [Instagram Video Controls source and command reference](https://github.com/mynameistito/browser-extensions/tree/main/apps/ig-video-controls).

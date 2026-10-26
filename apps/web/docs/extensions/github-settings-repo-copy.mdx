@@ -1,0 +1,39 @@
+---
+title: GitHub Settings Repo Copy
+description: Copy repository owner/name text from GitHub confirmation dialogs with access limited to GitHub pages and no collection or storage of repository data.
+---
+
+This small extension makes the `owner/repo` text in GitHub repository-confirmation dialogs selectable and copyable. It runs on GitHub repository pages only and does not send or retain repository data.
+
+## Use it
+
+1. Open a GitHub repository page and start the settings action that shows a repository confirmation dialog.
+2. Select or copy the `owner/repo` text from the dialog using the normal browser interaction.
+
+The extension is intentionally limited to this workflow; it does not add a toolbar popup or collect repository information.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/github-settings-repo-copy/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/github-settings-repo-copy/firefox)
+- [All GitHub Settings Repo Copy releases](https://github.com/mynameistito/browser-extensions/releases?q=github-settings-repo-copy)
+
+The download links always redirect to the latest stable release for this extension.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions) and run `bun install`.
+2. Run `bun run prepare:wxt` from the repository root.
+3. Run `bun run --filter github-settings-repo-copy build`.
+4. Load `apps/github-settings-repo-copy/.output/chrome-mv3` from `chrome://extensions` with Developer mode enabled, or select `apps/github-settings-repo-copy/.output/firefox-mv3/manifest.json` through `about:debugging#/runtime/this-firefox`.
+
+## Permissions and privacy
+
+The extension requests `clipboardWrite` and access to `https://github.com/*` for its copy action on repository pages. It does not send or store repository data. Firefox's manifest declares no data collection.
+
+## Troubleshooting
+
+- **No dialog behavior:** check that the current page is a GitHub repository page and that the confirmation dialog is open.
+- **Install fails:** choose the browser-specific output directory and select its `manifest.json`.
+
+See the [extension source](https://github.com/mynameistito/browser-extensions/tree/main/apps/github-settings-repo-copy).

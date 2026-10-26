@@ -1,0 +1,41 @@
+---
+title: Mute Tab Manager
+description: Toggle browser-tab audio from the toolbar or keyboard, mute all tabs, and keep YouTube player audio synchronized with each tab's mute state.
+---
+
+Mute Tab Manager lets you mute or unmute tabs across Chrome and Firefox, including YouTube player audio. Muted tabs receive an `M` badge, and their muted state is retained for the current browser session.
+
+## Mute a tab
+
+- Select the toolbar action to toggle mute for the active tab.
+- Use `Alt` + `Shift` + `M` to toggle the active tab from the keyboard. Browser or operating-system shortcut conflicts can override this key combination.
+- Open the toolbar action's context menu and choose the command to mute all tabs.
+
+For YouTube, the extension synchronizes the player element's audio with the tab's mute state across single-page navigation and reloads. The toolbar icon adapts to the system's dark-mode setting.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/mute-tab-manager/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/mute-tab-manager/firefox)
+- [All Mute Tab Manager releases](https://github.com/mynameistito/browser-extensions/releases?q=mute-tab-manager)
+
+The download links always redirect to the latest stable release for this extension.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions), then run `bun install` and `bun run prepare:wxt` from its root.
+2. Run `bun run --filter mute-tab-manager build`.
+3. Load `apps/mute-tab-manager/.output/chrome-mv3` in Chrome using `chrome://extensions` and Developer mode.
+4. Select `apps/mute-tab-manager/.output/firefox-mv3/manifest.json` using `about:debugging#/runtime/this-firefox`.
+
+## Permissions and privacy
+
+The extension uses `activeTab` and `tabs` to control tab audio, `contextMenus` for the mute-all command, and `storage` for session state. It requests YouTube host access to keep the player element in sync. Chrome also uses `offscreen` for dark-mode detection. Firefox declares no data collection.
+
+## Troubleshooting
+
+- **The shortcut does not work:** check `chrome://extensions/shortcuts` (Chrome) or the browser's extension shortcut settings for conflicts.
+- **YouTube sound does not follow tab mute:** reload the YouTube tab and confirm the extension is allowed to run there.
+- **The badge is missing:** confirm the tab is muted and the extension toolbar action is visible.
+
+See the [Mute Tab Manager source and permissions](https://github.com/mynameistito/browser-extensions/tree/main/apps/mute-tab-manager).

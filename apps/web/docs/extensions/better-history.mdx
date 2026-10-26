@@ -1,0 +1,42 @@
+---
+title: Better History
+description: Search, filter, and clean up your browser history with full-text search, date presets, bulk deletion, URL rules, and scheduled cleanup options.
+---
+
+Better History adds fast search, bulk cleanup, and automatic history rules to Chrome and Firefox. History stays in the browser; the extension has no backend, analytics, or telemetry.
+
+## Search and browse
+
+Open the extension from the browser toolbar. Search your history by text, use date-range presets to narrow results, and select multiple entries when you want to remove them together. Chrome also opens the full history interface when you visit the browser's History page; in Firefox, open the full interface from the extension action.
+
+## Protect or remove sites automatically
+
+Use URL patterns to create a blacklist for entries that should be removed automatically, or a whitelist for entries that should be kept. Scheduled cleanup can run when the browser closes or on a daily, weekly, or monthly schedule. Choose a retention period to control how much history remains.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/better-history/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/better-history/firefox)
+- [All Better History releases](https://github.com/mynameistito/browser-extensions/releases?q=better-history)
+
+The download links always redirect to the latest stable release for this extension.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions) and install its dependencies with `bun install`.
+2. From the repository root, run `bun run prepare:wxt`.
+3. Run `bun run --filter better-history build`.
+4. In Chrome, open `chrome://extensions`, enable Developer mode, select **Load unpacked**, and choose `apps/better-history/.output/chrome-mv3`.
+5. In Firefox, open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `apps/better-history/.output/firefox-mv3/manifest.json`.
+
+## Permissions and privacy
+
+Better History uses the `history`, `sessions`, `tabs`, `storage`, `unlimitedStorage`, `contextMenus`, `alarms`, and `activeTab` permissions to search and manage history, keep settings, and schedule cleanup. Chrome additionally uses `favicon` to show site icons. History and settings are processed locally. No analytics, telemetry, backend, or remote API is used.
+
+## Troubleshooting
+
+- **The extension doesn't appear:** confirm the selected folder contains `manifest.json`; use the browser-specific output folder above.
+- **A scheduled cleanup didn't run:** check that the extension remains enabled and review the schedule and retention settings.
+- **A pattern does not match:** compare it with the URL in the history entry and simplify the pattern to isolate the mismatch.
+
+See the [Better History source and release notes](https://github.com/mynameistito/browser-extensions/tree/main/apps/better-history).
