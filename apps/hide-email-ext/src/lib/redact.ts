@@ -41,7 +41,6 @@ interface WrapperRestoration {
   readonly restoreGroup?: () => boolean;
   readonly dispose: () => void;
   readonly cancelPendingHover: () => void;
-  readonly pattern: string | null;
   readonly detached: boolean;
   readonly detachedReference: WeakRef<HTMLElement> | null;
 }
@@ -51,12 +50,12 @@ interface RedactorRestorations {
   readonly attributes: WeakMap<Element, Map<string, AttributeRestoration>>;
   readonly wrappers: WeakMap<HTMLElement, WrapperRestoration>;
   readonly detachedWrappers: Set<WeakRef<HTMLElement>>;
-  readonly detachedSubtrees: Map<WeakRef<Node>, string | null>;
+  readonly detachedSubtrees: Set<WeakRef<Node>>;
 }
 
 const createRestorations = (): RedactorRestorations => ({
   attributes: new WeakMap(),
-  detachedSubtrees: new Map(),
+  detachedSubtrees: new Set(),
   detachedWrappers: new Set(),
   text: new WeakMap(),
   wrappers: new WeakMap(),
@@ -404,7 +403,6 @@ const tryReplaceText = (
       detachedReference: null,
       dispose,
       isRestorable,
-      pattern: regex.source,
       restore: () => {
         dispose();
 
@@ -755,15 +753,14 @@ const cancelPendingHoverInSubtree = (
 
 const trackDetachedSubtree = (
   node: Node,
-  regex: RegExp | null,
   restorations: RedactorRestorations
 ): void => {
-  const alreadyTracked = [...restorations.detachedSubtrees.keys()].some(
+  const alreadyTracked = [...restorations.detachedSubtrees].some(
     (reference) => reference.deref() === node
   );
 
   if (!alreadyTracked) {
-    restorations.detachedSubtrees.set(new WeakRef(node), regex?.source ?? null);
+    restorations.detachedSubtrees.add(new WeakRef(node));
   }
 };
 
@@ -789,7 +786,7 @@ const cleanupRemovedSubtree = (
         detached: true,
         detachedReference,
       });
-      trackDetachedSubtree(node, regex, restorations);
+      trackDetachedSubtree(node, restorations);
 
       return;
     }
@@ -797,7 +794,7 @@ const cleanupRemovedSubtree = (
 
   if (!wasReinserted) {
     cancelPendingHoverInSubtree(node, restorations);
-    trackDetachedSubtree(node, regex, restorations);
+    trackDetachedSubtree(node, restorations);
 
     return;
   }
@@ -821,17 +818,13 @@ const refreshDetachedSubtrees = (
   regex: RegExp | null,
   restorations: RedactorRestorations
 ): void => {
-  for (const [reference, pattern] of restorations.detachedSubtrees) {
+  for (const reference of restorations.detachedSubtrees) {
     const detachedRoot = reference.deref();
 
     if (detachedRoot === undefined) {
       restorations.detachedSubtrees.delete(reference);
     } else if (isReinsertedSubtree(node, detachedRoot)) {
       restorations.detachedSubtrees.delete(reference);
-
-      if (pattern !== (regex?.source ?? null)) {
-        restoreTrackedContent(detachedRoot, restorations);
-      }
 
       if (regex) {
         if (detachedRoot instanceof Text) {
@@ -860,21 +853,10 @@ const refreshReinsertedWrappers = (
     const restoration = restorations.wrappers.get(node);
 
     if (restoration !== undefined && restoration.detached) {
-      if (restoration.pattern === (regex?.source ?? null)) {
-        restorations.wrappers.set(node, { ...restoration, detached: false });
+      restorations.wrappers.set(node, { ...restoration, detached: false });
 
-        if (restoration.detachedReference) {
-          restorations.detachedWrappers.delete(restoration.detachedReference);
-        }
-
-        return;
-      }
-
-      const parent = node.parentNode;
-      restoreTrackedContent(node, restorations);
-
-      if (regex && parent instanceof Element) {
-        scanSubtree(parent, regex, new WeakMap(), restorations);
+      if (restoration.detachedReference) {
+        restorations.detachedWrappers.delete(restoration.detachedReference);
       }
 
       return;
@@ -910,7 +892,7 @@ const restoreDetachedWrappers = (restorations: RedactorRestorations): void => {
 };
 
 const restoreDetachedSubtrees = (restorations: RedactorRestorations): void => {
-  for (const [reference] of restorations.detachedSubtrees) {
+  for (const reference of restorations.detachedSubtrees) {
     const root = reference.deref();
 
     if (root !== undefined && !root.isConnected) {
@@ -925,7 +907,7 @@ const reconcileDetachedSubtrees = (
   restorations: RedactorRestorations,
   regex: RegExp | null
 ): void => {
-  for (const [reference] of restorations.detachedSubtrees) {
+  for (const reference of restorations.detachedSubtrees) {
     const root = reference.deref();
 
     if (root === undefined) {
@@ -944,8 +926,6 @@ const reconcileDetachedSubtrees = (
         }
       }
     }
-
-    restorations.detachedSubtrees.set(reference, regex?.source ?? null);
   }
 };
 
