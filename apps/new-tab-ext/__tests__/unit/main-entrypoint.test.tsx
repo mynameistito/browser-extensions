@@ -25,6 +25,10 @@ describe("new-tab entrypoint", () => {
     root.id = "root";
     document.body.replaceChildren(root);
     vi.stubEnv("MODE", "development");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn<typeof fetch>().mockResolvedValue(Response.json({}))
+    );
 
     await act(async () => {
       await import("../../src/entrypoints/newtab/main");
