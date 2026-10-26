@@ -1,15 +1,18 @@
 import { Window } from "happy-dom";
-import { it, afterEach, describe, expect, beforeEach } from "vitest";
+import { it, afterEach, describe, expect, beforeEach, vi } from "vitest";
+import { ContentScriptContext } from "wxt/utils/content-script-context";
 
 import {
   createQuoteIconSvg,
   createQuoteViewer,
   setupQuoteViewer,
 } from "../src/entrypoints/content/dom";
+import contentScript from "../src/entrypoints/content/index";
 import { getTweetDetails, viewQuotedTweets } from "../src/lib/tweet";
 
 const originalElement = globalThis.Element;
 const originalEvent = globalThis.Event;
+const originalCustomEvent = globalThis.CustomEvent;
 const originalHTMLElement = globalThis.HTMLElement;
 const originalMutationObserver = globalThis.MutationObserver;
 const originalNode = globalThis.Node;
@@ -21,6 +24,7 @@ let testWindow: Window;
 const installWindow = (): void => {
   testWindow = new Window({ url: "https://x.com" });
   Object.defineProperties(globalThis, {
+    CustomEvent: { configurable: true, value: testWindow.CustomEvent },
     Element: { configurable: true, value: testWindow.Element },
     Event: { configurable: true, value: testWindow.Event },
     HTMLElement: { configurable: true, value: testWindow.HTMLElement },
@@ -38,6 +42,7 @@ const installWindow = (): void => {
 const restoreWindow = (): void => {
   testWindow.close();
   Object.defineProperties(globalThis, {
+    CustomEvent: { configurable: true, value: originalCustomEvent },
     Element: { configurable: true, value: originalElement },
     Event: { configurable: true, value: originalEvent },
     HTMLElement: { configurable: true, value: originalHTMLElement },
@@ -148,17 +153,25 @@ describe(getTweetDetails, () => {
     });
   });
 
-  it("returns a null tweet ID when there is no matching status link", () => {
-    const article = createArticle({ href: "/jack/with_replies" });
+  it("uses the default handle when the author handle text is empty", () => {
+    const article = createArticle({ href: "/someone/status/42", text: "" });
 
     expect(getTweetDetails(article)).toStrictEqual({
-      tweetId: null,
-      twitterHandle: "jack",
+      tweetId: "42",
+      twitterHandle: "x",
     });
   });
 
-  it("ignores invalid URLs", () => {
-    const article = createArticle({ href: "https://[invalid" });
+  it.each([
+    { href: "/jack/with_replies", scenario: "no matching status link" },
+    { href: "/jack/statuses/42", scenario: "no status segment" },
+    { href: "/jack/status", scenario: "missing status ID" },
+    {
+      href: "https://[invalid/jack/status/42",
+      scenario: "an invalid URL",
+    },
+  ])("returns a null tweet ID for $scenario", ({ href }) => {
+    const article = createArticle({ href });
 
     expect(getTweetDetails(article)).toStrictEqual({
       tweetId: null,
@@ -188,6 +201,33 @@ describe(viewQuotedTweets, () => {
     expect(window.location.pathname).toBe("/jack/status/12345/quotes");
     expect(popStateCount).toBe(1);
     expect(scrollPositions).toStrictEqual([[0, 0]]);
+  });
+});
+
+describe("content script entrypoint", () => {
+  beforeEach(installWindow);
+  afterEach(restoreWindow);
+
+  it("runs the configured content script on supported X domains", () => {
+    const article = createArticle({ href: "/jack/status/12345" });
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+
+    const context = new ContentScriptContext("quote-viewer-test");
+
+    contentScript.main(context);
+
+    expect(contentScript.matches).toStrictEqual([
+      "https://twitter.com/*",
+      "https://x.com/*",
+    ]);
+    expect(article.querySelectorAll(".quoted-tweets-container")).toHaveLength(
+      1
+    );
+    expect(log).toHaveBeenCalledWith(
+      "view quoted tweets extension: setting up observer"
+    );
+    log.mockRestore();
+    context.notifyInvalidated();
   });
 });
 
@@ -267,6 +307,44 @@ describe("content DOM behavior", () => {
     expect(nativeQuotes.getAttribute("aria-hidden")).toBeNull();
   });
 
+  it("hides a quotes link when the link itself is the scan root", () => {
+    const link = document.createElement("a");
+    link.setAttribute("href", "/jack/status/12345/quotes");
+    document.body.append(link);
+    const linkContainer = link.parentElement;
+
+    createQuoteViewer(document).hideNativeQuotesLinks(link);
+
+    expect(link.matches('a[href$="/quotes"]')).toBeTruthy();
+    expect(linkContainer?.dataset.quoteViewerHiddenNativeQuotes).toBe("true");
+    expect(linkContainer?.getAttribute("aria-hidden")).toBe("true");
+    expect(linkContainer?.style.display).toBe("none");
+  });
+
+  it("hides a detached quotes link when it has no parent wrapper", () => {
+    const link = document.createElement("a");
+    link.setAttribute("href", "/jack/status/12345/quotes");
+
+    createQuoteViewer(document).hideNativeQuotesLinks(link);
+
+    expect(link.dataset.quoteViewerHiddenNativeQuotes).toBe("true");
+    expect(link.getAttribute("aria-hidden")).toBe("true");
+  });
+
+  it("marks SVG quotes links hidden without applying HTML-only styles", () => {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const link = document.createElementNS("http://www.w3.org/2000/svg", "a");
+    link.setAttribute("href", "/jack/status/12345/quotes");
+    svg.append(link);
+    document.body.append(svg);
+
+    createQuoteViewer(document).hideNativeQuotesLinks(svg);
+
+    expect(svg.dataset.quoteViewerHiddenNativeQuotes).toBe("true");
+    expect(svg.getAttribute("aria-hidden")).toBe("true");
+    expect(svg.getAttribute("style")).toBeNull();
+  });
+
   it("clicking the quote button navigates to quotes", () => {
     const article = createArticle({ href: "/jack/status/12345" });
     const viewer = createQuoteViewer(document);
@@ -338,6 +416,18 @@ describe("content DOM behavior", () => {
 
     expect(direct.querySelectorAll(".quoted-tweets-container")).toHaveLength(1);
     expect(nested.querySelectorAll(".quoted-tweets-container")).toHaveLength(1);
+  });
+
+  it("ignores non-element nodes added to the document", () => {
+    const viewer = createQuoteViewer(document);
+
+    const mutations = captureAddedNodes(document.body, () => {
+      document.body.append(document.createTextNode("unrelated content"));
+    });
+
+    expect(() => {
+      viewer.processMutations(mutations);
+    }).not.toThrow();
   });
 
   it("attaches an icon when a pending article later receives a group", () => {
