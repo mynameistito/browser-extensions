@@ -17,5 +17,11 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true
   },
-  "include": [".wxt/wxt.d.ts", "src/**/*", "wxt.config.ts", "scripts/**/*"]
+  "include": [
+    ".wxt/wxt.d.ts",
+    "src/**/*",
+    "wxt.config.ts",
+    "scripts/**/*",
+    "__tests__/**/*"
+  ]
 }
