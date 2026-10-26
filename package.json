@@ -46,6 +46,7 @@
     "@shadcn/lint": "^0.2.3",
     "@types/bun": "catalog:",
     "@typescript/native": "npm:typescript@^7.0.2",
+    "@vitest/coverage-v8": "catalog:",
     "eslint-plugin-github": "6.1.2",
     "eslint-plugin-jsdoc": "^65.4.2",
     "eslint-plugin-sonarjs": "^4.2.2",
@@ -58,7 +59,6 @@
     "turbo": "^2.11.10",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "ultracite": "8.0.2",
-    "@vitest/coverage-v8": "catalog:",
     "vitest": "catalog:"
   },
   "overrides": {

@@ -14,10 +14,10 @@
     },
     "test": {
       "dependsOn": ["^test"],
-      "outputs": []
+      "outputs": ["coverage/**"]
     },
     "//#test:root": {
-      "outputs": []
+      "outputs": ["coverage/**"]
     }
   }
 }
