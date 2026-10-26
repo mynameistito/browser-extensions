@@ -41,7 +41,6 @@ interface WrapperRestoration {
   readonly restoreGroup?: () => boolean;
   readonly dispose: () => void;
   readonly cancelPendingHover: () => void;
-  readonly pattern: string | null;
   readonly detached: boolean;
   readonly detachedReference: WeakRef<HTMLElement> | null;
 }
@@ -51,12 +50,12 @@ interface RedactorRestorations {
   readonly attributes: WeakMap<Element, Map<string, AttributeRestoration>>;
   readonly wrappers: WeakMap<HTMLElement, WrapperRestoration>;
   readonly detachedWrappers: Set<WeakRef<HTMLElement>>;
-  readonly detachedSubtrees: Map<WeakRef<Node>, string | null>;
+  readonly detachedSubtrees: Set<WeakRef<Node>>;
 }
 
 const createRestorations = (): RedactorRestorations => ({
   attributes: new WeakMap(),
-  detachedSubtrees: new Map(),
+  detachedSubtrees: new Set(),
   detachedWrappers: new Set(),
   text: new WeakMap(),
   wrappers: new WeakMap(),
@@ -404,7 +403,6 @@ const tryReplaceText = (
       detachedReference: null,
       dispose,
       isRestorable,
-      pattern: regex.source,
       restore: () => {
         dispose();
 
@@ -439,21 +437,23 @@ const tryReplaceText = (
 
     for (const node of generatedNodes) {
       if (node instanceof Text) {
-        generatedText.set(node, node.nodeValue ?? "");
+        generatedText.set(node, node.data);
       }
     }
 
     const restoreOriginalText = (): boolean => {
       const liveNodes = generatedNodes.filter(
-        (node) => node.parentNode !== null
+        (node): node is ChildNode & { parentNode: ParentNode } =>
+          node.parentNode !== null
       );
 
       const [firstNode] = liveNodes;
-      const parent = firstNode?.parentNode;
 
-      if (firstNode === undefined || parent === null || parent === undefined) {
+      if (!firstNode) {
         return false;
       }
+
+      const parent = firstNode.parentNode;
 
       if (!hasRestorableGeneratedText(generatedText)) {
         return false;
@@ -555,26 +555,25 @@ const scanTextRun = (
     return;
   }
 
-  const combined = textRun.map((text) => text.nodeValue ?? "").join("");
+  const combined = textRun.map((text) => text.data).join("");
   regex.lastIndex = 0;
 
   if (
     regex.test(combined) &&
     textRun.every((text) => text.parentNode === root)
   ) {
-    const [matchedFirstText, ...remainingText] = textRun;
+    const matchedFirstText = firstText;
+    const remainingText = textRun.slice(1);
 
-    if (matchedFirstText) {
-      matchedFirstText.nodeValue = combined;
+    matchedFirstText.nodeValue = combined;
 
-      for (const text of remainingText) {
-        text.remove();
-      }
-
-      tryReplaceText(matchedFirstText, regex, skipCache, restorations);
-
-      return;
+    for (const text of remainingText) {
+      text.remove();
     }
+
+    tryReplaceText(matchedFirstText, regex, skipCache, restorations);
+
+    return;
   }
 
   for (const text of textRun) {
@@ -592,29 +591,25 @@ const scanTextChildren = (
   let index = 0;
 
   while (index < children.length) {
+    const startIndex = index;
     const textRun: Text[] = [];
 
-    while (children[index] instanceof Text) {
+    while (true) {
       const candidate = children[index];
 
-      if (candidate instanceof Text && candidate.parentNode === root) {
+      if (!(candidate instanceof Text)) {
+        break;
+      }
+
+      if (candidate.parentNode === root) {
         textRun.push(candidate);
       }
 
       index += 1;
     }
 
-    if (textRun.length === 1) {
-      const [onlyText] = textRun;
-
-      if (onlyText) {
-        tryReplaceText(onlyText, regex, skipCache, restorations);
-      }
-    } else if (textRun.length > 1) {
-      scanTextRun(root, textRun, regex, skipCache, restorations);
-    } else {
-      index += 1;
-    }
+    scanTextRun(root, textRun, regex, skipCache, restorations);
+    index = Math.max(index, startIndex + 1);
   }
 };
 
@@ -758,15 +753,14 @@ const cancelPendingHoverInSubtree = (
 
 const trackDetachedSubtree = (
   node: Node,
-  regex: RegExp | null,
   restorations: RedactorRestorations
 ): void => {
-  const alreadyTracked = [...restorations.detachedSubtrees.keys()].some(
+  const alreadyTracked = [...restorations.detachedSubtrees].some(
     (reference) => reference.deref() === node
   );
 
   if (!alreadyTracked) {
-    restorations.detachedSubtrees.set(new WeakRef(node), regex?.source ?? null);
+    restorations.detachedSubtrees.add(new WeakRef(node));
   }
 };
 
@@ -777,7 +771,6 @@ const cleanupRemovedSubtree = (
   restorations: RedactorRestorations
 ): void => {
   const wasReinserted = doc.documentElement.contains(node);
-  const previousParent = node.parentNode;
 
   if (!wasReinserted && node instanceof HTMLElement) {
     const wrapper = restorations.wrappers.get(node);
@@ -793,7 +786,7 @@ const cleanupRemovedSubtree = (
         detached: true,
         detachedReference,
       });
-      trackDetachedSubtree(node, regex, restorations);
+      trackDetachedSubtree(node, restorations);
 
       return;
     }
@@ -801,22 +794,18 @@ const cleanupRemovedSubtree = (
 
   if (!wasReinserted) {
     cancelPendingHoverInSubtree(node, restorations);
-    trackDetachedSubtree(node, regex, restorations);
+    trackDetachedSubtree(node, restorations);
 
     return;
   }
 
   restoreTrackedContent(node, restorations);
 
-  if (wasReinserted && regex) {
+  if (regex) {
     if (node instanceof Text) {
       tryReplaceText(node, regex, new WeakMap(), restorations);
     } else {
-      const scanRoot = node.parentNode === null ? previousParent : node;
-
-      if (scanRoot !== null) {
-        scanSubtree(scanRoot, regex, new WeakMap(), restorations);
-      }
+      scanSubtree(node, regex, new WeakMap(), restorations);
     }
   }
 };
@@ -829,17 +818,13 @@ const refreshDetachedSubtrees = (
   regex: RegExp | null,
   restorations: RedactorRestorations
 ): void => {
-  for (const [reference, pattern] of restorations.detachedSubtrees) {
+  for (const reference of restorations.detachedSubtrees) {
     const detachedRoot = reference.deref();
 
     if (detachedRoot === undefined) {
       restorations.detachedSubtrees.delete(reference);
     } else if (isReinsertedSubtree(node, detachedRoot)) {
       restorations.detachedSubtrees.delete(reference);
-
-      if (pattern !== (regex?.source ?? null)) {
-        restoreTrackedContent(detachedRoot, restorations);
-      }
 
       if (regex) {
         if (detachedRoot instanceof Text) {
@@ -868,21 +853,10 @@ const refreshReinsertedWrappers = (
     const restoration = restorations.wrappers.get(node);
 
     if (restoration !== undefined && restoration.detached) {
-      if (restoration.pattern === (regex?.source ?? null)) {
-        restorations.wrappers.set(node, { ...restoration, detached: false });
+      restorations.wrappers.set(node, { ...restoration, detached: false });
 
-        if (restoration.detachedReference) {
-          restorations.detachedWrappers.delete(restoration.detachedReference);
-        }
-
-        return;
-      }
-
-      const parent = node.parentNode;
-      restoreTrackedContent(node, restorations);
-
-      if (regex && parent instanceof Element) {
-        scanSubtree(parent, regex, new WeakMap(), restorations);
+      if (restoration.detachedReference) {
+        restorations.detachedWrappers.delete(restoration.detachedReference);
       }
 
       return;
@@ -918,7 +892,7 @@ const restoreDetachedWrappers = (restorations: RedactorRestorations): void => {
 };
 
 const restoreDetachedSubtrees = (restorations: RedactorRestorations): void => {
-  for (const [reference] of restorations.detachedSubtrees) {
+  for (const reference of restorations.detachedSubtrees) {
     const root = reference.deref();
 
     if (root !== undefined && !root.isConnected) {
@@ -933,7 +907,7 @@ const reconcileDetachedSubtrees = (
   restorations: RedactorRestorations,
   regex: RegExp | null
 ): void => {
-  for (const [reference] of restorations.detachedSubtrees) {
+  for (const reference of restorations.detachedSubtrees) {
     const root = reference.deref();
 
     if (root === undefined) {
@@ -952,8 +926,6 @@ const reconcileDetachedSubtrees = (
         }
       }
     }
-
-    restorations.detachedSubtrees.set(reference, regex?.source ?? null);
   }
 };
 
@@ -1002,26 +974,20 @@ export const createRedactor = (root?: Document): Redactor => {
     }
   };
 
-  const flush = (mutations?: MutationRecord[]): void => {
+  const flush = (mutations: MutationRecord[]): void => {
     skipCache = new WeakMap<Element, boolean>();
 
     if (!regex) {
       return;
     }
 
-    if (mutations === undefined) {
-      scanSubtree(doc.body ?? doc, regex, skipCache, restorations);
-    } else {
-      for (const mutation of mutations) {
-        scanMutation(mutation, regex, skipCache, restorations);
-      }
+    for (const mutation of mutations) {
+      scanMutation(mutation, regex, skipCache, restorations);
     }
   };
 
-  const scheduleFlush = (mutations?: MutationRecord[]): void => {
-    if (mutations) {
-      pendingMutations.push(...mutations);
-    }
+  const scheduleFlush = (mutations: MutationRecord[]): void => {
+    pendingMutations.push(...mutations);
 
     if (scheduled) {
       return;

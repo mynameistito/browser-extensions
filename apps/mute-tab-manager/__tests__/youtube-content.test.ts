@@ -69,6 +69,15 @@ describe("YouTube content handlers", () => {
         )
       ).resolves.toBeUndefined();
     });
+
+    it("ignores messages for other handlers", async () => {
+      await mockEvents.runtime.onMessage.fire(
+        { type: "UNRELATED" },
+        {},
+        () => {}
+      );
+      expect(document.body.querySelectorAll("video")).toHaveLength(0);
+    });
   });
 
   describe("yt-navigate-finish event", () => {
@@ -92,6 +101,53 @@ describe("YouTube content handlers", () => {
       document.body.append(video);
       document.dispatchEvent(new Event("yt-navigate-finish"));
       expect(video.muted).toBeFalsy();
+    });
+  });
+
+  describe("dynamically inserted media", () => {
+    it("mutes a newly inserted video while the tab is muted", async () => {
+      await mockEvents.runtime.onMessage.fire(
+        { muted: true, type: "SET_MUTED" },
+        {},
+        () => {}
+      );
+      const video = document.createElement("video");
+      document.body.append(video);
+      await Promise.resolve();
+
+      expect(video.muted).toBeTruthy();
+    });
+
+    it("mutes videos nested in a newly inserted element", async () => {
+      await mockEvents.runtime.onMessage.fire(
+        { muted: true, type: "SET_MUTED" },
+        {},
+        () => {}
+      );
+      const container = document.createElement("div");
+      const video = document.createElement("video");
+      container.append(video);
+      document.body.append(container);
+      await Promise.resolve();
+
+      expect(video.muted).toBeTruthy();
+    });
+
+    it("ignores inserted elements without video descendants", async () => {
+      await mockEvents.runtime.onMessage.fire(
+        { muted: true, type: "SET_MUTED" },
+        {},
+        () => {}
+      );
+      document.body.append(document.createElement("div"));
+      await Promise.resolve();
+
+      const video = document.createElement("video");
+      video.muted = false;
+      document.body.append(video);
+      await Promise.resolve();
+
+      expect(video.muted).toBeTruthy();
     });
   });
 });

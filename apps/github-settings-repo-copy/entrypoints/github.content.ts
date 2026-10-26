@@ -74,7 +74,7 @@ const makeLabelCopyable = (
   label: HTMLLabelElement,
   repositoryName: string
 ): void => {
-  const labelText = label.textContent ?? "";
+  const labelText = label.textContent;
 
   if (
     label.querySelector(`[${COPYABLE_ATTRIBUTE}]`) ||
@@ -83,7 +83,7 @@ const makeLabelCopyable = (
     return;
   }
 
-  const walker = document.createTreeWalker(label, NodeFilter.SHOW_TEXT);
+  const walker = document.createTreeWalker(label, NodeFilter.SHOW_ALL);
   const textNodes: Text[] = [];
 
   while (walker.nextNode()) {
@@ -100,7 +100,7 @@ const makeLabelCopyable = (
     return;
   }
 
-  const text = textNode.nodeValue ?? "";
+  const text = textNode.data;
   const nameStart = text.indexOf(repositoryName);
 
   const hasOpeningQuote = /["'“‘]$/u.test(text.slice(0, nameStart));
@@ -112,13 +112,13 @@ const makeLabelCopyable = (
   const nameAndAfter = textNode.splitText(nameStart - Number(hasOpeningQuote));
 
   if (hasOpeningQuote) {
-    nameAndAfter.nodeValue = nameAndAfter.nodeValue?.slice(1) ?? "";
+    nameAndAfter.data = nameAndAfter.data.slice(1);
   }
 
   const afterName = nameAndAfter.splitText(repositoryName.length);
 
   if (hasClosingQuote) {
-    afterName.nodeValue = afterName.nodeValue?.slice(1) ?? "";
+    afterName.data = afterName.data.slice(1);
   }
 
   const button = document.createElement("button");
@@ -153,17 +153,20 @@ const makeConfirmationLabelsCopyable = (): void => {
   }
 };
 
+/** Installs the dialog observer and GitHub navigation listeners. */
+export const startContentScript = (): void => {
+  const observer = new MutationObserver(makeConfirmationLabelsCopyable);
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+  makeConfirmationLabelsCopyable();
+  window.addEventListener("popstate", makeConfirmationLabelsCopyable);
+  window.addEventListener("turbo:load", makeConfirmationLabelsCopyable);
+};
+
 export default defineContentScript({
-  main: () => {
-    const observer = new MutationObserver(makeConfirmationLabelsCopyable);
-    observer.observe(document.documentElement, {
-      childList: true,
-      subtree: true,
-    });
-    makeConfirmationLabelsCopyable();
-    window.addEventListener("popstate", makeConfirmationLabelsCopyable);
-    window.addEventListener("turbo:load", makeConfirmationLabelsCopyable);
-  },
+  main: startContentScript,
   matches: ["https://github.com/*/*"],
   runAt: "document_idle",
 });

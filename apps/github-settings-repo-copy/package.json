@@ -32,12 +32,16 @@
     "zip:all": "bun run zip:chrome && bun run zip:firefox",
     "typecheck": "tsc --noEmit",
     "check": "ultracite check",
+    "test": "vitest run",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
     "postinstall": "bun ../../scripts/run-wxt.ts prepare"
   },
   "devDependencies": {
     "@types/bun": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "happy-dom": "catalog:",
+    "vitest": "catalog:",
     "wxt": "catalog:"
   }
 }

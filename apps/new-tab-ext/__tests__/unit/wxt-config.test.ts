@@ -5,7 +5,7 @@ import path from "node:path";
 
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-import { createManifest, createViteConfig } from "../../wxt.config";
+import config, { createManifest, createViteConfig } from "../../wxt.config";
 import {
   cleanupTestEnvironment,
   setupTestEnvironment,
@@ -45,6 +45,14 @@ describe("WXT browser configuration", () => {
     expect(manifest).toHaveProperty(
       "content_security_policy",
       expect.stringContaining("script-src 'self'")
+    );
+  });
+
+  it("delegates WXT manifest generation to the browser config", () => {
+    expect(config.manifest).toStrictEqual(expect.any(Function));
+    expect(createManifest("firefox")).toHaveProperty(
+      "browser_specific_settings.gecko.id",
+      "new-tab-ext@mynameistito.com"
     );
   });
 

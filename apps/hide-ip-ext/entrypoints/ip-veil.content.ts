@@ -68,7 +68,7 @@ const veilTextNode = (textNode: Text, matcher: RegExp): void => {
   let cursor = 0;
 
   for (const match of value.matchAll(matcher)) {
-    const matchStart = match.index ?? 0;
+    const matchStart = match.index;
     fragment.append(value.slice(cursor, matchStart));
     fragment.append(createVeil(match[0]));
     cursor = matchStart + match[0].length;

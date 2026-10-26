@@ -33,7 +33,7 @@
     "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
     "zip:all": "bun run zip",
     "postinstall": "bun ../../scripts/run-wxt.ts prepare",
-    "test": "vitest run",
+    "test": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "check": "ultracite check",
     "ci:release": "bun ../../scripts/release-app.ts"
@@ -41,6 +41,7 @@
   "devDependencies": {
     "@types/bun": "catalog:",
     "@types/chrome": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
     "happy-dom": "catalog:",
     "vitest": "catalog:",
     "wxt": "catalog:"

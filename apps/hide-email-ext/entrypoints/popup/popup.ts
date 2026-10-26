@@ -1,4 +1,4 @@
-import { isEmail, normalize } from "@/src/lib/email";
+import { isEmail } from "@/src/lib/email";
 import {
   addHiddenEmail,
   getHiddenEmails,
@@ -91,13 +91,7 @@ const handleAdd = async (): Promise<void> => {
     return;
   }
 
-  const email = normalize(raw);
-
-  if (email === null) {
-    errorSpan.textContent = "Please enter a valid email address.";
-
-    return;
-  }
+  const email = raw.trim().toLowerCase();
 
   try {
     await addHiddenEmail(email);

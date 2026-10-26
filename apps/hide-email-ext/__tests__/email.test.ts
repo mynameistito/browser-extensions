@@ -19,4 +19,8 @@ describe("email helpers", () => {
 
     expect(String(normalized)).toBe("user.name+tag@example.com");
   });
+
+  it("returns null when asked to normalize an invalid address", () => {
+    expect(normalize("not-an-email")).toBeNull();
+  });
 });
