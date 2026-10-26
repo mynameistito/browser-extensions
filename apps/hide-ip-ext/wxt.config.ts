@@ -38,11 +38,20 @@ export default defineConfig({
     };
 
     if (browser === "firefox") {
-      return base;
+      return {
+        ...base,
+        browser_specific_settings: {
+          gecko: {
+            data_collection_permissions: { required: ["none"] },
+            id: "hide-ip-ext@mynameistito.com",
+          },
+        },
+      };
     }
 
     const key = loadManifestKey();
 
     return key === undefined ? base : { ...base, key };
   },
+  manifestVersion: 3,
 });

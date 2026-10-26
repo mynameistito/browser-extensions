@@ -72,6 +72,7 @@ export default defineConfig({
 
     return base;
   },
+  manifestVersion: 3,
   outDir: ".output",
   srcDir: "src",
 });
