@@ -41,6 +41,7 @@
   "devDependencies": {
     "@types/chrome": "catalog:",
     "happy-dom": "catalog:",
+    "vitest": "catalog:",
     "wxt": "catalog:"
   }
 }
