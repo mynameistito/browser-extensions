@@ -38,20 +38,27 @@ const GitHubRelease = Struct({
 
 const GitHubReleases = SchemaArray(GitHubRelease);
 
-const latestDownload = async (
+const findLatestRelease = async (
   extension: string,
-  browser: Browser
-): Promise<Response> => {
-  const releasesResponse = await fetch(
-    "https://api.github.com/repos/mynameistito/browser-extensions/releases?per_page=100",
-    {
-      cf: { cacheEverything: true, cacheTtl: 300 },
-      headers: {
-        Accept: "application/vnd.github+json",
-        "User-Agent": "browser-extensions-docs",
-      },
-    }
+  browser: Browser,
+  page: number
+): Promise<typeof GitHubRelease.Type | Response | undefined> => {
+  const prefix = `${extension}-v`;
+
+  const releasesUrl = new URL(
+    "https://api.github.com/repos/mynameistito/browser-extensions/releases"
   );
+
+  releasesUrl.searchParams.set("page", String(page));
+  releasesUrl.searchParams.set("per_page", "100");
+
+  const releasesResponse = await fetch(releasesUrl, {
+    cf: { cacheEverything: true, cacheTtl: 300 },
+    headers: {
+      Accept: "application/vnd.github+json",
+      "User-Agent": "browser-extensions-docs",
+    },
+  });
 
   if (!releasesResponse.ok) {
     return Response.json(
@@ -72,8 +79,6 @@ const latestDownload = async (
     );
   }
 
-  const prefix = `${extension}-v`;
-
   const release = parsedReleases.find(
     (item) =>
       !item.draft &&
@@ -86,6 +91,25 @@ const latestDownload = async (
       )
   );
 
+  if (release || parsedReleases.length < 100) {
+    return release;
+  }
+
+  return await findLatestRelease(extension, browser, page + 1);
+};
+
+const latestDownload = async (
+  extension: string,
+  browser: Browser
+): Promise<Response> => {
+  const lookup = await findLatestRelease(extension, browser, 1);
+
+  if (lookup instanceof Response) {
+    return lookup;
+  }
+
+  const release = lookup;
+
   if (!release) {
     return Response.json(
       { error: `No ${browser} release is available for ${extension}.` },
@@ -93,7 +117,7 @@ const latestDownload = async (
     );
   }
 
-  const version = release.tag_name.slice(prefix.length);
+  const version = release.tag_name.slice(`${extension}-v`.length);
   const asset = `${extension}-${version}-${browser}.zip`;
   const target = `https://github.com/mynameistito/browser-extensions/releases/download/${encodeURIComponent(release.tag_name)}/${encodeURIComponent(asset)}`;
 
