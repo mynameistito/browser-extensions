@@ -80,4 +80,3 @@ bun run generate-keys --help        Show signing-key options
 
 - Root `test` delegates to Turbo; app suites and the root `scripts/__tests__` Vitest suite run through their declared test tasks.
 - Most app build scripts create Chrome and Firefox outputs. Inspect package scripts for exact platform coverage before relying on a build command.
-- `hide-ip-ext` currently does not use a persistent Chrome signing key.
