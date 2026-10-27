@@ -31,7 +31,9 @@ jobs:
         with:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
+      - name: Prepare WXT types
+        if: matrix.task != 'check' && matrix.task != 'knip'
+        run: bun run prepare:wxt
       - run: bun run ${{ matrix.task }}
 
       - name: Build the credential-free Cloudflare preview bundle
