@@ -1,0 +1,52 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": ["scripts/*.ts"],
+      "project": ["scripts/**/*.ts", "*.config.ts"]
+    },
+    "apps/better-history": {
+      "entry": ["src/entrypoints/**/*", "src/styles/globals.css"],
+      "wxt": { "entry": "src/entrypoints/**/*" }
+    },
+    "apps/github-settings-repo-copy": {
+      "wxt": { "entry": "entrypoints/**/*" }
+    },
+    "apps/hide-email-ext": {
+      "wxt": { "entry": "entrypoints/**/*" }
+    },
+    "apps/hide-ip-ext": {
+      "wxt": { "entry": "entrypoints/**/*" }
+    },
+    "apps/ig-video-controls": {
+      "includeEntryExports": true,
+      "wxt": {
+        "entry": [
+          "src/entrypoints/background.ts",
+          "src/entrypoints/content/index.ts"
+        ]
+      }
+    },
+    "apps/mute-tab-manager": {
+      "wxt": { "entry": "src/entrypoints/**/*" }
+    },
+    "apps/new-tab-ext": {
+      "entry": ["src/entrypoints/**/*.{ts,tsx}", "scripts/*.ts"],
+      "wxt": { "entry": "src/entrypoints/**/*" }
+    },
+    "apps/quote-viewer": {
+      "entry": ["src/entrypoints/**/*.{ts,tsx}", "scripts/*.ts"],
+      "wxt": { "entry": "src/entrypoints/**/*" }
+    },
+    "apps/web": {
+      "entry": [
+        "alchemy.run.ts",
+        "blume.config.ts",
+        "src/worker.ts",
+        "pages/**/*.{astro,ts,tsx}",
+        "scripts/**/*.ts"
+      ],
+      "project": ["**/*.{ts,tsx}", "*.config.ts"]
+    }
+  }
+}

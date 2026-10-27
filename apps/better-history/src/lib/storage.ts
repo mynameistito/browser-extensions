@@ -94,24 +94,3 @@ export const writeKey = async <K extends StorageKey>(
     },
   });
 };
-
-/**
- * Read, update, validate, and write a storage value.
- * @param key - Storage key to update.
- * @param fallback - Value used when no stored entry exists.
- * @param fn - Function that creates the next value.
- * @returns The storage result with any read, validation, or write error.
- */
-export const updateKey = async <K extends StorageKey>(
-  key: K,
-  fallback: StorageValue<K>,
-  fn: (current: StorageValue<K>) => StorageValue<K>
-) => {
-  const r = await readKeyOr(key, fallback);
-
-  if (Result.isError(r)) {
-    return r;
-  }
-
-  return await writeKey(key, fn(r.value));
-};
