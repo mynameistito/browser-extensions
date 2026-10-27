@@ -79,11 +79,14 @@ const pkg = parseAppPackage(
 );
 
 const tag = `${pkg.name}-v${pkg.version}`;
+const releaseRepository = "mynameistito/browser-extensions";
+const sourceArchiveName = `${pkg.name}-${pkg.version}-source.zip`;
 
 const expectedAssets = [
   `${pkg.name}-${pkg.version}-chrome.zip`,
   `${pkg.name}-${pkg.version}-firefox.zip`,
-];
+  sourceArchiveName,
+] as const;
 
 const run = (command: string, args: string[]): string =>
   execFileSync(command, args, {
@@ -130,7 +133,7 @@ const readReleaseAssetNames = (): readonly string[] => {
     "view",
     tag,
     "--repo",
-    "mynameistito/browser-extensions",
+    releaseRepository,
     "--json",
     "assets",
     "--jq",
@@ -140,11 +143,15 @@ const readReleaseAssetNames = (): readonly string[] => {
   return output ? output.split("\n") : [];
 };
 
-try {
-  const assets = readReleaseAssetNames();
+let existingAssets: readonly string[] = [];
+let releaseExists = false;
 
-  if (expectedAssets.every((asset) => assets.includes(asset))) {
-    console.log(`Release ${tag} already contains both browser artifacts.`);
+try {
+  existingAssets = readReleaseAssetNames();
+  releaseExists = true;
+
+  if (expectedAssets.every((asset) => existingAssets.includes(asset))) {
+    console.log(`Release ${tag} already contains all release artifacts.`);
     process.exit(0);
   }
 } catch {
@@ -162,6 +169,16 @@ const scripts = scriptsToRun.filter((script) => {
 for (const script of scripts) {
   runInherited("bun", ["run", script]);
 }
+
+const sourceArchive = path.join(appDir, ".output", sourceArchiveName);
+
+runInherited("git", [
+  "archive",
+  "--format=zip",
+  `--output=${sourceArchive}`,
+  "HEAD",
+  `:(top)apps/${pkg.name}`,
+]);
 
 const releaseAssets = expectedAssets.map((asset) =>
   path.join(appDir, ".output", asset)
@@ -199,17 +216,32 @@ writeFileSync(notesPath, notes, "utf-8");
 
 const target = run("git", ["rev-parse", "HEAD"]);
 
-runInherited("gh", [
-  "release",
-  "create",
-  tag,
-  ...releaseAssets,
-  "--repo",
-  "mynameistito/browser-extensions",
-  "--title",
-  tag,
-  "--notes-file",
-  notesPath,
-  "--target",
-  target,
-]);
+if (releaseExists) {
+  const missingAssets = expectedAssets.flatMap((asset) =>
+    existingAssets.includes(asset) ? [] : [path.join(appDir, ".output", asset)]
+  );
+
+  runInherited("gh", [
+    "release",
+    "upload",
+    tag,
+    ...missingAssets,
+    "--repo",
+    releaseRepository,
+  ]);
+} else {
+  runInherited("gh", [
+    "release",
+    "create",
+    tag,
+    ...releaseAssets,
+    "--repo",
+    releaseRepository,
+    "--title",
+    tag,
+    "--notes-file",
+    notesPath,
+    "--target",
+    target,
+  ]);
+}
