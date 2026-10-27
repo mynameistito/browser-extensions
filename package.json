@@ -28,7 +28,7 @@
     "fix": "ultracite fix",
     "typecheck": "bun scripts/run-turbo.ts run typecheck",
     "typecheck:root": "tsc --noEmit -p tsconfig.json",
-    "test": "bun scripts/run-turbo.ts run test test:root",
+    "test": "bun scripts/run-turbo.ts run test test:root --concurrency=1",
     "test:root": "vitest run scripts/__tests__ --coverage",
     "prepare:wxt": "bun run --filter hide-email-ext postinstall && bun run --filter quote-viewer postinstall && bun run --filter new-tab-ext postinstall && bun run --filter hide-ip-ext postinstall && bun run --filter ig-video-controls postinstall && bun run --filter better-history postinstall && bun run --filter github-settings-repo-copy postinstall && bun run --filter mute-tab-manager postinstall",
     "prepare": "bun run lefthook install",
