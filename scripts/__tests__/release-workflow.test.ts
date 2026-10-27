@@ -4,6 +4,13 @@ import { describe, expect, it } from "vitest";
 
 describe("release workflow", () => {
   const workflow = readFileSync(".github/workflows/release.yml", "utf-8");
+  const ciWorkflow = readFileSync(".github/workflows/ci.yml", "utf-8");
+
+  it("keeps CI runs for different main commits from cancelling each other", () => {
+    expect(ciWorkflow).toMatch(
+      /group: ci-\$\{\{ github\.event_name == 'push' && github\.sha \|\| github\.ref \}\}/u
+    );
+  });
 
   it("only starts release work for successful main push CI", () => {
     expect(workflow).toContain("workflows: [CI]");
