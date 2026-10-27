@@ -1,8 +1,6 @@
 import type { Settings } from "@/lib/defaults";
 import { DEFAULTS } from "@/lib/defaults";
 
-export { DEFAULTS } from "@/lib/defaults";
-
 export type { Settings } from "@/lib/defaults";
 
 /**

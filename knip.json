@@ -19,7 +19,13 @@
       "wxt": { "entry": "entrypoints/**/*" }
     },
     "apps/ig-video-controls": {
-      "wxt": { "entry": "src/entrypoints/**/*" }
+      "includeEntryExports": true,
+      "wxt": {
+        "entry": [
+          "src/entrypoints/background.ts",
+          "src/entrypoints/content/index.ts"
+        ]
+      }
     },
     "apps/mute-tab-manager": {
       "wxt": { "entry": "src/entrypoints/**/*" }
