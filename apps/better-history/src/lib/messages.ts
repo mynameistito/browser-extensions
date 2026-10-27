@@ -34,7 +34,7 @@ interface RuntimeMessageEvent {
 }
 
 /** Response returned after the cleanup message finishes. */
-export const CleanupRunNowResponseSchema = z.object({
+const CleanupRunNowResponseSchema = z.object({
   lastRunAt: z.number(),
 });
 

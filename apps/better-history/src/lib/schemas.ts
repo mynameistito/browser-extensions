@@ -8,10 +8,7 @@ export const PatternKindSchema = z.enum([
   "page",
 ]);
 
-/** Supported matching modes for domain rules. */
-export type PatternKind = z.infer<typeof PatternKindSchema>;
-
-export const DomainRuleSchema = z.object({
+const DomainRuleSchema = z.object({
   kind: PatternKindSchema,
   pattern: z.string().min(1),
 });
@@ -36,7 +33,7 @@ export const SettingsSchema = z.object({
 });
 
 /** User preferences for the extension interface and search behavior. */
-export type Settings = z.infer<typeof SettingsSchema>;
+type Settings = z.infer<typeof SettingsSchema>;
 
 export const CleanupSchema = z.object({
   lastRunAt: z.number().int().nonnegative().optional(),
@@ -50,25 +47,22 @@ export const CleanupSchema = z.object({
 /** Schedule and retention preferences for history cleanup. */
 export type Cleanup = z.infer<typeof CleanupSchema>;
 
-export const DomainSession = z.object({
+const DomainSession = z.object({
   end: z.number().int().nonnegative(),
   start: z.number().int().nonnegative(),
 });
 
-export const DomainTrackingSchema = z.object({
+const DomainTrackingSchema = z.object({
   days: z.record(z.string(), z.number().int().nonnegative()).default({}),
   lastVisit: z.number().int().nonnegative().optional(),
   sessions: z.array(DomainSession).default([]),
   totalSec: z.number().int().nonnegative().default(0),
 });
 
-/** Visit statistics stored for one domain. */
-export type DomainTracking = z.infer<typeof DomainTrackingSchema>;
-
-export const TrackingDataSchema = z.record(z.string(), DomainTrackingSchema);
+const TrackingDataSchema = z.record(z.string(), DomainTrackingSchema);
 
 /** Visit statistics indexed by domain. */
-export type TrackingData = z.infer<typeof TrackingDataSchema>;
+type TrackingData = z.infer<typeof TrackingDataSchema>;
 
 export const MetaSchema = z.object({
   firstInit: z.boolean().default(true),
@@ -78,7 +72,7 @@ export const MetaSchema = z.object({
 });
 
 /** Installation metadata persisted by the extension. */
-export type Meta = z.infer<typeof MetaSchema>;
+type Meta = z.infer<typeof MetaSchema>;
 
 interface StorageValueMap {
   blacklist: DomainRule[];
