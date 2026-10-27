@@ -1,6 +1,6 @@
 {
   "name": "quote-viewer",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "private": true,
   "description": "Restores the View Quote Tweets button on Twitter/X with a cross-browser extension.",
   "keywords": [

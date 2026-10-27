@@ -1,5 +1,13 @@
 # quote-viewer
 
+## 0.2.14
+
+### Patch Changes
+
+- [`34be681`](https://github.com/mynameistito/browser-extensions/commit/34be681): Explicitly target Manifest V3.
+- [`48907f9`](https://github.com/mynameistito/browser-extensions/commit/48907f9): Run tests with V8 coverage by default and enforce 95% global coverage thresholds.
+- [`51261c2`](https://github.com/mynameistito/browser-extensions/commit/51261c2): Run the test suite with Vitest and align its checks with the shared lint rules.
+
 ## 0.2.13
 
 ### Patch Changes

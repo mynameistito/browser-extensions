@@ -1,5 +1,17 @@
 # hide-email-ext
 
+## 0.3.4
+
+### Patch Changes
+
+- 1bc3e8b: fix(hide-email-ext): subscribe before initial storage read
+- 35794a5: Blur matched emails with a click-to-reveal toggle
+- 34be681: Add a Firefox extension ID and explicitly target Manifest V3.
+- 1407ab8: Run the test suite with Vitest and align its checks with the shared lint rules.
+- 163b479: fix(hide-email-ext): serialize concurrent email-list updates
+- b4989cf: Restore page content when configured redaction addresses are removed or cleared.
+- e97e91e: Require comprehensive V8 coverage and test popup failure and interaction behavior.
+
 ## 0.3.3
 
 ### Patch Changes

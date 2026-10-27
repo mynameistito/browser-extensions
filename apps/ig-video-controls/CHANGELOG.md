@@ -1,5 +1,12 @@
 # ig-video-controls
 
+## 1.0.4
+
+### Patch Changes
+
+- [`34be681`](https://github.com/mynameistito/browser-extensions/commit/34be681): Explicitly target Manifest V3.
+- [`d83262c`](https://github.com/mynameistito/browser-extensions/commit/d83262c): Add comprehensive tests and enforce app-wide coverage thresholds.
+
 ## 1.0.3
 
 ### Patch Changes
