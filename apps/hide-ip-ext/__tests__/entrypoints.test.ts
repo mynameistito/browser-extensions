@@ -101,7 +101,9 @@ describe("background IP lookup", () => {
     await expect(sendMessage(listener, "IP_VEIL_GET_IP")).resolves.toBe(
       "203.0.113.4"
     );
-    expect(fetchMock).toHaveBeenCalledOnce();
+    expect(fetchMock).toHaveBeenCalledExactlyOnceWith(
+      "https://browser-ext.mynameistito.com/api/v1/ip"
+    );
   });
 
   it("refreshes the cached address after fifteen minutes", async () => {

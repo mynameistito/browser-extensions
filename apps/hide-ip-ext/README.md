@@ -22,6 +22,6 @@ The build creates Chrome and Firefox extensions in `.output/chrome-mv3` and `.ou
 
 ## Privacy notes
 
-- The extension requests the public address from `api.ipify.org` and caches it in memory for 15 minutes.
+- The extension requests the public address from `browser-ext.mynameistito.com/api/v1/ip` and caches it in memory for 15 minutes.
 - It only scans page text for that exact address. It does not collect page content or send it anywhere.
 - Text inside inputs and textareas is deliberately left alone so it does not interfere with typing.

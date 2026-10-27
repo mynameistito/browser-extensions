@@ -29,7 +29,9 @@ export default defineBackground(() => {
       return cachedIp;
     }
 
-    const response = await fetch("https://api.ipify.org?format=json");
+    const response = await fetch(
+      "https://browser-ext.mynameistito.com/api/v1/ip"
+    );
 
     if (!response.ok) {
       throw new Error("Unable to look up your public IP address.");

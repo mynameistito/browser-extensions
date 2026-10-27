@@ -32,7 +32,7 @@ export default defineConfig({
     const base = {
       description:
         "Keeps your public IP address hidden on web pages until you intentionally reveal it.",
-      host_permissions: ["https://api.ipify.org/*"],
+      host_permissions: ["https://browser-ext.mynameistito.com/*"],
       name: "IP Veil",
       permissions: ["storage"],
     };

@@ -357,8 +357,9 @@ const { config } = data;
           <p>
           Each extension handles data differently. Hide Email syncs your
           redaction list and scans page text on your device. The Hide IP
-          extension asks ipify for your public IP, then checks for matches
-          locally; this page's demo uses a separate Cloudflare endpoint. Page
+          extension asks the Browser Extensions API for your public IP, then
+          checks for matches locally. Cloudflare processes the lookup request;
+          page
           contents stay on your device.
           </p>
           <p>
