@@ -53,7 +53,10 @@ export default defineConfig({
       return {
         ...base,
         browser_specific_settings: {
-          gecko: { id: "better-history@mynameistito" },
+          gecko: {
+            data_collection_permissions: { required: ["none"] },
+            id: "better-history@mynameistito",
+          },
         },
       };
     }

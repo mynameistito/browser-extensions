@@ -71,6 +71,7 @@ export default defineConfig({
         ...base,
         browser_specific_settings: {
           gecko: {
+            data_collection_permissions: { required: ["none"] },
             id: "hide-email-ext@mynameistito.com",
           },
         },
