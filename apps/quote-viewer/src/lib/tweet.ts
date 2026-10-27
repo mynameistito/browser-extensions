@@ -72,7 +72,7 @@ export const viewQuotedTweets = (
   tweetId: string
 ): void => {
   const newPath = `/${twitterHandle}/status/${tweetId}/quotes`;
-  window.history.replaceState({}, "", newPath);
+  window.history.pushState({}, "", newPath);
   window.dispatchEvent(new PopStateEvent("popstate", { state: {} }));
   window.scrollTo(0, 0);
 };
