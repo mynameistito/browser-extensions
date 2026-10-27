@@ -32,7 +32,7 @@
     "zip:chrome": "bun ../../scripts/run-wxt.ts zip -b chrome",
     "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
     "postinstall": "bun ../../scripts/run-wxt.ts prepare",
-    "test": "vitest run",
+    "test": "vitest run --no-cache",
     "typecheck": "tsc --noEmit",
     "check": "ultracite check",
     "fix": "ultracite fix",
