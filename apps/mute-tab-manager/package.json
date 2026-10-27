@@ -33,7 +33,7 @@
     "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
     "zip:all": "bun run zip",
     "postinstall": "bun ../../scripts/run-wxt.ts prepare",
-    "test": "vitest run --no-cache --coverage",
+    "test": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "check": "ultracite check",
     "ci:release": "bun ../../scripts/release-app.ts"
