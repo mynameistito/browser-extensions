@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@alchemy.run/cloudflare": "2.0.0-beta.84",
+    "@effect/platform-node": "^4.0.5",
     "alchemy": "2.0.0-beta.84",
     "blume": "2.2.6",
     "effect": "^4.0.5"
