@@ -38,7 +38,9 @@ jobs:
           restore-keys: |
             bun-${{ runner.os }}-1.4.2-
       - run: bun install --frozen-lockfile
-      - run: bun run prepare:wxt
+      - name: Prepare WXT types
+        if: matrix.task != 'build'
+        run: bun run prepare:wxt
       - run: bun run ${{ matrix.task }}
 
       - name: Build the credential-free Cloudflare preview bundle
