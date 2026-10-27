@@ -1,5 +1,12 @@
 # better-history
 
+## 8.0.5
+
+### Patch Changes
+
+- 2580e3c: Remove unused internal helpers and exports without changing extension behavior.
+- e368b09: Include an app-specific source archive in extension releases.
+
 ## 8.0.4
 
 ### Patch Changes

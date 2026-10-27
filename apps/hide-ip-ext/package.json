@@ -1,6 +1,6 @@
 {
   "name": "hide-ip-ext",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "description": "A WXT browser extension that blurs your public IP address on web pages.",
   "keywords": [

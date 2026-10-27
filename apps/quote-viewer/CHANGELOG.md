@@ -1,5 +1,13 @@
 # quote-viewer
 
+## 0.2.15
+
+### Patch Changes
+
+- [`43d8340`](https://github.com/mynameistito/browser-extensions/commit/43d8340): Preserve browser history when opening quotes
+- [`622fbde`](https://github.com/mynameistito/browser-extensions/commit/622fbde): Expose the documented Changesets helper command in the app package scripts.
+- [`e368b09`](https://github.com/mynameistito/browser-extensions/commit/e368b09): Include an app-specific source archive in extension releases.
+
 ## 0.2.14
 
 ### Patch Changes

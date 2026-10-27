@@ -1,5 +1,11 @@
 # github-settings-repo-copy
 
+## 0.2.3
+
+### Patch Changes
+
+- e368b09: Include an app-specific source archive in extension releases.
+
 ## 0.2.2
 
 ### Patch Changes
