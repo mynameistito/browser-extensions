@@ -1,5 +1,11 @@
 # better-history
 
+## 8.0.6
+
+### Patch Changes
+
+- 819df8a: Declare that the Firefox extensions do not collect data, as required for new Firefox extension submissions.
+
 ## 8.0.5
 
 ### Patch Changes

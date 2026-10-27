@@ -1,5 +1,11 @@
 # hide-email-ext
 
+## 0.3.6
+
+### Patch Changes
+
+- 819df8a: Declare that the Firefox extensions do not collect data, as required for new Firefox extension submissions.
+
 ## 0.3.5
 
 ### Patch Changes
