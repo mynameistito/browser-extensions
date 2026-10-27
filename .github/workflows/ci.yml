@@ -42,9 +42,13 @@ jobs:
         run: |
           docs_only=false
           if changes=$(git diff --no-renames --name-only "$BASE_SHA" HEAD) && [[ -n "$changes" ]]; then
-            if ! printf '%s\n' "$changes" | grep -qv '^apps/web/docs/'; then
-              docs_only=true
-            fi
+            docs_only=true
+            while IFS= read -r file; do
+              if [[ "$file" != apps/web/docs/* ]]; then
+                docs_only=false
+                break
+              fi
+            done <<< "$changes"
           fi
           echo "docs_only=$docs_only" >> "$GITHUB_OUTPUT"
       - name: Run root tests for documentation-only changes
