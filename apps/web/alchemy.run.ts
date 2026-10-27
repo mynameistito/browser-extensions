@@ -11,7 +11,7 @@ const site = Website.StaticSite(
     },
     command: "bun run build",
     compatibility: { date: "2026-10-26" },
-    domains: stage === "prod" ? ["browser-ext.mynameistito.com"] : undefined,
+    domain: stage === "prod" ? "browser-ext.mynameistito.com" : undefined,
     main: "./src/worker.ts",
     name: "browser-ext",
     observability: {
