@@ -29,6 +29,7 @@
   "type": "module",
   "scripts": {
     "check": "ultracite check",
+    "changeset-add": "bun scripts/changeset-add.ts",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
     "typecheck": "tsc --noEmit",
