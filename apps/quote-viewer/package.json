@@ -23,6 +23,7 @@
   },
   "type": "module",
   "scripts": {
+    "changeset-add": "bun scripts/changeset-add.ts",
     "dev": "bun ../../scripts/run-wxt.ts",
     "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
     "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",
