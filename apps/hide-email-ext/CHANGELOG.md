@@ -1,5 +1,11 @@
 # hide-email-ext
 
+## 0.3.7
+
+### Patch Changes
+
+- 0930ed4: Trigger a patch release for every app to test the release CI/CD pipeline.
+
 ## 0.3.6
 
 ### Patch Changes

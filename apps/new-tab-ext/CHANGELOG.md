@@ -1,5 +1,11 @@
 # new-tab-ext
 
+## 0.2.6
+
+### Patch Changes
+
+- 0930ed4: Trigger a patch release for every app to test the release CI/CD pipeline.
+
 ## 0.2.5
 
 ### Patch Changes
