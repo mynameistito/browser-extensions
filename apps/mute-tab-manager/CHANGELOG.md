@@ -1,5 +1,11 @@
 # mute-tab-manager
 
+## 1.0.5
+
+### Patch Changes
+
+- e368b09: Include an app-specific source archive in extension releases.
+
 ## 1.0.4
 
 ### Patch Changes

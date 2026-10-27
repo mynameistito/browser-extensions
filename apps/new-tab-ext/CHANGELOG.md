@@ -1,5 +1,12 @@
 # new-tab-ext
 
+## 0.2.5
+
+### Patch Changes
+
+- 22daddb: Expose the documented Changesets helper command in the app package scripts.
+- e368b09: Include an app-specific source archive in extension releases.
+
 ## 0.2.4
 
 ### Patch Changes

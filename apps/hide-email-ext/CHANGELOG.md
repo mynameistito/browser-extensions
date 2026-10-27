@@ -1,5 +1,12 @@
 # hide-email-ext
 
+## 0.3.5
+
+### Patch Changes
+
+- 456c2c3: Remove obsolete package-local release scripts; the shared release and Changesets tooling remain available.
+- e368b09: Include an app-specific source archive in extension releases.
+
 ## 0.3.4
 
 ### Patch Changes

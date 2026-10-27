@@ -1,5 +1,12 @@
 # ig-video-controls
 
+## 1.0.5
+
+### Patch Changes
+
+- [`e0fc927`](https://github.com/mynameistito/browser-extensions/commit/e0fc927): Refine Knip entrypoint discovery and remove an unused settings re-export.
+- [`e368b09`](https://github.com/mynameistito/browser-extensions/commit/e368b09): Include an app-specific source archive in extension releases.
+
 ## 1.0.4
 
 ### Patch Changes

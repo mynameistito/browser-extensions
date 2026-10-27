@@ -1,5 +1,12 @@
 # hide-ip-ext
 
+## 0.1.5
+
+### Patch Changes
+
+- a396e78: Use the browser-extensions API to look up the public IP address.
+- e368b09: Include an app-specific source archive in extension releases.
+
 ## 0.1.4
 
 ### Patch Changes

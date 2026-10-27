@@ -1,5 +1,11 @@
 # web
 
+## 0.2.3
+
+### Patch Changes
+
+- a396e78: Update Hide IP setup and privacy notes to describe its Cloudflare IP lookup endpoint.
+
 ## 0.2.2
 
 ### Patch Changes
