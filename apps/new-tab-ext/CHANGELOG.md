@@ -1,5 +1,12 @@
 # new-tab-ext
 
+## 0.2.4
+
+### Patch Changes
+
+- 34be681: Explicitly target Manifest V3.
+- d6d18f5: Enable coverage reporting by default when running the new-tab extension test suite.
+
 ## 0.2.3
 
 ### Patch Changes

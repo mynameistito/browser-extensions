@@ -1,5 +1,12 @@
 # github-settings-repo-copy
 
+## 0.2.2
+
+### Patch Changes
+
+- 34be681: Explicitly target Manifest V3.
+- 8c2754f: Add automated tests and enforce V8 coverage for the GitHub settings copy control.
+
 ## 0.2.1
 
 ### Patch Changes

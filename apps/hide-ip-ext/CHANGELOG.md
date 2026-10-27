@@ -1,5 +1,13 @@
 # hide-ip-ext
 
+## 0.1.4
+
+### Patch Changes
+
+- 3cc4e6f: Use a stable Chrome signing key for release builds.
+- 492a4b9: Add automated entrypoint tests with enforced V8 coverage thresholds.
+- 34be681: Add a Firefox extension ID and declare no data collection.
+
 ## 0.1.3
 
 ### Patch Changes

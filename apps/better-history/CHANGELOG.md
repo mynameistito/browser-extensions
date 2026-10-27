@@ -1,5 +1,11 @@
 # better-history
 
+## 8.0.4
+
+### Patch Changes
+
+- d38748b: Run the test suite with Vitest and align its checks with the shared lint rules.
+
 ## 8.0.3
 
 ### Patch Changes

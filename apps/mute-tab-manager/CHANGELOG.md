@@ -1,5 +1,12 @@
 # mute-tab-manager
 
+## 1.0.4
+
+### Patch Changes
+
+- f21c5da: Enforce 95% V8 coverage thresholds for the app source and expand behavioral test coverage.
+- 4b98c31: Run the test suite with Vitest and align its checks with the shared lint rules.
+
 ## 1.0.3
 
 ### Patch Changes
