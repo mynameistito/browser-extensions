@@ -32,7 +32,7 @@ jobs:
           bun-version: 1.4.2
       - run: bun install --frozen-lockfile
       - name: Prepare WXT types
-        if: matrix.task != 'check' && matrix.task != 'knip'
+        if: matrix.task != 'build'
         run: bun run prepare:wxt
       - run: bun run ${{ matrix.task }}
 
