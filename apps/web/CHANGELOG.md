@@ -1,5 +1,11 @@
 # web
 
+## 0.2.2
+
+### Patch Changes
+
+- 90841a0: Configure the production Worker custom domain using Alchemy's supported `domain` property.
+
 ## 0.2.1
 
 ### Patch Changes
