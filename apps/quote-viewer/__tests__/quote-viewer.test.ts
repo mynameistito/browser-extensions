@@ -186,6 +186,8 @@ describe(viewQuotedTweets, () => {
 
   it("updates browser state, dispatches popstate, and scrolls to top", () => {
     let popStateCount = 0;
+    const pushState = vi.spyOn(window.history, "pushState");
+    const replaceState = vi.spyOn(window.history, "replaceState");
     const scrollPositions: (readonly [number, number])[] = [];
     window.addEventListener("popstate", () => {
       popStateCount += 1;
@@ -198,6 +200,12 @@ describe(viewQuotedTweets, () => {
 
     viewQuotedTweets("jack", "12345");
 
+    expect(pushState).toHaveBeenCalledExactlyOnceWith(
+      {},
+      "",
+      "/jack/status/12345/quotes"
+    );
+    expect(replaceState).not.toHaveBeenCalled();
     expect(window.location.pathname).toBe("/jack/status/12345/quotes");
     expect(popStateCount).toBe(1);
     expect(scrollPositions).toStrictEqual([[0, 0]]);
