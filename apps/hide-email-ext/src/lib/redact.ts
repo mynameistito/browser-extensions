@@ -12,7 +12,7 @@ const SKIP_TAGS = new Set([
 const ARIA_LABEL = "aria-label";
 const SCANNABLE_ATTRS = ["title", ARIA_LABEL, "alt", "placeholder"] as const;
 
-const ADDRESS_HINT_RE = /[@.:0-9a-f]/iu;
+const ADDRESS_HINT_RE = /[@.:]/u;
 const EMAIL_VISIBILITY_LABEL = "Toggle email visibility";
 const BLUR_FILTER = "blur(4px)";
 const FILTER_TRANSITION = "filter 150ms cubic-bezier(0.4, 0, 0.2, 1)";
