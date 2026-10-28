@@ -1,8 +1,8 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-import type { Extension } from "./generate-keys-core";
 import { deriveChromeExtensionKey } from "./chrome-extension-key";
+import type { Extension } from "./generate-keys-core";
 import {
   chromeKeySecrets,
   parseGenerateKeyOptions,
@@ -31,12 +31,12 @@ const generateKey = (
   );
 
   const keyExists = existsSync(keyPath);
+
   const result =
     keyExists && options.upload && !options.force
       ? {
-          extensionId: deriveChromeExtensionKey(
-            readFileSync(keyPath, "utf-8")
-          ).extensionId,
+          extensionId: deriveChromeExtensionKey(readFileSync(keyPath, "utf-8"))
+            .extensionId,
           kind: "generated" as const,
         }
       : generateChromeKeyFile(keyPath, options.force);
@@ -83,10 +83,11 @@ if (parsed.kind === "help") {
   console.error(parsed.message);
   process.exitCode = 1;
 } else {
-  const existing = parsed.options.extensions.filter((extension) =>
-    existsSync(
-      path.resolve(import.meta.dirname, "..", "apps", extension, "key.pem")
-    ) && !parsed.options.upload
+  const existing = parsed.options.extensions.filter(
+    (extension) =>
+      existsSync(
+        path.resolve(import.meta.dirname, "..", "apps", extension, "key.pem")
+      ) && !parsed.options.upload
   );
 
   if (existing.length > 0 && !parsed.options.force) {
