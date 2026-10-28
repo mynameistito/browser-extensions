@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "happy-dom": "catalog:",
-    "publish-browser-extension": "^6.1.1",
+    "publish-browser-extension": "catalog:",
     "vitest": "catalog:",
     "wxt": "catalog:"
   }

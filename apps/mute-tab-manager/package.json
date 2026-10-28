@@ -44,7 +44,7 @@
     "@types/chrome": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "happy-dom": "catalog:",
-    "publish-browser-extension": "^6.1.1",
+    "publish-browser-extension": "catalog:",
     "vitest": "catalog:",
     "wxt": "catalog:"
   }
