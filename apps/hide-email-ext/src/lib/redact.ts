@@ -654,6 +654,18 @@ const scanAttributes = (
   }
 };
 
+const hasValidMatch = (value: string, regex: RegExp): boolean => {
+  regex.lastIndex = 0;
+
+  for (const match of value.matchAll(regex)) {
+    if (isValidMatch(match[0])) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const scanTextRun = (
   root: Node,
   textRun: Text[],
@@ -671,7 +683,7 @@ const scanTextRun = (
   regex.lastIndex = 0;
 
   if (
-    regex.test(combined) &&
+    hasValidMatch(combined, regex) &&
     textRun.every((text) => text.parentNode === root)
   ) {
     const matchedFirstText = firstText;

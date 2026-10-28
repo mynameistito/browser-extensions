@@ -181,6 +181,28 @@ describe("redactor", () => {
     expect(document.body.textContent).toStrictEqual(originalText);
   });
 
+  it("does not merge text nodes for invalid IPv6 candidates", async () => {
+    const nodeValues = ["12", ":", "30", ":", "45"];
+
+    const textNodes = nodeValues.map((value) => document.createTextNode(value));
+
+    const paragraph = document.createElement("p");
+    paragraph.append(...textNodes);
+    document.body.append(paragraph);
+
+    redactor = createRedactor();
+    redactor.setHideIpAddresses(true);
+    redactor.start();
+    await flush();
+
+    expect({
+      sameNodes: [...paragraph.childNodes].every(
+        (node, index) => node === textNodes[index]
+      ),
+      values: textNodes.map((node) => node.data),
+    }).toStrictEqual({ sameNodes: true, values: nodeValues });
+  });
+
   it("toggles email visibility with Enter and Space", async () => {
     setMarkup(document.body, `<p>${email}</p>`);
 
