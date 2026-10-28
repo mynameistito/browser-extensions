@@ -1,6 +1,6 @@
 # Hide Email
 
-A cross-browser extension that scans every web page for a user-defined list of email addresses and replaces each occurrence with `[Email Redacted]`. Built with [WXT](https://wxt.dev), TypeScript, and Bun.
+A cross-browser extension that finds a user-defined list of email addresses on web pages and replaces each match with `[Email Redacted]`. Built with [WXT](https://wxt.dev), TypeScript, and Bun.
 
 ## Features
 
@@ -11,20 +11,26 @@ A cross-browser extension that scans every web page for a user-defined list of e
 - Never mutates user-editable fields (inputs, textareas, contenteditable)
 - Works on Chromium and Firefox
 
-## Install
+## Get started
+
+From the repository root, install dependencies:
 
 ```bash
 bun install
 ```
 
-## Development
+## Develop and build
+
+Run these commands from `apps/hide-email-ext`:
+
+Run the development version in Chrome or Firefox:
 
 ```bash
 bun run dev              # Chrome — opens browser with extension loaded
 bun run dev:firefox      # Firefox
 ```
 
-## Build
+Build or package the extension for either browser:
 
 ```bash
 bun run build            # → .output/chrome-mv3
@@ -33,7 +39,7 @@ bun run zip              # zipped artifact for store upload
 bun run zip:firefox
 ```
 
-## Type-check & Lint
+## Typecheck and lint
 
 ```bash
 bun run typecheck        # tsc --noEmit
@@ -41,22 +47,22 @@ bun run check            # ultracite (oxlint + oxfmt)
 bun run fix              # auto-fix lint/format issues
 ```
 
-## Stable Extension ID
+## Persistent Chrome extension ID
 
-Chrome assigns a random extension ID on each build unless an RSA key is embedded in the manifest. Generate one locally:
+Chrome assigns a random extension ID on each build unless an RSA key is embedded in the manifest. Generate a persistent key from the workspace root:
 
 ```bash
 # Run from the workspace root.
 bun run generate-keys -- --app hide-email-ext
 ```
 
-The root-level script creates this app's gitignored `key.pem`, prints the stable Chromium extension ID, and prints the command to configure `HIDE_EMAIL_WXT_CHROME_KEY` in the workspace repository. Do not commit or share `key.pem`; use `--force` only when intentionally changing the extension ID.
+The root-level script creates this app's gitignored `key.pem`, prints the stable Chromium extension ID, and prints the command to configure `HIDE_EMAIL_WXT_CHROME_KEY` in the workspace repository. Do not commit or share `key.pem`. Use `--force` only when intentionally changing the extension ID.
 
-```
+```powershell
 Get-Content apps/hide-email-ext/key.pem -Raw | gh secret set HIDE_EMAIL_WXT_CHROME_KEY --repo mynameistito/browser-extensions
 ```
 
-## Project Structure
+## Project structure
 
 ```
 ├── entrypoints/
@@ -97,7 +103,7 @@ bun run version            # bumps package.json + changelog
 
 CI automates the version PR and publishes GitHub Releases with Chrome + Firefox zips attached on merge to `main`.
 
-## Tech Stack
+## Tech stack
 
 - [WXT](https://wxt.dev) — cross-browser extension framework
 - [Bun](https://bun.sh) — runtime & package manager

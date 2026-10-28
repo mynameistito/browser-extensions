@@ -1,4 +1,4 @@
-# quote-viewer
+# Quote Viewer
 
 `quote-viewer` is a cross-browser Manifest V3 extension that restores the "View quote tweets" button on Twitter/X web. It injects a small quote icon into tweet action bars and navigates directly to the tweet's `/quotes` route when clicked.
 
@@ -20,11 +20,15 @@ Originally forked from [View Quote Tweets on Twitter - QuickQuotes](https://chro
 
 ## Setup
 
+Install workspace dependencies from the repository root:
+
 ```bash
 bun install
 ```
 
 ## Development
+
+Run these commands from `apps/quote-viewer`:
 
 ```bash
 bun run dev          # launch Chromium with the unpacked extension
@@ -33,7 +37,7 @@ bun run dev:firefox  # launch Firefox with the unpacked extension
 
 WXT writes development builds to `.output/`. You can also load the generated extension directory manually from your browser's extension developer page if needed.
 
-## Build And Package
+## Build and package
 
 ```bash
 bun run build          # build Chrome and Firefox outputs
@@ -43,7 +47,7 @@ bun run zip:all        # create Chrome and Firefox zip files in .output/
 
 Release assets are named like `quote-viewer-<version>-chrome.zip` and `quote-viewer-<version>-firefox.zip`.
 
-## Quality Checks
+## Quality checks
 
 ```bash
 bun run typecheck
@@ -55,7 +59,7 @@ bun run knip
 
 `bun run check` uses Ultracite on top of `oxlint` and `oxfmt`. Use `bun run fix` to apply automatic lint and formatting fixes.
 
-## Persistent Chromium ID
+## Persistent Chromium extension ID
 
 Chromium derives an unpacked extension ID from the extension key. For local development, `wxt.config.ts` reads a gitignored `key.pem` from this app's directory and converts it into `manifest.key`, keeping the same extension ID across rebuilds.
 
@@ -68,13 +72,13 @@ bun run generate-keys -- --app quote-viewer
 
 The root-level script writes this app's gitignored `key.pem` and prints the resulting extension ID plus the GitHub CLI command to register the private key as the `QUOTE_VIEWER_WXT_CHROME_KEY` GitHub Actions secret. Do not commit or share the key; use `--force` only when intentionally changing the extension ID.
 
-```bash
+```powershell
 Get-Content apps/quote-viewer/key.pem -Raw | gh secret set QUOTE_VIEWER_WXT_CHROME_KEY --repo mynameistito/browser-extensions
 ```
 
 Firefox uses `browser_specific_settings.gecko.id` from `wxt.config.ts`, so it does not need this key.
 
-## Project Structure
+## Project structure
 
 - `src/entrypoints/content/` contains the content script, DOM injection, and styles.
 - `src/lib/tweet.ts` extracts tweet details and performs quote-route navigation.
@@ -93,7 +97,7 @@ bun run changeset-add patch "Describe change"  # non-interactive helper
 
 Use `patch`, `minor`, or `major` with `changeset-add` depending on the release impact.
 
-On pushes to `main`, the release workflow creates or updates the Changesets version PR. Once versioned changes land, CI runs `bun run ci:release`, builds Chrome and Firefox zips, tags the version, and uploads both assets to a GitHub Release.
+On pushes to `main`, the release workflow creates or updates the Changesets version PR. After the versioned changes land, CI runs `bun run ci:release`, builds Chrome and Firefox archives, tags the version, and uploads both assets to a GitHub Release.
 
 `WXT_CHROME_KEY` must be set before publishing so Chromium release builds keep the stable extension ID.
 

@@ -1,42 +1,101 @@
 # Browser Extensions
 
-Eight independent WXT browser extensions and their Blume documentation site, maintained in one Bun/Turborepo workspace.
+Eight independently versioned WXT browser extensions and a Blume documentation site, maintained in one Bun and Turborepo workspace.
 
-## Apps
+## Extensions and apps
 
-| App | Description |
+| App | What it does |
 | --- | --- |
 | [`hide-email-ext`](apps/hide-email-ext) | Redacts selected email addresses on web pages. |
-| [`quote-viewer`](apps/quote-viewer) | Restores a View Quotes action on X. |
-| [`new-tab-ext`](apps/new-tab-ext) | A local-first browser new-tab dashboard. |
+| [`quote-viewer`](apps/quote-viewer) | Restores a “View Quotes” action on X. |
+| [`new-tab-ext`](apps/new-tab-ext) | Provides a local-first new-tab dashboard. |
 | [`hide-ip-ext`](apps/hide-ip-ext) | Blurs your public IP address on web pages. |
 | [`ig-video-controls`](apps/ig-video-controls) | Adds native HTML5 video controls to Instagram videos. |
-| [`better-history`](apps/better-history) | Powerful browser history search, filtering, and cleanup. |
-| [`github-settings-repo-copy`](apps/github-settings-repo-copy) | Copies the repository name from GitHub settings confirmation dialogs. |
+| [`better-history`](apps/better-history) | Searches, filters, and cleans up browser history. |
+| [`github-settings-repo-copy`](apps/github-settings-repo-copy) | Copies repository names from GitHub settings confirmation dialogs. |
 | [`mute-tab-manager`](apps/mute-tab-manager) | Mutes browser tabs and synchronizes YouTube player audio. |
-| [`web`](apps/web) | User documentation for every extension. |
+| [`web`](apps/web) | Hosts user documentation for the extensions. |
 
-## Setup
+## Get started
 
-Install [Bun](https://bun.sh/) and run `bun install` followed by `bun run prepare:wxt` from the repository root. The prepare step generates each WXT app's local types and is safe to rerun.
+Install [Bun](https://bun.sh/) and run these commands from the repository root:
 
-Run a command across all apps with `bun run build`, `bun run test`, or `bun run typecheck`. To target one app, use Turbo filters, for example: `bunx turbo run build --filter=hide-email-ext`.
+```sh
+bun install
+bun run prepare:wxt
+```
 
-Each app remains independently versioned. Create a Changeset for the package that changed with `bun run changeset`, or use `bun run changeset-add <app> <patch|minor|major> "summary"`. Extension releases get app-prefixed GitHub tags and Chrome/Firefox artifacts. `web` is versioned with Changesets but deploys separately to Cloudflare Workers after its version bump is merged; it is not part of the extension ZIP release flow. Mute Tab Manager's former standalone repository is retired; its canonical source is now [`apps/mute-tab-manager`](apps/mute-tab-manager).
+The prepare step generates each WXT app's local types and is safe to rerun.
 
-Generate persistent Chromium signing keys from the repository root with `bun run generate-keys`. This creates a separate gitignored `key.pem` in each app that uses a persistent Chrome key. To generate only one app's key, use `bun run generate-keys -- --app quote-viewer`. Existing keys are never overwritten unless `--force` is passed. By default, the command prints the `gh secret set` command using that app's secret in the release workflow. It targets `mynameistito/browser-extensions` unless `--repo owner/name` is supplied. Add `--upload` to send the key to GitHub directly (requires `gh` authentication). Repo overrides and uploads require a single `--app` target.
+## Workspace commands
 
-Run `bun run generate-keys --help` for all options and examples.
+Run common tasks across the workspace:
 
-## Repository layout
+```sh
+bun run build
+bun run test
+bun run typecheck
+```
+
+To run a task for one app, use a Turbo filter. For example:
+
+```sh
+bunx turbo run build --filter=hide-email-ext
+```
+
+## Versioning and releases
+
+Each app is independently versioned. Create a Changeset for the package you changed:
+
+```sh
+bun run changeset
+# Or create one non-interactively:
+bun run changeset-add <app> <patch|minor|major> "summary"
+```
+
+Extension releases use app-prefixed GitHub tags and include Chrome and Firefox artifacts. The `web` app is also versioned with Changesets, but deploys separately to Cloudflare Workers after its version bump is merged; it is not part of the extension ZIP release flow.
+
+Mute Tab Manager's former standalone repository is retired. Its canonical source is [`apps/mute-tab-manager`](apps/mute-tab-manager).
+
+## Persistent Chromium keys
+
+Generate signing keys from the repository root:
+
+```sh
+bun run generate-keys
+```
+
+The command creates a separate, gitignored `key.pem` for each app that uses a persistent Chrome key. To generate a key for only one app:
+
+```sh
+bun run generate-keys -- --app quote-viewer
+```
+
+Existing keys are never overwritten unless you pass `--force`. By default, the command prints the `gh secret set` command for the app's release secret. It targets `mynameistito/browser-extensions`; use `--repo owner/name` to choose another repository. Add `--upload` to upload the key directly to GitHub (requires `gh` authentication). Repository overrides and uploads require a single `--app` target.
+
+For all options and examples, run `bun run generate-keys --help`.
+
+## Repository layout and tooling
 
 ```text
 apps/       WXT extensions and the Blume documentation site
 scripts/    Shared Node.js tooling scripts
 ```
 
-Lint/format configuration is centralized in the root `oxlint.config.ts` and `oxfmt.config.ts`. The new-tab app adds its React/TanStack-specific Oxlint presets in its local config while inheriting the same Ultracite core. All project TypeScript configs inherit shared compiler options from the root `tsconfig.base.json`.
+Lint and format configuration lives in the root `oxlint.config.ts` and `oxfmt.config.ts`. The new-tab app adds React and TanStack-specific Oxlint presets in its local config while inheriting the shared Ultracite core. All project TypeScript configs inherit compiler options from the root `tsconfig.base.json`.
 
-Before enabling automated Chrome releases, add these repository Actions secrets, each containing that extension's own PEM key: `BETTER_HISTORY_WXT_CHROME_KEY`, `HIDE_EMAIL_WXT_CHROME_KEY`, `QUOTE_VIEWER_WXT_CHROME_KEY`, `NEW_TAB_WXT_CHROME_KEY`, `IG_VIDEO_CONTROLS_WXT_CHROME_KEY`, `WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY`, and `MUTE_TAB_MANAGER_WXT_CHROME_KEY`. `hide-ip-ext` does not currently use a persistent Chrome key.
+## Release secrets
 
-The web deployment workflow also requires `CLOUDFLARE_ACCOUNT_ID` and a narrowly scoped `CLOUDFLARE_API_TOKEN` repository secret. Its Alchemy stack uses `browser-ext.mynameistito.com` in production and creates per-PR Worker previews.
+Before enabling automated Chrome releases, add a repository Actions secret for each extension that uses a persistent key. Each secret must contain that extension's own PEM key:
+
+- `BETTER_HISTORY_WXT_CHROME_KEY`
+- `HIDE_EMAIL_WXT_CHROME_KEY`
+- `QUOTE_VIEWER_WXT_CHROME_KEY`
+- `NEW_TAB_WXT_CHROME_KEY`
+- `IG_VIDEO_CONTROLS_WXT_CHROME_KEY`
+- `WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY`
+- `MUTE_TAB_MANAGER_WXT_CHROME_KEY`
+
+`hide-ip-ext` does not currently use a persistent Chrome key.
+
+The web deployment workflow also requires the `CLOUDFLARE_ACCOUNT_ID` and a narrowly scoped `CLOUDFLARE_API_TOKEN` repository secret. Its Alchemy stack deploys to `browser-ext.mynameistito.com` in production and creates per-PR Worker previews.

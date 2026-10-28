@@ -1,4 +1,4 @@
-# ig-video-controls
+# Instagram Video Controls
 
 Adds the native HTML5 video player (seek bar, volume slider, fullscreen, PiP) to Instagram videos, remembers your volume and playback speed across tabs and sessions, and provides mouse-wheel hotkeys for quick adjustments.
 
@@ -13,15 +13,19 @@ Originally based on [Controls for Instagram Videos](https://chromewebstore.googl
 
 Right-click without scrolling still works normally — the context menu is only suppressed when you actually scroll while holding RMB.
 
-## development
+## Development
+
+Install workspace dependencies from the repository root:
 
 ```bash
 bun install
 ```
 
-## Persistent extension ID (Chrome)
+Run the development build from `apps/ig-video-controls` with `bun run dev` for Chrome or `bun run dev:firefox` for Firefox. See [Commands](#commands) for build, package, and check scripts.
 
-Chrome assigns a random extension ID on each build unless an RSA key is embedded in the manifest. Generate one locally:
+## Persistent Chrome extension ID
+
+Chrome assigns a random extension ID on each build unless an RSA key is embedded in the manifest. Generate a persistent key from the workspace root:
 
 ```bash
 # Run from the workspace root.
@@ -51,7 +55,7 @@ Get-Content apps/ig-video-controls/key.pem -Raw | gh secret set IG_VIDEO_CONTROL
 
 ## Release
 
-This app is versioned and released from the `browser-extensions` monorepo with [Changesets](https://github.com/changesets/changesets) + GitHub Actions. See the workspace root README for the release flow.
+This app is versioned and released from the `browser-extensions` monorepo with [Changesets](https://github.com/changesets/changesets) and GitHub Actions. See the [workspace README](../../README.md) for the release flow.
 
 ## License
 
