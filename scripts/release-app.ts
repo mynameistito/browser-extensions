@@ -75,6 +75,10 @@ const parseAppPackage = (json: string): AppPackage => {
 
 const appDir = process.cwd();
 const repositoryDir = path.resolve(import.meta.dirname, "..");
+const gitExecutable =
+  process.platform === "win32"
+    ? "C:\\Program Files\\Git\\cmd\\git.exe"
+    : "/usr/bin/git";
 
 const pkg = parseAppPackage(
   readFileSync(path.join(appDir, "package.json"), "utf-8")
@@ -285,7 +289,7 @@ const publishFirefox = async (): Promise<void> => {
 let previousPackage: AppPackage | undefined;
 
 try {
-  const previousPackageJson = run("git", [
+  const previousPackageJson = run(gitExecutable, [
     "show",
     `HEAD^:apps/${pkg.name}/package.json`,
   ]);
@@ -360,7 +364,7 @@ for (const script of scripts) {
 const sourceArchive = path.join(appDir, ".output", sourceArchiveName);
 
 runInherited(
-  "git",
+  gitExecutable,
   [
     "archive",
     "--format=zip",
@@ -408,7 +412,7 @@ const notesPath = path.join(appDir, ".output", "release-notes.md");
 
 writeFileSync(notesPath, notes, "utf-8");
 
-const target = run("git", ["rev-parse", "HEAD"]);
+const target = run(gitExecutable, ["rev-parse", "HEAD"]);
 
 if (releaseExists) {
   const missingAssets = expectedAssets.flatMap((asset) =>
