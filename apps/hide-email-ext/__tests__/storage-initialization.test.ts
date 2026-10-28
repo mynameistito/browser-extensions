@@ -429,8 +429,24 @@ describe("storage initialization", () => {
         appliedIpSettings.push(value);
       }
     );
+
+    ipConsoleError.mockClear();
+    const staleIpReadSource = createBooleanWatchSource();
+    await initializePopupIpMasking(
+      async () => {
+        staleIpReadSource.emit(true);
+
+        return await Promise.reject(new Error("stale read failed"));
+      },
+      staleIpReadSource.subscribe,
+      (value) => {
+        appliedIpSettings.push(value);
+      }
+    );
+
+    expect(appliedIpSettings).toStrictEqual([true, false, true]);
+    expect(ipConsoleError).not.toHaveBeenCalled();
     ipConsoleError.mockRestore();
-    expect(appliedIpSettings).toStrictEqual([true, false]);
 
     const [input, addButton, error, list] = elements;
 
