@@ -75,6 +75,7 @@ const parseAppPackage = (json: string): AppPackage => {
 
 const appDir = process.cwd();
 const repositoryDir = path.resolve(import.meta.dirname, "..");
+
 const gitExecutable =
   process.platform === "win32"
     ? "C:\\Program Files\\Git\\cmd\\git.exe"
