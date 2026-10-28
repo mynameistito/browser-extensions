@@ -287,10 +287,10 @@ describe("storage initialization", () => {
   it("popup applies a watcher update instead of a late snapshot", async () => {
     const elements = [
       Object.assign(document.createElement("input"), { id: "email-input" }),
-      Object.assign(document.createElement("input"), { id: "hide-ip-toggle" }),
       Object.assign(document.createElement("button"), { id: "add-btn" }),
       Object.assign(document.createElement("span"), { id: "error" }),
       Object.assign(document.createElement("ul"), { id: "email-list" }),
+      Object.assign(document.createElement("input"), { id: "hide-ip-toggle" }),
     ];
 
     document.body.replaceChildren(...elements);
