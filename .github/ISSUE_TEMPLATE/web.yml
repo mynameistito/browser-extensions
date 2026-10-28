@@ -63,7 +63,6 @@ body:
     attributes:
       label: Additional context
       description: Add relevant screenshots or details. Remove personal information first.
-      render: markdown
     validations:
       required: false
 
