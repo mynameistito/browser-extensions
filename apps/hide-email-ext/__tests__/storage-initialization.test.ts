@@ -4,6 +4,7 @@ import {
   createContentEmailApplier,
   initializeContentEmails,
   initializeContentIpMasking,
+  runContentScript,
 } from "../entrypoints/content";
 import { hiddenEmailsItem } from "../src/lib/storage";
 
@@ -91,6 +92,61 @@ const expectErrorText = async (
 };
 
 describe("storage initialization", () => {
+  it("runs while either emails or IP masking is enabled", async () => {
+    let emailListener: Watcher | undefined;
+    let ipListener: BooleanWatcher | undefined;
+    const actions: string[] = [];
+
+    await runContentScript(
+      {
+        setEmails: (emails) => {
+          actions.push(`emails:${emails.length}`);
+        },
+        setHideIpAddresses: (enabled) => {
+          actions.push(`ip:${enabled}`);
+        },
+        start: () => {
+          actions.push("start");
+        },
+        stop: () => {
+          actions.push("stop");
+        },
+      },
+      {
+        getValue: async () => await Promise.resolve(["initial@example.com"]),
+        watch: (listener) => {
+          emailListener = listener;
+        },
+      },
+      {
+        getValue: async () => await Promise.resolve(false),
+        watch: (listener) => {
+          ipListener = listener;
+        },
+      }
+    );
+
+    expect(actions).toStrictEqual([
+      "emails:1",
+      "ip:false",
+      "start",
+      "emails:1",
+      "ip:false",
+    ]);
+
+    ipListener?.(true);
+    emailListener?.([]);
+    expect(actions.slice(-4)).toStrictEqual([
+      "emails:1",
+      "ip:true",
+      "emails:0",
+      "ip:true",
+    ]);
+
+    ipListener?.(false);
+    expect(actions.slice(-3)).toStrictEqual(["emails:0", "ip:false", "stop"]);
+  });
+
   it("content applies a watcher update instead of a late IP setting snapshot", async () => {
     const initial = createDeferred<boolean | null | undefined>();
     const applied: (boolean | null | undefined)[] = [];

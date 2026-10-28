@@ -95,49 +95,73 @@ export const createContentEmailApplier = (
   };
 };
 
+type ContentRedactor = Pick<
+  ReturnType<typeof createRedactor>,
+  "setEmails" | "setHideIpAddresses" | "start" | "stop"
+>;
+
+interface ContentStorageItem<T> {
+  getValue: () => Promise<T | null | undefined>;
+  watch: (listener: (value: T | null | undefined) => void) => void;
+}
+
+/**
+ * Run the content script using injectable storage and redactor dependencies.
+ * @param redactor - Redactor controlled by this content script.
+ * @param emailItem - Storage item for the hidden email list.
+ * @param ipItem - Storage item for the IP masking setting.
+ * @returns A promise that resolves after the initial settings are applied.
+ */
+export const runContentScript = async (
+  redactor: ContentRedactor = createRedactor(),
+  emailItem: ContentStorageItem<string[]> = hiddenEmailsItem,
+  ipItem: ContentStorageItem<boolean> = hideIpAddressesItem
+): Promise<void> => {
+  let emails: string[] = [];
+  let hideIpAddresses = false;
+  let started = false;
+
+  const applyConfiguration = (): void => {
+    redactor.setEmails(emails);
+    redactor.setHideIpAddresses(hideIpAddresses);
+    const shouldRun = emails.length > 0 || hideIpAddresses;
+
+    if (!started && shouldRun) {
+      started = true;
+      redactor.start();
+    } else if (started && !shouldRun) {
+      started = false;
+      redactor.stop();
+    }
+  };
+
+  await Promise.all([
+    initializeContentEmails(
+      async () => await emailItem.getValue(),
+      (listener) => {
+        emailItem.watch(listener);
+      },
+      (next) => {
+        emails = next ?? [];
+        applyConfiguration();
+      }
+    ),
+    initializeContentIpMasking(
+      async () => await ipItem.getValue(),
+      (listener) => {
+        ipItem.watch(listener);
+      },
+      (next) => {
+        hideIpAddresses = next ?? false;
+        applyConfiguration();
+      }
+    ),
+  ]);
+};
+
 export default defineContentScript({
   async main() {
-    const redactor = createRedactor();
-    let emails: string[] = [];
-    let hideIpAddresses = false;
-    let started = false;
-
-    const applyConfiguration = (): void => {
-      redactor.setEmails(emails);
-      redactor.setHideIpAddresses(hideIpAddresses);
-      const shouldRun = emails.length > 0 || hideIpAddresses;
-
-      if (!started && shouldRun) {
-        started = true;
-        redactor.start();
-      } else if (started && !shouldRun) {
-        started = false;
-        redactor.stop();
-      }
-    };
-
-    await Promise.all([
-      initializeContentEmails(
-        async () => await hiddenEmailsItem.getValue(),
-        (listener) => {
-          hiddenEmailsItem.watch(listener);
-        },
-        (next) => {
-          emails = next ?? [];
-          applyConfiguration();
-        }
-      ),
-      initializeContentIpMasking(
-        async () => await hideIpAddressesItem.getValue(),
-        (listener) => {
-          hideIpAddressesItem.watch(listener);
-        },
-        (next) => {
-          hideIpAddresses = next ?? false;
-          applyConfiguration();
-        }
-      ),
-    ]);
+    await runContentScript();
   },
   matches: ["<all_urls>"],
   runAt: "document_start",
