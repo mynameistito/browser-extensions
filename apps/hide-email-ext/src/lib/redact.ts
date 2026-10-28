@@ -44,6 +44,8 @@ const IPV4_PATTERN = `(?<![\\w.:])${IPV4_OCTET}(?:\\.${IPV4_OCTET}){3}(?!\\w|\\.
 const IPV6_CANDIDATE_PATTERN =
   "(?<![\\w:])(?:(?:[a-f\\d]{1,4}:){2,7}[a-f\\d]{1,4}|(?:[a-f\\d]{1,4}:){1,7}:|(?:[a-f\\d]{1,4}:){1,6}:(?:[a-f\\d]{1,4}(?::[a-f\\d]{1,4}){0,5})?|::(?:[a-f\\d]{1,4}(?::[a-f\\d]{1,4}){0,6})?)(?![\\w:]|\\.\\w)";
 
+type AddressKind = "email" | "ipv4" | "ipv6";
+
 interface TextRestoration {
   readonly originalValue: string;
   readonly redactedValue: string;
@@ -153,12 +155,20 @@ const isValidIpv6 = (value: string): boolean => {
 const isValidMatch = (value: string): boolean =>
   !value.includes(":") || isValidIpv6(value);
 
-const createDecoy = (value: string): string => {
+const classifyAddress = (value: string): AddressKind => {
   if (value.includes("@")) {
+    return "email";
+  }
+
+  return value.includes(":") ? "ipv6" : "ipv4";
+};
+
+const createDecoy = (kind: AddressKind): string => {
+  if (kind === "email") {
     return createDecoyEmail();
   }
 
-  return value.includes(":") ? createDecoyIpv6() : createDecoyIpv4();
+  return kind === "ipv6" ? createDecoyIpv6() : createDecoyIpv4();
 };
 
 const replaceMatches = (value: string, regex: RegExp): string =>
@@ -288,11 +298,12 @@ const replaceTextWithToggles = (
 
     matched = true;
 
-    const visibilityCopy = matchedText.includes("@")
-      ? EMAIL_VISIBILITY_COPY
-      : IP_VISIBILITY_COPY;
+    const addressKind = classifyAddress(matchedText);
 
-    const decoyEmail = createDecoy(matchedText);
+    const visibilityCopy =
+      addressKind === "email" ? EMAIL_VISIBILITY_COPY : IP_VISIBILITY_COPY;
+
+    const decoyEmail = createDecoy(addressKind);
     fragment.append(
       text.ownerDocument.createTextNode(
         originalValue.slice(cursor, match.index)
