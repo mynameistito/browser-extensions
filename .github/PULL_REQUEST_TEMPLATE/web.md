@@ -26,5 +26,3 @@ Documentation site (web)
 ## App-specific review notes
 
 <!-- Note affected pages, navigation, responsive layout, accessibility, or documentation routes. Mention any deployment/configuration impact. -->
-
-

@@ -104,4 +104,3 @@ body:
       description: Add relevant screenshots, page/site context, or anything else that may help. Redact private information first.
     validations:
       required: false
-

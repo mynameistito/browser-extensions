@@ -18,8 +18,8 @@ Hide Email (hide-email-ext)
 
 <!-- List steps a reviewer can use to confirm the change. Include browser/version if relevant. -->
 
-Browser and version tested:
-Installation source (store, ZIP, or local build):
+- Browser and version tested:
+- Installation source (store, ZIP, or local build):
 
 - [ ] Verified in a relevant browser or documented why browser verification is not applicable.
 - [ ] Added or updated tests when behavior changed.
@@ -33,5 +33,3 @@ Installation source (store, ZIP, or local build):
 ## App-specific review notes
 
 <!-- Check redaction matching, dynamic page updates, editable fields, and how addresses are stored or synced. Never paste real addresses in examples. -->
-
-

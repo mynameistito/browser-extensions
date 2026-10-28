@@ -65,4 +65,3 @@ body:
       description: Add relevant screenshots or details. Remove personal information first.
     validations:
       required: false
-
