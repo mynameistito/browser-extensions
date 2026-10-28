@@ -81,11 +81,17 @@ const pkg = parseAppPackage(
 const tag = `${pkg.name}-v${pkg.version}`;
 const releaseRepository = "mynameistito/browser-extensions";
 const sourceArchiveName = `${pkg.name}-${pkg.version}-source.zip`;
-const firefoxStoreListings: Readonly<Record<string, string>> = {
+
+const firefoxStoreListings = {
   "hide-email-ext": "hide-email-ext@mynameistito.com",
   "mute-tab-manager": "mute-tab-manager@mynameistito.com",
   "quote-viewer": "quote-viewer@mynameistito.com",
-};
+} satisfies Readonly<Record<string, string>>;
+
+const isFirefoxStoreListing = (
+  appName: string
+): appName is keyof typeof firefoxStoreListings =>
+  Object.hasOwn(firefoxStoreListings, appName);
 
 const expectedAssets = [
   `${pkg.name}-${pkg.version}-chrome.zip`,
@@ -105,19 +111,24 @@ const runInherited = (command: string, args: string[]): void => {
 };
 
 const publishFirefox = (): void => {
-  const extensionId = firefoxStoreListings[pkg.name];
-
-  if (extensionId === undefined) {
+  if (!isFirefoxStoreListing(pkg.name)) {
     return;
   }
 
+  const extensionId = firefoxStoreListings[pkg.name];
   const jwtIssuer = process.env.FIREFOX_JWT_ISSUER;
   const jwtSecret = process.env.FIREFOX_JWT_SECRET;
 
-  if (!jwtIssuer || !jwtSecret) {
+  if (
+    jwtIssuer === undefined ||
+    jwtIssuer.length === 0 ||
+    jwtSecret === undefined ||
+    jwtSecret.length === 0
+  ) {
     console.log(
       `Skipping Firefox Add-ons submission for ${pkg.name}: FIREFOX_JWT_ISSUER and FIREFOX_JWT_SECRET are not both configured.`
     );
+
     return;
   }
 
