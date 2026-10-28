@@ -28,6 +28,8 @@ The download links always redirect to the latest stable release for this extensi
 3. Load `apps/hide-ip-ext/.output/chrome-mv3` in Chrome through `chrome://extensions` with Developer mode enabled.
 4. For Firefox, select `apps/hide-ip-ext/.output/firefox-mv3/manifest.json` using `about:debugging#/runtime/this-firefox`.
 
+Without a local Chrome signing key, a local Chrome build gets a temporary extension ID. See the [source README's persistent Chrome ID setup](https://github.com/mynameistito/browser-extensions/tree/main/apps/hide-ip-ext#persistent-chrome-extension-id) for steps to keep the ID stable across builds. Firefox uses a fixed Gecko ID and does not need this key.
+
 ## Permissions and privacy
 
 The extension requests `storage` and permission to contact `https://browser-ext.mynameistito.com/*`. It asks the Browser Extensions API at `https://browser-ext.mynameistito.com/api/v1/ip` for the public IP address. Cloudflare processes that request and can see the connecting public IP; the API returns the address to the extension, which matches it against page text locally. The extension does not upload page contents.

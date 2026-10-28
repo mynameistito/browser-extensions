@@ -1,6 +1,7 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
+import { deriveChromeExtensionKey } from "./chrome-extension-key";
 import type { Extension } from "./generate-keys-core";
 import {
   chromeKeySecrets,
@@ -29,7 +30,16 @@ const generateKey = (
     "key.pem"
   );
 
-  const result = generateChromeKeyFile(keyPath, options.force);
+  const keyExists = existsSync(keyPath);
+
+  const result =
+    keyExists && options.upload && !options.force
+      ? {
+          extensionId: deriveChromeExtensionKey(readFileSync(keyPath, "utf-8"))
+            .extensionId,
+          kind: "generated" as const,
+        }
+      : generateChromeKeyFile(keyPath, options.force);
 
   if (result.kind === "error") {
     return { kind: "error", message: `${extension}: ${result.message}` };
@@ -50,7 +60,7 @@ const generateKey = (
 
     return {
       kind: "generated",
-      output: `Generated apps/${extension}/key.pem\nChrome extension ID: ${result.extensionId}\nUploaded as ${secretName} to ${repository}.`,
+      output: `${keyExists && !options.force ? "Used" : "Generated"} apps/${extension}/key.pem\nChrome extension ID: ${result.extensionId}\nUploaded as ${secretName} to ${repository}.`,
     };
   }
 
@@ -73,10 +83,11 @@ if (parsed.kind === "help") {
   console.error(parsed.message);
   process.exitCode = 1;
 } else {
-  const existing = parsed.options.extensions.filter((extension) =>
-    existsSync(
-      path.resolve(import.meta.dirname, "..", "apps", extension, "key.pem")
-    )
+  const existing = parsed.options.extensions.filter(
+    (extension) =>
+      existsSync(
+        path.resolve(import.meta.dirname, "..", "apps", extension, "key.pem")
+      ) && !parsed.options.upload
   );
 
   if (existing.length > 0 && !parsed.options.force) {
