@@ -1,5 +1,11 @@
 # hide-ip-ext
 
+## 0.1.7
+
+### Patch Changes
+
+- 2705d81: Document persistent Chrome key setup and Firefox Manifest V3 build instructions.
+
 ## 0.1.6
 
 ### Patch Changes

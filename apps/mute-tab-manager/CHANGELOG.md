@@ -1,5 +1,11 @@
 # mute-tab-manager
 
+## 1.0.7
+
+### Patch Changes
+
+- 6392514: feat: publish Mute Tab Manager and Quote Viewer releases to Firefox Add-ons
+
 ## 1.0.6
 
 ### Patch Changes

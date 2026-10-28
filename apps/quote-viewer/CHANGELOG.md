@@ -1,5 +1,11 @@
 # quote-viewer
 
+## 0.2.17
+
+### Patch Changes
+
+- [`6392514`](https://github.com/mynameistito/browser-extensions/commit/6392514): feat: publish Mute Tab Manager and Quote Viewer releases to Firefox Add-ons
+
 ## 0.2.16
 
 ### Patch Changes
