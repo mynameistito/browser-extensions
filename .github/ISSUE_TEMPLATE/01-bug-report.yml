@@ -1,0 +1,104 @@
+name: "Bug report"
+description: "Report something that is not working as expected."
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe one bug and include steps we can follow. Do not include private browsing history, email addresses, IP addresses, tokens, or other sensitive information in screenshots or logs.
+  - type: dropdown
+    id: app
+    attributes:
+      label: Affected app(s)
+      multiple: true
+      options:
+        - Better History
+        - GitHub Settings Repo Copy
+        - Hide Email
+        - Hide IP
+        - Instagram Video Controls
+        - Mute Tab Manager
+        - New Tab
+        - Quote Viewer
+        - Documentation site
+        - Not sure yet
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Firefox
+        - Edge
+        - Brave
+        - Opera
+        - Other Chromium-based browser
+        - Other browser
+        - Not applicable (documentation site)
+    validations:
+      required: true
+  - type: input
+    id: browser-version
+    attributes:
+      label: Browser version
+      description: Find this in the browser's About page.
+      placeholder: e.g. Chrome 130.0.6723.92
+    validations:
+      required: false
+  - type: dropdown
+    id: installed-from
+    attributes:
+      label: Installation source
+      description: For extension issues, choose where you installed the extension. Choose Not applicable for the documentation site.
+      options:
+        - Chrome Web Store
+        - Firefox Add-ons (AMO)
+        - Edge Add-ons
+        - Downloaded release ZIP (unpacked or temporary add-on)
+        - Built from this repository
+        - Other source
+        - Not applicable (documentation site)
+    validations:
+      required: true
+  - type: input
+    id: app-version
+    attributes:
+      label: App or extension version
+      description: For source builds, include the commit if known.
+      placeholder: e.g. 1.2.3
+    validations:
+      required: false
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating system and version
+      placeholder: e.g. Windows 11, macOS 15, Ubuntu 24.04
+    validations:
+      required: false
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: What were you trying to do, what did you expect, and what happened instead?
+      placeholder: Describe the problem and its impact.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open ...
+        2. Select ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Include affected page or feature and relevant screenshots. Redact private information first.
+    validations:
+      required: false

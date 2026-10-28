@@ -1,0 +1,60 @@
+name: "Documentation feedback"
+description: "Report incorrect, unclear, or missing documentation."
+title: "[Docs] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for documentation corrections or missing guidance. For a website bug unrelated to the written content, use Bug report.
+  - type: dropdown
+    id: app
+    attributes:
+      label: Relevant app(s) or documentation area
+      multiple: true
+      options:
+        - Better History
+        - GitHub Settings Repo Copy
+        - Hide Email
+        - Hide IP
+        - Instagram Video Controls
+        - Mute Tab Manager
+        - New Tab
+        - Quote Viewer
+        - Documentation site
+        - Not sure yet
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page URL or title
+      description: Link the documentation page if available.
+      placeholder: https://browser-ext.mynameistito.com/...
+    validations:
+      required: true
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: What needs attention?
+      options:
+        - Incorrect or outdated information
+        - Missing setup or troubleshooting steps
+        - Unclear explanation
+        - Typo or formatting issue
+        - Other documentation improvement
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What is wrong or missing?
+      description: Quote or summarize the relevant passage and describe what would make it clearer or correct.
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version, if this is browser-specific
+      placeholder: e.g. Chrome 130, not applicable
+    validations:
+      required: false
