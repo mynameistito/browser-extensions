@@ -12,7 +12,7 @@ const SKIP_TAGS = new Set([
 const ARIA_LABEL = "aria-label";
 const SCANNABLE_ATTRS = ["title", ARIA_LABEL, "alt", "placeholder"] as const;
 
-const EMAIL_HINT_RE = /[@.]/u;
+const ADDRESS_HINT_RE = /[@.:0-9a-f]/iu;
 const EMAIL_VISIBILITY_LABEL = "Toggle email visibility";
 const BLUR_FILTER = "blur(4px)";
 const FILTER_TRANSITION = "filter 150ms cubic-bezier(0.4, 0, 0.2, 1)";
@@ -24,6 +24,12 @@ const HIDE_TOOLTIP = "Click to hide email";
 const TOOLTIP_PADDING = "2px 6px";
 const TOOLTIP_HOVER_DELAY_MS = 500;
 const RANDOM_EMAIL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
+const RANDOM_IPV6_CHARS = "0123456789abcdef";
+const IPV4_OCTET = "(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)";
+const IPV4_PATTERN = `(?<![\\w.:])${IPV4_OCTET}(?:\\.${IPV4_OCTET}){3}(?![\\w.:])`;
+
+const IPV6_CANDIDATE_PATTERN =
+  "(?<![\\w:])(?:(?:[a-f\\d]{1,4}:){2,7}[a-f\\d]{1,4}|(?:[a-f\\d]{1,4}:){1,7}:|(?:[a-f\\d]{1,4}:){1,6}:(?:[a-f\\d]{1,4}(?::[a-f\\d]{1,4}){0,5})?|::(?:[a-f\\d]{1,4}(?::[a-f\\d]{1,4}){0,6})?)(?![\\w:.])";
 
 interface TextRestoration {
   readonly originalValue: string;
@@ -87,17 +93,90 @@ const createRandomEmailPart = (length: number): string => {
 const createDecoyEmail = (): string =>
   `${createRandomEmailPart(8)}@${createRandomEmailPart(7)}.tld`;
 
+const createRandomIpv4Octet = (): string =>
+  String(globalThis.crypto.getRandomValues(new Uint8Array(1))[0] ?? 0);
+
+const createDecoyIpv4 = (): string =>
+  Array.from({ length: 4 }, createRandomIpv4Octet).join(".");
+
+const createDecoyIpv6 = (): string => {
+  const randomValues = globalThis.crypto.getRandomValues(new Uint8Array(32));
+  const groups: string[] = [];
+
+  for (let index = 0; index < randomValues.length; index += 4) {
+    const digits = randomValues.slice(index, index + 4);
+    groups.push(
+      Array.from(digits, (value) =>
+        RANDOM_IPV6_CHARS.charAt(value % RANDOM_IPV6_CHARS.length)
+      ).join("")
+    );
+  }
+
+  return groups.join(":");
+};
+
+const isValidIpv6 = (value: string): boolean => {
+  const halves = value.split("::");
+
+  if (halves.length > 2) {
+    return false;
+  }
+
+  const left = halves[0] ?? "";
+  const right = halves[1] ?? "";
+
+  const groups = [
+    ...left.split(":").filter(Boolean),
+    ...right.split(":").filter(Boolean),
+  ];
+
+  if (!groups.every((group) => /^[a-f\d]{1,4}$/iu.test(group))) {
+    return false;
+  }
+
+  return halves.length === 2 ? groups.length < 8 : groups.length === 8;
+};
+
+const isValidMatch = (value: string): boolean =>
+  !value.includes(":") || isValidIpv6(value);
+
+const createDecoy = (value: string): string => {
+  if (value.includes(".")) {
+    return createDecoyIpv4();
+  }
+
+  if (value.includes(":")) {
+    return createDecoyIpv6();
+  }
+
+  return createDecoyEmail();
+};
+
+const replaceMatches = (value: string, regex: RegExp): string =>
+  value.replaceAll(regex, (match) =>
+    isValidMatch(match) ? REDACTION_TOKEN : match
+  );
+
 const escapeRegex = (str: string): string =>
   str.replaceAll(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 
-const buildRegex = (emails: string[]): RegExp | null => {
-  if (emails.length === 0) {
+const buildRegex = (
+  emails: string[],
+  hideIpAddresses: boolean
+): RegExp | null => {
+  const pattern = emails.map((e) => escapeRegex(e)).join("|");
+
+  const addressPatterns = hideIpAddresses
+    ? [IPV6_CANDIDATE_PATTERN, IPV4_PATTERN]
+    : [];
+
+  const expressions = [...addressPatterns, pattern].filter(Boolean);
+
+  if (expressions.length === 0) {
     return null;
   }
 
-  const pattern = emails.map((e) => escapeRegex(e)).join("|");
-
-  return new RegExp(pattern, "giu");
+  return new RegExp(expressions.join("|"), "giu");
 };
 
 const shouldSkipCached = (
@@ -173,45 +252,11 @@ const areWrappersRestorable = (
     );
   });
 
-const tryReplaceText = (
+const replaceTextWithToggles = (
   text: Text,
   regex: RegExp,
-  skipCache: WeakMap<Element, boolean>,
   restorations: RedactorRestorations
 ): void => {
-  if (text.nodeValue === null || text.nodeValue.length === 0) {
-    return;
-  }
-
-  if (shouldSkipCached(text, skipCache)) {
-    return;
-  }
-
-  if (!EMAIL_HINT_RE.test(text.nodeValue)) {
-    return;
-  }
-
-  regex.lastIndex = 0;
-
-  const link = text.parentElement?.closest("a[href]");
-
-  if (link !== null && link !== undefined) {
-    const originalValue = text.nodeValue;
-    const redactedValue = originalValue.replaceAll(regex, REDACTION_TOKEN);
-
-    if (redactedValue === originalValue) {
-      return;
-    }
-
-    text.nodeValue = redactedValue;
-    restorations.text.set(text, {
-      originalValue,
-      redactedValue,
-    });
-
-    return;
-  }
-
   const fragment = text.ownerDocument.createDocumentFragment();
   const wrappers: HTMLElement[] = [];
   let cursor = 0;
@@ -219,10 +264,29 @@ const tryReplaceText = (
   let match: RegExpExecArray | null;
 
   while ((match = regex.exec(text.nodeValue)) !== null) {
-    matched = true;
     const matchEnd = regex.lastIndex;
     const matchedText = text.nodeValue.slice(match.index, matchEnd);
-    const decoyEmail = createDecoyEmail();
+
+    if (!isValidMatch(matchedText)) {
+      continue;
+    }
+
+    matched = true;
+    const isEmailMatch = matchedText.includes("@");
+
+    const visibilityLabel = isEmailMatch
+      ? EMAIL_VISIBILITY_LABEL
+      : "Toggle IP address visibility";
+
+    const revealTooltip = isEmailMatch
+      ? REVEAL_TOOLTIP
+      : "Click to reveal IP address";
+
+    const hideTooltip = isEmailMatch
+      ? HIDE_TOOLTIP
+      : "Click to hide IP address";
+
+    const decoyEmail = createDecoy(matchedText);
     fragment.append(
       text.ownerDocument.createTextNode(
         text.nodeValue.slice(cursor, match.index)
@@ -238,8 +302,8 @@ const tryReplaceText = (
     const toggle = text.ownerDocument.createElement("span");
     toggle.textContent = decoyEmail;
     toggle.dataset.redacted = "toggle";
-    toggle.setAttribute(ARIA_LABEL, EMAIL_VISIBILITY_LABEL);
-    toggle.setAttribute("aria-description", REVEAL_TOOLTIP);
+    toggle.setAttribute(ARIA_LABEL, visibilityLabel);
+    toggle.setAttribute("aria-description", revealTooltip);
     toggle.setAttribute(ARIA_PRESSED, HIDDEN_STATE);
     toggle.setAttribute("role", "button");
     toggle.tabIndex = 0;
@@ -248,7 +312,7 @@ const tryReplaceText = (
     toggle.style.transition = FILTER_TRANSITION;
 
     const tooltip = text.ownerDocument.createElement("span");
-    tooltip.textContent = REVEAL_TOOLTIP;
+    tooltip.textContent = revealTooltip;
     tooltip.setAttribute("role", "tooltip");
     tooltip.setAttribute("aria-hidden", VISIBLE_STATE);
     tooltip.style.position = "absolute";
@@ -339,11 +403,8 @@ const tryReplaceText = (
         ARIA_PRESSED,
         isHidden ? VISIBLE_STATE : HIDDEN_STATE
       );
-      toggle.setAttribute(
-        ARIA_LABEL,
-        isHidden ? matchedText : EMAIL_VISIBILITY_LABEL
-      );
-      const hint = isHidden ? HIDE_TOOLTIP : REVEAL_TOOLTIP;
+      toggle.setAttribute(ARIA_LABEL, isHidden ? matchedText : visibilityLabel);
+      const hint = isHidden ? hideTooltip : revealTooltip;
       tooltip.textContent = hint;
       toggle.setAttribute("aria-description", hint);
       toggle.style.filter = isHidden ? "none" : BLUR_FILTER;
@@ -496,6 +557,48 @@ const tryReplaceText = (
   }
 };
 
+const tryReplaceText = (
+  text: Text,
+  regex: RegExp,
+  skipCache: WeakMap<Element, boolean>,
+  restorations: RedactorRestorations
+): void => {
+  if (text.nodeValue === null || text.nodeValue.length === 0) {
+    return;
+  }
+
+  if (shouldSkipCached(text, skipCache)) {
+    return;
+  }
+
+  if (!ADDRESS_HINT_RE.test(text.nodeValue)) {
+    return;
+  }
+
+  regex.lastIndex = 0;
+
+  const link = text.parentElement?.closest("a[href]");
+
+  if (link !== null && link !== undefined) {
+    const originalValue = text.nodeValue;
+    const redactedValue = replaceMatches(originalValue, regex);
+
+    if (redactedValue === originalValue) {
+      return;
+    }
+
+    text.nodeValue = redactedValue;
+    restorations.text.set(text, {
+      originalValue,
+      redactedValue,
+    });
+
+    return;
+  }
+
+  replaceTextWithToggles(text, regex, restorations);
+};
+
 const scanAttributes = (
   root: Element,
   regex: RegExp,
@@ -518,12 +621,12 @@ const scanAttributes = (
   for (const attr of SCANNABLE_ATTRS) {
     const value = root.getAttribute(attr);
 
-    if (value === null || value.length === 0 || !EMAIL_HINT_RE.test(value)) {
+    if (value === null || value.length === 0 || !ADDRESS_HINT_RE.test(value)) {
       continue;
     }
 
     regex.lastIndex = 0;
-    const replaced = value.replaceAll(regex, REDACTION_TOKEN);
+    const replaced = replaceMatches(value, regex);
 
     if (replaced !== value) {
       root.setAttribute(attr, replaced);
@@ -933,6 +1036,8 @@ const reconcileDetachedSubtrees = (
 export interface Redactor {
   /** Replace the email list used by the redactor. */
   setEmails: (emails: string[]) => void;
+  /** Enable or disable automatic IPv4 and IPv6 masking. */
+  setHideIpAddresses: (enabled: boolean) => void;
   /** Begin observing and redact the existing document content. */
   start: () => void;
   /** Stop observing and cancel queued scans. */
@@ -947,6 +1052,8 @@ export interface Redactor {
 export const createRedactor = (root?: Document): Redactor => {
   const doc = root ?? document;
   let regex: RegExp | null = null;
+  let emails: string[] = [];
+  let hideIpAddresses = false;
   let observer: MutationObserver | null = null;
   let scheduled = false;
   let pendingTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -1080,25 +1187,31 @@ export const createRedactor = (root?: Document): Redactor => {
     pendingMutations = [];
   };
 
-  return {
-    setEmails(emails: string[]) {
-      drainPendingMutations();
-      restoreDetachedWrappers(restorations);
-      regex = buildRegex(emails);
-      reconcileDetachedSubtrees(restorations, regex);
-      restoreTrackedContent(doc.documentElement ?? doc, restorations);
+  const updateConfiguration = (): void => {
+    drainPendingMutations();
+    restoreDetachedWrappers(restorations);
+    regex = buildRegex(emails, hideIpAddresses);
+    reconcileDetachedSubtrees(restorations, regex);
+    restoreTrackedContent(doc.documentElement ?? doc, restorations);
 
-      if (observer) {
-        skipCache = new WeakMap<Element, boolean>();
+    if (observer && regex) {
+      skipCache = new WeakMap<Element, boolean>();
+      scanSubtree(doc.body ?? doc, regex, skipCache, restorations);
 
-        if (regex) {
-          scanSubtree(doc.body ?? doc, regex, skipCache, restorations);
-
-          if (doc.body !== null) {
-            scanAttributes(doc.documentElement, regex, skipCache, restorations);
-          }
-        }
+      if (doc.body !== null) {
+        scanAttributes(doc.documentElement, regex, skipCache, restorations);
       }
+    }
+  };
+
+  return {
+    setEmails(nextEmails: string[]) {
+      emails = nextEmails;
+      updateConfiguration();
+    },
+    setHideIpAddresses(enabled: boolean) {
+      hideIpAddresses = enabled;
+      updateConfiguration();
     },
     start,
     stop,

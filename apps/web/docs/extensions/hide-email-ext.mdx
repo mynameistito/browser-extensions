@@ -1,16 +1,18 @@
 ---
 title: Hide Email
-description: Redact email addresses you select from web-page text, including dynamically added content, while leaving inputs and editable fields unchanged.
+description: Blur selected email addresses and optionally mask IPv4 or IPv6 addresses in web-page text, including dynamically added content, while leaving editable fields unchanged.
 ---
 
-Hide Email replaces occurrences of the addresses you specify with `[Email Redacted]`. It works on regular pages and dynamically updated pages, while leaving input fields and editable content alone.
+Hide Email blurs email addresses you select. You can also enable **Hide IP addresses** in the toolbar popup to mask IPv4 and IPv6 addresses in page text. IP masking is off by default. It works on regular pages and dynamically updated pages, while leaving input fields and editable content alone. Hidden addresses appear as random values with the same address format; click one to reveal it and click again to hide it.
 
 ## Add and remove addresses
 
 1. Open the Hide Email toolbar popup.
 2. Add an email address to the redaction list. The extension validates and normalizes entries before saving.
-3. Visit a page containing that address; matching text is replaced as the page is scanned.
+3. Visit a page containing that address; it will be blurred as the page is scanned.
 4. Remove an address from the popup when you want it to appear normally again.
+
+To mask IP addresses, open the popup and turn on **Hide IP addresses**. The setting syncs with your browser profile.
 
 The list is saved with browser sync storage, so it can follow your browser profile when sync is enabled. A page's visible text is scanned locally, including new content added by single-page apps or infinite scrolling.
 
@@ -31,7 +33,7 @@ The download links always redirect to the latest stable release for this extensi
 
 ## Permissions and privacy
 
-`storage` saves the address list in `browser.storage.sync`. `<all_urls>` allows the content script to redact matching text on pages you visit. The extension does not send the addresses or page text to a server. It skips inputs, textareas, and contenteditable fields so it does not alter text you are entering.
+`storage` saves the email list and IP masking setting in `browser.storage.sync`. `<all_urls>` allows the content script to find and blur selected emails and, when enabled, IP addresses on pages you visit. This scan runs locally; the extension does not send addresses or page text to a server. It skips inputs, textareas, and contenteditable fields so it does not alter text you are entering.
 
 ## Troubleshooting
 

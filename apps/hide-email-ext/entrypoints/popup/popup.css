@@ -36,6 +36,21 @@ body {
   margin: 8px 0 0;
 }
 
+.setting-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  color: #e0e0e0;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.setting-toggle input {
+  margin: 0;
+  accent-color: #4d9cff;
+}
+
 #email-list li {
   display: flex;
   align-items: center;

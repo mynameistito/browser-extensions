@@ -5,6 +5,25 @@ export const hiddenEmailsItem = storage.defineItem<string[]>(
   { fallback: [] }
 );
 
+export const hideIpAddressesItem = storage.defineItem<boolean>(
+  "sync:hideIpAddresses",
+  { fallback: false }
+);
+
+/** Returns whether IP address masking is enabled.
+ * @returns Whether the setting is enabled.
+ */
+export const getHideIpAddresses = async (): Promise<boolean> =>
+  await hideIpAddressesItem.getValue();
+
+/** Saves whether IP address masking is enabled.
+ * @param enabled - Whether to mask IPv4 and IPv6 addresses.
+ * @returns Nothing.
+ */
+export const setHideIpAddresses = async (enabled: boolean): Promise<void> => {
+  await hideIpAddressesItem.setValue(enabled);
+};
+
 let hiddenEmailsQueue: Promise<void> = Promise.resolve();
 
 const serializeHiddenEmailsUpdate = async (

@@ -52,7 +52,8 @@ export default defineConfig({
         },
         default_popup: "popup/index.html",
       },
-      description: "Redacts user-specified email addresses on every page.",
+      description:
+        "Blurs selected emails and optionally masks IPv4 and IPv6 addresses on every page.",
       host_permissions: ["<all_urls>"],
       icons: {
         "128": "icon/128.png",

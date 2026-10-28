@@ -1,10 +1,12 @@
 # Hide Email
 
-A cross-browser extension that finds a user-defined list of email addresses on web pages and replaces each match with `[Email Redacted]`. Built with [WXT](https://wxt.dev), TypeScript, and Bun.
+A cross-browser extension that blurs a user-defined list of email addresses and, when enabled in the popup, IPv4 and IPv6 addresses on web pages. Addresses appear as random, format-matched decoys until clicked to reveal. Built with [WXT](https://wxt.dev), TypeScript, and Bun.
 
 ## Features
 
-- Redact specific email addresses on every web page (`<all_urls>`)
+- Blur specific email addresses on every web page (`<all_urls>`)
+- Optionally blur IPv4 and IPv6 addresses on every web page, showing random addresses with the same format
+- Click a blurred address to reveal it; click again to hide it
 - Popup UI to add and remove emails from the redaction list
 - Emails persist across sessions and sync across devices via `browser.storage.sync`
 - Handles dynamic content (SPA navigation, infinite scroll) via `MutationObserver`
