@@ -1,11 +1,12 @@
 import {
   buildRegex,
   classifyAddress,
-  createDecoy,
   hasValidIpMatch,
   isValidMatch,
   replaceMatches,
 } from "./redaction-address";
+import { createRedactionToggle } from "./redaction-toggle";
+import type { ToggleRestoration } from "./redaction-toggle";
 
 export { isValidIpv6 } from "./redaction-address";
 
@@ -22,29 +23,6 @@ const ARIA_LABEL = "aria-label";
 const SCANNABLE_ATTRS = ["title", ARIA_LABEL, "alt", "placeholder"] as const;
 
 const ADDRESS_HINT_RE = /[@.:]/u;
-const EMAIL_VISIBILITY_LABEL = "Toggle email visibility";
-const BLUR_FILTER = "blur(4px)";
-const FILTER_TRANSITION = "filter 150ms cubic-bezier(0.4, 0, 0.2, 1)";
-const ARIA_PRESSED = "aria-pressed";
-const HIDDEN_STATE = "false";
-const VISIBLE_STATE = "true";
-const REVEAL_TOOLTIP = "Click to reveal email";
-const HIDE_TOOLTIP = "Click to hide email";
-
-const IP_VISIBILITY_COPY = {
-  hide: "Click to hide IP address",
-  label: "Toggle IP address visibility",
-  reveal: "Click to reveal IP address",
-} as const;
-
-const EMAIL_VISIBILITY_COPY = {
-  hide: HIDE_TOOLTIP,
-  label: EMAIL_VISIBILITY_LABEL,
-  reveal: REVEAL_TOOLTIP,
-} as const;
-
-const TOOLTIP_PADDING = "2px 6px";
-const TOOLTIP_HOVER_DELAY_MS = 500;
 
 interface TextRestoration {
   readonly originalValue: string;
@@ -56,20 +34,10 @@ interface AttributeRestoration {
   readonly redactedValue: string;
 }
 
-interface WrapperRestoration {
-  readonly isRestorable: () => boolean;
-  readonly restore: () => boolean;
-  readonly restoreGroup?: () => boolean;
-  readonly dispose: () => void;
-  readonly cancelPendingHover: () => void;
-  readonly detached: boolean;
-  readonly detachedReference: WeakRef<HTMLElement> | null;
-}
-
 interface RedactorRestorations {
   readonly text: WeakMap<Text, TextRestoration>;
   readonly attributes: WeakMap<Element, Map<string, AttributeRestoration>>;
-  readonly wrappers: WeakMap<HTMLElement, WrapperRestoration>;
+  readonly wrappers: WeakMap<HTMLElement, ToggleRestoration>;
   readonly detachedWrappers: Set<WeakRef<HTMLElement>>;
   readonly detachedSubtrees: Set<WeakRef<Node>>;
 }
@@ -195,219 +163,22 @@ const replaceTextWithToggles = (
     }
 
     matched = true;
-
-    const addressKind = classifyAddress(matchedText);
-
-    const visibilityCopy =
-      addressKind === "email" ? EMAIL_VISIBILITY_COPY : IP_VISIBILITY_COPY;
-
-    const decoyEmail = createDecoy(addressKind);
     fragment.append(
       text.ownerDocument.createTextNode(
         originalValue.slice(cursor, match.index)
       )
     );
 
-    const wrapper = text.ownerDocument.createElement("span");
-    wrappers.push(wrapper);
-    wrapper.dataset.redacted = "toggle-container";
-    wrapper.style.display = "inline-block";
-    wrapper.style.position = "relative";
+    const toggle = createRedactionToggle(
+      text.ownerDocument,
+      matchedText,
+      classifyAddress(matchedText),
+      enclosingLink !== null
+    );
 
-    const toggle = text.ownerDocument.createElement("span");
-    toggle.textContent = decoyEmail;
-    toggle.dataset.redacted = "toggle";
-    toggle.setAttribute(ARIA_LABEL, visibilityCopy.label);
-    toggle.setAttribute("aria-description", visibilityCopy.reveal);
-    toggle.setAttribute(ARIA_PRESSED, HIDDEN_STATE);
-    toggle.setAttribute("role", "button");
-    toggle.tabIndex = 0;
-    toggle.style.cursor = "pointer";
-    toggle.style.filter = BLUR_FILTER;
-    toggle.style.transition = FILTER_TRANSITION;
-
-    const tooltip = text.ownerDocument.createElement("span");
-    tooltip.textContent = visibilityCopy.reveal;
-    tooltip.setAttribute("role", "tooltip");
-    tooltip.setAttribute("aria-hidden", VISIBLE_STATE);
-    tooltip.style.position = "absolute";
-    tooltip.style.bottom = "calc(100% + 6px)";
-    tooltip.style.left = "50%";
-    tooltip.style.transform = "translateX(-50%)";
-    tooltip.style.zIndex = "2147483647";
-    tooltip.style.display = "none";
-    tooltip.style.padding = TOOLTIP_PADDING;
-    tooltip.style.border = "1px solid rgba(255, 255, 255, 0.12)";
-    tooltip.style.borderRadius = "999px";
-    tooltip.style.backgroundColor = "#222";
-    tooltip.style.color = "#fff";
-    tooltip.style.fontFamily = "inherit";
-    tooltip.style.fontSize = "12px";
-    tooltip.style.fontWeight = "500";
-    tooltip.style.lineHeight = "1.2";
-    tooltip.style.whiteSpace = "nowrap";
-    tooltip.style.pointerEvents = "none";
-    tooltip.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.25)";
-
-    const setTooltipVisibility = (visible: boolean): void => {
-      tooltip.style.display = visible ? "block" : "none";
-      tooltip.setAttribute("aria-hidden", String(!visible));
-    };
-
-    let isHovered = false;
-    let isFocused = false;
-    let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
-
-    const clearHoverTimeout = (): void => {
-      if (hoverTimeout !== null) {
-        clearTimeout(hoverTimeout);
-        hoverTimeout = null;
-      }
-    };
-
-    const scheduleHoverTooltip = (): void => {
-      setTooltipVisibility(false);
-      clearHoverTimeout();
-      hoverTimeout = setTimeout(() => {
-        hoverTimeout = null;
-
-        if (isHovered && !isFocused) {
-          setTooltipVisibility(true);
-        }
-      }, TOOLTIP_HOVER_DELAY_MS);
-    };
-
-    const onMouseEnter = (): void => {
-      isHovered = true;
-
-      if (!isFocused) {
-        scheduleHoverTooltip();
-      }
-    };
-
-    const onMouseLeave = (): void => {
-      isHovered = false;
-      clearHoverTimeout();
-
-      if (!isFocused) {
-        setTooltipVisibility(false);
-      }
-    };
-
-    const onFocus = (): void => {
-      isFocused = true;
-      clearHoverTimeout();
-      setTooltipVisibility(true);
-    };
-
-    const onBlur = (): void => {
-      isFocused = false;
-
-      if (isHovered) {
-        scheduleHoverTooltip();
-      } else {
-        setTooltipVisibility(false);
-      }
-    };
-
-    const toggleVisibility = (): void => {
-      const isHidden = toggle.getAttribute(ARIA_PRESSED) === HIDDEN_STATE;
-      clearHoverTimeout();
-      setTooltipVisibility(false);
-      toggle.setAttribute(
-        ARIA_PRESSED,
-        isHidden ? VISIBLE_STATE : HIDDEN_STATE
-      );
-      toggle.setAttribute(
-        ARIA_LABEL,
-        isHidden ? matchedText : visibilityCopy.label
-      );
-      const hint = isHidden ? visibilityCopy.hide : visibilityCopy.reveal;
-      tooltip.textContent = hint;
-      toggle.setAttribute("aria-description", hint);
-      toggle.style.filter = isHidden ? "none" : BLUR_FILTER;
-      toggle.textContent = isHidden ? matchedText : decoyEmail;
-    };
-
-    const onClick = (event: MouseEvent): void => {
-      const isHidden = toggle.getAttribute(ARIA_PRESSED) === HIDDEN_STATE;
-
-      if (!isHidden && enclosingLink !== null) {
-        return;
-      }
-
-      event.preventDefault();
-      event.stopPropagation();
-      toggleVisibility();
-    };
-
-    const onKeydown = (event: KeyboardEvent): void => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        toggleVisibility();
-      }
-    };
-
-    toggle.addEventListener("mouseenter", onMouseEnter);
-    toggle.addEventListener("mouseleave", onMouseLeave);
-    toggle.addEventListener("focus", onFocus);
-    toggle.addEventListener("blur", onBlur);
-    toggle.addEventListener("click", onClick);
-    toggle.addEventListener("keydown", onKeydown);
-
-    wrapper.append(toggle, tooltip);
-    fragment.append(wrapper);
-
-    const dispose = (): void => {
-      clearHoverTimeout();
-      toggle.removeEventListener("mouseenter", onMouseEnter);
-      toggle.removeEventListener("mouseleave", onMouseLeave);
-      toggle.removeEventListener("focus", onFocus);
-      toggle.removeEventListener("blur", onBlur);
-      toggle.removeEventListener("click", onClick);
-      toggle.removeEventListener("keydown", onKeydown);
-    };
-
-    const isRestorable = (): boolean => {
-      if (wrapper.childNodes.length !== 2) {
-        return false;
-      }
-
-      if (wrapper.firstChild !== toggle || wrapper.lastChild !== tooltip) {
-        return false;
-      }
-
-      return (
-        toggle.textContent === decoyEmail || toggle.textContent === matchedText
-      );
-    };
-
-    restorations.wrappers.set(wrapper, {
-      cancelPendingHover: clearHoverTimeout,
-      detached: false,
-      detachedReference: null,
-      dispose,
-      isRestorable,
-      restore: () => {
-        dispose();
-
-        if (!isRestorable()) {
-          return false;
-        }
-
-        const originalText = wrapper.ownerDocument.createTextNode(matchedText);
-
-        if (wrapper.parentNode === null) {
-          wrapper.replaceChildren(originalText);
-          delete wrapper.dataset.redacted;
-          wrapper.removeAttribute("style");
-        } else {
-          wrapper.replaceWith(originalText);
-        }
-
-        return true;
-      },
-    });
+    wrappers.push(toggle.wrapper);
+    restorations.wrappers.set(toggle.wrapper, toggle.restoration);
+    fragment.append(toggle.wrapper);
     cursor = matchEnd;
   }
 
@@ -417,7 +188,6 @@ const replaceTextWithToggles = (
     );
 
     const generatedNodes = [...fragment.childNodes];
-
     const generatedText = new Map<Text, string>();
 
     for (const node of generatedNodes) {
@@ -440,15 +210,11 @@ const replaceTextWithToggles = (
 
       const parent = firstNode.parentNode;
 
-      if (!hasRestorableGeneratedText(generatedText)) {
-        return false;
-      }
-
-      if (!areGeneratedNodesContiguous(liveNodes, parent)) {
-        return false;
-      }
-
-      if (!areWrappersRestorable(wrappers, parent, restorations)) {
+      if (
+        !hasRestorableGeneratedText(generatedText) ||
+        !areGeneratedNodesContiguous(liveNodes, parent) ||
+        !areWrappersRestorable(wrappers, parent, restorations)
+      ) {
         return false;
       }
 
