@@ -29,7 +29,7 @@
     },
     "apps/better-history": {
       "name": "better-history",
-      "version": "8.0.4",
+      "version": "8.0.7",
       "dependencies": {
         "@tailwindcss/vite": "catalog:",
         "@tanstack/react-query": "^5.104.5",
@@ -60,7 +60,7 @@
     },
     "apps/github-settings-repo-copy": {
       "name": "github-settings-repo-copy",
-      "version": "0.2.2",
+      "version": "0.2.4",
       "devDependencies": {
         "@types/bun": "catalog:",
         "@vitest/coverage-v8": "catalog:",
@@ -71,18 +71,19 @@
     },
     "apps/hide-email-ext": {
       "name": "hide-email-ext",
-      "version": "0.3.4",
+      "version": "0.3.7",
       "devDependencies": {
         "@types/chrome": "catalog:",
         "@vitest/coverage-v8": "catalog:",
         "happy-dom": "catalog:",
+        "publish-browser-extension": "catalog:",
         "vitest": "catalog:",
         "wxt": "catalog:",
       },
     },
     "apps/hide-ip-ext": {
       "name": "hide-ip-ext",
-      "version": "0.1.4",
+      "version": "0.1.6",
       "dependencies": {
         "zod": "catalog:",
       },
@@ -97,7 +98,7 @@
     },
     "apps/ig-video-controls": {
       "name": "ig-video-controls",
-      "version": "1.0.4",
+      "version": "1.0.6",
       "devDependencies": {
         "@types/bun": "catalog:",
         "@vitest/coverage-v8": "catalog:",
@@ -108,19 +109,20 @@
     },
     "apps/mute-tab-manager": {
       "name": "mute-tab-manager",
-      "version": "1.0.4",
+      "version": "1.0.6",
       "devDependencies": {
         "@types/bun": "catalog:",
         "@types/chrome": "catalog:",
         "@vitest/coverage-v8": "catalog:",
         "happy-dom": "catalog:",
+        "publish-browser-extension": "catalog:",
         "vitest": "catalog:",
         "wxt": "catalog:",
       },
     },
     "apps/new-tab-ext": {
       "name": "new-tab-ext",
-      "version": "0.2.4",
+      "version": "0.2.6",
       "dependencies": {
         "effect": "^4.0.6",
         "react": "catalog:",
@@ -145,16 +147,17 @@
     },
     "apps/quote-viewer": {
       "name": "quote-viewer",
-      "version": "0.2.14",
+      "version": "0.2.16",
       "devDependencies": {
         "happy-dom": "catalog:",
+        "publish-browser-extension": "catalog:",
         "vitest": "catalog:",
         "wxt": "catalog:",
       },
     },
     "apps/web": {
       "name": "web",
-      "version": "0.2.2",
+      "version": "0.2.4",
       "dependencies": {
         "@alchemy.run/cloudflare": "2.0.0-beta.84",
         "@effect/platform-node": "^4.0.5",
@@ -184,6 +187,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitest/coverage-v8": "5.0.5",
     "happy-dom": "^21.0.4",
+    "publish-browser-extension": "^6.1.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "tailwindcss": "^4.3.3",

@@ -36,12 +36,14 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
+    "publish:firefox": "publish-extension",
     "knip": "bunx knip@latest"
   },
   "devDependencies": {
     "@types/chrome": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "happy-dom": "catalog:",
+    "publish-browser-extension": "catalog:",
     "vitest": "catalog:",
     "wxt": "catalog:"
   }

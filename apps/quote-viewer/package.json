@@ -40,11 +40,13 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
+    "publish:firefox": "publish-extension",
     "linkify-changelog": "bun scripts/linkify-changelog.ts",
     "knip": "bunx knip@latest"
   },
   "devDependencies": {
     "happy-dom": "catalog:",
+    "publish-browser-extension": "catalog:",
     "vitest": "catalog:",
     "wxt": "catalog:"
   }
