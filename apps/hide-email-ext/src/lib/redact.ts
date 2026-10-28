@@ -300,6 +300,7 @@ const replaceTextWithToggles = (
   }
 
   const fragment = text.ownerDocument.createDocumentFragment();
+  const enclosingLink = text.parentElement?.closest("a[href]") ?? null;
   const wrappers: HTMLElement[] = [];
   let cursor = 0;
   let matched = false;
@@ -449,6 +450,12 @@ const replaceTextWithToggles = (
     };
 
     const onClick = (event: MouseEvent): void => {
+      const isHidden = toggle.getAttribute(ARIA_PRESSED) === HIDDEN_STATE;
+
+      if (!isHidden && enclosingLink !== null) {
+        return;
+      }
+
       event.preventDefault();
       event.stopPropagation();
       toggleVisibility();

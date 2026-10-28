@@ -533,7 +533,7 @@ describe("redactor", () => {
     expect(click.defaultPrevented).toBeFalsy();
   });
 
-  it("uses blurred IP toggles inside links without replacing the link", async () => {
+  it("reveals linked IPs before allowing the link to navigate", async () => {
     const ipv6 = "2001:db8::1";
     setMarkup(
       document.body,
@@ -576,16 +576,33 @@ describe("redactor", () => {
     link?.addEventListener("click", () => {
       linkWasClicked = true;
     });
-    const click = new Event("click", { bubbles: true, cancelable: true });
-    toggle?.dispatchEvent(click);
+    const revealClick = new Event("click", { bubbles: true, cancelable: true });
+    toggle?.dispatchEvent(revealClick);
 
     expect({
-      defaultPrevented: click.defaultPrevented,
+      defaultPrevented: revealClick.defaultPrevented,
       linkWasClicked,
       revealedText: toggle?.textContent,
     }).toStrictEqual({
       defaultPrevented: true,
       linkWasClicked: false,
+      revealedText: ipv6,
+    });
+
+    const navigateClick = new Event("click", {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    toggle?.dispatchEvent(navigateClick);
+
+    expect({
+      defaultPrevented: navigateClick.defaultPrevented,
+      linkWasClicked,
+      revealedText: toggle?.textContent,
+    }).toStrictEqual({
+      defaultPrevented: false,
+      linkWasClicked: true,
       revealedText: ipv6,
     });
   });
