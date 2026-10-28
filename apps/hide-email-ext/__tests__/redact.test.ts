@@ -512,6 +512,40 @@ describe("redactor", () => {
     expect(click.defaultPrevented).toBeFalsy();
   });
 
+  it("uses blurred IP toggles inside links without replacing the link", async () => {
+    const ipv6 = "2001:db8::1";
+    setMarkup(document.body, `<a href="/lookup">IPv6: ${ipv6}</a>`);
+
+    redactor = createRedactor();
+    redactor.setHideIpAddresses(true);
+    redactor.start();
+    await flush();
+
+    const link = document.body.querySelector("a");
+    const toggle = link?.querySelector<HTMLElement>('[role="button"]');
+
+    expect(link?.textContent).toContain("IPv6:");
+    expect(toggle?.textContent).toMatch(/^[a-f\d]{4}(?::[a-f\d]{4}){7}$/iu);
+    expect(toggle?.style.filter).toBe("blur(4px)");
+
+    let linkWasClicked = false;
+    link?.addEventListener("click", () => {
+      linkWasClicked = true;
+    });
+    const click = new Event("click", { bubbles: true, cancelable: true });
+    toggle?.dispatchEvent(click);
+
+    expect({
+      defaultPrevented: click.defaultPrevented,
+      linkWasClicked,
+      revealedText: toggle?.textContent,
+    }).toStrictEqual({
+      defaultPrevented: true,
+      linkWasClicked: false,
+      revealedText: ipv6,
+    });
+  });
+
   it("does not redact inside skipped tags", async () => {
     setMarkup(
       document.body,

@@ -163,6 +163,18 @@ const classifyAddress = (value: string): AddressKind => {
   return value.includes(":") ? "ipv6" : "ipv4";
 };
 
+const hasValidIpMatch = (value: string, regex: RegExp): boolean => {
+  regex.lastIndex = 0;
+
+  for (const match of value.matchAll(regex)) {
+    if (isValidMatch(match[0]) && classifyAddress(match[0]) !== "email") {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const createDecoy = (kind: AddressKind): string => {
   if (kind === "email") {
     return createDecoyEmail();
@@ -601,6 +613,13 @@ const tryReplaceText = (
 
   if (link !== null && link !== undefined) {
     const originalValue = text.nodeValue;
+
+    if (hasValidIpMatch(originalValue, regex)) {
+      replaceTextWithToggles(text, regex, restorations);
+
+      return;
+    }
+
     const redactedValue = replaceMatches(originalValue, regex);
 
     if (redactedValue === originalValue) {
