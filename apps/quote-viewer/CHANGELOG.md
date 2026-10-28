@@ -1,5 +1,11 @@
 # quote-viewer
 
+## 0.2.16
+
+### Patch Changes
+
+- [`0930ed4`](https://github.com/mynameistito/browser-extensions/commit/0930ed4): Trigger a patch release for every app to test the release CI/CD pipeline.
+
 ## 0.2.15
 
 ### Patch Changes
