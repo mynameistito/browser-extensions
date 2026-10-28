@@ -1,5 +1,11 @@
 # mute-tab-manager
 
+## 1.0.8
+
+### Patch Changes
+
+- 683625a: Retry the Firefox releases for Mute Tab Manager and Quote Viewer now that source archive generation is fixed.
+
 ## 1.0.7
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # quote-viewer
 
+## 0.2.18
+
+### Patch Changes
+
+- [`683625a`](https://github.com/mynameistito/browser-extensions/commit/683625a): Retry the Firefox releases for Mute Tab Manager and Quote Viewer now that source archive generation is fixed.
+
 ## 0.2.17
 
 ### Patch Changes
