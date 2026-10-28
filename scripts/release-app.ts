@@ -232,14 +232,17 @@ let releaseExists = false;
 try {
   existingAssets = readReleaseAssetNames();
   releaseExists = true;
-
-  if (expectedAssets.every((asset) => existingAssets.includes(asset))) {
-    console.log(`Release ${tag} already contains all release artifacts.`);
-    publishFirefox();
-    process.exit(0);
-  }
 } catch {
   // A missing release is created below; other gh errors will surface on create.
+}
+
+if (
+  releaseExists &&
+  expectedAssets.every((asset) => existingAssets.includes(asset))
+) {
+  console.log(`Release ${tag} already contains all release artifacts.`);
+  await publishFirefox();
+  process.exit(0);
 }
 
 const scriptsToRun = ["check", "typecheck", "test", "zip:all"] as const;
