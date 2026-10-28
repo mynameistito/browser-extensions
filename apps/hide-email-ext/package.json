@@ -36,6 +36,7 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
+    "publish:firefox": "publish-extension",
     "knip": "bunx knip@latest"
   },
   "devDependencies": {

@@ -157,8 +157,9 @@ const publishFirefox = (): void => {
   }
 
   runInherited("bun", [
-    "x",
-    "publish-extension",
+    "run",
+    "publish:firefox",
+    "--",
     "--firefox-zip",
     path.join(outputDirectory, firefoxZip),
     "--firefox-sources-zip",

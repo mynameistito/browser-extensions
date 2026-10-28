@@ -36,7 +36,8 @@
     "test": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "check": "ultracite check",
-    "ci:release": "bun ../../scripts/release-app.ts"
+    "ci:release": "bun ../../scripts/release-app.ts",
+    "publish:firefox": "publish-extension"
   },
   "devDependencies": {
     "@types/bun": "catalog:",
