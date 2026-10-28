@@ -21,6 +21,19 @@ const HIDDEN_STATE = "false";
 const VISIBLE_STATE = "true";
 const REVEAL_TOOLTIP = "Click to reveal email";
 const HIDE_TOOLTIP = "Click to hide email";
+
+const IP_VISIBILITY_COPY = {
+  hide: "Click to hide IP address",
+  label: "Toggle IP address visibility",
+  reveal: "Click to reveal IP address",
+} as const;
+
+const EMAIL_VISIBILITY_COPY = {
+  hide: HIDE_TOOLTIP,
+  label: EMAIL_VISIBILITY_LABEL,
+  reveal: REVEAL_TOOLTIP,
+} as const;
+
 const TOOLTIP_PADDING = "2px 6px";
 const TOOLTIP_HOVER_DELAY_MS = 500;
 const RANDOM_EMAIL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -257,39 +270,36 @@ const replaceTextWithToggles = (
   regex: RegExp,
   restorations: RedactorRestorations
 ): void => {
+  const originalValue = text.nodeValue;
+
+  if (originalValue === null) {
+    return;
+  }
+
   const fragment = text.ownerDocument.createDocumentFragment();
   const wrappers: HTMLElement[] = [];
   let cursor = 0;
   let matched = false;
   let match: RegExpExecArray | null;
 
-  while ((match = regex.exec(text.nodeValue)) !== null) {
+  while ((match = regex.exec(originalValue)) !== null) {
     const matchEnd = regex.lastIndex;
-    const matchedText = text.nodeValue.slice(match.index, matchEnd);
+    const matchedText = originalValue.slice(match.index, matchEnd);
 
     if (!isValidMatch(matchedText)) {
       continue;
     }
 
     matched = true;
-    const isEmailMatch = matchedText.includes("@");
 
-    const visibilityLabel = isEmailMatch
-      ? EMAIL_VISIBILITY_LABEL
-      : "Toggle IP address visibility";
-
-    const revealTooltip = isEmailMatch
-      ? REVEAL_TOOLTIP
-      : "Click to reveal IP address";
-
-    const hideTooltip = isEmailMatch
-      ? HIDE_TOOLTIP
-      : "Click to hide IP address";
+    const visibilityCopy = matchedText.includes("@")
+      ? EMAIL_VISIBILITY_COPY
+      : IP_VISIBILITY_COPY;
 
     const decoyEmail = createDecoy(matchedText);
     fragment.append(
       text.ownerDocument.createTextNode(
-        text.nodeValue.slice(cursor, match.index)
+        originalValue.slice(cursor, match.index)
       )
     );
 
@@ -302,8 +312,8 @@ const replaceTextWithToggles = (
     const toggle = text.ownerDocument.createElement("span");
     toggle.textContent = decoyEmail;
     toggle.dataset.redacted = "toggle";
-    toggle.setAttribute(ARIA_LABEL, visibilityLabel);
-    toggle.setAttribute("aria-description", revealTooltip);
+    toggle.setAttribute(ARIA_LABEL, visibilityCopy.label);
+    toggle.setAttribute("aria-description", visibilityCopy.reveal);
     toggle.setAttribute(ARIA_PRESSED, HIDDEN_STATE);
     toggle.setAttribute("role", "button");
     toggle.tabIndex = 0;
@@ -312,7 +322,7 @@ const replaceTextWithToggles = (
     toggle.style.transition = FILTER_TRANSITION;
 
     const tooltip = text.ownerDocument.createElement("span");
-    tooltip.textContent = revealTooltip;
+    tooltip.textContent = visibilityCopy.reveal;
     tooltip.setAttribute("role", "tooltip");
     tooltip.setAttribute("aria-hidden", VISIBLE_STATE);
     tooltip.style.position = "absolute";
@@ -403,8 +413,11 @@ const replaceTextWithToggles = (
         ARIA_PRESSED,
         isHidden ? VISIBLE_STATE : HIDDEN_STATE
       );
-      toggle.setAttribute(ARIA_LABEL, isHidden ? matchedText : visibilityLabel);
-      const hint = isHidden ? hideTooltip : revealTooltip;
+      toggle.setAttribute(
+        ARIA_LABEL,
+        isHidden ? matchedText : visibilityCopy.label
+      );
+      const hint = isHidden ? visibilityCopy.hide : visibilityCopy.reveal;
       tooltip.textContent = hint;
       toggle.setAttribute("aria-description", hint);
       toggle.style.filter = isHidden ? "none" : BLUR_FILTER;
@@ -489,7 +502,7 @@ const replaceTextWithToggles = (
 
   if (matched) {
     fragment.append(
-      text.ownerDocument.createTextNode(text.nodeValue.slice(cursor))
+      text.ownerDocument.createTextNode(originalValue.slice(cursor))
     );
 
     const generatedNodes = [...fragment.childNodes];
