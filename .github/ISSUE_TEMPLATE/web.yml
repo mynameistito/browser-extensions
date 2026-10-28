@@ -1,0 +1,67 @@
+name: "Website: Documentation site"
+description: "Report a problem with the documentation site."
+title: "[Documentation site] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for the documentation site. For extension behavior, select that extension's issue form. Leave private information out of screenshots and URLs.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of issue is this?
+      options:
+        - Website bug
+        - Documentation error or missing information
+        - Accessibility or usability
+        - Suggestion
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page URL or title
+      description: Which page is affected?
+      placeholder: https://browser-ext.mynameistito.com/...
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened or what should change?
+      description: Include the expected result and the result you saw.
+      placeholder: Describe the issue or suggestion.
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      description: Include the browser if the issue is browser-specific.
+      placeholder: Firefox 130, Chrome 130, Safari 18, or not applicable
+    validations:
+      required: false
+  - type: input
+    id: device
+    attributes:
+      label: Device and operating system
+      placeholder: Windows 11, macOS 15, Android 15, or not applicable
+    validations:
+      required: false
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open ...
+        2. Select ...
+        3. Observe ...
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Add relevant screenshots or details. Remove personal information first.
+    validations:
+      required: false
