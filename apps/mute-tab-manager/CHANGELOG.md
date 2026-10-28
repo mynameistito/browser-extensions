@@ -1,5 +1,11 @@
 # mute-tab-manager
 
+## 1.0.9
+
+### Patch Changes
+
+- 87d0331: Use the correct AMO add-on ID when publishing Mute Tab Manager to Firefox.
+
 ## 1.0.8
 
 ### Patch Changes
