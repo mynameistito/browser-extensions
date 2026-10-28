@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 import { assertRequiredChromeExtensionKey } from "./chrome-extension-key";
@@ -81,6 +81,11 @@ const pkg = parseAppPackage(
 const tag = `${pkg.name}-v${pkg.version}`;
 const releaseRepository = "mynameistito/browser-extensions";
 const sourceArchiveName = `${pkg.name}-${pkg.version}-source.zip`;
+const firefoxStoreListings: Readonly<Record<string, string>> = {
+  "hide-email-ext": "hide-email-ext@mynameistito.com",
+  "mute-tab-manager": "mute-tab-manager@mynameistito.com",
+  "quote-viewer": "quote-viewer@mynameistito.com",
+};
 
 const expectedAssets = [
   `${pkg.name}-${pkg.version}-chrome.zip`,
@@ -97,6 +102,72 @@ const run = (command: string, args: string[]): string =>
 
 const runInherited = (command: string, args: string[]): void => {
   execFileSync(command, args, { cwd: appDir, stdio: "inherit" });
+};
+
+const publishFirefox = (): void => {
+  const extensionId = firefoxStoreListings[pkg.name];
+
+  if (extensionId === undefined) {
+    return;
+  }
+
+  const jwtIssuer = process.env.FIREFOX_JWT_ISSUER;
+  const jwtSecret = process.env.FIREFOX_JWT_SECRET;
+
+  if (!jwtIssuer || !jwtSecret) {
+    console.log(
+      `Skipping Firefox Add-ons submission for ${pkg.name}: FIREFOX_JWT_ISSUER and FIREFOX_JWT_SECRET are not both configured.`
+    );
+    return;
+  }
+
+  const firefoxZip = `${pkg.name}-${pkg.version}-firefox.zip`;
+  const firefoxSourcesZip = sourceArchiveName;
+  const outputDirectory = path.join(appDir, ".output");
+  mkdirSync(outputDirectory, { recursive: true });
+
+  // When retrying a release whose GitHub assets already exist, restore those
+  // assets so a transient AMO failure does not require rebuilding the release.
+  const missingAssets = [firefoxZip, firefoxSourcesZip].filter(
+    (asset) => !existsSync(path.join(outputDirectory, asset))
+  );
+
+  if (missingAssets.length > 0) {
+    runInherited("gh", [
+      "release",
+      "download",
+      tag,
+      ...missingAssets.flatMap((asset) => ["--pattern", asset]),
+      "--dir",
+      outputDirectory,
+      "--clobber",
+      "--repo",
+      releaseRepository,
+    ]);
+  }
+
+  for (const asset of [firefoxZip, firefoxSourcesZip]) {
+    const assetPath = path.join(outputDirectory, asset);
+
+    if (!existsSync(assetPath)) {
+      throw new Error(
+        `Expected Firefox submission artifact is missing: ${assetPath}`
+      );
+    }
+  }
+
+  runInherited("bun", [
+    "x",
+    "publish-extension",
+    "--firefox-zip",
+    path.join(outputDirectory, firefoxZip),
+    "--firefox-sources-zip",
+    path.join(outputDirectory, firefoxSourcesZip),
+    "--firefox-extension-id",
+    extensionId,
+    "--firefox-channel",
+    "listed",
+  ]);
 };
 
 let previousPackage: AppPackage | undefined;
@@ -152,6 +223,7 @@ try {
 
   if (expectedAssets.every((asset) => existingAssets.includes(asset))) {
     console.log(`Release ${tag} already contains all release artifacts.`);
+    publishFirefox();
     process.exit(0);
   }
 } catch {
@@ -245,3 +317,5 @@ if (releaseExists) {
     target,
   ]);
 }
+
+publishFirefox();
