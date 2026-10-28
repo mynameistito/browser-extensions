@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { createHmac, randomUUID } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
@@ -110,7 +111,93 @@ const runInherited = (command: string, args: string[]): void => {
   execFileSync(command, args, { cwd: appDir, stdio: "inherit" });
 };
 
-const publishFirefox = (): void => {
+const hasFirefoxVersion = async (
+  extensionId: string,
+  version: string,
+  jwtIssuer: string,
+  jwtSecret: string
+): Promise<boolean> => {
+  const issuedAt = Math.floor(Date.now() / 1000);
+
+  const header = Buffer.from(
+    JSON.stringify({ alg: "HS256", typ: "JWT" })
+  ).toString("base64url");
+
+  const payload = Buffer.from(
+    JSON.stringify({
+      exp: issuedAt + 60,
+      iat: issuedAt,
+      iss: jwtIssuer,
+      jti: randomUUID(),
+    })
+  ).toString("base64url");
+
+  const signingInput = `${header}.${payload}`;
+
+  const signature = createHmac("sha256", jwtSecret)
+    .update(signingInput)
+    .digest("base64url");
+
+  const authorization = `JWT ${signingInput}.${signature}`;
+
+  const apiUrl = new URL(
+    `https://addons.mozilla.org/api/v5/addons/addon/${encodeURIComponent(extensionId)}/versions/`
+  );
+
+  apiUrl.searchParams.set("filter", "all_without_unlisted");
+  apiUrl.searchParams.set("page_size", "100");
+
+  const fetchVersionPage = async (pageUrl: URL): Promise<boolean> => {
+    if (pageUrl.origin !== apiUrl.origin) {
+      throw new Error(
+        "AMO returned a versions page outside addons.mozilla.org."
+      );
+    }
+
+    const response = await fetch(pageUrl, {
+      headers: {
+        Accept: "application/json",
+        Authorization: authorization,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `AMO version lookup failed with HTTP ${response.status}.`
+      );
+    }
+
+    const result: unknown = await response.json();
+
+    if (!isObject(result) || !Array.isArray(result.results)) {
+      throw new TypeError("AMO returned an invalid versions response.");
+    }
+
+    for (const entry of result.results) {
+      if (!isObject(entry) || !isString(entry.version)) {
+        throw new TypeError("AMO returned an invalid version entry.");
+      }
+
+      if (entry.version === version) {
+        return true;
+      }
+    }
+
+    if (result.next === null) {
+      return false;
+    }
+
+    if (!isString(result.next)) {
+      throw new TypeError("AMO returned an invalid versions page link.");
+    }
+
+    return await fetchVersionPage(new URL(result.next, apiUrl));
+  };
+
+  return await fetchVersionPage(apiUrl);
+};
+
+const publishFirefox = async (): Promise<void> => {
   if (!isFirefoxStoreListing(pkg.name)) {
     return;
   }
@@ -136,6 +223,14 @@ const publishFirefox = (): void => {
   const firefoxSourcesZip = sourceArchiveName;
   const outputDirectory = path.join(appDir, ".output");
   mkdirSync(outputDirectory, { recursive: true });
+
+  if (await hasFirefoxVersion(extensionId, pkg.version, jwtIssuer, jwtSecret)) {
+    console.log(
+      `Skipping Firefox Add-ons submission for ${pkg.name}: version ${pkg.version} already exists on AMO.`
+    );
+
+    return;
+  }
 
   // When retrying a release whose GitHub assets already exist, restore those
   // assets so a transient AMO failure does not require rebuilding the release.
@@ -336,4 +431,4 @@ if (releaseExists) {
   ]);
 }
 
-publishFirefox();
+await publishFirefox();
