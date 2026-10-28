@@ -154,6 +154,33 @@ describe("redactor", () => {
     });
   });
 
+  it("masks IP addresses before sentence punctuation and IPv4 ports", async () => {
+    const ipv4WithPeriod = "198.51.100.7.";
+    const ipv4WithPort = "203.0.113.9:8443";
+    const ipv6WithPeriod = "2001:db8::1.";
+    const originalText = `IPs: ${ipv4WithPeriod} port: ${ipv4WithPort} IPv6: ${ipv6WithPeriod}`;
+    setMarkup(document.body, `<p>${originalText}</p>`);
+
+    redactor = createRedactor();
+    redactor.setHideIpAddresses(true);
+    redactor.start();
+    await flush();
+
+    const toggles = [
+      ...document.body.querySelectorAll<HTMLElement>('[role="button"]'),
+    ];
+
+    expect(toggles).toHaveLength(3);
+
+    for (const toggle of toggles) {
+      toggle.dispatchEvent(
+        new Event("click", { bubbles: true, cancelable: true })
+      );
+    }
+
+    expect(document.body.textContent).toStrictEqual(originalText);
+  });
+
   it("toggles email visibility with Enter and Space", async () => {
     setMarkup(document.body, `<p>${email}</p>`);
 

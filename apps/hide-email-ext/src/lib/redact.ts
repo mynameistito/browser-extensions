@@ -39,10 +39,10 @@ const TOOLTIP_HOVER_DELAY_MS = 500;
 const RANDOM_EMAIL_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
 const RANDOM_IPV6_CHARS = "0123456789abcdef";
 const IPV4_OCTET = "(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)";
-const IPV4_PATTERN = `(?<![\\w.:])${IPV4_OCTET}(?:\\.${IPV4_OCTET}){3}(?![\\w.:])`;
+const IPV4_PATTERN = `(?<![\\w.:])${IPV4_OCTET}(?:\\.${IPV4_OCTET}){3}(?!\\w|\\.\\w|:(?!\\d))`;
 
 const IPV6_CANDIDATE_PATTERN =
-  "(?<![\\w:])(?:(?:[a-f\\d]{1,4}:){2,7}[a-f\\d]{1,4}|(?:[a-f\\d]{1,4}:){1,7}:|(?:[a-f\\d]{1,4}:){1,6}:(?:[a-f\\d]{1,4}(?::[a-f\\d]{1,4}){0,5})?|::(?:[a-f\\d]{1,4}(?::[a-f\\d]{1,4}){0,6})?)(?![\\w:.])";
+  "(?<![\\w:])(?:(?:[a-f\\d]{1,4}:){2,7}[a-f\\d]{1,4}|(?:[a-f\\d]{1,4}:){1,7}:|(?:[a-f\\d]{1,4}:){1,6}:(?:[a-f\\d]{1,4}(?::[a-f\\d]{1,4}){0,5})?|::(?:[a-f\\d]{1,4}(?::[a-f\\d]{1,4}){0,6})?)(?![\\w:]|\\.\\w)";
 
 interface TextRestoration {
   readonly originalValue: string;
