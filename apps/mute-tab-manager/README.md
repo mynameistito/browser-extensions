@@ -10,9 +10,16 @@ Mute and unmute tabs across Chrome and Firefox, including YouTube player audio.
 - Show an `M` badge on muted tabs and adapt the icon to system dark mode.
 - Keep muted state for the current browser session.
 
-## Development
+## Development and checks
 
-Run commands from the repository root. Install dependencies with `bun install`, then generate WXT types with `bun run --filter mute-tab-manager postinstall`.
+Run commands from the repository root. Install dependencies, then generate WXT types:
+
+```sh
+bun install
+bun run --filter mute-tab-manager postinstall
+```
+
+Start a development build or run checks with:
 
 ```sh
 bun run --filter mute-tab-manager dev
@@ -22,9 +29,21 @@ bun run --filter mute-tab-manager test
 bun run --filter mute-tab-manager typecheck
 ```
 
-For development-only Chrome builds, WXT can run without a persistent signing key. Generate a stable Chrome key before publishing with `bun run generate-keys -- --app mute-tab-manager`; add its printed secret to the `MUTE_TAB_MANAGER_WXT_CHROME_KEY` Actions secret. Never commit `key.pem`.
+WXT can create development-only Chrome builds without a persistent signing key. Before publishing, generate a stable key from the repository root:
 
-Each app is independently versioned and released through Changesets. Create a patch changeset with `bun run changeset-add mute-tab-manager patch "Describe the change"`. The monorepo release workflow publishes Chrome and Firefox archives on GitHub.
+```sh
+bun run generate-keys -- --app mute-tab-manager
+```
+
+Add the printed secret to the `MUTE_TAB_MANAGER_WXT_CHROME_KEY` Actions secret. Never commit `key.pem`.
+
+Each app is independently versioned and released through Changesets. Create a patch changeset from the repository root with:
+
+```sh
+bun run changeset-add mute-tab-manager patch "Describe the change"
+```
+
+The monorepo release workflow publishes Chrome and Firefox archives on GitHub.
 
 ## Permissions
 

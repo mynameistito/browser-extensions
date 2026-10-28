@@ -1,8 +1,8 @@
 # Better History
 
-Powerful browser history search, filtering, and cleanup for Chrome and Firefox.
+Search, filter, and clean up browser history in Chrome and Firefox.
 
-A modern rewrite of the classic Better History extension — local-only, no telemetry, no backend.
+A modern rewrite of the classic Better History extension. Everything runs locally in your browser: no telemetry and no backend.
 
 ## Features
 
@@ -22,15 +22,15 @@ Custom date ranges, per-domain views, synced device sessions, on-device time tra
 
 Runs entirely in your browser. No analytics, no telemetry, no remote API. See [`PRIVACY.md`](./PRIVACY.md).
 
-## Persistent extension ID (Chrome)
+## Persistent Chrome extension ID
 
-Generate a signing key once from the workspace root and upload it to the release workflow secret:
+To keep the Chrome extension ID stable across builds and releases, generate a signing key from the workspace root and upload it as a release secret:
 
 ```bash
 bun run generate-keys -- --app better-history --upload
 ```
 
-This writes `apps/better-history/key.pem` (ignored by Git) and configures `BETTER_HISTORY_WXT_CHROME_KEY` in the workspace repository. Keep the key private and do not replace it with `--force`; rotating it changes the extension ID.
+This writes `apps/better-history/key.pem` (ignored by Git) and configures `BETTER_HISTORY_WXT_CHROME_KEY` in the workspace repository. Keep the key private. Do not use `--force` unless you intend to rotate the key; doing so changes the extension ID.
 
 ## Stack
 
@@ -44,8 +44,9 @@ This writes `apps/better-history/key.pem` (ignored by Git) and configures `BETTE
 
 ## Develop
 
+Install dependencies from the repository root, then run these commands from `apps/better-history`:
+
 ```bash
-bun install
 bun run dev            # Chrome
 bun run dev:firefox    # Firefox
 ```
@@ -63,7 +64,7 @@ bun run zip:firefox
 
 Zipped artifacts land in `.output/`.
 
-## Lint / typecheck
+## Lint and typecheck
 
 ```bash
 bun run check     # ultracite (oxlint + oxfmt)
@@ -71,7 +72,7 @@ bun run fix       # auto-fix
 bun run typecheck # tsc --noEmit
 ```
 
-## Layout
+## Project structure
 
 ```
 src/
