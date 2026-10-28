@@ -92,6 +92,22 @@ const expectErrorText = async (
 };
 
 describe("storage initialization", () => {
+  it("uses the default redactor with injected content storage", async () => {
+    await expect(
+      runContentScript(
+        undefined,
+        {
+          getValue: async () => await Promise.resolve([]),
+          watch: () => {},
+        },
+        {
+          getValue: async () => await Promise.resolve(false),
+          watch: () => {},
+        }
+      )
+    ).resolves.toBeUndefined();
+  });
+
   it("runs while either emails or IP masking is enabled", async () => {
     let emailListener: Watcher | undefined;
     let ipListener: BooleanWatcher | undefined;
