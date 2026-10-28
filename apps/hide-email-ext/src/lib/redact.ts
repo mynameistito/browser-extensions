@@ -154,15 +154,11 @@ const isValidMatch = (value: string): boolean =>
   !value.includes(":") || isValidIpv6(value);
 
 const createDecoy = (value: string): string => {
-  if (value.includes(".")) {
-    return createDecoyIpv4();
+  if (value.includes("@")) {
+    return createDecoyEmail();
   }
 
-  if (value.includes(":")) {
-    return createDecoyIpv6();
-  }
-
-  return createDecoyEmail();
+  return value.includes(":") ? createDecoyIpv6() : createDecoyIpv4();
 };
 
 const replaceMatches = (value: string, regex: RegExp): string =>
