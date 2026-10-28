@@ -514,19 +514,42 @@ describe("redactor", () => {
 
   it("uses blurred IP toggles inside links without replacing the link", async () => {
     const ipv6 = "2001:db8::1";
-    setMarkup(document.body, `<a href="/lookup">IPv6: ${ipv6}</a>`);
+    setMarkup(
+      document.body,
+      `<a href="/lookup">IPv6: ${ipv6}</a><a href="/clock">Time: 12:30:45</a><a href="/info">IPv6 lookup: unavailable</a>`
+    );
 
     redactor = createRedactor();
     redactor.setHideIpAddresses(true);
     redactor.start();
     await flush();
 
-    const link = document.body.querySelector("a");
+    const [link, clockLink, noMatchLink] = document.body.querySelectorAll("a");
     const toggle = link?.querySelector<HTMLElement>('[role="button"]');
 
-    expect(link?.textContent).toContain("IPv6:");
-    expect(toggle?.textContent).toMatch(/^[a-f\d]{4}(?::[a-f\d]{4}){7}$/iu);
-    expect(toggle?.style.filter).toBe("blur(4px)");
+    expect({
+      clockLinkHasToggle: Boolean(clockLink?.querySelector('[role="button"]')),
+      clockLinkText: clockLink?.textContent,
+      decoyIsBlurred: toggle?.style.filter === "blur(4px)",
+      decoyMatchesIpv6: /^[a-f\d]{4}(?::[a-f\d]{4}){7}$/iu.test(
+        toggle?.textContent ?? ""
+      ),
+      ipv6LinkHasLabel: link?.textContent?.includes("IPv6:") ?? false,
+      noMatchLinkHasToggle: Boolean(
+        noMatchLink?.querySelector('[role="button"]')
+      ),
+      noMatchLinkText: noMatchLink?.textContent,
+      toggleCount: document.body.querySelectorAll('[role="button"]').length,
+    }).toStrictEqual({
+      clockLinkHasToggle: false,
+      clockLinkText: "Time: 12:30:45",
+      decoyIsBlurred: true,
+      decoyMatchesIpv6: true,
+      ipv6LinkHasLabel: true,
+      noMatchLinkHasToggle: false,
+      noMatchLinkText: "IPv6 lookup: unavailable",
+      toggleCount: 1,
+    });
 
     let linkWasClicked = false;
     link?.addEventListener("click", () => {
