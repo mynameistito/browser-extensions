@@ -4,8 +4,10 @@ import { fakeBrowser } from "wxt/testing/fake-browser";
 import {
   addHiddenEmail,
   getHiddenEmails,
+  getHideIpAddresses,
   hiddenEmailsItem,
   removeHiddenEmail,
+  setHideIpAddresses,
 } from "../src/lib/storage";
 
 const email1 = "alice@example.com";
@@ -19,6 +21,14 @@ describe("storage", () => {
   it("getHiddenEmails returns empty array by default", async () => {
     const result = await getHiddenEmails();
     expect(result).toStrictEqual([]);
+  });
+
+  it("IP masking is disabled by default and can be enabled", async () => {
+    await expect(getHideIpAddresses()).resolves.toBeFalsy();
+
+    await setHideIpAddresses(true);
+
+    await expect(getHideIpAddresses()).resolves.toBeTruthy();
   });
 
   it("addHiddenEmail stores an email", async () => {

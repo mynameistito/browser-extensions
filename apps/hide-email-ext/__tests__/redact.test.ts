@@ -92,6 +92,68 @@ describe("redactor", () => {
     });
   });
 
+  it("masks IPv4 and IPv6 only while the IP setting is enabled", async () => {
+    const ipv4 = "192.0.2.24";
+    const ipv6 = "2001:db8::1";
+    const invalidIpv6 = "1234:5678:9abc";
+    setMarkup(
+      document.body,
+      `<p>IPs: ${ipv4} and ${ipv6}; invalid: ${invalidIpv6}</p>`
+    );
+
+    redactor = createRedactor();
+    redactor.start();
+    await flush();
+    expect(document.body.textContent).toBe(
+      `IPs: ${ipv4} and ${ipv6}; invalid: ${invalidIpv6}`
+    );
+
+    redactor.setHideIpAddresses(true);
+    await flush();
+
+    const toggles = [
+      ...document.body.querySelectorAll<HTMLElement>('[role="button"]'),
+    ];
+
+    expect(toggles).toHaveLength(2);
+
+    const decoyIpv4 = toggles[0]?.textContent ?? "";
+    const decoyIpv6 = toggles[1]?.textContent ?? "";
+    expect({
+      ipv4OctetsAreValid: decoyIpv4
+        .split(".")
+        .every((octet) => Number(octet) <= 255),
+      ipv4PatternMatches: /^\d{1,3}(?:\.\d{1,3}){3}$/u.test(decoyIpv4),
+      ipv6PatternMatches: /^[a-f\d]{4}(?::[a-f\d]{4}){7}$/u.test(decoyIpv6),
+      labels: toggles.map((toggle) => toggle.getAttribute("aria-label")),
+    }).toStrictEqual({
+      ipv4OctetsAreValid: true,
+      ipv4PatternMatches: true,
+      ipv6PatternMatches: true,
+      labels: ["Toggle IP address visibility", "Toggle IP address visibility"],
+    });
+
+    for (const toggle of toggles) {
+      toggle.dispatchEvent(
+        new Event("click", { bubbles: true, cancelable: true })
+      );
+    }
+
+    expect(toggles.map((toggle) => toggle.textContent)).toStrictEqual([
+      ipv4,
+      ipv6,
+    ]);
+
+    redactor.setHideIpAddresses(false);
+    expect({
+      hasVisibleToggle: document.body.querySelector('[role="button"]') !== null,
+      text: document.body.textContent,
+    }).toStrictEqual({
+      hasVisibleToggle: false,
+      text: `IPs: ${ipv4} and ${ipv6}; invalid: ${invalidIpv6}`,
+    });
+  });
+
   it("toggles email visibility with Enter and Space", async () => {
     setMarkup(document.body, `<p>${email}</p>`);
 

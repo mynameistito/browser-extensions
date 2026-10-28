@@ -3,12 +3,15 @@ import { it, describe, expect, vi } from "vitest";
 import {
   createContentEmailApplier,
   initializeContentEmails,
+  initializeContentIpMasking,
 } from "../entrypoints/content";
 import { hiddenEmailsItem } from "../src/lib/storage";
 
 type StorageValue = string[] | null | undefined;
 
 type Watcher = (value: StorageValue) => void;
+
+type BooleanWatcher = (value: boolean | null | undefined) => void;
 
 interface Deferred<T> {
   promise: Promise<T>;
@@ -20,10 +23,26 @@ interface WatchSource {
   subscribe: (watcher: Watcher) => void;
 }
 
+interface BooleanWatchSource {
+  emit: (value: boolean | null | undefined) => void;
+  subscribe: (watcher: BooleanWatcher) => void;
+}
+
 const createDeferred = <T>(): Deferred<T> => Promise.withResolvers<T>();
 
 const createWatchSource = (): WatchSource => {
   let listener: Watcher | null = null;
+
+  return {
+    emit: (value) => listener?.(value),
+    subscribe: (watcher) => {
+      listener = watcher;
+    },
+  };
+};
+
+const createBooleanWatchSource = (): BooleanWatchSource => {
+  let listener: BooleanWatcher | null = null;
 
   return {
     emit: (value) => listener?.(value),
@@ -72,6 +91,54 @@ const expectErrorText = async (
 };
 
 describe("storage initialization", () => {
+  it("content applies a watcher update instead of a late IP setting snapshot", async () => {
+    const initial = createDeferred<boolean | null | undefined>();
+    const applied: (boolean | null | undefined)[] = [];
+    const source = createBooleanWatchSource();
+
+    const initialization = initializeContentIpMasking(
+      async () => await initial.promise,
+      source.subscribe,
+      (value) => {
+        applied.push(value);
+      }
+    );
+
+    source.emit(true);
+    initial.resolve(false);
+    await initialization;
+
+    expect(applied).toStrictEqual([true]);
+  });
+
+  it("content defaults IP masking to false when no stored value exists", async () => {
+    const applied: (boolean | null | undefined)[] = [];
+
+    await initializeContentIpMasking(
+      async () => await Promise.resolve(null),
+      () => {},
+      (value) => {
+        applied.push(value);
+      }
+    );
+
+    expect(applied).toStrictEqual([false]);
+  });
+
+  it("content defaults IP masking to false when the initial read fails", async () => {
+    const applied: (boolean | null | undefined)[] = [];
+
+    await initializeContentIpMasking(
+      async () => await Promise.reject(new Error("read failed")),
+      () => {},
+      (value) => {
+        applied.push(value);
+      }
+    );
+
+    expect(applied).toStrictEqual([false]);
+  });
+
   it("content applies a watcher update instead of a late snapshot", async () => {
     const initial = createDeferred<StorageValue>();
     const applied: StorageValue[] = [];
@@ -220,6 +287,7 @@ describe("storage initialization", () => {
   it("popup applies a watcher update instead of a late snapshot", async () => {
     const elements = [
       Object.assign(document.createElement("input"), { id: "email-input" }),
+      Object.assign(document.createElement("input"), { id: "hide-ip-toggle" }),
       Object.assign(document.createElement("button"), { id: "add-btn" }),
       Object.assign(document.createElement("span"), { id: "error" }),
       Object.assign(document.createElement("ul"), { id: "email-list" }),
@@ -240,7 +308,7 @@ describe("storage initialization", () => {
       HTMLUListElement: { configurable: true, value: window.HTMLUListElement },
     });
 
-    const { initializePopupEmails } =
+    const { initializePopupEmails, initializePopupIpMasking } =
       await import("../entrypoints/popup/popup");
 
     const applied: StorageValue[] = [];
@@ -260,6 +328,37 @@ describe("storage initialization", () => {
     await initialization;
 
     expect(applied).toStrictEqual([["new@example.com"]]);
+
+    const appliedIpSettings: (boolean | null | undefined)[] = [];
+    const ipInitial = createDeferred<boolean | null | undefined>();
+    const ipSource = createBooleanWatchSource();
+
+    const ipInitialization = initializePopupIpMasking(
+      async () => await ipInitial.promise,
+      ipSource.subscribe,
+      (value) => {
+        appliedIpSettings.push(value);
+      }
+    );
+
+    ipSource.emit(true);
+    ipInitial.resolve(false);
+    await ipInitialization;
+    expect(appliedIpSettings).toStrictEqual([true]);
+
+    const ipConsoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
+    await initializePopupIpMasking(
+      async () => await Promise.reject(new Error("read failed")),
+      () => {},
+      (value) => {
+        appliedIpSettings.push(value);
+      }
+    );
+    ipConsoleError.mockRestore();
+    expect(appliedIpSettings).toStrictEqual([true, false]);
 
     const [input, addButton, error, list] = elements;
 
@@ -433,6 +532,7 @@ describe("storage initialization", () => {
   it("popup renders watcher values and treats null as an empty list", async () => {
     document.body.replaceChildren(
       Object.assign(document.createElement("input"), { id: "email-input" }),
+      Object.assign(document.createElement("input"), { id: "hide-ip-toggle" }),
       Object.assign(document.createElement("button"), { id: "add-btn" }),
       Object.assign(document.createElement("span"), { id: "error" }),
       Object.assign(document.createElement("ul"), { id: "email-list" })
@@ -453,8 +553,13 @@ describe("storage initialization", () => {
 
     vi.resetModules();
 
-    const { hiddenEmailsItem: popupStorageItem } =
-      await import("../src/lib/storage");
+    const {
+      getHideIpAddresses,
+      hiddenEmailsItem: popupStorageItem,
+      setHideIpAddresses,
+    } = await import("../src/lib/storage");
+
+    await setHideIpAddresses(false);
 
     const originalWatch = Object.getOwnPropertyDescriptor(
       popupStorageItem,
@@ -474,6 +579,23 @@ describe("storage initialization", () => {
       expect(document.querySelector("#email-list")?.textContent).toBe(
         "watcher@example.com×"
       );
+
+      const hideIpToggle =
+        document.querySelector<HTMLInputElement>("#hide-ip-toggle");
+
+      await vi.waitFor(() => {
+        expect(hideIpToggle?.checked).toBeFalsy();
+      });
+
+      if (hideIpToggle === null) {
+        throw new TypeError("Expected the Hide IP checkbox");
+      }
+
+      hideIpToggle.checked = true;
+      hideIpToggle.dispatchEvent(new Event("change", { bubbles: true }));
+      await vi.waitFor(async () => {
+        await expect(getHideIpAddresses()).resolves.toBeTruthy();
+      });
     } finally {
       if (originalWatch === undefined) {
         Reflect.deleteProperty(popupStorageItem, "watch");
