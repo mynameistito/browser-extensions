@@ -78,6 +78,13 @@ describe(parseGenerateKeyOptions, () => {
     });
   });
 
+  it("accepts Hide IP as a persistent-key target", () => {
+    expect(parseGenerateKeyOptions(["--app", "hide-ip-ext"])).toMatchObject({
+      kind: "ok",
+      options: { extensions: ["hide-ip-ext"] },
+    });
+  });
+
   it("accepts Mute Tab Manager as a persistent-key target", () => {
     expect(
       parseGenerateKeyOptions(["--app", "mute-tab-manager"])

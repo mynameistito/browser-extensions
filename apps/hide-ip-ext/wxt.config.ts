@@ -21,6 +21,10 @@ const loadManifestKey = (): string | undefined => {
       );
     }
 
+    console.warn(
+      "[wxt] key.pem not found and WXT_CHROME_KEY is unset - Chrome extension ID will be random. Run `bun run generate-keys -- --app hide-ip-ext` from the workspace root."
+    );
+
     return undefined;
   }
 
