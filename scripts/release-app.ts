@@ -74,6 +74,7 @@ const parseAppPackage = (json: string): AppPackage => {
 };
 
 const appDir = process.cwd();
+const repositoryDir = path.resolve(import.meta.dirname, "..");
 
 const pkg = parseAppPackage(
   readFileSync(path.join(appDir, "package.json"), "utf-8")
@@ -354,16 +355,20 @@ for (const script of scripts) {
 
 const sourceArchive = path.join(appDir, ".output", sourceArchiveName);
 
-runInherited("git", [
-  "archive",
-  "--format=zip",
-  `--output=${sourceArchive}`,
-  "HEAD",
-  `:(top)apps/${pkg.name}`,
-  ":(top)package.json",
-  ":(top)bun.lock",
-  ":(top)scripts",
-]);
+execFileSync(
+  "git",
+  [
+    "archive",
+    "--format=zip",
+    `--output=${sourceArchive}`,
+    "HEAD",
+    `:(top)apps/${pkg.name}`,
+    ":(top)package.json",
+    ":(top)bun.lock",
+    ":(top)scripts",
+  ],
+  { cwd: repositoryDir, stdio: "inherit" }
+);
 
 const releaseAssets = expectedAssets.map((asset) =>
   path.join(appDir, ".output", asset)
