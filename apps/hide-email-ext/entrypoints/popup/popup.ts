@@ -2,9 +2,14 @@ import { isEmail } from "@/src/lib/email";
 import {
   addHiddenEmail,
   getHiddenEmails,
+  getHideIpAddresses,
   hiddenEmailsItem,
+  hideIpAddressesItem,
   removeHiddenEmail,
+  setHideIpAddresses,
 } from "@/src/lib/storage";
+
+const UNKNOWN_ERROR = "unknown error";
 
 /**
  * Subscribe to email changes before applying the initial storage snapshot.
@@ -40,6 +45,38 @@ export const initializePopupEmails = async (
   }
 };
 
+/** Subscribe to the IP masking setting before applying its initial value.
+ * @param read - Reads the initial stored value.
+ * @param watch - Subscribes to subsequent values.
+ * @param apply - Applies the selected value.
+ * @returns Nothing.
+ */
+export const initializePopupIpMasking = async (
+  read: () => Promise<boolean | null | undefined>,
+  watch: (listener: (value: boolean | null | undefined) => void) => void,
+  apply: (value: boolean | null | undefined) => void
+): Promise<void> => {
+  let hasReceivedUpdate = false;
+
+  watch((value) => {
+    hasReceivedUpdate = true;
+    apply(value);
+  });
+
+  try {
+    const initialValue = await read();
+
+    if (!hasReceivedUpdate) {
+      apply(initialValue ?? false);
+    }
+  } catch (error) {
+    if (!hasReceivedUpdate) {
+      console.error("Failed to load IP masking setting:", error);
+      apply(false);
+    }
+  }
+};
+
 const getById = <T extends HTMLElement>(id: string, ctor: new () => T): T => {
   const el = document.querySelector<HTMLElement>(`#${id}`);
 
@@ -54,6 +91,7 @@ const input = getById("email-input", HTMLInputElement);
 const addBtn = getById("add-btn", HTMLButtonElement);
 const errorSpan = getById("error", HTMLSpanElement);
 const list = getById("email-list", HTMLUListElement);
+const hideIpToggle = getById("hide-ip-toggle", HTMLInputElement);
 
 const renderList = (emails: string[]): void => {
   list.replaceChildren();
@@ -71,7 +109,7 @@ const renderList = (emails: string[]): void => {
         try {
           await removeHiddenEmail(email);
         } catch (error) {
-          errorSpan.textContent = `Failed to remove email: ${error instanceof Error ? error.message : "unknown error"}`;
+          errorSpan.textContent = `Failed to remove email: ${error instanceof Error ? error.message : UNKNOWN_ERROR}`;
         }
       })();
     });
@@ -97,7 +135,7 @@ const handleAdd = async (): Promise<void> => {
     await addHiddenEmail(email);
     input.value = "";
   } catch (error) {
-    errorSpan.textContent = `Failed to add email: ${error instanceof Error ? error.message : "unknown error"}`;
+    errorSpan.textContent = `Failed to add email: ${error instanceof Error ? error.message : UNKNOWN_ERROR}`;
   }
 };
 
@@ -119,16 +157,39 @@ input.addEventListener("keydown", (event) => {
   void handleKeydown(event);
 });
 
-const init = async (): Promise<void> => {
-  await initializePopupEmails(
-    async () => await getHiddenEmails(),
-    (listener) => {
-      hiddenEmailsItem.watch(listener);
-    },
-    (next) => {
-      renderList(next ?? []);
+hideIpToggle.addEventListener("change", () => {
+  errorSpan.textContent = "";
+  void (async () => {
+    try {
+      await setHideIpAddresses(hideIpToggle.checked);
+    } catch (error) {
+      errorSpan.textContent = `Failed to save IP masking setting: ${error instanceof Error ? error.message : UNKNOWN_ERROR}`;
+      hideIpToggle.checked = await getHideIpAddresses().catch(() => false);
     }
-  );
+  })();
+});
+
+const init = async (): Promise<void> => {
+  await Promise.all([
+    initializePopupEmails(
+      async () => await getHiddenEmails(),
+      (listener) => {
+        hiddenEmailsItem.watch(listener);
+      },
+      (next) => {
+        renderList(next ?? []);
+      }
+    ),
+    initializePopupIpMasking(
+      async () => await getHideIpAddresses(),
+      (listener) => {
+        hideIpAddressesItem.watch(listener);
+      },
+      (next) => {
+        hideIpToggle.checked = next ?? false;
+      }
+    ),
+  ]);
 };
 
 void (async () => {

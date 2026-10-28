@@ -4,6 +4,7 @@ import { it, afterEach, describe, expect, vi } from "vitest";
 
 import {
   createRedactor,
+  isValidIpv6,
   pruneDetachedWrapperReferences,
 } from "../src/lib/redact";
 import { REDACTION_TOKEN } from "../src/lib/types";
@@ -19,6 +20,26 @@ const setMarkup = (element: Element, markup: string): void => {
   const parsed = new DOMParser().parseFromString(markup, "text/html");
   element.replaceChildren(...parsed.body.childNodes);
 };
+
+describe("IPv6 validation", () => {
+  it("accepts valid forms and rejects malformed groups or compression", () => {
+    expect({
+      compressed: isValidIpv6("2001:db8::1"),
+      full: isValidIpv6("2001:db8:0:0:0:0:0:1"),
+      malformedGroup: isValidIpv6("2001:db8::gg"),
+      multipleCompression: isValidIpv6("1::2::3"),
+      tooFewGroupsWithoutCompression: isValidIpv6("2001:db8:1"),
+      tooManyGroupsWithCompression: isValidIpv6("1:2:3::4:5:6:7:8"),
+    }).toStrictEqual({
+      compressed: true,
+      full: true,
+      malformedGroup: false,
+      multipleCompression: false,
+      tooFewGroupsWithoutCompression: false,
+      tooManyGroupsWithCompression: false,
+    });
+  });
+});
 
 describe("redactor", () => {
   let redactor: ReturnType<typeof createRedactor> | null = null;
@@ -90,6 +111,136 @@ describe("redactor", () => {
       filter: "blur(4px)",
       text: decoyEmail,
     });
+  });
+
+  it("masks IPv4 and IPv6 only while the IP setting is enabled", async () => {
+    const ipv4 = "192.0.2.24";
+    const ipv6 = "2001:db8::1";
+    const invalidIpv6 = "1234:5678:9abc";
+    setMarkup(
+      document.body,
+      `<p>IPs: ${ipv4} and ${ipv6}; invalid: ${invalidIpv6}</p>`
+    );
+
+    redactor = createRedactor();
+    redactor.start();
+    await flush();
+    expect(document.body.textContent).toBe(
+      `IPs: ${ipv4} and ${ipv6}; invalid: ${invalidIpv6}`
+    );
+
+    redactor.setHideIpAddresses(true);
+    await flush();
+
+    const toggles = [
+      ...document.body.querySelectorAll<HTMLElement>('[role="button"]'),
+    ];
+
+    expect(toggles).toHaveLength(2);
+
+    const decoyIpv4 = toggles[0]?.textContent ?? "";
+    const decoyIpv6 = toggles[1]?.textContent ?? "";
+    expect({
+      ipv4OctetsAreValid: decoyIpv4
+        .split(".")
+        .every((octet) => Number(octet) <= 255),
+      ipv4PatternMatches: /^\d{1,3}(?:\.\d{1,3}){3}$/u.test(decoyIpv4),
+      ipv6PatternMatches: /^[a-f\d]{4}(?::[a-f\d]{4}){7}$/u.test(decoyIpv6),
+      labels: toggles.map((toggle) => toggle.getAttribute("aria-label")),
+    }).toStrictEqual({
+      ipv4OctetsAreValid: true,
+      ipv4PatternMatches: true,
+      ipv6PatternMatches: true,
+      labels: ["Toggle IP address visibility", "Toggle IP address visibility"],
+    });
+
+    for (const toggle of toggles) {
+      toggle.dispatchEvent(
+        new Event("click", { bubbles: true, cancelable: true })
+      );
+    }
+
+    expect(toggles.map((toggle) => toggle.textContent)).toStrictEqual([
+      ipv4,
+      ipv6,
+    ]);
+
+    redactor.setHideIpAddresses(false);
+    expect({
+      hasVisibleToggle: document.body.querySelector('[role="button"]') !== null,
+      text: document.body.textContent,
+    }).toStrictEqual({
+      hasVisibleToggle: false,
+      text: `IPs: ${ipv4} and ${ipv6}; invalid: ${invalidIpv6}`,
+    });
+  });
+
+  it("masks IP addresses before sentence punctuation and IPv4 ports", async () => {
+    const ipv4WithPeriod = "198.51.100.7.";
+    const ipv4WithPort = "203.0.113.9:8443";
+    const ipv6WithPeriod = "2001:db8::1.";
+    const originalText = `IPs: ${ipv4WithPeriod} port: ${ipv4WithPort} IPv6: ${ipv6WithPeriod}`;
+    setMarkup(document.body, `<p>${originalText}</p>`);
+
+    redactor = createRedactor();
+    redactor.setHideIpAddresses(true);
+    redactor.start();
+    await flush();
+
+    const toggles = [
+      ...document.body.querySelectorAll<HTMLElement>('[role="button"]'),
+    ];
+
+    expect(toggles).toHaveLength(3);
+
+    for (const toggle of toggles) {
+      toggle.dispatchEvent(
+        new Event("click", { bubbles: true, cancelable: true })
+      );
+    }
+
+    const paragraph = document.body.querySelector("p");
+
+    const visibleText = [...(paragraph?.childNodes ?? [])]
+      .map((node) => {
+        if (node instanceof Text) {
+          return node.data;
+        }
+
+        if (node instanceof Element) {
+          return (
+            node.querySelector<HTMLElement>('[data-redacted="toggle"]')
+              ?.textContent ?? ""
+          );
+        }
+
+        return "";
+      })
+      .join("");
+
+    expect(visibleText).toStrictEqual(originalText);
+  });
+
+  it("does not merge text nodes for invalid IPv6 candidates", async () => {
+    const nodeValues = ["12", ":", "30", ":", "45"];
+
+    const textNodes = nodeValues.map((value) => document.createTextNode(value));
+
+    const paragraph = document.createElement("p");
+    paragraph.append(...textNodes);
+    document.body.append(paragraph);
+
+    redactor = createRedactor();
+    redactor.setHideIpAddresses(true);
+    redactor.start();
+    await flush();
+
+    expect({
+      sameNodes: [...paragraph.childNodes].every(
+        (node, index) => node === textNodes[index]
+      ),
+      values: textNodes.map((node) => node.data),
+    }).toStrictEqual({ sameNodes: true, values: nodeValues });
   });
 
   it("toggles email visibility with Enter and Space", async () => {
@@ -380,6 +531,80 @@ describe("redactor", () => {
 
     expect(receivedClick).toBeTruthy();
     expect(click.defaultPrevented).toBeFalsy();
+  });
+
+  it("reveals linked IPs before allowing the link to navigate", async () => {
+    const ipv6 = "2001:db8::1";
+    setMarkup(
+      document.body,
+      `<a href="/lookup">IPv6: ${ipv6}</a><a href="/clock">Time: 12:30:45</a><a href="/info">IPv6 lookup: unavailable</a>`
+    );
+
+    redactor = createRedactor();
+    redactor.setHideIpAddresses(true);
+    redactor.start();
+    await flush();
+
+    const [link, clockLink, noMatchLink] = document.body.querySelectorAll("a");
+    const toggle = link?.querySelector<HTMLElement>('[role="button"]');
+
+    expect({
+      clockLinkHasToggle: Boolean(clockLink?.querySelector('[role="button"]')),
+      clockLinkText: clockLink?.textContent,
+      decoyIsBlurred: toggle?.style.filter === "blur(4px)",
+      decoyMatchesIpv6: /^[a-f\d]{4}(?::[a-f\d]{4}){7}$/iu.test(
+        toggle?.textContent ?? ""
+      ),
+      ipv6LinkHasLabel: link?.textContent?.includes("IPv6:") ?? false,
+      noMatchLinkHasToggle: Boolean(
+        noMatchLink?.querySelector('[role="button"]')
+      ),
+      noMatchLinkText: noMatchLink?.textContent,
+      toggleCount: document.body.querySelectorAll('[role="button"]').length,
+    }).toStrictEqual({
+      clockLinkHasToggle: false,
+      clockLinkText: "Time: 12:30:45",
+      decoyIsBlurred: true,
+      decoyMatchesIpv6: true,
+      ipv6LinkHasLabel: true,
+      noMatchLinkHasToggle: false,
+      noMatchLinkText: "IPv6 lookup: unavailable",
+      toggleCount: 1,
+    });
+
+    let linkWasClicked = false;
+    link?.addEventListener("click", () => {
+      linkWasClicked = true;
+    });
+    const revealClick = new Event("click", { bubbles: true, cancelable: true });
+    toggle?.dispatchEvent(revealClick);
+
+    expect({
+      defaultPrevented: revealClick.defaultPrevented,
+      linkWasClicked,
+      revealedText: toggle?.textContent,
+    }).toStrictEqual({
+      defaultPrevented: true,
+      linkWasClicked: false,
+      revealedText: ipv6,
+    });
+
+    const navigateClick = new Event("click", {
+      bubbles: true,
+      cancelable: true,
+    });
+
+    toggle?.dispatchEvent(navigateClick);
+
+    expect({
+      defaultPrevented: navigateClick.defaultPrevented,
+      linkWasClicked,
+      revealedText: toggle?.textContent,
+    }).toStrictEqual({
+      defaultPrevented: false,
+      linkWasClicked: true,
+      revealedText: ipv6,
+    });
   });
 
   it("does not redact inside skipped tags", async () => {
