@@ -130,7 +130,12 @@ const createDecoyIpv6 = (): string => {
   return groups.join(":");
 };
 
-const isValidIpv6 = (value: string): boolean => {
+/**
+ * Check whether an IPv6 value has valid groups and compression.
+ * @param value - Candidate IPv6 address.
+ * @returns Whether the value is a valid IPv6 address.
+ */
+export const isValidIpv6 = (value: string): boolean => {
   const halves = value.split("::");
 
   if (halves.length > 2) {

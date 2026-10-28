@@ -4,6 +4,7 @@ import { it, afterEach, describe, expect, vi } from "vitest";
 
 import {
   createRedactor,
+  isValidIpv6,
   pruneDetachedWrapperReferences,
 } from "../src/lib/redact";
 import { REDACTION_TOKEN } from "../src/lib/types";
@@ -19,6 +20,26 @@ const setMarkup = (element: Element, markup: string): void => {
   const parsed = new DOMParser().parseFromString(markup, "text/html");
   element.replaceChildren(...parsed.body.childNodes);
 };
+
+describe("IPv6 validation", () => {
+  it("accepts valid forms and rejects malformed groups or compression", () => {
+    expect({
+      compressed: isValidIpv6("2001:db8::1"),
+      full: isValidIpv6("2001:db8:0:0:0:0:0:1"),
+      malformedGroup: isValidIpv6("2001:db8::gg"),
+      multipleCompression: isValidIpv6("1::2::3"),
+      tooFewGroupsWithoutCompression: isValidIpv6("2001:db8:1"),
+      tooManyGroupsWithCompression: isValidIpv6("1:2:3::4:5:6:7:8"),
+    }).toStrictEqual({
+      compressed: true,
+      full: true,
+      malformedGroup: false,
+      multipleCompression: false,
+      tooFewGroupsWithoutCompression: false,
+      tooManyGroupsWithCompression: false,
+    });
+  });
+});
 
 describe("redactor", () => {
   let redactor: ReturnType<typeof createRedactor> | null = null;
