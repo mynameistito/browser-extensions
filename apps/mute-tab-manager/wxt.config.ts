@@ -62,7 +62,7 @@ export default defineConfig({
         browser_specific_settings: {
           gecko: {
             data_collection_permissions: { required: ["none"] },
-            id: "mute-tab-manager@mynameistito.com",
+            id: "mute-tab@mynameistito",
             strict_min_version: "140.0",
           },
         },

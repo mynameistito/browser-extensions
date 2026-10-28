@@ -91,7 +91,7 @@ const sourceArchiveName = `${pkg.name}-${pkg.version}-source.zip`;
 
 const firefoxStoreListings = {
   "hide-email-ext": "hide-email-ext@mynameistito.com",
-  "mute-tab-manager": "mute-tab-manager@mynameistito.com",
+  "mute-tab-manager": "mute-tab@mynameistito",
   "quote-viewer": "quote-viewer@mynameistito.com",
 } satisfies Readonly<Record<string, string>>;
 
