@@ -28,7 +28,7 @@ The download links always redirect to the latest stable release for this extensi
 3. Load `apps/hide-ip-ext/.output/chrome-mv3` in Chrome through `chrome://extensions` with Developer mode enabled.
 4. For Firefox, select `apps/hide-ip-ext/.output/firefox-mv3/manifest.json` using `about:debugging#/runtime/this-firefox`.
 
-Without a local Chrome signing key, a local Chrome build gets a temporary extension ID. See the [source README's persistent Chrome ID setup](https://github.com/mynameistito/browser-extensions/tree/main/apps/hide-ip-ext#persistent-chrome-extension-id) for steps to keep the ID stable across builds. Firefox uses a fixed Gecko ID and does not need this key.
+Hide IP supports a persistent Chrome signing key. Generate a local key before building with `bun run generate-keys -- --app hide-ip-ext` from the repository root; this keeps the extension ID stable across local builds. Automated Chrome releases require the `HIDE_IP_WXT_CHROME_KEY` Actions secret. See the [source README's persistent Chrome ID setup](https://github.com/mynameistito/browser-extensions/tree/main/apps/hide-ip-ext#persistent-chrome-extension-id) for details. Firefox uses a fixed Gecko ID and does not need this key.
 
 ## Permissions and privacy
 

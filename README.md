@@ -90,12 +90,11 @@ Before enabling automated Chrome releases, add a repository Actions secret for e
 
 - `BETTER_HISTORY_WXT_CHROME_KEY`
 - `HIDE_EMAIL_WXT_CHROME_KEY`
+- `HIDE_IP_WXT_CHROME_KEY`
 - `QUOTE_VIEWER_WXT_CHROME_KEY`
 - `NEW_TAB_WXT_CHROME_KEY`
 - `IG_VIDEO_CONTROLS_WXT_CHROME_KEY`
 - `WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY`
 - `MUTE_TAB_MANAGER_WXT_CHROME_KEY`
-
-`hide-ip-ext` does not currently use a persistent Chrome key.
 
 The web deployment workflow also requires the `CLOUDFLARE_ACCOUNT_ID` and a narrowly scoped `CLOUDFLARE_API_TOKEN` repository secret. Its Alchemy stack deploys to `browser-ext.mynameistito.com` in production and creates per-PR Worker previews.
