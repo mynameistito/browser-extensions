@@ -1,0 +1,108 @@
+name: "Mute Tab Manager"
+description: "Report a bug or suggest an improvement for Mute Tab Manager."
+title: "[Mute Tab Manager] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for **Mute Tab Manager** (Mute tabs and synchronize YouTube player audio). For another project, choose its issue form. Do not include private browsing history, email addresses, IP addresses, tokens, or other sensitive information in screenshots or logs.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What are you reporting?
+      options:
+        - Bug
+        - Feature or improvement suggestion
+        - Question or setup help
+        - Documentation issue
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: Include the browser where you saw the issue. Select not applicable for a feature idea that is not browser-specific.
+      options:
+        - Chrome
+        - Firefox
+        - Edge
+        - Brave
+        - Opera
+        - Other Chromium-based browser
+        - Other browser
+        - Not applicable
+    validations:
+      required: true
+  - type: input
+    id: browser-version
+    attributes:
+      label: Browser version
+      description: Find this in the browser's About page. Include the version if known.
+      placeholder: e.g. Chrome 130.0.6723.92
+    validations:
+      required: false
+  - type: dropdown
+    id: installed-from
+    attributes:
+      label: How did you install the extension?
+      description: Pick the closest match; this helps identify differences in permissions and update behavior.
+      options:
+        - Chrome Web Store
+        - Firefox Add-ons (AMO)
+        - Edge Add-ons
+        - Downloaded release ZIP and loaded unpacked / temporary add-on
+        - Built from this repository
+        - Other source
+        - Not installed (suggestion or question)
+    validations:
+      required: true
+  - type: input
+    id: extension-version
+    attributes:
+      label: Extension version
+      description: Find it on the browser's extensions/add-ons page. If installed from a ZIP or source, include the release or commit if known.
+      placeholder: e.g. 1.2.3
+    validations:
+      required: false
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating system and version
+      placeholder: e.g. Windows 11, macOS 15, Ubuntu 24.04
+    validations:
+      required: false
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary and context
+      description: What were you doing, and what did you expect? For a suggestion, describe the problem it would solve.
+      placeholder: Describe the issue or idea.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: For a bug, give the smallest set of steps that reliably shows it. For a suggestion, write Not applicable.
+      placeholder: |
+        1. Open ...
+        2. Select ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened?
+      description: Include any visible error text, without personal or sensitive data.
+    validations:
+      required: false
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional details
+      description: Add relevant screenshots, page/site context, or anything else that may help. Redact private information first.
+      render: markdown
+    validations:
+      required: false
+
