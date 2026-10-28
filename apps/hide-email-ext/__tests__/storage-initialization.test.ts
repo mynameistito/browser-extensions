@@ -866,4 +866,58 @@ describe("storage initialization", () => {
       }
     }
   });
+
+  it("logs unexpected failures from the popup Enter handler", async () => {
+    const input = Object.assign(document.createElement("input"), {
+      id: "email-input",
+    });
+
+    document.body.replaceChildren(
+      input,
+      Object.assign(document.createElement("button"), { id: "add-btn" }),
+      Object.assign(document.createElement("span"), { id: "error" }),
+      Object.assign(document.createElement("ul"), { id: "email-list" }),
+      Object.assign(document.createElement("input"), { id: "hide-ip-toggle" })
+    );
+
+    Object.defineProperties(globalThis, {
+      HTMLButtonElement: {
+        configurable: true,
+        value: window.HTMLButtonElement,
+      },
+      HTMLInputElement: {
+        configurable: true,
+        value: window.HTMLInputElement,
+      },
+      HTMLSpanElement: { configurable: true, value: window.HTMLSpanElement },
+      HTMLUListElement: { configurable: true, value: window.HTMLUListElement },
+    });
+
+    vi.resetModules();
+
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
+    try {
+      await import("../entrypoints/popup/popup");
+      Object.defineProperty(input, "value", {
+        configurable: true,
+        get: () => {
+          throw new Error("input value unavailable");
+        },
+      });
+
+      input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
+      await vi.waitFor(() => {
+        expect(consoleError).toHaveBeenCalledWith(
+          "handleAdd failed:",
+          expect.any(Error)
+        );
+      });
+    } finally {
+      consoleError.mockRestore();
+      Reflect.deleteProperty(input, "value");
+    }
+  });
 });
