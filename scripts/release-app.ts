@@ -108,8 +108,12 @@ const run = (command: string, args: string[]): string =>
     stdio: ["ignore", "pipe", "pipe"],
   }).trim();
 
-const runInherited = (command: string, args: string[]): void => {
-  execFileSync(command, args, { cwd: appDir, stdio: "inherit" });
+const runInherited = (
+  command: string,
+  args: string[],
+  cwd: string = appDir
+): void => {
+  execFileSync(command, args, { cwd, stdio: "inherit" });
 };
 
 const hasFirefoxVersion = async (
@@ -355,7 +359,7 @@ for (const script of scripts) {
 
 const sourceArchive = path.join(appDir, ".output", sourceArchiveName);
 
-execFileSync(
+runInherited(
   "git",
   [
     "archive",
@@ -367,7 +371,7 @@ execFileSync(
     ":(top)bun.lock",
     ":(top)scripts",
   ],
-  { cwd: repositoryDir, stdio: "inherit" }
+  repositoryDir
 );
 
 const releaseAssets = expectedAssets.map((asset) =>
