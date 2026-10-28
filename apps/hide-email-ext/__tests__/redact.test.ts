@@ -178,7 +178,26 @@ describe("redactor", () => {
       );
     }
 
-    expect(document.body.textContent).toStrictEqual(originalText);
+    const paragraph = document.body.querySelector("p");
+
+    const visibleText = [...(paragraph?.childNodes ?? [])]
+      .map((node) => {
+        if (node instanceof Text) {
+          return node.data;
+        }
+
+        if (node instanceof Element) {
+          return (
+            node.querySelector<HTMLElement>('[data-redacted="toggle"]')
+              ?.textContent ?? ""
+          );
+        }
+
+        return "";
+      })
+      .join("");
+
+    expect(visibleText).toStrictEqual(originalText);
   });
 
   it("does not merge text nodes for invalid IPv6 candidates", async () => {
