@@ -1,0 +1,90 @@
+name: "Help or setup question"
+description: "Ask for help using or installing an app."
+title: "[Help] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Include enough detail to understand what you are trying to do. Do not share passwords, private browsing history, personal email addresses, IP addresses, or tokens.
+  - type: dropdown
+    id: app
+    attributes:
+      label: Relevant app(s)
+      multiple: true
+      options:
+        - Better History
+        - GitHub Settings Repo Copy
+        - Hide Email
+        - Hide IP
+        - Instagram Video Controls
+        - Mute Tab Manager
+        - New Tab
+        - Quote Viewer
+        - Documentation site
+        - Not sure yet
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Firefox
+        - Edge
+        - Brave
+        - Opera
+        - Other Chromium-based browser
+        - Other browser
+        - Not applicable (documentation site)
+    validations:
+      required: true
+  - type: input
+    id: browser-version
+    attributes:
+      label: Browser version
+      placeholder: e.g. Firefox 130
+    validations:
+      required: false
+  - type: dropdown
+    id: installed-from
+    attributes:
+      label: Installation source
+      options:
+        - Chrome Web Store
+        - Firefox Add-ons (AMO)
+        - Edge Add-ons
+        - Downloaded release ZIP (unpacked or temporary add-on)
+        - Built from this repository
+        - Other source
+        - Not applicable (documentation site)
+    validations:
+      required: true
+  - type: input
+    id: app-version
+    attributes:
+      label: App or extension version
+      placeholder: e.g. 1.2.3
+    validations:
+      required: false
+  - type: input
+    id: operating-system
+    attributes:
+      label: Operating system and version
+      placeholder: e.g. Windows 11, macOS 15
+    validations:
+      required: false
+  - type: textarea
+    id: question
+    attributes:
+      label: What are you trying to do?
+      description: Include the page, feature, or setup step where you need help.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What have you tried, and what happened?
+      description: Include error text or screenshots if useful. Redact private information first.
+    validations:
+      required: true

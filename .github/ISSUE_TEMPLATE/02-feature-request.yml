@@ -1,0 +1,60 @@
+name: "Feature request"
+description: "Suggest an improvement for one or more apps."
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Explain the problem or use case behind the idea. Select every app that would benefit.
+  - type: dropdown
+    id: apps
+    attributes:
+      label: Relevant apps
+      multiple: true
+      options:
+        - Better History
+        - GitHub Settings Repo Copy
+        - Hide Email
+        - Hide IP
+        - Instagram Video Controls
+        - Mute Tab Manager
+        - New Tab
+        - Quote Viewer
+        - Documentation site
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the current limitation and who it affects.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to happen?
+      description: Describe the behavior or outcome you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or additional context
+      description: Add any alternatives, examples, or screenshots that help explain the request.
+    validations:
+      required: false
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser or platform, if relevant
+      options:
+        - Chrome
+        - Firefox
+        - Edge
+        - Brave
+        - Other Chromium-based browser
+        - Other browser or platform
+        - Not applicable
+    validations:
+      required: false
