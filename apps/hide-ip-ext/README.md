@@ -28,7 +28,9 @@ Generate a persistent signing key from the workspace root:
 bun run generate-keys -- --app hide-ip-ext
 ```
 
-This writes the gitignored `apps/hide-ip-ext/key.pem`, prints the stable Chrome extension ID, and shows how to configure the `HIDE_IP_WXT_CHROME_KEY` GitHub Actions secret. Add `--upload` to upload the key directly; if `key.pem` already exists, the command uploads it without rotating the key:
+If no local `key.pem` or `WXT_CHROME_KEY` is available, a local Chrome build uses a random extension ID. Release builds require the `HIDE_IP_WXT_CHROME_KEY` GitHub Actions secret and fail if it is missing, so they cannot publish with a random ID.
+
+The generator writes the gitignored `apps/hide-ip-ext/key.pem`, prints the stable Chrome extension ID, and shows how to configure the Actions secret. Add `--upload` to upload the key directly; if `key.pem` already exists, the command uploads it without rotating the key:
 
 ```bash
 bun run generate-keys -- --app hide-ip-ext --upload
