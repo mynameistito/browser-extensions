@@ -787,4 +787,67 @@ describe("storage initialization", () => {
       "Element #email-input not found or wrong type"
     );
   });
+
+  it("logs popup initialization failures when a storage subscription throws", async () => {
+    document.body.replaceChildren(
+      Object.assign(document.createElement("input"), { id: "email-input" }),
+      Object.assign(document.createElement("button"), { id: "add-btn" }),
+      Object.assign(document.createElement("span"), { id: "error" }),
+      Object.assign(document.createElement("ul"), { id: "email-list" }),
+      Object.assign(document.createElement("input"), { id: "hide-ip-toggle" })
+    );
+
+    Object.defineProperties(globalThis, {
+      HTMLButtonElement: {
+        configurable: true,
+        value: window.HTMLButtonElement,
+      },
+      HTMLInputElement: {
+        configurable: true,
+        value: window.HTMLInputElement,
+      },
+      HTMLSpanElement: { configurable: true, value: window.HTMLSpanElement },
+      HTMLUListElement: { configurable: true, value: window.HTMLUListElement },
+    });
+
+    vi.resetModules();
+
+    const { hiddenEmailsItem: popupStorageItem } =
+      await import("../src/lib/storage");
+
+    const originalWatch = Object.getOwnPropertyDescriptor(
+      popupStorageItem,
+      "watch"
+    );
+
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
+    try {
+      Object.defineProperty(popupStorageItem, "watch", {
+        configurable: true,
+        value: () => {
+          throw new Error("watch failed");
+        },
+        writable: true,
+      });
+
+      await import("../entrypoints/popup/popup");
+      await vi.waitFor(() => {
+        expect(consoleError).toHaveBeenCalledWith(
+          "Popup init failed:",
+          expect.any(Error)
+        );
+      });
+    } finally {
+      consoleError.mockRestore();
+
+      if (originalWatch === undefined) {
+        Reflect.deleteProperty(popupStorageItem, "watch");
+      } else {
+        Object.defineProperty(popupStorageItem, "watch", originalWatch);
+      }
+    }
+  });
 });
