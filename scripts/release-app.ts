@@ -262,6 +262,9 @@ runInherited("git", [
   `--output=${sourceArchive}`,
   "HEAD",
   `:(top)apps/${pkg.name}`,
+  ":(top)package.json",
+  ":(top)bun.lock",
+  ":(top)scripts",
 ]);
 
 const releaseAssets = expectedAssets.map((asset) =>
