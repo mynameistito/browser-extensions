@@ -11,7 +11,7 @@ const QUOTE_ICON_PATHS = [
 
 type MutationObserverCtor = new (
   callback: MutationCallback
-) => Pick<MutationObserver, "observe">;
+) => Pick<MutationObserver, "disconnect" | "observe">;
 
 const NATIVE_QUOTES_LINK_SELECTOR = 'a[href$="/quotes"]';
 const HIDDEN_NATIVE_QUOTES_ATTR = "data-quote-viewer-hidden-native-quotes";
@@ -168,7 +168,7 @@ export const createQuoteViewer = (
     processMutations(mutations, pending, trySetIcon);
   };
 
-  const main = (): Pick<MutationObserver, "observe"> => {
+  const main = (): Pick<MutationObserver, "disconnect" | "observe"> => {
     hideNativeQuotesLinks(doc);
 
     for (const article of doc.querySelectorAll(ARTICLE_SELECTOR)) {
@@ -191,7 +191,9 @@ export const createQuoteViewer = (
 
 /**
  * Initialize the quote viewer using the global document and observer.
- * @returns The active mutation observer.
+ * @returns The active mutation observer, which can be disconnected on teardown.
  */
-export const setupQuoteViewer = (): Pick<MutationObserver, "observe"> =>
-  createQuoteViewer().main();
+export const setupQuoteViewer = (): Pick<
+  MutationObserver,
+  "disconnect" | "observe"
+> => createQuoteViewer().main();
