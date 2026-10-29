@@ -1,11 +1,13 @@
 // Chrome event mocks and listener snapshot utilities.
 
+/** Message payload shape used by the Chrome runtime event mock. */
 export interface MockMessage {
   readonly isDark?: boolean;
   readonly muted?: boolean;
   readonly type: string;
 }
 
+/** Minimal tab shape accepted by the Chrome tabs event mocks. */
 export interface MockTab {
   id?: number;
   mutedInfo?: chrome.tabs.MutedInfo;
