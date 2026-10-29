@@ -8,13 +8,13 @@ import {
   isIgMuted,
 } from "./button-finder";
 import { queryAll, debounce } from "./dom";
-import {
-  modifyOverlayWithInstagramPlayControl,
-  incapacitateStoryVideoPausingOverlays,
-  modifyVideoHeightIfSendMessageBoxOrLikeButtonIsBlockingVideoControls,
-} from "./overlay-fixes";
+import { modifyOverlayWithInstagramPlayControl } from "./overlay-fixes";
 import type { Settings } from "./settings";
 import { persistSettings } from "./settings";
+import {
+  incapacitateStoryVideoPausingOverlays,
+  modifyVideoHeightIfSendMessageBoxOrLikeButtonIsBlockingVideoControls,
+} from "./story-layout";
 
 const knownVideoElements = new Set<HTMLVideoElement>();
 let currentSettings: Settings;
