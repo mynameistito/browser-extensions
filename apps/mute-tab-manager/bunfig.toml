@@ -1,5 +1,8 @@
 [test]
-preload = ["./__tests__/helpers/chrome-mock.ts"]
+preload = [
+  "./__tests__/helpers/dom-environment.ts",
+  "./__tests__/helpers/chrome-mock.ts",
+]
 coverage = true
 coverageReporter = ["text", "lcov"]
 coverageDir = "coverage"

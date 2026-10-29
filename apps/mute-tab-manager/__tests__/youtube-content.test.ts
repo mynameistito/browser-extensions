@@ -3,10 +3,10 @@ import { expect, it, describe, beforeAll, beforeEach } from "vitest";
 import {
   listenerDelta,
   mockEvents,
-  resetChromeMock,
   restoreListeners,
   snapshotListeners,
-} from "@/tests/helpers/chrome-mock.ts";
+} from "@/tests/helpers/chrome-mock-events.ts";
+import { resetChromeMock } from "@/tests/helpers/chrome-mock.ts";
 
 let myListeners: ReturnType<typeof snapshotListeners>;
 
