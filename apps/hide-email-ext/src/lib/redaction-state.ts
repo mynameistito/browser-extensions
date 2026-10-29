@@ -1,13 +1,13 @@
 import type { ToggleRestoration } from "./redaction-toggle";
 
 /** Original and redacted values tracked for a text node. */
-export interface TextRestoration {
+interface TextRestoration {
   readonly originalValue: string;
   readonly redactedValue: string;
 }
 
 /** Original and redacted values tracked for an element attribute. */
-export interface AttributeRestoration {
+interface AttributeRestoration {
   readonly originalValue: string;
   readonly redactedValue: string;
 }
