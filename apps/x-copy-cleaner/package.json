@@ -1,0 +1,47 @@
+{
+  "name": "x-copy-cleaner",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cleans tracking parameters from X post links when opened or copied.",
+  "keywords": [
+    "browser-extension",
+    "privacy",
+    "twitter",
+    "wxt",
+    "x"
+  ],
+  "homepage": "https://github.com/mynameistito/browser-extensions/tree/main/apps/x-copy-cleaner",
+  "bugs": {
+    "url": "https://github.com/mynameistito/browser-extensions/issues"
+  },
+  "license": "MIT",
+  "author": "My Name is Tito <github@mynameistito.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mynameistito/browser-extensions.git",
+    "directory": "apps/x-copy-cleaner"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "bun ../../scripts/run-wxt.ts",
+    "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
+    "build": "bun ../../scripts/run-wxt.ts build && bun ../../scripts/run-wxt.ts build -b firefox",
+    "build:chrome": "bun ../../scripts/run-wxt.ts build",
+    "build:firefox": "bun ../../scripts/run-wxt.ts build -b firefox",
+    "zip:chrome": "bun ../../scripts/run-wxt.ts zip -b chrome",
+    "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
+    "zip:all": "bun run zip:chrome && bun run zip:firefox",
+    "postinstall": "bun ../../scripts/run-wxt.ts prepare",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "ci:release": "bun ../../scripts/release-app.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "vitest": "catalog:",
+    "wxt": "catalog:"
+  }
+}

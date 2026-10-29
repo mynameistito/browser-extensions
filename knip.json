@@ -47,6 +47,10 @@
         "scripts/**/*.ts"
       ],
       "project": ["**/*.{ts,tsx}", "*.config.ts"]
+    },
+    "apps/x-copy-cleaner": {
+      "ignoreUnresolved": ["#imports"],
+      "wxt": { "entry": "src/entrypoints/**/*" }
     }
   }
 }

@@ -1,0 +1,54 @@
+---
+title: X Copy Cleaner
+description: Remove tracking query parameters from X or Twitter status links when opened or copied.
+---
+
+X Copy Cleaner cleans tracked X/Twitter status links automatically. Keep using X's normal **Copy link** menu item to copy a clean URL; if you open a tracked status URL, it also removes the query string from the address bar without reloading the post.
+
+## Copy a clean post link
+
+1. Visit `x.com` or `twitter.com` with the extension enabled.
+2. Open the post's **Share** menu.
+3. Select **Copy link**. The clipboard receives the same status URL without its query parameters.
+
+The extension only changes complete URLs matching a post's `/status/<id>` path. Other clipboard text, profile links, and unrelated sites pass through unchanged.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/x-copy-cleaner/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/x-copy-cleaner/firefox)
+- [All X Copy Cleaner releases](https://github.com/mynameistito/browser-extensions/releases?q=x-copy-cleaner)
+
+The download links always redirect to the latest stable release for this extension.
+
+### Install the Chrome ZIP
+
+1. Download and extract the Chrome ZIP.
+2. Open `chrome://extensions` and enable **Developer mode**.
+3. Select **Load unpacked** and choose the extracted `chrome-mv3` folder.
+
+### Install the Firefox ZIP
+
+1. Download and extract the Firefox ZIP.
+2. Open `about:debugging#/runtime/this-firefox` and select **Load Temporary Add-on**.
+3. Choose the extracted extension's `manifest.json` file.
+
+Firefox removes temporary add-ons when it restarts. After restarting Firefox, load the manifest again before using X Copy Cleaner.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions), then run `bun install` and `bun run prepare:wxt` from its root.
+2. Run `bun run --filter x-copy-cleaner build`.
+3. Load `apps/x-copy-cleaner/.output/chrome-mv3` from `chrome://extensions` with Developer mode enabled.
+4. Select **Load Temporary Add-on** in `about:debugging#/runtime/this-firefox`, then choose `apps/x-copy-cleaner/.output/firefox-mv3/manifest.json`. Firefox removes temporary add-ons on restart; load the manifest again afterward.
+
+## Permissions and privacy
+
+The extension runs on `x.com` and `twitter.com` to clean status URLs in the address bar and clipboard. It declares no API permissions, does not make network requests, and does not collect or store data. URL and clipboard handling occurs locally in the browser.
+
+## Troubleshooting
+
+- **The query string is still present:** reload the extension from your browser's extension manager, then reload the X/Twitter tab and use the site's **Copy link** menu item.
+- **The URL was not changed:** X Copy Cleaner only changes a complete X/Twitter status URL that has a query string. Other clipboard text is preserved.
+
+See the [X Copy Cleaner source and release notes](https://github.com/mynameistito/browser-extensions/tree/main/apps/x-copy-cleaner).

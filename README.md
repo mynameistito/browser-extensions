@@ -1,6 +1,6 @@
 # Browser Extensions
 
-Eight independently versioned WXT browser extensions and a Blume documentation site, maintained in one Bun and Turborepo workspace.
+Nine independently versioned WXT browser extensions and a Blume documentation site, maintained in one Bun and Turborepo workspace.
 
 ## Extensions and apps
 
@@ -14,6 +14,7 @@ Eight independently versioned WXT browser extensions and a Blume documentation s
 | [`better-history`](apps/better-history) | Searches, filters, and cleans up browser history. |
 | [`github-settings-repo-copy`](apps/github-settings-repo-copy) | Copies repository names from GitHub settings confirmation dialogs. |
 | [`mute-tab-manager`](apps/mute-tab-manager) | Mutes browser tabs and synchronizes YouTube player audio. |
+| [`x-copy-cleaner`](apps/x-copy-cleaner) | Removes tracking query parameters from opened and copied X/Twitter post links. |
 | [`web`](apps/web) | Hosts user documentation for the extensions. |
 
 ## Get started
@@ -96,5 +97,6 @@ Before enabling automated Chrome releases, add a repository Actions secret for e
 - `IG_VIDEO_CONTROLS_WXT_CHROME_KEY`
 - `WXT_GITHUB_SETTINGS_REPO_COPY_CHROME_KEY`
 - `MUTE_TAB_MANAGER_WXT_CHROME_KEY`
+- `X_COPY_CLEANER_WXT_CHROME_KEY`
 
 The web deployment workflow also requires the `CLOUDFLARE_ACCOUNT_ID` and a narrowly scoped `CLOUDFLARE_API_TOKEN` repository secret. Its Alchemy stack deploys to `browser-ext.mynameistito.com` in production and creates per-PR Worker previews.

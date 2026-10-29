@@ -21,6 +21,7 @@ export const supportedExtensions = [
   "github-settings-repo-copy",
   "hide-ip-ext",
   "mute-tab-manager",
+  "x-copy-cleaner",
 ] as const;
 
 /** An app configured to use a persistent Chromium signing key. */
@@ -36,6 +37,7 @@ export const chromeKeySecrets = {
   "mute-tab-manager": "MUTE_TAB_MANAGER_WXT_CHROME_KEY",
   "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
   "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
+  "x-copy-cleaner": "X_COPY_CLEANER_WXT_CHROME_KEY",
 } as const satisfies Record<Extension, string>;
 
 /** Parsed options for the key-generation command. */
@@ -57,7 +59,7 @@ export type ParseGenerateKeyOptionsResult =
   | { readonly kind: "ok"; readonly options: GenerateKeyOptions };
 
 const usage =
-  "Usage: bun generate-keys [--app <all|better-history|hide-email-ext|hide-ip-ext|quote-viewer|new-tab-ext|ig-video-controls|github-settings-repo-copy|mute-tab-manager>] [--repo <owner/name>] [--upload] [--force]";
+  "Usage: bun generate-keys [--app <all|better-history|hide-email-ext|hide-ip-ext|quote-viewer|new-tab-ext|ig-video-controls|github-settings-repo-copy|mute-tab-manager|x-copy-cleaner>] [--repo <owner/name>] [--upload] [--force]";
 
 /** Complete help text for the root key-generation command. */
 export const generateKeyHelp = `${usage}

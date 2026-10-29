@@ -70,6 +70,14 @@ const extensions = [
       preview: "quotes",
       title: "Quote Viewer",
   },
+  {
+      description:
+        "Removes tracking parameters from X or Twitter post links when opened or copied.",
+      href: "/extensions/x-copy-cleaner",
+      packageName: "x-copy-cleaner",
+      preview: "clean-link",
+      title: "X Copy Cleaner",
+  },
 ];
 
 const { config } = data;
@@ -85,7 +93,7 @@ const { config } = data;
   ogEnabled={config.og.enabled}
   page={{
     description:
-      "Eight open-source browser extensions for privacy, history, tabs, and the pages you use.",
+      "Nine open-source browser extensions for privacy, history, tabs, and the pages you use.",
     route: "/",
     title: "Small fixes for your browser",
   }}
@@ -100,7 +108,7 @@ const { config } = data;
         <h1 id="home-title">Small fixes for your browser.</h1>
         <div class="hero-lower">
           <p class="hero-description">
-            Eight open-source extensions for Chrome and Firefox. Pick one useful
+            Nine open-source extensions for Chrome and Firefox. Pick one useful
             thing, build it from source, and make it yours.
           </p>
           <div class="install-widget" data-install-widget>
@@ -129,10 +137,10 @@ const { config } = data;
     <section class="extensions hp-frame" id="extensions" aria-labelledby="extensions-title">
       <div class="section-heading">
         <div>
-          <h2 id="extensions-title">Eight small fixes, shown in context.</h2>
+          <h2 id="extensions-title">Nine small fixes, shown in context.</h2>
           <p>Each extension solves one everyday browser annoyance.</p>
         </div>
-        <span class="extension-count">8 extensions</span>
+        <span class="extension-count">9 extensions</span>
       </div>
       <div class="showcase-list">
         {extensions.map((extension) => (
@@ -207,6 +215,14 @@ const { config } = data;
                     <div class="preview-heading"><span>Confirm repository</span><span>×</span></div>
                     <p>Are you sure you want to continue?</p>
                     <div class="repo-value"><span>mynameistito/browser-extensions</span><b>Copy</b></div>
+                  </div>
+                )}
+                {extension.preview === "clean-link" && (
+                  <div class="preview-window clean-link-window">
+                    <div class="preview-heading"><span>Copy link</span><span>✓</span></div>
+                    <p class="tracked-link">x.com/leviackermanft/status/2115692550774526328?a=…&amp;s=19</p>
+                    <div class="clean-link-value">x.com/leviackermanft/status/2115692550774526328</div>
+                    <small>Copied without tracking parameters</small>
                   </div>
                 )}
                 {extension.preview === "ip" && (
@@ -1221,6 +1237,29 @@ const { config } = data;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .clean-link-window p,
+  .clean-link-window small {
+    display: block;
+    margin: 0.75rem 0;
+    color: #9db2ba;
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
+  }
+
+  .clean-link-window .tracked-link {
+    text-decoration: line-through;
+    text-decoration-color: #e68b91;
+  }
+
+  .clean-link-value {
+    padding: 0.75rem 0.8rem;
+    border-radius: 0.25rem;
+    color: #e8f1f4;
+    background: #142b38;
+    font-size: 0.9rem;
+    overflow-wrap: anywhere;
   }
 
   .repo-value b {
