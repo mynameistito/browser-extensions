@@ -1,5 +1,11 @@
 # web
 
+## 0.2.6
+
+### Patch Changes
+
+- 72afe74: Publish X Copy Cleaner homepage and documentation updates
+
 ## 0.2.5
 
 ### Patch Changes
