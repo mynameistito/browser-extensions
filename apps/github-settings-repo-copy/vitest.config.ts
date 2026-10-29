@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     coverage: {
       enabled: true,
-      include: ["entrypoints/**/*.ts"],
+      include: ["entrypoints/**/*.ts", "lib/**/*.ts"],
       provider: "v8",
       reporter: ["text", "html", "lcov"],
       thresholds: {
