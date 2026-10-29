@@ -1,5 +1,11 @@
 # better-history
 
+## 8.0.8
+
+### Patch Changes
+
+- a92bf2f: Separate cleanup settings state and actions from rendering, with focused lifecycle coverage.
+
 ## 8.0.7
 
 ### Patch Changes

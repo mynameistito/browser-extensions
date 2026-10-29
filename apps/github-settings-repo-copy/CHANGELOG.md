@@ -1,5 +1,11 @@
 # github-settings-repo-copy
 
+## 0.2.5
+
+### Patch Changes
+
+- c66c755: Add a legacy clipboard fallback for repository confirmation copy controls.
+
 ## 0.2.4
 
 ### Patch Changes

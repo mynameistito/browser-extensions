@@ -1,5 +1,11 @@
 # hide-ip-ext
 
+## 0.1.8
+
+### Patch Changes
+
+- 37820c6: Share concurrent public-IP lookups so pages opening together reuse one network request.
+
 ## 0.1.7
 
 ### Patch Changes
