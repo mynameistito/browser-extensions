@@ -29,6 +29,9 @@ export default defineConfig({
     },
     environment: "happy-dom",
     include: ["__tests__/**/*.test.{ts,tsx}"],
-    setupFiles: ["./__tests__/helpers/chrome-mock.ts"],
+    setupFiles: [
+      "./__tests__/helpers/dom-environment.ts",
+      "./__tests__/helpers/chrome-mock.ts",
+    ],
   },
 });

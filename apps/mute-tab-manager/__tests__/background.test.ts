@@ -3,12 +3,14 @@ import { setTimeout as delay } from "node:timers/promises";
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
-  mockCalls,
-  mockConfig,
   mockEvents,
-  resetChromeMock,
   restoreListeners,
   snapshotListeners,
+} from "@/tests/helpers/chrome-mock-events.ts";
+import {
+  mockCalls,
+  mockConfig,
+  resetChromeMock,
 } from "@/tests/helpers/chrome-mock.ts";
 import {
   COMMAND_TOGGLE_MUTE,

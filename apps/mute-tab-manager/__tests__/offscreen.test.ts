@@ -1,12 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
-  mockCalls,
   mockEvents,
-  resetChromeMock,
   restoreListeners,
   snapshotListeners,
-} from "@/tests/helpers/chrome-mock.ts";
+} from "@/tests/helpers/chrome-mock-events.ts";
+import { mockCalls, resetChromeMock } from "@/tests/helpers/chrome-mock.ts";
 
 describe("offscreen dark-mode reporter", () => {
   beforeEach(() => {
