@@ -10,6 +10,7 @@ const extensions = new Set([
   "hide-email-ext",
   "hide-ip-ext",
   "ig-video-controls",
+  "x-copy-cleaner",
   "mute-tab-manager",
   "new-tab-ext",
   "quote-viewer",

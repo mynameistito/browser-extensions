@@ -1,0 +1,40 @@
+---
+title: X Copy Cleaner
+description: Automatically remove tracking query parameters when you copy an X or Twitter post link.
+---
+
+X Copy Cleaner cleans tracked X/Twitter status links as they are copied. Keep using X's normal **Copy link** menu item; the extension removes the query string before the link reaches the clipboard.
+
+## Copy a clean post link
+
+1. Visit `x.com` or `twitter.com` with the extension enabled.
+2. Open a post's **More** menu.
+3. Select **Copy link**. The clipboard receives the same status URL without its query parameters.
+
+The extension only changes complete URLs matching a post's `/status/<id>` path. Other clipboard text, profile links, and unrelated sites pass through unchanged.
+
+## Download the latest release
+
+- [Chrome ZIP](https://browser-ext.mynameistito.com/install/x-copy-cleaner/chrome)
+- [Firefox ZIP](https://browser-ext.mynameistito.com/install/x-copy-cleaner/firefox)
+- [All X Copy Cleaner releases](https://github.com/mynameistito/browser-extensions/releases?q=x-copy-cleaner)
+
+The download links always redirect to the latest stable release for this extension.
+
+## Install a local build
+
+1. Clone the [source repository](https://github.com/mynameistito/browser-extensions), then run `bun install` and `bun run prepare:wxt` from its root.
+2. Run `bun run --filter x-copy-cleaner build`.
+3. Load `apps/x-copy-cleaner/.output/chrome-mv3` from `chrome://extensions` with Developer mode enabled.
+4. Select `apps/x-copy-cleaner/.output/firefox-mv3/manifest.json` using `about:debugging#/runtime/this-firefox`.
+
+## Permissions and privacy
+
+The extension runs a content script on `x.com` and `twitter.com` to clean clipboard writes. It declares no API permissions, does not make network requests, and does not collect or store data. Clipboard handling occurs locally in the browser.
+
+## Troubleshooting
+
+- **The query string is still present:** reload the X/Twitter tab after enabling the extension and use the site's **Copy link** menu item.
+- **The URL was not changed:** X Copy Cleaner only changes a complete X/Twitter status URL that has a query string. Other clipboard text is preserved.
+
+See the [X Copy Cleaner source and release notes](https://github.com/mynameistito/browser-extensions/tree/main/apps/x-copy-cleaner).

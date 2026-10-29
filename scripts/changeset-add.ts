@@ -11,6 +11,7 @@ const appNames = [
   "better-history",
   "github-settings-repo-copy",
   "mute-tab-manager",
+  "x-copy-cleaner",
   "web",
 ] as const;
 
