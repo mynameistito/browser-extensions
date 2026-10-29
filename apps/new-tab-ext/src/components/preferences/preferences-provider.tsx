@@ -1,18 +1,14 @@
-import { Effect, Exit } from "effect";
 import {
   createContext,
-  useMemo,
-  useCallback,
   useContext,
   useEffect,
-  useRef,
-  useState,
+  useMemo,
+  useSyncExternalStore,
 } from "react";
 import type { ReactNode } from "react";
 
-import { DEFAULT_PREFERENCES } from "@/lib/preferences";
 import type { Preferences } from "@/lib/preferences";
-import { loadPreferences, savePreferences } from "@/lib/preferences-storage";
+import { PreferencesSession } from "@/lib/preferences-session";
 
 interface PreferencesContextValue {
   readonly preferences: Preferences;
@@ -24,8 +20,6 @@ interface PreferencesContextValue {
 }
 
 const PreferencesContext = createContext<PreferencesContextValue | null>(null);
-const LOAD_ERROR_MESSAGE = "Settings could not be loaded. Defaults are shown.";
-const SAVE_ERROR_MESSAGE = "This change could not be saved on this device.";
 
 /**
  * Load and persist local settings around the new-tab application.
@@ -37,94 +31,23 @@ export const PreferencesProvider = ({
 }: {
   readonly children: ReactNode;
 }) => {
-  const [preferences, setPreferences] = useState(DEFAULT_PREFERENCES);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [storageMessage, setStorageMessage] = useState("");
-  const preferencesRef = useRef(DEFAULT_PREFERENCES);
-  const saveQueue = useRef<Preferences[]>([]);
-  const isSaving = useRef(false);
+  const session = useMemo(() => new PreferencesSession(), []);
 
-  useEffect(() => {
-    let isMounted = true;
-
-    const load = async () => {
-      const exit = await Effect.runPromiseExit(Effect.result(loadPreferences));
-
-      if (!isMounted) {
-        return;
-      }
-
-      if (Exit.isFailure(exit) || exit.value._tag === "Failure") {
-        setStorageMessage(LOAD_ERROR_MESSAGE);
-      } else {
-        preferencesRef.current = exit.value.success;
-        setPreferences(exit.value.success);
-      }
-
-      setIsLoaded(true);
-    };
-
-    void load();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  const updatePreferences = useCallback(
-    (update: (current: Preferences) => Preferences) => {
-      const next = update(preferencesRef.current);
-      preferencesRef.current = next;
-      setPreferences(next);
-
-      if (!isLoaded) {
-        return;
-      }
-
-      saveQueue.current.push(next);
-
-      const persistNext: () => Promise<void> = async () => {
-        if (isSaving.current || saveQueue.current.length === 0) {
-          return;
-        }
-
-        isSaving.current = true;
-        const queuedPreferences = saveQueue.current.shift();
-
-        if (queuedPreferences === undefined) {
-          isSaving.current = false;
-
-          return;
-        }
-
-        const exit = await Effect.runPromiseExit(
-          Effect.result(savePreferences(queuedPreferences))
-        );
-
-        setStorageMessage(
-          Exit.isFailure(exit) || exit.value._tag === "Failure"
-            ? SAVE_ERROR_MESSAGE
-            : ""
-        );
-        isSaving.current = false;
-
-        if (saveQueue.current.length > 0) {
-          void persistNext();
-        }
-      };
-
-      void persistNext();
-    },
-    [isLoaded]
+  const snapshot = useSyncExternalStore(
+    session.subscribe,
+    session.getSnapshot,
+    session.getSnapshot
   );
 
-  const contextValue = useMemo(
-    () => ({ isLoaded, preferences, storageMessage, updatePreferences }),
-    [preferences, isLoaded, storageMessage, updatePreferences]
+  useEffect(() => session.start(), [session]);
+
+  const value = useMemo(
+    () => ({ ...snapshot, updatePreferences: session.updatePreferences }),
+    [session, snapshot]
   );
 
   return (
-    <PreferencesContext.Provider value={contextValue}>
+    <PreferencesContext.Provider value={value}>
       {children}
     </PreferencesContext.Provider>
   );
