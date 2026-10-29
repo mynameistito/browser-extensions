@@ -2,7 +2,7 @@
   "name": "x-copy-cleaner",
   "version": "0.1.0",
   "private": true,
-  "description": "Automatically removes tracking parameters from copied X post links.",
+  "description": "Cleans tracking parameters from X post links when opened or copied.",
   "keywords": [
     "browser-extension",
     "privacy",

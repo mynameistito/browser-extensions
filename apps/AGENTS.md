@@ -13,7 +13,7 @@ Each child directory is an independently versioned app. Nine are WXT browser ext
 | `hide-email-ext/` | Email redaction content script, popup, background, and `src/lib/`. |
 | `hide-ip-ext/` | IP masking content script with background messaging. |
 | `ig-video-controls/` | Modular Instagram video content script; see its local `AGENTS.md`. |
-| `x-copy-cleaner/` | Removes tracking query parameters from copied X/Twitter post links. |
+| `x-copy-cleaner/` | Removes tracking query parameters from opened and copied X/Twitter post links. |
 | `mute-tab-manager/` | Cross-browser tab muting with YouTube player synchronization. |
 | `new-tab-ext/` | Local-first React dashboard; see its existing local `AGENTS.md`. |
 | `quote-viewer/` | X quote-viewer content script and tweet helpers. |

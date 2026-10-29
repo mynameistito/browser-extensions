@@ -48,9 +48,9 @@ describe(parseGenerateKeyOptions, () => {
       "hide-ip-ext": "HIDE_IP_WXT_CHROME_KEY",
       "ig-video-controls": "IG_VIDEO_CONTROLS_WXT_CHROME_KEY",
       "mute-tab-manager": "MUTE_TAB_MANAGER_WXT_CHROME_KEY",
-      "x-copy-cleaner": "X_COPY_CLEANER_WXT_CHROME_KEY",
       "new-tab-ext": "NEW_TAB_WXT_CHROME_KEY",
       "quote-viewer": "QUOTE_VIEWER_WXT_CHROME_KEY",
+      "x-copy-cleaner": "X_COPY_CLEANER_WXT_CHROME_KEY",
     });
   });
 

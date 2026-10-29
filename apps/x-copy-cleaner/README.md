@@ -1,6 +1,6 @@
 # X Copy Cleaner
 
-X Copy Cleaner automatically removes tracking query parameters from copied X/Twitter post links. Use X's normal **Copy link** menu item; the clipboard receives the same post URL without the query string.
+X Copy Cleaner automatically removes tracking query parameters from X/Twitter status URLs. Use X's normal **Copy link** menu item to copy a clean URL, or open a tracked status URL and the address bar is cleaned without reloading the post.
 
 The extension runs locally in the page's main world because X writes its links through the page Clipboard API. It only changes complete `x.com` or `twitter.com` status URLs, leaves other clipboard text untouched, and makes no network requests.
 
@@ -51,4 +51,4 @@ The release workflow publishes Chrome and Firefox ZIPs plus a source archive to 
 
 ## Privacy
 
-The extension declares no API permissions and does not collect or transmit data. It intercepts Clipboard API text writes on X/Twitter pages and only removes the query string from status URLs.
+The extension declares no API permissions and does not collect or transmit data. It intercepts Clipboard API text writes and normalizes the address bar on X/Twitter status pages, removing only the query string from status URLs.

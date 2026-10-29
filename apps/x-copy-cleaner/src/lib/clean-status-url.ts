@@ -14,7 +14,7 @@ export interface ClipboardWriter {
 }
 
 /**
- * Remove the query string from a copied X/Twitter status URL.
+ * Remove the query string from an X/Twitter status URL.
  * @param text - Clipboard text to inspect.
  * @returns A clean status URL when the whole input is a tracked X link, otherwise the original text.
  */
@@ -38,6 +38,22 @@ export const cleanStatusUrl = (text: string): string => {
   url.search = "";
 
   return url.toString();
+};
+
+/**
+ * Remove tracking query parameters from the current address-bar status URL.
+ * @param history - The page history API.
+ * @param currentUrl - The current absolute URL.
+ */
+export const cleanStatusAddressBarUrl = (
+  history: Pick<History, "state" | "replaceState">,
+  currentUrl: string
+): void => {
+  const cleanUrl = cleanStatusUrl(currentUrl);
+
+  if (cleanUrl !== currentUrl) {
+    history.replaceState(history.state, "", cleanUrl);
+  }
 };
 
 /**

@@ -18,7 +18,7 @@ export default defineConfig({
   manifest: ({ browser }) => {
     const base = {
       description:
-        "Automatically removes tracking parameters from copied X post links.",
+        "Cleans tracking parameters from X post links when opened or copied.",
       name: "X Copy Cleaner",
     };
 

@@ -14,7 +14,7 @@ Nine independently versioned WXT browser extensions and a Blume documentation si
 | [`better-history`](apps/better-history) | Searches, filters, and cleans up browser history. |
 | [`github-settings-repo-copy`](apps/github-settings-repo-copy) | Copies repository names from GitHub settings confirmation dialogs. |
 | [`mute-tab-manager`](apps/mute-tab-manager) | Mutes browser tabs and synchronizes YouTube player audio. |
-| [`x-copy-cleaner`](apps/x-copy-cleaner) | Removes tracking query parameters from copied X/Twitter post links. |
+| [`x-copy-cleaner`](apps/x-copy-cleaner) | Removes tracking query parameters from opened and copied X/Twitter post links. |
 | [`web`](apps/web) | Hosts user documentation for the extensions. |
 
 ## Get started

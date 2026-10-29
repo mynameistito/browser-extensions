@@ -1,6 +1,9 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-import { cleanStatusUrl } from "../src/lib/clean-status-url";
+import {
+  cleanStatusAddressBarUrl,
+  cleanStatusUrl,
+} from "../src/lib/clean-status-url";
 
 describe(cleanStatusUrl, () => {
   it("removes tracking parameters from X status links", () => {
@@ -34,5 +37,37 @@ describe(cleanStatusUrl, () => {
     const url = "https://notx.com/name/status/123?source=share";
 
     expect(cleanStatusUrl(url)).toBe(url);
+  });
+});
+
+describe(cleanStatusAddressBarUrl, () => {
+  it("replaces a tracked status URL without reloading the page", () => {
+    const replaceState = vi.fn<History["replaceState"]>();
+
+    const history = {
+      replaceState,
+      state: { page: "post" },
+    };
+
+    cleanStatusAddressBarUrl(
+      history,
+      "https://x.com/name/status/123?a=tracking&s=20"
+    );
+
+    expect(replaceState).toHaveBeenCalledWith(
+      history.state,
+      "",
+      "https://x.com/name/status/123"
+    );
+  });
+
+  it("leaves an already-clean address alone", () => {
+    const replaceState = vi.fn<History["replaceState"]>();
+
+    const history = { replaceState, state: null };
+
+    cleanStatusAddressBarUrl(history, "https://x.com/name/status/123");
+
+    expect(replaceState).not.toHaveBeenCalled();
   });
 });
