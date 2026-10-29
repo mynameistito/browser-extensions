@@ -1,5 +1,12 @@
 # web
 
+## 0.2.5
+
+### Patch Changes
+
+- c743d6c: Document Hide IP's persistent Chrome signing key setup.
+- 38071d3: Refactor extension release lookup into a testable resolver module.
+
 ## 0.2.4
 
 ### Patch Changes

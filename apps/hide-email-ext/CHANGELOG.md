@@ -1,5 +1,15 @@
 # hide-email-ext
 
+## 0.4.0
+
+### Minor Changes
+
+- 0e8d881: Add an optional popup toggle to blur IPv4 and IPv6 addresses with random format-matched values and click-to-reveal behavior.
+
+### Patch Changes
+
+- bf359fe: Refactor redaction address matching into focused module
+
 ## 0.3.7
 
 ### Patch Changes

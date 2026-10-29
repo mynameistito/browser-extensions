@@ -1,5 +1,11 @@
 # ig-video-controls
 
+## 1.0.7
+
+### Patch Changes
+
+- [`b201913`](https://github.com/mynameistito/browser-extensions/commit/b201913): Refine Story video overlays and layout handling.
+
 ## 1.0.6
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # quote-viewer
 
+## 0.2.19
+
+### Patch Changes
+
+- [`7d36c43`](https://github.com/mynameistito/browser-extensions/commit/7d36c43): Disconnect the quote viewer's DOM observer when its content script is invalidated.
+
 ## 0.2.18
 
 ### Patch Changes
