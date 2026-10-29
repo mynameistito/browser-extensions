@@ -20,7 +20,7 @@ WXT extension centered on a content script that adds native-style controls and h
 - Keep DOM/player concerns in the content modules; preserve the entrypoint as the integration point for those modules.
 - Instagram's page DOM is external and dynamic. Prefer resilient discovery and narrowly scoped DOM changes over assumptions about fixed markup.
 - Keep reusable pure calculations in `src/lib/` rather than coupling them to browser globals.
-- This package currently has no `test` script; do not assume `bun run test` exercises it. Use its declared `check`, `typecheck`, and build scripts.
+- Run the app's `test` script for its Vitest suite, alongside the declared `check`, `typecheck`, and build scripts.
 
 ## COMMANDS
 
@@ -28,6 +28,7 @@ Run from this app directory or target it from the root with Turbo:
 
 ```text
 bun run dev
+bun run test
 bun run build
 bun run check
 bun run typecheck
