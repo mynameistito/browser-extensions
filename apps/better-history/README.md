@@ -69,7 +69,7 @@ Zipped artifacts land in `.output/`.
 ```bash
 bun run check     # ultracite (oxlint + oxfmt)
 bun run fix       # auto-fix
-bun run typecheck # tsc --noEmit
+bun run typecheck # tsrs --noEmit
 ```
 
 ## Project structure

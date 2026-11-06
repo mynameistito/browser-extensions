@@ -44,7 +44,7 @@ bun run zip:firefox
 ## Typecheck and lint
 
 ```bash
-bun run typecheck        # tsc --noEmit
+bun run typecheck        # tsrs --noEmit
 bun run check            # ultracite (oxlint + oxfmt)
 bun run fix              # auto-fix lint/format issues
 ```

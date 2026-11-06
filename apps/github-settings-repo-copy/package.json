@@ -30,7 +30,7 @@
     "zip:chrome": "bun ../../scripts/run-wxt.ts zip -b chrome",
     "zip:firefox": "bun ../../scripts/run-wxt.ts zip -b firefox",
     "zip:all": "bun run zip:chrome && bun run zip:firefox",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsrs --noEmit",
     "check": "ultracite check",
     "test": "vitest run",
     "fix": "ultracite fix",

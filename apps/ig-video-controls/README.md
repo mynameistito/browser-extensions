@@ -49,7 +49,7 @@ Get-Content apps/ig-video-controls/key.pem -Raw | gh secret set IG_VIDEO_CONTROL
 | `bun run zip`           | Zip for Chrome Web Store             |
 | `bun run zip:firefox`   | Zip for AMO                          |
 | `bun run zip:all`       | Zip both browsers                    |
-| `bun run typecheck`     | Type-check with `tsc`                |
+| `bun run typecheck`     | Type-check with `tsrs`               |
 | `bun run check`         | Lint + format check (Ultracite)      |
 | `bun run fix`           | Auto-fix lint + format (Ultracite)   |
 
