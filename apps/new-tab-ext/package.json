@@ -32,7 +32,7 @@
     "changeset-add": "bun scripts/changeset-add.ts",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsrs --noEmit",
     "test": "vitest run --coverage",
     "test:coverage": "vitest run --coverage",
     "knip": "bunx knip@latest",
@@ -48,12 +48,12 @@
     "postinstall": "bun ../../scripts/run-wxt.ts prepare"
   },
   "dependencies": {
-    "effect": "^4.0.6",
+    "effect": "^4.1.2",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.4",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.8",
     "@types/react": "catalog:",
