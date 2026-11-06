@@ -85,6 +85,8 @@ scripts/    Shared Node.js tooling scripts
 
 Lint and format configuration lives in the root `oxlint.config.ts` and `oxfmt.config.ts`. The new-tab app adds React and TanStack-specific Oxlint presets in its local config while inheriting the shared Ultracite core. All project TypeScript configs inherit compiler options from the root `tsconfig.base.json`.
 
+Extension and root typechecks use `tsrs`. TypeScript 6 remains installed for tools that need its JavaScript compiler API: Blume and its Astro checker use it for documentation checks, and `eslint-plugin-github` depends on it.
+
 ## Release secrets
 
 Before enabling automated Chrome releases, add a repository Actions secret for each extension that uses a persistent key. Each secret must contain that extension's own PEM key:
