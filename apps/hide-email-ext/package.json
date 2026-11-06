@@ -32,7 +32,7 @@
     "zip:all": "bun run zip:chrome && bun run zip:firefox",
     "postinstall": "bun ../../scripts/run-wxt.ts prepare",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsrs --noEmit",
     "check": "ultracite check",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
