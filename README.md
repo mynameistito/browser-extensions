@@ -87,7 +87,7 @@ Lint and format configuration lives in the root `oxlint.config.ts` and `oxfmt.co
 
 Extension and root typechecks use `tsrs`. TypeScript 6 remains installed for tools that need its JavaScript compiler API: Blume and its Astro checker use it for documentation checks, and `eslint-plugin-github` depends on it.
 
-Before deploying the web site with Alchemy beta.85, coordinate the [Cloudflare state-store v8 upgrade](https://alchemy.run/blog/2026-11-01-beta-85/#upgrade-from-v7) across every client of the same store. The pinned `alchemy-deploy` action still uses beta.84 for preview and cleanup; confirm its state store is separate or upgrade that client as part of the cutover. Do not run beta.84 against a store after its v8 upgrade: the encryption key could be lost. The production deploy command uses `--yes`, which accepts the upgrade in CI.
+The web site currently uses Alchemy beta.84. Before a future upgrade to beta.85, coordinate the [Cloudflare state-store v8 upgrade](https://alchemy.run/blog/2026-11-01-beta-85/#upgrade-from-v7) across every client of the same store. The pinned `alchemy-deploy` action uses beta.84 for preview and cleanup; confirm its state store is separate or upgrade that client as part of the cutover. Do not run beta.84 against a store after its v8 upgrade: the encryption key could be lost. A future beta.85 production deploy would use the existing `--yes` flag and accept the upgrade in CI.
 
 ## Release secrets
 
