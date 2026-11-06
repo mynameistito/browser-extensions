@@ -26,7 +26,7 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "ci:release": "bun ../../scripts/release-app.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsrs --noEmit",
     "test": "vitest run --coverage",
     "dev": "bun ../../scripts/run-wxt.ts",
     "dev:firefox": "bun ../../scripts/run-wxt.ts -b firefox",
@@ -41,17 +41,17 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "catalog:",
-    "@tanstack/react-query": "^5.104.5",
+    "@tanstack/react-query": "^5.105.0",
     "@tanstack/react-router": "^1.170.46",
     "better-result": "^3.0.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
-    "lucide-react": "^1.61.0",
+    "lucide-react": "^1.65.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "tailwind-merge": "^3.7.0",
     "tailwindcss": "catalog:",
-    "virtua": "^0.53.6",
+    "virtua": "^0.54.0",
     "zod": "catalog:"
   },
   "devDependencies": {
@@ -62,8 +62,5 @@
     "@vitejs/plugin-react": "^6.1.2",
     "vitest": "catalog:",
     "wxt": "catalog:"
-  },
-  "peerDependencies": {
-    "typescript": "^6.0.3"
   }
 }

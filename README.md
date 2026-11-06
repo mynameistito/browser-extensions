@@ -85,6 +85,10 @@ scripts/    Shared Node.js tooling scripts
 
 Lint and format configuration lives in the root `oxlint.config.ts` and `oxfmt.config.ts`. The new-tab app adds React and TanStack-specific Oxlint presets in its local config while inheriting the shared Ultracite core. All project TypeScript configs inherit compiler options from the root `tsconfig.base.json`.
 
+Extension and root typechecks use `tsrs`. TypeScript 6 remains installed for tools that need its JavaScript compiler API: Blume and its Astro checker use it for documentation checks, and `eslint-plugin-github` depends on it.
+
+Before deploying the web site with Alchemy beta.85, coordinate the [Cloudflare state-store v8 upgrade](https://alchemy.run/blog/2026-11-01-beta-85/#upgrade-from-v7) across every client of the same store. The pinned `alchemy-deploy` action still uses beta.84 for preview and cleanup; confirm its state store is separate or upgrade that client as part of the cutover. Do not run beta.84 against a store after its v8 upgrade: the encryption key could be lost. The production deploy command uses `--yes`, which accepts the upgrade in CI.
+
 ## Release secrets
 
 Before enabling automated Chrome releases, add a repository Actions secret for each extension that uses a persistent key. Each secret must contain that extension's own PEM key:
