@@ -26,10 +26,10 @@ export const baseConfig = defineConfig({
   extends: [core, antiSlop, vitestConfig, sharedJsPlugins],
   ignorePatterns: core.ignorePatterns ?? [],
   jsPlugins: sharedJsPlugins.jsPlugins,
+  options: { typeAware: true },
   settings: jsPluginSettings,
 });
 
 export default defineConfig({
   extends: [baseConfig],
-  options: { typeAware: true },
 });
