@@ -13,15 +13,15 @@
     "check": "ultracite check"
   },
   "dependencies": {
-    "@alchemy.run/cloudflare": "2.0.0-beta.84",
-    "@effect/platform-node": "4.0.7",
-    "alchemy": "2.0.0-beta.84",
+    "@alchemy.run/cloudflare": "2.0.0-beta.87",
+    "@effect/platform-node": "4.1.4",
+    "alchemy": "2.0.0-beta.87",
     "blume": "2.2.6",
-    "effect": "4.0.7"
+    "effect": "4.1.4"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "5.20261030.1",
-    "@effect/platform-bun": "4.0.7",
+    "@effect/platform-bun": "4.1.4",
     "typescript": "^6.0.3"
   }
 }
