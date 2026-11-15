@@ -119,7 +119,7 @@
     },
     "apps/new-tab-ext": {
       "name": "new-tab-ext",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "dependencies": {
         "effect": "4.1.4",
         "react": "catalog:",
@@ -154,7 +154,7 @@
     },
     "apps/web": {
       "name": "web",
-      "version": "0.2.6",
+      "version": "0.2.7",
       "dependencies": {
         "@alchemy.run/cloudflare": "2.0.0-beta.87",
         "@effect/platform-node": "4.1.4",
