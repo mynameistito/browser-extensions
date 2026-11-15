@@ -1,5 +1,11 @@
 # web
 
+## 0.2.7
+
+### Patch Changes
+
+- 720ab24: Upgrade deployment to Alchemy beta.87 and Effect 4.1.4
+
 ## 0.2.6
 
 ### Patch Changes

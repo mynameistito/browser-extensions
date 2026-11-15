@@ -1,5 +1,11 @@
 # new-tab-ext
 
+## 0.2.7
+
+### Patch Changes
+
+- 720ab24: Upgrade the Effect runtime to 4.1.4
+
 ## 0.2.6
 
 ### Patch Changes
