@@ -1,15 +1,15 @@
 import { createCopyButton } from "./copy-button";
 
 const COPYABLE_ATTRIBUTE = "data-repocopy-confirmation-name";
-const CONFIRMATION_PREFIX = "To confirm, type";
+const CONFIRMATION_PREFIX = /^(?:To confirm, type|Please type)\s/u;
 
 const makeLabelCopyable = (
-  label: HTMLLabelElement,
+  label: HTMLElement,
   repositoryName: string
 ): void => {
   if (
     label.querySelector(`[${COPYABLE_ATTRIBUTE}]`) ||
-    !label.textContent.trim().startsWith(CONFIRMATION_PREFIX)
+    !CONFIRMATION_PREFIX.test(label.textContent.trim())
   ) {
     return;
   }
@@ -67,8 +67,8 @@ export const enhanceConfirmationLabels = (
   root: ParentNode,
   repositoryName: string
 ): void => {
-  const labels = root.querySelectorAll<HTMLLabelElement>(
-    'dialog label, [role="dialog"] label, label.FormControl-label'
+  const labels = root.querySelectorAll<HTMLElement>(
+    'dialog label, [role="dialog"] label, label.FormControl-label, dialog p, [role="dialog"] p'
   );
 
   for (const label of labels) {

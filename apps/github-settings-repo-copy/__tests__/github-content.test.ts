@@ -97,6 +97,47 @@ describe("GitHub repository confirmation copy control", () => {
     );
   });
 
+  it.each(["dialog", "div"])(
+    "adds a copy control to the archive paragraph in %s without submitting",
+    async (container) => {
+      const dialog = document.createElement(container);
+      dialog.setAttribute("role", "dialog");
+      const paragraph = document.createElement("p");
+      const name = document.createElement("strong");
+      name.textContent = "acme/widgets";
+      paragraph.append("Please type ", name, " to confirm.");
+      const form = document.createElement("form");
+      const input = document.createElement("input");
+      input.name = "verify";
+      const archive = document.createElement("button");
+      archive.disabled = true;
+      archive.textContent = "Archive";
+      form.append(input, archive);
+      dialog.append(paragraph, form);
+      document.body.append(dialog);
+      const submit = vi.fn<() => void>();
+      form.addEventListener("submit", submit);
+
+      // The archive dialog is inserted after the content script starts.
+      await vi.waitFor(() => {
+        expect(document.querySelector("p button")).not.toBeNull();
+      });
+      const button = document.querySelector<HTMLButtonElement>("p button");
+      expect(button).not.toBeNull();
+      button?.click();
+      await vi.waitFor(() => {
+        expect(writeTextMock).toHaveBeenCalledWith("acme/widgets");
+      });
+      window.dispatchEvent(new Event("turbo:load"));
+      expect(document.querySelectorAll("p button")).toHaveLength(1);
+      expect(document.querySelector("p")?.textContent).toBe(
+        "Please type acme/widgets to confirm."
+      );
+      expect(document.querySelector("input")?.value).toBe("");
+      expect(submit).not.toHaveBeenCalled();
+    }
+  );
+
   it("reports successful copies and resets the icon after the delay", async () => {
     vi.useFakeTimers();
     const label = addConfirmation('To confirm, type "acme/widgets"');
