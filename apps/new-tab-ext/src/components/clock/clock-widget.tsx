@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 
-const timeFormatter = new Intl.DateTimeFormat(undefined, {
+const { locale, timeZone } = new Intl.DateTimeFormat().resolvedOptions();
+
+const timeFormatter = new Intl.DateTimeFormat(locale, {
   hour: "numeric",
   minute: "2-digit",
+  timeZone,
 });
 
-const dateFormatter = new Intl.DateTimeFormat(undefined, {
+const dateFormatter = new Intl.DateTimeFormat(locale, {
   day: "numeric",
   month: "long",
   weekday: "long",
+  timeZone,
 });
 
 /**
@@ -32,7 +36,6 @@ export const ClockWidget = () => {
 
   return (
     <>
-      {/* oxlint-disable react-doctor/no-locale-format-in-render -- WXT mounts this page only in the browser; local timezone formatting is intentional. */}
       <p className="date-line">{dateFormatter.format(currentDate)}</p>
       <time className="clock" dateTime={currentDate.toISOString()}>
         {timeFormatter.format(currentDate)}
