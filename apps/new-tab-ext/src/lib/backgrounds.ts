@@ -87,10 +87,10 @@ const toPhoto = (
   }
 
   return {
-    artist: textFromHtml(artist),
-    imageUrl: info.thumburl,
     license,
     licenseUrl,
+    artist: textFromHtml(artist),
+    imageUrl: info.thumburl,
     pageUrl: info.descriptionurl,
     title: title.replace(/^File:/u, ""),
   };

@@ -184,8 +184,8 @@ export const createQuoteViewer = (
   return {
     hideNativeQuotesLinks,
     main,
-    processMutations: handleMutations,
     trySetIcon,
+    processMutations: handleMutations,
   };
 };
 

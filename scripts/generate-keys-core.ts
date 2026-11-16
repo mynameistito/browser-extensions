@@ -172,8 +172,8 @@ const runGhSecretCommand: GhSecretCommand = (args, input) => {
   }
 
   const result = spawnSync(executable, args, {
-    encoding: "utf-8",
     input,
+    encoding: "utf-8",
     stdio: ["pipe", "inherit", "inherit"],
   });
 

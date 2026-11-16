@@ -143,8 +143,8 @@ describe("redaction in links", () => {
     toggle?.dispatchEvent(revealClick);
 
     expect({
-      defaultPrevented: revealClick.defaultPrevented,
       linkWasClicked,
+      defaultPrevented: revealClick.defaultPrevented,
       revealedText: toggle?.textContent,
     }).toStrictEqual({
       defaultPrevented: true,
@@ -160,8 +160,8 @@ describe("redaction in links", () => {
     toggle?.dispatchEvent(navigateClick);
 
     expect({
-      defaultPrevented: navigateClick.defaultPrevented,
       linkWasClicked,
+      defaultPrevented: navigateClick.defaultPrevented,
       revealedText: toggle?.textContent,
     }).toStrictEqual({
       defaultPrevented: false,

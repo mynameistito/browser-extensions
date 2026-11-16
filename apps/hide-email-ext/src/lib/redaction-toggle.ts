@@ -239,11 +239,11 @@ export const createRedactionToggle = (
   };
 
   const restoration: ToggleRestoration = {
+    dispose,
+    isRestorable,
     cancelPendingHover: clearHoverTimeout,
     detached: false,
     detachedReference: null,
-    dispose,
-    isRestorable,
     restore: () => {
       dispose();
 
