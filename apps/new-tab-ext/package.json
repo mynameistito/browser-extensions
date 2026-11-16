@@ -53,9 +53,9 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.5",
     "@testing-library/react": "^16.3.3",
-    "@testing-library/user-event": "^14.6.8",
+    "@testing-library/user-event": "^14.6.12",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitest/coverage-v8": "catalog:",
@@ -63,7 +63,7 @@
     "happy-dom": "catalog:",
     "react-grab": "^0.2.0",
     "tailwindcss": "catalog:",
-    "vite": "^8.3.5",
+    "vite": "^8.3.8",
     "vitest": "catalog:",
     "web-ext": "^10.8.0",
     "wxt": "catalog:"

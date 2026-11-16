@@ -56,10 +56,10 @@ const installBrowserMocks = (
   searchResults: Browser.history.HistoryItem[] = []
 ): BrowserMocks => {
   const state: BrowserMocks = {
+    searchResults,
     deletedRanges: [],
     deletedUrls: [],
     searchQueries: [],
-    searchResults,
     storage: new Map(initialStorage),
   };
 
@@ -120,8 +120,8 @@ const historyItem = (url: string): Browser.history.HistoryItem =>
     lastVisitTime: NOW,
     title: "",
     typedCount: 0,
-    url,
     visitCount: 1,
+    url,
   }) satisfies Browser.history.HistoryItem;
 
 const getCleanupFailureApi = async (): Promise<string | null> => {

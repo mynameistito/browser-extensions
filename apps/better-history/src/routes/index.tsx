@@ -71,7 +71,11 @@ const HistoryPage = () => {
     <div className="flex h-full flex-col">
       <div className="border-border dark:border-border flex items-center gap-2 border-b px-4 py-3">
         <Search className="text-muted-foreground size-4" />
+        <label className="text-sm" htmlFor="history-search">
+          Search history
+        </label>
         <input
+          id="history-search"
           className="placeholder:text-muted-foreground flex-1 bg-transparent text-sm outline-none"
           onChange={(e) => {
             const next = e.target.value;

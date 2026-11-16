@@ -1,5 +1,5 @@
 import { Trash2 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 
 import { cn } from "@/lib/cn";
 import { PatternKindSchema } from "@/lib/schemas";
@@ -55,6 +55,8 @@ const saveRules = async (
  * @returns The domain rules editor.
  */
 export const RulesEditor = ({ title, rules, onChange }: Props) => {
+  const patternId = useId();
+  const bulkId = useId();
   const [pattern, setPattern] = useState("");
   const [kind, setKind] = useState<DomainRule["kind"]>("subdomain");
   const [bulk, setBulk] = useState("");
@@ -122,8 +124,12 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
       <h2 className="text-xl font-semibold">{title}</h2>
 
       <div className="space-y-2">
+        <label className="text-sm" htmlFor={patternId}>
+          Domain or URL pattern
+        </label>
         <div className="flex gap-2">
           <input
+            id={patternId}
             className="border-border dark:border-border flex-1 rounded-md border bg-transparent px-3 py-1.5 text-sm"
             disabled={isSaving}
             onChange={(e) => {
@@ -172,7 +178,9 @@ export const RulesEditor = ({ title, rules, onChange }: Props) => {
             Bulk add (one per line)
           </summary>
           <div className="mt-2 space-y-2">
+            <label htmlFor={bulkId}>Domain or URL patterns, one per line</label>
             <textarea
+              id={bulkId}
               className="border-border dark:border-border h-24 w-full rounded-md border bg-transparent px-3 py-2 font-mono text-xs"
               disabled={isSaving}
               onChange={(e) => {

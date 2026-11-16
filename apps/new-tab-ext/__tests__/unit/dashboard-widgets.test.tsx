@@ -66,6 +66,19 @@ describe("dashboard widgets", () => {
     const clock = view.container.querySelector("time");
 
     expect(clock?.dateTime).toBe("2026-09-30T12:00:00.000Z");
+    expect(clock?.textContent).toBe(
+      new Intl.DateTimeFormat(undefined, {
+        hour: "numeric",
+        minute: "2-digit",
+      }).format(new Date("2026-09-30T12:00:00Z"))
+    );
+    expect(view.container.querySelector(".date-line")?.textContent).toBe(
+      new Intl.DateTimeFormat(undefined, {
+        day: "numeric",
+        month: "long",
+        weekday: "long",
+      }).format(new Date("2026-09-30T12:00:00Z"))
+    );
     act(() => {
       vi.advanceTimersByTime(1000);
     });

@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 
-const timeFormatter = new Intl.DateTimeFormat(undefined, {
+const { locale, timeZone } = new Intl.DateTimeFormat().resolvedOptions();
+
+const timeFormatter = new Intl.DateTimeFormat(locale, {
   hour: "numeric",
   minute: "2-digit",
+  timeZone,
 });
 
-const dateFormatter = new Intl.DateTimeFormat(undefined, {
+const dateFormatter = new Intl.DateTimeFormat(locale, {
   day: "numeric",
   month: "long",
   weekday: "long",
+  timeZone,
 });
 
 /**
